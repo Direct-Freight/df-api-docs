@@ -1,0 +1,11 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": true,
+    "importedSpec": "/var/www/api/swagger.json",
+    "name": "Direct Freight",
+    "repo": "Direct-Freight/df-api-docs",
+    "splitSpec": true,
+    "samples": true,
+    "installSwaggerUI": true
+  }
+}

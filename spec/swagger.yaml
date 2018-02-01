@@ -1,0 +1,3142 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "In order to use the Direct Freight API please first contact us to get an API Token. This token needs to be sent as a HTTP header argument in every request to our API.\n\napi-token=\"SECRET KEY\"\n\nPlease keep your api-token a secret. If the token is compromised please contact us to get a new one.\n\nThis api token authenticates your application and gives it access to the API.\n\nThe API token should not be confused with the end-user-token. That token is given to you via the end_user_authentications endpoint when the user logs in. This token is needed in order to use certain features, and get certain sensitive information.\n\nBoth Tokens are stateless, and delivered via the HTTP headers.",
+    "version" : "2.0.0",
+    "title" : "Direct Freight API"
+  },
+  "schemes" : [ "https" ],
+  "security" : [ {
+    "api_key" : [ ]
+  } ],
+  "paths" : {
+    "/alerts/{alert_type}" : {
+      "get" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Get a list of alerts.",
+        "description" : "Get a list of alerts.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "alert_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", and \"trucks\".",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "loads", "trucks" ]
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "alert_id",
+          "in" : "query",
+          "description" : "only get a subset of alerts. As this is a get request this is specified as a query string parameter.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "uuid",
+            "minLength" : 30
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_alert_response"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Create an alert.",
+        "description" : "Any parameter that is defined here and is also defined on the boards GET, follows the same rules.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "alert_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", and \"trucks\".",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "loads", "trucks" ]
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "required" : true,
+          "type" : "string",
+          "minLength" : 30
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/alert_properties"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_alert_response"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Delete an alert.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "alert_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", and \"trucks\".",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "loads", "trucks" ]
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "required" : true,
+          "type" : "string",
+          "minLength" : 30
+        }, {
+          "name" : "alert_id",
+          "in" : "query",
+          "description" : "Specify to just delete some alerts.",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "alerts" ],
+        "summary" : "Update an alert.",
+        "description" : "Search objects are set at creation. You cannot modify them after the alert has been created.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "alert_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", and \"trucks\".",
+          "required" : true,
+          "type" : "string",
+          "enum" : [ "loads", "trucks" ]
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "required" : true,
+          "type" : "string",
+          "minLength" : 30
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/patch_alert_properties"
+          }
+        }, {
+          "name" : "alert_id",
+          "in" : "query",
+          "description" : "Specify which alert you are updating.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/patch_alert_response"
+            }
+          }
+        }
+      }
+    },
+    "/billings/" : {
+      "get" : {
+        "tags" : [ "billings" ],
+        "summary" : "Returns the amount the end user will be charged. If a promo code is present return adjusted amount. If there are special conditions a string with the promo code benefits will also be returned.",
+        "description" : "Will return how much the end user will be charged to upgrade. It will not charge the user, or consume the promo code.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "promo_code",
+          "in" : "query",
+          "description" : "The promo code. ",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_billing_response"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "billings" ],
+        "summary" : "This function will attempt to process a payment, and upgrade a non subscibed user. ",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "This function will attempt to process a payment, and upgrade a non subscibed user. ",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/bill_user"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_billing_response"
+            }
+          }
+        }
+      }
+    },
+    "/boards/notes/" : {
+      "get" : {
+        "tags" : [ "boards" ],
+        "summary" : "Get notes that this user has written.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "entry_id",
+          "in" : "query",
+          "description" : "Optionally just check if certain loads have notes associated with them. ",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_boards_notes_response"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "boards" ],
+        "summary" : "Create a new note.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/create_notes"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_boards_notes_response"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "boards" ],
+        "summary" : "Delete a note.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "note_id",
+          "in" : "query",
+          "description" : "The entry to associate the note with. ",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/delete_boards_notes_response"
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "boards" ],
+        "summary" : "Update a note.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/update_notes"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/patch_boards_notes_response"
+            }
+          }
+        }
+      }
+    },
+    "/boards/hidden_companies/" : {
+      "get" : {
+        "tags" : [ "boards" ],
+        "summary" : "Get a list of companies that should be hidden.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "company_name",
+          "in" : "query",
+          "description" : "A list of id's to check if any should be visually hidden.",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_hidden_companies_response"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "boards" ],
+        "summary" : "Mark a set of companies as hidden.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/mark_hidden_companies"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_hidden_companies_response"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "boards" ],
+        "summary" : "Mark a company as not hidden.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "company_id",
+          "in" : "query",
+          "description" : "The company that need to be marked as not hidden.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "boards" ],
+        "summary" : "Toggle one or more company between hidden and unhidden.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/toggle_hidden_companies"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/boards/hidden_entries/" : {
+      "get" : {
+        "tags" : [ "boards" ],
+        "summary" : "Get a list of entries that should be hidden.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "entry_id",
+          "in" : "query",
+          "description" : "A list of id's to check if any should be visually hidden.",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_hidden_entries"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "boards" ],
+        "summary" : "Mark a set of entries as hidden.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/mark_hidden_entries"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_hidden_entries_response"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "boards" ],
+        "summary" : "Mark a set of entries as not hidden.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "entry_id",
+          "in" : "query",
+          "description" : "The entry that need to be marked as not hidden. ",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "boards" ],
+        "summary" : "Toggle one or more entry between hidden and unhidden.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Only logged in users can use this feature.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/toggle_hidden_entries"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/boards/{board_type}/state_list/" : {
+      "get" : {
+        "tags" : [ "boards" ],
+        "summary" : "A convenience method to get totals by state.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "board_type",
+          "in" : "path",
+          "description" : "This will be specified in the url. Valid types are \"loads\", and \"trucks\".",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_state_list_response"
+            }
+          }
+        }
+      }
+    },
+    "/boards/{board_type}/" : {
+      "post" : {
+        "tags" : [ "boards" ],
+        "summary" : "Get a board.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/search_board"
+          }
+        }, {
+          "name" : "board_type",
+          "type" : "string",
+          "required" : true,
+          "in" : "path",
+          "description" : "This will be specified in the url. Valid types are \"loads\", and \"trucks\"."
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_board_type_response"
+            }
+          },
+          "422" : {
+            "description" : "error operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_board_type_error_response"
+            }
+          }
+        },
+        "description" : "This is the primary search method."
+      },
+      "parameters" : [ {
+        "name" : "end-user-token",
+        "type" : "string",
+        "required" : false,
+        "in" : "header",
+        "description" : "Sensitive info like phone numbers won't be returned without this."
+      } ]
+    },
+    "/boards/{board_type}/{origin_state}/{origin_city}/{origin_radius}/{load_type}/{destination_state}/{destination_city}" : {
+      "get" : {
+        "tags" : [ "boards" ],
+        "summary" : "A convenience method for simple searches.",
+        "description" : "This is a convenience method. In the background it is calling the POST method. Refer to that method for more in-depth information.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "Sensitive info like phone numbers won't be returned without this.",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "board_type",
+          "in" : "path",
+          "description" : "This will be specified in the url. Valid types are \"loads\", and \"trucks\".",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "origin_state",
+          "in" : "path",
+          "description" : "The minimum needed for a search.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "origin_city",
+          "in" : "path",
+          "description" : "Must be at least 2 characters.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "origin_radius",
+          "in" : "path",
+          "description" : "If both city and state, it will search for all entries within # Miles of the city.",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        }, {
+          "name" : "destination_state",
+          "in" : "path",
+          "description" : "If it is an array, we assume a multi state search, and ignore destination_city.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "destination_city",
+          "in" : "path",
+          "description" : "Must be at least 2 characters.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "load_type",
+          "in" : "path",
+          "description" : "A string of comma separated valid trailer types to limit the search.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_board_type_response"
+            }
+          }
+        }
+      }
+    },
+    "/credit_reports/" : {
+      "get" : {
+        "tags" : [ "credit_reports" ],
+        "summary" : "Request access to a credit report.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in user's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "credit_report_id",
+          "in" : "query",
+          "description" : "A special id returned with the board entries.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "format",
+          "in" : "query",
+          "description" : "Return format. Currently only supports html and json.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/end_user_authentication/users/" : {
+      "post" : {
+        "tags" : [ "end_user_authentications" ],
+        "summary" : "Create a new user.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/create_user"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_end_user_authentication_response"
+            }
+          }
+        }
+      }
+    },
+    "/end_user_authentications/passwords/" : {
+      "get" : {
+        "tags" : [ "end_user_authentications" ],
+        "summary" : "Request a forgotten password.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "email",
+          "in" : "query",
+          "description" : "The user e-mail to send a password to if valid.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "end_user_authentications" ],
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/update_password"
+          }
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in user's token.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "success operation"
+          }
+        }
+      }
+    },
+    "/end_user_authentications/" : {
+      "get" : {
+        "tags" : [ "end_user_authentications" ],
+        "summary" : "Get current authentication level for the user.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "",
+          "in" : "query",
+          "description" : "The logged in user's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in user's token.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_end_user_authentications_response"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "end_user_authentications" ],
+        "summary" : "Logs a user in.",
+        "description" : "This function sends login credentials, and retrieves a stateless token.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "",
+          "in" : "query",
+          "description" : "The logged in user's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/login"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_end_user_authentication_response"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "end_user_authentications" ],
+        "summary" : "Logs a user out.",
+        "description" : "This logs a user out. the end-user-token will no longer be valid.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "",
+          "in" : "query",
+          "description" : "The logged in user's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in user's token.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "success operation"
+          }
+        }
+      }
+    },
+    "/end_user_authentications/dates/" : {
+      "get" : {
+        "tags" : [ "end_user_authentications" ],
+        "summary" : "Gets an authoritative date_time string.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_end_user_authentications_dates_response"
+            }
+          }
+        }
+      }
+    },
+    "/locations/closest_city" : {
+      "get" : {
+        "tags" : [ "locations" ],
+        "summary" : "Will return the closest city to a lat/lon point.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "latitude",
+          "in" : "query",
+          "required" : true,
+          "type" : "number",
+          "format" : "float"
+        }, {
+          "name" : "longitude",
+          "in" : "query",
+          "required" : true,
+          "type" : "number",
+          "format" : "float"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_closest_city_response"
+            }
+          }
+        }
+      }
+    },
+    "/location/distance/" : {
+      "get" : {
+        "tags" : [ "locations" ],
+        "summary" : "Get the distance between 2 locations. This is used to calculate dead head miles.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "origin_city",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "origin_state",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "destination_city",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "destination_state",
+          "in" : "query",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_location_ distance_response"
+            }
+          }
+        }
+      }
+    },
+    "/locations/partial_match" : {
+      "get" : {
+        "tags" : [ "locations" ],
+        "summary" : "A string of a partial city or state name, and returns a list of possible matches.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "term",
+          "in" : "query",
+          "description" : "Min 2 characters.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "search_type",
+          "in" : "query",
+          "description" : "\"state\", and \"city\" will return only returns only the respective information for that search type. Misspelling, will default to city.",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation"
+          }
+        }
+      }
+    },
+    "/postings/{posting_type}/{action}/" : {
+      "post" : {
+        "tags" : [ "postings" ],
+        "summary" : "Copy or Move an posting.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "posting_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "action",
+          "in" : "path",
+          "description" : "Specified in the url. Valid types are \"copy\", and \"move\"",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/post_posting_type_action_body"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_posting_type_action_response"
+            }
+          }
+        }
+      }
+    },
+    "/postings/custom_categories/{category_type}/" : {
+      "get" : {
+        "tags" : [ "postings" ],
+        "summary" : "Get a list of custom columns, or custom_column data.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "category_type",
+          "in" : "path",
+          "description" : "Valid types are \"names\", and \"data\".",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "category_id",
+          "in" : "query",
+          "description" : "To just return information about some postings.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_custom_categories_response"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "postings" ],
+        "summary" : "Create new category names, or add new data.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category_type",
+          "in" : "path",
+          "description" : "Valid types are \"names\", and \"data\".",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/create_cc_info"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_custom_categories_response"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "postings" ],
+        "summary" : "Delete some or all custom columns, or custom_column data.",
+        "parameters" : [ {
+          "name" : "category_type",
+          "in" : "path",
+          "description" : "Valid types are \"names\", and \"data\".",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "category_id",
+          "in" : "query",
+          "description" : "To just delete information about some postings.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 OK"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "postings" ],
+        "summary" : "Update a category name, or value.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "category_type",
+          "in" : "path",
+          "description" : "Valid types are \"names\", and \"data\".",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/update_cc_info"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_custom_categories_response"
+            }
+          }
+        }
+      }
+    },
+    "/postings/multiple/{posting_type}/" : {
+      "post" : {
+        "tags" : [ "postings" ],
+        "summary" : "Create, multiple entries at once. This is a convenience method.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "posting_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/create_multiple_postings"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_posting_ multiple_response"
+            }
+          }
+        }
+      }
+    },
+    "/postings/{posting_type}/" : {
+      "get" : {
+        "tags" : [ "postings" ],
+        "summary" : "Get posts by this user.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "posting_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "posting_id",
+          "in" : "query",
+          "description" : "To just return information about some postings.",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_posting_type_response"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "postings" ],
+        "summary" : "Copy or Move an posting.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "posting_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/post_object_model"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "properties" : { }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "postings" ],
+        "summary" : "Remove one or more postings.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "posting_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "posting_id",
+          "in" : "query",
+          "description" : "You must specify which entry to remove.",
+          "required" : true,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "success operation"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "postings" ],
+        "summary" : "Update an posting.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "posting_type",
+          "in" : "path",
+          "description" : "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in account's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/post_object_model"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_posting_type_response"
+            }
+          }
+        }
+      }
+    },
+    "/profiles/optins/" : {
+      "get" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Check if the profile has opted to being contacted by text.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/success_status_response"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Create, and send an Optin Code.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/post_optin_code_response"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Marks the profile as opted out.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "successful operation"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Marks the profile as opted in.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/success_success_response"
+            }
+          }
+        }
+      }
+    },
+    "/profiles/" : {
+      "get" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Request the logged in user's profile.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/profile_model"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Create a new profile.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/create_profile"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/success_success_response"
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Update profile information.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/patch_profile"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/profile_model"
+            }
+          }
+        }
+      }
+    },
+    "/profiles/documents/" : {
+      "get" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Retrieve documents",
+        "description" : "Retrieve documents",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "success"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Upload a new document.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/upload_document"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/success_success_response"
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Delete the document.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "success operation"
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Rename a document.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in profile's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/rename_document"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "success"
+          }
+        }
+      }
+    },
+    "/profiles/mobile_carriers/" : {
+      "get" : {
+        "tags" : [ "profiles" ],
+        "summary" : "Retrieve one or more mobile carriers. ",
+        "description" : "Retrieve a list of supported carriers.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "A way to just get back the info for just one carrier.",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/get_mobile_carrier_body"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/mobile_carrier_response"
+            }
+          }
+        }
+      }
+    },
+    "/validations/email_exists/" : {
+      "get" : {
+        "tags" : [ "validations" ],
+        "summary" : "Check if an e-mail exists.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "end-user-token",
+          "in" : "header",
+          "description" : "The logged in user's token.",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "email",
+          "in" : "query",
+          "description" : "Enter an e-mail to see if it is available. Can be used as ?email=xxx or as a JSON request.",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/get_email_exists_response"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "api_key" : {
+      "description" : "This token needs to be sent as a HTTP header argument in every request to our API.",
+      "type" : "apiKey",
+      "name" : "api-token",
+      "in" : "header"
+    }
+  },
+  "definitions" : {
+    "bill_user" : {
+      "required" : [ "billing_address" ],
+      "properties" : {
+        "billing_address" : {
+          "type" : "object",
+          "description" : "first_name, last_name, address, city, state, and phone all needed. ",
+          "properties" : { }
+        },
+        "cc_data" : {
+          "type" : "object",
+          "description" : "This is optional if a check number is provided. ",
+          "properties" : { }
+        },
+        "check_data" : {
+          "type" : "object",
+          "description" : "This is optional if a credit number is provided. ",
+          "properties" : { }
+        },
+        "promo_code" : {
+          "type" : "string",
+          "description" : "Optional Promo Code for a discount. "
+        }
+      }
+    },
+    "get_amount" : {
+      "required" : [ "amount" ],
+      "properties" : {
+        "promo_code" : {
+          "type" : "string",
+          "description" : "The promo code. "
+        },
+        "amount" : {
+          "type" : "integer",
+          "description" : "Amount How much the user will be charged. This may be 0. "
+        }
+      }
+    },
+    "create_notes" : {
+      "required" : [ "body", "entry_id", "title" ],
+      "properties" : {
+        "entry_id" : {
+          "type" : "integer",
+          "description" : "The entry to associate the note with. "
+        },
+        "title" : {
+          "type" : "string",
+          "description" : "Subject of the note. "
+        },
+        "body" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "get_hidden_companies" : {
+      "required" : [ "company_name" ],
+      "properties" : {
+        "company_name" : {
+          "type" : "array",
+          "description" : "A subset of companies that need to be marked as hidden. ",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "mark_hidden_companies" : {
+      "required" : [ "company_name" ],
+      "properties" : {
+        "company_name" : {
+          "type" : "string",
+          "description" : "The comapny that need to be marked as hidden. "
+        }
+      }
+    },
+    "toggle_hidden_companies" : {
+      "required" : [ "company_id" ],
+      "properties" : {
+        "company_id" : {
+          "type" : "string",
+          "description" : "The company name that need to be toggled. "
+        }
+      }
+    },
+    "unmark_hidden_companies" : {
+      "required" : [ "company_id" ],
+      "properties" : {
+        "company_id" : {
+          "type" : "string",
+          "description" : "The company that need to be marked as not hidden. "
+        }
+      }
+    },
+    "get_hidden_entries" : {
+      "properties" : {
+        "entry_id" : {
+          "type" : "array",
+          "description" : "A subset of entries that need to be marked as hidden.",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "example" : {
+        "entry_id" : [ "entry_id", "entry_id" ]
+      }
+    },
+    "mark_hidden_entries" : { },
+    "toggle_hidden_entries" : {
+      "required" : [ "entry_id" ],
+      "properties" : {
+        "entry_id" : {
+          "type" : "array",
+          "description" : "The entry that need to be toggled. ",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "unmark_hidden_entries" : {
+      "required" : [ "entry_id" ],
+      "properties" : {
+        "entry_id" : {
+          "type" : "array",
+          "description" : "The entry that need to be marked as not hidden. ",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "get_totals_by_state" : { },
+    "search_board" : {
+      "required" : [ "origin_state", "page_number", "total_items", "total_pages" ],
+      "properties" : {
+        "count" : {
+          "type" : "boolean",
+          "description" : "If included this will return a count instead of a list. "
+        },
+        "origin_city" : {
+          "type" : "string",
+          "description" : "Must be at least 3 characters. "
+        },
+        "origin_state" : {
+          "type" : "array",
+          "description" : "If it is an array, we assume a multi state search, and ignore origin_city. ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "origin_radius" : {
+          "type" : "integer",
+          "description" : "If both city and state, it will search for all entries within # Miles of the city. "
+        },
+        "destination_city" : {
+          "type" : "string",
+          "description" : "Must be at least 2 characters. "
+        },
+        "destination_state" : {
+          "type" : "array",
+          "description" : "If it is an array, we assume a multi state search, and ignore destination_city. ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "destination_radius" : {
+          "type" : "integer",
+          "description" : "If both city and state, it will search for all entries within # Miles of the city. "
+        },
+        "trailer_type" : {
+          "type" : "array",
+          "description" : "A string array of valid trailer types to limit the search. ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "load_size" : {
+          "type" : "array",
+          "description" : "This is only valid on load boards. Valid values are &quot;Full&quot; and &quot;Partial&quot;. ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "ship_date" : {
+          "type" : "array",
+          "description" : "Limit the board to only show loads with X ship date. ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "only_new" : {
+          "type" : "boolean",
+          "description" : "This will only return unseen results. This requires an alert_id to be specified. "
+        },
+        "alert_id" : {
+          "type" : "boolean",
+          "description" : "By specifying an alert_id we will record the loads seen by this user, and associate it with their alert. "
+        },
+        "page_number" : {
+          "type" : "integer",
+          "description" : "The page you are on. "
+        },
+        "item_count" : {
+          "type" : "integer",
+          "description" : "Will default to 50 items per page. Max is 100, minimum is 1. "
+        },
+        "total_pages" : {
+          "type" : "integer",
+          "description" : "A count of the # of pages based on the search parameters. "
+        },
+        "total_items" : {
+          "type" : "integer",
+          "description" : "A count of all the entry objects for the specified search. "
+        }
+      }
+    },
+    "search_boards_by_url" : {
+      "required" : [ "page_number", "total_items", "total_pages" ],
+      "properties" : {
+        "total_pages" : {
+          "type" : "integer",
+          "description" : "A count of the # of pages based on the search parameters. "
+        },
+        "page_number" : {
+          "type" : "integer",
+          "description" : "The page you are on. "
+        },
+        "total_items" : {
+          "type" : "integer",
+          "description" : "A count of all the entry objects for the specified search. "
+        }
+      }
+    },
+    "update_notes" : {
+      "required" : [ "body", "title" ],
+      "properties" : {
+        "title" : {
+          "type" : "string",
+          "description" : "Subject of the note. "
+        },
+        "body" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "get_credit_report" : {
+      "required" : [ "credit_report_id", "format" ],
+      "properties" : {
+        "credit_report_id" : {
+          "type" : "string",
+          "description" : "A special id returned with the board entries. "
+        },
+        "format" : {
+          "type" : "string",
+          "description" : "Return format. Currently only supports html and json. "
+        }
+      }
+    },
+    "create_user" : {
+      "required" : [ "email", "end-user-token", "password" ],
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "description" : "This must be a valid e-mail. "
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "Currently this is a 6-10 digit alphanumeric password. "
+        },
+        "end-user-token" : {
+          "type" : "string",
+          "description" : "The account is created, and a generated token to authenticate as this user is returned. "
+        }
+      }
+    },
+    "email_password" : {
+      "required" : [ "email" ],
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "description" : "The user e-mail to send a password to if valid. "
+        }
+      }
+    },
+    "update_password" : {
+      "required" : [ "new_password", "old_password" ],
+      "properties" : {
+        "old_password" : {
+          "type" : "string",
+          "description" : "Their old password. "
+        },
+        "new_password" : {
+          "type" : "string",
+          "description" : "Their new password. "
+        }
+      }
+    },
+    "get_auth_status" : {
+      "required" : [ "status" ],
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Will return the logged in user&#39;s status. Valid status&#39;s are &quot;Subscribed&quot;, &quot;Posting&quot;, &quot;Overdue&quot;, or &quot;Not Logged In&quot;. "
+        }
+      }
+    },
+    "login" : {
+      "required" : [ "login", "realm", "secret" ],
+      "properties" : {
+        "realm" : {
+          "type" : "string",
+          "description" : "This specifies who to log in with. If left blank we will assume email/password. Valid realms are username, email, facebook(not implemneted), google(not implemented), and linkedin(not implemented). "
+        },
+        "login" : {
+          "type" : "string",
+          "description" : "The e-mail, or username information needed to log in. "
+        },
+        "secret" : {
+          "type" : "string",
+          "description" : "The password, or token required for this login. "
+        }
+      }
+    },
+    "get_date" : {
+      "required" : [ "now" ],
+      "properties" : {
+        "now" : {
+          "type" : "string",
+          "description" : "The current date and time based on our server. "
+        }
+      }
+    },
+    "get_closest_city" : {
+      "required" : [ "city", "latitude", "longitude", "state_abbreviation", "state_name" ],
+      "properties" : {
+        "latitude" : {
+          "type" : "number",
+          "description" : ""
+        },
+        "longitude" : {
+          "type" : "number",
+          "description" : ""
+        },
+        "city" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "state_abbreviation" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "state_name" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "get_deadhead" : {
+      "required" : [ "destination_city", "destination_state", "distance", "origin_city", "origin_state" ],
+      "properties" : {
+        "origin_city" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "origin_state" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "destination_city" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "destination_state" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "distance" : {
+          "type" : "integer",
+          "description" : "A number representing the miles between the two locations. "
+        }
+      }
+    },
+    "guess_location_name" : {
+      "required" : [ "term" ],
+      "properties" : {
+        "term" : {
+          "type" : "string",
+          "description" : "Min 2 characters. "
+        },
+        "search_type" : {
+          "type" : "string",
+          "description" : "&quot;state&quot;, and &quot;city&quot; will return only returns only the respective information for that search type. Misspelling, will default to city. "
+        }
+      }
+    },
+    "copy_move_postings" : {
+      "required" : [ "source_id", "source_posting" ],
+      "properties" : {
+        "source_posting" : {
+          "type" : "string",
+          "description" : "The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -&gt; private_private loads. "
+        },
+        "source_id" : {
+          "type" : "array",
+          "description" : "The posting id of the posting you are  moving or copying. Optional for create. ",
+          "items" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "create_cc_info" : { },
+    "get_cc_info" : {
+      "required" : [ "categories" ],
+      "properties" : {
+        "category_id" : {
+          "type" : "array",
+          "description" : "To just return information about some postings. ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "categories" : {
+          "type" : "array",
+          "description" : "A list of each category, type and it&#39;s corresponding position. ",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "update_cc_info" : { },
+    "create_multiple_postings" : {
+      "required" : [ "list" ],
+      "properties" : {
+        "list" : {
+          "type" : "array",
+          "description" : "Valid types are &quot;loads&quot;, &quot;trucks&quot;, &quot;private_loads&quot;, &quot;private_trucks&quot;, &quot;test_loads&quot;, and &quot;test_trucks&quot; ",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "delete_current_before_posting" : {
+          "type" : "boolean",
+          "description" : "An optional argument that will first delete all of the users loads before entering the fresh list. Caution, this will still delete everything even if some of the entries fail to be created. "
+        },
+        "contact_name" : {
+          "type" : "string",
+          "description" : "The dispatchers name. By default we use the profile information. "
+        },
+        "contact_phone" : {
+          "type" : "string",
+          "description" : "By default we use the number listed in their profile. "
+        },
+        "contact_fax" : {
+          "type" : "string",
+          "description" : "By default we use the number listed in their profile. "
+        }
+      }
+    },
+    "delete_postings_" : {
+      "required" : [ "posting_id", "posting_type" ],
+      "properties" : {
+        "posting_type" : {
+          "type" : "string",
+          "description" : "Valid types are &quot;loads&quot;, &quot;trucks&quot;, &quot;private_loads&quot;, &quot;private_trucks&quot;, &quot;test_loads&quot;, and &quot;test_trucks&quot; "
+        },
+        "posting_id" : {
+          "type" : "array",
+          "description" : "You must specify which entry to remove. ",
+          "items" : {
+            "type" : "integer"
+          }
+        }
+      }
+    },
+    "get_postings" : {
+      "properties" : {
+        "posting_id" : {
+          "type" : "array",
+          "description" : "To just return information about some postings. ",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "delete_cc_info" : {
+      "properties" : {
+        "category_id" : {
+          "type" : "array",
+          "description" : "To just delete information about some postings. ",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "check_optin" : {
+      "required" : [ "status" ],
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "A text status like OPTIN, NORESPONSE, OPTOUT. "
+        }
+      }
+    },
+    "send_optin" : {
+      "required" : [ "optin_code" ],
+      "properties" : {
+        "optin_code" : {
+          "type" : "string",
+          "description" : "A text string with the code sent. "
+        }
+      }
+    },
+    "create_profile" : {
+      "required" : [ "address", "city", "company", "contact_extension", "contact_name", "contact_number", "dot_number", "fax_number", "mc_number", "mobile_carrier", "mobile_number", "password", "state", "web_page", "zip" ],
+      "properties" : {
+        "password" : {
+          "type" : "string",
+          "description" : "Needed to set up the user/pass for authentication. "
+        },
+        "company" : {
+          "type" : "string",
+          "description" : "Company name. "
+        },
+        "contact_name" : {
+          "type" : "string",
+          "description" : "Contact name. "
+        },
+        "address" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "city" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "state" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "zip" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "contact_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "contact_extension" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "mobile_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "mobile_carrier" : {
+          "type" : "integer",
+          "description" : ""
+        },
+        "fax_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "web_page" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "mc_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "dot_number" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "get_profile" : {
+      "required" : [ "address", "city", "company", "contact_extension", "contact_name", "contact_number", "dot_number", "fax_number", "mc_number", "mobile_carrier", "mobile_number", "state", "web_page", "zip" ],
+      "properties" : {
+        "company" : {
+          "type" : "string",
+          "description" : "Company name. "
+        },
+        "contact_name" : {
+          "type" : "string",
+          "description" : "Contact name. "
+        },
+        "address" : {
+          "type" : "string",
+          "description" : "The address associated with their entries. "
+        },
+        "city" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "state" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "zip" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "contact_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "contact_extension" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "mobile_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "mobile_carrier" : {
+          "type" : "integer",
+          "description" : ""
+        },
+        "fax_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "web_page" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "mc_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "dot_number" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "patch_profile" : {
+      "required" : [ "address", "city", "company", "contact_extension", "contact_name", "contact_number", "dot_number", "fax_number", "mc_number", "mobile_carrier", "mobile_number", "state", "web_page", "zip" ],
+      "properties" : {
+        "company" : {
+          "type" : "string",
+          "description" : "Company name. "
+        },
+        "contact_name" : {
+          "type" : "string",
+          "description" : "Contact name. "
+        },
+        "address" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "city" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "state" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "zip" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "contact_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "contact_extension" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "mobile_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "mobile_carrier" : {
+          "type" : "integer",
+          "description" : ""
+        },
+        "fax_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "web_page" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "mc_number" : {
+          "type" : "string",
+          "description" : ""
+        },
+        "dot_number" : {
+          "type" : "string",
+          "description" : ""
+        }
+      }
+    },
+    "rename_document" : {
+      "required" : [ "current_name", "new_name" ],
+      "properties" : {
+        "current_name" : {
+          "type" : "string",
+          "description" : "The document to be renamed. "
+        },
+        "new_name" : {
+          "type" : "string",
+          "description" : "Replacement name. "
+        }
+      }
+    },
+    "upload_document" : {
+      "required" : [ "The" ],
+      "properties" : {
+        "The" : {
+          "type" : "object",
+          "description" : "file to be uploaded. ",
+          "properties" : { }
+        }
+      }
+    },
+    "check_email" : {
+      "required" : [ "email", "exists" ],
+      "properties" : {
+        "email" : {
+          "type" : "string",
+          "description" : "Enter an e-mail to see if it is available. Can be used as ?email=xxx or as a JSON request. "
+        },
+        "exists" : {
+          "type" : "boolean",
+          "description" : "Returns a true value if it is associated with an account. "
+        }
+      }
+    },
+    "get_mobile_carrier_body" : {
+      "required" : [ "carrier_id" ],
+      "properties" : {
+        "carrier_id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "A way to just get back the info for just one carrier."
+        }
+      }
+    },
+    "mobile_carrier_response" : {
+      "properties" : {
+        "carrier_id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The carrier ID."
+        },
+        "carrier_name" : {
+          "type" : "object",
+          "description" : "Their mobile carrier.",
+          "properties" : { }
+        }
+      },
+      "example" : {
+        "carrier_id" : 0,
+        "carrier_name" : "{}"
+      }
+    },
+    "partial_match_body" : {
+      "properties" : {
+        "term" : {
+          "type" : "string",
+          "description" : "Min 2 characters."
+        },
+        "search_type" : {
+          "type" : "object",
+          "description" : "\"state\", and \"city\" will return only returns only the respective information for that search type. Misspelling, will default to city.",
+          "properties" : { }
+        }
+      }
+    },
+    "hidden_entries_body" : {
+      "properties" : {
+        "entry_id" : {
+          "type" : "string",
+          "description" : "The entry that need to be marked as not hidden."
+        }
+      }
+    },
+    "get_alert_response" : {
+      "properties" : {
+        "data" : {
+          "type" : "array",
+          "description" : "A hash containing a list of objects. Each entry should have 1 alert object, and 1 search object, and 2 integer counts. One for the number of new loads, and one for the number of total loads that match the search critera.",
+          "items" : {
+            "type" : "object",
+            "properties" : { }
+          }
+        }
+      },
+      "example" : {
+        "data" : [ "{}", "{}" ]
+      }
+    },
+    "patch_alert_response" : {
+      "properties" : {
+        "alert" : {
+          "type" : "array",
+          "description" : "Same as get, but just one item instead of a list of items.",
+          "items" : {
+            "type" : "object",
+            "properties" : { }
+          }
+        }
+      },
+      "example" : {
+        "alert" : [ "{}", "{}" ]
+      }
+    },
+    "alert_properties" : {
+      "required" : [ "days_of_week", "email_address", "end_hour", "expires_after", "list_order", "list_type", "minute_frequency", "send_type", "start_hour", "time_zone" ],
+      "properties" : {
+        "email_address" : {
+          "type" : "string",
+          "format" : "email",
+          "description" : "The address for the alert."
+        },
+        "start_hour" : {
+          "type" : "object",
+          "description" : "A value between 3-21 corresponding to the hour of the day.",
+          "properties" : { }
+        },
+        "end_hour" : {
+          "type" : "object",
+          "description" : "Has the same values as start_hour",
+          "properties" : { }
+        },
+        "time_zone" : {
+          "type" : "object",
+          "description" : "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST",
+          "properties" : { }
+        },
+        "minute_frequency" : {
+          "type" : "object",
+          "description" : "How many minutes to wait before sending another alert. Valid values are '15','30','60','120','240','480', and '1440'.",
+          "properties" : { }
+        },
+        "days_of_week" : {
+          "type" : "object",
+          "description" : "Limit the days that alerts are sent to the days listed. Send an array of strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and 'Sat'.",
+          "properties" : { }
+        },
+        "list_type" : {
+          "type" : "object",
+          "description" : "This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are 'complete-list','only-new', and 'not-active'.",
+          "properties" : { }
+        },
+        "list_order" : {
+          "type" : "object",
+          "description" : "Any value that is valid in the boards sort_order is also valid here.",
+          "properties" : { }
+        },
+        "send_type" : {
+          "type" : "object",
+          "description" : "What method to send the alert list. Valid types are 'email',or 'text'.",
+          "properties" : { }
+        },
+        "expires_after" : {
+          "type" : "object",
+          "description" : "The last day the alert will be valid. Valid time frames are from today until one year into the future.",
+          "properties" : { }
+        }
+      }
+    },
+    "patch_alert_properties" : {
+      "properties" : {
+        "start_hour" : {
+          "type" : "object",
+          "description" : "A value between 3-21 corresponding to the hour of the day.",
+          "properties" : { }
+        },
+        "end_hour" : {
+          "type" : "object",
+          "description" : "Has the same values as start_hour",
+          "properties" : { }
+        },
+        "time_zone" : {
+          "type" : "object",
+          "description" : "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST",
+          "properties" : { }
+        },
+        "minute_frequency" : {
+          "type" : "object",
+          "description" : "How many minutes to wait before sending another alert. Valid values are '15','30','60','120','240','480', and '1440'.",
+          "properties" : { }
+        },
+        "days_of_week" : {
+          "type" : "object",
+          "description" : "Limit the days that alerts are sent to the days listed. Send an array of strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and 'Sat'.",
+          "properties" : { }
+        },
+        "list_type" : {
+          "type" : "object",
+          "description" : "This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are 'complete-list','only-new', and 'not-active'.",
+          "properties" : { }
+        },
+        "list_order" : {
+          "type" : "object",
+          "description" : "Any value that is valid in the boards sort_order is also valid here.",
+          "properties" : { }
+        },
+        "send_type" : {
+          "type" : "object",
+          "description" : "What method to send the alert list. Valid types are 'email',or 'text'.",
+          "properties" : { }
+        },
+        "expires_after" : {
+          "type" : "object",
+          "description" : "The last day the alert will be valid. Valid time frames are from today until one year into the future.",
+          "properties" : { }
+        }
+      }
+    },
+    "post_alert_response" : {
+      "properties" : {
+        "alert_id" : {
+          "type" : "string",
+          "description" : "Returns the id of the new alert entry."
+        }
+      },
+      "example" : {
+        "alert_id" : "alert_id"
+      }
+    },
+    "alert_type" : {
+      "type" : "string",
+      "description" : "Valid types are \"loads\", and \"trucks\".",
+      "enum" : [ "loads", "trucks" ]
+    },
+    "get_billing_response" : {
+      "properties" : {
+        "amount" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Amount How much the user will be charged. This may be 0."
+        },
+        "promo_conditions" : {
+          "type" : "object",
+          "description" : "Any extra text relating to the promo code. For example \"15 Day Free. 34.95 charged after that.\"",
+          "properties" : { }
+        }
+      },
+      "example" : {
+        "amount" : 0,
+        "promo_conditions" : "{}"
+      }
+    },
+    "post_billing_response" : {
+      "properties" : {
+        "charged" : {
+          "type" : "string",
+          "description" : "How much they were charged."
+        },
+        "method" : {
+          "type" : "object",
+          "description" : "What method they were charged.",
+          "properties" : { }
+        }
+      },
+      "example" : {
+        "method" : "{}",
+        "charged" : "charged"
+      }
+    },
+    "get_boards_notes_response" : {
+      "properties" : {
+        "entry_id" : {
+          "type" : "array",
+          "description" : "A hash with each entry id as the name, and a note_object as the value.",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "",
+      "example" : {
+        "entry_id" : [ "entry_id", "entry_id" ]
+      }
+    },
+    "post_boards_notes_response" : {
+      "properties" : {
+        "success" : {
+          "type" : "boolean"
+        }
+      },
+      "example" : {
+        "success" : true
+      }
+    },
+    "delete_boards_notes_response" : {
+      "properties" : {
+        "This" : {
+          "type" : "boolean",
+          "description" : "will not return any content."
+        }
+      },
+      "example" : {
+        "This" : true
+      }
+    },
+    "patch_boards_notes_response" : {
+      "properties" : {
+        "entry_id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "A hash with the updated value."
+        }
+      },
+      "example" : {
+        "entry_id" : 0
+      }
+    },
+    "get_hidden_companies_response" : {
+      "properties" : {
+        "company_name" : {
+          "type" : "array",
+          "description" : "A subset of companies that need to be marked as hidden.",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "example" : {
+        "company_name" : [ "company_name", "company_name" ]
+      }
+    },
+    "post_hidden_companies_response" : {
+      "properties" : {
+        "company_name" : {
+          "type" : "string",
+          "description" : "A subset of companies that need to be marked as hidden."
+        }
+      },
+      "example" : {
+        "company_name" : "company_name"
+      }
+    },
+    "post_hidden_entries_response" : {
+      "properties" : {
+        "success" : {
+          "type" : "boolean"
+        }
+      },
+      "example" : {
+        "success" : true
+      }
+    },
+    "get_state_list_response" : {
+      "properties" : {
+        "state_totals" : {
+          "type" : "object",
+          "example" : "{     \"MS\": 1449,     \"NS\": 24,     \"VT\": 145,     \"MD\": 520,     \"ID\": 2091,     \"SK\": 126,     \"WA\": 2207,     \"SC\": 1619,     \"VA\": 1781,     \"PQ\": 10,     \"ON\": 270,     \"KS\": 969,     \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,     \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,     \"BC\": 124,     \"DC\": 7,     .... }",
+          "description" : "A hash of state totals.",
+          "properties" : { }
+        }
+      },
+      "example" : {
+        "state_totals" : "{     \"MS\": 1449,     \"NS\": 24,     \"VT\": 145,     \"MD\": 520,     \"ID\": 2091,     \"SK\": 126,     \"WA\": 2207,     \"SC\": 1619,     \"VA\": 1781,     \"PQ\": 10,     \"ON\": 270,     \"KS\": 969,     \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,     \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,     \"BC\": 124,     \"DC\": 7,     .... }"
+      }
+    },
+    "post_board_type_response" : {
+      "properties" : {
+        "total_pages" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "A count of the # of pages based on the search parameters."
+        },
+        "page_number" : {
+          "type" : "object",
+          "description" : "The page you are on.",
+          "properties" : { }
+        },
+        "total_items" : {
+          "type" : "object",
+          "description" : "A count of all the entry objects for the specified search.",
+          "properties" : { }
+        },
+        "list" : {
+          "type" : "object",
+          "description" : "A list of entries for this board.",
+          "properties" : { }
+        }
+      },
+      "example" : {
+        "page_number" : "{}",
+        "total_pages" : 0,
+        "list" : "{}",
+        "total_items" : "{}"
+      }
+    },
+    "get_end_user_authentications_response" : {
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "example" : "{status: \"Subscribed\"}",
+          "description" : "Will return the logged in user's status. Valid status's are \"Subscribed\", \"Posting\", \"Overdue\", or \"Not Logged In\"."
+        }
+      },
+      "example" : {
+        "status" : "{status: \"Subscribed\"}"
+      }
+    },
+    "post_end_user_authentication_response" : {
+      "properties" : {
+        "end-user-token" : {
+          "type" : "string",
+          "example" : "XX423ASOEUHT4AESUTH",
+          "description" : "The account is created, and a generated token to authenticate as this user is returned."
+        }
+      },
+      "example" : {
+        "end-user-token" : "XX423ASOEUHT4AESUTH"
+      }
+    },
+    "get_end_user_authentications_dates_response" : {
+      "properties" : {
+        "now" : {
+          "type" : "string",
+          "description" : "The current date and time based on our server."
+        }
+      },
+      "example" : {
+        "now" : "now"
+      }
+    },
+    "get_closest_city_response" : {
+      "properties" : {
+        "city" : {
+          "type" : "string"
+        },
+        "state_abbreviation" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "state_name" : {
+          "type" : "object",
+          "properties" : { }
+        }
+      },
+      "example" : {
+        "city" : "city",
+        "state_name" : "{}",
+        "state_abbreviation" : "{}"
+      }
+    },
+    "get_location_ distance_response" : {
+      "properties" : {
+        "distance" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "A number representing the miles between the two locations."
+        }
+      },
+      "example" : {
+        "distance" : 0
+      }
+    },
+    "get_partial_match_response" : {
+      "properties" : {
+        "cities" : {
+          "type" : "array",
+          "description" : "Should return an array of possible city names.",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "post_posting_type_action_response" : {
+      "properties" : {
+        "posting_id" : {
+          "type" : "array",
+          "description" : "The id for the moved or copied postings.",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "example" : {
+        "posting_id" : [ "posting_id", "posting_id" ]
+      }
+    },
+    "post_posting_type_action_body" : {
+      "required" : [ "source_id", "source_posting" ],
+      "properties" : {
+        "source_posting" : {
+          "type" : "string",
+          "description" : "The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads."
+        },
+        "source_id" : {
+          "type" : "object",
+          "description" : "The posting id of the posting you are moving or copying. Optional for create.",
+          "properties" : { }
+        }
+      }
+    },
+    "get_custom_categories_response" : {
+      "properties" : {
+        "categories" : {
+          "type" : "array",
+          "description" : "A list of each category, type and it's corresponding position.",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "example" : {
+        "categories" : [ "categories", "categories" ]
+      }
+    },
+    "post_custom_categories_response" : {
+      "properties" : {
+        "success" : {
+          "type" : "string",
+          "description" : "HTTP 204 code with a blank body."
+        }
+      },
+      "example" : {
+        "success" : "success"
+      }
+    },
+    "post_posting_ multiple_response" : {
+      "properties" : {
+        "success" : {
+          "type" : "boolean",
+          "description" : "This will return true, and have a unique location in the location header."
+        }
+      },
+      "example" : {
+        "success" : true
+      }
+    },
+    "get_posting_type_response" : {
+      "properties" : {
+        "posting_list" : {
+          "type" : "array",
+          "description" : "A list of posting objects you can iterate over.",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
+      "example" : {
+        "posting_list" : [ "posting_list", "posting_list" ]
+      }
+    },
+    "post_object_model" : {
+      "required" : [ "origin_city", "origin_state", "posting_id", "ship_date", "trailer_type" ],
+      "properties" : {
+        "posting_id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "A unique id in our system for the user's entry."
+        },
+        "custom_id" : {
+          "type" : "object",
+          "description" : "A unique identifier a user can provide for their own records.",
+          "properties" : { }
+        },
+        "origin_city" : {
+          "type" : "object",
+          "description" : "Required for all entry types.",
+          "properties" : { }
+        },
+        "origin_state" : {
+          "type" : "object",
+          "description" : "Required, 2 character limit.",
+          "properties" : { }
+        },
+        "destination_city" : {
+          "type" : "object",
+          "description" : "For truck type entries this is optional.",
+          "properties" : { }
+        },
+        "destination_state" : {
+          "type" : "object",
+          "description" : "For truck type entries this is optional.",
+          "properties" : { }
+        },
+        "trailer_type" : {
+          "type" : "object",
+          "description" : "This can have 1 or more standard trailer types.",
+          "properties" : { }
+        },
+        "other_trailer_types" : {
+          "type" : "object",
+          "description" : "This may be empty.",
+          "properties" : { }
+        },
+        "load_size" : {
+          "type" : "object",
+          "description" : "Require for load type entries only. This field expects one of the 2 following terms, full or partial.",
+          "properties" : { }
+        },
+        "ship_date" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "receive_date" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "pay_rate" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "comment" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "width" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "height" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "length" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "weight" : {
+          "type" : "object",
+          "properties" : { }
+        }
+      }
+    },
+    "success_status_response" : {
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "A text status like OPTIN, NORESPONSE, OPTOUT."
+        }
+      },
+      "example" : {
+        "status" : "status"
+      }
+    },
+    "post_optin_code_response" : {
+      "properties" : {
+        "optin_code" : {
+          "type" : "string",
+          "description" : "A text string with the code sent."
+        }
+      },
+      "example" : {
+        "optin_code" : "optin_code"
+      }
+    },
+    "success_success_response" : {
+      "properties" : {
+        "success" : {
+          "type" : "boolean"
+        }
+      },
+      "example" : {
+        "success" : true
+      }
+    },
+    "profile_model" : {
+      "properties" : {
+        "company" : {
+          "type" : "string",
+          "description" : "Company name."
+        },
+        "contact_name" : {
+          "type" : "object",
+          "description" : "Contact name.",
+          "properties" : { }
+        },
+        "address" : {
+          "type" : "object",
+          "description" : "The address associated with their entries.",
+          "properties" : { }
+        },
+        "city" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "state" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "zip" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "contact_number" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "contact_extension" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "mobile_number" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "mobile_carrier" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "fax_number" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "web_page" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "mc_number" : {
+          "type" : "object",
+          "properties" : { }
+        },
+        "dot_number" : {
+          "type" : "object",
+          "properties" : { }
+        }
+      },
+      "example" : {
+        "zip" : "{}",
+        "contact_name" : "{}",
+        "address" : "{}",
+        "city" : "{}",
+        "fax_number" : "{}",
+        "contact_number" : "{}",
+        "contact_extension" : "{}",
+        "web_page" : "{}",
+        "mc_number" : "{}",
+        "dot_number" : "{}",
+        "mobile_carrier" : "{}",
+        "company" : "company",
+        "state" : "{}",
+        "mobile_number" : "{}"
+      }
+    },
+    "get_email_exists_response" : {
+      "properties" : {
+        "exists" : {
+          "type" : "boolean",
+          "description" : "Returns a true value if it is associated with an account."
+        }
+      },
+      "example" : {
+        "exists" : true
+      }
+    },
+    "post_board_type_error_response" : {
+      "properties" : {
+        "bad_search_parameter" : {
+          "description" : "You would get back this type of error if you forgot a parameter, or typed something wrong.",
+          "example" : "{     \"errors\": [         [             \"When searching by city please enter an accompanying state code.\"         ]     ] }",
+          "type" : "object"
+        }
+      },
+      "additionalProperties" : false
+    }
+  },
+  "x-ibm-configuration" : { },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/directfreight/direct-freight_api/2.0.0"
+}
