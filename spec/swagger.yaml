@@ -1,5 +1,5 @@
 swagger: '2.0'
-basePath: /directfreight/direct-freight_api/2.0.0
+basePath: /api
 securityDefinitions:
   api_key:
     in: header
@@ -9,7 +9,7 @@ securityDefinitions:
       to our API.
 schemes:
 - https
-host: virtserver.swaggerhub.com
+host: api.directfreight.com
 x-ibm-configuration: {}
 security:
 - api_key: []
