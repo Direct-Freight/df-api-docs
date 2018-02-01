@@ -4,12 +4,12 @@
 
 ## Links
 
-- Documentation: https://direct-freight.github.io/df-api-docs/
-- SwaggerUI: https://direct-freight.github.io/df-api-docs/swagger-ui/
+- Documentation: http://docs.directfreight.com/
+- SwaggerUI: http://docs.directfreight.com/swagger-ui/
 - Look at full spec:
-    + JSON https://direct-freight.github.io/df-api-docs/swagger.json
-    + YAML https://direct-freight.github.io/df-api-docs/swagger.yaml
-- Preview spec version for branch `[branch]`: https://direct-freight.github.io/df-api-docs/preview/[branch]
+    + JSON http://docs.directfreight.com/swagger.json
+    + YAML http://docs.directfreight.com/swagger.yaml
+- Preview spec version for branch `[branch]`: https://docs.directfreight.com/preview/[branch]
 
 ## Editing specification with swagger-editor
 ### Install
