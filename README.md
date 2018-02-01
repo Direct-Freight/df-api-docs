@@ -4,8 +4,8 @@
 
 ## Links
 
-- Documentation: http://apidocs.directfreight.com/
-- SwaggerUI: http://apidocs.directfreight.com/swagger-ui/
+- Documentation (ReDoc): http://apidocs.directfreight.com/
+- Try It Out (SwaggerUI): http://apidocs.directfreight.com/swagger-ui/
 - Look at full spec:
     + JSON http://apidocs.directfreight.com/swagger.json
     + YAML http://apidocs.directfreight.com/swagger.yaml
