@@ -1,0 +1,36 @@
+---
+post:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in account's token
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - description: Valid types are "loads", "trucks", "private_loads", "private_trucks",
+      "test_loads", and "test_trucks"
+    in: path
+    name: posting_type
+    required: true
+    type: string
+  - description: Specified in the url. Valid types are "copy", and "move"
+    in: path
+    name: action
+    required: true
+    type: string
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: ! '#/definitions/post_posting_type_action_body'
+  produces:
+  - application/json
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/post_posting_type_action_response'
+  summary: Copy or Move an posting.
+  tags:
+  - postings

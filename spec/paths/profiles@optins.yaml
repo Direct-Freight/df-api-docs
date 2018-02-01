@@ -1,0 +1,75 @@
+---
+delete:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in profile's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '204':
+      description: successful operation
+  summary: Marks the profile as opted out.
+  tags:
+  - profiles
+get:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in profile's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/success_status_response'
+  summary: Check if the profile has opted to being contacted by text.
+  tags:
+  - profiles
+patch:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in profile's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/success_success_response'
+  summary: Marks the profile as opted in.
+  tags:
+  - profiles
+post:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in profile's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/post_optin_code_response'
+  summary: Create, and send an Optin Code.
+  tags:
+  - profiles

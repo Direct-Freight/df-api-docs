@@ -1,0 +1,24 @@
+---
+example:
+  list: ! '{}'
+  page_number: ! '{}'
+  total_items: ! '{}'
+  total_pages: 0
+properties:
+  list:
+    description: A list of entries for this board.
+    properties: {}
+    type: object
+  page_number:
+    description: The page you are on.
+    properties: {}
+    type: object
+  total_items:
+    description: A count of all the entry objects for the specified search.
+    properties: {}
+    type: object
+  total_pages:
+    description: ! 'A count of the # of pages based on the search
+      parameters.'
+    format: int32
+    type: integer

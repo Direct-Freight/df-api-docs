@@ -1,0 +1,15 @@
+---
+get:
+  consumes:
+  - application/json
+  parameters: []
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/get_end_user_authentications_dates_response'
+  summary: Gets an authoritative date_time string.
+  tags:
+  - end_user_authentications

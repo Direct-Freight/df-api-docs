@@ -1,0 +1,101 @@
+---
+delete:
+  consumes:
+  - application/json
+  parameters:
+  - description: Only logged in users can use this feature.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - description: ! 'The entry to associate the note with. '
+    in: query
+    name: note_id
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '204':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/delete_boards_notes_response'
+  summary: Delete a note.
+  tags:
+  - boards
+get:
+  consumes:
+  - application/json
+  parameters:
+  - description: Only logged in users can use this feature.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - collectionFormat: multi
+    description: ! 'Optionally just check if certain loads have notes
+      associated with them. '
+    in: query
+    items:
+      type: string
+    name: entry_id
+    required: false
+    type: array
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/get_boards_notes_response'
+  summary: Get notes that this user has written.
+  tags:
+  - boards
+patch:
+  consumes:
+  - application/json
+  parameters:
+  - description: Only logged in users can use this feature.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: ! '#/definitions/update_notes'
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/patch_boards_notes_response'
+  summary: Update a note.
+  tags:
+  - boards
+post:
+  consumes:
+  - application/json
+  parameters:
+  - description: Only logged in users can use this feature.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: ! '#/definitions/create_notes'
+  produces:
+  - application/json
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/post_boards_notes_response'
+  summary: Create a new note.
+  tags:
+  - boards

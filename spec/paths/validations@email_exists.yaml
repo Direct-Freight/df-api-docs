@@ -1,0 +1,26 @@
+---
+get:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in user's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - description: Enter an e-mail to see if it is available. Can be used as ?email=xxx
+      or as a JSON request.
+    in: query
+    name: email
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/get_email_exists_response'
+  summary: Check if an e-mail exists.
+  tags:
+  - validations

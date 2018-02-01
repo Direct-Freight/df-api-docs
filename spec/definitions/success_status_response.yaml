@@ -1,0 +1,7 @@
+---
+example:
+  status: status
+properties:
+  status:
+    description: A text status like OPTIN, NORESPONSE, OPTOUT.
+    type: string

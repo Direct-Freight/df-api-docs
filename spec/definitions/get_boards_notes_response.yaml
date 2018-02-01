@@ -1,0 +1,12 @@
+---
+description: ''
+example:
+  entry_id:
+  - entry_id
+  - entry_id
+properties:
+  entry_id:
+    description: A hash with each entry id as the name, and a note_object as the value.
+    items:
+      type: string
+    type: array

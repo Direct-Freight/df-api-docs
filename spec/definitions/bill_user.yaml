@@ -1,0 +1,20 @@
+---
+properties:
+  billing_address:
+    description: ! 'first_name, last_name, address, city, state,
+      and phone all needed. '
+    properties: {}
+    type: object
+  cc_data:
+    description: ! 'This is optional if a check number is provided. '
+    properties: {}
+    type: object
+  check_data:
+    description: ! 'This is optional if a credit number is provided. '
+    properties: {}
+    type: object
+  promo_code:
+    description: ! 'Optional Promo Code for a discount. '
+    type: string
+required:
+- billing_address

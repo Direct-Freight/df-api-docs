@@ -1,0 +1,9 @@
+---
+additionalProperties: false
+properties:
+  bad_search_parameter:
+    description: You would get back this type of error if you forgot a parameter,
+      or typed something wrong.
+    example: ! '{     "errors": [         [             "When searching
+      by city please enter an accompanying state code."         ]     ] }'
+    type: object

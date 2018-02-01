@@ -1,0 +1,14 @@
+---
+example:
+  amount: 0
+  promo_conditions: ! '{}'
+properties:
+  amount:
+    description: Amount How much the user will be charged. This may be 0.
+    format: int32
+    type: integer
+  promo_conditions:
+    description: Any extra text relating to the promo code. For example "15 Day Free.
+      34.95 charged after that."
+    properties: {}
+    type: object

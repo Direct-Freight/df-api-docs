@@ -1,0 +1,9 @@
+---
+properties:
+  entry_id:
+    description: ! 'The entry that need to be toggled. '
+    items:
+      type: string
+    type: array
+required:
+- entry_id

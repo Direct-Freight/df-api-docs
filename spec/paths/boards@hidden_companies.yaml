@@ -1,0 +1,96 @@
+---
+delete:
+  consumes:
+  - application/json
+  parameters:
+  - description: Only logged in users can use this feature.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - description: The company that need to be marked as not hidden.
+    in: query
+    name: company_id
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+  summary: Mark a company as not hidden.
+  tags:
+  - boards
+get:
+  consumes:
+  - application/json
+  parameters:
+  - description: Only logged in users can use this feature.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - collectionFormat: multi
+    description: A list of id's to check if any should be visually hidden.
+    in: query
+    items:
+      type: string
+    name: company_name
+    required: true
+    type: array
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/get_hidden_companies_response'
+  summary: Get a list of companies that should be hidden.
+  tags:
+  - boards
+patch:
+  consumes:
+  - application/json
+  parameters:
+  - description: Only logged in users can use this feature.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: ! '#/definitions/toggle_hidden_companies'
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+  summary: Toggle one or more company between hidden and unhidden.
+  tags:
+  - boards
+post:
+  consumes:
+  - application/json
+  parameters:
+  - description: Only logged in users can use this feature.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: ! '#/definitions/mark_hidden_companies'
+  produces:
+  - application/json
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/post_hidden_companies_response'
+  summary: Mark a set of companies as hidden.
+  tags:
+  - boards

@@ -1,0 +1,7 @@
+---
+properties:
+  cities:
+    description: Should return an array of possible city names.
+    items:
+      type: string
+    type: array

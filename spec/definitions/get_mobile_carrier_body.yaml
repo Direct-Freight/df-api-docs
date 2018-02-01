@@ -1,0 +1,8 @@
+---
+properties:
+  carrier_id:
+    description: A way to just get back the info for just one carrier.
+    format: int32
+    type: integer
+required:
+- carrier_id

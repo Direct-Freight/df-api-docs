@@ -1,0 +1,7 @@
+---
+properties:
+  company_id:
+    description: ! 'The company that need to be marked as not hidden. '
+    type: string
+required:
+- company_id

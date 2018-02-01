@@ -1,0 +1,28 @@
+---
+get:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in user's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - description: A special id returned with the board entries.
+    in: query
+    name: credit_report_id
+    required: true
+    type: string
+  - description: Return format. Currently only supports html and json.
+    in: query
+    name: format
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: successful operation
+  summary: Request access to a credit report.
+  tags:
+  - credit_reports

@@ -1,0 +1,61 @@
+---
+example:
+  address: ! '{}'
+  city: ! '{}'
+  company: company
+  contact_extension: ! '{}'
+  contact_name: ! '{}'
+  contact_number: ! '{}'
+  dot_number: ! '{}'
+  fax_number: ! '{}'
+  mc_number: ! '{}'
+  mobile_carrier: ! '{}'
+  mobile_number: ! '{}'
+  state: ! '{}'
+  web_page: ! '{}'
+  zip: ! '{}'
+properties:
+  address:
+    description: The address associated with their entries.
+    properties: {}
+    type: object
+  city:
+    properties: {}
+    type: object
+  company:
+    description: Company name.
+    type: string
+  contact_extension:
+    properties: {}
+    type: object
+  contact_name:
+    description: Contact name.
+    properties: {}
+    type: object
+  contact_number:
+    properties: {}
+    type: object
+  dot_number:
+    properties: {}
+    type: object
+  fax_number:
+    properties: {}
+    type: object
+  mc_number:
+    properties: {}
+    type: object
+  mobile_carrier:
+    properties: {}
+    type: object
+  mobile_number:
+    properties: {}
+    type: object
+  state:
+    properties: {}
+    type: object
+  web_page:
+    properties: {}
+    type: object
+  zip:
+    properties: {}
+    type: object

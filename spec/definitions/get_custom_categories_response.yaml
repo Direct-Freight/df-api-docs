@@ -1,0 +1,11 @@
+---
+example:
+  categories:
+  - categories
+  - categories
+properties:
+  categories:
+    description: A list of each category, type and it's corresponding position.
+    items:
+      type: string
+    type: array

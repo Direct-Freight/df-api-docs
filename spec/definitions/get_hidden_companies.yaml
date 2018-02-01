@@ -1,0 +1,10 @@
+---
+properties:
+  company_name:
+    description: ! 'A subset of companies that need to be marked
+      as hidden. '
+    items:
+      type: string
+    type: array
+required:
+- company_name

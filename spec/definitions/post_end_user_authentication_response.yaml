@@ -1,0 +1,9 @@
+---
+example:
+  end-user-token: XX423ASOEUHT4AESUTH
+properties:
+  end-user-token:
+    description: The account is created, and a generated token to authenticate as
+      this user is returned.
+    example: XX423ASOEUHT4AESUTH
+    type: string

@@ -1,0 +1,69 @@
+---
+properties:
+  comment:
+    properties: {}
+    type: object
+  custom_id:
+    description: A unique identifier a user can provide for their own records.
+    properties: {}
+    type: object
+  destination_city:
+    description: For truck type entries this is optional.
+    properties: {}
+    type: object
+  destination_state:
+    description: For truck type entries this is optional.
+    properties: {}
+    type: object
+  height:
+    properties: {}
+    type: object
+  length:
+    properties: {}
+    type: object
+  load_size:
+    description: Require for load type entries only. This field expects one of the
+      2 following terms, full or partial.
+    properties: {}
+    type: object
+  origin_city:
+    description: Required for all entry types.
+    properties: {}
+    type: object
+  origin_state:
+    description: Required, 2 character limit.
+    properties: {}
+    type: object
+  other_trailer_types:
+    description: This may be empty.
+    properties: {}
+    type: object
+  pay_rate:
+    properties: {}
+    type: object
+  posting_id:
+    description: A unique id in our system for the user's entry.
+    format: int32
+    type: integer
+  receive_date:
+    properties: {}
+    type: object
+  ship_date:
+    properties: {}
+    type: object
+  trailer_type:
+    description: This can have 1 or more standard trailer types.
+    properties: {}
+    type: object
+  weight:
+    properties: {}
+    type: object
+  width:
+    properties: {}
+    type: object
+required:
+- origin_city
+- origin_state
+- posting_id
+- ship_date
+- trailer_type

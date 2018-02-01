@@ -1,0 +1,82 @@
+---
+delete:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in profile's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: success operation
+  summary: Delete the document.
+  tags:
+  - profiles
+get:
+  consumes:
+  - application/json
+  description: Retrieve documents
+  parameters:
+  - description: The logged in profile's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: success
+  summary: Retrieve documents
+  tags:
+  - profiles
+patch:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in profile's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: ! '#/definitions/rename_document'
+  produces:
+  - application/json
+  responses:
+    '200':
+      description: success
+  summary: Rename a document.
+  tags:
+  - profiles
+post:
+  consumes:
+  - application/json
+  parameters:
+  - description: The logged in profile's token.
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  - in: body
+    name: body
+    required: true
+    schema:
+      $ref: ! '#/definitions/upload_document'
+  produces:
+  - application/json
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: ! '#/definitions/success_success_response'
+  summary: Upload a new document.
+  tags:
+  - profiles

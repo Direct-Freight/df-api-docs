@@ -1,0 +1,7 @@
+---
+example:
+  alert_id: alert_id
+properties:
+  alert_id:
+    description: Returns the id of the new alert entry.
+    type: string

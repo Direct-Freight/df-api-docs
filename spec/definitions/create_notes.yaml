@@ -1,0 +1,15 @@
+---
+properties:
+  body:
+    description: ''
+    type: string
+  entry_id:
+    description: ! 'The entry to associate the note with. '
+    type: integer
+  title:
+    description: ! 'Subject of the note. '
+    type: string
+required:
+- body
+- entry_id
+- title

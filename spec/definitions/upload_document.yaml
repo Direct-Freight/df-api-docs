@@ -1,0 +1,8 @@
+---
+properties:
+  The:
+    description: ! 'file to be uploaded. '
+    properties: {}
+    type: object
+required:
+- The

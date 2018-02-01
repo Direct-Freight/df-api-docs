@@ -1,0 +1,6 @@
+---
+example:
+  success: true
+properties:
+  success:
+    type: boolean

@@ -1,0 +1,11 @@
+---
+properties:
+  search_type:
+    description: ! '"state", and "city" will return only returns
+      only the respective information for that search type. Misspelling, will default
+      to city.'
+    properties: {}
+    type: object
+  term:
+    description: Min 2 characters.
+    type: string
