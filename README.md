@@ -9,7 +9,6 @@
 - Look at full spec:
     + JSON http://apidocs.directfreight.com/swagger.json
     + YAML http://apidocs.directfreight.com/swagger.yaml
-- Preview spec version for branch `[branch]`: https://docs.directfreight.com/preview/[branch]
 
 ## Editing specification with swagger-editor
 ### Install
@@ -28,6 +27,7 @@
 5. Once you finish with the changes you can run tests using: `npm test`
 6. Share you changes with the rest of the world by pushing to GitHub :smile:
 
-### Steps to finish
+### Misc
 
-1. **[Optional]** If you document public API consider adding it into [APIs.guru](https://APIs.guru) directory using [this form](https://apis.guru/add-api/).
+- Preview spec version for branch `[branch]`: https://docs.directfreight.com/preview/[branch]
+- **[Optional]** If you document public API consider adding it into [APIs.guru](https://APIs.guru) directory using [this form](https://apis.guru/add-api/).
