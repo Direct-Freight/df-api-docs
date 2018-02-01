@@ -9,7 +9,8 @@ securityDefinitions:
       to our API.
 schemes:
 - https
-host: api.directfreight.com
+- http
+host: www.directfreight.com
 x-ibm-configuration: {}
 security:
 - api_key: []
