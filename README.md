@@ -4,11 +4,11 @@
 
 ## Links
 
-- Documentation: http://docs.directfreight.com/
-- SwaggerUI: http://docs.directfreight.com/swagger-ui/
+- Documentation: http://apidocs.directfreight.com/
+- SwaggerUI: http://apidocs.directfreight.com/swagger-ui/
 - Look at full spec:
-    + JSON http://docs.directfreight.com/swagger.json
-    + YAML http://docs.directfreight.com/swagger.yaml
+    + JSON http://apidocs.directfreight.com/swagger.json
+    + YAML http://apidocs.directfreight.com/swagger.yaml
 - Preview spec version for branch `[branch]`: https://docs.directfreight.com/preview/[branch]
 
 ## Editing specification with swagger-editor
