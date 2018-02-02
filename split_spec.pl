@@ -1,28 +1,36 @@
 #!/usr/bin/perl
-use YAML::XS qw/LoadFile Dump DumpFile/;
+use YAML::XS qw/LoadFile Dump DumpFile Load/;
+use File::Slurp;
+use Data::Dumper;
 $YAML::XS::DumpCode = 1;
 $YAML::XS::LoadCode = 1;
-use Data::Dumper;
-my $yaml = LoadFile('spec/swagger.yaml');
-#print Dumper($yaml);
-foreach $key( keys %{$yaml} ) 
+my $text = read_file('web_deploy/swagger.yaml') ;
+my $yaml = Load($text); #read from combined one.
+foreach my $key( keys %{$yaml} ) 
         { 
-        print "$key\n";
         if ($key eq 'paths' or $key eq 'definitions')
                 {
-                foreach $key2 ( keys %{$yaml->{$key}} )
+                foreach my $key2 ( keys %{$yaml->{$key}} )
                         {
-                        $key2path = "$key2.yaml";
-                        $key2path =~ s/\//@/g;
-                        $key2path =~ s/^@//g;
-                        $key2path =~ s/@\.yaml/.yaml/g;
-                        print "*** $key2 -> $key2path ***\n";
-                        $a = Dump($yaml->{$key}->{$key2});
-                        $a =~ s@: !!perl/scalar:main '@: ! '@g;
-                        $a =~ s@- !!perl/scalar:main '@- ! '@g;
-                        open (FILE,">spec/$key/$key2path");
-                        print FILE $a;
+                        my $key2filename = "$key2.yaml";
+                        $key2filename =~ s/\//@/g;
+                        $key2filename =~ s/^@//g;
+                        $key2filename =~ s/@\.yaml/.yaml/g;
+                        my $out = Dump($yaml->{$key}->{$key2});
+                        $out =~ s@: !!perl/scalar:main '@: ! '@g;
+                        $out =~ s@- !!perl/scalar:main '@- ! '@g;
+                        open (FILE,">spec/$key/$key2filename"); #write to the individual paths and definitions
+                        print FILE $out;
                         close FILE;
                         }
                 }
         }
+my @lines = split("\n",$text);
+open (FILE,">spec/swagger.yaml"); #write to the individual paths and definitions
+foreach my $line (@lines)
+        {       
+        last if($line =~ /^(definitions|paths)/);
+        chomp($line);
+        print FILE "$line\n";
+        }
+close FILE;
