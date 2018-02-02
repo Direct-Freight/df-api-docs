@@ -10,7 +10,7 @@
     + JSON http://apidocs.directfreight.com/swagger.json
     + YAML http://apidocs.directfreight.com/swagger.yaml
 
-## Editing specification with swagger-editor
+### Editing specification with swagger-editor
 
 1. Run `npm start`  (Install [Node JS](https://nodejs.org/) and run `npm install` inside of the repo first if you haven't yet)
 2. Checkout console output to see where local server is started. You can use all [links](#links) (except `preview`) by replacing https://direct-freight.github.io/df-api-docs/ with url from the message: `Server started <url>`
