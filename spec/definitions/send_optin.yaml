@@ -1,7 +1,7 @@
 ---
 properties:
   optin_code:
-    description: ! 'A text string with the code sent. '
+    description: 'A text string with the code sent. '
     type: string
 required:
 - optin_code

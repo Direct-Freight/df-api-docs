@@ -1,11 +1,10 @@
 ---
 properties:
   amount:
-    description: ! 'Amount How much the user will be charged. This
-      may be 0. '
+    description: 'Amount How much the user will be charged. This may be 0. '
     type: integer
   promo_code:
-    description: ! 'The promo code. '
+    description: 'The promo code. '
     type: string
 required:
 - amount

@@ -1,10 +1,10 @@
 ---
 properties:
   current_name:
-    description: ! 'The document to be renamed. '
+    description: 'The document to be renamed. '
     type: string
   new_name:
-    description: ! 'Replacement name. '
+    description: 'Replacement name. '
     type: string
 required:
 - current_name

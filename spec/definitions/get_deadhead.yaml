@@ -7,8 +7,7 @@ properties:
     description: ''
     type: string
   distance:
-    description: ! 'A number representing the miles between the two
-      locations. '
+    description: 'A number representing the miles between the two locations. '
     type: integer
   origin_city:
     description: ''

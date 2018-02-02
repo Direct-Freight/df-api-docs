@@ -1,7 +1,7 @@
 ---
 example:
   amount: 0
-  promo_conditions: ! '{}'
+  promo_conditions: '{}'
 properties:
   amount:
     description: Amount How much the user will be charged. This may be 0.

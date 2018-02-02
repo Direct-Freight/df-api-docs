@@ -8,7 +8,7 @@ delete:
     name: end-user-token
     required: true
     type: string
-  - description: ! 'The entry that need to be marked as not hidden. '
+  - description: 'The entry that need to be marked as not hidden. '
     in: query
     name: entry_id
     required: true
@@ -44,7 +44,7 @@ get:
     '200':
       description: successful operation
       schema:
-        $ref: ! '#/definitions/get_hidden_entries'
+        $ref: '#/definitions/get_hidden_entries'
   summary: Get a list of entries that should be hidden.
   tags:
   - boards
@@ -61,7 +61,7 @@ patch:
     name: body
     required: true
     schema:
-      $ref: ! '#/definitions/toggle_hidden_entries'
+      $ref: '#/definitions/toggle_hidden_entries'
   produces:
   - application/json
   responses:
@@ -83,14 +83,14 @@ post:
     name: body
     required: true
     schema:
-      $ref: ! '#/definitions/mark_hidden_entries'
+      $ref: '#/definitions/mark_hidden_entries'
   produces:
   - application/json
   responses:
     '201':
       description: successful operation
       schema:
-        $ref: ! '#/definitions/post_hidden_entries_response'
+        $ref: '#/definitions/post_hidden_entries_response'
   summary: Mark a set of entries as hidden.
   tags:
   - boards

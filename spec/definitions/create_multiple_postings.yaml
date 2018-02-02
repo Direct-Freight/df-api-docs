@@ -1,26 +1,22 @@
 ---
 properties:
   contact_fax:
-    description: ! 'By default we use the number listed in their
-      profile. '
+    description: 'By default we use the number listed in their profile. '
     type: string
   contact_name:
-    description: ! 'The dispatchers name. By default we use the profile
-      information. '
+    description: 'The dispatchers name. By default we use the profile information. '
     type: string
   contact_phone:
-    description: ! 'By default we use the number listed in their
-      profile. '
+    description: 'By default we use the number listed in their profile. '
     type: string
   delete_current_before_posting:
-    description: ! 'An optional argument that will first delete all
-      of the users loads before entering the fresh list. Caution, this will still
-      delete everything even if some of the entries fail to be created. '
+    description: 'An optional argument that will first delete all of the users loads
+      before entering the fresh list. Caution, this will still delete everything even
+      if some of the entries fail to be created. '
     type: boolean
   list:
-    description: ! 'Valid types are &quot;loads&quot;, &quot;trucks&quot;,
-      &quot;private_loads&quot;, &quot;private_trucks&quot;, &quot;test_loads&quot;,
-      and &quot;test_trucks&quot; '
+    description: 'Valid types are &quot;loads&quot;, &quot;trucks&quot;, &quot;private_loads&quot;,
+      &quot;private_trucks&quot;, &quot;test_loads&quot;, and &quot;test_trucks&quot; '
     items:
       type: string
     type: array

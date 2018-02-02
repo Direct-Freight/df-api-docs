@@ -1,7 +1,7 @@
 ---
 properties:
   now:
-    description: ! 'The current date and time based on our server. '
+    description: 'The current date and time based on our server. '
     type: string
 required:
 - now

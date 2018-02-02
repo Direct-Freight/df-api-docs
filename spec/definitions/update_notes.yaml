@@ -4,7 +4,7 @@ properties:
     description: ''
     type: string
   title:
-    description: ! 'Subject of the note. '
+    description: 'Subject of the note. '
     type: string
 required:
 - body

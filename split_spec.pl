@@ -4,6 +4,10 @@ use File::Slurp;
 use Data::Dumper;
 $YAML::XS::DumpCode = 1;
 $YAML::XS::LoadCode = 1;
+
+print "WARNING:  this uses the web_deploy directory which is in .gitignore so make sure to run 'npm start' \n";
+print "WARNING:  before using this program to make sure your full swagger.yaml is up to date.\n";
+
 my $text = read_file('web_deploy/swagger.yaml') ;
 my $yaml = Load($text); #read from combined one.
 foreach my $key( keys %{$yaml} ) 

@@ -5,36 +5,26 @@ securityDefinitions:
     in: header
     name: api-token
     type: apiKey
-    description: This token needs to be sent as a HTTP header argument in every request
-      to our API.
+    description: This token needs to be sent as a HTTP header argument in every request to our API.
 schemes:
-- https
-- http
+  - https
+  - http
 host: www.directfreight.com
 x-ibm-configuration: {}
 security:
-- api_key: []
+  - api_key: []
 info:
-  version: '2.0.0'
+  version: 2.0.0
   title: Direct Freight API
-  description: ! 'In order to use the Direct Freight API please first contact us to
-    get an API Token. This token needs to be sent as a HTTP header argument in every
-    request to our API.
-
+  description: |-
+    In order to use the Direct Freight API please first contact us to get an API Token. This token needs to be sent as a HTTP header argument in every request to our API.
 
     api-token="SECRET KEY"
 
-
-    Please keep your api-token a secret. If the token is compromised please contact
-    us to get a new one.
-
+    Please keep your api-token a secret. If the token is compromised please contact us to get a new one.
 
     This api token authenticates your application and gives it access to the API.
 
+    The API token should not be confused with the end-user-token. That token is given to you via the end_user_authentications endpoint when the user logs in. This token is needed in order to use certain features, and get certain sensitive information.
 
-    The API token should not be confused with the end-user-token. That token is given
-    to you via the end_user_authentications endpoint when the user logs in. This token
-    is needed in order to use certain features, and get certain sensitive information.
-
-
-    Both Tokens are stateless, and delivered via the HTTP headers.'
+    Both Tokens are stateless, and delivered via the HTTP headers.

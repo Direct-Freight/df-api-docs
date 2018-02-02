@@ -7,14 +7,14 @@ post:
     name: body
     required: true
     schema:
-      $ref: ! '#/definitions/create_user'
+      $ref: '#/definitions/create_user'
   produces:
   - application/json
   responses:
     '200':
       description: successful operation
       schema:
-        $ref: ! '#/definitions/post_end_user_authentication_response'
+        $ref: '#/definitions/post_end_user_authentication_response'
   summary: Create a new user.
   tags:
   - end_user_authentications

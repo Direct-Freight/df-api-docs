@@ -7,13 +7,13 @@ properties:
     description: ''
     type: string
   company:
-    description: ! 'Company name. '
+    description: 'Company name. '
     type: string
   contact_extension:
     description: ''
     type: string
   contact_name:
-    description: ! 'Contact name. '
+    description: 'Contact name. '
     type: string
   contact_number:
     description: ''

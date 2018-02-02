@@ -1,7 +1,7 @@
 ---
 example:
   charged: charged
-  method: ! '{}'
+  method: '{}'
 properties:
   charged:
     description: How much they were charged.

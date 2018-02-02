@@ -1,7 +1,7 @@
 ---
 properties:
   The:
-    description: ! 'file to be uploaded. '
+    description: 'file to be uploaded. '
     properties: {}
     type: object
 required:

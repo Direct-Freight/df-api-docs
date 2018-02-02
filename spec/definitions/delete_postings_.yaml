@@ -1,14 +1,13 @@
 ---
 properties:
   posting_id:
-    description: ! 'You must specify which entry to remove. '
+    description: 'You must specify which entry to remove. '
     items:
       type: integer
     type: array
   posting_type:
-    description: ! 'Valid types are &quot;loads&quot;, &quot;trucks&quot;,
-      &quot;private_loads&quot;, &quot;private_trucks&quot;, &quot;test_loads&quot;,
-      and &quot;test_trucks&quot; '
+    description: 'Valid types are &quot;loads&quot;, &quot;trucks&quot;, &quot;private_loads&quot;,
+      &quot;private_trucks&quot;, &quot;test_loads&quot;, and &quot;test_trucks&quot; '
     type: string
 required:
 - posting_id

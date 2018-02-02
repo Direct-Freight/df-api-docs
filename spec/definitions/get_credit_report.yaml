@@ -1,11 +1,10 @@
 ---
 properties:
   credit_report_id:
-    description: ! 'A special id returned with the board entries. '
+    description: 'A special id returned with the board entries. '
     type: string
   format:
-    description: ! 'Return format. Currently only supports html and
-      json. '
+    description: 'Return format. Currently only supports html and json. '
     type: string
 required:
 - credit_report_id

@@ -8,9 +8,8 @@ get:
     name: term
     required: true
     type: string
-  - description: ! '"state", and "city" will return only returns
-      only the respective information for that search type. Misspelling, will default
-      to city.'
+  - description: '"state", and "city" will return only returns only the respective
+      information for that search type. Misspelling, will default to city.'
     in: query
     name: search_type
     required: false

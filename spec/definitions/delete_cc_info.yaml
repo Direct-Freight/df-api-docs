@@ -1,7 +1,7 @@
 ---
 properties:
   category_id:
-    description: ! 'To just delete information about some postings. '
+    description: 'To just delete information about some postings. '
     items:
       type: string
     type: array

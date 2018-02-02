@@ -1,19 +1,19 @@
 ---
 example:
-  address: ! '{}'
-  city: ! '{}'
+  address: '{}'
+  city: '{}'
   company: company
-  contact_extension: ! '{}'
-  contact_name: ! '{}'
-  contact_number: ! '{}'
-  dot_number: ! '{}'
-  fax_number: ! '{}'
-  mc_number: ! '{}'
-  mobile_carrier: ! '{}'
-  mobile_number: ! '{}'
-  state: ! '{}'
-  web_page: ! '{}'
-  zip: ! '{}'
+  contact_extension: '{}'
+  contact_name: '{}'
+  contact_number: '{}'
+  dot_number: '{}'
+  fax_number: '{}'
+  mc_number: '{}'
+  mobile_carrier: '{}'
+  mobile_number: '{}'
+  state: '{}'
+  web_page: '{}'
+  zip: '{}'
 properties:
   address:
     description: The address associated with their entries.

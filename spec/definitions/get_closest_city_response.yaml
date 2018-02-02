@@ -1,8 +1,8 @@
 ---
 example:
   city: city
-  state_abbreviation: ! '{}'
-  state_name: ! '{}'
+  state_abbreviation: '{}'
+  state_name: '{}'
 properties:
   city:
     type: string

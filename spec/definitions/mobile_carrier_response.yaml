@@ -1,7 +1,7 @@
 ---
 example:
   carrier_id: 0
-  carrier_name: ! '{}'
+  carrier_name: '{}'
 properties:
   carrier_id:
     description: The carrier ID.

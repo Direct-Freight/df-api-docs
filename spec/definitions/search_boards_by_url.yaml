@@ -1,15 +1,13 @@
 ---
 properties:
   page_number:
-    description: ! 'The page you are on. '
+    description: 'The page you are on. '
     type: integer
   total_items:
-    description: ! 'A count of all the entry objects for the specified
-      search. '
+    description: 'A count of all the entry objects for the specified search. '
     type: integer
   total_pages:
-    description: ! 'A count of the # of pages based on the search
-      parameters. '
+    description: 'A count of the # of pages based on the search parameters. '
     type: integer
 required:
 - page_number

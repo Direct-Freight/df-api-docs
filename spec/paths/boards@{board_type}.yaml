@@ -1,32 +1,31 @@
+---
 parameters:
-  - description: Sensitive info like phone numbers won't be returned without this.
-    in: header
-    name: end-user-token
-    required: false
-    type: string
+- description: Sensitive info like phone numbers won't be returned without this.
+  in: header
+  name: end-user-token
+  required: false
+  type: string
 post:
   consumes:
-    - application/json
+  - application/json
   description: This is the primary search method.
   parameters:
-    - description: ''
-      in: body
-      name: body
-      required: true
-      schema:
-        $ref: '#/definitions/search_board'
-    - description: >-
-        This will be specified in the url. Valid types are "loads", and
-        "trucks".
-      in: path
-      name: board_type
-      required: true
-      type: string
-      enum:
-        - loads
-        - trucks
+  - description: ''
+    in: body
+    name: body
+    required: true
+    schema:
+      $ref: '#/definitions/search_board'
+  - description: This will be specified in the url. Valid types are "loads", and "trucks".
+    enum:
+    - loads
+    - trucks
+    in: path
+    name: board_type
+    required: true
+    type: string
   produces:
-    - application/json
+  - application/json
   responses:
     '200':
       description: successful operation
@@ -38,4 +37,4 @@ post:
         $ref: '#/definitions/post_board_type_error_response'
   summary: Get a board.
   tags:
-    - boards
+  - boards

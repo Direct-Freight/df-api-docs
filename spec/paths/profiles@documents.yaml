@@ -47,7 +47,7 @@ patch:
     name: body
     required: true
     schema:
-      $ref: ! '#/definitions/rename_document'
+      $ref: '#/definitions/rename_document'
   produces:
   - application/json
   responses:
@@ -69,14 +69,14 @@ post:
     name: body
     required: true
     schema:
-      $ref: ! '#/definitions/upload_document'
+      $ref: '#/definitions/upload_document'
   produces:
   - application/json
   responses:
     '201':
       description: successful operation
       schema:
-        $ref: ! '#/definitions/success_success_response'
+        $ref: '#/definitions/success_success_response'
   summary: Upload a new document.
   tags:
   - profiles

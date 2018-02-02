@@ -1,9 +1,9 @@
 ---
 properties:
   status:
-    description: ! 'Will return the logged in user&#39;s status.
-      Valid status&#39;s are &quot;Subscribed&quot;, &quot;Posting&quot;, &quot;Overdue&quot;,
-      or &quot;Not Logged In&quot;. '
+    description: 'Will return the logged in user&#39;s status. Valid status&#39;s
+      are &quot;Subscribed&quot;, &quot;Posting&quot;, &quot;Overdue&quot;, or &quot;Not
+      Logged In&quot;. '
     type: string
 required:
 - status

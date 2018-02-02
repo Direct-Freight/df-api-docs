@@ -1,8 +1,8 @@
 ---
 example:
   alert:
-  - ! '{}'
-  - ! '{}'
+  - '{}'
+  - '{}'
 properties:
   alert:
     description: Same as get, but just one item instead of a list of items.
