@@ -1,0 +1,30 @@
+var http = require("https");
+
+var options = {
+  "method": "POST",
+  "hostname": "www.directfreight.com",
+  "port": null,
+  "path": "/api/end_user_authentication/users",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json"
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(JSON.stringify({ email: '<ADD STRING VALUE>',
+  'end-user-token': '<ADD STRING VALUE>',
+  password: '<ADD STRING VALUE>' }));
+req.end();

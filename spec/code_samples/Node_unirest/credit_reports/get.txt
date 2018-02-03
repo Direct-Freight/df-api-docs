@@ -1,0 +1,21 @@
+var unirest = require("unirest");
+
+var req = unirest("GET", "https://www.directfreight.com/api/credit_reports");
+
+req.query({
+  "credit_report_id": "SOME_STRING_VALUE",
+  "format": "SOME_STRING_VALUE"
+});
+
+req.headers({
+  "end-user-token": "SOME_STRING_VALUE",
+  "content-type": "application/json",
+  "accept": "application/json"
+});
+
+
+req.end(function (res) {
+  if (res.error) throw new Error(res.error);
+
+  console.log(res.body);
+});

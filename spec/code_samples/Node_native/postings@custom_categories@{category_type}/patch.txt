@@ -1,0 +1,28 @@
+var http = require("https");
+
+var options = {
+  "method": "PATCH",
+  "hostname": "www.directfreight.com",
+  "port": null,
+  "path": "/api/postings/custom_categories/%7Bcategory_type%7D",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "end-user-token": "SOME_STRING_VALUE"
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.end();

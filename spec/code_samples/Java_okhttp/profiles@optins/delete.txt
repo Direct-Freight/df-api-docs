@@ -1,0 +1,11 @@
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("https://www.directfreight.com/api/profiles/optins")
+  .delete(null)
+  .addHeader("accept", "application/json")
+  .addHeader("content-type", "application/json")
+  .addHeader("end-user-token", "SOME_STRING_VALUE")
+  .build();
+
+Response response = client.newCall(request).execute();

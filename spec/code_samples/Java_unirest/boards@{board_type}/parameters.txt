@@ -1,0 +1,2 @@
+HttpResponse<String> response = Unirest.customMethod("PARAMETERS","https://www.directfreight.com/api/boards/%7Bboard_type%7D")
+  .asString();

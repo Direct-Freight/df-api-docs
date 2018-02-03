@@ -1,0 +1,20 @@
+var data = JSON.stringify({
+  "body": "<ADD STRING VALUE>",
+  "title": "<ADD STRING VALUE>"
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("PATCH", "https://www.directfreight.com/api/boards/notes");
+xhr.setRequestHeader("accept", "application/json");
+xhr.setRequestHeader("content-type", "application/json");
+xhr.setRequestHeader("end-user-token", "SOME_STRING_VALUE");
+
+xhr.send(data);

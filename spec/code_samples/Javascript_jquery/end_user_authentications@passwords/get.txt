@@ -1,0 +1,14 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/end_user_authentications/passwords?email=SOME_STRING_VALUE",
+  "method": "GET",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

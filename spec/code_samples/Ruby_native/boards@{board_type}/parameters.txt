@@ -1,0 +1,19 @@
+require 'uri'
+require 'net/http'
+
+class Net::HTTP::Parameters < Net::HTTPRequest
+  METHOD = 'PARAMETERS'
+  REQUEST_HAS_BODY = 'false'
+  RESPONSE_HAS_BODY = true
+end
+
+url = URI("https://www.directfreight.com/api/boards/%7Bboard_type%7D")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Parameters.new(url)
+
+response = http.request(request)
+puts response.read_body

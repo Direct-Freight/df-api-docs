@@ -1,0 +1,10 @@
+var request = require("request");
+
+var options = { method: 'PARAMETERS',
+  url: 'https://www.directfreight.com/api/boards/%7Bboard_type%7D' };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});

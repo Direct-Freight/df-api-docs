@@ -1,0 +1,21 @@
+var unirest = require("unirest");
+
+var req = unirest("POST", "https://www.directfreight.com/api/postings/%7Bposting_type%7D/%7Baction%7D");
+
+req.headers({
+  "end-user-token": "SOME_STRING_VALUE",
+  "content-type": "application/json",
+  "accept": "application/json"
+});
+
+req.type("json");
+req.send({
+  "source_id": {},
+  "source_posting": "<ADD STRING VALUE>"
+});
+
+req.end(function (res) {
+  if (res.error) throw new Error(res.error);
+
+  console.log(res.body);
+});

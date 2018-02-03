@@ -1,0 +1,22 @@
+var unirest = require("unirest");
+
+var req = unirest("GET", "https://www.directfreight.com/api/location/distance");
+
+req.query({
+  "origin_city": "SOME_STRING_VALUE",
+  "origin_state": "SOME_STRING_VALUE",
+  "destination_city": "SOME_STRING_VALUE",
+  "destination_state": "SOME_STRING_VALUE"
+});
+
+req.headers({
+  "content-type": "application/json",
+  "accept": "application/json"
+});
+
+
+req.end(function (res) {
+  if (res.error) throw new Error(res.error);
+
+  console.log(res.body);
+});

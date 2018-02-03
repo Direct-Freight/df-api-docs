@@ -1,0 +1,14 @@
+CURL *hnd = curl_easy_init();
+
+curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+curl_easy_setopt(hnd, CURLOPT_URL, "https://www.directfreight.com/api/billings");
+
+struct curl_slist *headers = NULL;
+headers = curl_slist_append(headers, "end-user-token: SOME_STRING_VALUE");
+headers = curl_slist_append(headers, "content-type: application/json");
+headers = curl_slist_append(headers, "accept: application/json");
+curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"billing_address\":{},\"cc_data\":{},\"check_data\":{},\"promo_code\":\"<ADD STRING VALUE>\"}");
+
+CURLcode ret = curl_easy_perform(hnd);

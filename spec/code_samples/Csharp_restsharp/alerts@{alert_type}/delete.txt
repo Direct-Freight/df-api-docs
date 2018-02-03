@@ -1,0 +1,6 @@
+var client = new RestClient("https://www.directfreight.com/api/alerts/%7Balert_type%7D?alert_id=SOME_ARRAY_VALUE");
+var request = new RestRequest(Method.DELETE);
+request.AddHeader("end-user-token", "SOME_STRING_VALUE");
+request.AddHeader("content-type", "application/json");
+request.AddHeader("accept", "application/json");
+IRestResponse response = client.Execute(request);

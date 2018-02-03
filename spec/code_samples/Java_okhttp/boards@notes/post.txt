@@ -1,0 +1,13 @@
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\"body\":\"<ADD STRING VALUE>\",\"entry_id\":0,\"title\":\"<ADD STRING VALUE>\"}");
+Request request = new Request.Builder()
+  .url("https://www.directfreight.com/api/boards/notes")
+  .post(body)
+  .addHeader("accept", "application/json")
+  .addHeader("content-type", "application/json")
+  .addHeader("end-user-token", "SOME_STRING_VALUE")
+  .build();
+
+Response response = client.newCall(request).execute();

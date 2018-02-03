@@ -1,0 +1,37 @@
+var http = require("https");
+
+var options = {
+  "method": "PATCH",
+  "hostname": "www.directfreight.com",
+  "port": null,
+  "path": "/api/alerts/%7Balert_type%7D?alert_id=SOME_STRING_VALUE",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "end-user-token": "SOME_STRING_VALUE"
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(JSON.stringify({ days_of_week: {},
+  end_hour: {},
+  expires_after: {},
+  list_order: {},
+  list_type: {},
+  minute_frequency: {},
+  send_type: {},
+  start_hour: {},
+  time_zone: {} }));
+req.end();

@@ -1,0 +1,7 @@
+var client = new RestClient("https://www.directfreight.com/api/boards/hidden_entries");
+var request = new RestRequest(Method.PATCH);
+request.AddHeader("end-user-token", "SOME_STRING_VALUE");
+request.AddHeader("content-type", "application/json");
+request.AddHeader("accept", "application/json");
+request.AddParameter("application/json", "{\"entry_id\":[\"<ADD STRING VALUE>\"]}", ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);

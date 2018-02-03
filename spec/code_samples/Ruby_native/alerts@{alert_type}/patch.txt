@@ -1,0 +1,17 @@
+require 'uri'
+require 'net/http'
+
+url = URI("https://www.directfreight.com/api/alerts/%7Balert_type%7D?alert_id=SOME_STRING_VALUE")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Patch.new(url)
+request["accept"] = 'application/json'
+request["content-type"] = 'application/json'
+request["end-user-token"] = 'SOME_STRING_VALUE'
+request.body = "{\"days_of_week\":{},\"end_hour\":{},\"expires_after\":{},\"list_order\":{},\"list_type\":{},\"minute_frequency\":{},\"send_type\":{},\"start_hour\":{},\"time_zone\":{}}"
+
+response = http.request(request)
+puts response.read_body

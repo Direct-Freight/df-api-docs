@@ -1,0 +1,7 @@
+var client = new RestClient("https://www.directfreight.com/api/alerts/%7Balert_type%7D");
+var request = new RestRequest(Method.POST);
+request.AddHeader("end-user-token", "SOME_STRING_VALUE");
+request.AddHeader("content-type", "application/json");
+request.AddHeader("accept", "application/json");
+request.AddParameter("application/json", "{\"days_of_week\":{},\"email_address\":\"<ADD STRING VALUE>\",\"end_hour\":{},\"expires_after\":{},\"list_order\":{},\"list_type\":{},\"minute_frequency\":{},\"send_type\":{},\"start_hour\":{},\"time_zone\":{}}", ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);

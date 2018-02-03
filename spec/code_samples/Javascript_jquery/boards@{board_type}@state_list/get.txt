@@ -1,0 +1,14 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/boards/%7Bboard_type%7D/state_list",
+  "method": "GET",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

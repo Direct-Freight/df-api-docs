@@ -1,0 +1,17 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/postings/multiple/%7Bposting_type%7D",
+  "method": "POST",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "end-user-token": "SOME_STRING_VALUE"
+  },
+  "processData": false,
+  "data": "{\"contact_fax\":\"<ADD STRING VALUE>\",\"contact_name\":\"<ADD STRING VALUE>\",\"contact_phone\":\"<ADD STRING VALUE>\",\"delete_current_before_posting\":false,\"list\":[\"<ADD STRING VALUE>\"]}"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

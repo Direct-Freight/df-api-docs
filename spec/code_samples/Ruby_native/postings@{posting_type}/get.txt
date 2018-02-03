@@ -1,0 +1,16 @@
+require 'uri'
+require 'net/http'
+
+url = URI("https://www.directfreight.com/api/postings/%7Bposting_type%7D?posting_id=SOME_ARRAY_VALUE")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Get.new(url)
+request["accept"] = 'application/json'
+request["content-type"] = 'application/json'
+request["end-user-token"] = 'SOME_STRING_VALUE'
+
+response = http.request(request)
+puts response.read_body

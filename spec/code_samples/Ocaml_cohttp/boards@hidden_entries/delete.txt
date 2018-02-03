@@ -1,0 +1,14 @@
+open Cohttp_lwt_unix
+open Cohttp
+open Lwt
+
+let uri = Uri.of_string "https://www.directfreight.com/api/boards/hidden_entries?entry_id=SOME_STRING_VALUE" in
+let headers = Header.add_list (Header.init ()) [
+  ("accept", "application/json");
+  ("content-type", "application/json");
+  ("end-user-token", "SOME_STRING_VALUE");
+] in
+
+Client.call ~headers `DELETE uri
+>>= fun (res, body_stream) ->
+  (* Do stuff with the result *)

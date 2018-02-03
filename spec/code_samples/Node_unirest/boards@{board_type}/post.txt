@@ -1,0 +1,44 @@
+var unirest = require("unirest");
+
+var req = unirest("POST", "https://www.directfreight.com/api/boards/%7Bboard_type%7D");
+
+req.headers({
+  "content-type": "application/json",
+  "accept": "application/json"
+});
+
+req.type("json");
+req.send({
+  "alert_id": false,
+  "count": false,
+  "destination_city": "<ADD STRING VALUE>",
+  "destination_radius": 0,
+  "destination_state": [
+    "<ADD STRING VALUE>"
+  ],
+  "item_count": 0,
+  "load_size": [
+    "<ADD STRING VALUE>"
+  ],
+  "only_new": false,
+  "origin_city": "<ADD STRING VALUE>",
+  "origin_radius": 0,
+  "origin_state": [
+    "<ADD STRING VALUE>"
+  ],
+  "page_number": 0,
+  "ship_date": [
+    "<ADD STRING VALUE>"
+  ],
+  "total_items": 0,
+  "total_pages": 0,
+  "trailer_type": [
+    "<ADD STRING VALUE>"
+  ]
+});
+
+req.end(function (res) {
+  if (res.error) throw new Error(res.error);
+
+  console.log(res.body);
+});

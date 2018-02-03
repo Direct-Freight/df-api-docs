@@ -12,6 +12,7 @@
     "portfinder": "^1.0.3",
     "print-object": "^1.1.3",
     "shelljs": "^0.7.0",
+    "sleep": "^5.1.1",
     "stringify-object": "^3.2.1",
     "swagger-repo": "^1.0.0",
     "swagger-snippet": "^0.5.1",

@@ -1,0 +1,11 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/boards/%7Bboard_type%7D",
+  "method": "PARAMETERS",
+  "headers": {}
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

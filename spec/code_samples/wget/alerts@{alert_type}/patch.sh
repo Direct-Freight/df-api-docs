@@ -1,0 +1,8 @@
+wget --quiet \
+  --method PATCH \
+  --header 'accept: application/json' \
+  --header 'content-type: application/json' \
+  --header 'end-user-token: SOME_STRING_VALUE' \
+  --body-data '{"days_of_week":{},"end_hour":{},"expires_after":{},"list_order":{},"list_type":{},"minute_frequency":{},"send_type":{},"start_hour":{},"time_zone":{}}' \
+  --output-document \
+  - 'https://www.directfreight.com/api/alerts/%7Balert_type%7D?alert_id=SOME_STRING_VALUE'

@@ -1,0 +1,6 @@
+var client = new RestClient("https://www.directfreight.com/api/validations/email_exists?email=SOME_STRING_VALUE");
+var request = new RestRequest(Method.GET);
+request.AddHeader("end-user-token", "SOME_STRING_VALUE");
+request.AddHeader("content-type", "application/json");
+request.AddHeader("accept", "application/json");
+IRestResponse response = client.Execute(request);

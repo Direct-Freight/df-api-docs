@@ -1,0 +1,5 @@
+echo '{"The":{}}' |  \
+  http POST https://www.directfreight.com/api/profiles/documents \
+  accept:application/json \
+  content-type:application/json \
+  end-user-token:SOME_STRING_VALUE

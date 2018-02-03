@@ -1,0 +1,6 @@
+var client = new RestClient("https://www.directfreight.com/api/end_user_authentication/users");
+var request = new RestRequest(Method.POST);
+request.AddHeader("content-type", "application/json");
+request.AddHeader("accept", "application/json");
+request.AddParameter("application/json", "{\"email\":\"<ADD STRING VALUE>\",\"end-user-token\":\"<ADD STRING VALUE>\",\"password\":\"<ADD STRING VALUE>\"}", ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);

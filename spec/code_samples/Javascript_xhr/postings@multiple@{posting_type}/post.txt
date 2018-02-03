@@ -1,0 +1,25 @@
+var data = JSON.stringify({
+  "contact_fax": "<ADD STRING VALUE>",
+  "contact_name": "<ADD STRING VALUE>",
+  "contact_phone": "<ADD STRING VALUE>",
+  "delete_current_before_posting": false,
+  "list": [
+    "<ADD STRING VALUE>"
+  ]
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://www.directfreight.com/api/postings/multiple/%7Bposting_type%7D");
+xhr.setRequestHeader("accept", "application/json");
+xhr.setRequestHeader("content-type", "application/json");
+xhr.setRequestHeader("end-user-token", "SOME_STRING_VALUE");
+
+xhr.send(data);

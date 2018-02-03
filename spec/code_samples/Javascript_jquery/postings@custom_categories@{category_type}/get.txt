@@ -1,0 +1,15 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/postings/custom_categories/%7Bcategory_type%7D?category_id=SOME_ARRAY_VALUE",
+  "method": "GET",
+  "headers": {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "end-user-token": "SOME_STRING_VALUE"
+  }
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

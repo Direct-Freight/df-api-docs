@@ -1,0 +1,5 @@
+echo '{"billing_address":{},"cc_data":{},"check_data":{},"promo_code":"<ADD STRING VALUE>"}' |  \
+  http POST https://www.directfreight.com/api/billings \
+  accept:application/json \
+  content-type:application/json \
+  end-user-token:SOME_STRING_VALUE
