@@ -48,7 +48,9 @@ results.forEach(function(result)
                 lang = lang[0].toUpperCase() + lang.substring(1); //uppercase first letter
                 if(lang == 'Shell_curl') { ext = '.sh'; lang = 'curl'; }
                 if(lang == 'Shell_wget') { ext = '.sh'; lang = 'wget'; }
-                if(lang == 'Perl_perl5') { ext = '.pl'; }
+                if(lang.substring(0,4) == 'Perl') { ext = '.pl'; }
+                if(lang.substring(0,6) == 'Python') { ext = '.py'; }
+                if(lang.substring(0,3) == 'Php') { ext = '.php'; }
                 var dir = 'spec/code_samples/' + lang + '/' + path + '/';
                 mkdirp(dir);
                 fs.writeFile(dir + result.method.toLowerCase() + ext,snippet.content, (err) => {
