@@ -2,8 +2,8 @@
 use Modern::Perl;
 use HTTP::Request::JSON;
 use LWP::UserAgent::JSON;
-my $request = HTTP::Request::JSON->new(%s,
-"POST") https://www.directfreight.com/api/end_user_authentication/users
+my $request = HTTP::Request::JSON->new(POST,
+"https://www.directfreight.com/api/end_user_authentication/users")
 $request->content('{"email":"<ADD STRING VALUE>","end-user-token":"<ADD STRING VALUE>","password":"<ADD STRING VALUE>"}');
 my $browser = LWP::UserAgent::JSON->new();
 my $response = $browser->request($request);
