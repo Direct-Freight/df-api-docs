@@ -11,6 +11,7 @@ var SwaggerFile = require('./web_deploy/swagger.json')
 //var result = SwaggerSnippet.getEndpointSnippets(SwaggerFile, '/boards/{board_type}', 'post' ,['shell_wget','shell_curl'])
 var results = SwaggerSnippet.getSwaggerSnippets(SwaggerFile,
         [
+        'perl_perl5',
         'c_libcurl', //(default)
         'csharp_restsharp', //(default)
         'go_native', //(default)
@@ -47,6 +48,7 @@ results.forEach(function(result)
                 lang = lang[0].toUpperCase() + lang.substring(1); //uppercase first letter
                 if(lang == 'Shell_curl') { ext = '.sh'; lang = 'curl'; }
                 if(lang == 'Shell_wget') { ext = '.sh'; lang = 'wget'; }
+                if(lang == 'Perl_perl5') { ext = '.pl'; }
                 var dir = 'spec/code_samples/' + lang + '/' + path + '/';
                 mkdirp(dir);
                 fs.writeFile(dir + result.method.toLowerCase() + ext,snippet.content, (err) => {
