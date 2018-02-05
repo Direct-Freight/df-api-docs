@@ -8,11 +8,6 @@ $request->setQueryData(array(
   '' => 'SOME_STRING_VALUE'
 ));
 
-$request->setHeaders(array(
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
-));
-
 $request->setBody('{"login":"<ADD STRING VALUE>","realm":"<ADD STRING VALUE>","secret":"<ADD STRING VALUE>"}');
 
 try {

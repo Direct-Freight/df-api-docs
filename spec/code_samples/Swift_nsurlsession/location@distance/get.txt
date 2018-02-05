@@ -1,15 +1,9 @@
 import Foundation
 
-let headers = [
-  "accept": "application/json",
-  "content-type": "application/json"
-]
-
 var request = NSMutableURLRequest(URL: NSURL(string: "https://www.directfreight.com/api/location/distance?origin_city=SOME_STRING_VALUE&origin_state=SOME_STRING_VALUE&destination_city=SOME_STRING_VALUE&destination_state=SOME_STRING_VALUE")!,
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
-request.allHTTPHeaderFields = headers
 
 let session = NSURLSession.sharedSession()
 let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in

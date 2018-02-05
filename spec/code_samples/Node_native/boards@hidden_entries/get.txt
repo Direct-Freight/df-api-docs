@@ -6,8 +6,6 @@ var options = {
   "port": null,
   "path": "/api/boards/hidden_entries?entry_id=SOME_ARRAY_VALUE",
   "headers": {
-    "accept": "application/json",
-    "content-type": "application/json",
     "end-user-token": "SOME_STRING_VALUE"
   }
 };

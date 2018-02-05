@@ -12,8 +12,6 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "PATCH",
   CURLOPT_POSTFIELDS => "{\"days_of_week\":{},\"end_hour\":{},\"expires_after\":{},\"list_order\":{},\"list_type\":{},\"minute_frequency\":{},\"send_type\":{},\"start_hour\":{},\"time_zone\":{}}",
   CURLOPT_HTTPHEADER => array(
-    "accept: application/json",
-    "content-type: application/json",
     "end-user-token: SOME_STRING_VALUE"
   ),
 ));

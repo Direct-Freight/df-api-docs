@@ -1,9 +1,4 @@
 import Foundation
-
-let headers = [
-  "accept": "application/json",
-  "content-type": "application/json"
-]
 let parameters = [
   "email": "<ADD STRING VALUE>",
   "end-user-token": "<ADD STRING VALUE>",
@@ -16,7 +11,6 @@ var request = NSMutableURLRequest(URL: NSURL(string: "https://www.directfreight.
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "POST"
-request.allHTTPHeaderFields = headers
 request.HTTPBody = postData
 
 let session = NSURLSession.sharedSession()

@@ -10,9 +10,7 @@ $request->setQueryData(array(
 ));
 
 $request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE',
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
+  'end-user-token' => 'SOME_STRING_VALUE'
 ));
 
 $request->setBody('{"days_of_week":{},"end_hour":{},"expires_after":{},"list_order":{},"list_type":{},"minute_frequency":{},"send_type":{},"start_hour":{},"time_zone":{}}');

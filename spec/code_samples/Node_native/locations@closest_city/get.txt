@@ -5,10 +5,7 @@ var options = {
   "hostname": "www.directfreight.com",
   "port": null,
   "path": "/api/locations/closest_city?latitude=SOME_NUMBER_VALUE&longitude=SOME_NUMBER_VALUE",
-  "headers": {
-    "accept": "application/json",
-    "content-type": "application/json"
-  }
+  "headers": {}
 };
 
 var req = http.request(options, function (res) {

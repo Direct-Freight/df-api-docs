@@ -10,7 +10,5 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("GET", "https://www.directfreight.com/api/locations/closest_city?latitude=SOME_NUMBER_VALUE&longitude=SOME_NUMBER_VALUE");
-xhr.setRequestHeader("accept", "application/json");
-xhr.setRequestHeader("content-type", "application/json");
 
 xhr.send(data);

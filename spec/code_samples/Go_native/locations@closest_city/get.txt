@@ -12,9 +12,6 @@ func main() {
 
 	req, _ := http.NewRequest("GET", url, nil)
 
-	req.Header.Add("accept", "application/json")
-	req.Header.Add("content-type", "application/json")
-
 	res, _ := http.DefaultClient.Do(req)
 
 	defer res.Body.Close()

@@ -1,8 +1,6 @@
 #import <Foundation/Foundation.h>
 
-NSDictionary *headers = @{ @"accept": @"application/json",
-                           @"content-type": @"application/json",
-                           @"end-user-token": @"SOME_STRING_VALUE" };
+NSDictionary *headers = @{ @"end-user-token": @"SOME_STRING_VALUE" };
 
 NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.directfreight.com/api/validations/email_exists?email=SOME_STRING_VALUE"]
                                                        cachePolicy:NSURLRequestUseProtocolCachePolicy

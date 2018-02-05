@@ -8,8 +8,6 @@ http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 request = Net::HTTP::Post.new(url)
-request["accept"] = 'application/json'
-request["content-type"] = 'application/json'
 request["end-user-token"] = 'SOME_STRING_VALUE'
 request.body = "{\"contact_fax\":\"<ADD STRING VALUE>\",\"contact_name\":\"<ADD STRING VALUE>\",\"contact_phone\":\"<ADD STRING VALUE>\",\"delete_current_before_posting\":false,\"list\":[\"<ADD STRING VALUE>\"]}"
 

@@ -2,11 +2,6 @@ var unirest = require("unirest");
 
 var req = unirest("POST", "https://www.directfreight.com/api/end_user_authentication/users");
 
-req.headers({
-  "content-type": "application/json",
-  "accept": "application/json"
-});
-
 req.type("json");
 req.send({
   "email": "<ADD STRING VALUE>",

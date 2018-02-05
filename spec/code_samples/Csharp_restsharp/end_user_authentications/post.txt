@@ -1,6 +1,4 @@
 var client = new RestClient("https://www.directfreight.com/api/end_user_authentications?=SOME_STRING_VALUE");
 var request = new RestRequest(Method.POST);
-request.AddHeader("content-type", "application/json");
-request.AddHeader("accept", "application/json");
-request.AddParameter("application/json", "{\"login\":\"<ADD STRING VALUE>\",\"realm\":\"<ADD STRING VALUE>\",\"secret\":\"<ADD STRING VALUE>\"}", ParameterType.RequestBody);
+request.AddParameter("undefined", "{\"login\":\"<ADD STRING VALUE>\",\"realm\":\"<ADD STRING VALUE>\",\"secret\":\"<ADD STRING VALUE>\"}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);

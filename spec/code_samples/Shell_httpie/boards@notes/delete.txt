@@ -1,4 +1,2 @@
 http DELETE 'https://www.directfreight.com/api/boards/notes?note_id=SOME_STRING_VALUE' \
-  accept:application/json \
-  content-type:application/json \
   end-user-token:SOME_STRING_VALUE

@@ -2,10 +2,7 @@ var request = require("request");
 
 var options = { method: 'POST',
   url: 'https://www.directfreight.com/api/postings/multiple/%7Bposting_type%7D',
-  headers: 
-   { 'end-user-token': 'SOME_STRING_VALUE',
-     'content-type': 'application/json',
-     accept: 'application/json' },
+  headers: { 'end-user-token': 'SOME_STRING_VALUE' },
   body: 
    { contact_fax: '<ADD STRING VALUE>',
      contact_name: '<ADD STRING VALUE>',

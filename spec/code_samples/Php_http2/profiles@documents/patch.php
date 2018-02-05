@@ -11,9 +11,7 @@ $request->setRequestMethod('PATCH');
 $request->setBody($body);
 
 $request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE',
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
+  'end-user-token' => 'SOME_STRING_VALUE'
 ));
 
 $client->enqueue($request)->send();

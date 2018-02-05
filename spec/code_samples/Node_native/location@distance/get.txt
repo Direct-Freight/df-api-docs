@@ -5,10 +5,7 @@ var options = {
   "hostname": "www.directfreight.com",
   "port": null,
   "path": "/api/location/distance?origin_city=SOME_STRING_VALUE&origin_state=SOME_STRING_VALUE&destination_city=SOME_STRING_VALUE&destination_state=SOME_STRING_VALUE",
-  "headers": {
-    "accept": "application/json",
-    "content-type": "application/json"
-  }
+  "headers": {}
 };
 
 var req = http.request(options, function (res) {

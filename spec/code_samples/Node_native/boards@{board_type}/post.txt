@@ -5,10 +5,7 @@ var options = {
   "hostname": "www.directfreight.com",
   "port": null,
   "path": "/api/boards/%7Bboard_type%7D",
-  "headers": {
-    "accept": "application/json",
-    "content-type": "application/json"
-  }
+  "headers": {}
 };
 
 var req = http.request(options, function (res) {

@@ -10,11 +10,6 @@ $request->setRequestUrl('https://www.directfreight.com/api/end_user_authenticati
 $request->setRequestMethod('POST');
 $request->setBody($body);
 
-$request->setHeaders(array(
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
-));
-
 $client->enqueue($request)->send();
 $response = $client->getResponse();
 

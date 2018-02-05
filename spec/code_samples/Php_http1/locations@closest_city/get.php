@@ -9,11 +9,6 @@ $request->setQueryData(array(
   'longitude' => 'SOME_NUMBER_VALUE'
 ));
 
-$request->setHeaders(array(
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
-));
-
 try {
   $response = $request->send();
 

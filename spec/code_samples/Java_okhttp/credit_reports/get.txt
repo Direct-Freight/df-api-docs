@@ -3,8 +3,6 @@ OkHttpClient client = new OkHttpClient();
 Request request = new Request.Builder()
   .url("https://www.directfreight.com/api/credit_reports?credit_report_id=SOME_STRING_VALUE&format=SOME_STRING_VALUE")
   .get()
-  .addHeader("accept", "application/json")
-  .addHeader("content-type", "application/json")
   .addHeader("end-user-token", "SOME_STRING_VALUE")
   .build();
 

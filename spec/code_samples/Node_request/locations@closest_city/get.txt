@@ -4,10 +4,7 @@ var options = { method: 'GET',
   url: 'https://www.directfreight.com/api/locations/closest_city',
   qs: 
    { latitude: 'SOME_NUMBER_VALUE',
-     longitude: 'SOME_NUMBER_VALUE' },
-  headers: 
-   { 'content-type': 'application/json',
-     accept: 'application/json' } };
+     longitude: 'SOME_NUMBER_VALUE' } };
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);

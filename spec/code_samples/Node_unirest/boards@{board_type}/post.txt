@@ -2,11 +2,6 @@ var unirest = require("unirest");
 
 var req = unirest("POST", "https://www.directfreight.com/api/boards/%7Bboard_type%7D");
 
-req.headers({
-  "content-type": "application/json",
-  "accept": "application/json"
-});
-
 req.type("json");
 req.send({
   "alert_id": 5555,

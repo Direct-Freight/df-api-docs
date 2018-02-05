@@ -1,8 +1,6 @@
 #import <Foundation/Foundation.h>
 
-NSDictionary *headers = @{ @"accept": @"application/json",
-                           @"content-type": @"application/json",
-                           @"end-user-token": @"SOME_STRING_VALUE" };
+NSDictionary *headers = @{ @"end-user-token": @"SOME_STRING_VALUE" };
 NSDictionary *parameters = @{ @"The": @{  } };
 
 NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];

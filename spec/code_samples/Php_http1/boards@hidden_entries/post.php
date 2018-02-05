@@ -5,9 +5,7 @@ $request->setUrl('https://www.directfreight.com/api/boards/hidden_entries');
 $request->setMethod(HTTP_METH_POST);
 
 $request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE',
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
+  'end-user-token' => 'SOME_STRING_VALUE'
 ));
 
 try {

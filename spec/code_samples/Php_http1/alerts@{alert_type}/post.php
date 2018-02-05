@@ -5,9 +5,7 @@ $request->setUrl('https://www.directfreight.com/api/alerts/%7Balert_type%7D');
 $request->setMethod(HTTP_METH_POST);
 
 $request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE',
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
+  'end-user-token' => 'SOME_STRING_VALUE'
 ));
 
 $request->setBody('{"days_of_week":{},"email_address":"<ADD STRING VALUE>","end_hour":{},"expires_after":{},"list_order":{},"list_type":{},"minute_frequency":{},"send_type":{},"start_hour":{},"time_zone":{}}');

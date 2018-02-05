@@ -10,7 +10,5 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("GET", "https://www.directfreight.com/api/location/distance?origin_city=SOME_STRING_VALUE&origin_state=SOME_STRING_VALUE&destination_city=SOME_STRING_VALUE&destination_state=SOME_STRING_VALUE");
-xhr.setRequestHeader("accept", "application/json");
-xhr.setRequestHeader("content-type", "application/json");
 
 xhr.send(data);

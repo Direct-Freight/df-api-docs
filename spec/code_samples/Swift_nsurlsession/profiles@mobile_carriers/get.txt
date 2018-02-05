@@ -1,9 +1,4 @@
 import Foundation
-
-let headers = [
-  "accept": "application/json",
-  "content-type": "application/json"
-]
 let parameters = ["carrier_id": 0]
 
 let postData = NSJSONSerialization.dataWithJSONObject(parameters, options: nil, error: nil)
@@ -12,7 +7,6 @@ var request = NSMutableURLRequest(URL: NSURL(string: "https://www.directfreight.
                                         cachePolicy: .UseProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.HTTPMethod = "GET"
-request.allHTTPHeaderFields = headers
 request.HTTPBody = postData
 
 let session = NSURLSession.sharedSession()

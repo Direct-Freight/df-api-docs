@@ -4,12 +4,7 @@ conn = http.client.HTTPSConnection("www.directfreight.com")
 
 payload = "{\"carrier_id\":0}"
 
-headers = {
-    'accept': "application/json",
-    'content-type': "application/json"
-    }
-
-conn.request("GET", "/api/profiles/mobile_carriers", payload, headers)
+conn.request("GET", "/api/profiles/mobile_carriers", payload)
 
 res = conn.getresponse()
 data = res.read()

@@ -3,10 +3,7 @@ var settings = {
   "crossDomain": true,
   "url": "https://www.directfreight.com/api/profiles/mobile_carriers",
   "method": "GET",
-  "headers": {
-    "accept": "application/json",
-    "content-type": "application/json"
-  },
+  "headers": {},
   "processData": false,
   "data": "{\"carrier_id\":0}"
 }

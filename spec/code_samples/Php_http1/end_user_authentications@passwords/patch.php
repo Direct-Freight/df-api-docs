@@ -6,9 +6,7 @@ $request->setUrl('https://www.directfreight.com/api/end_user_authentications/pas
 $request->setMethod(HttpRequest::HTTP_METH_PATCH);
 
 $request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE',
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
+  'end-user-token' => 'SOME_STRING_VALUE'
 ));
 
 $request->setBody('{"new_password":"<ADD STRING VALUE>","old_password":"<ADD STRING VALUE>"}');

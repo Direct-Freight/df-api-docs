@@ -10,8 +10,6 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("DELETE", "https://www.directfreight.com/api/alerts/%7Balert_type%7D?alert_id=SOME_ARRAY_VALUE");
-xhr.setRequestHeader("accept", "application/json");
-xhr.setRequestHeader("content-type", "application/json");
 xhr.setRequestHeader("end-user-token", "SOME_STRING_VALUE");
 
 xhr.send(data);

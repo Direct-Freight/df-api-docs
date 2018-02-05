@@ -1,7 +1,5 @@
 wget --quiet \
   --method POST \
-  --header 'accept: application/json' \
-  --header 'content-type: application/json' \
   --header 'end-user-token: SOME_STRING_VALUE' \
   --body-data '{"days_of_week":{},"email_address":"<ADD STRING VALUE>","end_hour":{},"expires_after":{},"list_order":{},"list_type":{},"minute_frequency":{},"send_type":{},"start_hour":{},"time_zone":{}}' \
   --output-document \

@@ -1,7 +1,5 @@
 var client = new RestClient("https://www.directfreight.com/api/profiles/documents");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("end-user-token", "SOME_STRING_VALUE");
-request.AddHeader("content-type", "application/json");
-request.AddHeader("accept", "application/json");
-request.AddParameter("application/json", "{\"current_name\":\"<ADD STRING VALUE>\",\"new_name\":\"<ADD STRING VALUE>\"}", ParameterType.RequestBody);
+request.AddParameter("undefined", "{\"current_name\":\"<ADD STRING VALUE>\",\"new_name\":\"<ADD STRING VALUE>\"}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);

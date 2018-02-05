@@ -10,8 +10,6 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("GET", "https://www.directfreight.com/api/boards/notes?entry_id=SOME_ARRAY_VALUE");
-xhr.setRequestHeader("accept", "application/json");
-xhr.setRequestHeader("content-type", "application/json");
 xhr.setRequestHeader("end-user-token", "SOME_STRING_VALUE");
 
 xhr.send(data);

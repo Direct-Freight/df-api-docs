@@ -8,8 +8,6 @@ http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 request = Net::HTTP::Get.new(url)
-request["accept"] = 'application/json'
-request["content-type"] = 'application/json'
 request["end-user-token"] = 'SOME_STRING_VALUE'
 
 response = http.request(request)

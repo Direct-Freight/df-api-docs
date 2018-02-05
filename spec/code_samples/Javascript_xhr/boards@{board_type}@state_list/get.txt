@@ -10,7 +10,5 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("GET", "https://www.directfreight.com/api/boards/%7Bboard_type%7D/state_list");
-xhr.setRequestHeader("accept", "application/json");
-xhr.setRequestHeader("content-type", "application/json");
 
 xhr.send(data);

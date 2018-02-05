@@ -10,7 +10,5 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("GET", "https://www.directfreight.com/api/locations/partial_match?term=SOME_STRING_VALUE&search_type=SOME_STRING_VALUE");
-xhr.setRequestHeader("accept", "application/json");
-xhr.setRequestHeader("content-type", "application/json");
 
 xhr.send(data);

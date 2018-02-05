@@ -1,5 +1,3 @@
 var client = new RestClient("https://www.directfreight.com/api/locations/partial_match?term=SOME_STRING_VALUE&search_type=SOME_STRING_VALUE");
 var request = new RestRequest(Method.GET);
-request.AddHeader("content-type", "application/json");
-request.AddHeader("accept", "application/json");
 IRestResponse response = client.Execute(request);

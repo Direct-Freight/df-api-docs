@@ -6,11 +6,6 @@ req.query({
   "": "SOME_STRING_VALUE"
 });
 
-req.headers({
-  "content-type": "application/json",
-  "accept": "application/json"
-});
-
 req.type("json");
 req.send({
   "login": "<ADD STRING VALUE>",
