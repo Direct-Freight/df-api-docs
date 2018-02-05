@@ -1,31 +1,27 @@
----
 post:
-  consumes:
-  - application/json
   parameters:
-  - description: Valid types are "loads", "trucks", "private_loads", "private_trucks",
-      "test_loads", and "test_trucks"
-    in: path
-    name: posting_type
-    required: true
-    type: string
-  - description: The logged in account's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/create_multiple_postings'
-  produces:
-  - application/json
+    - description: >-
+        Valid types are "loads", "trucks", "private_loads", "private_trucks",
+        "test_loads", and "test_trucks"
+      in: path
+      name: posting_type
+      required: true
+      type: string
+    - description: The logged in account's token.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/create_multiple_postings'
   responses:
     '200':
       description: successful operation
       schema:
         $ref: '#/definitions/post_posting_ multiple_response'
-  summary: Create, multiple entries at once. This is a convenience method.
+  summary: 'Create, multiple entries at once. This is a convenience method.'
   tags:
-  - postings
+    - postings

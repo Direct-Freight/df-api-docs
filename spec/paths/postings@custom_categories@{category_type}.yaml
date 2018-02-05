@@ -1,117 +1,104 @@
----
 delete:
   parameters:
-  - description: Valid types are "names", and "data".
-    in: path
-    name: category_type
-    required: true
-    type: string
-  - description: The logged in account's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - collectionFormat: multi
-    description: To just delete information about some postings.
-    in: query
-    items:
+    - description: 'Valid types are "names", and "data".'
+      in: path
+      name: category_type
+      required: true
       type: string
-    name: category_id
-    required: false
-    type: array
+    - description: The logged in account's token.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - collectionFormat: multi
+      description: To just delete information about some postings.
+      in: query
+      items:
+        type: string
+      name: category_id
+      required: false
+      type: array
   responses:
     '200':
       description: 200 OK
-  summary: Delete some or all custom columns, or custom_column data.
+  summary: 'Delete some or all custom columns, or custom_column data.'
   tags:
-  - postings
+    - postings
 get:
-  consumes:
-  - application/json
   parameters:
-  - description: The logged in account's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - description: Valid types are "names", and "data".
-    in: path
-    name: category_type
-    required: true
-    type: string
-  - collectionFormat: multi
-    description: To just return information about some postings.
-    in: query
-    items:
+    - description: The logged in account's token.
+      in: header
+      name: end-user-token
+      required: true
       type: string
-    name: category_id
-    required: false
-    type: array
-  produces:
-  - application/json
+    - description: 'Valid types are "names", and "data".'
+      in: path
+      name: category_type
+      required: true
+      type: string
+    - collectionFormat: multi
+      description: To just return information about some postings.
+      in: query
+      items:
+        type: string
+      name: category_id
+      required: false
+      type: array
   responses:
     '200':
       description: successful operation
       schema:
         $ref: '#/definitions/get_custom_categories_response'
-  summary: Get a list of custom columns, or custom_column data.
+  summary: 'Get a list of custom columns, or custom_column data.'
   tags:
-  - postings
+    - postings
 patch:
-  consumes:
-  - application/json
   parameters:
-  - description: Valid types are "names", and "data".
-    in: path
-    name: category_type
-    required: true
-    type: string
-  - description: The logged in account's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/update_cc_info'
-  produces:
-  - application/json
+    - description: 'Valid types are "names", and "data".'
+      in: path
+      name: category_type
+      required: true
+      type: string
+    - description: The logged in account's token.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/update_cc_info'
   responses:
     '200':
       description: successful operation
       schema:
         $ref: '#/definitions/post_custom_categories_response'
-  summary: Update a category name, or value.
+  summary: 'Update a category name, or value.'
   tags:
-  - postings
+    - postings
 post:
-  consumes:
-  - application/json
   parameters:
-  - description: Valid types are "names", and "data".
-    in: path
-    name: category_type
-    required: true
-    type: string
-  - description: The logged in account's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/create_cc_info'
-  produces:
-  - application/json
+    - description: 'Valid types are "names", and "data".'
+      in: path
+      name: category_type
+      required: true
+      type: string
+    - description: The logged in account's token.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/create_cc_info'
   responses:
     '204':
       description: successful operation
       schema:
         $ref: '#/definitions/post_custom_categories_response'
-  summary: Create new category names, or add new data.
+  summary: 'Create new category names, or add new data.'
   tags:
-  - postings
+    - postings

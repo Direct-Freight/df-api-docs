@@ -1,25 +1,22 @@
----
 get:
-  consumes:
-  - application/json
   parameters:
-  - description: Min 2 characters.
-    in: query
-    name: term
-    required: true
-    type: string
-  - description: '"state", and "city" will return only returns only the respective
-      information for that search type. Misspelling, will default to city.'
-    in: query
-    name: search_type
-    required: false
-    type: string
-  produces:
-  - application/json
+    - description: Min 2 characters.
+      in: query
+      name: term
+      required: true
+      type: string
+    - description: >-
+        "state", and "city" will return only returns only the respective
+        information for that search type. Misspelling, will default to city.
+      in: query
+      name: search_type
+      required: false
+      type: string
   responses:
     '200':
       description: successful operation
-  summary: A string of a partial city or state name, and returns a list of possible
+  summary: >-
+    A string of a partial city or state name, and returns a list of possible
     matches.
   tags:
-  - locations
+    - locations

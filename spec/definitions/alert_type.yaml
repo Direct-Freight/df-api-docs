@@ -1,6 +1,0 @@
----
-description: Valid types are "loads", and "trucks".
-enum:
-- loads
-- trucks
-type: string

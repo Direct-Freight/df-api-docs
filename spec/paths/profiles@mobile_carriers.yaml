@@ -1,17 +1,12 @@
----
 get:
-  consumes:
-  - application/json
   description: Retrieve a list of supported carriers.
   parameters:
-  - description: A way to just get back the info for just one carrier.
-    in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/get_mobile_carrier_body'
-  produces:
-  - application/json
+    - description: A way to just get back the info for just one carrier.
+      in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/get_mobile_carrier_body'
   responses:
     '200':
       description: successful operation
@@ -19,4 +14,4 @@ get:
         $ref: '#/definitions/mobile_carrier_response'
   summary: 'Retrieve one or more mobile carriers. '
   tags:
-  - profiles
+    - profiles
