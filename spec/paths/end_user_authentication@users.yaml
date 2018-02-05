@@ -1,15 +1,10 @@
----
 post:
-  consumes:
-  - application/json
   parameters:
-  - in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/create_user'
-  produces:
-  - application/json
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/create_user'
   responses:
     '200':
       description: successful operation
@@ -17,4 +12,4 @@ post:
         $ref: '#/definitions/post_end_user_authentication_response'
   summary: Create a new user.
   tags:
-  - end_user_authentications
+    - end_user_authentications

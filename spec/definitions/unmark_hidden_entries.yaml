@@ -1,9 +1,0 @@
----
-properties:
-  entry_id:
-    description: 'The entry that need to be marked as not hidden. '
-    items:
-      type: string
-    type: array
-required:
-- entry_id

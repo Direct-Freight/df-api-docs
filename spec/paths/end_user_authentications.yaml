@@ -1,43 +1,34 @@
----
 delete:
-  consumes:
-  - application/json
   description: This logs a user out. the end-user-token will no longer be valid.
   parameters:
-  - description: The logged in user's token.
-    in: query
-    name: ''
-    required: true
-    type: string
-  - description: The logged in user's token.
-    in: header
-    name: end-user-token
-    required: false
-    type: string
-  produces:
-  - application/json
+    - description: The logged in user's token.
+      in: query
+      name: ''
+      required: true
+      type: string
+    - description: The logged in user's token.
+      in: header
+      name: end-user-token
+      required: false
+      type: string
   responses:
     '200':
       description: success operation
   summary: Logs a user out.
   tags:
-  - end_user_authentications
+    - end_user_authentications
 get:
-  consumes:
-  - application/json
   parameters:
-  - description: The logged in user's token.
-    in: query
-    name: ''
-    required: true
-    type: string
-  - description: The logged in user's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  produces:
-  - application/json
+    - description: The logged in user's token.
+      in: query
+      name: ''
+      required: true
+      type: string
+    - description: The logged in user's token.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
@@ -45,25 +36,21 @@ get:
         $ref: '#/definitions/get_end_user_authentications_response'
   summary: Get current authentication level for the user.
   tags:
-  - end_user_authentications
+    - end_user_authentications
 post:
-  consumes:
-  - application/json
-  description: This function sends login credentials, and retrieves a stateless token.
+  description: 'This function sends login credentials, and retrieves a stateless token.'
   parameters:
-  - description: The logged in user's token.
-    in: query
-    name: ''
-    required: true
-    type: string
-  - description: ''
-    in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/login'
-  produces:
-  - application/json
+    - description: The logged in user's token.
+      in: query
+      name: ''
+      required: true
+      type: string
+    - description: ''
+      in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/login'
   responses:
     '201':
       description: successful operation
@@ -71,4 +58,4 @@ post:
         $ref: '#/definitions/post_end_user_authentication_response'
   summary: Logs a user in.
   tags:
-  - end_user_authentications
+    - end_user_authentications

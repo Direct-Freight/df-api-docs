@@ -1,54 +1,55 @@
----
 get:
-  consumes:
-  - application/json
-  description: This is a convenience method. In the background it is calling the POST
+  description: >-
+    This is a convenience method. In the background it is calling the POST
     method. Refer to that method for more in-depth information.
   parameters:
-  - description: Sensitive info like phone numbers won't be returned without this.
-    in: header
-    name: end-user-token
-    required: false
-    type: string
-  - description: This will be specified in the url. Valid types are "loads", and "trucks".
-    in: path
-    name: board_type
-    required: true
-    type: string
-  - description: The minimum needed for a search.
-    in: path
-    name: origin_state
-    required: true
-    type: string
-  - description: Must be at least 2 characters.
-    in: path
-    name: origin_city
-    required: true
-    type: string
-  - description: 'If both city and state, it will search for all entries within #
-      Miles of the city.'
-    format: int32
-    in: path
-    name: origin_radius
-    required: true
-    type: integer
-  - description: If it is an array, we assume a multi state search, and ignore destination_city.
-    in: path
-    name: destination_state
-    required: true
-    type: string
-  - description: Must be at least 2 characters.
-    in: path
-    name: destination_city
-    required: true
-    type: string
-  - description: A string of comma separated valid trailer types to limit the search.
-    in: path
-    name: load_type
-    required: true
-    type: string
-  produces:
-  - application/json
+    - description: Sensitive info like phone numbers won't be returned without this.
+      in: header
+      name: end-user-token
+      required: false
+      type: string
+    - description: >-
+        This will be specified in the url. Valid types are "loads", and
+        "trucks".
+      in: path
+      name: board_type
+      required: true
+      type: string
+    - description: The minimum needed for a search.
+      in: path
+      name: origin_state
+      required: true
+      type: string
+    - description: Must be at least 2 characters.
+      in: path
+      name: origin_city
+      required: true
+      type: string
+    - description: >-
+        If both city and state, it will search for all entries within # Miles of
+        the city.
+      format: int32
+      in: path
+      name: origin_radius
+      required: true
+      type: integer
+    - description: >-
+        If it is an array, we assume a multi state search, and ignore
+        destination_city.
+      in: path
+      name: destination_state
+      required: true
+      type: string
+    - description: Must be at least 2 characters.
+      in: path
+      name: destination_city
+      required: true
+      type: string
+    - description: A string of comma separated valid trailer types to limit the search.
+      in: path
+      name: load_type
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
@@ -56,4 +57,4 @@ get:
         $ref: '#/definitions/post_board_type_response'
   summary: A convenience method for simple searches.
   tags:
-  - boards
+    - boards

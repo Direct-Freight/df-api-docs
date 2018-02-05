@@ -1,15 +1,12 @@
----
 get:
-  consumes:
-  - application/json
   parameters:
-  - description: This will be specified in the url. Valid types are "loads", and "trucks".
-    in: path
-    name: board_type
-    required: true
-    type: string
-  produces:
-  - application/json
+    - description: >-
+        This will be specified in the url. Valid types are "loads", and
+        "trucks".
+      in: path
+      name: board_type
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
@@ -17,4 +14,4 @@ get:
         $ref: '#/definitions/get_state_list_response'
   summary: A convenience method to get totals by state.
   tags:
-  - boards
+    - boards

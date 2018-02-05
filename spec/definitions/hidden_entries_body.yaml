@@ -1,5 +1,0 @@
----
-properties:
-  entry_id:
-    description: The entry that need to be marked as not hidden.
-    type: string

@@ -1,20 +1,15 @@
----
 get:
-  consumes:
-  - application/json
   parameters:
-  - format: float
-    in: query
-    name: latitude
-    required: true
-    type: number
-  - format: float
-    in: query
-    name: longitude
-    required: true
-    type: number
-  produces:
-  - application/json
+    - format: float
+      in: query
+      name: latitude
+      required: true
+      type: number
+    - format: float
+      in: query
+      name: longitude
+      required: true
+      type: number
   responses:
     '200':
       description: successful operation
@@ -22,4 +17,4 @@ get:
         $ref: '#/definitions/get_closest_city_response'
   summary: Will return the closest city to a lat/lon point.
   tags:
-  - locations
+    - locations

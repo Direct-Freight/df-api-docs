@@ -1,45 +1,36 @@
----
 delete:
-  consumes:
-  - application/json
   parameters:
-  - description: Only logged in users can use this feature.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - description: 'The entry that need to be marked as not hidden. '
-    in: query
-    name: entry_id
-    required: true
-    type: string
-  produces:
-  - application/json
+    - description: Only logged in users can use this feature.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - description: 'The entry that need to be marked as not hidden. '
+      in: query
+      name: entry_id
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
   summary: Mark a set of entries as not hidden.
   tags:
-  - boards
+    - boards
 get:
-  consumes:
-  - application/json
   parameters:
-  - description: Only logged in users can use this feature.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - collectionFormat: multi
-    description: A list of id's to check if any should be visually hidden.
-    in: query
-    items:
+    - description: Only logged in users can use this feature.
+      in: header
+      name: end-user-token
+      required: true
       type: string
-    name: entry_id
-    required: true
-    type: array
-  produces:
-  - application/json
+    - collectionFormat: multi
+      description: A list of id's to check if any should be visually hidden.
+      in: query
+      items:
+        type: string
+      name: entry_id
+      required: true
+      type: array
   responses:
     '200':
       description: successful operation
@@ -47,45 +38,37 @@ get:
         $ref: '#/definitions/get_hidden_entries'
   summary: Get a list of entries that should be hidden.
   tags:
-  - boards
+    - boards
 patch:
-  consumes:
-  - application/json
   parameters:
-  - description: Only logged in users can use this feature.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/toggle_hidden_entries'
-  produces:
-  - application/json
+    - description: Only logged in users can use this feature.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/toggle_hidden_entries'
   responses:
     '204':
       description: successful operation
   summary: Toggle one or more entry between hidden and unhidden.
   tags:
-  - boards
+    - boards
 post:
-  consumes:
-  - application/json
   parameters:
-  - description: Only logged in users can use this feature.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/mark_hidden_entries'
-  produces:
-  - application/json
+    - description: Only logged in users can use this feature.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/mark_hidden_entries'
   responses:
     '201':
       description: successful operation
@@ -93,4 +76,4 @@ post:
         $ref: '#/definitions/post_hidden_entries_response'
   summary: Mark a set of entries as hidden.
   tags:
-  - boards
+    - boards

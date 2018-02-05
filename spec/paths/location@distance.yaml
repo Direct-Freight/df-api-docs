@@ -1,32 +1,28 @@
----
 get:
-  consumes:
-  - application/json
   parameters:
-  - in: query
-    name: origin_city
-    required: true
-    type: string
-  - in: query
-    name: origin_state
-    required: true
-    type: string
-  - in: query
-    name: destination_city
-    required: true
-    type: string
-  - in: query
-    name: destination_state
-    required: true
-    type: string
-  produces:
-  - application/json
+    - in: query
+      name: origin_city
+      required: true
+      type: string
+    - in: query
+      name: origin_state
+      required: true
+      type: string
+    - in: query
+      name: destination_city
+      required: true
+      type: string
+    - in: query
+      name: destination_state
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
       schema:
         $ref: '#/definitions/get_location_ distance_response'
-  summary: Get the distance between 2 locations. This is used to calculate dead head
+  summary: >-
+    Get the distance between 2 locations. This is used to calculate dead head
     miles.
   tags:
-  - locations
+    - locations

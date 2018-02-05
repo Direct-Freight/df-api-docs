@@ -1,60 +1,53 @@
----
 delete:
-  consumes:
-  - application/json
   parameters:
-  - description: Valid types are "loads", "trucks", "private_loads", "private_trucks",
-      "test_loads", and "test_trucks"
-    in: path
-    name: posting_type
-    required: true
-    type: string
-  - description: The logged in account's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - collectionFormat: multi
-    description: You must specify which entry to remove.
-    in: query
-    items:
+    - description: >-
+        Valid types are "loads", "trucks", "private_loads", "private_trucks",
+        "test_loads", and "test_trucks"
+      in: path
+      name: posting_type
+      required: true
       type: string
-    name: posting_id
-    required: true
-    type: array
-  produces:
-  - application/json
+    - description: The logged in account's token.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - collectionFormat: multi
+      description: You must specify which entry to remove.
+      in: query
+      items:
+        type: string
+      name: posting_id
+      required: true
+      type: array
   responses:
     '200':
       description: success operation
   summary: Remove one or more postings.
   tags:
-  - postings
+    - postings
 get:
-  consumes:
-  - application/json
   parameters:
-  - description: Valid types are "loads", "trucks", "private_loads", "private_trucks",
-      "test_loads", and "test_trucks"
-    in: path
-    name: posting_type
-    required: true
-    type: string
-  - description: The logged in account's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - collectionFormat: multi
-    description: To just return information about some postings.
-    in: query
-    items:
+    - description: >-
+        Valid types are "loads", "trucks", "private_loads", "private_trucks",
+        "test_loads", and "test_trucks"
+      in: path
+      name: posting_type
+      required: true
       type: string
-    name: posting_id
-    required: false
-    type: array
-  produces:
-  - application/json
+    - description: The logged in account's token.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - collectionFormat: multi
+      description: To just return information about some postings.
+      in: query
+      items:
+        type: string
+      name: posting_id
+      required: false
+      type: array
   responses:
     '200':
       description: successful operation
@@ -62,29 +55,26 @@ get:
         $ref: '#/definitions/get_posting_type_response'
   summary: Get posts by this user.
   tags:
-  - postings
+    - postings
 patch:
-  consumes:
-  - application/json
   parameters:
-  - description: Valid types are "loads", "trucks", "private_loads", "private_trucks",
-      "test_loads", and "test_trucks"
-    in: path
-    name: posting_type
-    required: true
-    type: string
-  - description: The logged in account's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - in: body
-    name: body
-    required: false
-    schema:
-      $ref: '#/definitions/post_object_model'
-  produces:
-  - application/json
+    - description: >-
+        Valid types are "loads", "trucks", "private_loads", "private_trucks",
+        "test_loads", and "test_trucks"
+      in: path
+      name: posting_type
+      required: true
+      type: string
+    - description: The logged in account's token.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: false
+      schema:
+        $ref: '#/definitions/post_object_model'
   responses:
     '200':
       description: successful operation
@@ -92,29 +82,26 @@ patch:
         $ref: '#/definitions/get_posting_type_response'
   summary: Update an posting.
   tags:
-  - postings
+    - postings
 post:
-  consumes:
-  - application/json
   parameters:
-  - description: Valid types are "loads", "trucks", "private_loads", "private_trucks",
-      "test_loads", and "test_trucks"
-    in: path
-    name: posting_type
-    required: true
-    type: string
-  - description: The logged in account's token.
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  - in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/post_object_model'
-  produces:
-  - application/json
+    - description: >-
+        Valid types are "loads", "trucks", "private_loads", "private_trucks",
+        "test_loads", and "test_trucks"
+      in: path
+      name: posting_type
+      required: true
+      type: string
+    - description: The logged in account's token.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/post_object_model'
   responses:
     '201':
       description: successful operation
@@ -123,4 +110,4 @@ post:
         type: object
   summary: Copy or Move an posting.
   tags:
-  - postings
+    - postings

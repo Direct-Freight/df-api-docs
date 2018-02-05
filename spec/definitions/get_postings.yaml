@@ -1,7 +1,0 @@
----
-properties:
-  posting_id:
-    description: 'To just return information about some postings. '
-    items:
-      type: string
-    type: array

@@ -1,54 +1,49 @@
----
 get:
-  consumes:
-  - application/json
-  description: Will return how much the end user will be charged to upgrade. It will
-    not charge the user, or consume the promo code.
+  description: >-
+    Will return how much the end user will be charged to upgrade. It will not
+    charge the user, or consume the promo code.
   parameters:
-  - in: header
-    name: end-user-token
-    required: true
-    type: string
-  - description: 'The promo code. '
-    in: query
-    name: promo_code
-    required: false
-    type: string
-  produces:
-  - application/json
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - description: 'The promo code. '
+      in: query
+      name: promo_code
+      required: false
+      type: string
   responses:
     '200':
       description: successful operation
       schema:
         $ref: '#/definitions/get_billing_response'
-  summary: Returns the amount the end user will be charged. If a promo code is present
-    return adjusted amount. If there are special conditions a string with the promo
-    code benefits will also be returned.
+  summary: >-
+    Returns the amount the end user will be charged. If a promo code is present
+    return adjusted amount. If there are special conditions a string with the
+    promo code benefits will also be returned.
   tags:
-  - billings
+    - billings
 post:
-  consumes:
-  - application/json
   parameters:
-  - in: header
-    name: end-user-token
-    required: true
-    type: string
-  - description: 'This function will attempt to process a payment, and upgrade a non
-      subscibed user. '
-    in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/bill_user'
-  produces:
-  - application/json
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - description: >-
+        This function will attempt to process a payment, and upgrade a non
+        subscibed user. 
+      in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/bill_user'
   responses:
     '200':
       description: successful operation
       schema:
         $ref: '#/definitions/post_billing_response'
-  summary: 'This function will attempt to process a payment, and upgrade a non subscibed
-    user. '
+  summary: >-
+    This function will attempt to process a payment, and upgrade a non subscibed
+    user. 
   tags:
-  - billings
+    - billings

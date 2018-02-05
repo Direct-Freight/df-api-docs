@@ -1,68 +1,30 @@
----
-delete:
-  consumes:
-  - application/json
-  parameters:
-  - default: loads
-    description: Valid types are "loads", and "trucks".
-    enum:
-    - loads
-    - trucks
-    in: path
-    name: alert_type
-    required: true
-    type: string
-  - in: header
-    minLength: 30
-    name: end-user-token
-    required: true
-    type: string
-  - collectionFormat: multi
-    description: Specify to just delete some alerts.
-    in: query
-    items:
-      type: string
-    name: alert_id
-    required: true
-    type: array
-  produces:
-  - application/json
-  responses:
-    '200':
-      description: successful operation
-  summary: Delete an alert.
-  tags:
-  - alerts
 get:
-  consumes:
-  - application/json
   description: Get a list of alerts.
   parameters:
-  - description: Valid types are "loads", and "trucks".
-    enum:
-    - loads
-    - trucks
-    in: path
-    name: alert_type
-    required: true
-    type: string
-  - in: header
-    name: end-user-token
-    required: true
-    type: string
-  - collectionFormat: multi
-    description: only get a subset of alerts. As this is a get request this is specified
-      as a query string parameter.
-    in: query
-    items:
-      format: uuid
-      minLength: 30
+    - description: 'Valid types are "loads", and "trucks".'
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: alert_type
+      required: true
       type: string
-    name: alert_id
-    required: false
-    type: array
-  produces:
-  - application/json
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - collectionFormat: multi
+      description: >-
+        only get a subset of alerts. As this is a get request this is specified
+        as a query string parameter.
+      in: query
+      items:
+        format: uuid
+        minLength: 30
+        type: string
+      name: alert_id
+      required: false
+      type: array
   responses:
     '200':
       description: successful operation
@@ -70,39 +32,66 @@ get:
         $ref: '#/definitions/get_alert_response'
   summary: Get a list of alerts.
   tags:
-  - alerts
-patch:
-  consumes:
-  - application/json
-  description: Search objects are set at creation. You cannot modify them after the
-    alert has been created.
+    - alerts
+delete:
   parameters:
-  - description: Valid types are "loads", and "trucks".
-    enum:
-    - loads
-    - trucks
-    in: path
-    name: alert_type
-    required: true
-    type: string
-  - in: header
-    minLength: 30
-    name: end-user-token
-    required: true
-    type: string
-  - description: ''
-    in: body
-    name: body
-    required: false
-    schema:
-      $ref: '#/definitions/patch_alert_properties'
-  - description: Specify which alert you are updating.
-    in: query
-    name: alert_id
-    required: true
-    type: string
-  produces:
-  - application/json
+    - default: loads
+      description: 'Valid types are "loads", and "trucks".'
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: alert_type
+      required: true
+      type: string
+    - in: header
+      minLength: 30
+      name: end-user-token
+      required: true
+      type: string
+    - collectionFormat: multi
+      description: Specify to just delete some alerts.
+      in: query
+      items:
+        type: string
+      name: alert_id
+      required: true
+      type: array
+  responses:
+    '204':
+      description: successful operation
+  summary: Delete an alert.
+  tags:
+    - alerts
+patch:
+  description: >-
+    Search objects are set at creation. You cannot modify them after the alert
+    has been created.
+  parameters:
+    - description: 'Valid types are "loads", and "trucks".'
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: alert_type
+      required: true
+      type: string
+    - in: header
+      minLength: 30
+      name: end-user-token
+      required: true
+      type: string
+    - description: ''
+      in: body
+      name: body
+      required: false
+      schema:
+        $ref: '#/definitions/patch_alert_properties'
+    - description: Specify which alert you are updating.
+      in: query
+      name: alert_id
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
@@ -110,33 +99,30 @@ patch:
         $ref: '#/definitions/patch_alert_response'
   summary: Update an alert.
   tags:
-  - alerts
+    - alerts
 post:
-  consumes:
-  - application/json
-  description: Any parameter that is defined here and is also defined on the boards
-    GET, follows the same rules.
+  description: >-
+    Any parameter that is defined here and is also defined on the boards GET,
+    follows the same rules.
   parameters:
-  - description: Valid types are "loads", and "trucks".
-    enum:
-    - loads
-    - trucks
-    in: path
-    name: alert_type
-    required: true
-    type: string
-  - in: header
-    minLength: 30
-    name: end-user-token
-    required: true
-    type: string
-  - in: body
-    name: body
-    required: true
-    schema:
-      $ref: '#/definitions/alert_properties'
-  produces:
-  - application/json
+    - description: 'Valid types are "loads", and "trucks".'
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: alert_type
+      required: true
+      type: string
+    - in: header
+      minLength: 30
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/alert_properties'
   responses:
     '201':
       description: successful operation
@@ -144,4 +130,4 @@ post:
         $ref: '#/definitions/post_alert_response'
   summary: Create an alert.
   tags:
-  - alerts
+    - alerts

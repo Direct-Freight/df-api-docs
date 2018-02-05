@@ -5,8 +5,6 @@ parameters:
     required: false
     type: string
 post:
-  consumes:
-    - application/json
   description: This is the primary search method.
   parameters:
     - description: ''
@@ -26,8 +24,6 @@ post:
       required: true
       type: string
       default: loads
-  produces:
-    - application/json
   responses:
     '200':
       description: successful operation
