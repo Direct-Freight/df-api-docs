@@ -1,3 +1,0 @@
-rm -rf client-sdks/perl/
-mkdir -p client-sdks/perl
-java -jar ./swagger-codegen-cli-2.2.1.jar generate -i ./web_deploy/swagger.json -l perl -o ./client-sdks/perl/
