@@ -4,11 +4,7 @@ url = "https://www.directfreight.com/api/postings/custom_categories/%7Bcategory_
 
 querystring = {"category_id":"SOME_ARRAY_VALUE"}
 
-headers = {
-    'accept': "application/json",
-    'content-type': "application/json",
-    'end-user-token': "SOME_STRING_VALUE"
-    }
+headers = {'end-user-token': 'SOME_STRING_VALUE'}
 
 response = requests.request("GET", url, headers=headers, params=querystring)
 

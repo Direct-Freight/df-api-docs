@@ -4,8 +4,6 @@ var settings = {
   "url": "https://www.directfreight.com/api/boards/hidden_entries",
   "method": "POST",
   "headers": {
-    "accept": "application/json",
-    "content-type": "application/json",
     "end-user-token": "SOME_STRING_VALUE"
   },
   "processData": false

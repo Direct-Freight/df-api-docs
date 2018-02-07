@@ -1,10 +1,6 @@
 import Foundation
 
-let headers = [
-  "accept": "application/json",
-  "content-type": "application/json",
-  "end-user-token": "SOME_STRING_VALUE"
-]
+let headers = ["end-user-token": "SOME_STRING_VALUE"]
 
 var request = NSMutableURLRequest(URL: NSURL(string: "https://www.directfreight.com/api/postings/%7Bposting_type%7D?posting_id=SOME_ARRAY_VALUE")!,
                                         cachePolicy: .UseProtocolCachePolicy,

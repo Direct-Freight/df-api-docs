@@ -6,10 +6,7 @@ var options = { method: 'GET',
    { origin_city: 'SOME_STRING_VALUE',
      origin_state: 'SOME_STRING_VALUE',
      destination_city: 'SOME_STRING_VALUE',
-     destination_state: 'SOME_STRING_VALUE' },
-  headers: 
-   { 'content-type': 'application/json',
-     accept: 'application/json' } };
+     destination_state: 'SOME_STRING_VALUE' } };
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);

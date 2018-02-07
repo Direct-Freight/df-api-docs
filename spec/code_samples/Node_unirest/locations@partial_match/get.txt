@@ -7,11 +7,6 @@ req.query({
   "search_type": "SOME_STRING_VALUE"
 });
 
-req.headers({
-  "content-type": "application/json",
-  "accept": "application/json"
-});
-
 
 req.end(function (res) {
   if (res.error) throw new Error(res.error);

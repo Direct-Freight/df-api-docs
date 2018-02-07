@@ -5,10 +5,7 @@ var options = {
   "hostname": "www.directfreight.com",
   "port": null,
   "path": "/api/locations/partial_match?term=SOME_STRING_VALUE&search_type=SOME_STRING_VALUE",
-  "headers": {
-    "accept": "application/json",
-    "content-type": "application/json"
-  }
+  "headers": {}
 };
 
 var req = http.request(options, function (res) {

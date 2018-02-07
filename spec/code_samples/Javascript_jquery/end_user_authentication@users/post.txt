@@ -3,10 +3,7 @@ var settings = {
   "crossDomain": true,
   "url": "https://www.directfreight.com/api/end_user_authentication/users",
   "method": "POST",
-  "headers": {
-    "accept": "application/json",
-    "content-type": "application/json"
-  },
+  "headers": {},
   "processData": false,
   "data": "{\"email\":\"<ADD STRING VALUE>\",\"end-user-token\":\"<ADD STRING VALUE>\",\"password\":\"<ADD STRING VALUE>\"}"
 }

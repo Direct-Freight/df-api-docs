@@ -2,12 +2,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("www.directfreight.com")
 
-headers = {
-    'accept': "application/json",
-    'content-type': "application/json"
-    }
-
-conn.request("GET", "/api/location/distance?origin_city=SOME_STRING_VALUE&origin_state=SOME_STRING_VALUE&destination_city=SOME_STRING_VALUE&destination_state=SOME_STRING_VALUE", headers=headers)
+conn.request("GET", "/api/location/distance?origin_city=SOME_STRING_VALUE&origin_state=SOME_STRING_VALUE&destination_city=SOME_STRING_VALUE&destination_state=SOME_STRING_VALUE")
 
 res = conn.getresponse()
 data = res.read()

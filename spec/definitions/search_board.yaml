@@ -1,8 +1,8 @@
----
 properties:
   alert_id:
-    description: 'By specifying an alert_id we will record the loads seen by this
-      user, and associate it with their alert. '
+    description: >-
+      By specifying an alert_id we will record the loads seen by this user, and
+      associate it with their alert. 
     example: 5555
     type: boolean
   count:
@@ -13,11 +13,14 @@ properties:
     example: chicago
     type: string
   destination_radius:
-    description: 'If both city and state, it will search for all entries within #
-      Miles of the city. '
+    description: >-
+      If both city and state, it will search for all entries within # Miles of
+      the city. 
     type: integer
   destination_state:
-    description: 'If it is an array, we assume a multi state search, and ignore destination_city. '
+    description: >-
+      If it is an array, we assume a multi state search, and ignore
+      destination_city. 
     items:
       type: string
     type: array
@@ -25,25 +28,29 @@ properties:
     description: 'Will default to 50 items per page. Max is 100, minimum is 1. '
     type: integer
   load_size:
-    description: 'This is only valid on load boards. Valid values are &quot;Full&quot;
-      and &quot;Partial&quot;. '
-    items:
-      type: string
-    type: array
+    description: >-
+      This is only valid on load boards. Valid values are &quot;Full&quot; and
+      &quot;Partial&quot;. 
+    type: string
+    default: Full
   only_new:
-    description: 'This will only return unseen results. This requires an alert_id
-      to be specified. '
+    description: >-
+      This will only return unseen results. This requires an alert_id to be
+      specified. 
     type: boolean
   origin_city:
     description: 'Must be at least 3 characters. '
-    example: chillcothe
+    example: chillicothe
     type: string
   origin_radius:
-    description: 'If both city and state, it will search for all entries within #
-      Miles of the city. '
+    description: >-
+      If both city and state, it will search for all entries within # Miles of
+      the city. 
     type: integer
   origin_state:
-    description: 'If it is an array, we assume a multi state search, and ignore origin_city. '
+    description: >-
+      If it is an array, we assume a multi state search, and ignore
+      origin_city. 
     items:
       type: string
     type: array
@@ -67,7 +74,7 @@ properties:
       type: string
     type: array
 required:
-- origin_state
-- page_number
-- total_items
-- total_pages
+  - origin_state
+  - page_number
+  - total_items
+  - total_pages

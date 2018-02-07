@@ -1,4 +1,2 @@
 echo '{"carrier_id":0}' |  \
-  http GET https://www.directfreight.com/api/profiles/mobile_carriers \
-  accept:application/json \
-  content-type:application/json
+  http GET https://www.directfreight.com/api/profiles/mobile_carriers

@@ -14,7 +14,5 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("POST", "https://www.directfreight.com/api/end_user_authentication/users");
-xhr.setRequestHeader("accept", "application/json");
-xhr.setRequestHeader("content-type", "application/json");
 
 xhr.send(data);

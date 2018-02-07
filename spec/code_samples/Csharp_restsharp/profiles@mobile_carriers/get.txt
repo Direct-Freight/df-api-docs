@@ -1,6 +1,4 @@
 var client = new RestClient("https://www.directfreight.com/api/profiles/mobile_carriers");
 var request = new RestRequest(Method.GET);
-request.AddHeader("content-type", "application/json");
-request.AddHeader("accept", "application/json");
-request.AddParameter("application/json", "{\"carrier_id\":0}", ParameterType.RequestBody);
+request.AddParameter("undefined", "{\"carrier_id\":0}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);

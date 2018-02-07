@@ -2,11 +2,6 @@ var unirest = require("unirest");
 
 var req = unirest("GET", "https://www.directfreight.com/api/boards/%7Bboard_type%7D/state_list");
 
-req.headers({
-  "content-type": "application/json",
-  "accept": "application/json"
-});
-
 
 req.end(function (res) {
   if (res.error) throw new Error(res.error);

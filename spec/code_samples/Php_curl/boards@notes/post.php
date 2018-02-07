@@ -12,8 +12,6 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "POST",
   CURLOPT_POSTFIELDS => "{\"body\":\"<ADD STRING VALUE>\",\"entry_id\":0,\"title\":\"<ADD STRING VALUE>\"}",
   CURLOPT_HTTPHEADER => array(
-    "accept: application/json",
-    "content-type: application/json",
     "end-user-token: SOME_STRING_VALUE"
   ),
 ));

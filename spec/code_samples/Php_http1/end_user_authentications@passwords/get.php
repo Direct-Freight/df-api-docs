@@ -8,11 +8,6 @@ $request->setQueryData(array(
   'email' => 'SOME_STRING_VALUE'
 ));
 
-$request->setHeaders(array(
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
-));
-
 try {
   $response = $request->send();
 

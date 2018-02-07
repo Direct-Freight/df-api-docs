@@ -9,11 +9,6 @@ $request->setQueryData(array(
   'search_type' => 'SOME_STRING_VALUE'
 ));
 
-$request->setHeaders(array(
-  'content-type' => 'application/json',
-  'accept' => 'application/json'
-));
-
 try {
   $response = $request->send();
 

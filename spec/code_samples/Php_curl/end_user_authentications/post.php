@@ -11,10 +11,6 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
   CURLOPT_POSTFIELDS => "{\"login\":\"<ADD STRING VALUE>\",\"realm\":\"<ADD STRING VALUE>\",\"secret\":\"<ADD STRING VALUE>\"}",
-  CURLOPT_HTTPHEADER => array(
-    "accept: application/json",
-    "content-type: application/json"
-  ),
 ));
 
 $response = curl_exec($curl);

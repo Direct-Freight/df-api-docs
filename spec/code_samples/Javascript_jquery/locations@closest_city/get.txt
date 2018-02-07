@@ -3,10 +3,7 @@ var settings = {
   "crossDomain": true,
   "url": "https://www.directfreight.com/api/locations/closest_city?latitude=SOME_NUMBER_VALUE&longitude=SOME_NUMBER_VALUE",
   "method": "GET",
-  "headers": {
-    "accept": "application/json",
-    "content-type": "application/json"
-  }
+  "headers": {}
 }
 
 $.ajax(settings).done(function (response) {

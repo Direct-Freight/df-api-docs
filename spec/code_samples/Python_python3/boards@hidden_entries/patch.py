@@ -4,11 +4,7 @@ conn = http.client.HTTPSConnection("www.directfreight.com")
 
 payload = "{\"entry_id\":[\"<ADD STRING VALUE>\"]}"
 
-headers = {
-    'accept': "application/json",
-    'content-type': "application/json",
-    'end-user-token': "SOME_STRING_VALUE"
-    }
+headers = { 'end-user-token': "SOME_STRING_VALUE" }
 
 conn.request("PATCH", "/api/boards/hidden_entries", payload, headers)
 

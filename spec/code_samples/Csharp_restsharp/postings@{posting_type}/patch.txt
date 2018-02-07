@@ -1,7 +1,5 @@
 var client = new RestClient("https://www.directfreight.com/api/postings/%7Bposting_type%7D");
 var request = new RestRequest(Method.PATCH);
 request.AddHeader("end-user-token", "SOME_STRING_VALUE");
-request.AddHeader("content-type", "application/json");
-request.AddHeader("accept", "application/json");
-request.AddParameter("application/json", "{\"comment\":{},\"custom_id\":{},\"destination_city\":{},\"destination_state\":{},\"height\":{},\"length\":{},\"load_size\":{},\"origin_city\":{},\"origin_state\":{},\"other_trailer_types\":{},\"pay_rate\":{},\"posting_id\":0,\"receive_date\":{},\"ship_date\":{},\"trailer_type\":{},\"weight\":{},\"width\":{}}", ParameterType.RequestBody);
+request.AddParameter("undefined", "{\"comment\":{},\"custom_id\":{},\"destination_city\":{},\"destination_state\":{},\"height\":{},\"length\":{},\"load_size\":{},\"origin_city\":{},\"origin_state\":{},\"other_trailer_types\":{},\"pay_rate\":{},\"posting_id\":0,\"receive_date\":{},\"ship_date\":{},\"trailer_type\":{},\"weight\":{},\"width\":{}}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);

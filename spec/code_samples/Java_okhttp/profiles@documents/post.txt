@@ -5,8 +5,6 @@ RequestBody body = RequestBody.create(mediaType, "{\"The\":{}}");
 Request request = new Request.Builder()
   .url("https://www.directfreight.com/api/profiles/documents")
   .post(body)
-  .addHeader("accept", "application/json")
-  .addHeader("content-type", "application/json")
   .addHeader("end-user-token", "SOME_STRING_VALUE")
   .build();
 

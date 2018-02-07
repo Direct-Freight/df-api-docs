@@ -2,11 +2,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("www.directfreight.com")
 
-headers = {
-    'accept': "application/json",
-    'content-type': "application/json",
-    'end-user-token': "SOME_STRING_VALUE"
-    }
+headers = { 'end-user-token': "SOME_STRING_VALUE" }
 
 conn.request("GET", "/api/boards/hidden_entries?entry_id=SOME_ARRAY_VALUE", headers=headers)
 

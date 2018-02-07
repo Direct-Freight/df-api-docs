@@ -4,11 +4,7 @@ conn = http.client.HTTPSConnection("www.directfreight.com")
 
 payload = "{\"contact_fax\":\"<ADD STRING VALUE>\",\"contact_name\":\"<ADD STRING VALUE>\",\"contact_phone\":\"<ADD STRING VALUE>\",\"delete_current_before_posting\":false,\"list\":[\"<ADD STRING VALUE>\"]}"
 
-headers = {
-    'accept': "application/json",
-    'content-type': "application/json",
-    'end-user-token': "SOME_STRING_VALUE"
-    }
+headers = { 'end-user-token': "SOME_STRING_VALUE" }
 
 conn.request("POST", "/api/postings/multiple/%7Bposting_type%7D", payload, headers)
 

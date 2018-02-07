@@ -5,10 +5,7 @@ var options = {
   "hostname": "www.directfreight.com",
   "port": null,
   "path": "/api/boards/%7Bboard_type%7D",
-  "headers": {
-    "accept": "application/json",
-    "content-type": "application/json"
-  }
+  "headers": {}
 };
 
 var req = http.request(options, function (res) {
@@ -24,15 +21,15 @@ var req = http.request(options, function (res) {
   });
 });
 
-req.write(JSON.stringify({ alert_id: false,
+req.write(JSON.stringify({ alert_id: 5555,
   count: false,
-  destination_city: '<ADD STRING VALUE>',
+  destination_city: 'chicago',
   destination_radius: 0,
   destination_state: [ '<ADD STRING VALUE>' ],
   item_count: 0,
-  load_size: [ '<ADD STRING VALUE>' ],
+  load_size: 'Full',
   only_new: false,
-  origin_city: '<ADD STRING VALUE>',
+  origin_city: 'chillicothe',
   origin_radius: 0,
   origin_state: [ '<ADD STRING VALUE>' ],
   page_number: 0,

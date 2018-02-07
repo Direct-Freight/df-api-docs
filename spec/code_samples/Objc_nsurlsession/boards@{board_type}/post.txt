@@ -1,16 +1,13 @@
 #import <Foundation/Foundation.h>
-
-NSDictionary *headers = @{ @"accept": @"application/json",
-                           @"content-type": @"application/json" };
-NSDictionary *parameters = @{ @"alert_id": @NO,
+NSDictionary *parameters = @{ @"alert_id": @5555,
                               @"count": @NO,
-                              @"destination_city": @"<ADD STRING VALUE>",
+                              @"destination_city": @"chicago",
                               @"destination_radius": @0,
                               @"destination_state": @[ @"<ADD STRING VALUE>" ],
                               @"item_count": @0,
-                              @"load_size": @[ @"<ADD STRING VALUE>" ],
+                              @"load_size": @"Full",
                               @"only_new": @NO,
-                              @"origin_city": @"<ADD STRING VALUE>",
+                              @"origin_city": @"chillicothe",
                               @"origin_radius": @0,
                               @"origin_state": @[ @"<ADD STRING VALUE>" ],
                               @"page_number": @0,
@@ -25,7 +22,6 @@ NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWit
                                                        cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                    timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
-[request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
 
 NSURLSession *session = [NSURLSession sharedSession];

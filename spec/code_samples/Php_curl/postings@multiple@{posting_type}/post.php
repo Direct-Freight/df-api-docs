@@ -12,8 +12,6 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "POST",
   CURLOPT_POSTFIELDS => "{\"contact_fax\":\"<ADD STRING VALUE>\",\"contact_name\":\"<ADD STRING VALUE>\",\"contact_phone\":\"<ADD STRING VALUE>\",\"delete_current_before_posting\":false,\"list\":[\"<ADD STRING VALUE>\"]}",
   CURLOPT_HTTPHEADER => array(
-    "accept: application/json",
-    "content-type: application/json",
     "end-user-token: SOME_STRING_VALUE"
   ),
 ));

@@ -12,8 +12,6 @@ func main() {
 
 	req, _ := http.NewRequest("PATCH", url, nil)
 
-	req.Header.Add("accept", "application/json")
-	req.Header.Add("content-type", "application/json")
 	req.Header.Add("end-user-token", "SOME_STRING_VALUE")
 
 	res, _ := http.DefaultClient.Do(req)

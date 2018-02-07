@@ -1,7 +1,4 @@
 #import <Foundation/Foundation.h>
-
-NSDictionary *headers = @{ @"accept": @"application/json",
-                           @"content-type": @"application/json" };
 NSDictionary *parameters = @{ @"login": @"<ADD STRING VALUE>",
                               @"realm": @"<ADD STRING VALUE>",
                               @"secret": @"<ADD STRING VALUE>" };
@@ -12,7 +9,6 @@ NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWit
                                                        cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                    timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
-[request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
 
 NSURLSession *session = [NSURLSession sharedSession];

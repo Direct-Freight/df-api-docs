@@ -5,8 +5,6 @@ RequestBody body = RequestBody.create(mediaType, "{\"new_password\":\"<ADD STRIN
 Request request = new Request.Builder()
   .url("https://www.directfreight.com/api/end_user_authentications/passwords")
   .patch(body)
-  .addHeader("accept", "application/json")
-  .addHeader("content-type", "application/json")
   .addHeader("end-user-token", "SOME_STRING_VALUE")
   .build();
 

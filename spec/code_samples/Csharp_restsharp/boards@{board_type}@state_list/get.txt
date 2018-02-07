@@ -1,5 +1,3 @@
 var client = new RestClient("https://www.directfreight.com/api/boards/%7Bboard_type%7D/state_list");
 var request = new RestRequest(Method.GET);
-request.AddHeader("content-type", "application/json");
-request.AddHeader("accept", "application/json");
 IRestResponse response = client.Execute(request);

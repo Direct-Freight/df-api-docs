@@ -1,5 +1,3 @@
 echo '{"new_password":"<ADD STRING VALUE>","old_password":"<ADD STRING VALUE>"}' |  \
   http PATCH https://www.directfreight.com/api/end_user_authentications/passwords \
-  accept:application/json \
-  content-type:application/json \
   end-user-token:SOME_STRING_VALUE

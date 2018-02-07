@@ -5,8 +5,6 @@ curl_easy_setopt(hnd, CURLOPT_URL, "https://www.directfreight.com/api/boards/hid
 
 struct curl_slist *headers = NULL;
 headers = curl_slist_append(headers, "end-user-token: SOME_STRING_VALUE");
-headers = curl_slist_append(headers, "content-type: application/json");
-headers = curl_slist_append(headers, "accept: application/json");
 curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
 curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"company_id\":\"<ADD STRING VALUE>\"}");

@@ -1,4 +1,2 @@
 echo '{"email":"<ADD STRING VALUE>","end-user-token":"<ADD STRING VALUE>","password":"<ADD STRING VALUE>"}' |  \
-  http POST https://www.directfreight.com/api/end_user_authentication/users \
-  accept:application/json \
-  content-type:application/json
+  http POST https://www.directfreight.com/api/end_user_authentication/users
