@@ -56,3 +56,17 @@ parameters:
     name: end-user-token
     required: false
     type: string
+  load_truck_selector:
+    description: 'Valid types are "loads", and "trucks".'
+    enum:
+      - loads
+      - trucks
+    in: path
+    name: list_type
+    required: true
+    type: string
+responses:
+  alerts_post:
+    description: Returns an alert_id.
+    schema:
+      $ref: '#/definitions/alert_id'
