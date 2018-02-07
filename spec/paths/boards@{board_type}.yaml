@@ -1,12 +1,9 @@
 parameters:
-  - description: Sensitive info like phone numbers won't be returned without this.
-    in: header
-    name: end-user-token
-    required: false
-    type: string
+  - $ref: '#/parameters/end-user-token'
 post:
   description: This is the primary search method.
   parameters:
+    - $ref: '#/parameters/end-user-tokenOptional'
     - description: ''
       in: body
       name: body

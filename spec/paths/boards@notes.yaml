@@ -1,10 +1,6 @@
 delete:
   parameters:
-    - description: Only logged in users can use this feature.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: 'The entry to associate the note with. '
       in: query
       name: note_id
@@ -20,11 +16,7 @@ delete:
     - boards
 get:
   parameters:
-    - description: Only logged in users can use this feature.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - collectionFormat: multi
       description: 'Optionally just check if certain loads have notes associated with them. '
       in: query
@@ -43,11 +35,7 @@ get:
     - boards
 patch:
   parameters:
-    - description: Only logged in users can use this feature.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true
@@ -63,11 +51,7 @@ patch:
     - boards
 post:
   parameters:
-    - description: Only logged in users can use this feature.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true

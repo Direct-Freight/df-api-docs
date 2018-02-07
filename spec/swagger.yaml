@@ -45,3 +45,14 @@ consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  end-user-token:
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  end-user-tokenOptional:
+    in: header
+    name: end-user-token
+    required: false
+    type: string

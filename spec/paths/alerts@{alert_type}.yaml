@@ -1,16 +1,13 @@
 get:
   description: Get a list of alerts.
   parameters:
+    - $ref: '#/parameters/end-user-token'
     - description: 'Valid types are "loads", and "trucks".'
       enum:
         - loads
         - trucks
       in: path
       name: alert_type
-      required: true
-      type: string
-    - in: header
-      name: end-user-token
       required: true
       type: string
     - collectionFormat: multi
@@ -27,9 +24,9 @@ get:
       type: array
   responses:
     '200':
-      description: successful operation
+      description: Successful response
       schema:
-        $ref: '#/definitions/get_alert_response'
+        $ref: '#/definitions/alert_list'
   summary: Get a list of alerts.
   tags:
     - alerts
@@ -44,11 +41,7 @@ delete:
       name: alert_type
       required: true
       type: string
-    - in: header
-      minLength: 30
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - collectionFormat: multi
       description: Specify to just delete some alerts.
       in: query
@@ -76,11 +69,7 @@ patch:
       name: alert_type
       required: true
       type: string
-    - in: header
-      minLength: 30
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: ''
       in: body
       name: body
@@ -113,11 +102,7 @@ post:
       name: alert_type
       required: true
       type: string
-    - in: header
-      minLength: 30
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true

@@ -1,10 +1,6 @@
 get:
   parameters:
-    - description: The logged in user's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: A special id returned with the board entries.
       in: query
       name: credit_report_id

@@ -1,16 +1,16 @@
----
 properties:
   email:
     description: 'This must be a valid e-mail. '
     type: string
   end-user-token:
-    description: 'The account is created, and a generated token to authenticate as
-      this user is returned. '
+    description: >-
+      The account is created, and a generated token to authenticate as this user
+      is returned. 
     type: string
   password:
     description: 'Currently this is a 6-10 digit alphanumeric password. '
     type: string
 required:
-- email
-- end-user-token
-- password
+  - email
+  - end-user-token
+  - password

@@ -1,10 +1,6 @@
 delete:
   parameters:
-    - description: The logged in profile's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
   responses:
     '204':
       description: successful operation
@@ -13,11 +9,7 @@ delete:
     - profiles
 get:
   parameters:
-    - description: The logged in profile's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
   responses:
     '200':
       description: successful operation
@@ -28,11 +20,7 @@ get:
     - profiles
 patch:
   parameters:
-    - description: The logged in profile's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
   responses:
     '201':
       description: successful operation
@@ -43,11 +31,7 @@ patch:
     - profiles
 post:
   parameters:
-    - description: The logged in profile's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
   responses:
     '200':
       description: successful operation

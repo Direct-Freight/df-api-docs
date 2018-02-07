@@ -7,11 +7,7 @@ delete:
       name: posting_type
       required: true
       type: string
-    - description: The logged in account's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - collectionFormat: multi
       description: You must specify which entry to remove.
       in: query
@@ -35,11 +31,7 @@ get:
       name: posting_type
       required: true
       type: string
-    - description: The logged in account's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - collectionFormat: multi
       description: To just return information about some postings.
       in: query
@@ -65,11 +57,7 @@ patch:
       name: posting_type
       required: true
       type: string
-    - description: The logged in account's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: false
@@ -92,11 +80,7 @@ post:
       name: posting_type
       required: true
       type: string
-    - description: The logged in account's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true
