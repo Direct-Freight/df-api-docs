@@ -1,13 +1,7 @@
 post:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - description: >-
-        Valid types are "loads", "trucks", "private_loads", "private_trucks",
-        "test_loads", and "test_trucks"
-      in: path
-      name: posting_type
-      required: true
-      type: string
+    - $ref: '#/parameters/posting_selector'
     - description: 'Specified in the url. Valid types are "copy", and "move"'
       in: path
       name: action

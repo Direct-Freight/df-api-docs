@@ -4,13 +4,7 @@ get:
     method. Refer to that method for more in-depth information.
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - description: >-
-        This will be specified in the url. Valid types are "loads", and
-        "trucks".
-      in: path
-      name: board_type
-      required: true
-      type: string
+    - $ref: '#/parameters/load_truck_selector'
     - description: The minimum needed for a search.
       in: path
       name: origin_state

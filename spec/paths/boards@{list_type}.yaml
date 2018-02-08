@@ -10,17 +10,7 @@ post:
       required: true
       schema:
         $ref: '#/definitions/search_board'
-    - description: >-
-        This will be specified in the url. Valid types are "loads", and
-        "trucks".
-      enum:
-        - loads
-        - trucks
-      in: path
-      name: board_type
-      required: true
-      type: string
-      default: loads
+    - $ref: '#/parameters/load_truck_selector'
   responses:
     '200':
       description: successful operation

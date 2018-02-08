@@ -1,12 +1,6 @@
 get:
   parameters:
-    - description: >-
-        This will be specified in the url. Valid types are "loads", and
-        "trucks".
-      in: path
-      name: board_type
-      required: true
-      type: string
+    - $ref: '#/parameters/load_truck_selector'
   responses:
     '200':
       description: successful operation

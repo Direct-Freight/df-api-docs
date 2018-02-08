@@ -65,6 +65,21 @@ parameters:
     name: list_type
     required: true
     type: string
+  posting_selector:
+    description: >-
+      Valid types are "loads", "trucks", "private_loads", "private_trucks",
+      "test_loads", and "test_trucks"
+    enum:
+      - loads
+      - trucks
+      - private_loads
+      - private_trucks
+      - test_loads
+      - test_trucks
+    in: path
+    name: list_type
+    required: true
+    type: string
 responses:
   alerts_post:
     description: Returns an alert_id.
