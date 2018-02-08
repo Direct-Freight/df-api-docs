@@ -6,7 +6,7 @@ var mkdirp = require('mkdirp')
 var stringifyObject = require('stringify-object');
 var SwaggerSnippet = require('swagger-snippet')
 
-var SwaggerFile = require('./web_deploy/swagger.json')
+var SwaggerFile = require('../web_deploy/swagger.json')
 
 //var result = SwaggerSnippet.getEndpointSnippets(SwaggerFile, '/boards/{board_type}', 'post' ,['shell_wget','shell_curl'])
 var results = SwaggerSnippet.getSwaggerSnippets(SwaggerFile,
