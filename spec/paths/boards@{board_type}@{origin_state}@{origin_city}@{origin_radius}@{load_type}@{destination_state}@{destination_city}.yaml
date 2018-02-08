@@ -3,11 +3,7 @@ get:
     This is a convenience method. In the background it is calling the POST
     method. Refer to that method for more in-depth information.
   parameters:
-    - description: Sensitive info like phone numbers won't be returned without this.
-      in: header
-      name: end-user-token
-      required: false
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: >-
         This will be specified in the url. Valid types are "loads", and
         "trucks".

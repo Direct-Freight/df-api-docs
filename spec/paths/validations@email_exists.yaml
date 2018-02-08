@@ -1,10 +1,6 @@
 get:
   parameters:
-    - description: The logged in user's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: >-
         Enter an e-mail to see if it is available. Can be used as ?email=xxx or
         as a JSON request.

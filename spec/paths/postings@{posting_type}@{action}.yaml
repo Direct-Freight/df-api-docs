@@ -1,10 +1,6 @@
 post:
   parameters:
-    - description: The logged in account's token
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: >-
         Valid types are "loads", "trucks", "private_loads", "private_trucks",
         "test_loads", and "test_trucks"

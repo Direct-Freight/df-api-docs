@@ -1,10 +1,6 @@
 delete:
   parameters:
-    - description: Only logged in users can use this feature.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: 'The entry that need to be marked as not hidden. '
       in: query
       name: entry_id
@@ -18,11 +14,7 @@ delete:
     - boards
 get:
   parameters:
-    - description: Only logged in users can use this feature.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - collectionFormat: multi
       description: A list of id's to check if any should be visually hidden.
       in: query
@@ -41,11 +33,7 @@ get:
     - boards
 patch:
   parameters:
-    - description: Only logged in users can use this feature.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true
@@ -59,11 +47,7 @@ patch:
     - boards
 post:
   parameters:
-    - description: Only logged in users can use this feature.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true

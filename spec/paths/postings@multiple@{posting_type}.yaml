@@ -7,11 +7,7 @@ post:
       name: posting_type
       required: true
       type: string
-    - description: The logged in account's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true

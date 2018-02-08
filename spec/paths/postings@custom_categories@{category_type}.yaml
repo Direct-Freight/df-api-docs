@@ -5,11 +5,7 @@ delete:
       name: category_type
       required: true
       type: string
-    - description: The logged in account's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - collectionFormat: multi
       description: To just delete information about some postings.
       in: query
@@ -26,11 +22,7 @@ delete:
     - postings
 get:
   parameters:
-    - description: The logged in account's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: 'Valid types are "names", and "data".'
       in: path
       name: category_type
@@ -59,11 +51,7 @@ patch:
       name: category_type
       required: true
       type: string
-    - description: The logged in account's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true
@@ -84,11 +72,7 @@ post:
       name: category_type
       required: true
       type: string
-    - description: The logged in account's token.
-      in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true

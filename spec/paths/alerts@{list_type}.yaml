@@ -1,0 +1,86 @@
+get:
+  summary: >-
+    Get a list of alerts. You can optionally limit the list by specifcying
+    alerts by their alert_id.
+  parameters:
+    - $ref: '#/parameters/end-user-token'
+    - $ref: '#/parameters/load_truck_selector'
+    - collectionFormat: multi
+      description: >-
+        only get a subset of alerts. As this is a get request this is specified
+        as a query string parameter.
+      in: query
+      items:
+        type: integer
+      name: alert_id
+      required: false
+      type: array
+  responses:
+    '200':
+      description: Successful response
+      schema:
+        $ref: '#/definitions/alert_list'
+  tags:
+    - alerts
+post:
+  description: >-
+    Any parameter that is defined here and is also defined on the boards GET,
+    follows the same rules.
+  parameters:
+    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/end-user-token'
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/alert_parameters'
+  responses:
+    '201':
+      description: Successful post operation. Returns an alert id.
+  summary: Create an alert.
+  tags:
+    - alerts
+delete:
+  parameters:
+    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/end-user-token'
+    - collectionFormat: multi
+      description: Specify to just delete some alerts.
+      in: query
+      items:
+        type: string
+      name: alert_id
+      required: true
+      type: array
+  responses:
+    '204':
+      description: successful operation
+  summary: Delete an alert.
+  tags:
+    - alerts
+patch:
+  description: >-
+    Search objects are set at creation. You cannot modify them after the alert
+    has been created.
+  parameters:
+    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/end-user-token'
+    - description: ''
+      in: body
+      name: body
+      required: false
+      schema:
+        $ref: '#/definitions/patch_alert_properties'
+    - description: Specify which alert you are updating.
+      in: query
+      name: alert_id
+      required: true
+      type: string
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/patch_alert_response'
+  summary: Update an alert.
+  tags:
+    - alerts

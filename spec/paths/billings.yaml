@@ -3,10 +3,7 @@ get:
     Will return how much the end user will be charged to upgrade. It will not
     charge the user, or consume the promo code.
   parameters:
-    - in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: 'The promo code. '
       in: query
       name: promo_code
@@ -25,10 +22,7 @@ get:
     - billings
 post:
   parameters:
-    - in: header
-      name: end-user-token
-      required: true
-      type: string
+    - $ref: '#/parameters/end-user-token'
     - description: >-
         This function will attempt to process a payment, and upgrade a non
         subscibed user. 
