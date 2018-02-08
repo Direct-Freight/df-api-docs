@@ -1,21 +1,19 @@
-parameters:
-  - $ref: '#/parameters/end-user-token'
 post:
   description: This is the primary search method.
   parameters:
     - $ref: '#/parameters/end-user-tokenOptional'
-    - description: ''
+    - $ref: '#/parameters/load_truck_selector'
+    - description: Please specifify at least a partial origin or destination.
       in: body
       name: body
       required: true
       schema:
-        $ref: '#/definitions/search_board'
-    - $ref: '#/parameters/load_truck_selector'
+        $ref: '#/definitions/board_search'
   responses:
     '200':
-      description: successful operation
+      description: Returns a list matching your search.
       schema:
-        $ref: '#/definitions/post_board_type_response'
+        $ref: '#/definitions/board'
     '422':
       $ref: '#/responses/error_422'
   summary: Get a board.

@@ -17,7 +17,9 @@ get:
       type: array
   responses:
     '200':
-      $ref: '#/responses/alerts_get'
+      description: On success will return a list of alerts.
+      schema:
+        $ref: '#/definitions/alert_list'
   tags:
     - alerts
 post:
@@ -34,7 +36,9 @@ post:
         $ref: '#/definitions/alert'
   responses:
     '201':
-      $ref: '#/responses/alerts_post'
+      description: Returns an alert_id.
+      schema:
+        $ref: '#/definitions/alert_id'
   summary: Create an alert.
   tags:
     - alerts
