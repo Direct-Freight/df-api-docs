@@ -3,9 +3,7 @@ var settings = {
   "crossDomain": true,
   "url": "https://www.directfreight.com/api/postings/custom_categories/%7Bcategory_type%7D",
   "method": "POST",
-  "headers": {
-    "end-user-token": "SOME_STRING_VALUE"
-  },
+  "headers": {},
   "processData": false
 }
 

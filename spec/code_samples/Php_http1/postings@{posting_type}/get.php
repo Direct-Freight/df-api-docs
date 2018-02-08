@@ -8,10 +8,6 @@ $request->setQueryData(array(
   'posting_id' => 'SOME_ARRAY_VALUE'
 ));
 
-$request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE'
-));
-
 try {
   $response = $request->send();
 

@@ -4,8 +4,7 @@ var options = { method: 'GET',
   url: 'https://www.directfreight.com/api/credit_reports',
   qs: 
    { credit_report_id: 'SOME_STRING_VALUE',
-     format: 'SOME_STRING_VALUE' },
-  headers: { 'end-user-token': 'SOME_STRING_VALUE' } };
+     format: 'SOME_STRING_VALUE' } };
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);

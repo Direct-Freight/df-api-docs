@@ -5,7 +5,6 @@ RequestBody body = RequestBody.create(mediaType, "{\"address\":\"<ADD STRING VAL
 Request request = new Request.Builder()
   .url("https://www.directfreight.com/api/profiles")
   .post(body)
-  .addHeader("end-user-token", "SOME_STRING_VALUE")
   .build();
 
 Response response = client.newCall(request).execute();

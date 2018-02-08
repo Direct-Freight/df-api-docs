@@ -1,6 +1,4 @@
 import Foundation
-
-let headers = ["end-user-token": "SOME_STRING_VALUE"]
 let parameters = ["company_id": "<ADD STRING VALUE>"] as [String : Any]
 
 let postData = JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -9,7 +7,6 @@ let request = NSMutableURLRequest(url: NSURL(string: "https://www.directfreight.
                                         cachePolicy: .useProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.httpMethod = "PATCH"
-request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
 
 let session = URLSession.shared

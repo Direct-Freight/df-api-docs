@@ -5,9 +5,7 @@ var options = {
   "hostname": "www.directfreight.com",
   "port": null,
   "path": "/api/credit_reports?credit_report_id=SOME_STRING_VALUE&format=SOME_STRING_VALUE",
-  "headers": {
-    "end-user-token": "SOME_STRING_VALUE"
-  }
+  "headers": {}
 };
 
 var req = http.request(options, function (res) {

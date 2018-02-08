@@ -1,4 +1,3 @@
 HttpResponse<String> response = Unirest.post("https://www.directfreight.com/api/billings")
-  .header("end-user-token", "SOME_STRING_VALUE")
   .body("{\"billing_address\":{},\"cc_data\":{},\"check_data\":{},\"promo_code\":\"<ADD STRING VALUE>\"}")
   .asString();

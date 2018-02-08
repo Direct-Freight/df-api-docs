@@ -1,6 +1,4 @@
 import Foundation
-
-let headers = ["end-user-token": "SOME_STRING_VALUE"]
 let parameters = [
   "address": "<ADD STRING VALUE>",
   "city": "<ADD STRING VALUE>",
@@ -24,7 +22,6 @@ let request = NSMutableURLRequest(url: NSURL(string: "https://www.directfreight.
                                         cachePolicy: .useProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.httpMethod = "PATCH"
-request.allHTTPHeaderFields = headers
 request.httpBody = postData as Data
 
 let session = URLSession.shared

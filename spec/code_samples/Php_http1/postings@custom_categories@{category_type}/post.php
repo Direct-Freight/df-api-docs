@@ -4,10 +4,6 @@ $request = new HttpRequest();
 $request->setUrl('https://www.directfreight.com/api/postings/custom_categories/%7Bcategory_type%7D');
 $request->setMethod(HTTP_METH_POST);
 
-$request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE'
-));
-
 try {
   $response = $request->send();
 

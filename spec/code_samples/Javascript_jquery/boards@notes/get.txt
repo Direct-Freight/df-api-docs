@@ -3,9 +3,7 @@ var settings = {
   "crossDomain": true,
   "url": "https://www.directfreight.com/api/boards/notes?entry_id=SOME_ARRAY_VALUE",
   "method": "GET",
-  "headers": {
-    "end-user-token": "SOME_STRING_VALUE"
-  }
+  "headers": {}
 }
 
 $.ajax(settings).done(function (response) {

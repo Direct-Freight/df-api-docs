@@ -3,8 +3,7 @@ open Cohttp
 open Lwt
 
 let uri = Uri.of_string "https://www.directfreight.com/api/validations/email_exists?email=SOME_STRING_VALUE" in
-let headers = Header.add (Header.init ()) "end-user-token" "SOME_STRING_VALUE" in
 
-Client.call ~headers `GET uri
+Client.call `GET uri
 >>= fun (res, body_stream) ->
   (* Do stuff with the result *)

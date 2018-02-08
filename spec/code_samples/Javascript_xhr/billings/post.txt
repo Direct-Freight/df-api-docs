@@ -15,6 +15,5 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("POST", "https://www.directfreight.com/api/billings");
-xhr.setRequestHeader("end-user-token", "SOME_STRING_VALUE");
 
 xhr.send(data);

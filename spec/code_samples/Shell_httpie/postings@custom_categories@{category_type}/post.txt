@@ -1,2 +1,1 @@
-http POST https://www.directfreight.com/api/postings/custom_categories/%7Bcategory_type%7D \
-  end-user-token:SOME_STRING_VALUE
+http POST https://www.directfreight.com/api/postings/custom_categories/%7Bcategory_type%7D

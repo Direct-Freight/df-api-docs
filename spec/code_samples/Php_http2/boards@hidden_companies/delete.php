@@ -9,10 +9,6 @@ $request->setQuery(new http\QueryString(array(
   'company_id' => 'SOME_STRING_VALUE'
 )));
 
-$request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE'
-));
-
 $client->enqueue($request)->send();
 $response = $client->getResponse();
 

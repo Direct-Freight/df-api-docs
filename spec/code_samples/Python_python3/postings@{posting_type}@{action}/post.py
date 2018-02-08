@@ -4,9 +4,7 @@ conn = http.client.HTTPSConnection("www.directfreight.com")
 
 payload = "{\"source_id\":{},\"source_posting\":\"<ADD STRING VALUE>\"}"
 
-headers = { 'end-user-token': "SOME_STRING_VALUE" }
-
-conn.request("POST", "/api/postings/%7Bposting_type%7D/%7Baction%7D", payload, headers)
+conn.request("POST", "/api/postings/%7Bposting_type%7D/%7Baction%7D", payload)
 
 res = conn.getresponse()
 data = res.read()

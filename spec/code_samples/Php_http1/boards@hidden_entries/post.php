@@ -4,10 +4,6 @@ $request = new HttpRequest();
 $request->setUrl('https://www.directfreight.com/api/boards/hidden_entries');
 $request->setMethod(HTTP_METH_POST);
 
-$request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE'
-));
-
 try {
   $response = $request->send();
 

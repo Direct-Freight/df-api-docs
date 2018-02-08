@@ -8,7 +8,6 @@ http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 request = Net::HTTP::Patch.new(url)
-request["end-user-token"] = 'SOME_STRING_VALUE'
 request.body = "{\"entry_id\":[\"<ADD STRING VALUE>\"]}"
 
 response = http.request(request)

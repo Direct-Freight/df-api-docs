@@ -1,4 +1,3 @@
 HttpResponse<String> response = Unirest.post("https://www.directfreight.com/api/boards/hidden_companies")
-  .header("end-user-token", "SOME_STRING_VALUE")
   .body("{\"company_name\":\"<ADD STRING VALUE>\"}")
   .asString();

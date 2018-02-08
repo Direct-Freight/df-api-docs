@@ -3,9 +3,7 @@ var settings = {
   "crossDomain": true,
   "url": "https://www.directfreight.com/api/end_user_authentications/passwords",
   "method": "PATCH",
-  "headers": {
-    "end-user-token": "SOME_STRING_VALUE"
-  },
+  "headers": {},
   "processData": false,
   "data": "{\"new_password\":\"<ADD STRING VALUE>\",\"old_password\":\"<ADD STRING VALUE>\"}"
 }

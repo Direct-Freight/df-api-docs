@@ -4,10 +4,8 @@ var options = {
   "method": "GET",
   "hostname": "www.directfreight.com",
   "port": null,
-  "path": "/api/end_user_authentications?=SOME_STRING_VALUE",
-  "headers": {
-    "end-user-token": "SOME_STRING_VALUE"
-  }
+  "path": "/api/end_user_authentications",
+  "headers": {}
 };
 
 var req = http.request(options, function (res) {

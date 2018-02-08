@@ -11,9 +11,6 @@ curl_setopt_array($curl, array(
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "PATCH",
   CURLOPT_POSTFIELDS => "{\"body\":\"<ADD STRING VALUE>\",\"title\":\"<ADD STRING VALUE>\"}",
-  CURLOPT_HTTPHEADER => array(
-    "end-user-token: SOME_STRING_VALUE"
-  ),
 ));
 
 $response = curl_exec($curl);

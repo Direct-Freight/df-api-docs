@@ -6,10 +6,6 @@ req.query({
   "entry_id": "SOME_STRING_VALUE"
 });
 
-req.headers({
-  "end-user-token": "SOME_STRING_VALUE"
-});
-
 
 req.end(function (res) {
   if (res.error) throw new Error(res.error);

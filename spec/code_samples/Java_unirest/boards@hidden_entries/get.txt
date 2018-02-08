@@ -1,3 +1,2 @@
 HttpResponse<String> response = Unirest.get("https://www.directfreight.com/api/boards/hidden_entries?entry_id=SOME_ARRAY_VALUE")
-  .header("end-user-token", "SOME_STRING_VALUE")
   .asString();

@@ -3,9 +3,7 @@ var settings = {
   "crossDomain": true,
   "url": "https://www.directfreight.com/api/boards/hidden_entries",
   "method": "POST",
-  "headers": {
-    "end-user-token": "SOME_STRING_VALUE"
-  },
+  "headers": {},
   "processData": false
 }
 

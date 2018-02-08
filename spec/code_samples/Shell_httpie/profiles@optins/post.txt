@@ -1,2 +1,1 @@
-http POST https://www.directfreight.com/api/profiles/optins \
-  end-user-token:SOME_STRING_VALUE
+http POST https://www.directfreight.com/api/profiles/optins

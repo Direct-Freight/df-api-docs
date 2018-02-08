@@ -5,9 +5,7 @@ var options = {
   "hostname": "www.directfreight.com",
   "port": null,
   "path": "/api/boards/hidden_companies?company_id=SOME_STRING_VALUE",
-  "headers": {
-    "end-user-token": "SOME_STRING_VALUE"
-  }
+  "headers": {}
 };
 
 var req = http.request(options, function (res) {

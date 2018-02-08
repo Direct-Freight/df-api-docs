@@ -1,12 +1,9 @@
 import Foundation
 
-let headers = ["end-user-token": "SOME_STRING_VALUE"]
-
 let request = NSMutableURLRequest(url: NSURL(string: "https://www.directfreight.com/api/boards/hidden_entries")! as URL,
                                         cachePolicy: .useProtocolCachePolicy,
                                     timeoutInterval: 10.0)
 request.httpMethod = "POST"
-request.allHTTPHeaderFields = headers
 
 let session = URLSession.shared
 let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in

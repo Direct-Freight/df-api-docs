@@ -1,3 +1,2 @@
 HttpResponse<String> response = Unirest.delete("https://www.directfreight.com/api/boards/notes?note_id=SOME_STRING_VALUE")
-  .header("end-user-token", "SOME_STRING_VALUE")
   .asString();

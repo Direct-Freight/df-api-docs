@@ -1,2 +1,1 @@
-http POST https://www.directfreight.com/api/boards/hidden_entries \
-  end-user-token:SOME_STRING_VALUE
+http POST https://www.directfreight.com/api/boards/hidden_entries

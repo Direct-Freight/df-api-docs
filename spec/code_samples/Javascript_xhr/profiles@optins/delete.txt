@@ -10,6 +10,5 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("DELETE", "https://www.directfreight.com/api/profiles/optins");
-xhr.setRequestHeader("end-user-token", "SOME_STRING_VALUE");
 
 xhr.send(data);

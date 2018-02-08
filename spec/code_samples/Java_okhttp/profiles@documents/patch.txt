@@ -5,7 +5,6 @@ RequestBody body = RequestBody.create(mediaType, "{\"current_name\":\"<ADD STRIN
 Request request = new Request.Builder()
   .url("https://www.directfreight.com/api/profiles/documents")
   .patch(body)
-  .addHeader("end-user-token", "SOME_STRING_VALUE")
   .build();
 
 Response response = client.newCall(request).execute();

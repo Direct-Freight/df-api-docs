@@ -2,10 +2,6 @@ var unirest = require("unirest");
 
 var req = unirest("PATCH", "https://www.directfreight.com/api/profiles");
 
-req.headers({
-  "end-user-token": "SOME_STRING_VALUE"
-});
-
 req.type("json");
 req.send({
   "address": "<ADD STRING VALUE>",

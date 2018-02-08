@@ -3,9 +3,8 @@ open Cohttp
 open Lwt
 
 let uri = Uri.of_string "https://www.directfreight.com/api/boards/notes" in
-let headers = Header.add (Header.init ()) "end-user-token" "SOME_STRING_VALUE" in
 let body = Cohttp_lwt_body.of_string "{\"body\":\"<ADD STRING VALUE>\",\"entry_id\":0,\"title\":\"<ADD STRING VALUE>\"}" in
 
-Client.call ~headers ~body `POST uri
+Client.call ~body `POST uri
 >>= fun (res, body_stream) ->
   (* Do stuff with the result *)

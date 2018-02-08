@@ -2,9 +2,7 @@ import http.client
 
 conn = http.client.HTTPSConnection("www.directfreight.com")
 
-headers = { 'end-user-token': "SOME_STRING_VALUE" }
-
-conn.request("GET", "/api/credit_reports?credit_report_id=SOME_STRING_VALUE&format=SOME_STRING_VALUE", headers=headers)
+conn.request("GET", "/api/credit_reports?credit_report_id=SOME_STRING_VALUE&format=SOME_STRING_VALUE")
 
 res = conn.getresponse()
 data = res.read()

@@ -3,9 +3,7 @@ var settings = {
   "crossDomain": true,
   "url": "https://www.directfreight.com/api/billings",
   "method": "POST",
-  "headers": {
-    "end-user-token": "SOME_STRING_VALUE"
-  },
+  "headers": {},
   "processData": false,
   "data": "{\"billing_address\":{},\"cc_data\":{},\"check_data\":{},\"promo_code\":\"<ADD STRING VALUE>\"}"
 }

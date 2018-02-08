@@ -1,6 +1,4 @@
 #import <Foundation/Foundation.h>
-
-NSDictionary *headers = @{ @"end-user-token": @"SOME_STRING_VALUE" };
 NSDictionary *parameters = @{ @"body": @"<ADD STRING VALUE>",
                               @"entry_id": @0,
                               @"title": @"<ADD STRING VALUE>" };
@@ -11,7 +9,6 @@ NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWit
                                                        cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                    timeoutInterval:10.0];
 [request setHTTPMethod:@"POST"];
-[request setAllHTTPHeaderFields:headers];
 [request setHTTPBody:postData];
 
 NSURLSession *session = [NSURLSession sharedSession];

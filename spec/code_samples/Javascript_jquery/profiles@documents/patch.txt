@@ -3,9 +3,7 @@ var settings = {
   "crossDomain": true,
   "url": "https://www.directfreight.com/api/profiles/documents",
   "method": "PATCH",
-  "headers": {
-    "end-user-token": "SOME_STRING_VALUE"
-  },
+  "headers": {},
   "processData": false,
   "data": "{\"current_name\":\"<ADD STRING VALUE>\",\"new_name\":\"<ADD STRING VALUE>\"}"
 }

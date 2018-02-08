@@ -1,14 +1,13 @@
 require 'uri'
 require 'net/http'
 
-url = URI("https://www.directfreight.com/api/end_user_authentications?=SOME_STRING_VALUE")
+url = URI("https://www.directfreight.com/api/end_user_authentications")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 request = Net::HTTP::Delete.new(url)
-request["end-user-token"] = 'SOME_STRING_VALUE'
 
 response = http.request(request)
 puts response.read_body

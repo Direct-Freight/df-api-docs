@@ -8,11 +8,9 @@ import (
 
 func main() {
 
-	url := "https://www.directfreight.com/api/end_user_authentications?=SOME_STRING_VALUE"
+	url := "https://www.directfreight.com/api/end_user_authentications"
 
 	req, _ := http.NewRequest("GET", url, nil)
-
-	req.Header.Add("end-user-token", "SOME_STRING_VALUE")
 
 	res, _ := http.DefaultClient.Do(req)
 

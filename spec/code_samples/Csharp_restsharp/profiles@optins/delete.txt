@@ -1,4 +1,3 @@
 var client = new RestClient("https://www.directfreight.com/api/profiles/optins");
 var request = new RestRequest(Method.DELETE);
-request.AddHeader("end-user-token", "SOME_STRING_VALUE");
 IRestResponse response = client.Execute(request);

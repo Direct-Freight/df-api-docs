@@ -2,8 +2,6 @@ import requests
 
 url = "https://www.directfreight.com/api/profiles/optins"
 
-headers = {'end-user-token': 'SOME_STRING_VALUE'}
-
-response = requests.request("DELETE", url, headers=headers)
+response = requests.request("DELETE", url)
 
 print(response.text)

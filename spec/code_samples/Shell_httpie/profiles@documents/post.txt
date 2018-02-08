@@ -1,3 +1,2 @@
 echo '{"The":{}}' |  \
-  http POST https://www.directfreight.com/api/profiles/documents \
-  end-user-token:SOME_STRING_VALUE
+  http POST https://www.directfreight.com/api/profiles/documents

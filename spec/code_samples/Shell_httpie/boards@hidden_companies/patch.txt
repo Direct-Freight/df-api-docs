@@ -1,3 +1,2 @@
 echo '{"company_id":"<ADD STRING VALUE>"}' |  \
-  http PATCH https://www.directfreight.com/api/boards/hidden_companies \
-  end-user-token:SOME_STRING_VALUE
+  http PATCH https://www.directfreight.com/api/boards/hidden_companies

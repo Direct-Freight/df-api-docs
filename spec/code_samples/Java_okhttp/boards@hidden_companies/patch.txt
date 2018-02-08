@@ -5,7 +5,6 @@ RequestBody body = RequestBody.create(mediaType, "{\"company_id\":\"<ADD STRING 
 Request request = new Request.Builder()
   .url("https://www.directfreight.com/api/boards/hidden_companies")
   .patch(body)
-  .addHeader("end-user-token", "SOME_STRING_VALUE")
   .build();
 
 Response response = client.newCall(request).execute();

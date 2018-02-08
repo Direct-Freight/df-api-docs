@@ -1,2 +1,1 @@
-http DELETE 'https://www.directfreight.com/api/boards/hidden_entries?entry_id=SOME_STRING_VALUE' \
-  end-user-token:SOME_STRING_VALUE
+http DELETE 'https://www.directfreight.com/api/boards/hidden_entries?entry_id=SOME_STRING_VALUE'

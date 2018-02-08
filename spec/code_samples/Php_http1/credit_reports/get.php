@@ -9,10 +9,6 @@ $request->setQueryData(array(
   'format' => 'SOME_STRING_VALUE'
 ));
 
-$request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE'
-));
-
 try {
   $response = $request->send();
 

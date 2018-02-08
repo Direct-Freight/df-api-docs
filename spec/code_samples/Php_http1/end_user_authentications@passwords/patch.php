@@ -5,10 +5,6 @@ $request = new HttpRequest();
 $request->setUrl('https://www.directfreight.com/api/end_user_authentications/passwords');
 $request->setMethod(HttpRequest::HTTP_METH_PATCH);
 
-$request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE'
-));
-
 $request->setBody('{"new_password":"<ADD STRING VALUE>","old_password":"<ADD STRING VALUE>"}');
 
 try {

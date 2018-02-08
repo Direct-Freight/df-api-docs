@@ -1,0 +1,6 @@
+CURL *hnd = curl_easy_init();
+
+curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "DELETE");
+curl_easy_setopt(hnd, CURLOPT_URL, "https://www.directfreight.com/api/alerts/%7Blist_type%7D?alert_id=SOME_ARRAY_VALUE");
+
+CURLcode ret = curl_easy_perform(hnd);

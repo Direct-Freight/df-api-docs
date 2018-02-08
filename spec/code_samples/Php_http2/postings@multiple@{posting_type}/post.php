@@ -10,10 +10,6 @@ $request->setRequestUrl('https://www.directfreight.com/api/postings/multiple/%7B
 $request->setRequestMethod('POST');
 $request->setBody($body);
 
-$request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE'
-));
-
 $client->enqueue($request)->send();
 $response = $client->getResponse();
 

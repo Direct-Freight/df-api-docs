@@ -10,6 +10,5 @@ xhr.addEventListener("readystatechange", function () {
 });
 
 xhr.open("POST", "https://www.directfreight.com/api/boards/hidden_entries");
-xhr.setRequestHeader("end-user-token", "SOME_STRING_VALUE");
 
 xhr.send(data);

@@ -10,10 +10,6 @@ $request->setRequestUrl('https://www.directfreight.com/api/end_user_authenticati
 $request->setRequestMethod('PATCH');
 $request->setBody($body);
 
-$request->setHeaders(array(
-  'end-user-token' => 'SOME_STRING_VALUE'
-));
-
 $client->enqueue($request)->send();
 $response = $client->getResponse();
 
