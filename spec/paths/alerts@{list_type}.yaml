@@ -17,9 +17,7 @@ get:
       type: array
   responses:
     '200':
-      description: Successful response
-      schema:
-        $ref: '#/definitions/alert_list'
+      $ref: '#/responses/alerts_get'
   tags:
     - alerts
 post:
@@ -33,29 +31,11 @@ post:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/alert_parameters'
+        $ref: '#/definitions/alert'
   responses:
     '201':
-      description: Successful post operation. Returns an alert id.
+      $ref: '#/responses/alerts_post'
   summary: Create an alert.
-  tags:
-    - alerts
-delete:
-  parameters:
-    - $ref: '#/parameters/load_truck_selector'
-    - $ref: '#/parameters/end-user-token'
-    - collectionFormat: multi
-      description: Specify to just delete some alerts.
-      in: query
-      items:
-        type: string
-      name: alert_id
-      required: true
-      type: array
-  responses:
-    '204':
-      description: successful operation
-  summary: Delete an alert.
   tags:
     - alerts
 patch:
@@ -82,5 +62,23 @@ patch:
       schema:
         $ref: '#/definitions/patch_alert_response'
   summary: Update an alert.
+  tags:
+    - alerts
+delete:
+  parameters:
+    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/end-user-token'
+    - collectionFormat: multi
+      description: Specify to just delete some alerts.
+      in: query
+      items:
+        type: string
+      name: alert_id
+      required: true
+      type: array
+  responses:
+    '204':
+      description: successful operation
+  summary: Delete an alert.
   tags:
     - alerts

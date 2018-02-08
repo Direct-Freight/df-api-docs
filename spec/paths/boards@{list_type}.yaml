@@ -17,9 +17,7 @@ post:
       schema:
         $ref: '#/definitions/post_board_type_response'
     '422':
-      description: error operation
-      schema:
-        $ref: '#/definitions/post_board_type_error_response'
+      $ref: '#/responses/error_422'
   summary: Get a board.
   tags:
     - boards

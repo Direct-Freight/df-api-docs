@@ -8,9 +8,4 @@ description: >-
   and 1 search object, and 2 integer counts. One for the number of new loads,
   and one for the number of total loads that match the search critera.
 items:
-  properties:
-    alert_id:
-      type: integer
-    origin_city:
-      type: string
-  type: object
+  $ref: '#/definitions/alert'

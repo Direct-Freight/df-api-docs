@@ -1,6 +1,4 @@
-example:
-  alert_id: alert_id
+type: object
 properties:
   alert_id:
-    description: The id of the new alert entry.
-    type: string
+    type: integer

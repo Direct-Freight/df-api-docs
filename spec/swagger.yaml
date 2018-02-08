@@ -81,7 +81,15 @@ parameters:
     required: true
     type: string
 responses:
+  error_422:
+    description: Unprocessable Entity. More information provided in the return object.
+    schema:
+      $ref: '#/definitions/error_object'
+  alerts_get:
+    description: On success will return a list of alerts.
+    schema:
+      $ref: '#/definitions/alert_list'
   alerts_post:
-    description: Returns an alert_id.
+    description: On Success returns an alert_id.
     schema:
       $ref: '#/definitions/alert_id'
