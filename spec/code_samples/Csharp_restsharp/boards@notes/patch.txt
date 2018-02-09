@@ -1,4 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/boards/notes");
-var request = new RestRequest(Method.PATCH);
-request.AddParameter("undefined", "{\"body\":\"<ADD STRING VALUE>\",\"title\":\"<ADD STRING VALUE>\"}", ParameterType.RequestBody);
-IRestResponse response = client.Execute(request);

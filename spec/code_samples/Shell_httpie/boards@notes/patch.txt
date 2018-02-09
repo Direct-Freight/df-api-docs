@@ -1,2 +1,0 @@
-echo '{"body":"<ADD STRING VALUE>","title":"<ADD STRING VALUE>"}' |  \
-  http PATCH https://www.directfreight.com/api/boards/notes

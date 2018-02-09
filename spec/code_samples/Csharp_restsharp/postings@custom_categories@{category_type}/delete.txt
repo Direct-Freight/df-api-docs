@@ -1,3 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/postings/custom_categories/%7Bcategory_type%7D?category_id=SOME_ARRAY_VALUE");
-var request = new RestRequest(Method.DELETE);
-IRestResponse response = client.Execute(request);

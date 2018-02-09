@@ -1,3 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/boards/notes?entry_id=SOME_ARRAY_VALUE");
-var request = new RestRequest(Method.GET);
-IRestResponse response = client.Execute(request);

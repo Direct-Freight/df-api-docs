@@ -1,9 +1,0 @@
-open Cohttp_lwt_unix
-open Cohttp
-open Lwt
-
-let uri = Uri.of_string "https://www.directfreight.com/api/boards/%7Bboard_type%7D/%7Borigin_state%7D/%7Borigin_city%7D/%7Borigin_radius%7D/%7Bload_type%7D/%7Bdestination_state%7D/%7Bdestination_city%7D" in
-
-Client.call `GET uri
->>= fun (res, body_stream) ->
-  (* Do stuff with the result *)

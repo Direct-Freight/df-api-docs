@@ -1,5 +1,0 @@
-wget --quiet \
-  --method POST \
-  --body-data '{"email":"<ADD STRING VALUE>","end-user-token":"<ADD STRING VALUE>","password":"<ADD STRING VALUE>"}' \
-  --output-document \
-  - https://www.directfreight.com/api/end_user_authentication/users

@@ -1,7 +1,0 @@
----
-example:
-  now: now
-properties:
-  now:
-    description: The current date and time based on our server.
-    type: string

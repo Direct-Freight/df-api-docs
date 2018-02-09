@@ -1,3 +1,0 @@
-HttpResponse<String> response = Unirest.patch("https://www.directfreight.com/api/end_user_authentications/passwords")
-  .body("{\"new_password\":\"<ADD STRING VALUE>\",\"old_password\":\"<ADD STRING VALUE>\"}")
-  .asString();

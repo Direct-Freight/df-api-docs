@@ -1,13 +1,3 @@
-delete:
-  description: This logs a user out. the end-user-token will no longer be valid.
-  parameters:
-    - $ref: '#/parameters/end-user-token'
-  responses:
-    '200':
-      description: success operation
-  summary: Logs a user out.
-  tags:
-    - end_user_authentications
 get:
   parameters:
     - $ref: '#/parameters/end-user-tokenOptional'
@@ -15,29 +5,42 @@ get:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/get_end_user_authentications_response'
+        example: '{status: "Subscribed"}'
+        type: object
+        properties:
+          status:
+            type: string
+            description: >-
+              Will return the logged in user's status. Valid status's are
+              "Subscribed", "Posting", "Overdue", or "Not Logged In".
   summary: Get current authentication level for the user.
   tags:
     - end_user_authentications
 post:
   description: 'This function sends login credentials, and retrieves a stateless token.'
   parameters:
-    - description: The logged in user's token.
-      in: query
-      name: ''
-      required: true
-      type: string
     - description: ''
       in: body
       name: body
       required: true
       schema:
-        $ref: '#/definitions/login'
+        $ref: '#/definitions/login_credentials'
   responses:
     '201':
       description: successful operation
       schema:
-        $ref: '#/definitions/post_end_user_authentication_response'
+        $ref: '#/definitions/end-user-token'
+    '422':
+      $ref: '#/responses/error_422'
   summary: Logs a user in.
+  tags:
+    - end_user_authentications
+delete:
+  description: This logs a user out. the end-user-token will no longer be valid.
+  parameters:
+    - $ref: '#/parameters/end-user-token'
+  responses:
+    '204':
+      description: Will not return content on a successful logout.
   tags:
     - end_user_authentications

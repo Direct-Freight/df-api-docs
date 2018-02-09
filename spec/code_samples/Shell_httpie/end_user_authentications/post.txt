@@ -1,2 +1,0 @@
-echo '{"login":"<ADD STRING VALUE>","realm":"<ADD STRING VALUE>","secret":"<ADD STRING VALUE>"}' |  \
-  http POST 'https://www.directfreight.com/api/end_user_authentications?=SOME_STRING_VALUE'
