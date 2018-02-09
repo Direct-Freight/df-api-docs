@@ -1,3 +1,4 @@
+type: object
 properties:
   days_of_week:
     description: >-

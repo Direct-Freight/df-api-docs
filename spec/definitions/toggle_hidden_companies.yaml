@@ -1,7 +1,7 @@
----
+type: object
 properties:
   company_id:
     description: 'The company name that need to be toggled. '
     type: string
 required:
-- company_id
+  - company_id

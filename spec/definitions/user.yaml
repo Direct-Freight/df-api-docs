@@ -1,3 +1,4 @@
+type: object
 properties:
   email:
     description: 'This must be a valid e-mail. '

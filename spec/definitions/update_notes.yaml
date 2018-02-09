@@ -1,4 +1,4 @@
----
+type: object
 properties:
   body:
     description: ''
@@ -7,5 +7,5 @@ properties:
     description: 'Subject of the note. '
     type: string
 required:
-- body
-- title
+  - body
+  - title

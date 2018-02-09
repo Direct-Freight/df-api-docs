@@ -1,4 +1,4 @@
----
+type: object
 properties:
   billing_address:
     description: 'first_name, last_name, address, city, state, and phone all needed. '
@@ -16,4 +16,4 @@ properties:
     description: 'Optional Promo Code for a discount. '
     type: string
 required:
-- billing_address
+  - billing_address

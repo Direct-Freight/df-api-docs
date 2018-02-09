@@ -1,8 +1,9 @@
----
+type: object
 properties:
   days_of_week:
-    description: Limit the days that alerts are sent to the days listed. Send an array
-      of strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and 'Sat'.
+    description: >-
+      Limit the days that alerts are sent to the days listed. Send an array of
+      strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and 'Sat'.
     properties: {}
     type: object
   end_hour:
@@ -10,8 +11,9 @@ properties:
     properties: {}
     type: object
   expires_after:
-    description: The last day the alert will be valid. Valid time frames are from
-      today until one year into the future.
+    description: >-
+      The last day the alert will be valid. Valid time frames are from today
+      until one year into the future.
     properties: {}
     type: object
   list_order:
@@ -19,18 +21,20 @@ properties:
     properties: {}
     type: object
   list_type:
-    description: This specify the type of list that is returned, including disabling
-      the list from being sent at all. Valid values are 'complete-list','only-new',
+    description: >-
+      This specify the type of list that is returned, including disabling the
+      list from being sent at all. Valid values are 'complete-list','only-new',
       and 'not-active'.
     properties: {}
     type: object
   minute_frequency:
-    description: How many minutes to wait before sending another alert. Valid values
-      are '15','30','60','120','240','480', and '1440'.
+    description: >-
+      How many minutes to wait before sending another alert. Valid values are
+      '15','30','60','120','240','480', and '1440'.
     properties: {}
     type: object
   send_type:
-    description: What method to send the alert list. Valid types are 'email',or 'text'.
+    description: 'What method to send the alert list. Valid types are ''email'',or ''text''.'
     properties: {}
     type: object
   start_hour:
@@ -38,6 +42,6 @@ properties:
     properties: {}
     type: object
   time_zone:
-    description: A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST
+    description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
     properties: {}
     type: object

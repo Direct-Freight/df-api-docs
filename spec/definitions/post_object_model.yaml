@@ -1,4 +1,4 @@
----
+type: object
 properties:
   comment:
     properties: {}
@@ -22,8 +22,9 @@ properties:
     properties: {}
     type: object
   load_size:
-    description: Require for load type entries only. This field expects one of the
-      2 following terms, full or partial.
+    description: >-
+      Require for load type entries only. This field expects one of the 2
+      following terms, full or partial.
     properties: {}
     type: object
   origin_city:
@@ -31,7 +32,7 @@ properties:
     properties: {}
     type: object
   origin_state:
-    description: Required, 2 character limit.
+    description: 'Required, 2 character limit.'
     properties: {}
     type: object
   other_trailer_types:
@@ -62,8 +63,8 @@ properties:
     properties: {}
     type: object
 required:
-- origin_city
-- origin_state
-- posting_id
-- ship_date
-- trailer_type
+  - origin_city
+  - origin_state
+  - posting_id
+  - ship_date
+  - trailer_type

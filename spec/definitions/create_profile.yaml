@@ -1,4 +1,4 @@
----
+type: object
 properties:
   address:
     description: ''
@@ -46,18 +46,18 @@ properties:
     description: ''
     type: string
 required:
-- address
-- city
-- company
-- contact_extension
-- contact_name
-- contact_number
-- dot_number
-- fax_number
-- mc_number
-- mobile_carrier
-- mobile_number
-- password
-- state
-- web_page
-- zip
+  - address
+  - city
+  - company
+  - contact_extension
+  - contact_name
+  - contact_number
+  - dot_number
+  - fax_number
+  - mc_number
+  - mobile_carrier
+  - mobile_number
+  - password
+  - state
+  - web_page
+  - zip

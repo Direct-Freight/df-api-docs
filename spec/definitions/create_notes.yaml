@@ -1,4 +1,4 @@
----
+type: object
 properties:
   body:
     description: ''
@@ -10,6 +10,6 @@ properties:
     description: 'Subject of the note. '
     type: string
 required:
-- body
-- entry_id
-- title
+  - body
+  - entry_id
+  - title

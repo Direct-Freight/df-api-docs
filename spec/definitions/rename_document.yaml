@@ -1,4 +1,4 @@
----
+type: object
 properties:
   current_name:
     description: 'The document to be renamed. '
@@ -7,5 +7,5 @@ properties:
     description: 'Replacement name. '
     type: string
 required:
-- current_name
-- new_name
+  - current_name
+  - new_name

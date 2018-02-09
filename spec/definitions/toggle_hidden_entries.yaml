@@ -1,4 +1,4 @@
----
+type: object
 properties:
   entry_id:
     description: 'The entry that need to be toggled. '
@@ -6,4 +6,4 @@ properties:
       type: string
     type: array
 required:
-- entry_id
+  - entry_id
