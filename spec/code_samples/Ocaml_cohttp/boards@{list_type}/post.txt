@@ -1,0 +1,10 @@
+open Cohttp_lwt_unix
+open Cohttp
+open Lwt
+
+let uri = Uri.of_string "https://www.directfreight.com/api/boards/%7Blist_type%7D" in
+let body = Cohttp_lwt_body.of_string "{\"alert_id\":0,\"count\":false,\"sort_parameter\":\"<ADD STRING VALUE>\",\"item_count\":0,\"page_number\":0,\"origin_city\":\"<ADD STRING VALUE>\",\"origin_radius\":0,\"origin_state\":\"<ADD STRING VALUE>\",\"destination_city\":\"<ADD STRING VALUE>\",\"destination_radius\":0,\"destination_state\":[\"<ADD STRING VALUE>\"],\"load_size\":\"Full\",\"only_new\":false,\"ship_date\":[\"<ADD STRING VALUE>\"],\"trailer_type\":[\"<ADD STRING VALUE>\"]}" in
+
+Client.call ~body `POST uri
+>>= fun (res, body_stream) ->
+  (* Do stuff with the result *)

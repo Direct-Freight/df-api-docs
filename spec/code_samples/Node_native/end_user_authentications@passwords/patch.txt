@@ -1,0 +1,26 @@
+var http = require("https");
+
+var options = {
+  "method": "PATCH",
+  "hostname": "www.directfreight.com",
+  "port": null,
+  "path": "/api/end_user_authentications/passwords",
+  "headers": {}
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(JSON.stringify({ new_password: '<ADD STRING VALUE>',
+  old_password: '<ADD STRING VALUE>' }));
+req.end();

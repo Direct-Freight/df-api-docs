@@ -1,0 +1,2 @@
+echo '{"entry_id":["<ADD STRING VALUE>"]}' |  \
+  http PATCH https://www.directfreight.com/api/boards/hidden_entries

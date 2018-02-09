@@ -1,0 +1,38 @@
+var http = require("https");
+
+var options = {
+  "method": "PATCH",
+  "hostname": "www.directfreight.com",
+  "port": null,
+  "path": "/api/profiles",
+  "headers": {}
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.write(JSON.stringify({ address: '<ADD STRING VALUE>',
+  city: '<ADD STRING VALUE>',
+  company: '<ADD STRING VALUE>',
+  contact_extension: '<ADD STRING VALUE>',
+  contact_name: '<ADD STRING VALUE>',
+  contact_number: '<ADD STRING VALUE>',
+  dot_number: '<ADD STRING VALUE>',
+  fax_number: '<ADD STRING VALUE>',
+  mc_number: '<ADD STRING VALUE>',
+  mobile_carrier: 0,
+  mobile_number: '<ADD STRING VALUE>',
+  state: '<ADD STRING VALUE>',
+  web_page: '<ADD STRING VALUE>',
+  zip: '<ADD STRING VALUE>' }));
+req.end();

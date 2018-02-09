@@ -1,0 +1,4 @@
+var client = new RestClient("https://www.directfreight.com/api/boards/hidden_companies");
+var request = new RestRequest(Method.POST);
+request.AddParameter("undefined", "{\"company_name\":\"<ADD STRING VALUE>\"}", ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);

@@ -1,0 +1,14 @@
+var request = require("request");
+
+var options = { method: 'PATCH',
+  url: 'https://www.directfreight.com/api/end_user_authentications/passwords',
+  body: 
+   { new_password: '<ADD STRING VALUE>',
+     old_password: '<ADD STRING VALUE>' },
+  json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});

@@ -1,0 +1,36 @@
+#import <Foundation/Foundation.h>
+NSDictionary *parameters = @{ @"alert_id": @0,
+                              @"count": @NO,
+                              @"sort_parameter": @"<ADD STRING VALUE>",
+                              @"item_count": @0,
+                              @"page_number": @0,
+                              @"origin_city": @"<ADD STRING VALUE>",
+                              @"origin_radius": @0,
+                              @"origin_state": @"<ADD STRING VALUE>",
+                              @"destination_city": @"<ADD STRING VALUE>",
+                              @"destination_radius": @0,
+                              @"destination_state": @[ @"<ADD STRING VALUE>" ],
+                              @"load_size": @"Full",
+                              @"only_new": @NO,
+                              @"ship_date": @[ @"<ADD STRING VALUE>" ],
+                              @"trailer_type": @[ @"<ADD STRING VALUE>" ] };
+
+NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.directfreight.com/api/boards/%7Blist_type%7D"]
+                                                       cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                   timeoutInterval:10.0];
+[request setHTTPMethod:@"POST"];
+[request setHTTPBody:postData];
+
+NSURLSession *session = [NSURLSession sharedSession];
+NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                if (error) {
+                                                    NSLog(@"%@", error);
+                                                } else {
+                                                    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                    NSLog(@"%@", httpResponse);
+                                                }
+                                            }];
+[dataTask resume];

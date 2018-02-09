@@ -1,0 +1,1 @@
+http GET https://www.directfreight.com/api/end_user_authentications

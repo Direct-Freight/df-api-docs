@@ -1,0 +1,2 @@
+echo '{"company_name":"<ADD STRING VALUE>"}' |  \
+  http POST https://www.directfreight.com/api/boards/hidden_companies

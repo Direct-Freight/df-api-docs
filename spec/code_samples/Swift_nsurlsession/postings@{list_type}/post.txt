@@ -1,0 +1,40 @@
+import Foundation
+let parameters = [
+  "comment": [],
+  "custom_id": [],
+  "destination_city": [],
+  "destination_state": [],
+  "height": [],
+  "length": [],
+  "load_size": [],
+  "origin_city": [],
+  "origin_state": [],
+  "other_trailer_types": [],
+  "pay_rate": [],
+  "posting_id": 0,
+  "receive_date": [],
+  "ship_date": [],
+  "trailer_type": [],
+  "weight": [],
+  "width": []
+]
+
+let postData = NSJSONSerialization.dataWithJSONObject(parameters, options: nil, error: nil)
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://www.directfreight.com/api/postings/%7Blist_type%7D")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "POST"
+request.HTTPBody = postData
+
+let session = NSURLSession.sharedSession()
+let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+  if (error != nil) {
+    println(error)
+  } else {
+    let httpResponse = response as? NSHTTPURLResponse
+    println(httpResponse)
+  }
+})
+
+dataTask.resume()

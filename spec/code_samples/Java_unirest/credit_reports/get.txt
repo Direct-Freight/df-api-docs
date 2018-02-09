@@ -1,0 +1,2 @@
+HttpResponse<String> response = Unirest.get("https://www.directfreight.com/api/credit_reports?credit_report_id=SOME_STRING_VALUE&format=SOME_STRING_VALUE")
+  .asString();

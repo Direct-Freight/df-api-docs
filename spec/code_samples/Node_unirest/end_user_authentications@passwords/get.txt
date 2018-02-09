@@ -1,0 +1,14 @@
+var unirest = require("unirest");
+
+var req = unirest("GET", "https://www.directfreight.com/api/end_user_authentications/passwords");
+
+req.query({
+  "email": "SOME_STRING_VALUE"
+});
+
+
+req.end(function (res) {
+  if (res.error) throw new Error(res.error);
+
+  console.log(res.body);
+});

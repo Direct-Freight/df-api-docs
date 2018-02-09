@@ -1,0 +1,3 @@
+var client = new RestClient("https://www.directfreight.com/api/boards/hidden_entries");
+var request = new RestRequest(Method.POST);
+IRestResponse response = client.Execute(request);

@@ -1,0 +1,13 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/end_user_authentications",
+  "method": "POST",
+  "headers": {},
+  "processData": false,
+  "data": "{\"login\":\"<ADD STRING VALUE>\",\"realm\":\"username\",\"secret\":\"<ADD STRING VALUE>\"}"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

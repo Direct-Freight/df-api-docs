@@ -1,0 +1,2 @@
+echo '{"current_name":"<ADD STRING VALUE>","new_name":"<ADD STRING VALUE>"}' |  \
+  http PATCH https://www.directfreight.com/api/profiles/documents

@@ -1,0 +1,8 @@
+CURL *hnd = curl_easy_init();
+
+curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+curl_easy_setopt(hnd, CURLOPT_URL, "https://www.directfreight.com/api/postings/%7Blist_type%7D/%7Baction%7D");
+
+curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"source_id\":{},\"source_posting\":\"<ADD STRING VALUE>\"}");
+
+CURLcode ret = curl_easy_perform(hnd);

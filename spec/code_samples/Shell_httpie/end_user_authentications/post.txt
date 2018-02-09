@@ -1,0 +1,2 @@
+echo '{"login":"<ADD STRING VALUE>","realm":"username","secret":"<ADD STRING VALUE>"}' |  \
+  http POST https://www.directfreight.com/api/end_user_authentications

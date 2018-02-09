@@ -1,0 +1,2 @@
+echo '{"carrier_id":0}' |  \
+  http GET https://www.directfreight.com/api/profiles/mobile_carriers

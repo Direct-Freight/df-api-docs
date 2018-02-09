@@ -1,0 +1,13 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/boards/hidden_companies",
+  "method": "POST",
+  "headers": {},
+  "processData": false,
+  "data": "{\"company_name\":\"<ADD STRING VALUE>\"}"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

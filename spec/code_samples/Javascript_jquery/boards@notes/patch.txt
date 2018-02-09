@@ -1,0 +1,13 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/boards/notes",
+  "method": "PATCH",
+  "headers": {},
+  "processData": false,
+  "data": "{\"body\":\"<ADD STRING VALUE>\",\"title\":\"<ADD STRING VALUE>\"}"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

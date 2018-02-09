@@ -1,0 +1,15 @@
+var unirest = require("unirest");
+
+var req = unirest("PATCH", "https://www.directfreight.com/api/end_user_authentications/passwords");
+
+req.type("json");
+req.send({
+  "new_password": "<ADD STRING VALUE>",
+  "old_password": "<ADD STRING VALUE>"
+});
+
+req.end(function (res) {
+  if (res.error) throw new Error(res.error);
+
+  console.log(res.body);
+});

@@ -1,0 +1,8 @@
+OkHttpClient client = new OkHttpClient();
+
+Request request = new Request.Builder()
+  .url("https://www.directfreight.com/api/boards/notes?entry_id=SOME_ARRAY_VALUE")
+  .get()
+  .build();
+
+Response response = client.newCall(request).execute();

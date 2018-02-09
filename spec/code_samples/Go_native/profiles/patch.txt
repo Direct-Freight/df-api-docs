@@ -1,0 +1,26 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://www.directfreight.com/api/profiles"
+
+	payload := strings.NewReader("{\"address\":\"<ADD STRING VALUE>\",\"city\":\"<ADD STRING VALUE>\",\"company\":\"<ADD STRING VALUE>\",\"contact_extension\":\"<ADD STRING VALUE>\",\"contact_name\":\"<ADD STRING VALUE>\",\"contact_number\":\"<ADD STRING VALUE>\",\"dot_number\":\"<ADD STRING VALUE>\",\"fax_number\":\"<ADD STRING VALUE>\",\"mc_number\":\"<ADD STRING VALUE>\",\"mobile_carrier\":0,\"mobile_number\":\"<ADD STRING VALUE>\",\"state\":\"<ADD STRING VALUE>\",\"web_page\":\"<ADD STRING VALUE>\",\"zip\":\"<ADD STRING VALUE>\"}")
+
+	req, _ := http.NewRequest("PATCH", url, payload)
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+
+}

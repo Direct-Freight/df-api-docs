@@ -1,0 +1,14 @@
+var unirest = require("unirest");
+
+var req = unirest("GET", "https://www.directfreight.com/api/billings");
+
+req.query({
+  "promo_code": "SOME_STRING_VALUE"
+});
+
+
+req.end(function (res) {
+  if (res.error) throw new Error(res.error);
+
+  console.log(res.body);
+});

@@ -1,0 +1,11 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/validations/email_exists?email=SOME_STRING_VALUE",
+  "method": "GET",
+  "headers": {}
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

@@ -1,0 +1,2 @@
+HttpResponse<String> response = Unirest.delete("https://www.directfreight.com/api/postings/custom_categories/%7Bcategory_type%7D?category_id=SOME_ARRAY_VALUE")
+  .asString();

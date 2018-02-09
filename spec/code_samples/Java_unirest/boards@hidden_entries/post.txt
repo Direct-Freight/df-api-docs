@@ -1,0 +1,2 @@
+HttpResponse<String> response = Unirest.post("https://www.directfreight.com/api/boards/hidden_entries")
+  .asString();

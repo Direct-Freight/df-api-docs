@@ -1,0 +1,3 @@
+curl --request POST \
+  --url https://www.directfreight.com/api/end_user_authentication/users \
+  --data '{"email":"<ADD STRING VALUE>","password":"<ADD STRING VALUE>"}'

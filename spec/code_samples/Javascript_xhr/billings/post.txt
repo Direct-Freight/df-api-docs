@@ -1,0 +1,19 @@
+var data = JSON.stringify({
+  "billing_address": {},
+  "cc_data": {},
+  "check_data": {},
+  "promo_code": "<ADD STRING VALUE>"
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://www.directfreight.com/api/billings");
+
+xhr.send(data);

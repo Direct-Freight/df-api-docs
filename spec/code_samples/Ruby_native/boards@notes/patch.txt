@@ -1,0 +1,14 @@
+require 'uri'
+require 'net/http'
+
+url = URI("https://www.directfreight.com/api/boards/notes")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Patch.new(url)
+request.body = "{\"body\":\"<ADD STRING VALUE>\",\"title\":\"<ADD STRING VALUE>\"}"
+
+response = http.request(request)
+puts response.read_body

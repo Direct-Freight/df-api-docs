@@ -1,0 +1,10 @@
+OkHttpClient client = new OkHttpClient();
+
+MediaType mediaType = MediaType.parse("application/json");
+RequestBody body = RequestBody.create(mediaType, "{\"carrier_id\":0}");
+Request request = new Request.Builder()
+  .url("https://www.directfreight.com/api/profiles/mobile_carriers")
+  .get()
+  .build();
+
+Response response = client.newCall(request).execute();

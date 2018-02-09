@@ -1,0 +1,38 @@
+import Foundation
+let parameters = [
+  "address": "<ADD STRING VALUE>",
+  "city": "<ADD STRING VALUE>",
+  "company": "<ADD STRING VALUE>",
+  "contact_extension": "<ADD STRING VALUE>",
+  "contact_name": "<ADD STRING VALUE>",
+  "contact_number": "<ADD STRING VALUE>",
+  "dot_number": "<ADD STRING VALUE>",
+  "fax_number": "<ADD STRING VALUE>",
+  "mc_number": "<ADD STRING VALUE>",
+  "mobile_carrier": 0,
+  "mobile_number": "<ADD STRING VALUE>",
+  "password": "<ADD STRING VALUE>",
+  "state": "<ADD STRING VALUE>",
+  "web_page": "<ADD STRING VALUE>",
+  "zip": "<ADD STRING VALUE>"
+]
+
+let postData = NSJSONSerialization.dataWithJSONObject(parameters, options: nil, error: nil)
+
+var request = NSMutableURLRequest(URL: NSURL(string: "https://www.directfreight.com/api/profiles")!,
+                                        cachePolicy: .UseProtocolCachePolicy,
+                                    timeoutInterval: 10.0)
+request.HTTPMethod = "POST"
+request.HTTPBody = postData
+
+let session = NSURLSession.sharedSession()
+let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+  if (error != nil) {
+    println(error)
+  } else {
+    let httpResponse = response as? NSHTTPURLResponse
+    println(httpResponse)
+  }
+})
+
+dataTask.resume()

@@ -1,0 +1,13 @@
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://www.directfreight.com/api/profiles/mobile_carriers",
+  "method": "GET",
+  "headers": {},
+  "processData": false,
+  "data": "{\"carrier_id\":0}"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});

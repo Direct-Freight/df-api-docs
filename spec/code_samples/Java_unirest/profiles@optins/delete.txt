@@ -1,0 +1,2 @@
+HttpResponse<String> response = Unirest.delete("https://www.directfreight.com/api/profiles/optins")
+  .asString();

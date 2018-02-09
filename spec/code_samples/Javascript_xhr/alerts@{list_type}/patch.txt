@@ -1,0 +1,24 @@
+var data = JSON.stringify({
+  "days_of_week": {},
+  "end_hour": {},
+  "expires_after": {},
+  "list_order": {},
+  "list_type": {},
+  "minute_frequency": {},
+  "send_type": {},
+  "start_hour": {},
+  "time_zone": {}
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("PATCH", "https://www.directfreight.com/api/alerts/%7Blist_type%7D?alert_id=SOME_STRING_VALUE");
+
+xhr.send(data);

@@ -1,0 +1,8 @@
+CURL *hnd = curl_easy_init();
+
+curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+curl_easy_setopt(hnd, CURLOPT_URL, "https://www.directfreight.com/api/boards/notes");
+
+curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"body\":\"<ADD STRING VALUE>\",\"title\":\"<ADD STRING VALUE>\"}");
+
+CURLcode ret = curl_easy_perform(hnd);

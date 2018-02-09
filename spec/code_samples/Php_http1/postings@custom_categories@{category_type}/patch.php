@@ -1,0 +1,14 @@
+<?php
+
+HttpRequest::methodRegister('PATCH');
+$request = new HttpRequest();
+$request->setUrl('https://www.directfreight.com/api/postings/custom_categories/%7Bcategory_type%7D');
+$request->setMethod(HttpRequest::HTTP_METH_PATCH);
+
+try {
+  $response = $request->send();
+
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
+}

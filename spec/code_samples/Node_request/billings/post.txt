@@ -1,0 +1,16 @@
+var request = require("request");
+
+var options = { method: 'POST',
+  url: 'https://www.directfreight.com/api/billings',
+  body: 
+   { billing_address: {},
+     cc_data: {},
+     check_data: {},
+     promo_code: '<ADD STRING VALUE>' },
+  json: true };
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  console.log(body);
+});

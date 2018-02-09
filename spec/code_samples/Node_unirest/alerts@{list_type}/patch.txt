@@ -1,0 +1,26 @@
+var unirest = require("unirest");
+
+var req = unirest("PATCH", "https://www.directfreight.com/api/alerts/%7Blist_type%7D");
+
+req.query({
+  "alert_id": "SOME_STRING_VALUE"
+});
+
+req.type("json");
+req.send({
+  "days_of_week": {},
+  "end_hour": {},
+  "expires_after": {},
+  "list_order": {},
+  "list_type": {},
+  "minute_frequency": {},
+  "send_type": {},
+  "start_hour": {},
+  "time_zone": {}
+});
+
+req.end(function (res) {
+  if (res.error) throw new Error(res.error);
+
+  console.log(res.body);
+});

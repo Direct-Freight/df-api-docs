@@ -1,0 +1,17 @@
+var data = JSON.stringify({
+  "current_name": "<ADD STRING VALUE>",
+  "new_name": "<ADD STRING VALUE>"
+});
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = true;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === this.DONE) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("PATCH", "https://www.directfreight.com/api/profiles/documents");
+
+xhr.send(data);
