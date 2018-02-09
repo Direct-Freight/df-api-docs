@@ -1,7 +1,6 @@
 #!/usr/bin/node
 'use strict'
 var fs = require('fs')
-var sleep = require('sleep')
 var mkdirp = require('mkdirp')
 var stringifyObject = require('stringify-object');
 var SwaggerSnippet = require('swagger-snippet')
