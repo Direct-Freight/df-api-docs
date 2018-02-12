@@ -11,16 +11,20 @@ get:
     - in: query
       name: destination_city
       required: true
-      type: string
+      type: array
+      items:
+        type: string
     - in: query
       name: destination_state
       required: true
-      type: string
+      type: array
+      items:
+        type: string
   responses:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/get_location_ distance_response'
+        $ref: '#/definitions/get_location_distance_response'
   summary: >-
     Get the distance between 2 locations. This is used to calculate dead head
     miles.
