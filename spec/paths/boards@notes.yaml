@@ -9,8 +9,6 @@ delete:
   responses:
     '204':
       description: successful operation
-      schema:
-        $ref: '#/definitions/delete_boards_notes_response'
   summary: Delete a note.
   tags:
     - boards
@@ -42,10 +40,8 @@ patch:
       schema:
         $ref: '#/definitions/update_notes'
   responses:
-    '200':
+    '204':
       description: successful operation
-      schema:
-        $ref: '#/definitions/patch_boards_notes_response'
   summary: Update a note.
   tags:
     - boards
@@ -59,9 +55,7 @@ post:
         $ref: '#/definitions/create_notes'
   responses:
     '201':
-      description: successful operation
-      schema:
-        $ref: '#/definitions/post_boards_notes_response'
+      $ref: '#/responses/object_created'
   summary: Create a new note.
   tags:
     - boards

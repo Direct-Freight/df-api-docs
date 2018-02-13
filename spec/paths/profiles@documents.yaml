@@ -2,7 +2,7 @@ delete:
   parameters:
     - $ref: '#/parameters/end-user-token'
   responses:
-    '200':
+    '204':
       description: success operation
   summary: Delete the document.
   tags:
@@ -26,7 +26,7 @@ patch:
       schema:
         $ref: '#/definitions/rename_document'
   responses:
-    '200':
+    '204':
       description: success
   summary: Rename a document.
   tags:
@@ -41,9 +41,7 @@ post:
         $ref: '#/definitions/upload_document'
   responses:
     '201':
-      description: successful operation
-      schema:
-        $ref: '#/definitions/success_success_response'
+      $ref: '#/responses/object_created'
   summary: Upload a new document.
   tags:
     - profiles

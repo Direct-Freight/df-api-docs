@@ -1,7 +1,0 @@
----
-example:
-  company_name: company_name
-properties:
-  company_name:
-    description: A subset of companies that need to be marked as hidden.
-    type: string

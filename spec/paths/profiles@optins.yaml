@@ -22,10 +22,8 @@ patch:
   parameters:
     - $ref: '#/parameters/end-user-token'
   responses:
-    '201':
+    '204':
       description: successful operation
-      schema:
-        $ref: '#/definitions/success_success_response'
   summary: Marks the profile as opted in.
   tags:
     - profiles

@@ -1,61 +1,46 @@
----
 example:
-  address: '{}'
-  city: '{}'
-  company: company
-  contact_extension: '{}'
-  contact_name: '{}'
-  contact_number: '{}'
-  dot_number: '{}'
-  fax_number: '{}'
-  mc_number: '{}'
-  mobile_carrier: '{}'
-  mobile_number: '{}'
-  state: '{}'
-  web_page: '{}'
-  zip: '{}'
+  address: P.O. Box 131
+  city: Chillicothe
+  company: Direct Freight
+  contact_extension: x333
+  contact_name: Joe Doe
+  contact_number: 555-555-5555
+  dot_number: 123456
+  fax_number: 555-555-5555
+  mc_number: 123456
+  mobile_carrier: Company_X
+  mobile_number: 555-555-1234
+  state: MO
+  web_page: 'http://www.directfreight.com'
+  zip: 55555
 properties:
   address:
     description: The address associated with their entries.
-    properties: {}
-    type: object
+    type: string
   city:
-    properties: {}
-    type: object
+    type: string
   company:
-    description: Company name.
     type: string
   contact_extension:
-    properties: {}
-    type: object
+    type: string
   contact_name:
     description: Contact name.
-    properties: {}
-    type: object
+    type: string
   contact_number:
-    properties: {}
-    type: object
+    type: string
   dot_number:
-    properties: {}
-    type: object
+    type: string
   fax_number:
-    properties: {}
-    type: object
+    type: string
   mc_number:
-    properties: {}
-    type: object
+    type: string
   mobile_carrier:
-    properties: {}
-    type: object
+    type: string
   mobile_number:
-    properties: {}
-    type: object
+    type: string
   state:
-    properties: {}
-    type: object
+    type: string
   web_page:
-    properties: {}
-    type: object
+    type: string
   zip:
-    properties: {}
-    type: object
+    type: string

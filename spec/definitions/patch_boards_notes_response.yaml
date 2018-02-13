@@ -1,8 +1,0 @@
----
-example:
-  entry_id: 0
-properties:
-  entry_id:
-    description: A hash with the updated value.
-    format: int32
-    type: integer

@@ -1,7 +1,0 @@
----
-example:
-  This: true
-properties:
-  This:
-    description: will not return any content.
-    type: boolean
