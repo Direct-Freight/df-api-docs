@@ -31,9 +31,11 @@ properties:
     type: integer
   origin_state:
     description: >-
-      If it is an array of strings, we assume a multi state search, and ignore
-      origin_city. 
-    type: string
+      If multiple states are entered the city field will be ignored, and a multi
+      state search will be performed.
+    items:
+      type: string
+    type: array
   destination_city:
     description: 'Must be at least 2 characters. '
     example: chicago
@@ -45,8 +47,8 @@ properties:
     type: integer
   destination_state:
     description: >-
-      If it is an array of strings, we assume a multi state search, and ignore
-      destination_city. 
+      If multiple states are entered the city field will be ignored, and a multi
+      state search will be performed.
     items:
       type: string
     type: array
