@@ -1,4 +1,4 @@
 type: object
 properties:
-  alert_id:
+  success:
     type: integer

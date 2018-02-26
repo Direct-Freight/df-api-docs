@@ -10,18 +10,17 @@ get:
   tags:
     - profiles
 patch:
+  description: Please send in at least one field to be updated.
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
-      required: true
+      required: false
       schema:
         $ref: '#/definitions/patch_profile'
   responses:
-    '200':
+    '204':
       description: successful operation
-      schema:
-        $ref: '#/definitions/profile_model'
   summary: Update profile information.
   tags:
     - profiles
@@ -34,10 +33,8 @@ post:
       schema:
         $ref: '#/definitions/create_profile'
   responses:
-    '200':
-      description: successful operation
-      schema:
-        $ref: '#/definitions/success_success_response'
+    '201':
+      $ref: '#/responses/object_created'
   summary: Create a new profile.
   tags:
     - profiles

@@ -1,7 +1,0 @@
----
-example:
-  success: success
-properties:
-  success:
-    description: HTTP 204 code with a blank body.
-    type: string
