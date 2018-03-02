@@ -167,42 +167,6 @@ paths:
           description: "Object created check the headers for a reference URL."
           schema:
             $ref: "#/definitions/post_status"
-  /boards/{list_type}:
-    post:
-      tags:
-      - "boards"
-      summary: "Get a board."
-      description: "This is the primary search method."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/board_search"
-      responses:
-        200:
-          description: "Returns a list matching your search."
-          schema:
-            $ref: "#/definitions/board"
-        422:
-          description: "Unprocessable Entity. More information provided in the return\
-            \ object."
-          schema:
-            $ref: "#/definitions/error_object"
-    parameters:
-    - name: "list_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"loads\", and \"trucks\"."
-      enum:
-      - "loads"
-      - "trucks"
   /boards/{list_type}/state_list:
     get:
       tags:
@@ -1160,6 +1124,44 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/get_email_exists_response"
+  /boards/{list_type}#test:
+    post:
+      tags:
+      - "boards"
+      summary: "Get a board."
+      description: "This is the primary search method."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/board_search"
+      responses:
+        200:
+          description: "Returns a list matching your search."
+          schema:
+            $ref: "#/definitions/board"
+        422:
+          description: "Unprocessable Entity. More information provided in the return\
+            \ object."
+          schema:
+            $ref: "#/definitions/error_object"
+    parameters:
+    - name: "list_type"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Valid types are \"loads\", and \"trucks\"."
+      enum:
+      - "loads"
+      - "trucks"
+    x-restlet:
+      section: "BOARDS"
 securityDefinitions:
   api_key:
     description: "This token needs to be sent as a HTTP header argument in every request\
@@ -1980,3 +1982,6 @@ definitions:
       password:
         type: "string"
         description: "Currently this is a 6-10 digit alphanumeric password. "
+x-restlet:
+  sections:
+    BOARDS: {}
