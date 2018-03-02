@@ -187,83 +187,6 @@ paths:
       enum:
       - "loads"
       - "trucks"
-  /boards/hidden_companies:
-    get:
-      tags:
-      - "boards"
-      summary: "Get a list of companies that should be hidden."
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "company_name"
-        in: "query"
-        required: true
-        type: "array"
-        description: "A list of id's to check if any should be visually hidden."
-        items:
-          type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_hidden_companies_response"
-    post:
-      tags:
-      - "boards"
-      summary: "Mark a set of companies as hidden."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/mark_hidden_companies"
-      responses:
-        201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/post_status"
-    delete:
-      tags:
-      - "boards"
-      summary: "Mark a company as not hidden."
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "company_id"
-        in: "query"
-        required: true
-        type: "string"
-        description: "The company that need to be marked as not hidden."
-      responses:
-        204:
-          description: "successful operation"
-    patch:
-      tags:
-      - "boards"
-      summary: "Toggle one or more company between hidden and unhidden."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/toggle_hidden_companies"
-      responses:
-        204:
-          description: "successful operation"
   /boards/hidden_entries:
     get:
       tags:
@@ -1162,6 +1085,85 @@ paths:
       - "trucks"
     x-restlet:
       section: "BOARDS"
+  /boards/hidden_companies:
+    get:
+      tags:
+      - "boards"
+      summary: "Get a list of companies that should be hidden."
+      parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "company_name"
+        in: "query"
+        required: true
+        type: "array"
+        description: "A list of id's to check if any should be visually hidden."
+        items:
+          type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/get_hidden_companies_response"
+    post:
+      tags:
+      - "boards"
+      summary: "Mark a set of companies as hidden."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/mark_hidden_companies"
+      responses:
+        201:
+          description: "Object created check the headers for a reference URL."
+          schema:
+            $ref: "#/definitions/post_status"
+    delete:
+      tags:
+      - "boards"
+      summary: "Mark a company as not hidden."
+      parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "company_id"
+        in: "query"
+        required: true
+        type: "string"
+        description: "The company that need to be marked as not hidden."
+      responses:
+        204:
+          description: "successful operation"
+    patch:
+      tags:
+      - "boards"
+      summary: "Toggle one or more company between hidden and unhidden."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/toggle_hidden_companies"
+      responses:
+        204:
+          description: "successful operation"
+    x-restlet:
+      section: "BOARDS"
 securityDefinitions:
   api_key:
     description: "This token needs to be sent as a HTTP header argument in every request\
@@ -1280,75 +1282,6 @@ definitions:
       promo_code:
         type: "string"
         description: "Optional Promo Code for a discount. "
-  board_search:
-    type: "object"
-    properties:
-      alert_id:
-        type: "integer"
-        description: "By specifying an alert_id we will record the loads seen by this\
-          \ user, and associate it with their alert. "
-        example: 5555
-      count:
-        type: "boolean"
-        description: "If included this will return a total count instead of a list. "
-      sort_parameter:
-        type: "string"
-        description: "Use almost any one of the columns of a returned board."
-      item_count:
-        type: "integer"
-        description: "This is how many board objects will be returned in the search.\
-          \ By default it will return 50 items per page. Max is 100, minimum is 1. "
-      page_number:
-        type: "integer"
-        description: "The page you want to get. Will return an empty board on an invalid\
-          \ page."
-      origin_city:
-        type: "string"
-        description: "Must be at least 3 characters. "
-        example: "chillicothe"
-      origin_radius:
-        type: "integer"
-        description: "If both city and state, it will search for all entries within\
-          \ # Miles of the city. "
-      origin_state:
-        type: "array"
-        description: "If multiple states are entered the city field will be ignored,\
-          \ and a multi state search will be performed."
-        items:
-          type: "string"
-      destination_city:
-        type: "string"
-        description: "Must be at least 2 characters. "
-        example: "chicago"
-      destination_radius:
-        type: "integer"
-        description: "If both city and state are specified, it will search for all\
-          \ entries within # Miles of the city. "
-      destination_state:
-        type: "array"
-        description: "If multiple states are entered the city field will be ignored,\
-          \ and a multi state search will be performed."
-        items:
-          type: "string"
-      load_size:
-        type: "string"
-        description: "This is only valid on load boards. Valid values are \"Full\"\
-          \ and \"Partial\"\". "
-        default: "Full"
-      only_new:
-        type: "boolean"
-        description: "This will only return unseen results. This requires an alert_id\
-          \ to be specified. "
-      ship_date:
-        type: "array"
-        description: "Limit the board to only show loads with X ship date. "
-        items:
-          type: "string"
-      trailer_type:
-        type: "array"
-        description: "A string array of valid trailer types to limit the search. "
-        items:
-          type: "string"
   board:
     type: "object"
     properties:
@@ -1982,6 +1915,77 @@ definitions:
       password:
         type: "string"
         description: "Currently this is a 6-10 digit alphanumeric password. "
+  board_search:
+    type: "object"
+    properties:
+      alert_id:
+        type: "integer"
+        description: "By specifying an alert_id we will record the loads seen by this\
+          \ user, and associate it with their alert. "
+        example: 5555
+      count:
+        type: "boolean"
+        description: "If included this will return a total count instead of a list. "
+      sort_parameter:
+        type: "string"
+        description: "Use almost any one of the columns of a returned board."
+      item_count:
+        type: "integer"
+        description: "This is how many board objects will be returned in the search.\
+          \ By default it will return 50 items per page. Max is 100, minimum is 1. "
+      page_number:
+        type: "integer"
+        description: "The page you want to get. Will return an empty board on an invalid\
+          \ page."
+      origin_city:
+        type: "string"
+        description: "Must be at least 3 characters. "
+        example: "chillicothe"
+      origin_radius:
+        type: "integer"
+        description: "If both city and state, it will search for all entries within\
+          \ # Miles of the city. "
+      origin_state:
+        type: "array"
+        description: "If multiple states are entered the city field will be ignored,\
+          \ and a multi state search will be performed."
+        items:
+          type: "string"
+      destination_city:
+        type: "string"
+        description: "Must be at least 2 characters. "
+        example: "chicago"
+      destination_radius:
+        type: "integer"
+        description: "If both city and state are specified, it will search for all\
+          \ entries within # Miles of the city. "
+      destination_state:
+        type: "array"
+        description: "If multiple states are entered the city field will be ignored,\
+          \ and a multi state search will be performed."
+        items:
+          type: "string"
+      load_size:
+        type: "string"
+        description: "This is only valid on load boards. Valid values are \"Full\"\
+          \ and \"Partial\"\". "
+        default: "Full"
+      only_new:
+        type: "boolean"
+        description: "This will only return unseen results. This requires an alert_id\
+          \ to be specified. "
+      ship_date:
+        type: "array"
+        description: "Limit the board to only show loads with X ship date. "
+        items:
+          type: "string"
+      trailer_type:
+        type: "array"
+        description: "A string array of valid trailer types to limit the search. "
+        items:
+          type: "string"
+    x-restlet:
+      section: "BOARDS"
 x-restlet:
   sections:
     BOARDS: {}
