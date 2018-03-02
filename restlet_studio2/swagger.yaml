@@ -1124,7 +1124,7 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/get_email_exists_response"
-  /boards/{list_type}#test:
+  /boards/{list_type}#test42:
     post:
       tags:
       - "boards"
