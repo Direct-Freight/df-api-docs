@@ -30,6 +30,10 @@ paths:
       summary: "Get a list of alerts. You can optionally limit the list by specifcying\
         \ alerts by their alert_id."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "alert_id"
         in: "query"
         required: false
@@ -38,10 +42,6 @@ paths:
           \ specified as a query string parameter."
         items:
           type: "integer"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "On success will return a list of alerts."
@@ -56,7 +56,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -74,6 +74,10 @@ paths:
       - "alerts"
       summary: "Delete an alert."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "alert_id"
         in: "query"
         required: true
@@ -81,10 +85,6 @@ paths:
         description: "Specify to just delete some alerts."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -96,15 +96,15 @@ paths:
         \ the alert has been created."
       consumes: []
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "alert_id"
         in: "query"
         required: true
         type: "string"
         description: "Specify which alert you are updating."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -132,15 +132,15 @@ paths:
       description: "Will return how much the end user will be charged to upgrade.\
         \ It will not charge the user, or consume the promo code."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "promo_code"
         in: "query"
         required: false
         type: "string"
         description: "The promo code. "
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -154,7 +154,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -229,6 +229,10 @@ paths:
       - "boards"
       summary: "Get a list of companies that should be hidden."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "company_name"
         in: "query"
         required: true
@@ -236,10 +240,6 @@ paths:
         description: "A list of id's to check if any should be visually hidden."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -252,7 +252,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -270,15 +270,15 @@ paths:
       - "boards"
       summary: "Mark a company as not hidden."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "company_id"
         in: "query"
         required: true
         type: "string"
         description: "The company that need to be marked as not hidden."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -289,7 +289,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -306,6 +306,10 @@ paths:
       - "boards"
       summary: "Get a list of entries that should be hidden."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "entry_id"
         in: "query"
         required: true
@@ -313,10 +317,6 @@ paths:
         description: "A list of id's to check if any should be visually hidden."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -329,7 +329,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -347,15 +347,15 @@ paths:
       - "boards"
       summary: "Mark a set of entries as not hidden."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "entry_id"
         in: "query"
         required: true
         type: "string"
         description: "The entry that need to be marked as not hidden. "
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -366,7 +366,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -383,6 +383,10 @@ paths:
       - "boards"
       summary: "Get notes that this user has written."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "entry_id"
         in: "query"
         required: false
@@ -391,10 +395,6 @@ paths:
           \ with them. "
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -407,7 +407,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -425,15 +425,15 @@ paths:
       - "boards"
       summary: "Delete a note."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "note_id"
         in: "query"
         required: true
         type: "string"
         description: "The entry to associate the note with. "
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -444,7 +444,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -461,6 +461,10 @@ paths:
       - "credit_reports"
       summary: "Request access to a credit report."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "credit_report_id"
         in: "query"
         required: true
@@ -471,10 +475,6 @@ paths:
         required: true
         type: "string"
         description: "Return format. Currently only supports html and json."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -552,7 +552,7 @@ paths:
       description: "This logs a user out. the end-user-token will no longer be valid."
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -603,7 +603,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -709,6 +709,10 @@ paths:
       - "postings"
       summary: "Get posts by this user."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "posting_id"
         in: "query"
         required: false
@@ -716,10 +720,6 @@ paths:
         description: "To just return information about some postings."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -732,7 +732,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -750,6 +750,10 @@ paths:
       - "postings"
       summary: "Remove one or more postings."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "posting_id"
         in: "query"
         required: true
@@ -757,10 +761,6 @@ paths:
         description: "You must specify which entry to remove."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "success operation"
@@ -771,7 +771,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -804,7 +804,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -842,6 +842,10 @@ paths:
       - "postings"
       summary: "Get a list of custom columns, or custom_column data."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "category_id"
         in: "query"
         required: false
@@ -849,10 +853,6 @@ paths:
         description: "To just return information about some postings."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -865,7 +865,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -883,6 +883,10 @@ paths:
       - "postings"
       summary: "Delete some or all custom columns, or custom_column data."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "category_id"
         in: "query"
         required: false
@@ -890,10 +894,6 @@ paths:
         description: "To just delete information about some postings."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "200 OK"
@@ -904,7 +904,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -929,7 +929,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -963,7 +963,7 @@ paths:
       summary: "Request the logged in user's profile."
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -978,7 +978,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -999,7 +999,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -1018,7 +1018,7 @@ paths:
       description: "Retrieve documents"
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -1031,7 +1031,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -1050,7 +1050,7 @@ paths:
       summary: "Delete the document."
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -1063,7 +1063,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       - name: "body"
@@ -1093,7 +1093,7 @@ paths:
       summary: "Check if the profile has opted to being contacted by text."
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -1107,7 +1107,7 @@ paths:
       summary: "Create, and send an Optin Code."
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -1121,7 +1121,7 @@ paths:
       summary: "Marks the profile as opted out."
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -1133,7 +1133,7 @@ paths:
       summary: "Marks the profile as opted in."
       parameters:
       - name: "end-user-token"
-        in: "header"
+        in: "query"
         required: true
         type: "string"
       responses:
@@ -1145,16 +1145,16 @@ paths:
       - "validations"
       summary: "Check if an e-mail exists."
       parameters:
+      - name: "end-user-token"
+        in: "query"
+        required: true
+        type: "string"
       - name: "email"
         in: "query"
         required: true
         type: "string"
         description: "Enter an e-mail to see if it is available. Can be used as ?email=xxx\
           \ or as a JSON request."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
