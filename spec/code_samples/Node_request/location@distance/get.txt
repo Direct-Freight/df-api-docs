@@ -5,8 +5,8 @@ var options = { method: 'GET',
   qs: 
    { origin_city: 'SOME_STRING_VALUE',
      origin_state: 'SOME_STRING_VALUE',
-     destination_city: 'SOME_STRING_VALUE',
-     destination_state: 'SOME_STRING_VALUE' } };
+     destination_city: 'SOME_ARRAY_VALUE',
+     destination_state: 'SOME_ARRAY_VALUE' } };
 
 request(options, function (error, response, body) {
   if (error) throw new Error(error);

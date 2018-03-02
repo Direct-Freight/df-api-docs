@@ -8,8 +8,8 @@ $request->setRequestMethod('GET');
 $request->setQuery(new http\QueryString(array(
   'origin_city' => 'SOME_STRING_VALUE',
   'origin_state' => 'SOME_STRING_VALUE',
-  'destination_city' => 'SOME_STRING_VALUE',
-  'destination_state' => 'SOME_STRING_VALUE'
+  'destination_city' => 'SOME_ARRAY_VALUE',
+  'destination_state' => 'SOME_ARRAY_VALUE'
 )));
 
 $client->enqueue($request)->send();

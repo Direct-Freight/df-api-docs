@@ -7,8 +7,8 @@ $request->setMethod(HTTP_METH_GET);
 $request->setQueryData(array(
   'origin_city' => 'SOME_STRING_VALUE',
   'origin_state' => 'SOME_STRING_VALUE',
-  'destination_city' => 'SOME_STRING_VALUE',
-  'destination_state' => 'SOME_STRING_VALUE'
+  'destination_city' => 'SOME_ARRAY_VALUE',
+  'destination_state' => 'SOME_ARRAY_VALUE'
 ));
 
 try {
