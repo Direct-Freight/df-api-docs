@@ -4,7 +4,16 @@ var fs = require('fs')
 var mkdirp = require('mkdirp')
 var stringifyObject = require('stringify-object');
 var SwaggerSnippet = require('swagger-snippet')
-
+if(process.argv[2] == "up_to_date") //first command line argument
+        {
+        console.log("generating code samples based on ../web_deploy/swagger.json");
+        }
+else
+        {
+        console.log("please don't call me directly.  please run 'npm run generate-code-samples' instead to make sure swagger.json is up to date.");
+        process.exit();
+        console.log("should have exited");
+        }
 var SwaggerFile = require('../web_deploy/swagger.json')
 
 //var result = SwaggerSnippet.getEndpointSnippets(SwaggerFile, '/boards/{board_type}', 'post' ,['shell_wget','shell_curl'])
@@ -61,5 +70,3 @@ results.forEach(function(result)
                 });
         })
 
-console.log("WARNING:  this uses the web_deploy directory which is in .gitignore so make sure to run 'npm start'")
-console.log("WARNING:  before using this program to make sure your full swagger.yaml is up to date.")
