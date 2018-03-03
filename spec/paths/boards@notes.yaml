@@ -28,7 +28,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/get_boards_notes_response'
-  summary: Get notes that this user has written.
+  summary: Get notes that this user has written. HIDE=TEST
   tags:
     - boards
 patch:

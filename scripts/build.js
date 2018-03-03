@@ -12,6 +12,9 @@ cp('-R', 'web/*', 'web_deploy/');
 console.log("generating code samples");
 exec('npm run generate-code-samples');
 
+console.log("generating code samples");
+exec('npm run hide-items');
+
 console.log("bundling json/yaml");
 exec('npm run swagger bundle --        -o web_deploy/swagger.json');
 exec('npm run swagger bundle -- --yaml -o web_deploy/swagger.yaml');

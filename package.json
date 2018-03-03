@@ -28,6 +28,7 @@
     "deploy": "npm run build && deploy-to-gh-pages --update web_deploy",
     "build": "node ./scripts/build.js",
     "generate-code-samples": "node ./scripts/generate-code-samples.js",
+    "hide-items": "node ./scripts/hide-items.js",
     "swagger": "swagger-repo",
     "test": "swagger-repo validate",
     "start": "gulp serve",
