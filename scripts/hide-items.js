@@ -4,8 +4,11 @@ require('shelljs/global');
 var fs = require('fs');
 var YAML = require('js-yaml');
 
-//first regenerate combined file to ensure it is up to date.
-exec('swagger-repo bundle -y -o ./web_deploy/swagger.yaml'); //this wants a single dot
+if(process.argv[2] != 'skip-regenerate')
+        {
+        console.log("first regenerate combined file to ensure it is up to date");
+        exec('swagger-repo bundle -y -o ./web_deploy/swagger.yaml'); //this wants a single dot
+        }
 
 //now load that file
 var swagger = YAML.safeLoad(fs.readFileSync('web_deploy/swagger.yaml', 'utf-8'));
