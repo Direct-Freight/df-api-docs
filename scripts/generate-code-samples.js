@@ -2,7 +2,6 @@
 'use strict'
 require('shelljs/global');
 var fs = require('fs')
-var mkdirp = require('mkdirp')
 var stringifyObject = require('stringify-object');
 var SwaggerSnippet = require('swagger-snippet')
 //first regenerate combined file to ensure it is up to date.
@@ -54,11 +53,13 @@ results.forEach(function(result)
                 if(lang.substring(0,6) == 'Python') { ext = '.py'; }
                 if(lang.substring(0,3) == 'Php') { ext = '.php'; }
                 var dir = 'spec/code_samples/' + lang + '/' + path + '/';
-                mkdirp(dir);
+                mkdir('-p',dir);
                 fs.writeFile(dir + result.method.toLowerCase() + ext,snippet.content, (err) => {
                         if (err) 
                                 {
                                 console.log('ERROR WRITING: ' + dir + result.method.toLowerCase() + ext);
+                                console.log(err);
+                                console.log(process.cwd());
                                 }
                         });
                 });
