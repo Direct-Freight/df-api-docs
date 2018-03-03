@@ -1,20 +1,14 @@
 #!/usr/bin/node
 'use strict'
+require('shelljs/global');
 var fs = require('fs')
 var mkdirp = require('mkdirp')
 var stringifyObject = require('stringify-object');
 var SwaggerSnippet = require('swagger-snippet')
-if(process.argv[2] == "up_to_date") //first command line argument
-        {
-        console.log("generating code samples based on ../web_deploy/swagger.json");
-        }
-else
-        {
-        console.log("please don't call me directly.  please run 'npm run generate-code-samples' instead to make sure swagger.json is up to date.");
-        process.exit();
-        console.log("should have exited");
-        }
-var SwaggerFile = require('../web_deploy/swagger.json')
+//first regenerate combined file to ensure it is up to date.
+exec('swagger-repo bundle -o ./web_deploy/swagger.json'); //this wants a single dot
+//now load that file
+var SwaggerFile = require('../web_deploy/swagger.json'); //this wants a double dot
 
 //var result = SwaggerSnippet.getEndpointSnippets(SwaggerFile, '/boards/{board_type}', 'post' ,['shell_wget','shell_curl'])
 var results = SwaggerSnippet.getSwaggerSnippets(SwaggerFile,
