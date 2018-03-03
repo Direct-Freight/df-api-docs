@@ -29,7 +29,7 @@
     "build": "node ./scripts/build.js",
     "generate-code-samples": "swagger-repo bundle -o web_deploy/swagger.json && node ./scripts/generate-code-samples.js up_to_date",
     "swagger": "swagger-repo",
-    "test": "npm run generate-code-samples && swagger-repo validate",
+    "test": "swagger-repo validate",
     "start": "gulp serve",
     "deploy-branch": "node ./scripts/deploy-branch.js"
   }
