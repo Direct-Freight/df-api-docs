@@ -1,2 +1,0 @@
-HttpResponse<String> response = Unirest.get("https://www.directfreight.com/api/billings?promo_code=SOME_STRING_VALUE")
-  .asString();

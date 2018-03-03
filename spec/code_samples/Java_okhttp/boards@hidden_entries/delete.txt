@@ -1,8 +1,0 @@
-OkHttpClient client = new OkHttpClient();
-
-Request request = new Request.Builder()
-  .url("https://www.directfreight.com/api/boards/hidden_entries?entry_id=SOME_STRING_VALUE")
-  .delete(null)
-  .build();
-
-Response response = client.newCall(request).execute();

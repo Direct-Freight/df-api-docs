@@ -1,8 +1,0 @@
-OkHttpClient client = new OkHttpClient();
-
-Request request = new Request.Builder()
-  .url("https://www.directfreight.com/api/end_user_authentications/passwords?email=SOME_STRING_VALUE")
-  .get()
-  .build();
-
-Response response = client.newCall(request).execute();

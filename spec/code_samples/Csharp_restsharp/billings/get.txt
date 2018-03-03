@@ -1,3 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/billings?promo_code=SOME_STRING_VALUE");
-var request = new RestRequest(Method.GET);
-IRestResponse response = client.Execute(request);

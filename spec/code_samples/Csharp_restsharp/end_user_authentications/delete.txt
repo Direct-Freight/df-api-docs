@@ -1,3 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/end_user_authentications");
-var request = new RestRequest(Method.DELETE);
-IRestResponse response = client.Execute(request);

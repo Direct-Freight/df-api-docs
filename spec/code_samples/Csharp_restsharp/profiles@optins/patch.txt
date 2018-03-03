@@ -1,3 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/profiles/optins");
-var request = new RestRequest(Method.PATCH);
-IRestResponse response = client.Execute(request);

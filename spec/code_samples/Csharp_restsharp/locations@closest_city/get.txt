@@ -1,3 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/locations/closest_city?latitude=SOME_NUMBER_VALUE&longitude=SOME_NUMBER_VALUE");
-var request = new RestRequest(Method.GET);
-IRestResponse response = client.Execute(request);

@@ -1,3 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/validations/email_exists?email=SOME_STRING_VALUE");
-var request = new RestRequest(Method.GET);
-IRestResponse response = client.Execute(request);

@@ -1,2 +1,0 @@
-echo '{"The":{}}' |  \
-  http POST https://www.directfreight.com/api/profiles/documents

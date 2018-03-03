@@ -1,4 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/postings/multiple/%7Blist_type%7D");
-var request = new RestRequest(Method.POST);
-request.AddParameter("undefined", "{\"contact_fax\":\"<ADD STRING VALUE>\",\"contact_name\":\"<ADD STRING VALUE>\",\"contact_phone\":\"<ADD STRING VALUE>\",\"delete_current_before_posting\":false,\"list\":[\"<ADD STRING VALUE>\"]}", ParameterType.RequestBody);
-IRestResponse response = client.Execute(request);

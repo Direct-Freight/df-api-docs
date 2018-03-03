@@ -1,4 +1,0 @@
-var client = new RestClient("https://www.directfreight.com/api/profiles/documents");
-var request = new RestRequest(Method.POST);
-request.AddParameter("undefined", "{\"The\":{}}", ParameterType.RequestBody);
-IRestResponse response = client.Execute(request);
