@@ -14,3 +14,5 @@ properties:
   promo_code:
     type: string
     description: 'Optional Promo Code for a discount. '
+x-restlet:
+  section: BILLINGS
