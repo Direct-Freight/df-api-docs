@@ -1,7 +1,7 @@
----
-example:
-  status: status
+type: object
 properties:
   status:
-    description: A text status like OPTIN, NORESPONSE, OPTOUT.
     type: string
+    description: 'A text status like OPTIN, NORESPONSE, OPTOUT.'
+example:
+  status: status
