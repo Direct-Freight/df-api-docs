@@ -1,8 +1,7 @@
----
-example:
-  success: true
+type: object
 properties:
   success:
-    description: This will return true, and have a unique location in the location
-      header.
     type: boolean
+    description: 'This will return true, and have a unique location in the location header.'
+example:
+  success: true
