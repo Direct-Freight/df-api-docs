@@ -26,5 +26,10 @@ sed('-i', 'http://petstore.swagger.io/v2/swagger.json', '../swagger.json', 'web_
 mkdir('-p', 'web_deploy/unhide')
 cp('-R', 'web_deploy/*', 'web_deploy/unhide/');
 
+mkdir('-p', 'web_deploy/restlet_studio')
+cp('-R', 'restlet_studio/*', 'web_deploy/restlet_studio');
+
 console.log("hiding items from public view");
 exec('npm run hide-items skip-regenerate');
+
+

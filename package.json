@@ -32,6 +32,8 @@
     "swagger": "swagger-repo",
     "test": "swagger-repo validate",
     "start": "gulp serve",
-    "deploy-branch": "node ./scripts/deploy-branch.js"
+    "deploy-branch": "node ./scripts/deploy-branch.js",
+    "swagger2repo": "swagger-repo sync-with-swagger web_deploy/swagger.json",
+    "repo2swagger": "swagger-repo bundle -y -o web_deploy/swagger.yaml && swagger-repo bundle -o web_deploy/swagger.json"
   }
 }
