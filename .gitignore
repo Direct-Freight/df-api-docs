@@ -1,6 +1,9 @@
 # Dir for API portal deploy
 web_deploy
 
+# Dir for code_samples
+code_samples
+
 # Logs
 logs
 *.log
