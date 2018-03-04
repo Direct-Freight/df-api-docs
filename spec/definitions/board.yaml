@@ -13,8 +13,12 @@ properties:
     type: integer
     format: int32
     description: 'A count of the # of pages based on the search parameters.'
-example:
-  list: '{}'
-  page_number: '{}'
-  total_items: '{}'
-  total_pages: 0
+example: |-
+  {
+    "list": "{}",
+    "page_number": "{}",
+    "total_items": "{}",
+    "total_pages": 0
+  }
+x-restlet:
+  section: BOARDS
