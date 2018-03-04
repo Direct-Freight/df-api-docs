@@ -394,7 +394,7 @@ paths:
     get:
       tags:
       - "boards"
-      summary: "Get notes that this user has written. HIDE=TEST"
+      summary: "Get notes that this user has written. HIDE=TRUE"
       parameters:
       - name: "entry_id"
         in: "query"
