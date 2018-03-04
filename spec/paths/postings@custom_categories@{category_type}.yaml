@@ -52,9 +52,6 @@ patch:
       required: true
       type: string
     - $ref: '#/parameters/end-user-token'
-    - in: body
-      name: body
-      required: true
   responses:
     '204':
       description: successful operation
@@ -69,9 +66,6 @@ post:
       required: true
       type: string
     - $ref: '#/parameters/end-user-token'
-    - in: body
-      name: body
-      required: true
   responses:
     '201':
       $ref: '#/responses/object_created'

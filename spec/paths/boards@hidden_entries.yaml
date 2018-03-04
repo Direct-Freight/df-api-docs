@@ -15,14 +15,13 @@ delete:
 get:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - collectionFormat: multi
+    - name: entry_id
       description: A list of id's to check if any should be visually hidden.
       in: query
-      items:
-        type: string
-      name: entry_id
       required: true
       type: array
+      items:
+        type: string
   responses:
     '200':
       description: successful operation
@@ -48,11 +47,13 @@ patch:
 post:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - description: 'The entry that need to be marked as hidden. '
-      in: body
-      name: entry_id
+    - name: entry_id
+      description: 'The entry that need to be marked as hidden. '
+      in: query
       required: true
-      type: string
+      type: array
+      items:
+        type: string
   responses:
     '201':
       $ref: '#/responses/object_created'
