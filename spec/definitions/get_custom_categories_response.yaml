@@ -1,11 +1,11 @@
----
-example:
-  categories:
-  - categories
-  - categories
+type: object
 properties:
   categories:
-    description: A list of each category, type and it's corresponding position.
+    type: array
+    description: 'A list of each category, type and it''s corresponding position.'
     items:
       type: string
-    type: array
+example:
+  categories:
+    - categories
+    - categories
