@@ -187,12 +187,12 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/board_search"
+          $ref: "#/definitions/board_request"
       responses:
         200:
           description: "Returns a list matching your search."
           schema:
-            $ref: "#/definitions/board"
+            $ref: "#/definitions/board_response"
         422:
           description: "Unprocessable Entity. More information provided in the return\
             \ object."
@@ -1211,14 +1211,6 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
-  alert_list:
-    type: "array"
-    description: "A hash containing a list of objects. Each entry should have 1 alert\
-      \ object, and 1 search object, and 2 integer counts. One for the number of new\
-      \ loads, and one for the number of total loads that match the search critera."
-    items:
-      $ref: "#/definitions/alert"
-    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
   end-user-token:
     type: "object"
     properties:
@@ -1243,34 +1235,6 @@ definitions:
       code: 1
       error: "Generic Validation"
       description: "The e-mail address must be valid."
-  get_billing_response:
-    type: "object"
-    properties:
-      amount:
-        type: "integer"
-        format: "int32"
-        description: "Amount How much the user will be charged. This may be 0."
-      promo_conditions:
-        type: "object"
-        description: "Any extra text relating to the promo code. For example \"15\
-          \ Day Free. 34.95 charged after that.\""
-    example:
-      amount: 0
-      promo_conditions: "{}"
-  get_boards_notes_response:
-    type: "object"
-    properties:
-      entry_id:
-        type: "array"
-        description: "A hash with each entry id as the name, and a note_object as\
-          \ the value."
-        items:
-          type: "string"
-    description: ""
-    example:
-      entry_id:
-      - "entry_id"
-      - "entry_id"
   get_closest_city_response:
     type: "object"
     properties:
@@ -1685,18 +1649,6 @@ definitions:
         description: "The entry that need to be toggled. "
         items:
           type: "string"
-  update_notes:
-    type: "object"
-    required:
-    - "body"
-    - "title"
-    properties:
-      body:
-        type: "string"
-        description: ""
-      title:
-        type: "string"
-        description: "Subject of the note. "
   upload_document:
     type: "object"
     required:
@@ -1801,6 +1753,16 @@ definitions:
             type: "string"
     x-restlet:
       section: "ALERTS"
+  alert_list:
+    type: "array"
+    description: "A hash containing a list of objects. Each entry should have 1 alert\
+      \ object, and 1 search object, and 2 integer counts. One for the number of new\
+      \ loads, and one for the number of total loads that match the search critera."
+    items:
+      $ref: "#/definitions/alert"
+    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
+    x-restlet:
+      section: "ALERTS"
   bill_user:
     type: "object"
     required:
@@ -1820,7 +1782,21 @@ definitions:
         description: "Optional Promo Code for a discount. "
     x-restlet:
       section: "BILLINGS"
-  board_search:
+  get_billing_response:
+    type: "object"
+    properties:
+      amount:
+        type: "integer"
+        format: "int32"
+        description: "Amount How much the user will be charged. This may be 0."
+      promo_conditions:
+        type: "object"
+        description: "Any extra text relating to the promo code. For example \"15\
+          \ Day Free. 34.95 charged after that.\""
+    example: "{\n  \"amount\": 0,\n  \"promo_conditions\": \"{}\"\n}"
+    x-restlet:
+      section: "BILLINGS"
+  board_request:
     type: "object"
     properties:
       alert_id:
@@ -1891,7 +1867,7 @@ definitions:
           type: "string"
     x-restlet:
       section: "BOARDS"
-  board:
+  board_response:
     type: "object"
     properties:
       list:
@@ -1923,6 +1899,31 @@ definitions:
       entry_id:
         type: "integer"
         description: "The entry to associate the note with. "
+      title:
+        type: "string"
+        description: "Subject of the note. "
+    x-restlet:
+      section: "BOARDS"
+  get_boards_notes_response:
+    type: "object"
+    properties:
+      entry_id:
+        type: "array"
+        description: "A hash with each entry id as the name, and a note_object as\
+          \ the value."
+        items:
+          type: "string"
+    example: "{\n  \"entry_id\": [\n    \"entry_id\",\n    \"entry_id\"\n  ]\n}"
+    x-restlet:
+      section: "BOARDS"
+  update_notes:
+    type: "object"
+    required:
+    - "body"
+    - "title"
+    properties:
+      body:
+        type: "string"
       title:
         type: "string"
         description: "Subject of the note. "
