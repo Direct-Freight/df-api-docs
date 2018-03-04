@@ -91,3 +91,14 @@ responses:
     description: Object created check the headers for a reference URL.
     schema:
       $ref: '#/definitions/post_status'
+x-restlet:
+  sections:
+    ALERTS: {}
+    BILLINGS: {}
+    BOARDS: {}
+    CREDIT_REPORTS: {}
+    END_USER_AUTHENTICATIONS: {}
+    LOCATIONS: {}
+    POSTINGS: {}
+    PROFILES: {}
+    VALIDATIONS: {}
