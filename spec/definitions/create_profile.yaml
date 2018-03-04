@@ -1,50 +1,4 @@
 type: object
-properties:
-  address:
-    description: ''
-    type: string
-  city:
-    description: ''
-    type: string
-  company:
-    description: 'Company name. '
-    type: string
-  contact_extension:
-    description: ''
-    type: string
-  contact_name:
-    description: 'Contact name. '
-    type: string
-  contact_number:
-    description: ''
-    type: string
-  dot_number:
-    description: ''
-    type: string
-  fax_number:
-    description: ''
-    type: string
-  mc_number:
-    description: ''
-    type: string
-  mobile_carrier:
-    description: ''
-    type: integer
-  mobile_number:
-    description: ''
-    type: string
-  password:
-    description: 'Needed to set up the user/pass for authentication. '
-    type: string
-  state:
-    description: ''
-    type: string
-  web_page:
-    description: ''
-    type: string
-  zip:
-    description: ''
-    type: string
 required:
   - address
   - city
@@ -61,3 +15,39 @@ required:
   - state
   - web_page
   - zip
+properties:
+  address:
+    type: string
+  city:
+    type: string
+  company:
+    type: string
+    description: 'Company name. '
+  contact_extension:
+    type: string
+  contact_name:
+    type: string
+    description: 'Contact name. '
+  contact_number:
+    type: string
+  dot_number:
+    type: string
+  fax_number:
+    type: string
+  mc_number:
+    type: string
+  mobile_carrier:
+    type: integer
+  mobile_number:
+    type: string
+  password:
+    type: string
+    description: 'Needed to set up the user/pass for authentication. '
+  state:
+    type: string
+  web_page:
+    type: string
+  zip:
+    type: string
+x-restlet:
+  section: PROFILES
