@@ -1,14 +1,12 @@
----
-example:
-  city: city
-  state_abbreviation: '{}'
-  state_name: '{}'
+type: object
 properties:
   city:
     type: string
   state_abbreviation:
-    properties: {}
     type: object
   state_name:
-    properties: {}
     type: object
+example:
+  city: city
+  state_abbreviation: '{}'
+  state_name: '{}'
