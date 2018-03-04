@@ -1,17 +1,16 @@
 type: object
+required:
+  - source_id
+  - source_posting
 properties:
   source_id:
+    type: object
     description: >-
       The posting id of the posting you are moving or copying. Optional for
       create.
-    properties: {}
-    type: object
   source_posting:
+    type: string
     description: >-
       The posting_type where you are moving or copying the posting from.
       Optional for create. Items can only be moved to like types. loads ->
       private_private loads.
-    type: string
-required:
-  - source_id
-  - source_posting
