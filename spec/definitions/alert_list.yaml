@@ -1,7 +1,3 @@
-example:
-  data:
-    - '{}'
-    - '{}'
 type: array
 description: >-
   A hash containing a list of objects. Each entry should have 1 alert object,
@@ -9,3 +5,10 @@ description: >-
   and one for the number of total loads that match the search critera.
 items:
   $ref: '#/definitions/alert'
+example: |-
+  {
+    "data": [
+      "{}",
+      "{}"
+    ]
+  }
