@@ -105,7 +105,7 @@ paths:
       - "billings"
       summary: "Returns the amount the end user will be charged. If a promo code is\
         \ present return adjusted amount. If there are special conditions a string\
-        \ with the promo code benefits will also be returned."
+        \ with the promo code benefits will also be returned.  HIDE=TRUE"
       description: "Will return how much the end user will be charged to upgrade.\
         \ It will not charge the user, or consume the promo code."
       parameters:
