@@ -1,15 +1,16 @@
 type: object
-properties:
-  body:
-    description: ''
-    type: string
-  entry_id:
-    description: 'The entry to associate the note with. '
-    type: integer
-  title:
-    description: 'Subject of the note. '
-    type: string
 required:
   - body
   - entry_id
   - title
+properties:
+  body:
+    type: string
+  entry_id:
+    type: integer
+    description: 'The entry to associate the note with. '
+  title:
+    type: string
+    description: 'Subject of the note. '
+x-restlet:
+  section: BOARDS
