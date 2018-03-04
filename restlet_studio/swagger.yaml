@@ -24,29 +24,6 @@ security:
 - api_key: []
 paths:
   /alerts/{list_type}:
-    get:
-      tags:
-      - "alerts"
-      summary: "Get a list of alerts. You can optionally limit the list by specifcying\
-        \ alerts by their alert_id."
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "alert_id"
-        in: "query"
-        required: false
-        type: "array"
-        description: "only get a subset of alerts. As this is a get request this is\
-          \ specified as a query string parameter."
-        items:
-          type: "integer"
-      responses:
-        200:
-          description: "On success will return a list of alerts."
-          schema:
-            $ref: "#/definitions/alert_list"
     post:
       tags:
       - "alerts"
@@ -56,7 +33,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -74,10 +51,6 @@ paths:
       - "alerts"
       summary: "Delete an alert."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "alert_id"
         in: "query"
         required: true
@@ -85,6 +58,10 @@ paths:
         description: "Specify to just delete some alerts."
         items:
           type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -96,15 +73,15 @@ paths:
         \ the alert has been created."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "alert_id"
         in: "query"
         required: true
         type: "string"
         description: "Specify which alert you are updating."
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -132,15 +109,15 @@ paths:
       description: "Will return how much the end user will be charged to upgrade.\
         \ It will not charge the user, or consume the promo code."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "promo_code"
         in: "query"
         required: false
         type: "string"
         description: "The promo code. "
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -154,7 +131,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -167,6 +144,42 @@ paths:
           description: "Object created check the headers for a reference URL."
           schema:
             $ref: "#/definitions/post_status"
+  /boards/{list_type}:
+    post:
+      tags:
+      - "boards"
+      summary: "Get a board."
+      description: "This is the primary search method."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/board_search"
+      responses:
+        200:
+          description: "Returns a list matching your search."
+          schema:
+            $ref: "#/definitions/board"
+        422:
+          description: "Unprocessable Entity. More information provided in the return\
+            \ object."
+          schema:
+            $ref: "#/definitions/error_object"
+    parameters:
+    - name: "list_type"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Valid types are \"loads\", and \"trucks\"."
+      enum:
+      - "loads"
+      - "trucks"
   /boards/{list_type}/state_list:
     get:
       tags:
@@ -187,16 +200,89 @@ paths:
       enum:
       - "loads"
       - "trucks"
+  /boards/hidden_companies:
+    get:
+      tags:
+      - "boards"
+      summary: "Get a list of companies that should be hidden."
+      parameters:
+      - name: "company_name"
+        in: "query"
+        required: true
+        type: "array"
+        description: "A list of id's to check if any should be visually hidden."
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/get_hidden_companies_response"
+    post:
+      tags:
+      - "boards"
+      summary: "Mark a set of companies as hidden."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/mark_hidden_companies"
+      responses:
+        201:
+          description: "Object created check the headers for a reference URL."
+          schema:
+            $ref: "#/definitions/post_status"
+    delete:
+      tags:
+      - "boards"
+      summary: "Mark a company as not hidden."
+      parameters:
+      - name: "company_id"
+        in: "query"
+        required: true
+        type: "string"
+        description: "The company that need to be marked as not hidden."
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "successful operation"
+    patch:
+      tags:
+      - "boards"
+      summary: "Toggle one or more company between hidden and unhidden."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/toggle_hidden_companies"
+      responses:
+        204:
+          description: "successful operation"
   /boards/hidden_entries:
     get:
       tags:
       - "boards"
       summary: "Get a list of entries that should be hidden."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "entry_id"
         in: "query"
         required: true
@@ -204,6 +290,10 @@ paths:
         description: "A list of id's to check if any should be visually hidden."
         items:
           type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -213,17 +303,18 @@ paths:
       tags:
       - "boards"
       summary: "Mark a set of entries as hidden."
-      consumes: []
       parameters:
-      - name: "end-user-token"
+      - name: "entry_id"
         in: "query"
         required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
+        type: "array"
+        description: "The entry that need to be marked as hidden. "
+        items:
           type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         201:
           description: "Object created check the headers for a reference URL."
@@ -234,15 +325,15 @@ paths:
       - "boards"
       summary: "Mark a set of entries as not hidden."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "entry_id"
         in: "query"
         required: true
         type: "string"
         description: "The entry that need to be marked as not hidden. "
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -253,7 +344,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -265,28 +356,6 @@ paths:
         204:
           description: "successful operation"
   /boards/notes:
-    get:
-      tags:
-      - "boards"
-      summary: "Get notes that this user has written."
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "entry_id"
-        in: "query"
-        required: false
-        type: "array"
-        description: "Optionally just check if certain loads have notes associated\
-          \ with them. "
-        items:
-          type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_boards_notes_response"
     post:
       tags:
       - "boards"
@@ -294,7 +363,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -312,15 +381,15 @@ paths:
       - "boards"
       summary: "Delete a note."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "note_id"
         in: "query"
         required: true
         type: "string"
         description: "The entry to associate the note with. "
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -331,7 +400,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -348,10 +417,6 @@ paths:
       - "credit_reports"
       summary: "Request access to a credit report."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "credit_report_id"
         in: "query"
         required: true
@@ -362,6 +427,10 @@ paths:
         required: true
         type: "string"
         description: "Return format. Currently only supports html and json."
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -439,7 +508,7 @@ paths:
       description: "This logs a user out. the end-user-token will no longer be valid."
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       responses:
@@ -490,7 +559,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -596,10 +665,6 @@ paths:
       - "postings"
       summary: "Get posts by this user."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "posting_id"
         in: "query"
         required: false
@@ -607,6 +672,10 @@ paths:
         description: "To just return information about some postings."
         items:
           type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -619,7 +688,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -637,10 +706,6 @@ paths:
       - "postings"
       summary: "Remove one or more postings."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "posting_id"
         in: "query"
         required: true
@@ -648,6 +713,10 @@ paths:
         description: "You must specify which entry to remove."
         items:
           type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         204:
           description: "success operation"
@@ -658,7 +727,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -691,7 +760,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -729,10 +798,6 @@ paths:
       - "postings"
       summary: "Get a list of custom columns, or custom_column data."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "category_id"
         in: "query"
         required: false
@@ -740,6 +805,10 @@ paths:
         description: "To just return information about some postings."
         items:
           type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -749,17 +818,11 @@ paths:
       tags:
       - "postings"
       summary: "Create new category names, or add new data."
-      consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          type: "string"
       responses:
         201:
           description: "Object created check the headers for a reference URL."
@@ -770,10 +833,6 @@ paths:
       - "postings"
       summary: "Delete some or all custom columns, or custom_column data."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "category_id"
         in: "query"
         required: false
@@ -781,6 +840,10 @@ paths:
         description: "To just delete information about some postings."
         items:
           type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         204:
           description: "200 OK"
@@ -788,17 +851,11 @@ paths:
       tags:
       - "postings"
       summary: "Update a category name, or value."
-      consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          type: "string"
       responses:
         204:
           description: "successful operation"
@@ -816,7 +873,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -850,7 +907,7 @@ paths:
       summary: "Request the logged in user's profile."
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       responses:
@@ -865,7 +922,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -886,7 +943,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -905,7 +962,7 @@ paths:
       description: "Retrieve documents"
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       responses:
@@ -918,7 +975,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -937,7 +994,7 @@ paths:
       summary: "Delete the document."
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       responses:
@@ -950,7 +1007,7 @@ paths:
       consumes: []
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       - name: "body"
@@ -967,7 +1024,13 @@ paths:
       - "profiles"
       summary: "Retrieve one or more mobile carriers. "
       description: "Retrieve a list of supported carriers."
-      parameters: []
+      parameters:
+      - name: "carrier_id"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+        description: "A way to just get back the info for just one carrier."
       responses:
         200:
           description: "successful operation"
@@ -980,7 +1043,7 @@ paths:
       summary: "Check if the profile has opted to being contacted by text."
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       responses:
@@ -994,7 +1057,7 @@ paths:
       summary: "Create, and send an Optin Code."
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       responses:
@@ -1008,7 +1071,7 @@ paths:
       summary: "Marks the profile as opted out."
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       responses:
@@ -1020,7 +1083,7 @@ paths:
       summary: "Marks the profile as opted in."
       parameters:
       - name: "end-user-token"
-        in: "query"
+        in: "header"
         required: true
         type: "string"
       responses:
@@ -1032,138 +1095,21 @@ paths:
       - "validations"
       summary: "Check if an e-mail exists."
       parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
       - name: "email"
         in: "query"
         required: true
         type: "string"
         description: "Enter an e-mail to see if it is available. Can be used as ?email=xxx\
           \ or as a JSON request."
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
       responses:
         200:
           description: "successful operation"
           schema:
             $ref: "#/definitions/get_email_exists_response"
-  /boards/{list_type}#test42:
-    post:
-      tags:
-      - "boards"
-      summary: "Get a board."
-      description: "This is the primary search method."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/board_search"
-      responses:
-        200:
-          description: "Returns a list matching your search."
-          schema:
-            $ref: "#/definitions/board"
-        422:
-          description: "Unprocessable Entity. More information provided in the return\
-            \ object."
-          schema:
-            $ref: "#/definitions/error_object"
-    parameters:
-    - name: "list_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"loads\", and \"trucks\"."
-      enum:
-      - "loads"
-      - "trucks"
-    x-restlet:
-      section: "BOARDS"
-  /boards/hidden_companies:
-    get:
-      tags:
-      - "boards"
-      summary: "Get a list of companies that should be hidden."
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "company_name"
-        in: "query"
-        required: true
-        type: "array"
-        description: "A list of id's to check if any should be visually hidden."
-        items:
-          type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_hidden_companies_response"
-    post:
-      tags:
-      - "boards"
-      summary: "Mark a set of companies as hidden."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/mark_hidden_companies"
-      responses:
-        201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/post_status"
-    delete:
-      tags:
-      - "boards"
-      summary: "Mark a company as not hidden."
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "company_id"
-        in: "query"
-        required: true
-        type: "string"
-        description: "The company that need to be marked as not hidden."
-      responses:
-        204:
-          description: "successful operation"
-    patch:
-      tags:
-      - "boards"
-      summary: "Toggle one or more company between hidden and unhidden."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/toggle_hidden_companies"
-      responses:
-        204:
-          description: "successful operation"
-    x-restlet:
-      section: "BOARDS"
 securityDefinitions:
   api_key:
     description: "This token needs to be sent as a HTTP header argument in every request\
@@ -1282,6 +1228,75 @@ definitions:
       promo_code:
         type: "string"
         description: "Optional Promo Code for a discount. "
+  board_search:
+    type: "object"
+    properties:
+      alert_id:
+        type: "integer"
+        description: "By specifying an alert_id we will record the loads seen by this\
+          \ user, and associate it with their alert. "
+        example: 5555
+      count:
+        type: "boolean"
+        description: "If included this will return a total count instead of a list. "
+      sort_parameter:
+        type: "string"
+        description: "Use almost any one of the columns of a returned board."
+      item_count:
+        type: "integer"
+        description: "This is how many board objects will be returned in the search.\
+          \ By default it will return 50 items per page. Max is 100, minimum is 1. "
+      page_number:
+        type: "integer"
+        description: "The page you want to get. Will return an empty board on an invalid\
+          \ page."
+      origin_city:
+        type: "string"
+        description: "Must be at least 3 characters. "
+        example: "chillicothe"
+      origin_radius:
+        type: "integer"
+        description: "If both city and state, it will search for all entries within\
+          \ # Miles of the city. "
+      origin_state:
+        type: "array"
+        description: "If multiple states are entered the city field will be ignored,\
+          \ and a multi state search will be performed."
+        items:
+          type: "string"
+      destination_city:
+        type: "string"
+        description: "Must be at least 2 characters. "
+        example: "chicago"
+      destination_radius:
+        type: "integer"
+        description: "If both city and state are specified, it will search for all\
+          \ entries within # Miles of the city. "
+      destination_state:
+        type: "array"
+        description: "If multiple states are entered the city field will be ignored,\
+          \ and a multi state search will be performed."
+        items:
+          type: "string"
+      load_size:
+        type: "string"
+        description: "This is only valid on load boards. Valid values are \"Full\"\
+          \ and \"Partial\"\". "
+        default: "Full"
+      only_new:
+        type: "boolean"
+        description: "This will only return unseen results. This requires an alert_id\
+          \ to be specified. "
+      ship_date:
+        type: "array"
+        description: "Limit the board to only show loads with X ship date. "
+        items:
+          type: "string"
+      trailer_type:
+        type: "array"
+        description: "A string array of valid trailer types to limit the search. "
+        items:
+          type: "string"
   board:
     type: "object"
     properties:
@@ -1526,15 +1541,6 @@ definitions:
         description: "A number representing the miles between the two locations."
     example:
       distance: 0
-  get_mobile_carrier_body:
-    type: "object"
-    required:
-    - "carrier_id"
-    properties:
-      carrier_id:
-        type: "integer"
-        format: "int32"
-        description: "A way to just get back the info for just one carrier."
   get_posting_type_response:
     type: "object"
     properties:
@@ -1915,77 +1921,3 @@ definitions:
       password:
         type: "string"
         description: "Currently this is a 6-10 digit alphanumeric password. "
-  board_search:
-    type: "object"
-    properties:
-      alert_id:
-        type: "integer"
-        description: "By specifying an alert_id we will record the loads seen by this\
-          \ user, and associate it with their alert. "
-        example: 5555
-      count:
-        type: "boolean"
-        description: "If included this will return a total count instead of a list. "
-      sort_parameter:
-        type: "string"
-        description: "Use almost any one of the columns of a returned board."
-      item_count:
-        type: "integer"
-        description: "This is how many board objects will be returned in the search.\
-          \ By default it will return 50 items per page. Max is 100, minimum is 1. "
-      page_number:
-        type: "integer"
-        description: "The page you want to get. Will return an empty board on an invalid\
-          \ page."
-      origin_city:
-        type: "string"
-        description: "Must be at least 3 characters. "
-        example: "chillicothe"
-      origin_radius:
-        type: "integer"
-        description: "If both city and state, it will search for all entries within\
-          \ # Miles of the city. "
-      origin_state:
-        type: "array"
-        description: "If multiple states are entered the city field will be ignored,\
-          \ and a multi state search will be performed."
-        items:
-          type: "string"
-      destination_city:
-        type: "string"
-        description: "Must be at least 2 characters. "
-        example: "chicago"
-      destination_radius:
-        type: "integer"
-        description: "If both city and state are specified, it will search for all\
-          \ entries within # Miles of the city. "
-      destination_state:
-        type: "array"
-        description: "If multiple states are entered the city field will be ignored,\
-          \ and a multi state search will be performed."
-        items:
-          type: "string"
-      load_size:
-        type: "string"
-        description: "This is only valid on load boards. Valid values are \"Full\"\
-          \ and \"Partial\"\". "
-        default: "Full"
-      only_new:
-        type: "boolean"
-        description: "This will only return unseen results. This requires an alert_id\
-          \ to be specified. "
-      ship_date:
-        type: "array"
-        description: "Limit the board to only show loads with X ship date. "
-        items:
-          type: "string"
-      trailer_type:
-        type: "array"
-        description: "A string array of valid trailer types to limit the search. "
-        items:
-          type: "string"
-    x-restlet:
-      section: "BOARDS"
-x-restlet:
-  sections:
-    BOARDS: {}
