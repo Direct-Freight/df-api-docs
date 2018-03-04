@@ -23,6 +23,7 @@ cp('web_deploy/*.*', 'web_deploy/nocode/');
 cp('-R', 'web_deploy/swagger-ui/', 'web_deploy/nocode/swagger-ui/');
 
 console.log("generating code samples");
+mkdir('-p', 'spec/code_samples/')
 exec('npm run generate-code-samples');
 
 console.log("rebundle with the code");
