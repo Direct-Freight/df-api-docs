@@ -1,8 +1,8 @@
 type: object
-example:
-  code: 1
-  error: Generic Validation
-  description: The e-mail address must be valid.
+required:
+  - code
+  - description
+  - error
 properties:
   code:
     type: integer
@@ -10,7 +10,7 @@ properties:
     type: string
   description:
     type: string
-required:
-  - code
-  - error
-  - description
+example:
+  code: 1
+  error: Generic Validation
+  description: The e-mail address must be valid.
