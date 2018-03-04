@@ -1,8 +1,8 @@
----
-example:
-  distance: 0
+type: object
 properties:
   distance:
-    description: A number representing the miles between the two locations.
-    format: int32
     type: integer
+    format: int32
+    description: A number representing the miles between the two locations.
+example:
+  distance: 0
