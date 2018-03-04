@@ -5,8 +5,12 @@ properties:
     description: 'A hash with each entry id as the name, and a note_object as the value.'
     items:
       type: string
-description: ''
-example:
-  entry_id:
-    - entry_id
-    - entry_id
+example: |-
+  {
+    "entry_id": [
+      "entry_id",
+      "entry_id"
+    ]
+  }
+x-restlet:
+  section: BOARDS
