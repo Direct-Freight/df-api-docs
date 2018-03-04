@@ -1,22 +1,8 @@
-example:
-  address: P.O. Box 131
-  city: Chillicothe
-  company: Direct Freight
-  contact_extension: x333
-  contact_name: Joe Doe
-  contact_number: 555-555-5555
-  dot_number: 123456
-  fax_number: 555-555-5555
-  mc_number: 123456
-  mobile_carrier: Company_X
-  mobile_number: 555-555-1234
-  state: MO
-  web_page: 'http://www.directfreight.com'
-  zip: 55555
+type: object
 properties:
   address:
-    description: The address associated with their entries.
     type: string
+    description: The address associated with their entries.
   city:
     type: string
   company:
@@ -24,8 +10,8 @@ properties:
   contact_extension:
     type: string
   contact_name:
-    description: Contact name.
     type: string
+    description: Contact name.
   contact_number:
     type: string
   dot_number:
@@ -44,3 +30,18 @@ properties:
     type: string
   zip:
     type: string
+example:
+  address: P.O. Box 131
+  city: Chillicothe
+  company: Direct Freight
+  contact_extension: x333
+  contact_name: Joe Doe
+  contact_number: 555-555-5555
+  dot_number: 123456
+  fax_number: 555-555-5555
+  mc_number: 123456
+  mobile_carrier: Company_X
+  mobile_number: 555-555-1234
+  state: MO
+  web_page: 'http://www.directfreight.com'
+  zip: 55555
