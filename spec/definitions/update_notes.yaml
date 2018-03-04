@@ -1,11 +1,12 @@
 type: object
-properties:
-  body:
-    description: ''
-    type: string
-  title:
-    description: 'Subject of the note. '
-    type: string
 required:
   - body
   - title
+properties:
+  body:
+    type: string
+  title:
+    type: string
+    description: 'Subject of the note. '
+x-restlet:
+  section: BOARDS
