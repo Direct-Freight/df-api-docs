@@ -80,3 +80,5 @@ properties:
         type: integer
       load_size:
         type: string
+x-restlet:
+  section: ALERTS
