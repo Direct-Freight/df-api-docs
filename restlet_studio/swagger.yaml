@@ -1131,7 +1131,7 @@ paths:
       - "profiles"
       summary: "Check if the profile has opted to being contacted by text."
       parameters:
-      - name: "end-user-token"
+      - name: "end-user-token2"
         in: "header"
         required: true
         type: "string"
