@@ -1,11 +1,11 @@
----
-example:
-  posting_list:
-  - posting_list
-  - posting_list
+type: object
 properties:
   posting_list:
+    type: array
     description: A list of posting objects you can iterate over.
     items:
       type: string
-    type: array
+example:
+  posting_list:
+    - posting_list
+    - posting_list
