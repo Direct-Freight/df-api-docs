@@ -1,27 +1,29 @@
 type: object
+required:
+  - list
 properties:
   contact_fax:
-    description: 'By default we use the number listed in their profile. '
     type: string
+    description: 'By default we use the number listed in their profile. '
   contact_name:
+    type: string
     description: 'The dispatchers name. By default we use the profile information. '
-    type: string
   contact_phone:
-    description: 'By default we use the number listed in their profile. '
     type: string
+    description: 'By default we use the number listed in their profile. '
   delete_current_before_posting:
+    type: boolean
     description: >-
       An optional argument that will first delete all of the users loads before
       entering the fresh list. Caution, this will still delete everything even
       if some of the entries fail to be created. 
-    type: boolean
   list:
+    type: array
     description: >-
       Valid types are &quot;loads&quot;, &quot;trucks&quot;,
       &quot;private_loads&quot;, &quot;private_trucks&quot;,
       &quot;test_loads&quot;, and &quot;test_trucks&quot; 
     items:
       type: string
-    type: array
-required:
-  - list
+x-restlet:
+  section: POSTINGS
