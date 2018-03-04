@@ -19,3 +19,5 @@ post:
   summary: Get a board.
   tags:
     - boards
+x-restlet:
+  section: BOARDS

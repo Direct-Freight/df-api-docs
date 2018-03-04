@@ -12,3 +12,5 @@ get:
   summary: Gets an authoritative date_time string.
   tags:
     - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

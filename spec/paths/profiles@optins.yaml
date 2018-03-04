@@ -38,3 +38,5 @@ post:
   summary: 'Create, and send an Optin Code.'
   tags:
     - profiles
+x-restlet:
+  section: PROFILES

@@ -17,3 +17,5 @@ get:
   summary: Request access to a credit report.
   tags:
     - credit_reports
+x-restlet:
+  section: CREDIT_REPORTS

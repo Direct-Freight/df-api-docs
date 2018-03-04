@@ -38,3 +38,5 @@ post:
   summary: Create a new profile.
   tags:
     - profiles
+x-restlet:
+  section: PROFILES

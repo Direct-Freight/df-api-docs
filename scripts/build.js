@@ -16,9 +16,6 @@ exec('npm run generate-code-samples');
 exec('npm run swagger bundle --        -o web_deploy/swagger.json');
 exec('npm run swagger bundle -- --yaml -o web_deploy/swagger.yaml');
 
-console.log("now remove the code samples from filesystem");
-rm('-rf', 'spec/code_samples/*')
-
 var SWAGGER_UI_DIST = Path.dirname(require.resolve('swagger-ui'));
 cp('-R', SWAGGER_UI_DIST, 'web_deploy/swagger-ui/')
 sed('-i', 'http://petstore.swagger.io/v2/swagger.json', '../swagger.json', 'web_deploy/swagger-ui/index.html')

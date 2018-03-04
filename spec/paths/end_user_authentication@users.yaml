@@ -15,3 +15,5 @@ post:
   summary: Create a new user.
   tags:
     - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

@@ -20,3 +20,5 @@ get:
     matches.
   tags:
     - locations
+x-restlet:
+  section: LOCATIONS

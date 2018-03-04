@@ -18,3 +18,5 @@ post:
   summary: Copy or Move an posting.
   tags:
     - postings
+x-restlet:
+  section: POSTINGS

@@ -45,3 +45,5 @@ post:
   summary: Upload a new document.
   tags:
     - profiles
+x-restlet:
+  section: PROFILES

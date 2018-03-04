@@ -44,3 +44,5 @@ delete:
       description: Will not return content on a successful logout.
   tags:
     - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

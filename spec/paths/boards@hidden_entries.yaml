@@ -60,3 +60,5 @@ post:
   summary: Mark a set of entries as hidden.
   tags:
     - boards
+x-restlet:
+  section: BOARDS

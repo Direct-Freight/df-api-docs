@@ -15,3 +15,5 @@ post:
   summary: 'Create, multiple entries at once. This is a convenience method.'
   tags:
     - postings
+x-restlet:
+  section: POSTINGS

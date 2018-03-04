@@ -18,3 +18,5 @@ get:
   summary: Will return the closest city to a lat/lon point.
   tags:
     - locations
+x-restlet:
+  section: LOCATIONS

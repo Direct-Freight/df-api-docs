@@ -9,3 +9,5 @@ get:
   summary: A convenience method to get totals by state.
   tags:
     - boards
+x-restlet:
+  section: BOARDS

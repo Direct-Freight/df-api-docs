@@ -15,3 +15,5 @@ get:
   summary: 'Retrieve one or more mobile carriers. '
   tags:
     - profiles
+x-restlet:
+  section: PROFILES

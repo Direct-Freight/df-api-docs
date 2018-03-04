@@ -82,3 +82,5 @@ delete:
   summary: Delete an alert.
   tags:
     - alerts
+x-restlet:
+  section: ALERTS

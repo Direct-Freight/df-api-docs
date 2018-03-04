@@ -39,3 +39,5 @@ post:
     user. 
   tags:
     - billings
+x-restlet:
+  section: BILLINGS

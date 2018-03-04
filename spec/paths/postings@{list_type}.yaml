@@ -66,3 +66,5 @@ post:
   summary: Post an entry.
   tags:
     - postings
+x-restlet:
+  section: POSTINGS

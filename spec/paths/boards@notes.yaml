@@ -59,3 +59,5 @@ post:
   summary: Create a new note.
   tags:
     - boards
+x-restlet:
+  section: BOARDS

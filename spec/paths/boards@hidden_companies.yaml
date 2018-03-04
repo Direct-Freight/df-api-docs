@@ -59,3 +59,5 @@ post:
   summary: Mark a set of companies as hidden.
   tags:
     - boards
+x-restlet:
+  section: BOARDS
