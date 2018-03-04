@@ -2,11 +2,10 @@ get:
   description: Retrieve a list of supported carriers.
   parameters:
     - description: A way to just get back the info for just one carrier.
-      in: body
-      name: body
+      in: query
+      format: int32
+      type: integer
       required: true
-      schema:
-        $ref: '#/definitions/get_mobile_carrier_body'
   responses:
     '200':
       description: successful operation

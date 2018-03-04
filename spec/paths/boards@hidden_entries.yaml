@@ -48,11 +48,11 @@ patch:
 post:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - in: body
-      name: body
+    - description: 'The entry that need to be marked as hidden. '
+      in: body
+      name: entry_id
       required: true
-      schema:
-        $ref: '#/definitions/mark_hidden_entries'
+      type: string
   responses:
     '201':
       $ref: '#/responses/object_created'

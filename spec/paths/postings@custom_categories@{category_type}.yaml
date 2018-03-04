@@ -55,8 +55,6 @@ patch:
     - in: body
       name: body
       required: true
-      schema:
-        $ref: '#/definitions/update_cc_info'
   responses:
     '204':
       description: successful operation
@@ -74,8 +72,6 @@ post:
     - in: body
       name: body
       required: true
-      schema:
-        $ref: '#/definitions/create_cc_info'
   responses:
     '201':
       $ref: '#/responses/object_created'
