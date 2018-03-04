@@ -1211,311 +1211,6 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
-  alert_list:
-    type: "array"
-    description: "A hash containing a list of objects. Each entry should have 1 alert\
-      \ object, and 1 search object, and 2 integer counts. One for the number of new\
-      \ loads, and one for the number of total loads that match the search critera."
-    items:
-      $ref: "#/definitions/alert"
-    example:
-      data:
-      - "{}"
-      - "{}"
-  alert:
-    type: "object"
-    required:
-    - "days_of_week"
-    - "email_address"
-    - "end_hour"
-    - "expires_after"
-    - "list_order"
-    - "list_type"
-    - "minute_frequency"
-    - "search"
-    - "send_type"
-    - "start_hour"
-    - "time_zone"
-    properties:
-      days_of_week:
-        type: "object"
-        description: "Limit the days that alerts are sent to the days listed. Send\
-          \ an array of strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and\
-          \ 'Sat'."
-      email_address:
-        type: "string"
-        description: "The address for the alert."
-      end_hour:
-        type: "object"
-        description: "Has the same values as start_hour"
-      expires_after:
-        type: "object"
-        description: "The last day the alert will be valid. Valid time frames are\
-          \ from today until one year into the future."
-      list_order:
-        type: "object"
-        description: "Any value that is valid in the boards sort_order is also valid\
-          \ here."
-      list_type:
-        type: "object"
-        description: "This specify the type of list that is returned, including disabling\
-          \ the list from being sent at all. Valid values are 'complete-list','only-new',\
-          \ and 'not-active'."
-      minute_frequency:
-        type: "object"
-        description: "How many minutes to wait before sending another alert. Valid\
-          \ values are '15','30','60','120','240','480', and '1440'."
-      send_type:
-        type: "object"
-        description: "What method to send the alert list. Valid types are 'email',or\
-          \ 'text'."
-      start_hour:
-        type: "object"
-        description: "A value between 3-21 corresponding to the hour of the day."
-      time_zone:
-        type: "object"
-        description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
-      search:
-        type: "object"
-        properties:
-          search_id:
-            type: "integer"
-          search_type:
-            type: "string"
-          date_received:
-            type: "string"
-            format: "date"
-          trailers:
-            type: "string"
-          date_available:
-            type: "string"
-            format: "date"
-          origin_state:
-            type: "string"
-          origin_city:
-            type: "string"
-          origin_radius:
-            type: "integer"
-          destination_state:
-            type: "string"
-          destination_city:
-            type: "string"
-          destination_radius:
-            type: "integer"
-          load_size:
-            type: "string"
-  bill_user:
-    type: "object"
-    required:
-    - "billing_address"
-    properties:
-      billing_address:
-        type: "object"
-        description: "first_name, last_name, address, city, state, and phone all needed. "
-      cc_data:
-        type: "object"
-        description: "This is optional if a check number is provided. "
-      check_data:
-        type: "object"
-        description: "This is optional if a credit number is provided. "
-      promo_code:
-        type: "string"
-        description: "Optional Promo Code for a discount. "
-  board_search:
-    type: "object"
-    properties:
-      alert_id:
-        type: "integer"
-        description: "By specifying an alert_id we will record the loads seen by this\
-          \ user, and associate it with their alert. "
-        example: 5555
-      count:
-        type: "boolean"
-        description: "If included this will return a total count instead of a list. "
-      sort_parameter:
-        type: "string"
-        description: "Use almost any one of the columns of a returned board."
-      item_count:
-        type: "integer"
-        description: "This is how many board objects will be returned in the search.\
-          \ By default it will return 50 items per page. Max is 100, minimum is 1. "
-      page_number:
-        type: "integer"
-        description: "The page you want to get. Will return an empty board on an invalid\
-          \ page."
-      origin_city:
-        type: "string"
-        description: "Must be at least 3 characters. "
-        example: "chillicothe"
-      origin_radius:
-        type: "integer"
-        description: "If both city and state, it will search for all entries within\
-          \ # Miles of the city. "
-      origin_state:
-        type: "array"
-        description: "If multiple states are entered the city field will be ignored,\
-          \ and a multi state search will be performed."
-        items:
-          type: "string"
-      destination_city:
-        type: "string"
-        description: "Must be at least 2 characters. "
-        example: "chicago"
-      destination_radius:
-        type: "integer"
-        description: "If both city and state are specified, it will search for all\
-          \ entries within # Miles of the city. "
-      destination_state:
-        type: "array"
-        description: "If multiple states are entered the city field will be ignored,\
-          \ and a multi state search will be performed."
-        items:
-          type: "string"
-      load_size:
-        type: "string"
-        description: "This is only valid on load boards. Valid values are \"Full\"\
-          \ and \"Partial\"\". "
-        default: "Full"
-      only_new:
-        type: "boolean"
-        description: "This will only return unseen results. This requires an alert_id\
-          \ to be specified. "
-      ship_date:
-        type: "array"
-        description: "Limit the board to only show loads with X ship date. "
-        items:
-          type: "string"
-      trailer_type:
-        type: "array"
-        description: "A string array of valid trailer types to limit the search. "
-        items:
-          type: "string"
-  board:
-    type: "object"
-    properties:
-      list:
-        type: "object"
-        description: "A list of entries for this board."
-      page_number:
-        type: "object"
-        description: "The page you are on."
-      total_items:
-        type: "object"
-        description: "A count of all the entry objects for the specified search."
-      total_pages:
-        type: "integer"
-        format: "int32"
-        description: "A count of the # of pages based on the search parameters."
-    example:
-      list: "{}"
-      page_number: "{}"
-      total_items: "{}"
-      total_pages: 0
-  create_multiple_postings:
-    type: "object"
-    required:
-    - "list"
-    properties:
-      contact_fax:
-        type: "string"
-        description: "By default we use the number listed in their profile. "
-      contact_name:
-        type: "string"
-        description: "The dispatchers name. By default we use the profile information. "
-      contact_phone:
-        type: "string"
-        description: "By default we use the number listed in their profile. "
-      delete_current_before_posting:
-        type: "boolean"
-        description: "An optional argument that will first delete all of the users\
-          \ loads before entering the fresh list. Caution, this will still delete\
-          \ everything even if some of the entries fail to be created. "
-      list:
-        type: "array"
-        description: "Valid types are &quot;loads&quot;, &quot;trucks&quot;, &quot;private_loads&quot;,\
-          \ &quot;private_trucks&quot;, &quot;test_loads&quot;, and &quot;test_trucks&quot; "
-        items:
-          type: "string"
-  create_notes:
-    type: "object"
-    required:
-    - "body"
-    - "entry_id"
-    - "title"
-    properties:
-      body:
-        type: "string"
-        description: ""
-      entry_id:
-        type: "integer"
-        description: "The entry to associate the note with. "
-      title:
-        type: "string"
-        description: "Subject of the note. "
-  create_profile:
-    type: "object"
-    required:
-    - "address"
-    - "city"
-    - "company"
-    - "contact_extension"
-    - "contact_name"
-    - "contact_number"
-    - "dot_number"
-    - "fax_number"
-    - "mc_number"
-    - "mobile_carrier"
-    - "mobile_number"
-    - "password"
-    - "state"
-    - "web_page"
-    - "zip"
-    properties:
-      address:
-        type: "string"
-        description: ""
-      city:
-        type: "string"
-        description: ""
-      company:
-        type: "string"
-        description: "Company name. "
-      contact_extension:
-        type: "string"
-        description: ""
-      contact_name:
-        type: "string"
-        description: "Contact name. "
-      contact_number:
-        type: "string"
-        description: ""
-      dot_number:
-        type: "string"
-        description: ""
-      fax_number:
-        type: "string"
-        description: ""
-      mc_number:
-        type: "string"
-        description: ""
-      mobile_carrier:
-        type: "integer"
-        description: ""
-      mobile_number:
-        type: "string"
-        description: ""
-      password:
-        type: "string"
-        description: "Needed to set up the user/pass for authentication. "
-      state:
-        type: "string"
-        description: ""
-      web_page:
-        type: "string"
-        description: ""
-      zip:
-        type: "string"
-        description: ""
   end-user-token:
     type: "object"
     properties:
@@ -2014,6 +1709,308 @@ definitions:
       password:
         type: "string"
         description: "Currently this is a 6-10 digit alphanumeric password. "
+  alert_list:
+    type: "array"
+    description: "A hash containing a list of objects. Each entry should have 1 alert\
+      \ object, and 1 search object, and 2 integer counts. One for the number of new\
+      \ loads, and one for the number of total loads that match the search critera."
+    items:
+      $ref: "#/definitions/alert"
+    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
+    x-restlet:
+      section: "ALERTS"
+  alert:
+    type: "object"
+    required:
+    - "days_of_week"
+    - "email_address"
+    - "end_hour"
+    - "expires_after"
+    - "list_order"
+    - "list_type"
+    - "minute_frequency"
+    - "search"
+    - "send_type"
+    - "start_hour"
+    - "time_zone"
+    properties:
+      days_of_week:
+        type: "object"
+        description: "Limit the days that alerts are sent to the days listed. Send\
+          \ an array of strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and\
+          \ 'Sat'."
+      email_address:
+        type: "string"
+        description: "The address for the alert."
+      end_hour:
+        type: "object"
+        description: "Has the same values as start_hour"
+      expires_after:
+        type: "object"
+        description: "The last day the alert will be valid. Valid time frames are\
+          \ from today until one year into the future."
+      list_order:
+        type: "object"
+        description: "Any value that is valid in the boards sort_order is also valid\
+          \ here."
+      list_type:
+        type: "object"
+        description: "This specify the type of list that is returned, including disabling\
+          \ the list from being sent at all. Valid values are 'complete-list','only-new',\
+          \ and 'not-active'."
+      minute_frequency:
+        type: "object"
+        description: "How many minutes to wait before sending another alert. Valid\
+          \ values are '15','30','60','120','240','480', and '1440'."
+      send_type:
+        type: "object"
+        description: "What method to send the alert list. Valid types are 'email',or\
+          \ 'text'."
+      start_hour:
+        type: "object"
+        description: "A value between 3-21 corresponding to the hour of the day."
+      time_zone:
+        type: "object"
+        description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
+      search:
+        type: "object"
+        properties:
+          search_id:
+            type: "integer"
+          search_type:
+            type: "string"
+          date_received:
+            type: "string"
+            format: "date"
+          trailers:
+            type: "string"
+          date_available:
+            type: "string"
+            format: "date"
+          origin_state:
+            type: "string"
+          origin_city:
+            type: "string"
+          origin_radius:
+            type: "integer"
+          destination_state:
+            type: "string"
+          destination_city:
+            type: "string"
+          destination_radius:
+            type: "integer"
+          load_size:
+            type: "string"
+    x-restlet:
+      section: "ALERTS"
+  bill_user:
+    type: "object"
+    required:
+    - "billing_address"
+    properties:
+      billing_address:
+        type: "object"
+        description: "first_name, last_name, address, city, state, and phone all needed. "
+      cc_data:
+        type: "object"
+        description: "This is optional if a check number is provided. "
+      check_data:
+        type: "object"
+        description: "This is optional if a credit number is provided. "
+      promo_code:
+        type: "string"
+        description: "Optional Promo Code for a discount. "
+    x-restlet:
+      section: "BILLINGS"
+  board_search:
+    type: "object"
+    properties:
+      alert_id:
+        type: "integer"
+        description: "By specifying an alert_id we will record the loads seen by this\
+          \ user, and associate it with their alert. "
+        example: 5555
+      count:
+        type: "boolean"
+        description: "If included this will return a total count instead of a list. "
+      sort_parameter:
+        type: "string"
+        description: "Use almost any one of the columns of a returned board."
+      item_count:
+        type: "integer"
+        description: "This is how many board objects will be returned in the search.\
+          \ By default it will return 50 items per page. Max is 100, minimum is 1. "
+      page_number:
+        type: "integer"
+        description: "The page you want to get. Will return an empty board on an invalid\
+          \ page."
+      origin_city:
+        type: "string"
+        description: "Must be at least 3 characters. "
+        example: "chillicothe"
+      origin_radius:
+        type: "integer"
+        description: "If both city and state, it will search for all entries within\
+          \ # Miles of the city. "
+      origin_state:
+        type: "array"
+        description: "If multiple states are entered the city field will be ignored,\
+          \ and a multi state search will be performed."
+        items:
+          type: "string"
+      destination_city:
+        type: "string"
+        description: "Must be at least 2 characters. "
+        example: "chicago"
+      destination_radius:
+        type: "integer"
+        description: "If both city and state are specified, it will search for all\
+          \ entries within # Miles of the city. "
+      destination_state:
+        type: "array"
+        description: "If multiple states are entered the city field will be ignored,\
+          \ and a multi state search will be performed."
+        items:
+          type: "string"
+      load_size:
+        type: "string"
+        description: "This is only valid on load boards. Valid values are \"Full\"\
+          \ and \"Partial\"\". "
+        default: "Full"
+      only_new:
+        type: "boolean"
+        description: "This will only return unseen results. This requires an alert_id\
+          \ to be specified. "
+      ship_date:
+        type: "array"
+        description: "Limit the board to only show loads with X ship date. "
+        items:
+          type: "string"
+      trailer_type:
+        type: "array"
+        description: "A string array of valid trailer types to limit the search. "
+        items:
+          type: "string"
+    x-restlet:
+      section: "BOARDS"
+  board:
+    type: "object"
+    properties:
+      list:
+        type: "object"
+        description: "A list of entries for this board."
+      page_number:
+        type: "object"
+        description: "The page you are on."
+      total_items:
+        type: "object"
+        description: "A count of all the entry objects for the specified search."
+      total_pages:
+        type: "integer"
+        format: "int32"
+        description: "A count of the # of pages based on the search parameters."
+    example: "{\n  \"list\": \"{}\",\n  \"page_number\": \"{}\",\n  \"total_items\"\
+      : \"{}\",\n  \"total_pages\": 0\n}"
+    x-restlet:
+      section: "BOARDS"
+  create_notes:
+    type: "object"
+    required:
+    - "body"
+    - "entry_id"
+    - "title"
+    properties:
+      body:
+        type: "string"
+      entry_id:
+        type: "integer"
+        description: "The entry to associate the note with. "
+      title:
+        type: "string"
+        description: "Subject of the note. "
+    x-restlet:
+      section: "BOARDS"
+  create_multiple_postings:
+    type: "object"
+    required:
+    - "list"
+    properties:
+      contact_fax:
+        type: "string"
+        description: "By default we use the number listed in their profile. "
+      contact_name:
+        type: "string"
+        description: "The dispatchers name. By default we use the profile information. "
+      contact_phone:
+        type: "string"
+        description: "By default we use the number listed in their profile. "
+      delete_current_before_posting:
+        type: "boolean"
+        description: "An optional argument that will first delete all of the users\
+          \ loads before entering the fresh list. Caution, this will still delete\
+          \ everything even if some of the entries fail to be created. "
+      list:
+        type: "array"
+        description: "Valid types are &quot;loads&quot;, &quot;trucks&quot;, &quot;private_loads&quot;,\
+          \ &quot;private_trucks&quot;, &quot;test_loads&quot;, and &quot;test_trucks&quot; "
+        items:
+          type: "string"
+    x-restlet:
+      section: "POSTINGS"
+  create_profile:
+    type: "object"
+    required:
+    - "address"
+    - "city"
+    - "company"
+    - "contact_extension"
+    - "contact_name"
+    - "contact_number"
+    - "dot_number"
+    - "fax_number"
+    - "mc_number"
+    - "mobile_carrier"
+    - "mobile_number"
+    - "password"
+    - "state"
+    - "web_page"
+    - "zip"
+    properties:
+      address:
+        type: "string"
+      city:
+        type: "string"
+      company:
+        type: "string"
+        description: "Company name. "
+      contact_extension:
+        type: "string"
+      contact_name:
+        type: "string"
+        description: "Contact name. "
+      contact_number:
+        type: "string"
+      dot_number:
+        type: "string"
+      fax_number:
+        type: "string"
+      mc_number:
+        type: "string"
+      mobile_carrier:
+        type: "integer"
+      mobile_number:
+        type: "string"
+      password:
+        type: "string"
+        description: "Needed to set up the user/pass for authentication. "
+      state:
+        type: "string"
+      web_page:
+        type: "string"
+      zip:
+        type: "string"
+    x-restlet:
+      section: "PROFILES"
 x-restlet:
   sections:
     ALERTS: {}
