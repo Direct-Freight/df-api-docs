@@ -12,3 +12,5 @@ example: |-
       "{}"
     ]
   }
+x-restlet:
+  section: ALERTS
