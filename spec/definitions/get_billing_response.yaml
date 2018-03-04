@@ -9,6 +9,10 @@ properties:
     description: >-
       Any extra text relating to the promo code. For example "15 Day Free. 34.95
       charged after that."
-example:
-  amount: 0
-  promo_conditions: '{}'
+example: |-
+  {
+    "amount": 0,
+    "promo_conditions": "{}"
+  }
+x-restlet:
+  section: BILLINGS
