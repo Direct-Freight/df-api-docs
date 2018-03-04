@@ -1,11 +1,11 @@
----
-example:
-  company_name:
-  - company_name
-  - company_name
+type: object
 properties:
   company_name:
+    type: array
     description: A subset of companies that need to be marked as hidden.
     items:
       type: string
-    type: array
+example:
+  company_name:
+    - company_name
+    - company_name
