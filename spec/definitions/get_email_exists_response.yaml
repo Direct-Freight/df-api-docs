@@ -1,7 +1,7 @@
----
-example:
-  exists: true
+type: object
 properties:
   exists:
-    description: Returns a true value if it is associated with an account.
     type: boolean
+    description: Returns a true value if it is associated with an account.
+example:
+  exists: true
