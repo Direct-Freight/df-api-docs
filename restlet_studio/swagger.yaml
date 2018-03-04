@@ -24,6 +24,29 @@ security:
 - api_key: []
 paths:
   /alerts/{list_type}:
+    get:
+      tags:
+      - "alerts"
+      summary: "Get a list of alerts. You can optionally limit the list by specifcying\
+        \ alerts by their alert_id. HIDE=TRUE"
+      parameters:
+      - name: "alert_id"
+        in: "query"
+        required: false
+        type: "array"
+        description: "only get a subset of alerts. As this is a get request this is\
+          \ specified as a query string parameter."
+        items:
+          type: "integer"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "On success will return a list of alerts."
+          schema:
+            $ref: "#/definitions/alert_list"
     post:
       tags:
       - "alerts"
@@ -99,13 +122,15 @@ paths:
       enum:
       - "loads"
       - "trucks"
+    x-restlet:
+      section: "ALERTS"
   /billings:
     get:
       tags:
       - "billings"
       summary: "Returns the amount the end user will be charged. If a promo code is\
         \ present return adjusted amount. If there are special conditions a string\
-        \ with the promo code benefits will also be returned.  HIDE=TRUE"
+        \ with the promo code benefits will also be returned."
       description: "Will return how much the end user will be charged to upgrade.\
         \ It will not charge the user, or consume the promo code."
       parameters:
@@ -144,6 +169,46 @@ paths:
           description: "Object created check the headers for a reference URL."
           schema:
             $ref: "#/definitions/post_status"
+    x-restlet:
+      section: "BILLINGS"
+  /boards/{list_type}:
+    post:
+      tags:
+      - "boards"
+      summary: "Get a board."
+      description: "This is the primary search method."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/board_search"
+      responses:
+        200:
+          description: "Returns a list matching your search."
+          schema:
+            $ref: "#/definitions/board"
+        422:
+          description: "Unprocessable Entity. More information provided in the return\
+            \ object."
+          schema:
+            $ref: "#/definitions/error_object"
+    parameters:
+    - name: "list_type"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Valid types are \"loads\", and \"trucks\"."
+      enum:
+      - "loads"
+      - "trucks"
+    x-restlet:
+      section: "BOARDS"
   /boards/{list_type}/state_list:
     get:
       tags:
@@ -164,6 +229,8 @@ paths:
       enum:
       - "loads"
       - "trucks"
+    x-restlet:
+      section: "BOARDS"
   /boards/hidden_companies:
     get:
       tags:
@@ -241,6 +308,8 @@ paths:
       responses:
         204:
           description: "successful operation"
+    x-restlet:
+      section: "BOARDS"
   /boards/hidden_entries:
     get:
       tags:
@@ -319,7 +388,31 @@ paths:
       responses:
         204:
           description: "successful operation"
+    x-restlet:
+      section: "BOARDS"
   /boards/notes:
+    get:
+      tags:
+      - "boards"
+      summary: "Get notes that this user has written. HIDE=TEST"
+      parameters:
+      - name: "entry_id"
+        in: "query"
+        required: false
+        type: "array"
+        description: "Optionally just check if certain loads have notes associated\
+          \ with them. "
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/get_boards_notes_response"
     post:
       tags:
       - "boards"
@@ -375,6 +468,8 @@ paths:
       responses:
         204:
           description: "successful operation"
+    x-restlet:
+      section: "BOARDS"
   /credit_reports:
     get:
       tags:
@@ -398,6 +493,8 @@ paths:
       responses:
         200:
           description: "successful operation"
+    x-restlet:
+      section: "CREDIT_REPORTS"
   /end_user_authentication/users:
     post:
       tags:
@@ -420,6 +517,8 @@ paths:
             \ object."
           schema:
             $ref: "#/definitions/error_object"
+    x-restlet:
+      section: "END_USER_AUTHENTICATIONS"
   /end_user_authentications:
     get:
       tags:
@@ -478,6 +577,8 @@ paths:
       responses:
         204:
           description: "Will not return content on a successful logout."
+    x-restlet:
+      section: "END_USER_AUTHENTICATIONS"
   /end_user_authentications/dates:
     get:
       tags:
@@ -496,6 +597,8 @@ paths:
           examples:
             application/json:
               now: "now"
+    x-restlet:
+      section: "END_USER_AUTHENTICATIONS"
   /end_user_authentications/passwords:
     get:
       tags:
@@ -549,6 +652,8 @@ paths:
             \ object."
           schema:
             $ref: "#/definitions/error_object"
+    x-restlet:
+      section: "END_USER_AUTHENTICATIONS"
   /location/distance:
     get:
       tags:
@@ -581,6 +686,8 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/get_location_distance_response"
+    x-restlet:
+      section: "LOCATIONS"
   /locations/closest_city:
     get:
       tags:
@@ -602,6 +709,8 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/get_closest_city_response"
+    x-restlet:
+      section: "LOCATIONS"
   /locations/partial_match:
     get:
       tags:
@@ -623,6 +732,8 @@ paths:
       responses:
         200:
           description: "successful operation"
+    x-restlet:
+      section: "LOCATIONS"
   /postings/{list_type}:
     get:
       tags:
@@ -716,6 +827,8 @@ paths:
       - "private_trucks"
       - "test_loads"
       - "test_trucks"
+    x-restlet:
+      section: "POSTINGS"
   /postings/{list_type}/{action}:
     post:
       tags:
@@ -756,6 +869,8 @@ paths:
       required: true
       type: "string"
       description: "Specified in the url. Valid types are \"copy\", and \"move\""
+    x-restlet:
+      section: "POSTINGS"
   /postings/custom_categories/{category_type}:
     get:
       tags:
@@ -829,6 +944,8 @@ paths:
       required: true
       type: "string"
       description: "Valid types are \"names\", and \"data\"."
+    x-restlet:
+      section: "POSTINGS"
   /postings/multiple/{list_type}:
     post:
       tags:
@@ -864,6 +981,8 @@ paths:
       - "private_trucks"
       - "test_loads"
       - "test_trucks"
+    x-restlet:
+      section: "POSTINGS"
   /profiles:
     get:
       tags:
@@ -918,6 +1037,8 @@ paths:
       responses:
         204:
           description: "successful operation"
+    x-restlet:
+      section: "PROFILES"
   /profiles/documents:
     get:
       tags:
@@ -982,6 +1103,8 @@ paths:
       responses:
         204:
           description: "success"
+    x-restlet:
+      section: "PROFILES"
   /profiles/mobile_carriers:
     get:
       tags:
@@ -1000,6 +1123,8 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/mobile_carrier_response"
+    x-restlet:
+      section: "PROFILES"
   /profiles/optins:
     get:
       tags:
@@ -1053,6 +1178,8 @@ paths:
       responses:
         204:
           description: "successful operation"
+    x-restlet:
+      section: "PROFILES"
   /validations/email_exists:
     get:
       tags:
@@ -1074,44 +1201,8 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/get_email_exists_response"
-  /boards/{list_type}:
-    post:
-      tags:
-      - "boards"
-      summary: "Get a board."
-      description: "This is the primary search method."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/board_search"
-      responses:
-        200:
-          description: "Returns a list matching your search."
-          schema:
-            $ref: "#/definitions/board"
-        422:
-          description: "Unprocessable Entity. More information provided in the return\
-            \ object."
-          schema:
-            $ref: "#/definitions/error_object"
-    parameters:
-    - name: "list_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"loads\", and \"trucks\"."
-      enum:
-      - "loads"
-      - "trucks"
     x-restlet:
-      section: "BOARDS"
+      section: "VALIDATIONS"
 securityDefinitions:
   api_key:
     description: "This token needs to be sent as a HTTP header argument in every request\
@@ -1925,4 +2016,12 @@ definitions:
         description: "Currently this is a 6-10 digit alphanumeric password. "
 x-restlet:
   sections:
+    ALERTS: {}
+    BILLINGS: {}
     BOARDS: {}
+    CREDIT_REPORTS: {}
+    END_USER_AUTHENTICATIONS: {}
+    LOCATIONS: {}
+    POSTINGS: {}
+    PROFILES: {}
+    VALIDATIONS: {}
