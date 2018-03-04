@@ -1,7 +1,7 @@
----
-example:
-  optin_code: optin_code
+type: object
 properties:
   optin_code:
-    description: A text string with the code sent.
     type: string
+    description: A text string with the code sent.
+example:
+  optin_code: optin_code
