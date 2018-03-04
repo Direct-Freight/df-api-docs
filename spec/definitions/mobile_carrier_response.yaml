@@ -1,13 +1,12 @@
----
+type: object
+properties:
+  carrier_id:
+    type: integer
+    format: int32
+    description: The carrier ID.
+  carrier_name:
+    type: object
+    description: Their mobile carrier.
 example:
   carrier_id: 0
   carrier_name: '{}'
-properties:
-  carrier_id:
-    description: The carrier ID.
-    format: int32
-    type: integer
-  carrier_name:
-    description: Their mobile carrier.
-    properties: {}
-    type: object
