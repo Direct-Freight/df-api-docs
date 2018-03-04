@@ -1,47 +1,38 @@
 type: object
 properties:
   days_of_week:
+    type: object
     description: >-
       Limit the days that alerts are sent to the days listed. Send an array of
       strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and 'Sat'.
-    properties: {}
-    type: object
   end_hour:
-    description: Has the same values as start_hour
-    properties: {}
     type: object
+    description: Has the same values as start_hour
   expires_after:
+    type: object
     description: >-
       The last day the alert will be valid. Valid time frames are from today
       until one year into the future.
-    properties: {}
-    type: object
   list_order:
-    description: Any value that is valid in the boards sort_order is also valid here.
-    properties: {}
     type: object
+    description: Any value that is valid in the boards sort_order is also valid here.
   list_type:
+    type: object
     description: >-
       This specify the type of list that is returned, including disabling the
       list from being sent at all. Valid values are 'complete-list','only-new',
       and 'not-active'.
-    properties: {}
-    type: object
   minute_frequency:
+    type: object
     description: >-
       How many minutes to wait before sending another alert. Valid values are
       '15','30','60','120','240','480', and '1440'.
-    properties: {}
-    type: object
   send_type:
+    type: object
     description: 'What method to send the alert list. Valid types are ''email'',or ''text''.'
-    properties: {}
-    type: object
   start_hour:
+    type: object
     description: A value between 3-21 corresponding to the hour of the day.
-    properties: {}
-    type: object
   time_zone:
-    description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
-    properties: {}
     type: object
+    description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
