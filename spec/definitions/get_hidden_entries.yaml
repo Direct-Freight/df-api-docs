@@ -1,11 +1,11 @@
----
-example:
-  entry_id:
-  - entry_id
-  - entry_id
+type: object
 properties:
   entry_id:
+    type: array
     description: A subset of entries that need to be marked as hidden.
     items:
       type: string
-    type: array
+example:
+  entry_id:
+    - entry_id
+    - entry_id
