@@ -37,10 +37,10 @@ function process_parameters(parameters)
                                 parameters.unshift({ '$ref': '#/parameters/end-user-token-optional' });
                                 }
                         }
-                if(level5.name == 'board_type')
+                if(level5.name == 'board_type' || level5.name == 'posting_type')
                         {
                         parameters.splice(x,1);
-                        parameters.unshift({ '$ref': '#/parameters/board_type' });
+                        parameters.unshift({ '$ref': '#/parameters/' + level5.name });
                         }
                 x++;
                 });
