@@ -14,8 +14,9 @@ get:
   responses:
     '200':
       description: successful operation
+      examples:
+        application/json: '{status: "Subscribed"}'
       schema:
-        example: '{status: "Subscribed"}'
         properties:
           status:
             description: >-
@@ -27,10 +28,10 @@ get:
   tags:
     - end_user_authentications
 post:
+  consumes: []
   description: 'This function sends login credentials, and retrieves a stateless token.'
   parameters:
-    - description: ''
-      in: body
+    - in: body
       name: body
       required: true
       schema:
