@@ -53,7 +53,15 @@ Object.keys(swagger).forEach(function(level1) {
                            swagger[level1][level2][level3]['responses']['201']['schema']['$ref'] &&
                            swagger[level1][level2][level3]['responses']['201']['schema']['$ref'] == '#/definitions/create_status')
                                 {
-                                console.log(swagger[level1][level2][level3]['responses']['201'] = { '$ref': '#/responses/object_created' });
+                                swagger[level1][level2][level3]['responses']['201'] = { '$ref': '#/responses/object_created' };
+                                }
+                        if(swagger[level1][level2][level3]['responses'] && 
+                           swagger[level1][level2][level3]['responses']['422'] &&
+                           swagger[level1][level2][level3]['responses']['422']['schema'] &&
+                           swagger[level1][level2][level3]['responses']['422']['schema']['$ref'] &&
+                           swagger[level1][level2][level3]['responses']['422']['schema']['$ref'] == '#/definitions/error_object')
+                                {
+                                swagger[level1][level2][level3]['responses']['422'] = { '$ref': '#/responses/error_422' };
                                 }
                 });
         });
