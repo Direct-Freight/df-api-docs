@@ -15,8 +15,7 @@ delete:
 get:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - collectionFormat: multi
-      description: A list of id's to check if any should be visually hidden.
+    - description: A list of id's to check if any should be visually hidden.
       in: query
       items:
         type: string
@@ -32,6 +31,7 @@ get:
   tags:
     - boards
 patch:
+  consumes: []
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body
@@ -46,6 +46,7 @@ patch:
   tags:
     - boards
 post:
+  consumes: []
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body
