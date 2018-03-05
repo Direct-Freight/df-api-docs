@@ -13,7 +13,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/get_email_exists_response'
-  summary: Check if an e-mail exists.
+  summary: STAGE=UNK Check if an e-mail exists.
   tags:
     - validations
 x-restlet:
