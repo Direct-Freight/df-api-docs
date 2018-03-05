@@ -1,3 +1,12 @@
+delete:
+  description: This logs a user out. the end-user-token will no longer be valid.
+  parameters:
+    - $ref: '#/parameters/end-user-token'
+  responses:
+    '204':
+      description: Will not return content on a successful logout.
+  tags:
+    - end_user_authentications
 get:
   parameters:
     - $ref: '#/parameters/end-user-tokenOptional'
@@ -6,14 +15,14 @@ get:
       description: successful operation
       schema:
         example: '{status: "Subscribed"}'
-        type: object
         properties:
           status:
-            type: string
             description: >-
               Will return the logged in user's status. Valid status's are
               "Subscribed", "Posting", "Overdue", or "Not Logged In".
-  summary: Get current authentication level for the user.
+            type: string
+        type: object
+  summary: STAGE=UNK Get current authentication level for the user.
   tags:
     - end_user_authentications
 post:
@@ -32,16 +41,7 @@ post:
         $ref: '#/definitions/end-user-token'
     '422':
       $ref: '#/responses/error_422'
-  summary: Logs a user in.
-  tags:
-    - end_user_authentications
-delete:
-  description: This logs a user out. the end-user-token will no longer be valid.
-  parameters:
-    - $ref: '#/parameters/end-user-token'
-  responses:
-    '204':
-      description: Will not return content on a successful logout.
+  summary: STAGE=UNK Logs a user in.
   tags:
     - end_user_authentications
 x-restlet:
