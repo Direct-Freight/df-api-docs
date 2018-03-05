@@ -1,12 +1,14 @@
+parameters:
+  - $ref: '#/parameters/posting_type'
+  - description: 'Specified in the url. Valid types are "copy", and "move"'
+    in: path
+    name: action
+    required: true
+    type: string
 post:
+  consumes: []
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - $ref: '#/parameters/posting_type'
-    - description: 'Specified in the url. Valid types are "copy", and "move"'
-      in: path
-      name: action
-      required: true
-      type: string
     - in: body
       name: body
       required: true
