@@ -10,12 +10,13 @@ get:
   tags:
     - profiles
 patch:
+  consumes: []
   description: Please send in at least one field to be updated.
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
-      required: false
+      required: true
       schema:
         $ref: '#/definitions/patch_profile'
   responses:
@@ -25,6 +26,7 @@ patch:
   tags:
     - profiles
 post:
+  consumes: []
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body
