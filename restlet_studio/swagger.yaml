@@ -38,10 +38,6 @@ paths:
           \ specified as a query string parameter."
         items:
           type: "integer"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "On success will return a list of alerts."
@@ -55,10 +51,6 @@ paths:
         \ boards GET, follows the same rules."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -66,9 +58,7 @@ paths:
           $ref: "#/definitions/alert"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     delete:
       tags:
       - "alerts"
@@ -81,10 +71,6 @@ paths:
         description: "Specify to just delete some alerts."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -101,10 +87,6 @@ paths:
         required: true
         type: "string"
         description: "Specify which alert you are updating."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -139,10 +121,6 @@ paths:
         required: false
         type: "string"
         description: "The promo code. "
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -155,10 +133,6 @@ paths:
         \ a non subscibed user. "
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -166,9 +140,7 @@ paths:
           $ref: "#/definitions/bill_user"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     x-restlet:
       section: "BILLINGS"
   /boards/{board_type}:
@@ -179,10 +151,6 @@ paths:
       description: "This is the primary search method."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: false
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -194,10 +162,7 @@ paths:
           schema:
             $ref: "#/definitions/board_response"
         422:
-          description: "Unprocessable Entity. More information provided in the return\
-            \ object."
-          schema:
-            $ref: "#/definitions/error_object"
+          description: "Status 422"
     parameters:
     - name: "board_type"
       in: "path"
@@ -244,10 +209,6 @@ paths:
         description: "A list of id's to check if any should be visually hidden."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -259,10 +220,6 @@ paths:
       summary: "STAGE=UNK Mark a set of companies as hidden."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -270,9 +227,7 @@ paths:
           $ref: "#/definitions/mark_hidden_companies"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     delete:
       tags:
       - "boards"
@@ -283,10 +238,6 @@ paths:
         required: true
         type: "string"
         description: "The company that need to be marked as not hidden."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -296,10 +247,6 @@ paths:
       summary: "STAGE=UNK Toggle one or more company between hidden and unhidden."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -323,10 +270,6 @@ paths:
         description: "A list of id's to check if any should be visually hidden."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -344,15 +287,9 @@ paths:
         description: "The entry that need to be marked as hidden. "
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     delete:
       tags:
       - "boards"
@@ -363,10 +300,6 @@ paths:
         required: true
         type: "string"
         description: "The entry that need to be marked as not hidden. "
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -376,10 +309,6 @@ paths:
       summary: "STAGE=UNK Toggle one or more entry between hidden and unhidden."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -404,10 +333,6 @@ paths:
           \ with them. "
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -419,10 +344,6 @@ paths:
       summary: "STAGE=UNK Create a new note."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -430,9 +351,7 @@ paths:
           $ref: "#/definitions/create_notes"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     delete:
       tags:
       - "boards"
@@ -443,10 +362,6 @@ paths:
         required: true
         type: "string"
         description: "The entry to associate the note with. "
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "successful operation"
@@ -456,10 +371,6 @@ paths:
       summary: "STAGE=UNK Update a note."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -486,10 +397,6 @@ paths:
         required: true
         type: "string"
         description: "Return format. Currently only supports html and json."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -513,10 +420,7 @@ paths:
           schema:
             $ref: "#/definitions/end-user-token"
         422:
-          description: "Unprocessable Entity. More information provided in the return\
-            \ object."
-          schema:
-            $ref: "#/definitions/error_object"
+          description: "Status 422"
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
   /end_user_authentications:
@@ -524,11 +428,7 @@ paths:
       tags:
       - "end_user_authentications"
       summary: "STAGE=UNK Get current authentication level for the user."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: false
-        type: "string"
+      parameters: []
       responses:
         200:
           description: "successful operation"
@@ -561,20 +461,13 @@ paths:
           schema:
             $ref: "#/definitions/end-user-token"
         422:
-          description: "Unprocessable Entity. More information provided in the return\
-            \ object."
-          schema:
-            $ref: "#/definitions/error_object"
+          description: "Status 422"
     delete:
       tags:
       - "end_user_authentications"
       summary: "STAGE=UNK Logs a user out."
       description: "This logs a user out. the end-user-token will no longer be valid."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         204:
           description: "Will not return content on a successful logout."
@@ -616,20 +509,13 @@ paths:
           description: "This will return a success even if the e-mail is not in our\
             \ records."
         422:
-          description: "Unprocessable Entity. More information provided in the return\
-            \ object."
-          schema:
-            $ref: "#/definitions/error_object"
+          description: "Status 422"
     patch:
       tags:
       - "end_user_authentications"
       summary: "STAGE=UNK Update a users password."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -649,10 +535,7 @@ paths:
         204:
           description: "A successful operation."
         422:
-          description: "Unprocessable Entity. More information provided in the return\
-            \ object."
-          schema:
-            $ref: "#/definitions/error_object"
+          description: "Status 422"
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
   /location/distance:
@@ -748,10 +631,6 @@ paths:
         description: "To just return information about some postings."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -763,10 +642,6 @@ paths:
       summary: "Create a posting"
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -774,9 +649,7 @@ paths:
           $ref: "#/definitions/post_object_model"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     delete:
       tags:
       - "postings"
@@ -789,10 +662,6 @@ paths:
         description: "You must specify which entry to remove."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "success operation"
@@ -802,10 +671,6 @@ paths:
       summary: "STAGE=UNK Update an posting."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -837,10 +702,6 @@ paths:
       summary: "STAGE=UNK Copy or Move an posting."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -848,9 +709,7 @@ paths:
           $ref: "#/definitions/post_posting_type_action_body"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     parameters:
     - name: "posting_type"
       in: "path"
@@ -885,10 +744,6 @@ paths:
         description: "To just return information about some postings."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
@@ -898,16 +753,10 @@ paths:
       tags:
       - "postings"
       summary: "STAGE=UNK Create new category names, or add new data."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     delete:
       tags:
       - "postings"
@@ -920,10 +769,6 @@ paths:
         description: "To just delete information about some postings."
         items:
           type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         204:
           description: "200 OK"
@@ -931,11 +776,7 @@ paths:
       tags:
       - "postings"
       summary: "STAGE=UNK Update a category name, or value."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         204:
           description: "successful operation"
@@ -955,10 +796,6 @@ paths:
         \ method."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -990,11 +827,7 @@ paths:
       tags:
       - "profiles"
       summary: "STAGE=UNK Request the logged in user's profile."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         200:
           description: "successful operation"
@@ -1006,10 +839,6 @@ paths:
       summary: "STAGE=UNK Create a new profile."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -1017,9 +846,7 @@ paths:
           $ref: "#/definitions/create_profile"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     patch:
       tags:
       - "profiles"
@@ -1027,10 +854,6 @@ paths:
       description: "Please send in at least one field to be updated."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -1047,11 +870,7 @@ paths:
       - "profiles"
       summary: "STAGE=UNK Retrieve documents"
       description: "Retrieve documents"
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         200:
           description: "success"
@@ -1061,10 +880,6 @@ paths:
       summary: "STAGE=UNK Upload a new document."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -1072,18 +887,12 @@ paths:
           $ref: "#/definitions/upload_document"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
+          description: "Status 201"
     delete:
       tags:
       - "profiles"
       summary: "STAGE=UNK Delete the document."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         204:
           description: "success operation"
@@ -1093,10 +902,6 @@ paths:
       summary: "STAGE=UNK Rename a document."
       consumes: []
       parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       - name: "body"
         in: "body"
         required: true
@@ -1132,11 +937,7 @@ paths:
       tags:
       - "profiles"
       summary: "STAGE=UNK Check if the profile has opted to being contacted by text."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         200:
           description: "successful operation"
@@ -1146,11 +947,7 @@ paths:
       tags:
       - "profiles"
       summary: "STAGE=UNK Create, and send an Optin Code."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         200:
           description: "successful operation"
@@ -1160,11 +957,7 @@ paths:
       tags:
       - "profiles"
       summary: "STAGE=UNK Marks the profile as opted out."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         204:
           description: "successful operation"
@@ -1172,11 +965,7 @@ paths:
       tags:
       - "profiles"
       summary: "STAGE=UNK Marks the profile as opted in."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
+      parameters: []
       responses:
         204:
           description: "successful operation"
@@ -1194,10 +983,6 @@ paths:
         type: "string"
         description: "Enter an e-mail to see if it is available. Can be used as ?email=xxx\
           \ or as a JSON request."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
       responses:
         200:
           description: "successful operation"
