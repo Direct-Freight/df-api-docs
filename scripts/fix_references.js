@@ -8,11 +8,11 @@ var filename = process.argv[2];
 //now load that file
 var swagger = YAML.safeLoad(fs.readFileSync(filename, 'utf-8'));
 
-console.log('Saving unmodified yaml:' + filename + '-unmodified');
-fs.writeFile(filename + '-unmodified', YAML.safeDump(swagger, {indent: 2, lineWidth: -1, noRefs: false, sortKeys: true}), (err) => {
+console.log('Saving unmodified yaml:' + filename + '-sorted');
+fs.writeFile(filename + '-sorted', YAML.safeDump(swagger, {indent: 2, lineWidth: -1, noRefs: false, sortKeys: true}), (err) => {
         if (err) 
                 {
-                console.log('ERROR WRITING: ' + filename + '-unmodified');
+                console.log('ERROR WRITING: ' + filename + '-sorted');
                 console.log(err);
                 console.log(process.cwd());
                 }
