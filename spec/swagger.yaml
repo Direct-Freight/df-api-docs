@@ -4,10 +4,6 @@ consumes:
 host: www.directfreight.com
 x-ibm-configuration: {}
 info:
-  version: 2.0.0
-  title: Direct Freight API
-  x-logo:
-    url: https://www.directfreight.com/home/images/logo-direct-freight.png
   description: >-
     In order to use the Direct Freight API please first contact us to get an API
     Token. This token needs to be sent as a HTTP header argument in every
@@ -32,6 +28,10 @@ info:
 
 
     Both Tokens are stateless, and delivered via the HTTP headers.
+  title: Direct Freight API
+  version: 2.0.0
+  x-logo:
+    url: https://www.directfreight.com/home/images/logo-direct-freight.png
 produces:
   - application/json
 responses:
@@ -49,12 +49,12 @@ security:
   - api_key: []
 securityDefinitions:
   api_key:
-    in: header
-    name: api-token
-    type: apiKey
     description: >-
       This token needs to be sent as a HTTP header argument in every request to
       our API.
+    in: header
+    name: api-token
+    type: apiKey
 swagger: '2.0'
 x-restlet:
   sections:
