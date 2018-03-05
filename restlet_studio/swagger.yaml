@@ -1274,15 +1274,6 @@ definitions:
       entry_id:
       - "entry_id"
       - "entry_id"
-  get_location_distance_response:
-    type: "object"
-    properties:
-      distance:
-        type: "integer"
-        format: "int32"
-        description: "A number representing the miles between the two locations."
-    example:
-      distance: 0
   get_posting_type_response:
     type: "object"
     properties:
@@ -1931,6 +1922,16 @@ definitions:
         type: "object"
     example: "{\n  \"city\": \"city\",\n  \"state_abbreviation\": \"{}\",\n  \"state_name\"\
       : \"{}\"\n}"
+    x-restlet:
+      section: "LOCATIONS"
+  get_location_distance_response:
+    type: "object"
+    properties:
+      distance:
+        type: "integer"
+        format: "int32"
+        description: "A number representing the miles between the two locations."
+    example: "{\n  \"distance\": 0\n}"
     x-restlet:
       section: "LOCATIONS"
   create_multiple_postings:
