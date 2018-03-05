@@ -4,7 +4,7 @@ delete:
   responses:
     '204':
       description: success operation
-  summary: Delete the document.
+  summary: STAGE=UNK Delete the document.
   tags:
     - profiles
 get:
@@ -14,7 +14,7 @@ get:
   responses:
     '200':
       description: success
-  summary: Retrieve documents
+  summary: STAGE=UNK Retrieve documents
   tags:
     - profiles
 patch:
@@ -28,7 +28,7 @@ patch:
   responses:
     '204':
       description: success
-  summary: Rename a document.
+  summary: STAGE=UNK Rename a document.
   tags:
     - profiles
 post:
@@ -42,7 +42,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: Upload a new document.
+  summary: STAGE=UNK Upload a new document.
   tags:
     - profiles
 x-restlet:
