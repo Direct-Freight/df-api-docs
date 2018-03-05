@@ -1,6 +1,8 @@
-type: object
 properties:
   end-user-token:
-    type: string
     description: On success and end-user-token is returned.
     example: XX423ASOEUHT4AESUTH
+    type: string
+type: object
+x-restlet:
+  section: END_USER_AUTHENTICATIONS
