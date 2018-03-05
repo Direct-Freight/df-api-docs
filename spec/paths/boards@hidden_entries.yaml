@@ -31,6 +31,7 @@ get:
   tags:
     - boards
 patch:
+  consumes: []
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body
