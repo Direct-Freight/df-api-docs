@@ -21,11 +21,11 @@ get:
   tags:
     - billings
 post:
-  parameters:
-    - $ref: '#/parameters/end-user-token'
-    - description: >-
+  description: >-
         This function will attempt to process a payment, and upgrade a non
         subscibed user. 
+  parameters:
+    - $ref: '#/parameters/end-user-token'
       in: body
       name: body
       required: true
