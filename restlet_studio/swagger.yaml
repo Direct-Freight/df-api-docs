@@ -27,8 +27,8 @@ paths:
     get:
       tags:
       - "alerts"
-      summary: "Get a list of alerts. You can optionally limit the list by specifcying\
-        \ alerts by their alert_id."
+      summary: "STAGE=UNK Get a list of alerts. You can optionally limit the list\
+        \ by specifcying alerts by their alert_id."
       parameters:
       - name: "alert_id"
         in: "query"
@@ -50,7 +50,7 @@ paths:
     post:
       tags:
       - "alerts"
-      summary: "Create an alert."
+      summary: "STAGE=UNK Create an alert."
       description: "Any parameter that is defined here and is also defined on the\
         \ boards GET, follows the same rules."
       consumes: []
@@ -72,7 +72,7 @@ paths:
     delete:
       tags:
       - "alerts"
-      summary: "Delete an alert."
+      summary: "STAGE=UNK Delete an alert."
       parameters:
       - name: "alert_id"
         in: "query"
@@ -91,7 +91,7 @@ paths:
     patch:
       tags:
       - "alerts"
-      summary: "Update an alert."
+      summary: "STAGE=UNK Update an alert."
       description: "Search objects are set at creation. You cannot modify them after\
         \ the alert has been created."
       consumes: []
@@ -128,9 +128,9 @@ paths:
     get:
       tags:
       - "billings"
-      summary: "Returns the amount the end user will be charged. If a promo code is\
-        \ present return adjusted amount. If there are special conditions a string\
-        \ with the promo code benefits will also be returned."
+      summary: "STAGE=UNK Returns the amount the end user will be charged. If a promo\
+        \ code is present return adjusted amount. If there are special conditions\
+        \ a string with the promo code benefits will also be returned."
       description: "Will return how much the end user will be charged to upgrade.\
         \ It will not charge the user, or consume the promo code."
       parameters:
@@ -151,8 +151,8 @@ paths:
     post:
       tags:
       - "billings"
-      summary: "This function will attempt to process a payment, and upgrade a non\
-        \ subscibed user. "
+      summary: "STAGE=UNK This function will attempt to process a payment, and upgrade\
+        \ a non subscibed user. "
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -171,245 +171,6 @@ paths:
             $ref: "#/definitions/post_status"
     x-restlet:
       section: "BILLINGS"
-  /boards/hidden_companies:
-    get:
-      tags:
-      - "boards"
-      summary: "Get a list of companies that should be hidden."
-      parameters:
-      - name: "company_name"
-        in: "query"
-        required: true
-        type: "array"
-        description: "A list of id's to check if any should be visually hidden."
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_hidden_companies_response"
-    post:
-      tags:
-      - "boards"
-      summary: "Mark a set of companies as hidden."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/mark_hidden_companies"
-      responses:
-        201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/post_status"
-    delete:
-      tags:
-      - "boards"
-      summary: "Mark a company as not hidden."
-      parameters:
-      - name: "company_id"
-        in: "query"
-        required: true
-        type: "string"
-        description: "The company that need to be marked as not hidden."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        204:
-          description: "successful operation"
-    patch:
-      tags:
-      - "boards"
-      summary: "Toggle one or more company between hidden and unhidden."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/toggle_hidden_companies"
-      responses:
-        204:
-          description: "successful operation"
-    x-restlet:
-      section: "BOARDS"
-  /boards/hidden_entries:
-    get:
-      tags:
-      - "boards"
-      summary: "Get a list of entries that should be hidden."
-      parameters:
-      - name: "entry_id"
-        in: "query"
-        required: true
-        type: "array"
-        description: "A list of id's to check if any should be visually hidden."
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_hidden_entries"
-    post:
-      tags:
-      - "boards"
-      summary: "Mark a set of entries as hidden."
-      parameters:
-      - name: "entry_id"
-        in: "query"
-        required: true
-        type: "array"
-        description: "The entry that need to be marked as hidden. "
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/post_status"
-    delete:
-      tags:
-      - "boards"
-      summary: "Mark a set of entries as not hidden."
-      parameters:
-      - name: "entry_id"
-        in: "query"
-        required: true
-        type: "string"
-        description: "The entry that need to be marked as not hidden. "
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        204:
-          description: "successful operation"
-    patch:
-      tags:
-      - "boards"
-      summary: "Toggle one or more entry between hidden and unhidden."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/toggle_hidden_entries"
-      responses:
-        204:
-          description: "successful operation"
-    x-restlet:
-      section: "BOARDS"
-  /boards/notes:
-    get:
-      tags:
-      - "boards"
-      summary: "Get notes that this user has written."
-      parameters:
-      - name: "entry_id"
-        in: "query"
-        required: false
-        type: "array"
-        description: "Optionally just check if certain loads have notes associated\
-          \ with them. "
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_boards_notes_response"
-    post:
-      tags:
-      - "boards"
-      summary: "Create a new note."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/create_notes"
-      responses:
-        201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/post_status"
-    delete:
-      tags:
-      - "boards"
-      summary: "Delete a note."
-      parameters:
-      - name: "note_id"
-        in: "query"
-        required: true
-        type: "string"
-        description: "The entry to associate the note with. "
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        204:
-          description: "successful operation"
-    patch:
-      tags:
-      - "boards"
-      summary: "Update a note."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/update_notes"
-      responses:
-        204:
-          description: "successful operation"
-    x-restlet:
-      section: "BOARDS"
   /boards/{list_type}:
     post:
       tags:
@@ -452,7 +213,7 @@ paths:
     get:
       tags:
       - "boards"
-      summary: "A convenience method to get totals by state."
+      summary: "STAGE=UNK A convenience method to get totals by state."
       parameters: []
       responses:
         200:
@@ -470,11 +231,250 @@ paths:
       - "trucks"
     x-restlet:
       section: "BOARDS"
+  /boards/hidden_companies:
+    get:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Get a list of companies that should be hidden."
+      parameters:
+      - name: "company_name"
+        in: "query"
+        required: true
+        type: "array"
+        description: "A list of id's to check if any should be visually hidden."
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/get_hidden_companies_response"
+    post:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Mark a set of companies as hidden."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/mark_hidden_companies"
+      responses:
+        201:
+          description: "Object created check the headers for a reference URL."
+          schema:
+            $ref: "#/definitions/post_status"
+    delete:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Mark a company as not hidden."
+      parameters:
+      - name: "company_id"
+        in: "query"
+        required: true
+        type: "string"
+        description: "The company that need to be marked as not hidden."
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "successful operation"
+    patch:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Toggle one or more company between hidden and unhidden."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/toggle_hidden_companies"
+      responses:
+        204:
+          description: "successful operation"
+    x-restlet:
+      section: "BOARDS"
+  /boards/hidden_entries:
+    get:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Get a list of entries that should be hidden."
+      parameters:
+      - name: "entry_id"
+        in: "query"
+        required: true
+        type: "array"
+        description: "A list of id's to check if any should be visually hidden."
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/get_hidden_entries"
+    post:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Mark a set of entries as hidden."
+      parameters:
+      - name: "entry_id"
+        in: "query"
+        required: true
+        type: "array"
+        description: "The entry that need to be marked as hidden. "
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Object created check the headers for a reference URL."
+          schema:
+            $ref: "#/definitions/post_status"
+    delete:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Mark a set of entries as not hidden."
+      parameters:
+      - name: "entry_id"
+        in: "query"
+        required: true
+        type: "string"
+        description: "The entry that need to be marked as not hidden. "
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "successful operation"
+    patch:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Toggle one or more entry between hidden and unhidden."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/toggle_hidden_entries"
+      responses:
+        204:
+          description: "successful operation"
+    x-restlet:
+      section: "BOARDS"
+  /boards/notes:
+    get:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Get notes that this user has written."
+      parameters:
+      - name: "entry_id"
+        in: "query"
+        required: false
+        type: "array"
+        description: "Optionally just check if certain loads have notes associated\
+          \ with them. "
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/get_boards_notes_response"
+    post:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Create a new note."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/create_notes"
+      responses:
+        201:
+          description: "Object created check the headers for a reference URL."
+          schema:
+            $ref: "#/definitions/post_status"
+    delete:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Delete a note."
+      parameters:
+      - name: "note_id"
+        in: "query"
+        required: true
+        type: "string"
+        description: "The entry to associate the note with. "
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "successful operation"
+    patch:
+      tags:
+      - "boards"
+      summary: "STAGE=UNK Update a note."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/update_notes"
+      responses:
+        204:
+          description: "successful operation"
+    x-restlet:
+      section: "BOARDS"
   /credit_reports:
     get:
       tags:
       - "credit_reports"
-      summary: "Request access to a credit report."
+      summary: "STAGE=UNK Request access to a credit report."
       parameters:
       - name: "credit_report_id"
         in: "query"
@@ -499,7 +499,7 @@ paths:
     post:
       tags:
       - "end_user_authentications"
-      summary: "Create a new user."
+      summary: "STAGE=UNK Create a new user."
       consumes: []
       parameters:
       - name: "body"
@@ -523,7 +523,7 @@ paths:
     get:
       tags:
       - "end_user_authentications"
-      summary: "Get current authentication level for the user."
+      summary: "STAGE=UNK Get current authentication level for the user."
       parameters:
       - name: "end-user-token"
         in: "header"
@@ -545,7 +545,7 @@ paths:
     post:
       tags:
       - "end_user_authentications"
-      summary: "Logs a user in."
+      summary: "STAGE=UNK Logs a user in."
       description: "This function sends login credentials, and retrieves a stateless\
         \ token."
       consumes: []
@@ -568,6 +568,7 @@ paths:
     delete:
       tags:
       - "end_user_authentications"
+      summary: "STAGE=UNK Logs a user out."
       description: "This logs a user out. the end-user-token will no longer be valid."
       parameters:
       - name: "end-user-token"
@@ -583,7 +584,7 @@ paths:
     get:
       tags:
       - "end_user_authentications"
-      summary: "Gets an authoritative date_time string."
+      summary: "STAGE=UNK Gets an authoritative date_time string."
       parameters: []
       responses:
         200:
@@ -603,7 +604,7 @@ paths:
     get:
       tags:
       - "end_user_authentications"
-      summary: "Request a forgotten password."
+      summary: "STAGE=UNK Request a forgotten password."
       parameters:
       - name: "email"
         in: "query"
@@ -622,7 +623,7 @@ paths:
     patch:
       tags:
       - "end_user_authentications"
-      summary: "Update a users password."
+      summary: "STAGE=UNK Update a users password."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -658,8 +659,8 @@ paths:
     get:
       tags:
       - "locations"
-      summary: "Get the distance between 2 locations. This is used to calculate dead\
-        \ head miles."
+      summary: "STAGE=UNK Get the distance between 2 locations. This is used to calculate\
+        \ dead head miles."
       parameters:
       - name: "origin_city"
         in: "query"
@@ -692,7 +693,7 @@ paths:
     get:
       tags:
       - "locations"
-      summary: "Will return the closest city to a lat/lon point."
+      summary: "STAGE=UNK Will return the closest city to a lat/lon point."
       parameters:
       - name: "latitude"
         in: "query"
@@ -715,8 +716,8 @@ paths:
     get:
       tags:
       - "locations"
-      summary: "A string of a partial city or state name, and returns a list of possible\
-        \ matches."
+      summary: "STAGE=UNK A string of a partial city or state name, and returns a\
+        \ list of possible matches."
       parameters:
       - name: "term"
         in: "query"
@@ -734,118 +735,6 @@ paths:
           description: "successful operation"
     x-restlet:
       section: "LOCATIONS"
-  /postings/custom_categories/{category_type}:
-    get:
-      tags:
-      - "postings"
-      summary: "Get a list of custom columns, or custom_column data."
-      parameters:
-      - name: "category_id"
-        in: "query"
-        required: false
-        type: "array"
-        description: "To just return information about some postings."
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_custom_categories_response"
-    post:
-      tags:
-      - "postings"
-      summary: "Create new category names, or add new data."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/post_status"
-    delete:
-      tags:
-      - "postings"
-      summary: "Delete some or all custom columns, or custom_column data."
-      parameters:
-      - name: "category_id"
-        in: "query"
-        required: false
-        type: "array"
-        description: "To just delete information about some postings."
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        204:
-          description: "200 OK"
-    patch:
-      tags:
-      - "postings"
-      summary: "Update a category name, or value."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        204:
-          description: "successful operation"
-    parameters:
-    - name: "category_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"names\", and \"data\"."
-    x-restlet:
-      section: "POSTINGS"
-  /postings/multiple/{list_type}:
-    post:
-      tags:
-      - "postings"
-      summary: "Create, multiple entries at once. This is a convenience method."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/create_multiple_postings"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/post_posting_multiple_response"
-    parameters:
-    - name: "list_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\"\
-        , \"test_loads\", and \"test_trucks\""
-      enum:
-      - "loads"
-      - "trucks"
-      - "private_loads"
-      - "private_trucks"
-      - "test_loads"
-      - "test_trucks"
-    x-restlet:
-      section: "POSTINGS"
   /postings/{list_type}:
     get:
       tags:
@@ -871,7 +760,7 @@ paths:
     post:
       tags:
       - "postings"
-      summary: "Post an entry."
+      summary: "Create a posting"
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -910,7 +799,7 @@ paths:
     patch:
       tags:
       - "postings"
-      summary: "Update an posting."
+      summary: "STAGE=UNK Update an posting."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -945,7 +834,7 @@ paths:
     post:
       tags:
       - "postings"
-      summary: "Copy or Move an posting."
+      summary: "STAGE=UNK Copy or Move an posting."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -983,11 +872,124 @@ paths:
       description: "Specified in the url. Valid types are \"copy\", and \"move\""
     x-restlet:
       section: "POSTINGS"
+  /postings/custom_categories/{category_type}:
+    get:
+      tags:
+      - "postings"
+      summary: "STAGE=UNK Get a list of custom columns, or custom_column data."
+      parameters:
+      - name: "category_id"
+        in: "query"
+        required: false
+        type: "array"
+        description: "To just return information about some postings."
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/get_custom_categories_response"
+    post:
+      tags:
+      - "postings"
+      summary: "STAGE=UNK Create new category names, or add new data."
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Object created check the headers for a reference URL."
+          schema:
+            $ref: "#/definitions/post_status"
+    delete:
+      tags:
+      - "postings"
+      summary: "STAGE=UNK Delete some or all custom columns, or custom_column data."
+      parameters:
+      - name: "category_id"
+        in: "query"
+        required: false
+        type: "array"
+        description: "To just delete information about some postings."
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "200 OK"
+    patch:
+      tags:
+      - "postings"
+      summary: "STAGE=UNK Update a category name, or value."
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "successful operation"
+    parameters:
+    - name: "category_type"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Valid types are \"names\", and \"data\"."
+    x-restlet:
+      section: "POSTINGS"
+  /postings/multiple/{list_type}:
+    post:
+      tags:
+      - "postings"
+      summary: "STAGE=UNK Create, multiple entries at once. This is a convenience\
+        \ method."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/create_multiple_postings"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/post_posting_multiple_response"
+    parameters:
+    - name: "list_type"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\"\
+        , \"test_loads\", and \"test_trucks\""
+      enum:
+      - "loads"
+      - "trucks"
+      - "private_loads"
+      - "private_trucks"
+      - "test_loads"
+      - "test_trucks"
+    x-restlet:
+      section: "POSTINGS"
   /profiles:
     get:
       tags:
       - "profiles"
-      summary: "Request the logged in user's profile."
+      summary: "STAGE=UNK Request the logged in user's profile."
       parameters:
       - name: "end-user-token"
         in: "header"
@@ -1001,7 +1003,7 @@ paths:
     post:
       tags:
       - "profiles"
-      summary: "Create a new profile."
+      summary: "STAGE=UNK Create a new profile."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -1021,7 +1023,7 @@ paths:
     patch:
       tags:
       - "profiles"
-      summary: "Update profile information."
+      summary: "STAGE=UNK Update profile information."
       description: "Please send in at least one field to be updated."
       consumes: []
       parameters:
@@ -1043,7 +1045,7 @@ paths:
     get:
       tags:
       - "profiles"
-      summary: "Retrieve documents"
+      summary: "STAGE=UNK Retrieve documents"
       description: "Retrieve documents"
       parameters:
       - name: "end-user-token"
@@ -1056,7 +1058,7 @@ paths:
     post:
       tags:
       - "profiles"
-      summary: "Upload a new document."
+      summary: "STAGE=UNK Upload a new document."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -1076,7 +1078,7 @@ paths:
     delete:
       tags:
       - "profiles"
-      summary: "Delete the document."
+      summary: "STAGE=UNK Delete the document."
       parameters:
       - name: "end-user-token"
         in: "header"
@@ -1088,7 +1090,7 @@ paths:
     patch:
       tags:
       - "profiles"
-      summary: "Rename a document."
+      summary: "STAGE=UNK Rename a document."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -1109,7 +1111,7 @@ paths:
     get:
       tags:
       - "profiles"
-      summary: "Retrieve one or more mobile carriers. "
+      summary: "STAGE=UNK Retrieve one or more mobile carriers. "
       description: "Retrieve a list of supported carriers."
       parameters:
       - name: "carrier_id"
@@ -1129,7 +1131,7 @@ paths:
     get:
       tags:
       - "profiles"
-      summary: "Check if the profile has opted to being contacted by text."
+      summary: "STAGE=UNK Check if the profile has opted to being contacted by text."
       parameters:
       - name: "end-user-token"
         in: "header"
@@ -1143,7 +1145,7 @@ paths:
     post:
       tags:
       - "profiles"
-      summary: "Create, and send an Optin Code."
+      summary: "STAGE=UNK Create, and send an Optin Code."
       parameters:
       - name: "end-user-token"
         in: "header"
@@ -1157,7 +1159,7 @@ paths:
     delete:
       tags:
       - "profiles"
-      summary: "Marks the profile as opted out."
+      summary: "STAGE=UNK Marks the profile as opted out."
       parameters:
       - name: "end-user-token"
         in: "header"
@@ -1169,7 +1171,7 @@ paths:
     patch:
       tags:
       - "profiles"
-      summary: "Marks the profile as opted in."
+      summary: "STAGE=UNK Marks the profile as opted in."
       parameters:
       - name: "end-user-token"
         in: "header"
@@ -1184,7 +1186,7 @@ paths:
     get:
       tags:
       - "validations"
-      summary: "Check if an e-mail exists."
+      summary: "STAGE=UNK Check if an e-mail exists."
       parameters:
       - name: "email"
         in: "query"
@@ -1235,14 +1237,14 @@ definitions:
     properties:
       code:
         type: "integer"
-      description:
-        type: "string"
       error:
+        type: "string"
+      description:
         type: "string"
     example:
       code: 1
-      description: "The e-mail address must be valid."
       error: "Generic Validation"
+      description: "The e-mail address must be valid."
   get_closest_city_response:
     type: "object"
     properties:
@@ -1720,35 +1722,6 @@ definitions:
         type: "object"
         description: "How many minutes to wait before sending another alert. Valid\
           \ values are '15','30','60','120','240','480', and '1440'."
-      search:
-        type: "object"
-        properties:
-          date_available:
-            type: "string"
-            format: "date"
-          date_received:
-            type: "string"
-            format: "date"
-          destination_city:
-            type: "string"
-          destination_radius:
-            type: "integer"
-          destination_state:
-            type: "string"
-          load_size:
-            type: "string"
-          origin_city:
-            type: "string"
-          origin_radius:
-            type: "integer"
-          origin_state:
-            type: "string"
-          search_id:
-            type: "integer"
-          search_type:
-            type: "string"
-          trailers:
-            type: "string"
       send_type:
         type: "object"
         description: "What method to send the alert list. Valid types are 'email',or\
@@ -1759,6 +1732,35 @@ definitions:
       time_zone:
         type: "object"
         description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
+      search:
+        type: "object"
+        properties:
+          search_id:
+            type: "integer"
+          search_type:
+            type: "string"
+          date_received:
+            type: "string"
+            format: "date"
+          trailers:
+            type: "string"
+          date_available:
+            type: "string"
+            format: "date"
+          origin_state:
+            type: "string"
+          origin_city:
+            type: "string"
+          origin_radius:
+            type: "integer"
+          destination_state:
+            type: "string"
+          destination_city:
+            type: "string"
+          destination_radius:
+            type: "integer"
+          load_size:
+            type: "string"
     x-restlet:
       section: "ALERTS"
   bill_user:
@@ -1805,33 +1807,17 @@ definitions:
       count:
         type: "boolean"
         description: "If included this will return a total count instead of a list. "
-      destination_city:
+      sort_parameter:
         type: "string"
-        description: "Must be at least 2 characters. "
-        example: "chicago"
-      destination_radius:
-        type: "integer"
-        description: "If both city and state are specified, it will search for all\
-          \ entries within # Miles of the city. "
-      destination_state:
-        type: "array"
-        description: "If multiple states are entered the city field will be ignored,\
-          \ and a multi state search will be performed."
-        items:
-          type: "string"
+        description: "Use almost any one of the columns of a returned board."
       item_count:
         type: "integer"
         description: "This is how many board objects will be returned in the search.\
           \ By default it will return 50 items per page. Max is 100, minimum is 1. "
-      load_size:
-        type: "string"
-        description: "This is only valid on load boards. Valid values are \"Full\"\
-          \ and \"Partial\"\". "
-        default: "Full"
-      only_new:
-        type: "boolean"
-        description: "This will only return unseen results. This requires an alert_id\
-          \ to be specified. "
+      page_number:
+        type: "integer"
+        description: "The page you want to get. Will return an empty board on an invalid\
+          \ page."
       origin_city:
         type: "string"
         description: "Must be at least 3 characters. "
@@ -1846,18 +1832,34 @@ definitions:
           \ and a multi state search will be performed."
         items:
           type: "string"
-      page_number:
+      destination_city:
+        type: "string"
+        description: "Must be at least 2 characters. "
+        example: "chicago"
+      destination_radius:
         type: "integer"
-        description: "The page you want to get. Will return an empty board on an invalid\
-          \ page."
+        description: "If both city and state are specified, it will search for all\
+          \ entries within # Miles of the city. "
+      destination_state:
+        type: "array"
+        description: "If multiple states are entered the city field will be ignored,\
+          \ and a multi state search will be performed."
+        items:
+          type: "string"
+      load_size:
+        type: "string"
+        description: "This is only valid on load boards. Valid values are \"Full\"\
+          \ and \"Partial\"\". "
+        default: "Full"
+      only_new:
+        type: "boolean"
+        description: "This will only return unseen results. This requires an alert_id\
+          \ to be specified. "
       ship_date:
         type: "array"
         description: "Limit the board to only show loads with X ship date. "
         items:
           type: "string"
-      sort_parameter:
-        type: "string"
-        description: "Use almost any one of the columns of a returned board."
       trailer_type:
         type: "array"
         description: "A string array of valid trailer types to limit the search. "
