@@ -1,14 +1,17 @@
 get:
+  parameters: []
   responses:
     '200':
       description: successful operation
-      schema:
-        example:
+      examples:
+        application/json:
           now: now
+      schema:
         properties:
           now:
             description: The current date and time based on our server.
             type: string
+        type: object
   summary: STAGE=UNK Gets an authoritative date_time string.
   tags:
     - end_user_authentications
