@@ -53,7 +53,7 @@ parameters:
     name: end-user-token
     required: true
     type: string
-  end-user-tokenOptional:
+  end-user-token-optional:
     in: header
     name: end-user-token
     required: false

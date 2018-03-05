@@ -1,7 +1,7 @@
 post:
   description: This is the primary search method.
   parameters:
-    - $ref: '#/parameters/end-user-tokenOptional'
+    - $ref: '#/parameters/end-user-token-optional'
     - $ref: '#/parameters/board_type'
     - description: Please specifify at least a partial origin or destination.
       in: body

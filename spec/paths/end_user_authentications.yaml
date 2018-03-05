@@ -10,7 +10,7 @@ delete:
     - end_user_authentications
 get:
   parameters:
-    - $ref: '#/parameters/end-user-tokenOptional'
+    - $ref: '#/parameters/end-user-token-optional'
   responses:
     '200':
       description: successful operation
