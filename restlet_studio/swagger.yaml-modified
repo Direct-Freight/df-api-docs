@@ -1138,7 +1138,7 @@ paths:
       consumes: []
       description: This is the primary search method.
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - $ref: '#/parameters/end-user-token-optional'
         - in: body
           name: body
           required: true
@@ -1238,7 +1238,7 @@ paths:
         - end_user_authentications
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - $ref: '#/parameters/end-user-token-optional'
       responses:
         '200':
           description: successful operation
