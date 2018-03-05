@@ -1,7 +1,5 @@
 get:
-  description: >-
-    Will return how much the end user will be charged to upgrade. It will not
-    charge the user, or consume the promo code.
+  description: "Will return how much the end user will be charged to upgrade. It will not charge the user, or consume the promo code."
   parameters:
     - $ref: '#/parameters/end-user-token'
     - description: 'The promo code. '
@@ -26,7 +24,7 @@ post:
         subscibed user. 
   parameters:
     - $ref: '#/parameters/end-user-token'
-      in: body
+    - in: body
       name: body
       required: true
       schema:
