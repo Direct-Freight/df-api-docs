@@ -5,7 +5,7 @@ required:
   - end_hour
   - expires_after
   - list_order
-  - send_type
+  - list_type
   - minute_frequency
   - search
   - send_type
@@ -31,7 +31,7 @@ properties:
   list_order:
     type: object
     description: Any value that is valid in the boards sort_order is also valid here.
-  send_type:
+  list_type:
     type: object
     description: >-
       This specify the type of list that is returned, including disabling the
