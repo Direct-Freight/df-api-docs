@@ -1131,7 +1131,7 @@ paths:
       - "profiles"
       summary: "Check if the profile has opted to being contacted by text."
       parameters:
-      - name: "end-user-token2"
+      - name: "end-user-token"
         in: "header"
         required: true
         type: "string"
@@ -1211,13 +1211,6 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
-  end-user-token:
-    type: "object"
-    properties:
-      end-user-token:
-        type: "string"
-        description: "On success and end-user-token is returned."
-        example: "XX423ASOEUHT4AESUTH"
   error_object:
     type: "object"
     required:
@@ -1235,19 +1228,6 @@ definitions:
       code: 1
       error: "Generic Validation"
       description: "The e-mail address must be valid."
-  get_closest_city_response:
-    type: "object"
-    properties:
-      city:
-        type: "string"
-      state_abbreviation:
-        type: "object"
-      state_name:
-        type: "object"
-    example:
-      city: "city"
-      state_abbreviation: "{}"
-      state_name: "{}"
   get_custom_categories_response:
     type: "object"
     properties:
@@ -1929,6 +1909,28 @@ definitions:
         description: "Subject of the note. "
     x-restlet:
       section: "BOARDS"
+  end-user-token:
+    type: "object"
+    properties:
+      end-user-token:
+        type: "string"
+        description: "On success and end-user-token is returned."
+        example: "XX423ASOEUHT4AESUTH"
+    x-restlet:
+      section: "END_USER_AUTHENTICATIONS"
+  get_closest_city_response:
+    type: "object"
+    properties:
+      city:
+        type: "string"
+      state_abbreviation:
+        type: "object"
+      state_name:
+        type: "object"
+    example: "{\n  \"city\": \"city\",\n  \"state_abbreviation\": \"{}\",\n  \"state_name\"\
+      : \"{}\"\n}"
+    x-restlet:
+      section: "LOCATIONS"
   create_multiple_postings:
     type: "object"
     required:
