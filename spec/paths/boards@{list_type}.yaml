@@ -16,7 +16,7 @@ post:
         $ref: '#/definitions/board_response'
     '422':
       $ref: '#/responses/error_422'
-  summary: Get a board.
+  summary: STAGE=UNK Get a board.
   tags:
     - boards
 x-restlet:
