@@ -18,35 +18,43 @@ fs.writeFile(filename + '-sorted', YAML.safeDump(swagger, {indent: 2, lineWidth:
                 }
         });
 
+function process_parameters(parameters)
+        {
+        var x = 0;
+        parameters.forEach(function(level5) {
+                if(level5.name == 'end-user-token')
+                        {
+                        if(level5.required)
+                                {
+                                parameters.splice(x,1);
+                                parameters.unshift({ '$ref': '#/parameters/end-user-token' });
+                                //parameters.push({ '$ref': '#/parameters/end-user-token' });
+                                //parameters[x] = { '$ref': '#/parameters/end-user-token' };
+                                }
+                        else
+                                {
+                                parameters.splice(x,1);
+                                parameters.unshift({ '$ref': '#/parameters/end-user-token-optional' });
+                                }
+                        }
+                if(level5.name == 'board_type')
+                        {
+                        parameters.splice(x,1);
+                        parameters.unshift({ '$ref': '#/parameters/board_type' });
+                        }
+                x++;
+                });
+        }
 
 Object.keys(swagger).forEach(function(level1) {
         //toplevels console.log(level1);
         Object.keys(swagger[level1]).forEach(function(level2) {
                 //methods console.log(level2);
                 Object.keys(swagger[level1][level2]).forEach(function(level3) {
-                        //get/post/delete  console.log(level3);
-                        if(swagger[level1][level2][level3]['parameters']) 
-                                {
-                                var x = 0;
-                                swagger[level1][level2][level3]['parameters'].forEach(function(level5) {
-                                        if(level5.name == 'end-user-token')
-                                                {
-                                                if(level5.required)
-                                                        {
-                                                        swagger[level1][level2][level3]['parameters'].splice(x,1);
-                                                        swagger[level1][level2][level3]['parameters'].unshift({ '$ref': '#/parameters/end-user-token' });
-                                                        //swagger[level1][level2][level3]['parameters'].push({ '$ref': '#/parameters/end-user-token' });
-                                                        //swagger[level1][level2][level3]['parameters'][x] = { '$ref': '#/parameters/end-user-token' };
-                                                        }
-                                                else
-                                                        {
-                                                        swagger[level1][level2][level3]['parameters'].splice(x,1);
-                                                        swagger[level1][level2][level3]['parameters'].unshift({ '$ref': '#/parameters/end-user-token-optional' });
-                                                        }
-                                                }
-                                        x++;
-                                        });
-                                }
+                        //get/post/delete  console.log(level3); //sometimes restlet puts global path parameters at level3
+                        if(swagger[level1][level2]['parameters']) { process_parameters(swagger[level1][level2]['parameters']); }
+                        if(swagger[level1][level2][level3]['parameters']) { process_parameters(swagger[level1][level2][level3]['parameters']); }
+
                         if(swagger[level1][level2][level3]['responses'] && 
                            swagger[level1][level2][level3]['responses']['201'] &&
                            swagger[level1][level2][level3]['responses']['201']['schema'] &&
