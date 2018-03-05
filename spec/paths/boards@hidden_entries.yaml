@@ -9,25 +9,25 @@ delete:
   responses:
     '204':
       description: successful operation
-  summary: Mark a set of entries as not hidden.
+  summary: STAGE=UNK Mark a set of entries as not hidden.
   tags:
     - boards
 get:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - name: entry_id
-      description: A list of id's to check if any should be visually hidden.
+    - description: A list of id's to check if any should be visually hidden.
       in: query
-      required: true
-      type: array
       items:
         type: string
+      name: entry_id
+      required: true
+      type: array
   responses:
     '200':
       description: successful operation
       schema:
         $ref: '#/definitions/get_hidden_entries'
-  summary: Get a list of entries that should be hidden.
+  summary: STAGE=UNK Get a list of entries that should be hidden.
   tags:
     - boards
 patch:
@@ -41,23 +41,23 @@ patch:
   responses:
     '204':
       description: successful operation
-  summary: Toggle one or more entry between hidden and unhidden.
+  summary: STAGE=UNK Toggle one or more entry between hidden and unhidden.
   tags:
     - boards
 post:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - name: entry_id
-      description: 'The entry that need to be marked as hidden. '
+    - description: 'The entry that need to be marked as hidden. '
       in: query
-      required: true
-      type: array
       items:
         type: string
+      name: entry_id
+      required: true
+      type: array
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: Mark a set of entries as hidden.
+  summary: STAGE=UNK Mark a set of entries as hidden.
   tags:
     - boards
 x-restlet:
