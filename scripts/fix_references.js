@@ -9,7 +9,7 @@ var filename = process.argv[2];
 var swagger = YAML.safeLoad(fs.readFileSync(filename, 'utf-8'));
 
 console.log('Saving unmodified yaml:' + filename + '-unmodified');
-fs.writeFile(filename + '-unmodified', YAML.safeDump(swagger, {indent: 2, lineWidth: -1, noRefs: false}), (err) => {
+fs.writeFile(filename + '-unmodified', YAML.safeDump(swagger, {indent: 2, lineWidth: -1, noRefs: false, sortKeys: true}), (err) => {
         if (err) 
                 {
                 console.log('ERROR WRITING: ' + filename + '-unmodified');
@@ -44,7 +44,7 @@ Object.keys(swagger).forEach(function(level1) {
 });
 
 console.log('Saving modified yaml:' + filename + '-modified');
-fs.writeFile(filename + '-modified', YAML.safeDump(swagger, {indent: 2, lineWidth: -1, noRefs: false}), (err) => {
+fs.writeFile(filename + '-modified', YAML.safeDump(swagger, {indent: 2, lineWidth: -1, noRefs: false, sortKeys: true}), (err) => {
         if (err) 
                 {
                 console.log('ERROR WRITING: ' + filename + '-modified');
