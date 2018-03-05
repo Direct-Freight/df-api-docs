@@ -171,66 +171,6 @@ paths:
             $ref: "#/definitions/post_status"
     x-restlet:
       section: "BILLINGS"
-  /boards/{list_type}:
-    post:
-      tags:
-      - "boards"
-      summary: "Get a board."
-      description: "This is the primary search method."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/board_request"
-      responses:
-        200:
-          description: "Returns a list matching your search."
-          schema:
-            $ref: "#/definitions/board_response"
-        422:
-          description: "Unprocessable Entity. More information provided in the return\
-            \ object."
-          schema:
-            $ref: "#/definitions/error_object"
-    parameters:
-    - name: "list_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"loads\", and \"trucks\"."
-      enum:
-      - "loads"
-      - "trucks"
-    x-restlet:
-      section: "BOARDS"
-  /boards/{list_type}/state_list:
-    get:
-      tags:
-      - "boards"
-      summary: "A convenience method to get totals by state."
-      parameters: []
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_state_list_response"
-    parameters:
-    - name: "list_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"loads\", and \"trucks\"."
-      enum:
-      - "loads"
-      - "trucks"
-    x-restlet:
-      section: "BOARDS"
   /boards/hidden_companies:
     get:
       tags:
@@ -468,6 +408,66 @@ paths:
       responses:
         204:
           description: "successful operation"
+    x-restlet:
+      section: "BOARDS"
+  /boards/{list_type}:
+    post:
+      tags:
+      - "boards"
+      summary: "Get a board."
+      description: "This is the primary search method."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: false
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/board_request"
+      responses:
+        200:
+          description: "Returns a list matching your search."
+          schema:
+            $ref: "#/definitions/board_response"
+        422:
+          description: "Unprocessable Entity. More information provided in the return\
+            \ object."
+          schema:
+            $ref: "#/definitions/error_object"
+    parameters:
+    - name: "list_type"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Valid types are \"loads\", and \"trucks\"."
+      enum:
+      - "loads"
+      - "trucks"
+    x-restlet:
+      section: "BOARDS"
+  /boards/{list_type}/state_list:
+    get:
+      tags:
+      - "boards"
+      summary: "A convenience method to get totals by state."
+      parameters: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/get_state_list_response"
+    parameters:
+    - name: "list_type"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Valid types are \"loads\", and \"trucks\"."
+      enum:
+      - "loads"
+      - "trucks"
     x-restlet:
       section: "BOARDS"
   /credit_reports:
@@ -734,6 +734,118 @@ paths:
           description: "successful operation"
     x-restlet:
       section: "LOCATIONS"
+  /postings/custom_categories/{category_type}:
+    get:
+      tags:
+      - "postings"
+      summary: "Get a list of custom columns, or custom_column data."
+      parameters:
+      - name: "category_id"
+        in: "query"
+        required: false
+        type: "array"
+        description: "To just return information about some postings."
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/get_custom_categories_response"
+    post:
+      tags:
+      - "postings"
+      summary: "Create new category names, or add new data."
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        201:
+          description: "Object created check the headers for a reference URL."
+          schema:
+            $ref: "#/definitions/post_status"
+    delete:
+      tags:
+      - "postings"
+      summary: "Delete some or all custom columns, or custom_column data."
+      parameters:
+      - name: "category_id"
+        in: "query"
+        required: false
+        type: "array"
+        description: "To just delete information about some postings."
+        items:
+          type: "string"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "200 OK"
+    patch:
+      tags:
+      - "postings"
+      summary: "Update a category name, or value."
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      responses:
+        204:
+          description: "successful operation"
+    parameters:
+    - name: "category_type"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Valid types are \"names\", and \"data\"."
+    x-restlet:
+      section: "POSTINGS"
+  /postings/multiple/{list_type}:
+    post:
+      tags:
+      - "postings"
+      summary: "Create, multiple entries at once. This is a convenience method."
+      consumes: []
+      parameters:
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/create_multiple_postings"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/post_posting_multiple_response"
+    parameters:
+    - name: "list_type"
+      in: "path"
+      required: true
+      type: "string"
+      description: "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\"\
+        , \"test_loads\", and \"test_trucks\""
+      enum:
+      - "loads"
+      - "trucks"
+      - "private_loads"
+      - "private_trucks"
+      - "test_loads"
+      - "test_trucks"
+    x-restlet:
+      section: "POSTINGS"
   /postings/{list_type}:
     get:
       tags:
@@ -869,118 +981,6 @@ paths:
       required: true
       type: "string"
       description: "Specified in the url. Valid types are \"copy\", and \"move\""
-    x-restlet:
-      section: "POSTINGS"
-  /postings/custom_categories/{category_type}:
-    get:
-      tags:
-      - "postings"
-      summary: "Get a list of custom columns, or custom_column data."
-      parameters:
-      - name: "category_id"
-        in: "query"
-        required: false
-        type: "array"
-        description: "To just return information about some postings."
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_custom_categories_response"
-    post:
-      tags:
-      - "postings"
-      summary: "Create new category names, or add new data."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/post_status"
-    delete:
-      tags:
-      - "postings"
-      summary: "Delete some or all custom columns, or custom_column data."
-      parameters:
-      - name: "category_id"
-        in: "query"
-        required: false
-        type: "array"
-        description: "To just delete information about some postings."
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        204:
-          description: "200 OK"
-    patch:
-      tags:
-      - "postings"
-      summary: "Update a category name, or value."
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        204:
-          description: "successful operation"
-    parameters:
-    - name: "category_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"names\", and \"data\"."
-    x-restlet:
-      section: "POSTINGS"
-  /postings/multiple/{list_type}:
-    post:
-      tags:
-      - "postings"
-      summary: "Create, multiple entries at once. This is a convenience method."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/create_multiple_postings"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/post_posting_multiple_response"
-    parameters:
-    - name: "list_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\"\
-        , \"test_loads\", and \"test_trucks\""
-      enum:
-      - "loads"
-      - "trucks"
-      - "private_loads"
-      - "private_trucks"
-      - "test_loads"
-      - "test_trucks"
     x-restlet:
       section: "POSTINGS"
   /profiles:
@@ -1235,14 +1235,14 @@ definitions:
     properties:
       code:
         type: "integer"
-      error:
-        type: "string"
       description:
+        type: "string"
+      error:
         type: "string"
     example:
       code: 1
-      error: "Generic Validation"
       description: "The e-mail address must be valid."
+      error: "Generic Validation"
   get_closest_city_response:
     type: "object"
     properties:
@@ -1720,6 +1720,35 @@ definitions:
         type: "object"
         description: "How many minutes to wait before sending another alert. Valid\
           \ values are '15','30','60','120','240','480', and '1440'."
+      search:
+        type: "object"
+        properties:
+          date_available:
+            type: "string"
+            format: "date"
+          date_received:
+            type: "string"
+            format: "date"
+          destination_city:
+            type: "string"
+          destination_radius:
+            type: "integer"
+          destination_state:
+            type: "string"
+          load_size:
+            type: "string"
+          origin_city:
+            type: "string"
+          origin_radius:
+            type: "integer"
+          origin_state:
+            type: "string"
+          search_id:
+            type: "integer"
+          search_type:
+            type: "string"
+          trailers:
+            type: "string"
       send_type:
         type: "object"
         description: "What method to send the alert list. Valid types are 'email',or\
@@ -1730,35 +1759,6 @@ definitions:
       time_zone:
         type: "object"
         description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
-      search:
-        type: "object"
-        properties:
-          search_id:
-            type: "integer"
-          search_type:
-            type: "string"
-          date_received:
-            type: "string"
-            format: "date"
-          trailers:
-            type: "string"
-          date_available:
-            type: "string"
-            format: "date"
-          origin_state:
-            type: "string"
-          origin_city:
-            type: "string"
-          origin_radius:
-            type: "integer"
-          destination_state:
-            type: "string"
-          destination_city:
-            type: "string"
-          destination_radius:
-            type: "integer"
-          load_size:
-            type: "string"
     x-restlet:
       section: "ALERTS"
   bill_user:
@@ -1805,31 +1805,6 @@ definitions:
       count:
         type: "boolean"
         description: "If included this will return a total count instead of a list. "
-      sort_parameter:
-        type: "string"
-        description: "Use almost any one of the columns of a returned board."
-      item_count:
-        type: "integer"
-        description: "This is how many board objects will be returned in the search.\
-          \ By default it will return 50 items per page. Max is 100, minimum is 1. "
-      page_number:
-        type: "integer"
-        description: "The page you want to get. Will return an empty board on an invalid\
-          \ page."
-      origin_city:
-        type: "string"
-        description: "Must be at least 3 characters. "
-        example: "chillicothe"
-      origin_radius:
-        type: "integer"
-        description: "If both city and state, it will search for all entries within\
-          \ # Miles of the city. "
-      origin_state:
-        type: "array"
-        description: "If multiple states are entered the city field will be ignored,\
-          \ and a multi state search will be performed."
-        items:
-          type: "string"
       destination_city:
         type: "string"
         description: "Must be at least 2 characters. "
@@ -1844,6 +1819,10 @@ definitions:
           \ and a multi state search will be performed."
         items:
           type: "string"
+      item_count:
+        type: "integer"
+        description: "This is how many board objects will be returned in the search.\
+          \ By default it will return 50 items per page. Max is 100, minimum is 1. "
       load_size:
         type: "string"
         description: "This is only valid on load boards. Valid values are \"Full\"\
@@ -1853,11 +1832,32 @@ definitions:
         type: "boolean"
         description: "This will only return unseen results. This requires an alert_id\
           \ to be specified. "
+      origin_city:
+        type: "string"
+        description: "Must be at least 3 characters. "
+        example: "chillicothe"
+      origin_radius:
+        type: "integer"
+        description: "If both city and state, it will search for all entries within\
+          \ # Miles of the city. "
+      origin_state:
+        type: "array"
+        description: "If multiple states are entered the city field will be ignored,\
+          \ and a multi state search will be performed."
+        items:
+          type: "string"
+      page_number:
+        type: "integer"
+        description: "The page you want to get. Will return an empty board on an invalid\
+          \ page."
       ship_date:
         type: "array"
         description: "Limit the board to only show loads with X ship date. "
         items:
           type: "string"
+      sort_parameter:
+        type: "string"
+        description: "Use almost any one of the columns of a returned board."
       trailer_type:
         type: "array"
         description: "A string array of valid trailer types to limit the search. "
