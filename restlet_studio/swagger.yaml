@@ -28,7 +28,7 @@ paths:
       tags:
       - "alerts"
       summary: "Get a list of alerts. You can optionally limit the list by specifcying\
-        \ alerts by their alert_id. HIDE=TRUE"
+        \ alerts by their alert_id."
       parameters:
       - name: "alert_id"
         in: "query"
@@ -394,7 +394,7 @@ paths:
     get:
       tags:
       - "boards"
-      summary: "Get notes that this user has written. HIDE=TRUE"
+      summary: "Get notes that this user has written."
       parameters:
       - name: "entry_id"
         in: "query"
@@ -1211,6 +1211,21 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
+  alert_list:
+    type: "array"
+    description: "A hash containing a list of objects. Each entry should have 1 alert\
+      \ object, and 1 search object, and 2 integer counts. One for the number of new\
+      \ loads, and one for the number of total loads that match the search critera."
+    items:
+      $ref: "#/definitions/alert"
+    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
+  end-user-token:
+    type: "object"
+    properties:
+      end-user-token:
+        type: "string"
+        description: "On success and end-user-token is returned."
+        example: "XX423ASOEUHT4AESUTH"
   error_object:
     type: "object"
     required:
@@ -1228,6 +1243,19 @@ definitions:
       code: 1
       error: "Generic Validation"
       description: "The e-mail address must be valid."
+  get_closest_city_response:
+    type: "object"
+    properties:
+      city:
+        type: "string"
+      state_abbreviation:
+        type: "object"
+      state_name:
+        type: "object"
+    example:
+      city: "city"
+      state_abbreviation: "{}"
+      state_name: "{}"
   get_custom_categories_response:
     type: "object"
     properties:
@@ -1733,16 +1761,6 @@ definitions:
             type: "string"
     x-restlet:
       section: "ALERTS"
-  alert_list:
-    type: "array"
-    description: "A hash containing a list of objects. Each entry should have 1 alert\
-      \ object, and 1 search object, and 2 integer counts. One for the number of new\
-      \ loads, and one for the number of total loads that match the search critera."
-    items:
-      $ref: "#/definitions/alert"
-    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
-    x-restlet:
-      section: "ALERTS"
   bill_user:
     type: "object"
     required:
@@ -1909,28 +1927,6 @@ definitions:
         description: "Subject of the note. "
     x-restlet:
       section: "BOARDS"
-  end-user-token:
-    type: "object"
-    properties:
-      end-user-token:
-        type: "string"
-        description: "On success and end-user-token is returned."
-        example: "XX423ASOEUHT4AESUTH"
-    x-restlet:
-      section: "END_USER_AUTHENTICATIONS"
-  get_closest_city_response:
-    type: "object"
-    properties:
-      city:
-        type: "string"
-      state_abbreviation:
-        type: "object"
-      state_name:
-        type: "object"
-    example: "{\n  \"city\": \"city\",\n  \"state_abbreviation\": \"{}\",\n  \"state_name\"\
-      : \"{}\"\n}"
-    x-restlet:
-      section: "LOCATIONS"
   create_multiple_postings:
     type: "object"
     required:
