@@ -5,6 +5,7 @@ delete:
   responses:
     '204':
       description: Will not return content on a successful logout.
+  summary: STAGE=UNK Logs a user out.
   tags:
     - end_user_authentications
 get:
