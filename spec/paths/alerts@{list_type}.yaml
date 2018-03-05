@@ -1,7 +1,22 @@
+delete:
+  parameters:
+    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/end-user-token'
+    - collectionFormat: multi
+      description: Specify to just delete some alerts.
+      in: query
+      items:
+        type: string
+      name: alert_id
+      required: true
+      type: array
+  responses:
+    '204':
+      description: successful operation
+  summary: STAGE=UNK Delete an alert.
+  tags:
+    - alerts
 get:
-  summary: >-
-    Get a list of alerts. You can optionally limit the list by specifcying
-    alerts by their alert_id.
   parameters:
     - $ref: '#/parameters/end-user-token'
     - $ref: '#/parameters/load_truck_selector'
@@ -20,24 +35,9 @@ get:
       description: On success will return a list of alerts.
       schema:
         $ref: '#/definitions/alert_list'
-  tags:
-    - alerts
-post:
-  description: >-
-    Any parameter that is defined here and is also defined on the boards GET,
-    follows the same rules.
-  parameters:
-    - $ref: '#/parameters/load_truck_selector'
-    - $ref: '#/parameters/end-user-token'
-    - in: body
-      name: body
-      required: true
-      schema:
-        $ref: '#/definitions/alert'
-  responses:
-    '201':
-      $ref: '#/responses/object_created'
-  summary: Create an alert.
+  summary: >-
+    STAGE=UNK Get a list of alerts. You can optionally limit the list by
+    specifcying alerts by their alert_id.
   tags:
     - alerts
 patch:
@@ -61,25 +61,25 @@ patch:
   responses:
     '204':
       description: Returned on response.
-  summary: Update an alert.
+  summary: STAGE=UNK Update an alert.
   tags:
     - alerts
-delete:
+post:
+  description: >-
+    Any parameter that is defined here and is also defined on the boards GET,
+    follows the same rules.
   parameters:
     - $ref: '#/parameters/load_truck_selector'
     - $ref: '#/parameters/end-user-token'
-    - collectionFormat: multi
-      description: Specify to just delete some alerts.
-      in: query
-      items:
-        type: string
-      name: alert_id
+    - in: body
+      name: body
       required: true
-      type: array
+      schema:
+        $ref: '#/definitions/alert'
   responses:
-    '204':
-      description: successful operation
-  summary: Delete an alert.
+    '201':
+      $ref: '#/responses/object_created'
+  summary: STAGE=UNK Create an alert.
   tags:
     - alerts
 x-restlet:
