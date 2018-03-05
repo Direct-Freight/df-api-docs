@@ -18,6 +18,7 @@ get:
   tags:
     - profiles
 patch:
+  consumes: []
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body
@@ -32,6 +33,7 @@ patch:
   tags:
     - profiles
 post:
+  consumes: []
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body
