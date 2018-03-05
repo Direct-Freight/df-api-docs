@@ -13,7 +13,7 @@ delete:
   responses:
     '204':
       description: success operation
-  summary: Remove one or more postings.
+  summary: STAGE=UNK Remove one or more postings.
   tags:
     - postings
 get:
@@ -33,7 +33,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/get_posting_type_response'
-  summary: Get posts by this user.
+  summary: STAGE=UNK Get posts by this user.
   tags:
     - postings
 patch:
@@ -48,7 +48,7 @@ patch:
   responses:
     '204':
       description: successful operation
-  summary: Update an posting.
+  summary: STAGE=UNK Update an posting.
   tags:
     - postings
 post:
@@ -63,7 +63,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: Post an entry.
+  summary: STAGE=UNK Post an entry.
   tags:
     - postings
 x-restlet:

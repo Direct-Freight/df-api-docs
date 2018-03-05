@@ -15,7 +15,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: Copy or Move an posting.
+  summary: STAGE=UNK Copy or Move an posting.
   tags:
     - postings
 x-restlet:
