@@ -15,7 +15,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/get_closest_city_response'
-  summary: Will return the closest city to a lat/lon point.
+  summary: STAGE=UNK Will return the closest city to a lat/lon point.
   tags:
     - locations
 x-restlet:
