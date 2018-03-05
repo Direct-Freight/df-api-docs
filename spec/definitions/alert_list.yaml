@@ -1,10 +1,7 @@
-type: array
 description: >-
   A hash containing a list of objects. Each entry should have 1 alert object,
   and 1 search object, and 2 integer counts. One for the number of new loads,
   and one for the number of total loads that match the search critera.
-items:
-  $ref: '#/definitions/alert'
 example: |-
   {
     "data": [
@@ -12,5 +9,6 @@ example: |-
       "{}"
     ]
   }
-x-restlet:
-  section: ALERTS
+items:
+  $ref: '#/definitions/alert'
+type: array
