@@ -1,6 +1,5 @@
 get:
-  parameters:
-    - $ref: '#/parameters/board_type'
+  parameters: []
   responses:
     '200':
       description: successful operation
@@ -9,5 +8,7 @@ get:
   summary: STAGE=UNK A convenience method to get totals by state.
   tags:
     - boards
+parameters:
+  - $ref: '#/parameters/board_type'
 x-restlet:
   section: BOARDS
