@@ -19,7 +19,7 @@ Object.keys(swagger).forEach(function(level1) {
                 //methods console.log(level2);
                 Object.keys(swagger[level1][level2]).forEach(function(level3) {
                         //get/post/delete  console.log(level3);
-                        if(swagger[level1][level2][level3]['summary'] && swagger[level1][level2][level3]['summary'].indexOf('HIDE=') >= 0) 
+                        if(swagger[level1][level2][level3]['summary'] && swagger[level1][level2][level3]['summary'].indexOf('STAGE=') >= 0) 
                                 {
                                 delete swagger[level1][level2][level3]; //hide the method
                                 }
