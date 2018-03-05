@@ -12,7 +12,7 @@ post:
         $ref: '#/definitions/end-user-token'
     '422':
       $ref: '#/responses/error_422'
-  summary: Create a new user.
+  summary: STAGE=UNK Create a new user.
   tags:
     - end_user_authentications
 x-restlet:
