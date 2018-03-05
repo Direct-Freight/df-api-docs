@@ -31,7 +31,7 @@ Object.keys(swagger).forEach(function(level1) {
                         //get/post/delete  console.log(level3);
                         if(swagger[level1][level2][level3]['summary'] && swagger[level1][level2][level3]['summary'].indexOf('STAGE=') == -1) 
                                 {
-                                swagger[level1][level2][level3]['summary'] = 'STAGE=UNK' + swagger[level1][level2][level3]['summary'];
+                                swagger[level1][level2][level3]['summary'] = 'STAGE=UNK ' + swagger[level1][level2][level3]['summary'];
                                 }
                 });
         });
