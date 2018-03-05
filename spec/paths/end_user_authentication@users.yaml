@@ -1,4 +1,5 @@
 post:
+  consumes: []
   parameters:
     - in: body
       name: body
