@@ -1,5 +1,5 @@
 #!/bin/bash
 git config --global diff.tool difftool
-git config --global difftool.difftool.cmd "./script/yamldiff1 --file1 \$LOCAL --file2 \$REMOTE"
+git config --global difftool.difftool.cmd "./scripts/yamldiff1 --file1 \$LOCAL --file2 \$REMOTE"
 git difftool $@
 git config --global diff.tool vimdiff
