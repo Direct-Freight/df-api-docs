@@ -9,7 +9,7 @@ get:
           now:
             description: The current date and time based on our server.
             type: string
-  summary: Gets an authoritative date_time string.
+  summary: STAGE=UNK Gets an authoritative date_time string.
   tags:
     - end_user_authentications
 x-restlet:
