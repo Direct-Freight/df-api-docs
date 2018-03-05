@@ -47,41 +47,6 @@ consumes:
   - application/json
 produces:
   - application/json
-parameters:
-  end-user-token:
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  end-user-token-optional:
-    in: header
-    name: end-user-token
-    required: false
-    type: string
-  board_type:
-    description: 'Valid types are "loads", and "trucks".'
-    enum:
-      - loads
-      - trucks
-    in: path
-    name: board_type
-    required: true
-    type: string
-  posting_type:
-    description: >-
-      Valid types are "loads", "trucks", "private_loads", "private_trucks",
-      "test_loads", and "test_trucks"
-    enum:
-      - loads
-      - trucks
-      - private_loads
-      - private_trucks
-      - test_loads
-      - test_trucks
-    in: path
-    name: posting_type
-    required: true
-    type: string
 responses:
   error_422:
     description: Unprocessable Entity. More information provided in the return object.
