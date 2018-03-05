@@ -47,6 +47,14 @@ Object.keys(swagger).forEach(function(level1) {
                                         x++;
                                         });
                                 }
+                        if(swagger[level1][level2][level3]['responses'] && 
+                           swagger[level1][level2][level3]['responses']['201'] &&
+                           swagger[level1][level2][level3]['responses']['201']['schema'] &&
+                           swagger[level1][level2][level3]['responses']['201']['schema']['$ref'] &&
+                           swagger[level1][level2][level3]['responses']['201']['schema']['$ref'] == '#/definitions/create_status')
+                                {
+                                console.log(swagger[level1][level2][level3]['responses']['201'] = { '$ref': '#/responses/object_created' });
+                                }
                 });
         });
 });

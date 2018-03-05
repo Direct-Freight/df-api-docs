@@ -877,9 +877,7 @@ paths:
             $ref: '#/definitions/alert'
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: STAGE=UNK Create an alert.
       tags:
         - alerts
@@ -914,9 +912,7 @@ paths:
             $ref: '#/definitions/bill_user'
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: 'STAGE=UNK This function will attempt to process a payment, and upgrade a non subscibed user. '
       tags:
         - billings
@@ -981,9 +977,7 @@ paths:
             $ref: '#/definitions/mark_hidden_companies'
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: STAGE=UNK Mark a set of companies as hidden.
       tags:
         - boards
@@ -1049,9 +1043,7 @@ paths:
           type: array
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: STAGE=UNK Mark a set of entries as hidden.
       tags:
         - boards
@@ -1116,9 +1108,7 @@ paths:
             $ref: '#/definitions/create_notes'
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: STAGE=UNK Create a new note.
       tags:
         - boards
@@ -1477,9 +1467,7 @@ paths:
         - $ref: '#/parameters/end-user-token'
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: 'STAGE=UNK Create new category names, or add new data.'
       tags:
         - postings
@@ -1592,9 +1580,7 @@ paths:
             $ref: '#/definitions/post_object_model'
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: Create a posting
       tags:
         - postings
@@ -1630,9 +1616,7 @@ paths:
             $ref: '#/definitions/post_posting_type_action_body'
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: STAGE=UNK Copy or Move an posting.
       tags:
         - postings
@@ -1677,9 +1661,7 @@ paths:
             $ref: '#/definitions/create_profile'
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: STAGE=UNK Create a new profile.
       tags:
         - profiles
@@ -1731,9 +1713,7 @@ paths:
             $ref: '#/definitions/upload_document'
       responses:
         '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/post_status'
+          $ref: '#/responses/object_created'
       summary: STAGE=UNK Upload a new document.
       tags:
         - profiles

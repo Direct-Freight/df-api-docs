@@ -90,7 +90,7 @@ responses:
   object_created:
     description: Object created check the headers for a reference URL.
     schema:
-      $ref: '#/definitions/post_status'
+      $ref: '#/definitions/create_status'
 x-restlet:
   sections:
     ALERTS: {}
