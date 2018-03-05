@@ -1,9 +1,7 @@
 delete:
   parameters:
-    - $ref: '#/parameters/board_type'
     - $ref: '#/parameters/end-user-token'
-    - collectionFormat: multi
-      description: Specify to just delete some alerts.
+    - description: Specify to just delete some alerts.
       in: query
       items:
         type: string
@@ -19,9 +17,7 @@ delete:
 get:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - $ref: '#/parameters/board_type'
-    - collectionFormat: multi
-      description: >-
+    - description: >-
         only get a subset of alerts. As this is a get request this is specified
         as a query string parameter.
       in: query
@@ -40,24 +36,25 @@ get:
     specifcying alerts by their alert_id.
   tags:
     - alerts
+parameters:
+  - $ref: '#/parameters/board_type'
 patch:
+  consumes: []
   description: >-
     Search objects are set at creation. You cannot modify them after the alert
     has been created.
   parameters:
-    - $ref: '#/parameters/board_type'
     - $ref: '#/parameters/end-user-token'
-    - description: ''
-      in: body
-      name: body
-      required: false
-      schema:
-        $ref: '#/definitions/patch_alert_properties'
     - description: Specify which alert you are updating.
       in: query
       name: alert_id
       required: true
       type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/patch_alert_properties'
   responses:
     '204':
       description: Returned on response.
@@ -65,11 +62,11 @@ patch:
   tags:
     - alerts
 post:
+  consumes: []
   description: >-
     Any parameter that is defined here and is also defined on the boards GET,
     follows the same rules.
   parameters:
-    - $ref: '#/parameters/board_type'
     - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
