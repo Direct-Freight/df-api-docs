@@ -31,10 +31,18 @@ Object.keys(swagger).forEach(function(level1) {
                                 swagger[level1][level2][level3]['parameters'].forEach(function(level5) {
                                         if(level5.name == 'end-user-token')
                                                 {
-                                                //swagger[level1][level2][level3]['parameters'][x] = { '$ref': '#/parameters/end-user-token' };
-                                                swagger[level1][level2][level3]['parameters'].splice(x,1);
-                                                swagger[level1][level2][level3]['parameters'].unshift({ '$ref': '#/parameters/end-user-token' });
-                                                //swagger[level1][level2][level3]['parameters'].push({ '$ref': '#/parameters/end-user-token' });
+                                                if(level5.required)
+                                                        {
+                                                        swagger[level1][level2][level3]['parameters'].splice(x,1);
+                                                        swagger[level1][level2][level3]['parameters'].unshift({ '$ref': '#/parameters/end-user-token' });
+                                                        //swagger[level1][level2][level3]['parameters'].push({ '$ref': '#/parameters/end-user-token' });
+                                                        //swagger[level1][level2][level3]['parameters'][x] = { '$ref': '#/parameters/end-user-token' };
+                                                        }
+                                                else
+                                                        {
+                                                        swagger[level1][level2][level3]['parameters'].splice(x,1);
+                                                        swagger[level1][level2][level3]['parameters'].unshift({ '$ref': '#/parameters/end-user-token-optional' });
+                                                        }
                                                 }
                                         x++;
                                         });
