@@ -68,7 +68,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - "alerts"
@@ -168,7 +168,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     x-restlet:
       section: "BILLINGS"
   /boards/{board_type}:
@@ -272,7 +272,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - "boards"
@@ -352,7 +352,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - "boards"
@@ -432,7 +432,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - "boards"
@@ -776,7 +776,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - "postings"
@@ -850,7 +850,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     parameters:
     - name: "posting_type"
       in: "path"
@@ -907,7 +907,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - "postings"
@@ -1019,7 +1019,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     patch:
       tags:
       - "profiles"
@@ -1074,7 +1074,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/post_status"
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - "profiles"
@@ -1213,6 +1213,19 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
+  alert_list:
+    type: "array"
+    description: "A hash containing a list of objects. Each entry should have 1 alert\
+      \ object, and 1 search object, and 2 integer counts. One for the number of new\
+      \ loads, and one for the number of total loads that match the search critera."
+    items:
+      $ref: "#/definitions/alert"
+    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
+  create_status:
+    type: "object"
+    properties:
+      success:
+        type: "integer"
   error_object:
     type: "object"
     required:
@@ -1531,11 +1544,6 @@ definitions:
         description: "The posting_type where you are moving or copying the posting\
           \ from. Optional for create. Items can only be moved to like types. loads\
           \ -> private_private loads."
-  post_status:
-    type: "object"
-    properties:
-      success:
-        type: "integer"
   profile_model:
     type: "object"
     properties:
@@ -1724,16 +1732,6 @@ definitions:
             type: "integer"
           load_size:
             type: "string"
-    x-restlet:
-      section: "ALERTS"
-  alert_list:
-    type: "array"
-    description: "A hash containing a list of objects. Each entry should have 1 alert\
-      \ object, and 1 search object, and 2 integer counts. One for the number of new\
-      \ loads, and one for the number of total loads that match the search critera."
-    items:
-      $ref: "#/definitions/alert"
-    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
     x-restlet:
       section: "ALERTS"
   bill_user:
