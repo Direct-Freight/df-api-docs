@@ -1,9 +1,7 @@
 delete:
   parameters:
-    - $ref: '#/parameters/posting_type'
     - $ref: '#/parameters/end-user-token'
-    - collectionFormat: multi
-      description: You must specify which entry to remove.
+    - description: You must specify which entry to remove.
       in: query
       items:
         type: string
@@ -18,10 +16,8 @@ delete:
     - postings
 get:
   parameters:
-    - $ref: '#/parameters/posting_type'
     - $ref: '#/parameters/end-user-token'
-    - collectionFormat: multi
-      description: To just return information about some postings.
+    - description: To just return information about some postings.
       in: query
       items:
         type: string
@@ -36,13 +32,15 @@ get:
   summary: Get posts by this user.
   tags:
     - postings
+parameters:
+  - $ref: '#/parameters/posting_type'
 patch:
+  consumes: []
   parameters:
-    - $ref: '#/parameters/posting_type'
     - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
-      required: false
+      required: true
       schema:
         $ref: '#/definitions/post_object_model'
   responses:
@@ -52,8 +50,8 @@ patch:
   tags:
     - postings
 post:
+  consumes: []
   parameters:
-    - $ref: '#/parameters/posting_type'
     - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
