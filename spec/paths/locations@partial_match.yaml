@@ -16,8 +16,8 @@ get:
     '200':
       description: successful operation
   summary: >-
-    A string of a partial city or state name, and returns a list of possible
-    matches.
+    STAGE=UNK A string of a partial city or state name, and returns a list of
+    possible matches.
   tags:
     - locations
 x-restlet:
