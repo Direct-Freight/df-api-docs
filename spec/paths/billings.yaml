@@ -1,5 +1,7 @@
 get:
-  description: "Will return how much the end user will be charged to upgrade. It will not charge the user, or consume the promo code."
+  description: >-
+    Will return how much the end user will be charged to upgrade. It will not
+    charge the user, or consume the promo code.
   parameters:
     - $ref: '#/parameters/end-user-token'
     - description: 'The promo code. '
@@ -19,9 +21,10 @@ get:
   tags:
     - billings
 post:
+  consumes: []
   description: >-
-        This function will attempt to process a payment, and upgrade a non
-        subscibed user. 
+    This function will attempt to process a payment, and upgrade a non subscibed
+    user. 
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body
