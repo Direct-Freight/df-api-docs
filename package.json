@@ -34,7 +34,7 @@
     "start": "gulp serve",
     "deploy-branch": "node ./scripts/deploy-branch.js",
     "swagger2repo": "swagger-repo sync-with-swagger",
-    "restlet2repo": "node ./scripts/fix_references.js restlet_studio/swagger.yaml && swagger-repo sync-with-swagger restlet_studio/swagger.yaml-modified",
+    "restlet2repo": "node ./scripts/fix-restlet.js restlet_studio/swagger.yaml && swagger-repo sync-with-swagger restlet_studio/swagger.yaml-modified",
     "repo2swagger": "swagger-repo bundle -y -o web_deploy/swagger.yaml && swagger-repo bundle -o web_deploy/swagger.json"
   }
 }
