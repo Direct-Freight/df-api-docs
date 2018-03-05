@@ -1,19 +1,8 @@
-swagger: '2.0'
 basePath: /api
-securityDefinitions:
-  api_key:
-    in: header
-    name: api-token
-    type: apiKey
-    description: >-
-      This token needs to be sent as a HTTP header argument in every request to
-      our API.
-schemes:
-  - https
+consumes:
+  - application/json
 host: www.directfreight.com
 x-ibm-configuration: {}
-security:
-  - api_key: []
 info:
   version: 2.0.0
   title: Direct Freight API
@@ -43,8 +32,6 @@ info:
 
 
     Both Tokens are stateless, and delivered via the HTTP headers.
-consumes:
-  - application/json
 produces:
   - application/json
 responses:
@@ -56,6 +43,19 @@ responses:
     description: Object created check the headers for a reference URL.
     schema:
       $ref: '#/definitions/create_status'
+schemes:
+  - https
+security:
+  - api_key: []
+securityDefinitions:
+  api_key:
+    in: header
+    name: api-token
+    type: apiKey
+    description: >-
+      This token needs to be sent as a HTTP header argument in every request to
+      our API.
+swagger: '2.0'
 x-restlet:
   sections:
     ALERTS: {}
