@@ -15,9 +15,9 @@ get:
       schema:
         $ref: '#/definitions/get_billing_response'
   summary: >-
-    Returns the amount the end user will be charged. If a promo code is present
-    return adjusted amount. If there are special conditions a string with the
-    promo code benefits will also be returned.
+    STAGE=UNK Returns the amount the end user will be charged. If a promo code
+    is present return adjusted amount. If there are special conditions a string
+    with the promo code benefits will also be returned.
   tags:
     - billings
 post:
@@ -35,8 +35,8 @@ post:
     '201':
       $ref: '#/responses/object_created'
   summary: >-
-    This function will attempt to process a payment, and upgrade a non subscibed
-    user. 
+    STAGE=UNK This function will attempt to process a payment, and upgrade a non
+    subscibed user. 
   tags:
     - billings
 x-restlet:
