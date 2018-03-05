@@ -2,7 +2,7 @@ post:
   description: This is the primary search method.
   parameters:
     - $ref: '#/parameters/end-user-tokenOptional'
-    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/board_type'
     - description: Please specifify at least a partial origin or destination.
       in: body
       name: body

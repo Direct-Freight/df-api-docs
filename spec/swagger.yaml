@@ -58,16 +58,16 @@ parameters:
     name: end-user-token
     required: false
     type: string
-  load_truck_selector:
+  board_type:
     description: 'Valid types are "loads", and "trucks".'
     enum:
       - loads
       - trucks
     in: path
-    name: list_type
+    name: board_type
     required: true
     type: string
-  posting_selector:
+  posting_type:
     description: >-
       Valid types are "loads", "trucks", "private_loads", "private_trucks",
       "test_loads", and "test_trucks"
@@ -79,7 +79,7 @@ parameters:
       - test_loads
       - test_trucks
     in: path
-    name: list_type
+    name: posting_type
     required: true
     type: string
 responses:

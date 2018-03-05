@@ -1,6 +1,6 @@
 delete:
   parameters:
-    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/board_type'
     - $ref: '#/parameters/end-user-token'
     - collectionFormat: multi
       description: Specify to just delete some alerts.
@@ -19,7 +19,7 @@ delete:
 get:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/board_type'
     - collectionFormat: multi
       description: >-
         only get a subset of alerts. As this is a get request this is specified
@@ -45,7 +45,7 @@ patch:
     Search objects are set at creation. You cannot modify them after the alert
     has been created.
   parameters:
-    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/board_type'
     - $ref: '#/parameters/end-user-token'
     - description: ''
       in: body
@@ -69,7 +69,7 @@ post:
     Any parameter that is defined here and is also defined on the boards GET,
     follows the same rules.
   parameters:
-    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/board_type'
     - $ref: '#/parameters/end-user-token'
     - in: body
       name: body

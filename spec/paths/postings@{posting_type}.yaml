@@ -1,6 +1,6 @@
 delete:
   parameters:
-    - $ref: '#/parameters/posting_selector'
+    - $ref: '#/parameters/posting_type'
     - $ref: '#/parameters/end-user-token'
     - collectionFormat: multi
       description: You must specify which entry to remove.
@@ -18,7 +18,7 @@ delete:
     - postings
 get:
   parameters:
-    - $ref: '#/parameters/posting_selector'
+    - $ref: '#/parameters/posting_type'
     - $ref: '#/parameters/end-user-token'
     - collectionFormat: multi
       description: To just return information about some postings.
@@ -38,7 +38,7 @@ get:
     - postings
 patch:
   parameters:
-    - $ref: '#/parameters/posting_selector'
+    - $ref: '#/parameters/posting_type'
     - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
@@ -53,7 +53,7 @@ patch:
     - postings
 post:
   parameters:
-    - $ref: '#/parameters/posting_selector'
+    - $ref: '#/parameters/posting_type'
     - $ref: '#/parameters/end-user-token'
     - in: body
       name: body

@@ -1,6 +1,6 @@
 post:
   parameters:
-    - $ref: '#/parameters/posting_selector'
+    - $ref: '#/parameters/posting_type'
     - $ref: '#/parameters/end-user-token'
     - in: body
       name: body

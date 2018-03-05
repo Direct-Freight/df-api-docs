@@ -1,6 +1,6 @@
 get:
   parameters:
-    - $ref: '#/parameters/load_truck_selector'
+    - $ref: '#/parameters/board_type'
   responses:
     '200':
       description: successful operation
