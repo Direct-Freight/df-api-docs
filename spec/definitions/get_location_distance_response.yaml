@@ -1,8 +1,12 @@
-type: object
+example: |-
+  {
+    "distance": 0
+  }
 properties:
   distance:
-    type: integer
-    format: int32
     description: A number representing the miles between the two locations.
-example:
-  distance: 0
+    format: int32
+    type: integer
+type: object
+x-restlet:
+  section: LOCATIONS
