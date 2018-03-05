@@ -1,13 +1,7 @@
 delete:
   parameters:
-    - description: 'Valid types are "names", and "data".'
-      in: path
-      name: category_type
-      required: true
-      type: string
     - $ref: '#/parameters/end-user-token'
-    - collectionFormat: multi
-      description: To just delete information about some postings.
+    - description: To just delete information about some postings.
       in: query
       items:
         type: string
@@ -23,13 +17,7 @@ delete:
 get:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - description: 'Valid types are "names", and "data".'
-      in: path
-      name: category_type
-      required: true
-      type: string
-    - collectionFormat: multi
-      description: To just return information about some postings.
+    - description: To just return information about some postings.
       in: query
       items:
         type: string
@@ -44,13 +32,14 @@ get:
   summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
   tags:
     - postings
+parameters:
+  - description: 'Valid types are "names", and "data".'
+    in: path
+    name: category_type
+    required: true
+    type: string
 patch:
   parameters:
-    - description: 'Valid types are "names", and "data".'
-      in: path
-      name: category_type
-      required: true
-      type: string
     - $ref: '#/parameters/end-user-token'
   responses:
     '204':
@@ -60,11 +49,6 @@ patch:
     - postings
 post:
   parameters:
-    - description: 'Valid types are "names", and "data".'
-      in: path
-      name: category_type
-      required: true
-      type: string
     - $ref: '#/parameters/end-user-token'
   responses:
     '201':
