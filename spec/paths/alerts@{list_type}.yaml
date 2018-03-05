@@ -1,7 +1,7 @@
 get:
   summary: >-
     Get a list of alerts. You can optionally limit the list by specifcying
-    alerts by their alert_id. HIDE=TRUE
+    alerts by their alert_id.
   parameters:
     - $ref: '#/parameters/end-user-token'
     - $ref: '#/parameters/load_truck_selector'
