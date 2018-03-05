@@ -28,7 +28,7 @@ Object.keys(swagger).forEach(function(level1) {
 });
 
 console.log('Saving modified yaml');
-fs.writeFile('web_deploy/swagger.yaml', YAML.safeDump(swagger, {indent: 2, lineWidth: -1, noRefs: true}), (err) => {
+fs.writeFile('web_deploy/swagger.yaml', YAML.safeDump(swagger, {indent: 2, lineWidth: -1, noRefs: true, sortKeys: true}), (err) => {
         if (err) 
                 {
                 console.log('ERROR WRITING: web_deploy/swagger.yaml');
