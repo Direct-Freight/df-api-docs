@@ -1216,11 +1216,6 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
-  create_status:
-    type: "object"
-    properties:
-      success:
-        type: "integer"
   error_object:
     type: "object"
     required:
@@ -2008,6 +2003,13 @@ definitions:
         type: "string"
     x-restlet:
       section: "PROFILES"
+  create_status:
+    type: "object"
+    properties:
+      success:
+        type: "integer"
+    x-restlet:
+      section: "common_definitions"
 x-restlet:
   sections:
     ALERTS: {}
@@ -2019,3 +2021,4 @@ x-restlet:
     POSTINGS: {}
     PROFILES: {}
     VALIDATIONS: {}
+    common_definitions: {}
