@@ -1216,14 +1216,6 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
-  alert_list:
-    type: "array"
-    description: "A hash containing a list of objects. Each entry should have 1 alert\
-      \ object, and 1 search object, and 2 integer counts. One for the number of new\
-      \ loads, and one for the number of total loads that match the search critera."
-    items:
-      $ref: "#/definitions/alert"
-    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
   create_status:
     type: "object"
     properties:
@@ -1401,66 +1393,6 @@ definitions:
       time_zone:
         type: "object"
         description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
-  patch_profile:
-    type: "object"
-    required:
-    - "address"
-    - "city"
-    - "company"
-    - "contact_extension"
-    - "contact_name"
-    - "contact_number"
-    - "dot_number"
-    - "fax_number"
-    - "mc_number"
-    - "mobile_carrier"
-    - "mobile_number"
-    - "state"
-    - "web_page"
-    - "zip"
-    properties:
-      address:
-        type: "string"
-        description: ""
-      city:
-        type: "string"
-        description: ""
-      company:
-        type: "string"
-        description: "Company name. "
-      contact_extension:
-        type: "string"
-        description: ""
-      contact_name:
-        type: "string"
-        description: "Contact name. "
-      contact_number:
-        type: "string"
-        description: ""
-      dot_number:
-        type: "string"
-        description: ""
-      fax_number:
-        type: "string"
-        description: ""
-      mc_number:
-        type: "string"
-        description: ""
-      mobile_carrier:
-        type: "integer"
-        description: ""
-      mobile_number:
-        type: "string"
-        description: ""
-      state:
-        type: "string"
-        description: ""
-      web_page:
-        type: "string"
-        description: ""
-      zip:
-        type: "string"
-        description: ""
   post_object_model:
     type: "object"
     required:
@@ -1737,6 +1669,16 @@ definitions:
             type: "string"
     x-restlet:
       section: "ALERTS"
+  alert_list:
+    type: "array"
+    description: "A hash containing a list of objects. Each entry should have 1 alert\
+      \ object, and 1 search object, and 2 integer counts. One for the number of new\
+      \ loads, and one for the number of total loads that match the search critera."
+    items:
+      $ref: "#/definitions/alert"
+    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
+    x-restlet:
+      section: "ALERTS"
   bill_user:
     type: "object"
     required:
@@ -2008,6 +1950,56 @@ definitions:
       password:
         type: "string"
         description: "Needed to set up the user/pass for authentication. "
+      state:
+        type: "string"
+      web_page:
+        type: "string"
+      zip:
+        type: "string"
+    x-restlet:
+      section: "PROFILES"
+  patch_profile:
+    type: "object"
+    required:
+    - "address"
+    - "city"
+    - "company"
+    - "contact_extension"
+    - "contact_name"
+    - "contact_number"
+    - "dot_number"
+    - "fax_number"
+    - "mc_number"
+    - "mobile_carrier"
+    - "mobile_number"
+    - "state"
+    - "web_page"
+    - "zip"
+    properties:
+      address:
+        type: "string"
+      city:
+        type: "string"
+      company:
+        type: "string"
+        description: "Company name. "
+      contact_extension:
+        type: "string"
+      contact_name:
+        type: "string"
+        description: "Contact name. "
+      contact_number:
+        type: "string"
+      dot_number:
+        type: "string"
+      fax_number:
+        type: "string"
+      mc_number:
+        type: "string"
+      mobile_carrier:
+        type: "integer"
+      mobile_number:
+        type: "string"
       state:
         type: "string"
       web_page:
