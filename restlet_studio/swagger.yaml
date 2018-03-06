@@ -1216,353 +1216,6 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
-  get_custom_categories_response:
-    type: "object"
-    properties:
-      categories:
-        type: "array"
-        description: "A list of each category, type and it's corresponding position."
-        items:
-          type: "string"
-    example:
-      categories:
-      - "categories"
-      - "categories"
-  get_email_exists_response:
-    type: "object"
-    properties:
-      exists:
-        type: "boolean"
-        description: "Returns a true value if it is associated with an account."
-    example:
-      exists: true
-  get_hidden_companies_response:
-    type: "object"
-    properties:
-      company_name:
-        type: "array"
-        description: "A subset of companies that need to be marked as hidden."
-        items:
-          type: "string"
-    example:
-      company_name:
-      - "company_name"
-      - "company_name"
-  get_hidden_entries:
-    type: "object"
-    properties:
-      entry_id:
-        type: "array"
-        description: "A subset of entries that need to be marked as hidden."
-        items:
-          type: "string"
-    example:
-      entry_id:
-      - "entry_id"
-      - "entry_id"
-  get_posting_type_response:
-    type: "object"
-    properties:
-      posting_list:
-        type: "array"
-        description: "A list of posting objects you can iterate over."
-        items:
-          type: "string"
-    example:
-      posting_list:
-      - "posting_list"
-      - "posting_list"
-  get_state_list_response:
-    type: "object"
-    properties:
-      state_totals:
-        type: "object"
-        description: "A hash of state totals."
-        example: "{     \"MS\": 1449,     \"NS\": 24,     \"VT\": 145,     \"MD\"\
-          : 520,     \"ID\": 2091,     \"SK\": 126,     \"WA\": 2207,     \"SC\":\
-          \ 1619,     \"VA\": 1781,     \"PQ\": 10,     \"ON\": 270,     \"KS\": 969,\
-          \     \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,\
-          \     \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,\
-          \     \"BC\": 124,     \"DC\": 7,     .... }"
-    example:
-      state_totals: "{     \"MS\": 1449,     \"NS\": 24,     \"VT\": 145,     \"MD\"\
-        : 520,     \"ID\": 2091,     \"SK\": 126,     \"WA\": 2207,     \"SC\": 1619,\
-        \     \"VA\": 1781,     \"PQ\": 10,     \"ON\": 270,     \"KS\": 969,    \
-        \ \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,    \
-        \ \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,     \"\
-        BC\": 124,     \"DC\": 7,     .... }"
-  login_credentials:
-    type: "object"
-    required:
-    - "login"
-    - "realm"
-    - "secret"
-    properties:
-      login:
-        type: "string"
-        description: "The e-mail, or username information needed to log in. "
-      realm:
-        type: "string"
-        description: "This specifies who to log in with. If left blank we will assume\
-          \ email/password. Valid realms are username, email, facebook(not implemneted),\
-          \ google(not implemented), and linkedin(not implemented). "
-        enum:
-        - "username"
-        - "email"
-      secret:
-        type: "string"
-        description: "The password, or token required for this login. "
-  mark_hidden_companies:
-    type: "object"
-    required:
-    - "company_name"
-    properties:
-      company_name:
-        type: "string"
-        description: "The comapny that need to be marked as hidden. "
-  mobile_carrier_response:
-    type: "object"
-    properties:
-      carrier_id:
-        type: "integer"
-        format: "int32"
-        description: "The carrier ID."
-      carrier_name:
-        type: "object"
-        description: "Their mobile carrier."
-    example:
-      carrier_id: 0
-      carrier_name: "{}"
-  patch_alert_properties:
-    type: "object"
-    properties:
-      days_of_week:
-        type: "object"
-        description: "Limit the days that alerts are sent to the days listed. Send\
-          \ an array of strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and\
-          \ 'Sat'."
-      end_hour:
-        type: "object"
-        description: "Has the same values as start_hour"
-      expires_after:
-        type: "object"
-        description: "The last day the alert will be valid. Valid time frames are\
-          \ from today until one year into the future."
-      list_order:
-        type: "object"
-        description: "Any value that is valid in the boards sort_order is also valid\
-          \ here."
-      list_type:
-        type: "object"
-        description: "This specify the type of list that is returned, including disabling\
-          \ the list from being sent at all. Valid values are 'complete-list','only-new',\
-          \ and 'not-active'."
-      minute_frequency:
-        type: "object"
-        description: "How many minutes to wait before sending another alert. Valid\
-          \ values are '15','30','60','120','240','480', and '1440'."
-      send_type:
-        type: "object"
-        description: "What method to send the alert list. Valid types are 'email',or\
-          \ 'text'."
-      start_hour:
-        type: "object"
-        description: "A value between 3-21 corresponding to the hour of the day."
-      time_zone:
-        type: "object"
-        description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
-  post_object_model:
-    type: "object"
-    required:
-    - "origin_city"
-    - "origin_state"
-    - "posting_id"
-    - "ship_date"
-    - "trailer_type"
-    properties:
-      comment:
-        type: "object"
-      custom_id:
-        type: "object"
-        description: "A unique identifier a user can provide for their own records."
-      destination_city:
-        type: "object"
-        description: "For truck type entries this is optional."
-      destination_state:
-        type: "object"
-        description: "For truck type entries this is optional."
-      height:
-        type: "object"
-      length:
-        type: "object"
-      load_size:
-        type: "object"
-        description: "Require for load type entries only. This field expects one of\
-          \ the 2 following terms, full or partial."
-      origin_city:
-        type: "object"
-        description: "Required for all entry types."
-      origin_state:
-        type: "object"
-        description: "Required, 2 character limit."
-      other_trailer_types:
-        type: "object"
-        description: "This may be empty."
-      pay_rate:
-        type: "object"
-      posting_id:
-        type: "integer"
-        format: "int32"
-        description: "A unique id in our system for the user's entry."
-      receive_date:
-        type: "object"
-      ship_date:
-        type: "object"
-      trailer_type:
-        type: "object"
-        description: "This can have 1 or more standard trailer types."
-      weight:
-        type: "object"
-      width:
-        type: "object"
-  post_optin_code_response:
-    type: "object"
-    properties:
-      optin_code:
-        type: "string"
-        description: "A text string with the code sent."
-    example:
-      optin_code: "optin_code"
-  post_posting_multiple_response:
-    type: "object"
-    properties:
-      success:
-        type: "boolean"
-        description: "This will return true, and have a unique location in the location\
-          \ header."
-    example:
-      success: true
-  post_posting_type_action_body:
-    type: "object"
-    required:
-    - "source_id"
-    - "source_posting"
-    properties:
-      source_id:
-        type: "object"
-        description: "The posting id of the posting you are moving or copying. Optional\
-          \ for create."
-      source_posting:
-        type: "string"
-        description: "The posting_type where you are moving or copying the posting\
-          \ from. Optional for create. Items can only be moved to like types. loads\
-          \ -> private_private loads."
-  profile_model:
-    type: "object"
-    properties:
-      address:
-        type: "string"
-        description: "The address associated with their entries."
-      city:
-        type: "string"
-      company:
-        type: "string"
-      contact_extension:
-        type: "string"
-      contact_name:
-        type: "string"
-        description: "Contact name."
-      contact_number:
-        type: "string"
-      dot_number:
-        type: "string"
-      fax_number:
-        type: "string"
-      mc_number:
-        type: "string"
-      mobile_carrier:
-        type: "string"
-      mobile_number:
-        type: "string"
-      state:
-        type: "string"
-      web_page:
-        type: "string"
-      zip:
-        type: "string"
-    example:
-      address: "P.O. Box 131"
-      city: "Chillicothe"
-      company: "Direct Freight"
-      contact_extension: "x333"
-      contact_name: "Joe Doe"
-      contact_number: "555-555-5555"
-      dot_number: 123456
-      fax_number: "555-555-5555"
-      mc_number: 123456
-      mobile_carrier: "Company_X"
-      mobile_number: "555-555-1234"
-      state: "MO"
-      web_page: "http://www.directfreight.com"
-      zip: 55555
-  rename_document:
-    type: "object"
-    required:
-    - "current_name"
-    - "new_name"
-    properties:
-      current_name:
-        type: "string"
-        description: "The document to be renamed. "
-      new_name:
-        type: "string"
-        description: "Replacement name. "
-  success_status_response:
-    type: "object"
-    properties:
-      status:
-        type: "string"
-        description: "A text status like OPTIN, NORESPONSE, OPTOUT."
-    example:
-      status: "status"
-  toggle_hidden_companies:
-    type: "object"
-    required:
-    - "company_id"
-    properties:
-      company_id:
-        type: "string"
-        description: "The company name that need to be toggled. "
-  toggle_hidden_entries:
-    type: "object"
-    required:
-    - "entry_id"
-    properties:
-      entry_id:
-        type: "array"
-        description: "The entry that need to be toggled. "
-        items:
-          type: "string"
-  upload_document:
-    type: "object"
-    required:
-    - "The"
-    properties:
-      The:
-        type: "object"
-        description: "file to be uploaded. "
-  user:
-    type: "object"
-    required:
-    - "email"
-    - "password"
-    properties:
-      email:
-        type: "string"
-        description: "This must be a valid e-mail. "
-      password:
-        type: "string"
-        description: "Currently this is a 6-10 digit alphanumeric password. "
   alert:
     type: "object"
     required:
@@ -1655,6 +1308,46 @@ definitions:
     items:
       $ref: "#/definitions/alert"
     example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
+    x-restlet:
+      section: "ALERTS"
+  patch_alert_properties:
+    type: "object"
+    properties:
+      days_of_week:
+        type: "object"
+        description: "Limit the days that alerts are sent to the days listed. Send\
+          \ an array of strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and\
+          \ 'Sat'."
+      end_hour:
+        type: "object"
+        description: "Has the same values as start_hour"
+      expires_after:
+        type: "object"
+        description: "The last day the alert will be valid. Valid time frames are\
+          \ from today until one year into the future."
+      list_order:
+        type: "object"
+        description: "Any value that is valid in the boards sort_order is also valid\
+          \ here."
+      list_type:
+        type: "object"
+        description: "This specify the type of list that is returned, including disabling\
+          \ the list from being sent at all. Valid values are 'complete-list','only-new',\
+          \ and 'not-active'."
+      minute_frequency:
+        type: "object"
+        description: "How many minutes to wait before sending another alert. Valid\
+          \ values are '15','30','60','120','240','480', and '1440'."
+      send_type:
+        type: "object"
+        description: "What method to send the alert list. Valid types are 'email',or\
+          \ 'text'."
+      start_hour:
+        type: "object"
+        description: "A value between 3-21 corresponding to the hour of the day."
+      time_zone:
+        type: "object"
+        description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
     x-restlet:
       section: "ALERTS"
   bill_user:
@@ -1823,6 +1516,39 @@ definitions:
         description: "Subject of the note. "
     x-restlet:
       section: "BOARDS"
+  get_state_list_response:
+    type: "object"
+    properties:
+      state_totals:
+        type: "object"
+        description: "A hash of state totals."
+        example: "{     \"MS\": 1449,     \"NS\": 24,     \"VT\": 145,     \"MD\"\
+          : 520,     \"ID\": 2091,     \"SK\": 126,     \"WA\": 2207,     \"SC\":\
+          \ 1619,     \"VA\": 1781,     \"PQ\": 10,     \"ON\": 270,     \"KS\": 969,\
+          \     \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,\
+          \     \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,\
+          \     \"BC\": 124,     \"DC\": 7,     .... }"
+    example:
+      state_totals: "{     \"MS\": 1449,     \"NS\": 24,     \"VT\": 145,     \"MD\"\
+        : 520,     \"ID\": 2091,     \"SK\": 126,     \"WA\": 2207,     \"SC\": 1619,\
+        \     \"VA\": 1781,     \"PQ\": 10,     \"ON\": 270,     \"KS\": 969,    \
+        \ \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,    \
+        \ \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,     \"\
+        BC\": 124,     \"DC\": 7,     .... }"
+    x-restlet:
+      section: "BOARDS"
+  toggle_hidden_entries:
+    type: "object"
+    required:
+    - "entry_id"
+    properties:
+      entry_id:
+        type: "array"
+        description: "The entry that need to be toggled. "
+        items:
+          type: "string"
+    x-restlet:
+      section: "BOARDS"
   end-user-token:
     type: "object"
     properties:
@@ -1830,6 +1556,29 @@ definitions:
         type: "string"
         description: "On success and end-user-token is returned."
         example: "XX423ASOEUHT4AESUTH"
+    x-restlet:
+      section: "END_USER_AUTHENTICATIONS"
+  login_credentials:
+    type: "object"
+    required:
+    - "login"
+    - "realm"
+    - "secret"
+    properties:
+      login:
+        type: "string"
+        description: "The e-mail, or username information needed to log in. "
+      realm:
+        type: "string"
+        description: "This specifies who to log in with. If left blank we will assume\
+          \ email/password. Valid realms are username, email, facebook(not implemneted),\
+          \ google(not implemented), and linkedin(not implemented). "
+        enum:
+        - "username"
+        - "email"
+      secret:
+        type: "string"
+        description: "The password, or token required for this login. "
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
   get_closest_city_response:
@@ -1986,6 +1735,56 @@ definitions:
         type: "string"
     x-restlet:
       section: "PROFILES"
+  profile_model:
+    type: "object"
+    properties:
+      address:
+        type: "string"
+        description: "The address associated with their entries."
+      city:
+        type: "string"
+      company:
+        type: "string"
+      contact_extension:
+        type: "string"
+      contact_name:
+        type: "string"
+        description: "Contact name."
+      contact_number:
+        type: "string"
+      dot_number:
+        type: "string"
+      fax_number:
+        type: "string"
+      mc_number:
+        type: "string"
+      mobile_carrier:
+        type: "string"
+      mobile_number:
+        type: "string"
+      state:
+        type: "string"
+      web_page:
+        type: "string"
+      zip:
+        type: "string"
+    example:
+      address: "P.O. Box 131"
+      city: "Chillicothe"
+      company: "Direct Freight"
+      contact_extension: "x333"
+      contact_name: "Joe Doe"
+      contact_number: "555-555-5555"
+      dot_number: 123456
+      fax_number: "555-555-5555"
+      mc_number: 123456
+      mobile_carrier: "Company_X"
+      mobile_number: "555-555-1234"
+      state: "MO"
+      web_page: "http://www.directfreight.com"
+      zip: 55555
+    x-restlet:
+      section: "PROFILES"
   create_status:
     type: "object"
     properties:
@@ -2010,6 +1809,244 @@ definitions:
       : \"The e-mail address must be valid.\"\n}"
     x-restlet:
       section: "common_definitions"
+  get_custom_categories_response:
+    type: "object"
+    properties:
+      categories:
+        type: "array"
+        description: "A list of each category, type and it's corresponding position."
+        items:
+          type: "string"
+    example: "{\n  \"categories\": [\n    \"categories\",\n    \"categories\"\n  ]\n\
+      }"
+    x-restlet:
+      section: "not categorized yet"
+  get_email_exists_response:
+    type: "object"
+    properties:
+      exists:
+        type: "boolean"
+        description: "Returns a true value if it is associated with an account."
+    example: "{\n  \"exists\": true\n}"
+    x-restlet:
+      section: "not categorized yet"
+  get_hidden_companies_response:
+    type: "object"
+    properties:
+      company_name:
+        type: "array"
+        description: "A subset of companies that need to be marked as hidden."
+        items:
+          type: "string"
+    example: "{\n  \"company_name\": [\n    \"company_name\",\n    \"company_name\"\
+      \n  ]\n}"
+    x-restlet:
+      section: "not categorized yet"
+  get_hidden_entries:
+    type: "object"
+    properties:
+      entry_id:
+        type: "array"
+        description: "A subset of entries that need to be marked as hidden."
+        items:
+          type: "string"
+    example:
+      entry_id:
+      - "entry_id"
+      - "entry_id"
+    x-restlet:
+      section: "not categorized yet"
+  get_posting_type_response:
+    type: "object"
+    properties:
+      posting_list:
+        type: "array"
+        description: "A list of posting objects you can iterate over."
+        items:
+          type: "string"
+    example:
+      posting_list:
+      - "posting_list"
+      - "posting_list"
+    x-restlet:
+      section: "not categorized yet"
+  upload_document:
+    type: "object"
+    required:
+    - "The"
+    properties:
+      The:
+        type: "object"
+        description: "file to be uploaded. "
+    x-restlet:
+      section: "not categorized yet"
+  user:
+    type: "object"
+    required:
+    - "email"
+    - "password"
+    properties:
+      email:
+        type: "string"
+        description: "This must be a valid e-mail. "
+      password:
+        type: "string"
+        description: "Currently this is a 6-10 digit alphanumeric password. "
+    x-restlet:
+      section: "not categorized yet"
+  toggle_hidden_companies:
+    type: "object"
+    required:
+    - "company_id"
+    properties:
+      company_id:
+        type: "string"
+        description: "The company name that need to be toggled. "
+    x-restlet:
+      section: "not categorized yet"
+  success_status_response:
+    type: "object"
+    properties:
+      status:
+        type: "string"
+        description: "A text status like OPTIN, NORESPONSE, OPTOUT."
+    example:
+      status: "status"
+    x-restlet:
+      section: "not categorized yet"
+  mark_hidden_companies:
+    type: "object"
+    required:
+    - "company_name"
+    properties:
+      company_name:
+        type: "string"
+        description: "The comapny that need to be marked as hidden. "
+    x-restlet:
+      section: "not categorized yet"
+  mobile_carrier_response:
+    type: "object"
+    properties:
+      carrier_id:
+        type: "integer"
+        format: "int32"
+        description: "The carrier ID."
+      carrier_name:
+        type: "object"
+        description: "Their mobile carrier."
+    example:
+      carrier_id: 0
+      carrier_name: "{}"
+    x-restlet:
+      section: "not categorized yet"
+  post_object_model:
+    type: "object"
+    required:
+    - "origin_city"
+    - "origin_state"
+    - "posting_id"
+    - "ship_date"
+    - "trailer_type"
+    properties:
+      comment:
+        type: "object"
+      custom_id:
+        type: "object"
+        description: "A unique identifier a user can provide for their own records."
+      destination_city:
+        type: "object"
+        description: "For truck type entries this is optional."
+      destination_state:
+        type: "object"
+        description: "For truck type entries this is optional."
+      height:
+        type: "object"
+      length:
+        type: "object"
+      load_size:
+        type: "object"
+        description: "Require for load type entries only. This field expects one of\
+          \ the 2 following terms, full or partial."
+      origin_city:
+        type: "object"
+        description: "Required for all entry types."
+      origin_state:
+        type: "object"
+        description: "Required, 2 character limit."
+      other_trailer_types:
+        type: "object"
+        description: "This may be empty."
+      pay_rate:
+        type: "object"
+      posting_id:
+        type: "integer"
+        format: "int32"
+        description: "A unique id in our system for the user's entry."
+      receive_date:
+        type: "object"
+      ship_date:
+        type: "object"
+      trailer_type:
+        type: "object"
+        description: "This can have 1 or more standard trailer types."
+      weight:
+        type: "object"
+      width:
+        type: "object"
+    x-restlet:
+      section: "not categorized yet"
+  post_optin_code_response:
+    type: "object"
+    properties:
+      optin_code:
+        type: "string"
+        description: "A text string with the code sent."
+    example:
+      optin_code: "optin_code"
+    x-restlet:
+      section: "not categorized yet"
+  post_posting_multiple_response:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+        description: "This will return true, and have a unique location in the location\
+          \ header."
+    example:
+      success: true
+    x-restlet:
+      section: "not categorized yet"
+  rename_document:
+    type: "object"
+    required:
+    - "current_name"
+    - "new_name"
+    properties:
+      current_name:
+        type: "string"
+        description: "The document to be renamed. "
+      new_name:
+        type: "string"
+        description: "Replacement name. "
+    x-restlet:
+      section: "not categorized yet"
+  post_posting_type_action_body:
+    type: "object"
+    required:
+    - "source_id"
+    - "source_posting"
+    properties:
+      source_id:
+        type: "object"
+        description: "The posting id of the posting you are moving or copying. Optional\
+          \ for create."
+      source_posting:
+        type: "string"
+        description: "The posting_type where you are moving or copying the posting\
+          \ from. Optional for create. Items can only be moved to like types. loads\
+          \ -> private_private loads."
+    x-restlet:
+      section: "not categorized yet"
 x-restlet:
   sections:
     ALERTS: {}
@@ -2022,3 +2059,4 @@ x-restlet:
     PROFILES: {}
     VALIDATIONS: {}
     common_definitions: {}
+    not categorized yet: {}
