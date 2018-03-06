@@ -11,6 +11,7 @@
     "gulp-connect": "^4.2.0",
     "gulp-util": "^3.0.7",
     "httpsnippet": "^1.16.5",
+    "js-yaml": "^3.11.0",
     "mkdirp": "^0.5.1",
     "mkdirp-promise": "^5.0.1",
     "portfinder": "^1.0.13",
