@@ -29,12 +29,12 @@
     "build": "node ./scripts/build.js",
     "generate-code-samples": "node ./scripts/generate-code-samples.js",
     "hide-items": "node ./scripts/hide-items.js",
-    "swagger": "swagger-repo",
-    "test": "swagger-repo validate",
+    "swagger": "./node_modules/swagger-repo/bin/swagger-repo.js",
+    "test": "npm run swagger validate",
     "start": "gulp serve",
     "deploy-branch": "node ./scripts/deploy-branch.js",
-    "swagger2repo": "swagger-repo sync-with-swagger",
-    "restlet2repo": "node ./scripts/fix-restlet.js restlet_studio/swagger.yaml && swagger-repo sync-with-swagger restlet_studio/swagger.yaml-modified",
-    "repo2swagger": "swagger-repo bundle -y -o web_deploy/swagger.yaml && swagger-repo bundle -o web_deploy/swagger.json"
+    "swagger2repo": "npm run swagger sync-with-swagger",
+    "restlet2repo": "node ./scripts/fix-restlet.js restlet_studio/swagger.yaml && npm run swagger sync-with-swagger restlet_studio/swagger.yaml-modified",
+    "repo2swagger": "npm run swagger bundle -y -o web_deploy/swagger.yaml && npm run swagger bundle -o web_deploy/swagger.json"
   }
 }
