@@ -1,0 +1,23 @@
+{
+  "disableFileMenu": true,
+  "disableCodeGen": true,
+  "disableNewUserIntro": true,
+  "autocompleteExtension": {
+    "paths": {
+      ".": {
+        ".": {
+          "x-swagger-router-controller": "String",
+          "x-swagger-js-method-name": "String"
+        }
+      }
+    }
+  },
+  "useBackendForStorage": true,
+  "backendEndpoint": "./backend_swagger.yaml",
+  "backendHelathCheckTimeout": 5000,
+  "useYamlBackend": true,
+  "headerBranding": false,
+  "enableTryIt": false,
+  "schemaUrl": "/schema/swagger.json",
+  "importProxyUrl": "https://cors-it.herokuapp.com/?url="
+}

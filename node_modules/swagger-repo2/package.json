@@ -1,0 +1,122 @@
+{
+  "_args": [
+    [
+      "swagger-repo@^1.0.0",
+      "/MasterCopy/repo/www/dfwdbi/api/df-api-docs"
+    ]
+  ],
+  "_from": "swagger-repo@>=1.0.0 <2.0.0",
+  "_id": "swagger-repo@1.4.2",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/swagger-repo",
+  "_nodeVersion": "6.9.1",
+  "_npmOperationalInternal": {
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/swagger-repo-1.4.2.tgz_1480432379438_0.38576742936857045"
+  },
+  "_npmUser": {
+    "email": "gotsijroman@gmail.com",
+    "name": "romanhotsiy"
+  },
+  "_npmVersion": "3.10.8",
+  "_phantomChildren": {
+    "brace-expansion": "1.1.8",
+    "content-type": "1.0.4",
+    "debug": "2.6.9",
+    "fs.realpath": "1.0.0",
+    "inflight": "1.0.6",
+    "inherits": "2.0.3",
+    "on-finished": "2.3.0",
+    "once": "1.3.3",
+    "path-is-absolute": "1.0.1",
+    "setprototypeof": "1.0.3",
+    "statuses": "1.4.0",
+    "type-is": "1.6.15",
+    "unpipe": "1.0.0"
+  },
+  "_requested": {
+    "name": "swagger-repo",
+    "raw": "swagger-repo@^1.0.0",
+    "rawSpec": "^1.0.0",
+    "scope": null,
+    "spec": ">=1.0.0 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/swagger-repo/-/swagger-repo-1.4.2.tgz",
+  "_shasum": "a480acdbb10f39c4f4457c38e6191c21ca676c3b",
+  "_shrinkwrap": null,
+  "_spec": "swagger-repo@^1.0.0",
+  "_where": "/MasterCopy/repo/www/dfwdbi/api/df-api-docs",
+  "bin": {
+    "swagger-repo": "./bin/swagger-repo.js"
+  },
+  "bugs": {
+    "url": "https://github.com/Rebilly/swagger-repo/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "commander": "^2.9.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "glob": "^7.0.0",
+    "js-yaml": "^3.5.3",
+    "json-pointer": "^0.5.0",
+    "jsonpath": "^0.2.9",
+    "lodash": "^4.5.0",
+    "mkdirp": "^0.5.1",
+    "require-dir": "^0.3.1",
+    "swagger-editor": "^2.10.3",
+    "swagger-ui": "^2.1.4",
+    "sway": "^0.6.0"
+  },
+  "description": "CLI tool to help you manage your OpenAPI(fka Swagger) repo.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "a480acdbb10f39c4f4457c38e6191c21ca676c3b",
+    "tarball": "https://registry.npmjs.org/swagger-repo/-/swagger-repo-1.4.2.tgz"
+  },
+  "gitHead": "868d52c2d17c9ceab83d58b1f31e495daaf7db4a",
+  "homepage": "https://github.com/Rebilly/swagger-repo",
+  "keywords": [
+    "API",
+    "OpenAPI",
+    "OpenAPI Specification",
+    "REST",
+    "Restful",
+    "Swagger"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "maintainers": [
+    {
+      "name": "adamaltman",
+      "email": "adam@rebilly.com"
+    },
+    {
+      "name": "i1g",
+      "email": "ivan.goncharov.ua@gmail.com"
+    },
+    {
+      "name": "romanhotsiy",
+      "email": "gotsijroman@gmail.com"
+    },
+    {
+      "name": "slavcodev",
+      "email": "slavcopost@gmail.com"
+    }
+  ],
+  "name": "swagger-repo",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rebilly/swagger-repo.git"
+  },
+  "scripts": {},
+  "version": "1.4.2"
+}
