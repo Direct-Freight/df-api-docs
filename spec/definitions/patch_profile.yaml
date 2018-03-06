@@ -1,46 +1,33 @@
-type: object
 properties:
   address:
-    description: ''
     type: string
   city:
-    description: ''
     type: string
   company:
     description: 'Company name. '
     type: string
   contact_extension:
-    description: ''
     type: string
   contact_name:
     description: 'Contact name. '
     type: string
   contact_number:
-    description: ''
     type: string
   dot_number:
-    description: ''
     type: string
   fax_number:
-    description: ''
     type: string
   mc_number:
-    description: ''
     type: string
   mobile_carrier:
-    description: ''
     type: integer
   mobile_number:
-    description: ''
     type: string
   state:
-    description: ''
     type: string
   web_page:
-    description: ''
     type: string
   zip:
-    description: ''
     type: string
 required:
   - address
@@ -57,3 +44,6 @@ required:
   - state
   - web_page
   - zip
+type: object
+x-restlet:
+  section: PROFILES
