@@ -2,7 +2,6 @@ basePath: /api
 consumes:
   - application/json
 host: www.directfreight.com
-x-ibm-configuration: {}
 info:
   description: >-
     In order to use the Direct Freight API please first contact us to get an API
@@ -31,7 +30,7 @@ info:
   title: Direct Freight API
   version: 2.0.0
   x-logo:
-    url: https://www.directfreight.com/home/images/logo-direct-freight.png
+    url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
 produces:
   - application/json
 schemes:

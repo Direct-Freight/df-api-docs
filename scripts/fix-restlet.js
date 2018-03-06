@@ -46,6 +46,8 @@ function process_parameters(parameters)
                 });
         }
 
+swagger['info']['x-logo'] = { url: 'https://www.directfreight.com/home/images/logo-direct-freight.png' };
+
 Object.keys(swagger).forEach(function(level1) {
         //toplevels console.log(level1);
         Object.keys(swagger[level1]).forEach(function(level2) {
