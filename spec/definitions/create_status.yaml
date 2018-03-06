@@ -1,4 +1,6 @@
-type: object
 properties:
   success:
     type: integer
+type: object
+x-restlet:
+  section: common_definitions
