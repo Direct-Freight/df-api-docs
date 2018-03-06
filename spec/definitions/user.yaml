@@ -1,4 +1,3 @@
-type: object
 properties:
   email:
     description: 'This must be a valid e-mail. '
@@ -9,3 +8,6 @@ properties:
 required:
   - email
   - password
+type: object
+x-restlet:
+  section: not categorized yet

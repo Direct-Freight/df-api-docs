@@ -1,7 +1,9 @@
-type: object
-required:
-  - The
 properties:
   The:
-    type: object
     description: 'file to be uploaded. '
+    type: object
+required:
+  - The
+type: object
+x-restlet:
+  section: not categorized yet

@@ -1,11 +1,16 @@
-type: object
+example: |-
+  {
+    "company_name": [
+      "company_name",
+      "company_name"
+    ]
+  }
 properties:
   company_name:
-    type: array
     description: A subset of companies that need to be marked as hidden.
     items:
       type: string
-example:
-  company_name:
-    - company_name
-    - company_name
+    type: array
+type: object
+x-restlet:
+  section: not categorized yet

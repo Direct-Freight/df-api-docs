@@ -1,54 +1,56 @@
-type: object
+properties:
+  comment:
+    type: object
+  custom_id:
+    description: A unique identifier a user can provide for their own records.
+    type: object
+  destination_city:
+    description: For truck type entries this is optional.
+    type: object
+  destination_state:
+    description: For truck type entries this is optional.
+    type: object
+  height:
+    type: object
+  length:
+    type: object
+  load_size:
+    description: >-
+      Require for load type entries only. This field expects one of the 2
+      following terms, full or partial.
+    type: object
+  origin_city:
+    description: Required for all entry types.
+    type: object
+  origin_state:
+    description: 'Required, 2 character limit.'
+    type: object
+  other_trailer_types:
+    description: This may be empty.
+    type: object
+  pay_rate:
+    type: object
+  posting_id:
+    description: A unique id in our system for the user's entry.
+    format: int32
+    type: integer
+  receive_date:
+    type: object
+  ship_date:
+    type: object
+  trailer_type:
+    description: This can have 1 or more standard trailer types.
+    type: object
+  weight:
+    type: object
+  width:
+    type: object
 required:
   - origin_city
   - origin_state
   - posting_id
   - ship_date
   - trailer_type
-properties:
-  comment:
-    type: object
-  custom_id:
-    type: object
-    description: A unique identifier a user can provide for their own records.
-  destination_city:
-    type: object
-    description: For truck type entries this is optional.
-  destination_state:
-    type: object
-    description: For truck type entries this is optional.
-  height:
-    type: object
-  length:
-    type: object
-  load_size:
-    type: object
-    description: >-
-      Require for load type entries only. This field expects one of the 2
-      following terms, full or partial.
-  origin_city:
-    type: object
-    description: Required for all entry types.
-  origin_state:
-    type: object
-    description: 'Required, 2 character limit.'
-  other_trailer_types:
-    type: object
-    description: This may be empty.
-  pay_rate:
-    type: object
-  posting_id:
-    type: integer
-    format: int32
-    description: A unique id in our system for the user's entry.
-  receive_date:
-    type: object
-  ship_date:
-    type: object
-  trailer_type:
-    type: object
-    description: This can have 1 or more standard trailer types.
-  weight:
-    type: object
-  width:
-    type: object
+type: object
+x-restlet:
+  section: not categorized yet

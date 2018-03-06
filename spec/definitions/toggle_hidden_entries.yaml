@@ -1,4 +1,3 @@
-type: object
 properties:
   entry_id:
     description: 'The entry that need to be toggled. '
@@ -7,3 +6,6 @@ properties:
     type: array
 required:
   - entry_id
+type: object
+x-restlet:
+  section: BOARDS

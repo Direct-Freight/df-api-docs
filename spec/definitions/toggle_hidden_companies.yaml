@@ -1,7 +1,9 @@
-type: object
 properties:
   company_id:
     description: 'The company name that need to be toggled. '
     type: string
 required:
   - company_id
+type: object
+x-restlet:
+  section: not categorized yet
