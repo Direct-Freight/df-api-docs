@@ -2009,7 +2009,7 @@ definitions:
     example: "{\n  \"code\": 1,\n  \"error\": \"Generic Validation\",\n  \"description\"\
       : \"The e-mail address must be valid.\"\n}"
     x-restlet:
-      section: "COMMON"
+      section: "common_definitions"
 x-restlet:
   sections:
     ALERTS: {}
@@ -2022,4 +2022,3 @@ x-restlet:
     PROFILES: {}
     VALIDATIONS: {}
     common_definitions: {}
-    COMMON: {}
