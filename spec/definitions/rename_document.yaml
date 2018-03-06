@@ -10,4 +10,4 @@ required:
   - new_name
 type: object
 x-restlet:
-  section: not categorized yet
+  section: PROFILES
