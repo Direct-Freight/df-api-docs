@@ -28,7 +28,7 @@
     "build": "node ./scripts/build.js",
     "generate-code-samples": "node ./scripts/generate-code-samples.js",
     "hide-items": "node ./scripts/hide-items.js",
-    "swagger": "./node_modules/swagger-repo2/bin/swagger-repo.js",
+    "swagger": "node scripts/swagger-repo2/bin/swagger-repo.js",
     "test": "npm run swagger validate",
     "start": "gulp serve",
     "deploy-branch": "node ./scripts/deploy-branch.js",
