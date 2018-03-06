@@ -1216,23 +1216,6 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
-  error_object:
-    type: "object"
-    required:
-    - "code"
-    - "description"
-    - "error"
-    properties:
-      code:
-        type: "integer"
-      error:
-        type: "string"
-      description:
-        type: "string"
-    example:
-      code: 1
-      error: "Generic Validation"
-      description: "The e-mail address must be valid."
   get_custom_categories_response:
     type: "object"
     properties:
@@ -2010,6 +1993,23 @@ definitions:
         type: "integer"
     x-restlet:
       section: "common_definitions"
+  error_object:
+    type: "object"
+    required:
+    - "code"
+    - "description"
+    - "error"
+    properties:
+      code:
+        type: "integer"
+      error:
+        type: "string"
+      description:
+        type: "string"
+    example: "{\n  \"code\": 1,\n  \"error\": \"Generic Validation\",\n  \"description\"\
+      : \"The e-mail address must be valid.\"\n}"
+    x-restlet:
+      section: "COMMON"
 x-restlet:
   sections:
     ALERTS: {}
@@ -2022,3 +2022,4 @@ x-restlet:
     PROFILES: {}
     VALIDATIONS: {}
     common_definitions: {}
+    COMMON: {}
