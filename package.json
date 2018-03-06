@@ -6,6 +6,7 @@
     "connect": "^3.6.5",
     "cors": "^2.8.4",
     "deploy-to-gh-pages": "^1.1.0",
+    "express": "^4.16.2",
     "gulp": "^3.9.1",
     "gulp-connect": "^4.2.0",
     "gulp-util": "^3.0.7",
