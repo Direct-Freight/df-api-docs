@@ -1785,6 +1785,30 @@ definitions:
       zip: 55555
     x-restlet:
       section: "PROFILES"
+  rename_document:
+    type: "object"
+    required:
+    - "current_name"
+    - "new_name"
+    properties:
+      current_name:
+        type: "string"
+        description: "The document to be renamed. "
+      new_name:
+        type: "string"
+        description: "Replacement name. "
+    x-restlet:
+      section: "PROFILES"
+  upload_document:
+    type: "object"
+    required:
+    - "The"
+    properties:
+      The:
+        type: "object"
+        description: "file to be uploaded. "
+    x-restlet:
+      section: "PROFILES"
   create_status:
     type: "object"
     properties:
@@ -1868,16 +1892,6 @@ definitions:
       posting_list:
       - "posting_list"
       - "posting_list"
-    x-restlet:
-      section: "not categorized yet"
-  upload_document:
-    type: "object"
-    required:
-    - "The"
-    properties:
-      The:
-        type: "object"
-        description: "file to be uploaded. "
     x-restlet:
       section: "not categorized yet"
   user:
@@ -2014,20 +2028,6 @@ definitions:
           \ header."
     example:
       success: true
-    x-restlet:
-      section: "not categorized yet"
-  rename_document:
-    type: "object"
-    required:
-    - "current_name"
-    - "new_name"
-    properties:
-      current_name:
-        type: "string"
-        description: "The document to be renamed. "
-      new_name:
-        type: "string"
-        description: "Replacement name. "
     x-restlet:
       section: "not categorized yet"
   post_posting_type_action_body:
