@@ -21,8 +21,7 @@ cp('-R', SWAGGER_UI_DIST, 'web_deploy/swagger-ui/')
 sed('-i', 'http://petstore.swagger.io/v2/swagger.json', '../swagger.json', 'web_deploy/swagger-ui/index.html')
 
 console.log("we need the swagger without code for restlet");
-mkdir('-p', 'web_deploy/nocode/');
-cp('web_deploy/*.*', 'web_deploy/nocode/');
+cp('web_deploy/swagger.yaml', 'web_deploy/restlet-import.yaml');
 
 console.log("generate code samples");
 mkdir('-p', 'spec/code_samples/');
