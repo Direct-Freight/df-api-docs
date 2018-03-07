@@ -9,8 +9,11 @@ example: |-
       "{}"
     ]
   }
-items:
-  $ref: '#/definitions/alert'
+properties:
+  data:
+    items:
+      $ref: '#/definitions/alert'
+    type: array
 type: object
 x-restlet:
   section: ALERTS

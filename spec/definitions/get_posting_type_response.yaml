@@ -1,7 +1,10 @@
-example:
-  posting_list:
-    - posting_list
-    - posting_list
+example: |-
+  {
+    "posting_list": [
+      "posting_list",
+      "posting_list"
+    ]
+  }
 properties:
   posting_list:
     description: A list of posting objects you can iterate over.
@@ -10,4 +13,4 @@ properties:
     type: array
 type: object
 x-restlet:
-  section: not categorized yet
+  section: POSTINGS

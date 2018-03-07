@@ -87,9 +87,12 @@ definitions:
           "{}"
         ]
       }
-    items:
-      $ref: '#/definitions/alert'
-    type: array
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/alert'
+        type: array
+    type: object
     x-restlet:
       section: ALERTS
   bill_user:
@@ -455,10 +458,13 @@ definitions:
     x-restlet:
       section: LOCATIONS
   get_posting_type_response:
-    example:
-      posting_list:
-        - posting_list
-        - posting_list
+    example: |-
+      {
+        "posting_list": [
+          "posting_list",
+          "posting_list"
+        ]
+      }
     properties:
       posting_list:
         description: A list of posting objects you can iterate over.
@@ -467,7 +473,7 @@ definitions:
         type: array
     type: object
     x-restlet:
-      section: not categorized yet
+      section: POSTINGS
   get_state_list_response:
     example:
       state_totals: '{     "MS": 1449,     "NS": 24,     "VT": 145,     "MD": 520,     "ID": 2091,     "SK": 126,     "WA": 2207,     "SC": 1619,     "VA": 1781,     "PQ": 10,     "ON": 270,     "KS": 969,     "NE": 1386,     "OR": 2984,     "WI": 2714,     "GA": 3184,     "IN": 3363,     "KY": 1731,     "NV": 534,     "NC": 1824,     "BC": 124,     "DC": 7,     .... }'

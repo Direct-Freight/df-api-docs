@@ -1216,6 +1216,19 @@ securityDefinitions:
     name: "api-token"
     in: "header"
 definitions:
+  alert_list:
+    type: "object"
+    properties:
+      data:
+        type: "array"
+        items:
+          $ref: "#/definitions/alert"
+    description: "A hash containing a list of objects. Each entry should have 1 alert\
+      \ object, and 1 search object, and 2 integer counts. One for the number of new\
+      \ loads, and one for the number of total loads that match the search critera."
+    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
+    x-restlet:
+      section: "ALERTS"
   alert:
     type: "object"
     required:
@@ -1338,16 +1351,6 @@ definitions:
       time_zone:
         type: "object"
         description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
-    x-restlet:
-      section: "ALERTS"
-  alert_list:
-    type: "array"
-    description: "A hash containing a list of objects. Each entry should have 1 alert\
-      \ object, and 1 search object, and 2 integer counts. One for the number of new\
-      \ loads, and one for the number of total loads that match the search critera."
-    items:
-      $ref: "#/definitions/alert"
-    example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
     x-restlet:
       section: "ALERTS"
   bill_user:
@@ -1631,6 +1634,18 @@ definitions:
           type: "string"
     x-restlet:
       section: "POSTINGS"
+  get_posting_type_response:
+    type: "object"
+    properties:
+      posting_list:
+        type: "array"
+        description: "A list of posting objects you can iterate over."
+        items:
+          type: "string"
+    example: "{\n  \"posting_list\": [\n    \"posting_list\",\n    \"posting_list\"\
+      \n  ]\n}"
+    x-restlet:
+      section: "POSTINGS"
   create_profile:
     type: "object"
     required:
@@ -1878,20 +1893,6 @@ definitions:
       entry_id:
       - "entry_id"
       - "entry_id"
-    x-restlet:
-      section: "not categorized yet"
-  get_posting_type_response:
-    type: "object"
-    properties:
-      posting_list:
-        type: "array"
-        description: "A list of posting objects you can iterate over."
-        items:
-          type: "string"
-    example:
-      posting_list:
-      - "posting_list"
-      - "posting_list"
     x-restlet:
       section: "not categorized yet"
   mark_hidden_companies:
