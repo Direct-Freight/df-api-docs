@@ -27,7 +27,7 @@ paths:
     get:
       tags:
       - "alerts"
-      summary: "STAGE=test77 Get a list of alerts. You can optionally limit the list\
+      summary: "STAGE=UNK Get a list of alerts. You can optionally limit the list\
         \ by specifcying alerts by their alert_id."
       parameters:
       - name: "alert_id"
@@ -50,7 +50,7 @@ paths:
     post:
       tags:
       - "alerts"
-      summary: "STAGE=test88 Create an alert."
+      summary: "STAGE=UNK Create an alert."
       description: "Any parameter that is defined here and is also defined on the\
         \ boards GET, follows the same rules."
       consumes: []
