@@ -1,6 +1,8 @@
 #!/bin/bash
 cd /var/www/dfwdbi/api/df-api-docs
 git pull --no-edit
+cp restlet_studio/swagger.yaml /home/catalyst/Dropbox/directfreight/swagger20-with-extensions.yaml
+cp restlet_studio/swagger.yaml web_deploy/swagger-nocode.yaml
 npm run restlet2repo
 git diff spec
 git config --global user.email "$1"
