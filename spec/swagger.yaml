@@ -31,8 +31,52 @@ info:
   version: 2.0.0
   x-logo:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
+parameters:
+  board_type:
+    description: 'Valid types are "loads", and "trucks".'
+    enum:
+      - loads
+      - trucks
+    in: path
+    name: board_type
+    required: true
+    type: string
+  end-user-token:
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  end-user-token-optional:
+    in: header
+    name: end-user-token
+    required: false
+    type: string
+  posting_type:
+    description: >-
+      Valid types are "loads", "trucks", "private_loads", "private_trucks",
+      "test_loads", and "test_trucks"
+    enum:
+      - loads
+      - trucks
+      - private_loads
+      - private_trucks
+      - test_loads
+      - test_trucks
+    in: path
+    name: posting_type
+    required: true
+    type: string
 produces:
   - application/json
+responses:
+  error_422:
+    description: Unprocessable Entity. More information provided in the return object.
+    schema:
+      $ref: '#/definitions/error_object'
+  object_created:
+    description: Object created check the headers for a reference URL.
+    schema:
+      $ref: '#/definitions/create_status'
 schemes:
   - https
 security:
