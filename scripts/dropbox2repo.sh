@@ -8,4 +8,11 @@ if ! diff -q web_deploy/swagger-nocode.yaml /home/catalyst/Dropbox/directfreight
         git pull --no-edit
         git commit -m "dropbox2repo" -a
         git push
+elif ! diff -q web_deploy/swagger-nocode.yaml restlet_studio/swagger.yaml; then
+        cp restlet_studio/swagger.yaml web_deploy/swagger-nocode.yaml
+        npm run restlet2repo
+        git diff spec
+        git pull --no-edit
+        git commit -m "dropbox2repo" -a
+        git push
 fi
