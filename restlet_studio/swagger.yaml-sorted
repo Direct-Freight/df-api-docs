@@ -892,7 +892,7 @@ paths:
           description: On success will return a list of alerts.
           schema:
             $ref: '#/definitions/alert_list'
-      summary: STAGE=test77 Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
+      summary: STAGE=UNK Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
       tags:
         - alerts
     parameters:
@@ -946,7 +946,7 @@ paths:
           description: Object created check the headers for a reference URL.
           schema:
             $ref: '#/definitions/create_status'
-      summary: STAGE=test88 Create an alert.
+      summary: STAGE=UNK Create an alert.
       tags:
         - alerts
     x-restlet:

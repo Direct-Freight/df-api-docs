@@ -32,7 +32,7 @@ get:
       schema:
         $ref: '#/definitions/alert_list'
   summary: >-
-    STAGE=test77 Get a list of alerts. You can optionally limit the list by
+    STAGE=UNK Get a list of alerts. You can optionally limit the list by
     specifcying alerts by their alert_id.
   tags:
     - alerts
@@ -76,7 +76,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: STAGE=test88 Create an alert.
+  summary: STAGE=UNK Create an alert.
   tags:
     - alerts
 x-restlet:
