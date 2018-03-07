@@ -11,7 +11,7 @@ delete:
   responses:
     '204':
       description: successful operation
-  summary: STAGE=UNK Delete an alert.
+  summary: STAGE=test5 Delete an alert.
   tags:
     - alerts
 get:
@@ -32,7 +32,7 @@ get:
       schema:
         $ref: '#/definitions/alert_list'
   summary: >-
-    STAGE=UNK Get a list of alerts. You can optionally limit the list by
+    STAGE=test9 Get a list of alerts. You can optionally limit the list by
     specifcying alerts by their alert_id.
   tags:
     - alerts
@@ -58,7 +58,7 @@ patch:
   responses:
     '204':
       description: Returned on response.
-  summary: STAGE=UNK Update an alert.
+  summary: STAGE=test11 Update an alert.
   tags:
     - alerts
 post:
@@ -76,7 +76,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: STAGE=UNK Create an alert.
+  summary: STAGE=test4 Create an alert.
   tags:
     - alerts
 x-restlet:
