@@ -76,7 +76,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: STAGE=UNK Create an alert.
+  summary: STAGE=test88 Create an alert.
   tags:
     - alerts
 x-restlet:

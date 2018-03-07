@@ -946,7 +946,7 @@ paths:
           description: Object created check the headers for a reference URL.
           schema:
             $ref: '#/definitions/create_status'
-      summary: STAGE=UNK Create an alert.
+      summary: STAGE=test88 Create an alert.
       tags:
         - alerts
     x-restlet:

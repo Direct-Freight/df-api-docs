@@ -50,7 +50,7 @@ paths:
     post:
       tags:
       - "alerts"
-      summary: "STAGE=UNK Create an alert."
+      summary: "STAGE=test88 Create an alert."
       description: "Any parameter that is defined here and is also defined on the\
         \ boards GET, follows the same rules."
       consumes: []
