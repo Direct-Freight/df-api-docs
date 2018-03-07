@@ -1,77 +1,77 @@
-type: object
 properties:
   alert_id:
-    type: integer
     description: >-
       By specifying an alert_id we will record the loads seen by this user, and
       associate it with their alert. 
     example: 5555
+    type: integer
   count:
-    type: boolean
     description: 'If included this will return a total count instead of a list. '
-  sort_parameter:
-    type: string
-    description: Use almost any one of the columns of a returned board.
-  item_count:
-    type: integer
-    description: >-
-      This is how many board objects will be returned in the search. By default
-      it will return 50 items per page. Max is 100, minimum is 1. 
-  page_number:
-    type: integer
-    description: The page you want to get. Will return an empty board on an invalid page.
-  origin_city:
-    type: string
-    description: 'Must be at least 3 characters. '
-    example: chillicothe
-  origin_radius:
-    type: integer
-    description: >-
-      If both city and state, it will search for all entries within # Miles of
-      the city. 
-  origin_state:
-    type: array
-    description: >-
-      If multiple states are entered the city field will be ignored, and a multi
-      state search will be performed.
-    items:
-      type: string
+    type: boolean
   destination_city:
-    type: string
     description: 'Must be at least 2 characters. '
     example: chicago
+    type: string
   destination_radius:
-    type: integer
     description: >-
       If both city and state are specified, it will search for all entries
       within # Miles of the city. 
+    type: integer
   destination_state:
-    type: array
     description: >-
-      If multiple states are entered the city field will be ignored, and a multi
-      state search will be performed.
+      If the city field is filled out, the first state in the array list will be
+      used with it.
     items:
       type: string
+    type: array
+  item_count:
+    description: >-
+      This is how many board objects will be returned in the search. By default
+      it will return 50 items per page. Max is 100, minimum is 1. 
+    type: integer
   load_size:
-    type: string
+    default: Full
     description: >-
       This is only valid on load boards. Valid values are "Full" and
       "Partial"". 
-    default: Full
+    type: string
   only_new:
-    type: boolean
     description: >-
       This will only return unseen results. This requires an alert_id to be
       specified. 
-  ship_date:
+    type: boolean
+  origin_city:
+    description: 'Must be at least 3 characters. '
+    example: chillicothe
+    type: string
+  origin_radius:
+    description: >-
+      If both city and state, it will search for all entries within # Miles of
+      the city. 
+    type: integer
+  origin_state:
+    description: >-
+      If the city field is filled out, the first state in the array list will be
+      used with it.
+    items:
+      type: string
     type: array
+  page_number:
+    description: The page you want to get. Will return an empty board on an invalid page.
+    type: integer
+  ship_date:
     description: 'Limit the board to only show loads with X ship date. '
     items:
       type: string
-  trailer_type:
     type: array
+  sort_parameter:
+    description: Use almost any one of the columns of a returned board.
+    type: string
+  trailer_type:
     description: 'A string array of valid trailer types to limit the search. '
     items:
       type: string
+    type: array
+type: object
 x-restlet:
   section: BOARDS

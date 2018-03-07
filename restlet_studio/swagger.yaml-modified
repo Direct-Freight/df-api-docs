@@ -131,7 +131,7 @@ definitions:
         description: 'If both city and state are specified, it will search for all entries within # Miles of the city. '
         type: integer
       destination_state:
-        description: 'If multiple states are entered the city field will be ignored, and a multi state search will be performed.'
+        description: 'If the city field is filled out, the first state in the array list will be used with it.'
         items:
           type: string
         type: array
@@ -153,7 +153,7 @@ definitions:
         description: 'If both city and state, it will search for all entries within # Miles of the city. '
         type: integer
       origin_state:
-        description: 'If multiple states are entered the city field will be ignored, and a multi state search will be performed.'
+        description: 'If the city field is filled out, the first state in the array list will be used with it.'
         items:
           type: string
         type: array
