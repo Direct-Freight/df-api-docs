@@ -91,7 +91,7 @@ paths:
     patch:
       tags:
       - "alerts"
-      summary: "STAGE=test8 Update an alert."
+      summary: "STAGE=test10 Update an alert."
       description: "Search objects are set at creation. You cannot modify them after\
         \ the alert has been created."
       consumes: []
