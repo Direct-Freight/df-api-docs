@@ -12,3 +12,5 @@ example: |-
 items:
   $ref: '#/definitions/alert'
 type: array
+x-restlet:
+  section: ALERTS
