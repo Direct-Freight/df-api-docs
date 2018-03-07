@@ -1584,6 +1584,20 @@ definitions:
         description: "The password, or token required for this login. "
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
+  user:
+    type: "object"
+    required:
+    - "email"
+    - "password"
+    properties:
+      email:
+        type: "string"
+        description: "This must be a valid e-mail. "
+      password:
+        type: "string"
+        description: "Currently this is a 6-10 digit alphanumeric password. "
+    x-restlet:
+      section: "END_USER_AUTHENTICATIONS"
   get_closest_city_response:
     type: "object"
     properties:
@@ -1644,6 +1658,16 @@ definitions:
           type: "string"
     example: "{\n  \"posting_list\": [\n    \"posting_list\",\n    \"posting_list\"\
       \n  ]\n}"
+    x-restlet:
+      section: "POSTINGS"
+  post_posting_multiple_response:
+    type: "object"
+    properties:
+      success:
+        type: "boolean"
+        description: "This will return true, and have a unique location in the location\
+          \ header."
+    example: "{\n  \"success\": true\n}"
     x-restlet:
       section: "POSTINGS"
   create_profile:
@@ -1986,17 +2010,6 @@ definitions:
       optin_code: "optin_code"
     x-restlet:
       section: "not categorized yet"
-  post_posting_multiple_response:
-    type: "object"
-    properties:
-      success:
-        type: "boolean"
-        description: "This will return true, and have a unique location in the location\
-          \ header."
-    example:
-      success: true
-    x-restlet:
-      section: "not categorized yet"
   post_posting_type_action_body:
     type: "object"
     required:
@@ -2032,20 +2045,6 @@ definitions:
       company_id:
         type: "string"
         description: "The company name that need to be toggled. "
-    x-restlet:
-      section: "not categorized yet"
-  user:
-    type: "object"
-    required:
-    - "email"
-    - "password"
-    properties:
-      email:
-        type: "string"
-        description: "This must be a valid e-mail. "
-      password:
-        type: "string"
-        description: "Currently this is a 6-10 digit alphanumeric password. "
     x-restlet:
       section: "not categorized yet"
 x-restlet:

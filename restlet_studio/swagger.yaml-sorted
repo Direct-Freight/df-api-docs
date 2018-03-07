@@ -679,15 +679,17 @@ definitions:
     x-restlet:
       section: not categorized yet
   post_posting_multiple_response:
-    example:
-      success: true
+    example: |-
+      {
+        "success": true
+      }
     properties:
       success:
         description: 'This will return true, and have a unique location in the location header.'
         type: boolean
     type: object
     x-restlet:
-      section: not categorized yet
+      section: POSTINGS
   post_posting_type_action_body:
     properties:
       source_id:
@@ -834,7 +836,7 @@ definitions:
       - password
     type: object
     x-restlet:
-      section: not categorized yet
+      section: END_USER_AUTHENTICATIONS
 host: www.directfreight.com
 info:
   description: |-
