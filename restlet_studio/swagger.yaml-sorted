@@ -853,46 +853,10 @@ info:
     Both Tokens are stateless, and delivered via the HTTP headers.
   title: Direct Freight API
   version: 2.0.0
-  x-logo:
-    url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
-parameters:
-  board_type:
-    description: 'Valid types are "loads", and "trucks".'
-    enum:
-      - loads
-      - trucks
-    in: path
-    name: board_type
-    required: true
-    type: string
-  end-user-token:
-    in: header
-    name: end-user-token
-    required: true
-    type: string
-  end-user-token-optional:
-    in: header
-    name: end-user-token
-    required: false
-    type: string
-  posting_type:
-    description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
-    enum:
-      - loads
-      - trucks
-      - private_loads
-      - private_trucks
-      - test_loads
-      - test_trucks
-    in: path
-    name: posting_type
-    required: true
-    type: string
 paths:
   '/alerts/{board_type}':
     delete:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: Specify to just delete some alerts.
           in: query
           items:
@@ -900,15 +864,18 @@ paths:
           name: alert_id
           required: true
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '204':
           description: successful operation
-      summary: STAGE=UNK Delete an alert.
+      summary: STAGE=test5 Delete an alert.
       tags:
         - alerts
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: only get a subset of alerts. As this is a get request this is specified as a query string parameter.
           in: query
           items:
@@ -916,24 +883,38 @@ paths:
           name: alert_id
           required: false
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: On success will return a list of alerts.
           schema:
             $ref: '#/definitions/alert_list'
-      summary: STAGE=UNK Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
+      summary: STAGE=test3 Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
       tags:
         - alerts
     parameters:
-      - $ref: '#/parameters/board_type'
+      - description: 'Valid types are "loads", and "trucks".'
+        enum:
+          - loads
+          - trucks
+        in: path
+        name: board_type
+        required: true
+        type: string
     patch:
       consumes: []
       description: Search objects are set at creation. You cannot modify them after the alert has been created.
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: Specify which alert you are updating.
           in: query
           name: alert_id
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
           required: true
           type: string
         - in: body
@@ -944,14 +925,17 @@ paths:
       responses:
         '204':
           description: Returned on response.
-      summary: STAGE=UNK Update an alert.
+      summary: STAGE=test7 Update an alert.
       tags:
         - alerts
     post:
       consumes: []
       description: 'Any parameter that is defined here and is also defined on the boards GET, follows the same rules.'
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -959,8 +943,10 @@ paths:
             $ref: '#/definitions/alert'
       responses:
         '201':
-          $ref: '#/responses/object_created'
-      summary: STAGE=UNK Create an alert.
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
+      summary: STAGE=test4 Create an alert.
       tags:
         - alerts
     x-restlet:
@@ -969,11 +955,14 @@ paths:
     get:
       description: 'Will return how much the end user will be charged to upgrade. It will not charge the user, or consume the promo code.'
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: 'The promo code. '
           in: query
           name: promo_code
           required: false
+          type: string
+        - in: header
+          name: end-user-token
+          required: true
           type: string
       responses:
         '200':
@@ -987,7 +976,10 @@ paths:
       consumes: []
       description: 'This function will attempt to process a payment, and upgrade a non subscibed user. '
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -995,7 +987,9 @@ paths:
             $ref: '#/definitions/bill_user'
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
       summary: 'STAGE=UNK This function will attempt to process a payment, and upgrade a non subscibed user. '
       tags:
         - billings
@@ -1004,10 +998,13 @@ paths:
   /boards/hidden_companies:
     delete:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: The company that need to be marked as not hidden.
           in: query
           name: company_id
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
           required: true
           type: string
       responses:
@@ -1018,7 +1015,6 @@ paths:
         - boards
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: A list of id's to check if any should be visually hidden.
           in: query
           items:
@@ -1026,6 +1022,10 @@ paths:
           name: company_name
           required: true
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
@@ -1037,7 +1037,10 @@ paths:
     patch:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1052,7 +1055,10 @@ paths:
     post:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1060,7 +1066,9 @@ paths:
             $ref: '#/definitions/mark_hidden_companies'
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
       summary: STAGE=UNK Mark a set of companies as hidden.
       tags:
         - boards
@@ -1069,10 +1077,13 @@ paths:
   /boards/hidden_entries:
     delete:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: 'The entry that need to be marked as not hidden. '
           in: query
           name: entry_id
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
           required: true
           type: string
       responses:
@@ -1083,7 +1094,6 @@ paths:
         - boards
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: A list of id's to check if any should be visually hidden.
           in: query
           items:
@@ -1091,6 +1101,10 @@ paths:
           name: entry_id
           required: true
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
@@ -1102,7 +1116,10 @@ paths:
     patch:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1116,7 +1133,6 @@ paths:
         - boards
     post:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: 'The entry that need to be marked as hidden. '
           in: query
           items:
@@ -1124,9 +1140,15 @@ paths:
           name: entry_id
           required: true
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
       summary: STAGE=UNK Mark a set of entries as hidden.
       tags:
         - boards
@@ -1135,10 +1157,13 @@ paths:
   /boards/notes:
     delete:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: 'The entry to associate the note with. '
           in: query
           name: note_id
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
           required: true
           type: string
       responses:
@@ -1149,7 +1174,6 @@ paths:
         - boards
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: 'Optionally just check if certain loads have notes associated with them. '
           in: query
           items:
@@ -1157,6 +1181,10 @@ paths:
           name: entry_id
           required: false
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
@@ -1168,7 +1196,10 @@ paths:
     patch:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1183,7 +1214,10 @@ paths:
     post:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1191,7 +1225,9 @@ paths:
             $ref: '#/definitions/create_notes'
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
       summary: STAGE=UNK Create a new note.
       tags:
         - boards
@@ -1199,12 +1235,22 @@ paths:
       section: BOARDS
   '/boards/{board_type}':
     parameters:
-      - $ref: '#/parameters/board_type'
+      - description: 'Valid types are "loads", and "trucks".'
+        enum:
+          - loads
+          - trucks
+        in: path
+        name: board_type
+        required: true
+        type: string
     post:
       consumes: []
       description: This is the primary search method. Please specifify at least a partial origin or destination.
       parameters:
-        - $ref: '#/parameters/end-user-token-optional'
+        - in: header
+          name: end-user-token
+          required: false
+          type: string
         - in: body
           name: body
           required: true
@@ -1216,7 +1262,9 @@ paths:
           schema:
             $ref: '#/definitions/board_response'
         '422':
-          $ref: '#/responses/error_422'
+          description: Unprocessable Entity. More information provided in the return object.
+          schema:
+            $ref: '#/definitions/error_object'
       summary: Get a board.
       tags:
         - boards
@@ -1234,13 +1282,19 @@ paths:
       tags:
         - boards
     parameters:
-      - $ref: '#/parameters/board_type'
+      - description: 'Valid types are "loads", and "trucks".'
+        enum:
+          - loads
+          - trucks
+        in: path
+        name: board_type
+        required: true
+        type: string
     x-restlet:
       section: BOARDS
   /credit_reports:
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: A special id returned with the board entries.
           in: query
           name: credit_report_id
@@ -1249,6 +1303,10 @@ paths:
         - description: Return format. Currently only supports html and json.
           in: query
           name: format
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
           required: true
           type: string
       responses:
@@ -1274,7 +1332,9 @@ paths:
           schema:
             $ref: '#/definitions/end-user-token'
         '422':
-          $ref: '#/responses/error_422'
+          description: Unprocessable Entity. More information provided in the return object.
+          schema:
+            $ref: '#/definitions/error_object'
       summary: STAGE=UNK Create a new user.
       tags:
         - end_user_authentications
@@ -1284,7 +1344,10 @@ paths:
     delete:
       description: This logs a user out. the end-user-token will no longer be valid.
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '204':
           description: Will not return content on a successful logout.
@@ -1293,7 +1356,10 @@ paths:
         - end_user_authentications
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token-optional'
+        - in: header
+          name: end-user-token
+          required: false
+          type: string
       responses:
         '200':
           description: successful operation
@@ -1323,7 +1389,9 @@ paths:
           schema:
             $ref: '#/definitions/end-user-token'
         '422':
-          $ref: '#/responses/error_422'
+          description: Unprocessable Entity. More information provided in the return object.
+          schema:
+            $ref: '#/definitions/error_object'
       summary: STAGE=UNK Logs a user in.
       tags:
         - end_user_authentications
@@ -1361,14 +1429,19 @@ paths:
         '200':
           description: This will return a success even if the e-mail is not in our records.
         '422':
-          $ref: '#/responses/error_422'
+          description: Unprocessable Entity. More information provided in the return object.
+          schema:
+            $ref: '#/definitions/error_object'
       summary: STAGE=UNK Request a forgotten password.
       tags:
         - end_user_authentications
     patch:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1388,7 +1461,9 @@ paths:
         '204':
           description: A successful operation.
         '422':
-          $ref: '#/responses/error_422'
+          description: Unprocessable Entity. More information provided in the return object.
+          schema:
+            $ref: '#/definitions/error_object'
       summary: STAGE=UNK Update a users password.
       tags:
         - end_user_authentications
@@ -1474,7 +1549,6 @@ paths:
   '/postings/custom_categories/{category_type}':
     delete:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: To just delete information about some postings.
           in: query
           items:
@@ -1482,6 +1556,10 @@ paths:
           name: category_id
           required: false
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '204':
           description: 200 OK
@@ -1490,7 +1568,6 @@ paths:
         - postings
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: To just return information about some postings.
           in: query
           items:
@@ -1498,6 +1575,10 @@ paths:
           name: category_id
           required: false
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
@@ -1514,7 +1595,10 @@ paths:
         type: string
     patch:
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '204':
           description: successful operation
@@ -1523,10 +1607,15 @@ paths:
         - postings
     post:
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
       summary: 'STAGE=UNK Create new category names, or add new data.'
       tags:
         - postings
@@ -1534,11 +1623,25 @@ paths:
       section: POSTINGS
   '/postings/multiple/{posting_type}':
     parameters:
-      - $ref: '#/parameters/posting_type'
+      - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+        enum:
+          - loads
+          - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
+        in: path
+        name: posting_type
+        required: true
+        type: string
     post:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1557,7 +1660,6 @@ paths:
   '/postings/{posting_type}':
     delete:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: You must specify which entry to remove.
           in: query
           items:
@@ -1565,6 +1667,10 @@ paths:
           name: posting_id
           required: true
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '204':
           description: success operation
@@ -1573,7 +1679,6 @@ paths:
         - postings
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - description: To just return information about some postings.
           in: query
           items:
@@ -1581,6 +1686,10 @@ paths:
           name: posting_id
           required: false
           type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
@@ -1590,11 +1699,25 @@ paths:
       tags:
         - postings
     parameters:
-      - $ref: '#/parameters/posting_type'
+      - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+        enum:
+          - loads
+          - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
+        in: path
+        name: posting_type
+        required: true
+        type: string
     patch:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1609,7 +1732,10 @@ paths:
     post:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1617,7 +1743,9 @@ paths:
             $ref: '#/definitions/post_object_model'
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
       summary: Create a posting
       tags:
         - postings
@@ -1625,7 +1753,18 @@ paths:
       section: POSTINGS
   '/postings/{posting_type}/{action}':
     parameters:
-      - $ref: '#/parameters/posting_type'
+      - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+        enum:
+          - loads
+          - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
+        in: path
+        name: posting_type
+        required: true
+        type: string
       - description: 'Specified in the url. Valid types are "copy", and "move"'
         in: path
         name: action
@@ -1634,7 +1773,10 @@ paths:
     post:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1642,7 +1784,9 @@ paths:
             $ref: '#/definitions/post_posting_type_action_body'
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
       summary: STAGE=UNK Copy or Move an posting.
       tags:
         - postings
@@ -1651,7 +1795,10 @@ paths:
   /profiles:
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
@@ -1664,7 +1811,10 @@ paths:
       consumes: []
       description: Please send in at least one field to be updated.
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1679,7 +1829,10 @@ paths:
     post:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1687,7 +1840,9 @@ paths:
             $ref: '#/definitions/create_profile'
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
       summary: STAGE=UNK Create a new profile.
       tags:
         - profiles
@@ -1696,7 +1851,10 @@ paths:
   /profiles/documents:
     delete:
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '204':
           description: success operation
@@ -1706,7 +1864,10 @@ paths:
     get:
       description: Retrieve documents
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: success
@@ -1716,7 +1877,10 @@ paths:
     patch:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1731,7 +1895,10 @@ paths:
     post:
       consumes: []
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
         - in: body
           name: body
           required: true
@@ -1739,7 +1906,9 @@ paths:
             $ref: '#/definitions/upload_document'
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/create_status'
       summary: STAGE=UNK Upload a new document.
       tags:
         - profiles
@@ -1768,7 +1937,10 @@ paths:
   /profiles/optins:
     delete:
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '204':
           description: successful operation
@@ -1777,7 +1949,10 @@ paths:
         - profiles
     get:
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
@@ -1788,7 +1963,10 @@ paths:
         - profiles
     patch:
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '204':
           description: successful operation
@@ -1797,7 +1975,10 @@ paths:
         - profiles
     post:
       parameters:
-        - $ref: '#/parameters/end-user-token'
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
@@ -1812,9 +1993,12 @@ paths:
     get:
       description: Enter an e-mail to see if it is available. Can be used as ?email=xxx or as a JSON request.
       parameters:
-        - $ref: '#/parameters/end-user-token'
         - in: query
           name: email
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
           required: true
           type: string
       responses:
@@ -1829,15 +2013,6 @@ paths:
       section: VALIDATIONS
 produces:
   - application/json
-responses:
-  error_422:
-    description: Unprocessable Entity. More information provided in the return object.
-    schema:
-      $ref: '#/definitions/error_object'
-  object_created:
-    description: Object created check the headers for a reference URL.
-    schema:
-      $ref: '#/definitions/create_status'
 schemes:
   - https
 security:
