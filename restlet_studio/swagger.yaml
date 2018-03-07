@@ -216,7 +216,7 @@ paths:
     get:
       tags:
       - "boards"
-      summary: "STAGE=UNK A convenience method to get totals by state."
+      summary: "A convenience method to get totals by state."
       parameters: []
       responses:
         200:

@@ -1197,7 +1197,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/get_state_list_response'
-      summary: STAGE=UNK A convenience method to get totals by state.
+      summary: A convenience method to get totals by state.
       tags:
         - boards
     parameters:
