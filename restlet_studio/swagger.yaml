@@ -19,32 +19,6 @@ info:
   version: 2.0.0
   x-logo:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
-produces:
-  - application/json
-schemes:
-  - https
-security:
-  - api_key: []
-securityDefinitions:
-  api_key:
-    description: This token needs to be sent as a HTTP header argument in every request to our API.
-    in: header
-    name: api-token
-    type: apiKey
-swagger: '2.0'
-x-restlet:
-  sections:
-    ALERTS: {}
-    BILLINGS: {}
-    BOARDS: {}
-    CREDIT_REPORTS: {}
-    END_USER_AUTHENTICATIONS: {}
-    LOCATIONS: {}
-    POSTINGS: {}
-    PROFILES: {}
-    VALIDATIONS: {}
-    common_definitions: {}
-    not categorized yet: {}
 parameters:
   end-user-token:
     in: header
@@ -78,6 +52,8 @@ parameters:
     name: posting_type
     required: true
     type: string
+produces:
+  - application/json
 responses:
   error_422:
     description: Unprocessable Entity. More information provided in the return object.
@@ -87,6 +63,30 @@ responses:
     description: Object created check the headers for a reference URL.
     schema:
       $ref: '#/definitions/create_status'
+schemes:
+  - https
+security:
+  - api_key: []
+securityDefinitions:
+  api_key:
+    description: This token needs to be sent as a HTTP header argument in every request to our API.
+    in: header
+    name: api-token
+    type: apiKey
+swagger: '2.0'
+x-restlet:
+  sections:
+    ALERTS: {}
+    BILLINGS: {}
+    BOARDS: {}
+    CREDIT_REPORTS: {}
+    END_USER_AUTHENTICATIONS: {}
+    LOCATIONS: {}
+    POSTINGS: {}
+    PROFILES: {}
+    VALIDATIONS: {}
+    common_definitions: {}
+    not categorized yet: {}
 paths:
   '/alerts/{board_type}':
     delete:
