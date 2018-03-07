@@ -855,6 +855,39 @@ info:
   version: 2.0.0
   x-logo:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
+parameters:
+  board_type:
+    description: 'Valid types are "loads", and "trucks".'
+    enum:
+      - loads
+      - trucks
+    in: path
+    name: board_type
+    required: true
+    type: string
+  end-user-token:
+    in: header
+    name: end-user-token
+    required: true
+    type: string
+  end-user-token-optional:
+    in: header
+    name: end-user-token
+    required: false
+    type: string
+  posting_type:
+    description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+    enum:
+      - loads
+      - trucks
+      - private_loads
+      - private_trucks
+      - test_loads
+      - test_trucks
+    in: path
+    name: posting_type
+    required: true
+    type: string
 paths:
   '/alerts/{board_type}':
     delete:
@@ -870,7 +903,7 @@ paths:
       responses:
         '204':
           description: successful operation
-      summary: STAGE=test5 Delete an alert.
+      summary: STAGE=UNK Delete an alert.
       tags:
         - alerts
     get:
@@ -888,7 +921,7 @@ paths:
           description: On success will return a list of alerts.
           schema:
             $ref: '#/definitions/alert_list'
-      summary: STAGE=test3 Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
+      summary: STAGE=UNK Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
       tags:
         - alerts
     parameters:
@@ -927,7 +960,7 @@ paths:
       responses:
         '201':
           $ref: '#/responses/object_created'
-      summary: STAGE=test4 Create an alert.
+      summary: STAGE=UNK Create an alert.
       tags:
         - alerts
     x-restlet:
@@ -1796,6 +1829,15 @@ paths:
       section: VALIDATIONS
 produces:
   - application/json
+responses:
+  error_422:
+    description: Unprocessable Entity. More information provided in the return object.
+    schema:
+      $ref: '#/definitions/error_object'
+  object_created:
+    description: Object created check the headers for a reference URL.
+    schema:
+      $ref: '#/definitions/create_status'
 schemes:
   - https
 security:
