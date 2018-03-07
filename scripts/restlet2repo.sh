@@ -1,0 +1,9 @@
+#!/bin/bash
+cd /var/www/dfwdbi/api/df-api-docs
+git pull --no-edit
+npm run restlet2repo
+git diff spec
+git config --global user.email "$1"
+git commit -m "restlet2repo: $2" -a
+git push
+git config --global user.email "jondf@directfreight.com"
