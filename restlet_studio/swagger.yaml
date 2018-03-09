@@ -177,7 +177,7 @@ paths:
     post:
       tags:
       - "boards"
-      summary: "Get a board 12."
+      summary: "Get a board"
       description: "This is the primary search method. Please specifify at least a\
         \ partial origin or destination."
       consumes: []

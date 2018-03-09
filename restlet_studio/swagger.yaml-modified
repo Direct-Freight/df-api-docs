@@ -1184,7 +1184,7 @@ paths:
             $ref: '#/definitions/board_response'
         '422':
           $ref: '#/responses/error_422'
-      summary: Get a board 12.
+      summary: Get a board
       tags:
         - boards
     x-restlet:
