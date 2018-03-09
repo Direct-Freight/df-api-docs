@@ -892,7 +892,7 @@ paths:
           description: On success will return a list of alerts.
           schema:
             $ref: '#/definitions/alert_list'
-      summary: STAGE=UNK4 Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
+      summary: STAGE=UNK Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
       tags:
         - alerts
     parameters:
