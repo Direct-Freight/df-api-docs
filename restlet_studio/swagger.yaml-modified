@@ -631,7 +631,7 @@ definitions:
       length:
         type: object
       load_size:
-        description: 'Require for load type entries only. This field expects one of the 2 following terms, full or partial.'
+        description: 'Require for load type entries only. This field expects one of the 2 following terms, Full or Partial.'
         type: object
       origin_city:
         description: Required for all entry types.

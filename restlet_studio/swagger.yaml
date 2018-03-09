@@ -1971,7 +1971,7 @@ definitions:
       load_size:
         type: "object"
         description: "Require for load type entries only. This field expects one of\
-          \ the 2 following terms, full or partial."
+          \ the 2 following terms, Full or Partial."
       origin_city:
         type: "object"
         description: "Required for all entry types."
