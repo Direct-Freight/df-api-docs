@@ -13,6 +13,6 @@ if ! diff -q web_deploy/swagger-nocode.yaml /home/catalyst/Dropbox/directfreight
         export short_email=${dropbox_info%@*}
         export display_name=${dropbox_info#*:}
         git config --global user.email "$email"
-        git commit -m "dropbox2repo: $short_email/$display_name" -a
+        git commit -m "dropbox2repo: $email/$short_email/$display_name" -a
         git push
 fi
