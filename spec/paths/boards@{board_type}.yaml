@@ -2,7 +2,9 @@ parameters:
   - $ref: '#/parameters/board_type'
 post:
   consumes: []
-  description: This is the primary search method. Please specifify at least a partial origin or destination.
+  description: >-
+    This is the primary search method. Please specifify at least a partial
+    origin or destination.
   parameters:
     - $ref: '#/parameters/end-user-token-optional'
     - in: body
@@ -17,7 +19,7 @@ post:
         $ref: '#/definitions/board_response'
     '422':
       $ref: '#/responses/error_422'
-  summary: Get a board.
+  summary: Get a board 1.
   tags:
     - boards
 x-restlet:

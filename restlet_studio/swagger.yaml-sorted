@@ -1265,7 +1265,7 @@ paths:
           description: Unprocessable Entity. More information provided in the return object.
           schema:
             $ref: '#/definitions/error_object'
-      summary: Get a board.
+      summary: Get a board 1.
       tags:
         - boards
     x-restlet:
