@@ -27,7 +27,7 @@ paths:
     get:
       tags:
       - "alerts"
-      summary: "STAGE=UNK Get a list of alerts. You can optionally limit the list\
+      summary: "STAGE=UNK2 Get a list of alerts. You can optionally limit the list\
         \ by specifcying alerts by their alert_id."
       parameters:
       - name: "alert_id"
