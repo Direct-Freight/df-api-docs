@@ -1,5 +1,7 @@
 # Dir for API portal deploy
 web_deploy
+restlet_studio/swagger.yaml-modified
+restlet_studio/swagger.yaml-sorted
 
 # Dir for code_samples
 code_samples
