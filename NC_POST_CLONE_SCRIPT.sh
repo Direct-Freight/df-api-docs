@@ -8,5 +8,5 @@ export NC_TEST_ONLY=true  #nevercode build step will be skipped.
 #other environment variables
 
 #Commands to do a custom build
-npm run build
+npm run deploy
 
