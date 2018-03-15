@@ -5,71 +5,141 @@ properties:
       associate it with their alert. 
     example: 5555
     type: integer
-  count:
-    description: 'If included this will return a total count instead of a list. '
-    type: boolean
   destination_city:
-    description: 'Must be at least 2 characters. '
     example: chicago
+    minLength: 2
     type: string
   destination_radius:
+    default: 30
     description: >-
       If both city and state are specified, it will search for all entries
       within # Miles of the city. 
+    maximum: 300
+    minimum: 1
     type: integer
   destination_state:
     description: >-
       If the city field is filled out, the first state in the array list will be
       used with it.
+    example: '["CA", "OR", "WA"]'
     items:
+      maxLength: 2
+      minLength: 2
       type: string
     type: array
-  item_count:
+  full_load:
     description: >-
-      This is how many board objects will be returned in the search. By default
-      it will return 50 items per page. Max is 100, minimum is 1. 
-    type: integer
-  load_size:
-    default: Full
-    description: >-
-      This is only valid on load boards. Valid values are "Full" and
-      "Partial"". 
-    type: string
-  only_new:
-    description: >-
-      This will only return unseen results. This requires an alert_id to be
-      specified. 
+      This is only valid on load boards. Add it to limit results to just full or
+      partial loads.
     type: boolean
+  item_count:
+    default: 50
+    description: This argument adjusts how many items per page will be returned.
+    maximum: 100
+    minimum: 1
+    type: integer
   origin_city:
-    description: 'Must be at least 3 characters. '
     example: chillicothe
+    minLength: 2
     type: string
   origin_radius:
+    default: 30
     description: >-
-      If both city and state, it will search for all entries within # Miles of
-      the city. 
+      If both city and state, boards will return all entries within # miles of
+      the city.
+    maximum: 300
+    minimum: 1
     type: integer
   origin_state:
     description: >-
       If the city field is filled out, the first state in the array list will be
       used with it.
+    example: '["MO", "IL"]'
     items:
+      maxLength: 2
+      minLength: 2
       type: string
     type: array
   page_number:
-    description: The page you want to get. Will return an empty board on an invalid page.
+    description: >-
+      The page you want to return. Will return an empty board on an invalid
+      page.
+    minimum: 1
     type: integer
+  return_count:
+    description: 'If included this will return a total count instead of a list. '
+    type: boolean
+  return_only_new:
+    description: >-
+      This will only return unseen results. This requires an alert_id to be
+      specified. 
+    type: boolean
   ship_date:
     description: 'Limit the board to only show loads with X ship date. '
+    example: '["2019-12-20", "2018-01-09", "2017-08-15"]'
     items:
+      description: Please use the YYYY-MM-DD format.
+      format: date
       type: string
     type: array
   sort_parameter:
-    description: Use almost any one of the columns of a returned board.
+    default: age
+    description: >-
+      The system automatically chooses the most common order based on the
+      parameter chosen. Because of this there is no reverse order option.
+    enum:
+      - origin_city
+      - origin_state
+      - origin_radius
+      - destination_city
+      - destination_state
+      - destination_radius
+      - trailer_type
+      - load_size
+      - pay_rate
+      - credit_score
+      - age
+      - load_points
+      - trip_miles
+      - dead_head
+      - length
+      - weight
+      - company_name
+      - ship_date
+      - receive_date
     type: string
   trailer_type:
     description: 'A string array of valid trailer types to limit the search. '
+    example: '["F", "F+T", "F+S"]'
     items:
+      enum:
+        - V
+        - VINT
+        - SD
+        - MX
+        - HS
+        - AC
+        - LB
+        - F+T
+        - F
+        - FINT
+        - DD
+        - V+V
+        - V+A
+        - CRG
+        - HB
+        - LA
+        - PO
+        - R
+        - RINT
+        - RGN
+        - CV
+        - DT
+        - TNK
+        - '|F+S'
+        - PNEU
+        - CONT
+        - OTHER
       type: string
     type: array
 type: object

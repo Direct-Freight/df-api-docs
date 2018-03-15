@@ -42,7 +42,7 @@ patch:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/post_object_model'
+        $ref: '#/definitions/postings_patch_request'
   responses:
     '204':
       description: successful operation
@@ -57,7 +57,7 @@ post:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/post_object_model'
+        $ref: '#/definitions/postings_post_request'
   responses:
     '201':
       $ref: '#/responses/object_created'
