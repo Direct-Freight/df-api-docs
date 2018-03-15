@@ -719,8 +719,8 @@ paths:
     get:
       tags:
       - "locations"
-      summary: "STAGE=UNK A string of a partial city or state name, and returns a\
-        \ list of possible matches."
+      summary: "A string of a partial city or state name, and returns a list of possible\
+        \ matches."
       parameters:
       - name: "term"
         in: "query"
@@ -731,8 +731,8 @@ paths:
         in: "query"
         required: false
         type: "string"
-        description: "\"state\", and \"city\" will return only returns only the respective\
-          \ information for that search type. Misspelling, will default to city."
+        description: "\"state\", and \"city\" will return only the respective information\
+          \ for that search type. Misspelling or blank with default to both."
       responses:
         200:
           description: "successful operation"
@@ -1017,7 +1017,7 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/create_profile"
+          $ref: "#/definitions/profile_request"
       responses:
         201:
           description: "Object created check the headers for a reference URL."
@@ -1792,7 +1792,7 @@ definitions:
     example: "{\n  \"success\": true\n}"
     x-restlet:
       section: "POSTINGS"
-  create_profile:
+  profile_request:
     type: "object"
     required:
     - "address"

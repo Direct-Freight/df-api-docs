@@ -6,8 +6,8 @@ get:
       required: true
       type: string
     - description: >-
-        "state", and "city" will return only returns only the respective
-        information for that search type. Misspelling, will default to city.
+        "state", and "city" will return only the respective information for that
+        search type. Misspelling or blank with default to both.
       in: query
       name: search_type
       required: false
@@ -16,8 +16,8 @@ get:
     '200':
       description: successful operation
   summary: >-
-    STAGE=UNK A string of a partial city or state name, and returns a list of
-    possible matches.
+    A string of a partial city or state name, and returns a list of possible
+    matches.
   tags:
     - locations
 x-restlet:
