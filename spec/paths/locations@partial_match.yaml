@@ -8,6 +8,10 @@ get:
     - description: >-
         "state", and "city" will return only the respective information for that
         search type. Misspelling or blank with default to both.
+      enum:
+        - city
+        - state
+        - both
       in: query
       name: search_type
       required: false

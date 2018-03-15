@@ -733,6 +733,10 @@ paths:
         type: "string"
         description: "\"state\", and \"city\" will return only the respective information\
           \ for that search type. Misspelling or blank with default to both."
+        enum:
+        - "city"
+        - "state"
+        - "both"
       responses:
         200:
           description: "successful operation"
