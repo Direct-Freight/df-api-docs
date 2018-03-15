@@ -726,13 +726,12 @@ paths:
         in: "query"
         required: true
         type: "string"
-        description: "Min 2 characters."
       - name: "search_type"
         in: "query"
         required: false
         type: "string"
         description: "\"state\", and \"city\" will return only the respective information\
-          \ for that search type. Misspelling or blank with default to both."
+          \ for that search type. Misspelling or blank will default to both."
         enum:
         - "city"
         - "state"

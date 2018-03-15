@@ -1,13 +1,12 @@
 get:
   parameters:
-    - description: Min 2 characters.
-      in: query
+    - in: query
       name: term
       required: true
       type: string
     - description: >-
         "state", and "city" will return only the respective information for that
-        search type. Misspelling or blank with default to both.
+        search type. Misspelling or blank will default to both.
       enum:
         - city
         - state

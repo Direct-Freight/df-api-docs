@@ -6,6 +6,7 @@ cp restlet_studio/swagger.yaml web_deploy/swagger-nocode.yaml
 npm run restlet2repo
 git diff spec
 git config --global user.email "$1"
+git add spec/*/*
 git commit -m "restlet2repo: $2" -a
 git push
 git config --global user.email "jondf@directfreight.com"
