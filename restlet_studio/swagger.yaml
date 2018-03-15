@@ -726,6 +726,9 @@ paths:
         in: "query"
         required: true
         type: "string"
+        description: "City/State term to search for.   It matches city name and state\
+          \ name and state abbreviation.  So for instance \"MI\" would return Michigan,\
+          \ Missouri, and Miami, FL"
       - name: "search_type"
         in: "query"
         required: false
@@ -1471,7 +1474,7 @@ definitions:
           - "CV"
           - "DT"
           - "TNK"
-          - "|F+S"
+          - "F+S"
           - "PNEU"
           - "CONT"
           - "OTHER"

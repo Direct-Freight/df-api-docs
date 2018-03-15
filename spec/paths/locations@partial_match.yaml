@@ -1,6 +1,10 @@
 get:
   parameters:
-    - in: query
+    - description: >-
+        City/State term to search for.   It matches city name and state name and
+        state abbreviation.  So for instance "MI" would return Michigan,
+        Missouri, and Miami, FL
+      in: query
       name: term
       required: true
       type: string

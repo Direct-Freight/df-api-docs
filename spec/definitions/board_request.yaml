@@ -136,7 +136,7 @@ properties:
         - CV
         - DT
         - TNK
-        - '|F+S'
+        - F+S
         - PNEU
         - CONT
         - OTHER
