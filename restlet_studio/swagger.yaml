@@ -1792,62 +1792,6 @@ definitions:
     example: "{\n  \"success\": true\n}"
     x-restlet:
       section: "POSTINGS"
-  postings_patch_request:
-    type: "object"
-    required:
-    - "origin_city"
-    - "origin_state"
-    - "posting_id"
-    - "ship_date"
-    - "trailer_type"
-    properties:
-      comment:
-        type: "object"
-      custom_id:
-        type: "object"
-        description: "A unique identifier a user can provide for their own records."
-      destination_city:
-        type: "object"
-        description: "For truck type entries this is optional."
-      destination_state:
-        type: "object"
-        description: "For truck type entries this is optional."
-      height:
-        type: "object"
-      length:
-        type: "object"
-      load_size:
-        type: "object"
-        description: "Require for load type entries only. This field expects one of\
-          \ the 2 following terms, Full or Partial."
-      origin_city:
-        type: "object"
-        description: "Required for all entry types."
-      origin_state:
-        type: "object"
-        description: "Required, 2 character limit."
-      other_trailer_types:
-        type: "object"
-        description: "This may be empty."
-      pay_rate:
-        type: "object"
-      posting_id:
-        type: "integer"
-        format: "int32"
-        description: "A unique id in our system for the user's entry."
-      receive_date:
-        type: "object"
-      ship_date:
-        type: "object"
-      trailer_type:
-        type: "object"
-        description: "This can have 1 or more standard trailer types."
-      weight:
-        type: "object"
-      width:
-        type: "object"
-    x-restlet:
-      section: "POSTINGS"
   create_profile:
     type: "object"
     required:
@@ -2130,6 +2074,62 @@ definitions:
         description: "A text string with the code sent."
     example:
       optin_code: "optin_code"
+    x-restlet:
+      section: "not categorized yet"
+  postings_patch_request:
+    type: "object"
+    required:
+    - "origin_city"
+    - "origin_state"
+    - "posting_id"
+    - "ship_date"
+    - "trailer_type"
+    properties:
+      comment:
+        type: "string"
+      custom_id:
+        type: "object"
+        description: "A unique identifier a user can provide for their own records."
+      destination_city:
+        type: "object"
+        description: "For truck type entries this is optional."
+      destination_state:
+        type: "object"
+        description: "For truck type entries this is optional."
+      height:
+        type: "object"
+      length:
+        type: "object"
+      load_size:
+        type: "object"
+        description: "Require for load type entries only. This field expects one of\
+          \ the 2 following terms, Full or Partial."
+      origin_city:
+        type: "object"
+        description: "Required for all entry types."
+      origin_state:
+        type: "object"
+        description: "Required, 2 character limit."
+      other_trailer_types:
+        type: "object"
+        description: "This may be empty."
+      pay_rate:
+        type: "object"
+      posting_id:
+        type: "integer"
+        format: "int32"
+        description: "A unique id in our system for the user's entry."
+      receive_date:
+        type: "object"
+      ship_date:
+        type: "object"
+      trailer_type:
+        type: "object"
+        description: "This can have 1 or more standard trailer types."
+      weight:
+        type: "object"
+      width:
+        type: "object"
     x-restlet:
       section: "not categorized yet"
   post_posting_type_action_body:
