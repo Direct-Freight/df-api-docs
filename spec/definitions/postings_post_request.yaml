@@ -1,0 +1,54 @@
+properties:
+  comment:
+    type: string
+  custom_id:
+    description: A unique identifier a user can provide for their own records.
+    type: integer
+  destination_city:
+    description: For truck type entries this is optional.
+    type: string
+  destination_state:
+    description: For truck type entries this is optional.
+    type: object
+  full_load:
+    description: >-
+      The load will be defaulted to full if this argument isn't included and
+      marked to false.
+    type: boolean
+  height:
+    type: integer
+  length:
+    type: integer
+  origin_city:
+    description: Required for all entry types.
+    type: string
+  origin_state:
+    description: 'Required, 2 character limit.'
+    type: object
+  other_trailer_types:
+    description: To include custom trailer types.
+    type: string
+  pay_rate:
+    description: 'We expect one of 2 formats. either the per mile, or total sum.'
+    type: integer
+  receive_date:
+    format: date
+    type: string
+  ship_date:
+    format: date
+    type: string
+  trailer_type:
+    description: This can have 1 or more standard trailer types.
+    type: object
+  weight:
+    type: integer
+  width:
+    type: integer
+required:
+  - origin_city
+  - origin_state
+  - ship_date
+  - trailer_type
+type: object
+x-restlet:
+  section: POSTINGS
