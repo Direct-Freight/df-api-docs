@@ -1742,8 +1742,51 @@ definitions:
     - "ship_date"
     - "trailer_type"
     properties:
-      comment:
+      origin_city:
         type: "string"
+        description: "Required for all entry types."
+      origin_state:
+        type: "string"
+        description: "Use the 2 digit state abbreviation."
+        minLength: 2
+        maxLength: 2
+      trailer_type:
+        type: "array"
+        description: "This can have 1 or more standard trailer types."
+        items:
+          type: "string"
+          enum:
+          - "V"
+          - "VINT"
+          - "SD"
+          - "MX"
+          - "HS"
+          - "AC"
+          - "LB"
+          - "F+T"
+          - "F"
+          - "FINT"
+          - "DD"
+          - "V+V"
+          - "V+A"
+          - "CRG"
+          - "HB"
+          - "LA"
+          - "PO"
+          - "R"
+          - "RINT"
+          - "RGN"
+          - "CV"
+          - "DT"
+          - "TNK"
+          - "F+S"
+          - "PNEU"
+          - "CONT"
+          - "OTHER"
+      ship_date:
+        type: "string"
+        format: "date"
+        description: "The date you wish the load to be shipped."
       custom_id:
         type: "integer"
         description: "A unique identifier a user can provide for their own records."
@@ -1751,22 +1794,22 @@ definitions:
         type: "string"
         description: "For truck type entries this is optional."
       destination_state:
-        type: "object"
+        type: "array"
         description: "For truck type entries this is optional."
+        items:
+          type: "string"
       height:
         type: "integer"
+      width:
+        type: "integer"
       length:
+        type: "integer"
+      weight:
         type: "integer"
       full_load:
         type: "boolean"
         description: "The load will be defaulted to full if this argument isn't included\
           \ and marked to false."
-      origin_city:
-        type: "string"
-        description: "Required for all entry types."
-      origin_state:
-        type: "object"
-        description: "Required, 2 character limit."
       other_trailer_types:
         type: "string"
         description: "To include custom trailer types."
@@ -1776,16 +1819,8 @@ definitions:
       receive_date:
         type: "string"
         format: "date"
-      ship_date:
+      comment:
         type: "string"
-        format: "date"
-      trailer_type:
-        type: "object"
-        description: "This can have 1 or more standard trailer types."
-      weight:
-        type: "integer"
-      width:
-        type: "integer"
     x-restlet:
       section: "POSTINGS"
   post_posting_multiple_response:
