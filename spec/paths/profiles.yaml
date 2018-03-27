@@ -1,6 +1,12 @@
 get:
   parameters:
     - $ref: '#/parameters/end-user-token'
+    - in: query
+      items:
+        type: integer
+      name: posting_id
+      required: false
+      type: array
   responses:
     '200':
       description: successful operation
@@ -36,7 +42,19 @@ post:
         $ref: '#/definitions/profile_request'
   responses:
     '201':
-      $ref: '#/responses/object_created'
+      description: Object created check the headers for a reference URL.
+      headers:
+        Location:
+          description: >-
+            This will have a fully qualified API url you can call to get details
+            of yoru load.
+          type: string
+          x-example: 'https://directfreight.com/api/postings/loads/?posting_id=1764957218'
+      schema:
+        properties:
+          posting_id:
+            type: integer
+        type: object
   summary: STAGE=UNK Create a new profile.
   tags:
     - profiles
