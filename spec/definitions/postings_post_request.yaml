@@ -18,8 +18,10 @@ properties:
       marked to false.
     type: boolean
   height:
+    description: This number represents inches.
     type: integer
   length:
+    description: This number represents inches.
     type: integer
   origin_city:
     description: Required for all entry types.
@@ -76,8 +78,10 @@ properties:
       type: string
     type: array
   weight:
+    description: This number represents pounds.
     type: integer
   width:
+    description: This number represents inches.
     type: integer
 required:
   - origin_city

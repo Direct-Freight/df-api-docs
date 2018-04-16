@@ -1815,12 +1815,16 @@ definitions:
           type: "string"
       height:
         type: "integer"
+        description: "This number represents inches."
       width:
         type: "integer"
+        description: "This number represents inches."
       length:
         type: "integer"
+        description: "This number represents inches."
       weight:
         type: "integer"
+        description: "This number represents pounds."
       full_load:
         type: "boolean"
         description: "The load will be defaulted to full if this argument isn't included\
@@ -1912,12 +1916,16 @@ definitions:
           type: "string"
       height:
         type: "integer"
+        description: "This number represents inches."
       width:
         type: "integer"
+        description: "This number represents inches."
       length:
         type: "integer"
+        description: "This number represents inches."
       weight:
         type: "integer"
+        description: "This number represents pounds."
       full_load:
         type: "boolean"
       other_trailer_types:
