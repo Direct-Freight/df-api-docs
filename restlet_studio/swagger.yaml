@@ -765,7 +765,7 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/get_posting_type_response"
+            $ref: "#/definitions/posting_post_response"
     post:
       tags:
       - "postings"
@@ -1823,16 +1823,15 @@ definitions:
           type: "string"
     x-restlet:
       section: "POSTINGS"
-  get_posting_type_response:
+  posting_post_response:
     type: "object"
     properties:
-      posting_list:
+      list:
         type: "array"
         description: "A list of posting objects you can iterate over."
         items:
-          type: "string"
-    example: "{\n  \"posting_list\": [\n    \"posting_list\",\n    \"posting_list\"\
-      \n  ]\n}"
+          $ref: "#/definitions/postings_post_response_item"
+    example: "{\n  \"list\": [\n    .....\n  ]\n}"
     x-restlet:
       section: "POSTINGS"
   postings_post_request:
@@ -2024,6 +2023,110 @@ definitions:
         format: "date"
       comment:
         type: "string"
+    x-restlet:
+      section: "POSTINGS"
+  postings_post_response_item:
+    type: "object"
+    required:
+    - "contact_info"
+    - "full_load"
+    - "origin_city"
+    - "origin_state"
+    - "posting_id"
+    - "ship_date"
+    - "trailer_type"
+    properties:
+      origin_city:
+        type: "string"
+        description: "Required for all entry types."
+      origin_state:
+        type: "string"
+        description: "Use the 2 digit state abbreviation."
+        minLength: 2
+        maxLength: 2
+      trailer_type:
+        type: "array"
+        description: "This can have 1 or more standard trailer types."
+        items:
+          type: "string"
+          enum:
+          - "V"
+          - "VINT"
+          - "SD"
+          - "MX"
+          - "HS"
+          - "AC"
+          - "LB"
+          - "F+T"
+          - "F"
+          - "FINT"
+          - "DD"
+          - "V+V"
+          - "V+A"
+          - "CRG"
+          - "HB"
+          - "LA"
+          - "PO"
+          - "R"
+          - "RINT"
+          - "RGN"
+          - "CV"
+          - "DT"
+          - "TNK"
+          - "F+S"
+          - "PNEU"
+          - "CONT"
+          - "OTHER"
+      ship_date:
+        type: "string"
+        format: "date"
+        description: "The date you wish the load to be shipped."
+      custom_id:
+        type: "integer"
+        description: "A unique identifier a user can provide for their own records."
+      destination_city:
+        type: "string"
+        description: "For truck type entries this is optional."
+      destination_state:
+        type: "array"
+        description: "For truck type entries this is optional."
+        items:
+          type: "string"
+      height:
+        type: "integer"
+        description: "This number represents inches."
+      width:
+        type: "integer"
+        description: "This number represents inches."
+      length:
+        type: "integer"
+        description: "This number represents inches."
+      weight:
+        type: "integer"
+        description: "This number represents pounds."
+      full_load:
+        type: "boolean"
+        description: "For trucks this will always be false."
+      other_trailer_types:
+        type: "string"
+        description: "To include custom trailer types."
+      pay_rate:
+        type: "integer"
+        description: "We expect one of 2 formats. either the per mile, or total sum."
+      receive_date:
+        type: "string"
+        format: "date"
+      comment:
+        type: "string"
+      posting_id:
+        type: "integer"
+        description: "This is the unique ID of this post."
+      contact_info:
+        type: "string"
+        description: "This is generated from the logged in users profile information."
+      contact_name:
+        type: "string"
+        description: "This is generated from the logged in users profile information."
     x-restlet:
       section: "POSTINGS"
   profile_request:
