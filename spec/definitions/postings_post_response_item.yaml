@@ -1,0 +1,103 @@
+properties:
+  comment:
+    type: string
+  contact_info:
+    description: This is generated from the logged in users profile information.
+    type: string
+  contact_name:
+    description: This is generated from the logged in users profile information.
+    type: string
+  custom_id:
+    description: A unique identifier a user can provide for their own records.
+    type: integer
+  destination_city:
+    description: For truck type entries this is optional.
+    type: string
+  destination_state:
+    description: For truck type entries this is optional.
+    items:
+      type: string
+    type: array
+  full_load:
+    description: For trucks this will always be false.
+    type: boolean
+  height:
+    description: This number represents inches.
+    type: integer
+  length:
+    description: This number represents inches.
+    type: integer
+  origin_city:
+    description: Required for all entry types.
+    type: string
+  origin_state:
+    description: Use the 2 digit state abbreviation.
+    maxLength: 2
+    minLength: 2
+    type: string
+  other_trailer_types:
+    description: To include custom trailer types.
+    type: string
+  pay_rate:
+    description: 'We expect one of 2 formats. either the per mile, or total sum.'
+    type: integer
+  posting_id:
+    description: This is the unique ID of this post.
+    type: integer
+  receive_date:
+    format: date
+    type: string
+  ship_date:
+    description: The date you wish the load to be shipped.
+    format: date
+    type: string
+  trailer_type:
+    description: This can have 1 or more standard trailer types.
+    items:
+      enum:
+        - V
+        - VINT
+        - SD
+        - MX
+        - HS
+        - AC
+        - LB
+        - F+T
+        - F
+        - FINT
+        - DD
+        - V+V
+        - V+A
+        - CRG
+        - HB
+        - LA
+        - PO
+        - R
+        - RINT
+        - RGN
+        - CV
+        - DT
+        - TNK
+        - F+S
+        - PNEU
+        - CONT
+        - OTHER
+      type: string
+    type: array
+  weight:
+    description: This number represents pounds.
+    type: integer
+  width:
+    description: This number represents inches.
+    type: integer
+required:
+  - contact_info
+  - full_load
+  - origin_city
+  - origin_state
+  - posting_id
+  - ship_date
+  - trailer_type
+type: object
+x-restlet:
+  section: POSTINGS
