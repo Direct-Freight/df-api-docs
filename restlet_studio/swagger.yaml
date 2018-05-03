@@ -803,7 +803,7 @@ paths:
         required: true
         type: "string"
       responses:
-        204:
+        200:
           description: "success operation"
     patch:
       tags:
