@@ -9,7 +9,7 @@ delete:
       required: true
       type: array
   responses:
-    '200':
+    '204':
       description: success operation
   summary: Remove one or more postings.
   tags:
