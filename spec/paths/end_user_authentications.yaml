@@ -5,7 +5,7 @@ delete:
   responses:
     '204':
       description: Will not return content on a successful logout.
-  summary: STAGE=UNK Logs a user out.
+  summary: Logs a user out.
   tags:
     - end_user_authentications
 get:
@@ -24,7 +24,7 @@ get:
               "Subscribed", "Posting", "Overdue", or "Not Logged In".
             type: string
         type: object
-  summary: STAGE=UNK Get current authentication level for the user.
+  summary: Get current authentication level for the user.
   tags:
     - end_user_authentications
 post:
@@ -43,7 +43,7 @@ post:
         $ref: '#/definitions/end-user-token'
     '422':
       $ref: '#/responses/error_422'
-  summary: STAGE=UNK Logs a user in.
+  summary: Logs a user in.
   tags:
     - end_user_authentications
 x-restlet:

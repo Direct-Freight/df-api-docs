@@ -4,15 +4,17 @@ get:
     '200':
       description: successful operation
       examples:
-        application/json:
-          now: now
+        application/json: |-
+          {
+            "now": "now"
+          }
       schema:
         properties:
           now:
             description: The current date and time based on our server.
             type: string
         type: object
-  summary: STAGE=UNK Gets an authoritative date_time string.
+  summary: Gets an authoritative date_time string.
   tags:
     - end_user_authentications
 x-restlet:

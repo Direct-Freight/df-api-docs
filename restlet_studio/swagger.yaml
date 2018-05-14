@@ -526,7 +526,7 @@ paths:
     get:
       tags:
       - "end_user_authentications"
-      summary: "STAGE=UNK Get current authentication level for the user."
+      summary: "Get current authentication level for the user."
       parameters:
       - name: "end-user-token"
         in: "header"
@@ -548,7 +548,7 @@ paths:
     post:
       tags:
       - "end_user_authentications"
-      summary: "STAGE=UNK Logs a user in."
+      summary: "Logs a user in."
       description: "This function sends login credentials, and retrieves a stateless\
         \ token."
       consumes: []
@@ -571,7 +571,7 @@ paths:
     delete:
       tags:
       - "end_user_authentications"
-      summary: "STAGE=UNK Logs a user out."
+      summary: "Logs a user out."
       description: "This logs a user out. the end-user-token will no longer be valid."
       parameters:
       - name: "end-user-token"
@@ -587,7 +587,7 @@ paths:
     get:
       tags:
       - "end_user_authentications"
-      summary: "STAGE=UNK Gets an authoritative date_time string."
+      summary: "Gets an authoritative date_time string."
       parameters: []
       responses:
         200:
@@ -599,8 +599,7 @@ paths:
                 type: "string"
                 description: "The current date and time based on our server."
           examples:
-            application/json:
-              now: "now"
+            application/json: "{\n  \"now\": \"now\"\n}"
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
   /end_user_authentications/passwords:
