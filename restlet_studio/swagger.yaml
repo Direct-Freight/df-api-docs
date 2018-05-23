@@ -1711,9 +1711,12 @@ definitions:
           \ if doing a state search."
       credit_score:
         type: "integer"
-      exclude_status:
-        type: "string"
-        description: "misc information for displaying."
+      user_hid:
+        type: "boolean"
+        description: "This field is only returned for logged in searches. The value\
+          \ when true represents that the user wishes the entry hidden. Look at the\
+          \ boards/hidden_entries/ documentation for more information on how to set\
+          \ and update this value."
       green_light:
         type: "boolean"
       md5sum:

@@ -34,9 +34,6 @@ properties:
   destination_state:
     example: '"OR"'
     type: string
-  exclude_status:
-    description: misc information for displaying.
-    type: string
   full_load:
     description: Will always return false for trucks.
     type: boolean
@@ -69,6 +66,13 @@ properties:
   trip_miles:
     description: Distance between origin and destination.
     type: integer
+  user_hid:
+    description: >-
+      This field is only returned for logged in searches. The value when true
+      represents that the user wishes the entry hidden. Look at the
+      boards/hidden_entries/ documentation for more information on how to set
+      and update this value.
+    type: boolean
 required:
   - age
   - credit_score
