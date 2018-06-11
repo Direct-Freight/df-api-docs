@@ -51,6 +51,9 @@ patch:
     - postings
 post:
   consumes: []
+  description: >-
+    This endpoint method will post an entry. Valid posting_type are: loads,
+    trucks, test_loads, test_trucks, private_loads, and private_trucks.
   parameters:
     - $ref: '#/parameters/end-user-token'
     - in: body

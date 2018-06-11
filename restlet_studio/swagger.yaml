@@ -769,6 +769,8 @@ paths:
       tags:
       - "postings"
       summary: "Create a posting"
+      description: "This endpoint method will post an entry. Valid posting_type are:\
+        \ loads, trucks, test_loads, test_trucks, private_loads, and private_trucks."
       consumes: []
       parameters:
       - name: "end-user-token"
