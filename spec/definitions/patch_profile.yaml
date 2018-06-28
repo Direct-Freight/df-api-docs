@@ -20,7 +20,29 @@ properties:
   mc_number:
     type: string
   mobile_carrier:
-    type: integer
+    enum:
+      - Other/Unknown
+      - AT&T
+      - Verizon
+      - Sprint
+      - T-Mobile
+      - US Cellular
+      - Nextel
+      - Virgin Mobile
+      - Boost Mobile
+      - Straight Talk
+      - Tracfone
+      - NET10
+      - Metro PCS
+      - Cricket
+      - Rogers
+      - Fido
+      - Bell Mobility
+      - Telus
+      - Clearnet
+      - Solo Mobile
+      - Koodo Mobile
+    type: string
   mobile_number:
     type: string
   state:
@@ -29,21 +51,6 @@ properties:
     type: string
   zip:
     type: string
-required:
-  - address
-  - city
-  - company
-  - contact_extension
-  - contact_name
-  - contact_number
-  - dot_number
-  - fax_number
-  - mc_number
-  - mobile_carrier
-  - mobile_number
-  - state
-  - web_page
-  - zip
 type: object
 x-restlet:
   section: PROFILES

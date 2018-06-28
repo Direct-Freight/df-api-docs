@@ -52,8 +52,8 @@ post:
           x-example: 'https://directfreight.com/api/postings/loads/?posting_id=1764957218'
       schema:
         properties:
-          posting_id:
-            type: integer
+          success:
+            type: boolean
         type: object
   summary: STAGE=UNK Create a new profile.
   tags:

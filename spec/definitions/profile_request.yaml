@@ -20,11 +20,30 @@ properties:
   mc_number:
     type: string
   mobile_carrier:
-    type: integer
-  mobile_number:
+    enum:
+      - Other/Unknown
+      - AT&T
+      - Verizon
+      - Sprint
+      - T-Mobile
+      - US Cellular
+      - Nextel
+      - Virgin Mobile
+      - Boost Mobile
+      - Straight Talk
+      - Tracfone
+      - NET10
+      - Metro PCS
+      - Cricket
+      - Rogers
+      - Fido
+      - Bell Mobility
+      - Telus
+      - Clearnet
+      - Solo Mobile
+      - Koodo Mobile
     type: string
-  password:
-    description: 'Needed to set up the user/pass for authentication. '
+  mobile_number:
     type: string
   state:
     type: string
@@ -44,7 +63,6 @@ required:
   - mc_number
   - mobile_carrier
   - mobile_number
-  - password
   - state
   - web_page
   - zip

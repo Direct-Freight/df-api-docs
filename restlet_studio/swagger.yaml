@@ -1037,8 +1037,8 @@ paths:
           schema:
             type: "object"
             properties:
-              posting_id:
-                type: "integer"
+              success:
+                type: "boolean"
           headers:
             Location:
               type: "string"
@@ -2147,7 +2147,6 @@ definitions:
     - "mc_number"
     - "mobile_carrier"
     - "mobile_number"
-    - "password"
     - "state"
     - "web_page"
     - "zip"
@@ -2173,12 +2172,31 @@ definitions:
       mc_number:
         type: "string"
       mobile_carrier:
-        type: "integer"
+        type: "string"
+        enum:
+        - "Other/Unknown"
+        - "AT&T"
+        - "Verizon"
+        - "Sprint"
+        - "T-Mobile"
+        - "US Cellular"
+        - "Nextel"
+        - "Virgin Mobile"
+        - "Boost Mobile"
+        - "Straight Talk"
+        - "Tracfone"
+        - "NET10"
+        - "Metro PCS"
+        - "Cricket"
+        - "Rogers"
+        - "Fido"
+        - "Bell Mobility"
+        - "Telus"
+        - "Clearnet"
+        - "Solo Mobile"
+        - "Koodo Mobile"
       mobile_number:
         type: "string"
-      password:
-        type: "string"
-        description: "Needed to set up the user/pass for authentication. "
       state:
         type: "string"
       web_page:
@@ -2189,21 +2207,6 @@ definitions:
       section: "PROFILES"
   patch_profile:
     type: "object"
-    required:
-    - "address"
-    - "city"
-    - "company"
-    - "contact_extension"
-    - "contact_name"
-    - "contact_number"
-    - "dot_number"
-    - "fax_number"
-    - "mc_number"
-    - "mobile_carrier"
-    - "mobile_number"
-    - "state"
-    - "web_page"
-    - "zip"
     properties:
       address:
         type: "string"
@@ -2226,7 +2229,29 @@ definitions:
       mc_number:
         type: "string"
       mobile_carrier:
-        type: "integer"
+        type: "string"
+        enum:
+        - "Other/Unknown"
+        - "AT&T"
+        - "Verizon"
+        - "Sprint"
+        - "T-Mobile"
+        - "US Cellular"
+        - "Nextel"
+        - "Virgin Mobile"
+        - "Boost Mobile"
+        - "Straight Talk"
+        - "Tracfone"
+        - "NET10"
+        - "Metro PCS"
+        - "Cricket"
+        - "Rogers"
+        - "Fido"
+        - "Bell Mobility"
+        - "Telus"
+        - "Clearnet"
+        - "Solo Mobile"
+        - "Koodo Mobile"
       mobile_number:
         type: "string"
       state:
