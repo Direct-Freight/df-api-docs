@@ -1,0 +1,73 @@
+example: |-
+  {
+    "address": "P.O. Box 131",
+    "city": "Chillicothe",
+    "company": "Direct Freight",
+    "contact_extension": "x333",
+    "contact_name": "Joe Doe",
+    "contact_number": "555-555-5555",
+    "dot_number": 123456,
+    "fax_number": "555-555-5555",
+    "mc_number": 123456,
+    "mobile_carrier": "Company_X",
+    "mobile_number": "555-555-1234",
+    "state": "MO",
+    "web_page": "http://www.directfreight.com",
+    "zip": 55555
+  }
+properties:
+  address:
+    type: string
+  city:
+    type: string
+  company:
+    description: 'Company name. '
+    type: string
+  contact_extension:
+    type: integer
+  contact_name:
+    description: 'Contact name. '
+    type: string
+  contact_number:
+    type: integer
+  dot_number:
+    type: string
+  fax_number:
+    type: integer
+  mc_number:
+    type: string
+  mobile_carrier:
+    enum:
+      - Other/Unknown
+      - AT&T
+      - Verizon
+      - Sprint
+      - T-Mobile
+      - US Cellular
+      - Nextel
+      - Virgin Mobile
+      - Boost Mobile
+      - Straight Talk
+      - Tracfone
+      - NET10
+      - Metro PCS
+      - Cricket
+      - Rogers
+      - Fido
+      - Bell Mobility
+      - Telus
+      - Clearnet
+      - Solo Mobile
+      - Koodo Mobile
+    type: string
+  mobile_number:
+    type: integer
+  state:
+    type: string
+  web_page:
+    type: string
+  zip:
+    type: string
+type: object
+x-restlet:
+  section: PROFILES
