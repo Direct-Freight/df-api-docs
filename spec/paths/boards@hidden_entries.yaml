@@ -1,8 +1,7 @@
 delete:
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - description: 'The entry that need to be marked as not hidden. '
-      in: query
+    - in: query
       name: entry_id
       required: true
       type: string
@@ -46,15 +45,14 @@ patch:
   tags:
     - boards
 post:
+  consumes: []
   parameters:
     - $ref: '#/parameters/end-user-token'
-    - description: 'The entry that need to be marked as hidden. '
-      in: query
-      items:
-        type: string
-      name: entry_id
+    - in: body
+      name: body
       required: true
-      type: array
+      schema:
+        $ref: '#/definitions/hidden_entry_object'
   responses:
     '201':
       $ref: '#/responses/object_created'

@@ -339,18 +339,17 @@ paths:
       tags:
       - "boards"
       summary: "STAGE=UNK Mark a set of entries as hidden."
+      consumes: []
       parameters:
-      - name: "entry_id"
-        in: "query"
-        required: true
-        type: "array"
-        description: "The entry that need to be marked as hidden. "
-        items:
-          type: "string"
       - name: "end-user-token"
         in: "header"
         required: true
         type: "string"
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/hidden_entry_object"
       responses:
         201:
           description: "Object created check the headers for a reference URL."
@@ -365,7 +364,6 @@ paths:
         in: "query"
         required: true
         type: "string"
-        description: "The entry that need to be marked as not hidden. "
       - name: "end-user-token"
         in: "header"
         required: true
@@ -1729,6 +1727,18 @@ definitions:
         description: "how long since we received this information."
       comment:
         type: "string"
+    x-restlet:
+      section: "BOARDS"
+  hidden_entry_object:
+    type: "object"
+    required:
+    - "entry_id"
+    properties:
+      entry_id:
+        type: "array"
+        description: "The entry that need to be marked as hidden."
+        items:
+          type: "string"
     x-restlet:
       section: "BOARDS"
   end-user-token:
