@@ -20,6 +20,16 @@ properties:
       To see this you must also send an end_user_token that has the subscribed
       access level.
     type: string
+  credit_report_key:
+    description: >-
+      This will only be in the response if the request comes from a subscribed
+      logged in user. 
+
+
+      To access the report, use the key with the following url.
+
+      https://www.directfreight.com/home/credit_report?refid=$credit_report_key
+    type: string
   credit_score:
     type: integer
   dead_head:

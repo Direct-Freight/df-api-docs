@@ -471,31 +471,6 @@ paths:
           description: "successful operation"
     x-restlet:
       section: "BOARDS"
-  /credit_reports:
-    get:
-      tags:
-      - "credit_reports"
-      summary: "STAGE=UNK Request access to a credit report."
-      parameters:
-      - name: "credit_report_id"
-        in: "query"
-        required: true
-        type: "string"
-        description: "A special id returned with the board entries."
-      - name: "format"
-        in: "query"
-        required: true
-        type: "string"
-        description: "Return format. Currently only supports html and json."
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-    x-restlet:
-      section: "CREDIT_REPORTS"
   /end_user_authentication/users:
     post:
       tags:
@@ -1711,6 +1686,11 @@ definitions:
           \ if doing a state search."
       credit_score:
         type: "integer"
+      credit_report_key:
+        type: "string"
+        description: "This will only be in the response if the request comes from\
+          \ a subscribed logged in user. \n\nTo access the report, use the key with\
+          \ the following url.\nhttps://www.directfreight.com/home/credit_report?refid=$credit_report_key"
       user_hid:
         type: "boolean"
         description: "This field is only returned for logged in searches. The value\
@@ -2379,7 +2359,6 @@ x-restlet:
     ALERTS: {}
     BILLINGS: {}
     BOARDS: {}
-    CREDIT_REPORTS: {}
     END_USER_AUTHENTICATIONS: {}
     LOCATIONS: {}
     POSTINGS: {}

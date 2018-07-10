@@ -51,7 +51,6 @@ x-restlet:
     ALERTS: {}
     BILLINGS: {}
     BOARDS: {}
-    CREDIT_REPORTS: {}
     END_USER_AUTHENTICATIONS: {}
     LOCATIONS: {}
     POSTINGS: {}
