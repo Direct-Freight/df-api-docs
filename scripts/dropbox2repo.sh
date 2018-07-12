@@ -14,5 +14,6 @@ if ! diff -q web_deploy/swagger-nocode.yaml $APIDOCS_PATH/swagger20-with-extensi
         export short_email=${dropbox_info%@*}
         export display_name=${dropbox_info#*:}
         git commit --author="$display_name <$email>" -m "dropbox2repo: $short_email/$display_name" -a
+        git config --global push.default simple
         git push
 fi

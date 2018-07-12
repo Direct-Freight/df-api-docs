@@ -2179,7 +2179,7 @@ definitions:
       zip:
         type: "string"
     example: "{\n  \"address\": \"P.O. Box 131\",\n  \"city\": \"Chillicothe\",\n\
-      \  \"company\": \"Direct Freight Test\",\n  \"contact_extension\": \"x333\",\n  \"\
+      \  \"company\": \"Direct Freight Test2\",\n  \"contact_extension\": \"x333\",\n  \"\
       contact_name\": \"Joe Doe\",\n  \"contact_number\": \"555-555-5555\",\n  \"\
       dot_number\": 123456,\n  \"fax_number\": \"555-555-5555\",\n  \"mc_number\"\
       : 123456,\n  \"mobile_carrier\": \"Company_X\",\n  \"mobile_number\": \"555-555-1234\"\
