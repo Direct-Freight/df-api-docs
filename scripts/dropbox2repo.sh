@@ -1,11 +1,12 @@
 #!/bin/bash
 cd /var/www/dfwdbi/api/df-api-docs
-if ! diff -q web_deploy/swagger-nocode.yaml /home/catalyst/Dropbox/directfreight/swagger20-with-extensions.yaml; then
-        cp /home/catalyst/Dropbox/directfreight/swagger20-with-extensions.yaml web_deploy/swagger-nocode.yaml
-        cp /home/catalyst/Dropbox/directfreight/swagger20-with-extensions.yaml restlet_studio/swagger.yaml
+export DF_APIDOCS_PATH="/home/catalyst/Dropbox/directfreight/apidocs/directfreight"
+if ! diff -q web_deploy/swagger-nocode.yaml $DF_APIDOCS_PATH/swagger20-with-extensions.yaml; then
+        cp $DF_APIDOCS_PATH/swagger20-with-extensions.yaml web_deploy/swagger-nocode.yaml
+        cp $DF_APIDOCS_PATH/swagger20-with-extensions.yaml restlet_studio/swagger.yaml
         git pull --no-edit #just in case
-        cp /home/catalyst/Dropbox/directfreight/swagger20-with-extensions.yaml web_deploy/swagger-nocode.yaml
-        cp /home/catalyst/Dropbox/directfreight/swagger20-with-extensions.yaml restlet_studio/swagger.yaml
+        cp $DF_APIDOCS_PATH/swagger20-with-extensions.yaml web_deploy/swagger-nocode.yaml
+        cp $DF_APIDOCS_PATH/swagger20-with-extensions.yaml restlet_studio/swagger.yaml
         npm run restlet2repo
         git diff spec
         export dropbox_info=`scripts/dropbox_last_modifier.pl`
