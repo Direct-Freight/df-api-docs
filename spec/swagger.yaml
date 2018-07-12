@@ -1,10 +1,10 @@
 basePath: /api
 consumes:
   - application/json
-host: www.directfreight.com
+host: www.truckersearch.com
 info:
   description: >-
-    In order to use the Direct Freight API please first contact us to get an API
+    In order to use the Trucker Search API please first contact us to get an API
     Token. This token needs to be sent as a HTTP header argument in every
     request to our API.
 
@@ -27,7 +27,7 @@ info:
 
 
     Both Tokens are stateless, and delivered via the HTTP headers.
-  title: Direct Freight API
+  title: Trucker Search API
   version: 2.0.0
   x-logo:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
