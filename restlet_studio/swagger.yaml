@@ -1,7 +1,7 @@
 ---
 swagger: "2.0"
 info:
-  description: "In order to use the Direct Freight API please first contact us to\
+  description: "In order to use the Trucker Search API please first contact us to\
     \ get an API Token. This token needs to be sent as a HTTP header argument in every\
     \ request to our API.\n\napi-token=\"SECRET KEY\"\n\nPlease keep your api-token\
     \ a secret. If the token is compromised please contact us to get a new one.\n\n\
@@ -11,8 +11,8 @@ info:
     \ This token is needed in order to use certain features, and get certain sensitive\
     \ information.\n\nBoth Tokens are stateless, and delivered via the HTTP headers."
   version: "2.0.0"
-  title: "Direct Freight API"
-host: "www.directfreight.com"
+  title: "Trucker Search API"
+host: "www.truckersearch.com"
 basePath: "/api"
 schemes:
 - "https"
@@ -2179,7 +2179,7 @@ definitions:
       zip:
         type: "string"
     example: "{\n  \"address\": \"P.O. Box 131\",\n  \"city\": \"Chillicothe\",\n\
-      \  \"company\": \"Direct Freight\",\n  \"contact_extension\": \"x333\",\n  \"\
+      \  \"company\": \"Trucker Search\",\n  \"contact_extension\": \"x333\",\n  \"\
       contact_name\": \"Joe Doe\",\n  \"contact_number\": \"555-555-5555\",\n  \"\
       dot_number\": 123456,\n  \"fax_number\": \"555-555-5555\",\n  \"mc_number\"\
       : 123456,\n  \"mobile_carrier\": \"Company_X\",\n  \"mobile_number\": \"555-555-1234\"\
