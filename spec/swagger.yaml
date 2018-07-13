@@ -3,6 +3,7 @@ consumes:
   - application/json
 host: www.directfreight.com
 info:
+  contact: {}
   description: >-
     In order to use the Direct Freight API please first contact us to get an API
     Token. This token needs to be sent as a HTTP header argument in every
@@ -49,7 +50,6 @@ swagger: '2.0'
 x-restlet:
   sections:
     ALERTS: {}
-    BILLINGS: {}
     BOARDS: {}
     END_USER_AUTHENTICATIONS: {}
     LOCATIONS: {}

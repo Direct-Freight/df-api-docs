@@ -56,7 +56,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: STAGE=UNK Mark a set of entries as hidden.
+  summary: STAGE=UNK Mark an entry as hidden.
   tags:
     - boards
 x-restlet:

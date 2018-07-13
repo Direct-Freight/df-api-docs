@@ -12,6 +12,7 @@ info:
     \ information.\n\nBoth Tokens are stateless, and delivered via the HTTP headers."
   version: "2.0.0"
   title: "Direct Freight API"
+  contact: {}
 host: "www.directfreight.com"
 basePath: "/api"
 schemes:
@@ -124,55 +125,6 @@ paths:
       - "trucks"
     x-restlet:
       section: "ALERTS"
-  /billings:
-    get:
-      tags:
-      - "billings"
-      summary: "STAGE=UNK Returns the amount the end user will be charged. If a promo\
-        \ code is present return adjusted amount. If there are special conditions\
-        \ a string with the promo code benefits will also be returned."
-      description: "Will return how much the end user will be charged to upgrade.\
-        \ It will not charge the user, or consume the promo code."
-      parameters:
-      - name: "promo_code"
-        in: "query"
-        required: false
-        type: "string"
-        description: "The promo code. "
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_billing_response"
-    post:
-      tags:
-      - "billings"
-      summary: "STAGE=UNK This function will attempt to process a payment, and upgrade\
-        \ a non subscibed user. "
-      description: "This function will attempt to process a payment, and upgrade a\
-        \ non subscibed user. "
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/bill_user"
-      responses:
-        201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            $ref: "#/definitions/create_status"
-    x-restlet:
-      section: "BILLINGS"
   /boards/{board_type}:
     post:
       tags:
@@ -338,7 +290,7 @@ paths:
     post:
       tags:
       - "boards"
-      summary: "STAGE=UNK Mark a set of entries as hidden."
+      summary: "STAGE=UNK Mark an entry as hidden."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -1348,39 +1300,6 @@ definitions:
         description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
     x-restlet:
       section: "ALERTS"
-  bill_user:
-    type: "object"
-    required:
-    - "billing_address"
-    properties:
-      billing_address:
-        type: "object"
-        description: "first_name, last_name, address, city, state, and phone all needed. "
-      cc_data:
-        type: "object"
-        description: "This is optional if a check number is provided. "
-      check_data:
-        type: "object"
-        description: "This is optional if a credit number is provided. "
-      promo_code:
-        type: "string"
-        description: "Optional Promo Code for a discount. "
-    x-restlet:
-      section: "BILLINGS"
-  get_billing_response:
-    type: "object"
-    properties:
-      amount:
-        type: "integer"
-        format: "int32"
-        description: "Amount How much the user will be charged. This may be 0."
-      promo_conditions:
-        type: "object"
-        description: "Any extra text relating to the promo code. For example \"15\
-          \ Day Free. 34.95 charged after that.\""
-    example: "{\n  \"amount\": 0,\n  \"promo_conditions\": \"{}\"\n}"
-    x-restlet:
-      section: "BILLINGS"
   board_request:
     type: "object"
     properties:
@@ -1401,7 +1320,6 @@ definitions:
         type: "integer"
         description: "If both city and state, boards will return all entries within\
           \ # miles of the city."
-        default: 30
         minimum: 1
         maximum: 300
       destination_city:
@@ -1421,13 +1339,11 @@ definitions:
         type: "integer"
         description: "If both city and state are specified, it will search for all\
           \ entries within # Miles of the city. "
-        default: 30
         minimum: 1
         maximum: 300
       item_count:
         type: "integer"
         description: "This argument adjusts how many items per page will be returned."
-        default: 50
         minimum: 1
         maximum: 100
       full_load:
@@ -1715,10 +1631,8 @@ definitions:
     - "entry_id"
     properties:
       entry_id:
-        type: "array"
+        type: "string"
         description: "The entry that need to be marked as hidden."
-        items:
-          type: "string"
     x-restlet:
       section: "BOARDS"
   end-user-token:
@@ -2179,7 +2093,7 @@ definitions:
       zip:
         type: "string"
     example: "{\n  \"address\": \"P.O. Box 131\",\n  \"city\": \"Chillicothe\",\n\
-      \  \"company\": \"Direct Freight Test2\",\n  \"contact_extension\": \"x333\",\n  \"\
+      \  \"company\": \"Direct Freight\",\n  \"contact_extension\": \"x333\",\n  \"\
       contact_name\": \"Joe Doe\",\n  \"contact_number\": \"555-555-5555\",\n  \"\
       dot_number\": 123456,\n  \"fax_number\": \"555-555-5555\",\n  \"mc_number\"\
       : 123456,\n  \"mobile_carrier\": \"Company_X\",\n  \"mobile_number\": \"555-555-1234\"\
@@ -2357,7 +2271,6 @@ definitions:
 x-restlet:
   sections:
     ALERTS: {}
-    BILLINGS: {}
     BOARDS: {}
     END_USER_AUTHENTICATIONS: {}
     LOCATIONS: {}

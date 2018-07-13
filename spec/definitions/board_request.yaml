@@ -10,7 +10,6 @@ properties:
     minLength: 2
     type: string
   destination_radius:
-    default: 30
     description: >-
       If both city and state are specified, it will search for all entries
       within # Miles of the city. 
@@ -33,7 +32,6 @@ properties:
       partial loads.
     type: boolean
   item_count:
-    default: 50
     description: This argument adjusts how many items per page will be returned.
     maximum: 100
     minimum: 1
@@ -43,7 +41,6 @@ properties:
     minLength: 2
     type: string
   origin_radius:
-    default: 30
     description: >-
       If both city and state, boards will return all entries within # miles of
       the city.
