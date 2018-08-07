@@ -436,10 +436,16 @@ paths:
         schema:
           $ref: "#/definitions/user"
       responses:
-        200:
+        201:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/end-user-token"
+            required:
+            - "end-user-token"
+            type: "object"
+            properties:
+              end-user-token:
+                type: "string"
+                description: "Auto logs in the new user and gives them a token."
         422:
           description: "Unprocessable Entity. More information provided in the return\
             \ object."
