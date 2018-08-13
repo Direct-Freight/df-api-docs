@@ -15,11 +15,6 @@ properties:
       To see this you must also send an end_user_token that has the subscribed
       access level.
     type: string
-  contact_info:
-    description: >-
-      To see this you must also send an end_user_token that has the subscribed
-      access level.
-    type: string
   credit_report_key:
     description: >-
       This will only be in the response if the request comes from a subscribed
@@ -59,6 +54,17 @@ properties:
   origin_state:
     example: '"MO"'
     type: string
+  phone_extension:
+    description: >-
+      To see this you must also send an end-user-token that has the subscribed
+      access level.
+    type: integer
+  phone_number:
+    description: >-
+      To see this you must also send an end-user-token that has the subscribed
+      access level.
+    example: 8005551234
+    type: integer
   receive_date:
     format: date
     type: string

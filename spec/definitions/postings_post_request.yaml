@@ -37,6 +37,16 @@ properties:
   pay_rate:
     description: 'We expect one of 2 formats. either the per mile, or total sum.'
     type: integer
+  phone_extension:
+    description: >-
+      If not provided we will use the contact info associated with their
+      account.
+    type: integer
+  phone_number:
+    description: >-
+      If not provided we will use the contact info associated with their
+      account.
+    type: integer
   receive_date:
     format: date
     type: string

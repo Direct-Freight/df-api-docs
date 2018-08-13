@@ -26,7 +26,8 @@
     "swagger-ui": "^2.2.10",
     "swaggerui-snippets": "^1.0.1",
     "sway": "^1.0.0",
-    "tape": "^4.8.0"
+    "tape": "^4.8.0",
+    "travis-encrypt": "^2.1.1"
   },
   "private": true,
   "scripts": {

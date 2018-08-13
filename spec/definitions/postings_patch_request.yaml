@@ -31,6 +31,10 @@ properties:
     type: string
   pay_rate:
     type: integer
+  phone_extension:
+    type: integer
+  phone_number:
+    type: integer
   posting_id:
     description: A unique id in our system for the user's entry.
     format: int32

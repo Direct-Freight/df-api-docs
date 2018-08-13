@@ -1588,9 +1588,14 @@ definitions:
         description: "By specifying an alert_id we will record the loads seen by this\
           \ user, and associate it with their alert. "
         example: 5555
-      contact_info:
-        type: "string"
-        description: "To see this you must also send an end_user_token that has the\
+      phone_number:
+        type: "integer"
+        description: "To see this you must also send an end-user-token that has the\
+          \ subscribed access level."
+        example: 8005551234
+      phone_extension:
+        type: "integer"
+        description: "To see this you must also send an end-user-token that has the\
           \ subscribed access level."
       receive_date:
         type: "string"
@@ -1839,6 +1844,14 @@ definitions:
         format: "date"
       comment:
         type: "string"
+      phone_number:
+        type: "integer"
+        description: "If not provided we will use the contact info associated with\
+          \ their account."
+      phone_extension:
+        type: "integer"
+        description: "If not provided we will use the contact info associated with\
+          \ their account."
     x-restlet:
       section: "POSTINGS"
   post_posting_multiple_response:
@@ -1937,15 +1950,20 @@ definitions:
         format: "date"
       comment:
         type: "string"
+      phone_number:
+        type: "integer"
+      phone_extension:
+        type: "integer"
     x-restlet:
       section: "POSTINGS"
   postings_post_response_item:
     type: "object"
     required:
-    - "contact_info"
     - "full_load"
     - "origin_city"
     - "origin_state"
+    - "phone_extension"
+    - "phone_number"
     - "posting_id"
     - "ship_date"
     - "trailer_type"
@@ -2035,9 +2053,13 @@ definitions:
       posting_id:
         type: "integer"
         description: "This is the unique ID of this post."
-      contact_info:
-        type: "string"
-        description: "This is generated from the logged in users profile information."
+      phone_number:
+        type: "integer"
+        description: "If not supplied, this is generated from the logged in users\
+          \ profile information."
+      phone_extension:
+        type: "integer"
+        description: "If not supplied and not in the user's profile this will be null."
       contact_name:
         type: "string"
         description: "This is generated from the logged in users profile information."

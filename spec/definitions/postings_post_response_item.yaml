@@ -1,9 +1,6 @@
 properties:
   comment:
     type: string
-  contact_info:
-    description: This is generated from the logged in users profile information.
-    type: string
   contact_name:
     description: This is generated from the logged in users profile information.
     type: string
@@ -40,6 +37,14 @@ properties:
     type: string
   pay_rate:
     description: 'We expect one of 2 formats. either the per mile, or total sum.'
+    type: integer
+  phone_extension:
+    description: If not supplied and not in the user's profile this will be null.
+    type: integer
+  phone_number:
+    description: >-
+      If not supplied, this is generated from the logged in users profile
+      information.
     type: integer
   posting_id:
     description: This is the unique ID of this post.
@@ -91,10 +96,11 @@ properties:
     description: This number represents inches.
     type: integer
 required:
-  - contact_info
   - full_load
   - origin_city
   - origin_state
+  - phone_extension
+  - phone_number
   - posting_id
   - ship_date
   - trailer_type
