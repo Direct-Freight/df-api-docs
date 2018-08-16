@@ -39,14 +39,14 @@ properties:
   destination_state:
     example: '"OR"'
     type: string
+  entry_id:
+    description: unique identifier for this item.
+    type: string
   full_load:
     description: Will always return false for trucks.
     type: boolean
   green_light:
     type: boolean
-  md5sum:
-    description: unique identifier for this item.
-    type: string
   origin_city:
     example: chillicothe
     minLength: 2
@@ -94,9 +94,9 @@ required:
   - credit_score
   - destination_city
   - destination_state
+  - entry_id
   - full_load
   - green_light
-  - md5sum
   - origin_city
   - origin_state
   - ship_date

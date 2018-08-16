@@ -8,7 +8,7 @@ delete:
   responses:
     '204':
       description: successful operation
-  summary: STAGE=UNK Mark a set of entries as not hidden.
+  summary: STAGE=UNK Mark an entry as not hidden.
   tags:
     - boards
 get:

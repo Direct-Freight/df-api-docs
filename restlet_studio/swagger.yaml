@@ -310,7 +310,7 @@ paths:
     delete:
       tags:
       - "boards"
-      summary: "STAGE=UNK Mark a set of entries as not hidden."
+      summary: "STAGE=UNK Mark an entry as not hidden."
       parameters:
       - name: "entry_id"
         in: "query"
@@ -1547,9 +1547,9 @@ definitions:
     - "credit_score"
     - "destination_city"
     - "destination_state"
+    - "entry_id"
     - "full_load"
     - "green_light"
-    - "md5sum"
     - "origin_city"
     - "origin_state"
     - "ship_date"
@@ -1626,7 +1626,7 @@ definitions:
           \ and update this value."
       green_light:
         type: "boolean"
-      md5sum:
+      entry_id:
         type: "string"
         description: "unique identifier for this item."
       age:
