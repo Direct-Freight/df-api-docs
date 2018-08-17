@@ -2075,12 +2075,14 @@ definitions:
       company:
         type: "string"
         description: "Company name. "
-      contact_extension:
-        type: "integer"
       contact_name:
         type: "string"
         description: "Contact name. "
+      dispatch_number:
+        type: "integer"
       contact_number:
+        type: "integer"
+      contact_extension:
         type: "integer"
       dot_number:
         type: "string"

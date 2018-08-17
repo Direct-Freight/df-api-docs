@@ -30,6 +30,8 @@ properties:
     type: string
   contact_number:
     type: integer
+  dispatch_number:
+    type: integer
   dot_number:
     type: string
   fax_number:
