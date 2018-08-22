@@ -30,6 +30,9 @@ properties:
     type: string
   contact_number:
     type: integer
+  dispatch_extension:
+    description: Limited to 3 integers
+    type: integer
   dispatch_number:
     type: integer
   dot_number:

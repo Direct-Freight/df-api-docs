@@ -322,7 +322,7 @@ paths:
         type: "string"
       responses:
         204:
-          description: "successful operation"
+          description: "No Content"
     patch:
       tags:
       - "boards"
@@ -2080,6 +2080,9 @@ definitions:
         description: "Contact name. "
       dispatch_number:
         type: "integer"
+      dispatch_extension:
+        type: "integer"
+        description: "Limited to 3 integers"
       contact_number:
         type: "integer"
       contact_extension:
