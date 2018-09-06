@@ -1,6 +1,46 @@
+delete:
+  description: >-
+    This is a convenience method. It is mapped to /postings/{posting_type}
+    delete behind the scenes.
+  parameters:
+    - $ref: '#/parameters/end-user-token'
+    - description: You must specify which entry to remove.
+      in: query
+      items:
+        type: string
+      name: posting_id
+      required: true
+      type: array
+  responses:
+    '204':
+      description: success operation
+  summary: Remove one or more postings.
+  tags:
+    - postings
+get:
+  description: >-
+    This is a convenience method. It is mapped to /postings/{posting_type} get
+    behind the scenes.
+  parameters:
+    - $ref: '#/parameters/end-user-token'
+    - description: To just return information about some postings.
+      in: query
+      items:
+        type: string
+      name: posting_id
+      required: false
+      type: array
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/posting_post_response'
+  summary: Get posts by this user.
+  tags:
+    - postings
 parameters:
   - $ref: '#/parameters/posting_type'
-post:
+patch:
   consumes: []
   parameters:
     - $ref: '#/parameters/end-user-token'
@@ -8,13 +48,81 @@ post:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/create_multiple_postings'
+        properties:
+          contact_name:
+            description: >-
+              If provided this will override the account default, but not
+              information set for an individual load.
+            type: string
+          contact_phone_extension:
+            description: >-
+              If provided this will override the account default, but not
+              information set for an individual load.
+            type: integer
+          contact_phone_number:
+            description: >-
+              If provided this will override the account default, but not
+              information set for an individual load.
+            type: integer
+          list:
+            items:
+              $ref: '#/definitions/postings_patch_request'
+            type: array
+        required:
+          - list
+        type: object
   responses:
-    '200':
+    '202':
       description: successful operation
+      headers:
+        location:
+          description: A url linking to the entry report.
+          type: string
+  summary: STAGE=UNK Update an posting.
+  tags:
+    - postings
+post:
+  consumes: []
+  description: >-
+    This endpoint method will post entries. Valid posting_type are: loads,
+    trucks, test_loads, test_trucks, private_loads, and private_trucks.
+  parameters:
+    - $ref: '#/parameters/end-user-token'
+    - in: body
+      name: body
+      required: true
       schema:
-        $ref: '#/definitions/post_posting_multiple_response'
-  summary: 'STAGE=UNK Create, multiple entries at once. This is a convenience method.'
+        properties:
+          contact_name:
+            description: >-
+              If provided this will override the account default, but not 
+              information set for an individual load.
+            type: string
+          contact_phone_extension:
+            description: >-
+              If provided this will override the account default, but not
+              information set for an individual load.
+            type: string
+          contact_phone_number:
+            description: >-
+              If provided this will override the account default, but not any
+              phone_numbers placed on individual loads.
+            type: integer
+          list:
+            items:
+              $ref: '#/definitions/postings_post_request'
+            type: array
+        required:
+          - list
+        type: object
+  responses:
+    '202':
+      description: Object created check the headers for a reference URL.
+      headers:
+        location:
+          description: A link to a report on the status of entering multiple loads.
+          type: string
+  summary: Create multiple postings.
   tags:
     - postings
 x-restlet:
