@@ -857,18 +857,6 @@ paths:
           required:
           - "list"
           properties:
-            contact_name:
-              type: "string"
-              description: "If provided this will override the account default, but\
-                \ not  information set for an individual load."
-            contact_phone_number:
-              type: "integer"
-              description: "If provided this will override the account default, but\
-                \ not any phone_numbers placed on individual loads."
-            contact_phone_extension:
-              type: "string"
-              description: "If provided this will override the account default, but\
-                \ not information set for an individual load."
             list:
               type: "array"
               items:

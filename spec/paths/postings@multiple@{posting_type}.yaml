@@ -93,21 +93,6 @@ post:
       required: true
       schema:
         properties:
-          contact_name:
-            description: >-
-              If provided this will override the account default, but not 
-              information set for an individual load.
-            type: string
-          contact_phone_extension:
-            description: >-
-              If provided this will override the account default, but not
-              information set for an individual load.
-            type: string
-          contact_phone_number:
-            description: >-
-              If provided this will override the account default, but not any
-              phone_numbers placed on individual loads.
-            type: integer
           list:
             items:
               $ref: '#/definitions/postings_post_request'
