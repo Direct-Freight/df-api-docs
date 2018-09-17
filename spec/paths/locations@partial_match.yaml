@@ -22,6 +22,13 @@ get:
   responses:
     '200':
       description: successful operation
+      schema:
+        properties:
+          partial_match_response:
+            $ref: '#/definitions/partial_match_response'
+        required:
+          - partial_match_response
+        type: object
   summary: >-
     A string of a partial city or state name, and returns a list of possible
     matches.

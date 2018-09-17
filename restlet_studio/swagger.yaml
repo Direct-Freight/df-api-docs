@@ -588,45 +588,11 @@ paths:
             $ref: "#/definitions/error_object"
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
-  /location/distance:
-    get:
-      tags:
-      - "locations"
-      summary: "STAGE=UNK Get the distance between 2 locations. This is used to calculate\
-        \ dead head miles."
-      parameters:
-      - name: "origin_city"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "origin_state"
-        in: "query"
-        required: true
-        type: "string"
-      - name: "destination_city"
-        in: "query"
-        required: true
-        type: "array"
-        items:
-          type: "string"
-      - name: "destination_state"
-        in: "query"
-        required: true
-        type: "array"
-        items:
-          type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/get_location_distance_response"
-    x-restlet:
-      section: "LOCATIONS"
   /locations/closest_city:
     get:
       tags:
       - "locations"
-      summary: "STAGE=UNK Will return the closest city to a lat/lon point."
+      summary: "returns the nearest city to a lat/lon point."
       parameters:
       - name: "latitude"
         in: "query"
@@ -642,7 +608,7 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/get_closest_city_response"
+            $ref: "#/definitions/closest_city_response"
     x-restlet:
       section: "LOCATIONS"
   /locations/partial_match:
@@ -672,6 +638,13 @@ paths:
       responses:
         200:
           description: "successful operation"
+          schema:
+            required:
+            - "partial_match_response"
+            type: "object"
+            properties:
+              partial_match_response:
+                $ref: "#/definitions/partial_match_response"
     x-restlet:
       section: "LOCATIONS"
   /postings/{posting_type}:
@@ -1852,27 +1825,50 @@ definitions:
         description: "Currently this is a 6-10 digit alphanumeric password. "
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
-  get_closest_city_response:
+  partial_match_response:
     type: "object"
+    required:
+    - "latitude"
+    - "longitude"
+    - "region_abbreviation"
+    - "region_name"
+    - "region_type"
     properties:
       city:
         type: "string"
-      state_abbreviation:
+      region_abbreviation:
         type: "object"
-      state_name:
+      region_name:
         type: "object"
+      region_type:
+        type: "string"
+        enum:
+        - "country"
+        - "state"
+        - "province"
+        - "city"
+        - "postal_code"
+      latitude:
+        type: "number"
+      longitude:
+        type: "number"
     example: "{\n  \"city\": \"city\",\n  \"state_abbreviation\": \"{}\",\n  \"state_name\"\
       : \"{}\"\n}"
     x-restlet:
       section: "LOCATIONS"
-  get_location_distance_response:
+  closest_city_response:
     type: "object"
+    required:
+    - "city_name"
+    - "region_abbreviation"
+    - "region_name"
     properties:
-      distance:
-        type: "integer"
-        format: "int32"
-        description: "A number representing the miles between the two locations."
-    example: "{\n  \"distance\": 0\n}"
+      city_name:
+        type: "string"
+      region_abbreviation:
+        type: "string"
+      region_name:
+        type: "string"
     x-restlet:
       section: "LOCATIONS"
   create_multiple_postings:
