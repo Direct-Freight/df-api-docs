@@ -129,9 +129,10 @@ paths:
     post:
       tags:
       - "boards"
-      summary: "Get a board"
-      description: "This is the primary search method. Please specifify at least a\
-        \ partial origin or destination."
+      summary: "Retrieve a board"
+      description: "This is the primary search method for loads and trucks. Please\
+        \ specifify at least an origin or destination.  The origin or destination\
+        \ may be state only."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -1444,51 +1445,65 @@ definitions:
     properties:
       origin_city:
         type: "string"
+        description: "If used, this field must be accompanied by an origin_state."
         minLength: 2
         example: "chillicothe"
       origin_state:
         type: "array"
-        description: "If the city field is filled out, the first state in the array\
-          \ list will be used with it."
+        description: "If the origin_city field is is used, this field should contain\
+          \ the state for that city. For searches without a specified origin_city\
+          \ this field may contain an array list of state abbreviations."
         items:
           type: "string"
           minLength: 2
           maxLength: 2
-        example: "[\"MO\", \"IL\"]"
+        example: "[\"MO\"]"
       origin_radius:
         type: "integer"
-        description: "If both city and state, boards will return all entries within\
-          \ # miles of the city."
+        description: "If both the origin city and state are specified, this field\
+          \ will limit the search to results to within # miles of the specified origin\
+          \ city. If this field is omitted during a search that includes an origin\
+          \ city a default value of 25 miles will be used."
         minimum: 1
         maximum: 300
+        example: 150
       destination_city:
         type: "string"
+        description: "If used, this field must be accompanied by a destination_state."
         minLength: 2
         example: "chicago"
       destination_state:
         type: "array"
-        description: "If the city field is filled out, the first state in the array\
-          \ list will be used with it."
+        description: "If the destination_city field is is used, this field should\
+          \ contain the state for that city.  For searches without a specified destination_city\
+          \ this field may contain an array list of state abbreviations."
         items:
           type: "string"
           minLength: 2
           maxLength: 2
-        example: "[\"CA\", \"OR\", \"WA\"]"
+        example: "[\"IL\"]"
       destination_radius:
         type: "integer"
-        description: "If both city and state are specified, it will search for all\
-          \ entries within # Miles of the city. "
+        description: "If both the destination city and state are specified, this field\
+          \ will limit the search to results to within # miles of the specified destination\
+          \ city.   If this field is omitted during a search that includes a destination\
+          \ city a default value of 30 miles will be used."
         minimum: 1
         maximum: 300
+        example: 100
       item_count:
         type: "integer"
-        description: "This argument adjusts how many items per page will be returned."
+        description: "This argument adjusts how many items per page will be returned.\
+          \  Omitting this field will return the default of 50 items per page"
         minimum: 1
         maximum: 100
+        example: 25
       full_load:
         type: "boolean"
-        description: "This is only valid on load boards. Add it to limit results to\
-          \ just full or partial loads."
+        description: "This is only valid when requesting a loads board. Omitting this\
+          \ field will return both full and partial loads. A true value will limit\
+          \ results to full loads loads only.  False will return partial loads only."
+        example: true
       trailer_type:
         type: "array"
         description: "A string array of valid trailer types to limit the search. "
@@ -1525,12 +1540,12 @@ definitions:
         example: "[\"F\", \"F+T\", \"F+S\"]"
       ship_date:
         type: "array"
-        description: "Limit the board to only show loads with X ship date. "
+        description: "Limits results to specified ship date(s)."
         items:
           type: "string"
           format: "date"
           description: "Please use the YYYY-MM-DD format."
-        example: "[\"2019-12-20\", \"2018-01-09\", \"2017-08-15\"]"
+        example: "[\"2018-09-19\", \"2018-09-20\", \"2018-09-21\"]"
       page_number:
         type: "integer"
         description: "The page you want to return. Will return an empty board on an\
@@ -1547,13 +1562,11 @@ definitions:
         - "origin_radius"
         - "destination_city"
         - "destination_state"
-        - "destination_radius"
         - "trailer_type"
         - "load_size"
         - "pay_rate"
         - "credit_score"
         - "age"
-        - "load_points"
         - "trip_miles"
         - "dead_head"
         - "length"
@@ -1561,15 +1574,19 @@ definitions:
         - "company_name"
         - "ship_date"
         - "receive_date"
+        example: "age"
       alert_id:
         type: "integer"
-        description: "By specifying an alert_id we will record the loads seen by this\
-          \ user, and associate it with their alert. "
+        description: "By specifying an alert_id we will record the loads or trucks\
+          \ seen by this user, and associate it with their alert.   See /alerts documentation\
+          \ for more information on setting up alerts."
         example: 5555
       return_only_new:
         type: "boolean"
-        description: "This will only return unseen results. This requires an alert_id\
-          \ to be specified. "
+        description: "A true value will only return results that have not been viewed\
+          \ by the user. This field requires a valid alert_id to be specified in order\
+          \ to return unviewed items.  See /alerts for more information on setting\
+          \ up and using alerts."
       return_count:
         type: "boolean"
         description: "If included this will return a total count instead of a list. "
@@ -1697,10 +1714,12 @@ definitions:
         example: "\"MO\""
       destination_city:
         type: "string"
+        description: "This field may be returned as null."
         minLength: 2
         example: "chicago"
       destination_state:
         type: "string"
+        description: "This field may be returned as null."
         example: "\"OR\""
       full_load:
         type: "boolean"
@@ -1716,11 +1735,6 @@ definitions:
         format: "date"
         description: "Limit the board to only show loads with X ship date. "
         example: "\"2017-08-15\""
-      alert_id:
-        type: "integer"
-        description: "By specifying an alert_id we will record the loads seen by this\
-          \ user, and associate it with their alert. "
-        example: 5555
       phone_number:
         type: "integer"
         description: "To see this you must also send an end-user-token that has the\
@@ -1735,22 +1749,25 @@ definitions:
         format: "date"
       company_name:
         type: "string"
-        description: "To see this you must also send an end_user_token that has the\
+        description: "This field is only returned for an end_user_token that has the\
           \ subscribed access level."
       trip_miles:
         type: "integer"
         description: "Distance between origin and destination."
       dead_head:
         type: "integer"
-        description: "Distance between origin_city, and searched city. Will be null\
-          \ if doing a state search."
+        description: "Distance between request body origin_city, and response item\
+          \ origin_city. This field will be null if no origin_city is specified in\
+          \ the request body."
       credit_score:
         type: "integer"
+        description: "The credit score for the company associated with this item."
       credit_report_key:
         type: "string"
-        description: "This will only be in the response if the request comes from\
-          \ a subscribed logged in user. \n\nTo access the report, use the key with\
-          \ the following url.\nhttps://www.directfreight.com/home/credit_report?refid=$credit_report_key"
+        description: "This field is only returned for an end_user_token that has the\
+          \ subscribed access level.\n\nTo access the credit report associated with\
+          \ the company for this item, use the key returned with the following url.\n\
+          https://www.directfreight.com/home/credit_report?refid=$credit_report_key"
       user_hid:
         type: "boolean"
         description: "This field is only returned for logged in searches. The value\
@@ -1764,9 +1781,12 @@ definitions:
         description: "unique identifier for this item."
       age:
         type: "integer"
-        description: "how long since we received this information."
+        description: "Time in minutes since load/truck was first posted.  NULL is\
+          \ returned for values less than 1 minute."
       comment:
         type: "string"
+        description: "This field is only returned for an end_user_token that has the\
+          \ subscribed access level."
     x-restlet:
       section: "BOARDS"
   hidden_entry_object:

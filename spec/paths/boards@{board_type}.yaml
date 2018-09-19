@@ -3,8 +3,9 @@ parameters:
 post:
   consumes: []
   description: >-
-    This is the primary search method. Please specifify at least a partial
-    origin or destination.
+    This is the primary search method for loads and trucks. Please specifify at
+    least an origin or destination.  The origin or destination may be state
+    only.
   parameters:
     - $ref: '#/parameters/end-user-token-optional'
     - in: body
@@ -19,7 +20,7 @@ post:
         $ref: '#/definitions/board_response'
     '422':
       $ref: '#/responses/error_422'
-  summary: Get a board
+  summary: Retrieve a board
   tags:
     - boards
 x-restlet:

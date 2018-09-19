@@ -1,26 +1,32 @@
 properties:
   alert_id:
     description: >-
-      By specifying an alert_id we will record the loads seen by this user, and
-      associate it with their alert. 
+      By specifying an alert_id we will record the loads or trucks seen by this
+      user, and associate it with their alert.   See /alerts documentation for
+      more information on setting up alerts.
     example: 5555
     type: integer
   destination_city:
+    description: 'If used, this field must be accompanied by a destination_state.'
     example: chicago
     minLength: 2
     type: string
   destination_radius:
     description: >-
-      If both city and state are specified, it will search for all entries
-      within # Miles of the city. 
+      If both the destination city and state are specified, this field will
+      limit the search to results to within # miles of the specified destination
+      city.   If this field is omitted during a search that includes a
+      destination city a default value of 30 miles will be used.
+    example: 100
     maximum: 300
     minimum: 1
     type: integer
   destination_state:
     description: >-
-      If the city field is filled out, the first state in the array list will be
-      used with it.
-    example: '["CA", "OR", "WA"]'
+      If the destination_city field is is used, this field should contain the
+      state for that city.  For searches without a specified destination_city
+      this field may contain an array list of state abbreviations.
+    example: '["IL"]'
     items:
       maxLength: 2
       minLength: 2
@@ -28,30 +34,40 @@ properties:
     type: array
   full_load:
     description: >-
-      This is only valid on load boards. Add it to limit results to just full or
-      partial loads.
+      This is only valid when requesting a loads board. Omitting this field will
+      return both full and partial loads. A true value will limit results to
+      full loads loads only.  False will return partial loads only.
+    example: true
     type: boolean
   item_count:
-    description: This argument adjusts how many items per page will be returned.
+    description: >-
+      This argument adjusts how many items per page will be returned.  Omitting
+      this field will return the default of 50 items per page
+    example: 25
     maximum: 100
     minimum: 1
     type: integer
   origin_city:
+    description: 'If used, this field must be accompanied by an origin_state.'
     example: chillicothe
     minLength: 2
     type: string
   origin_radius:
     description: >-
-      If both city and state, boards will return all entries within # miles of
-      the city.
+      If both the origin city and state are specified, this field will limit the
+      search to results to within # miles of the specified origin city. If this
+      field is omitted during a search that includes an origin city a default
+      value of 25 miles will be used.
+    example: 150
     maximum: 300
     minimum: 1
     type: integer
   origin_state:
     description: >-
-      If the city field is filled out, the first state in the array list will be
-      used with it.
-    example: '["MO", "IL"]'
+      If the origin_city field is is used, this field should contain the state
+      for that city. For searches without a specified origin_city this field may
+      contain an array list of state abbreviations.
+    example: '["MO"]'
     items:
       maxLength: 2
       minLength: 2
@@ -68,12 +84,14 @@ properties:
     type: boolean
   return_only_new:
     description: >-
-      This will only return unseen results. This requires an alert_id to be
-      specified. 
+      A true value will only return results that have not been viewed by the
+      user. This field requires a valid alert_id to be specified in order to
+      return unviewed items.  See /alerts for more information on setting up and
+      using alerts.
     type: boolean
   ship_date:
-    description: 'Limit the board to only show loads with X ship date. '
-    example: '["2019-12-20", "2018-01-09", "2017-08-15"]'
+    description: Limits results to specified ship date(s).
+    example: '["2018-09-19", "2018-09-20", "2018-09-21"]'
     items:
       description: Please use the YYYY-MM-DD format.
       format: date
@@ -90,13 +108,11 @@ properties:
       - origin_radius
       - destination_city
       - destination_state
-      - destination_radius
       - trailer_type
       - load_size
       - pay_rate
       - credit_score
       - age
-      - load_points
       - trip_miles
       - dead_head
       - length
@@ -104,6 +120,7 @@ properties:
       - company_name
       - ship_date
       - receive_date
+    example: age
     type: string
   trailer_type:
     description: 'A string array of valid trailer types to limit the search. '

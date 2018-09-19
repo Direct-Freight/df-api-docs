@@ -1,42 +1,46 @@
 properties:
   age:
-    description: how long since we received this information.
-    type: integer
-  alert_id:
     description: >-
-      By specifying an alert_id we will record the loads seen by this user, and
-      associate it with their alert. 
-    example: 5555
+      Time in minutes since load/truck was first posted.  NULL is returned for
+      values less than 1 minute.
     type: integer
   comment:
+    description: >-
+      This field is only returned for an end_user_token that has the subscribed
+      access level.
     type: string
   company_name:
     description: >-
-      To see this you must also send an end_user_token that has the subscribed
+      This field is only returned for an end_user_token that has the subscribed
       access level.
     type: string
   credit_report_key:
     description: >-
-      This will only be in the response if the request comes from a subscribed
-      logged in user. 
+      This field is only returned for an end_user_token that has the subscribed
+      access level.
 
 
-      To access the report, use the key with the following url.
+      To access the credit report associated with the company for this item, use
+      the key returned with the following url.
 
       https://www.directfreight.com/home/credit_report?refid=$credit_report_key
     type: string
   credit_score:
+    description: The credit score for the company associated with this item.
     type: integer
   dead_head:
     description: >-
-      Distance between origin_city, and searched city. Will be null if doing a
-      state search.
+      Distance between request body origin_city, and response item origin_city.
+      This field will be null if no origin_city is specified in the request
+      body.
     type: integer
   destination_city:
+    description: This field may be returned as null.
     example: chicago
     minLength: 2
     type: string
   destination_state:
+    description: This field may be returned as null.
     example: '"OR"'
     type: string
   entry_id:
