@@ -589,30 +589,7 @@ paths:
             $ref: "#/definitions/error_object"
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
-  /locations/closest_city:
-    get:
-      tags:
-      - "locations"
-      summary: "returns the nearest city to a lat/lon point."
-      parameters:
-      - name: "latitude"
-        in: "query"
-        required: true
-        type: "number"
-        format: "float"
-      - name: "longitude"
-        in: "query"
-        required: true
-        type: "number"
-        format: "float"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/closest_city_response"
-    x-restlet:
-      section: "LOCATIONS"
-  /locations/partial_match:
+  /locations/cityname_to_latlon:
     get:
       tags:
       - "locations"
@@ -645,7 +622,30 @@ paths:
             type: "object"
             properties:
               partial_match_response:
-                $ref: "#/definitions/partial_match_response"
+                $ref: "#/definitions/cityname_to_latlon_response"
+    x-restlet:
+      section: "LOCATIONS"
+  /locations/latlon_to_cityname:
+    get:
+      tags:
+      - "locations"
+      summary: "returns the nearest city to a lat/lon point. (reverse geocode)"
+      parameters:
+      - name: "latitude"
+        in: "query"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "longitude"
+        in: "query"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/latlon_to_city_response"
     x-restlet:
       section: "LOCATIONS"
   /postings/{posting_type}:
@@ -1694,99 +1694,12 @@ definitions:
     type: "object"
     required:
     - "age"
-    - "credit_score"
-    - "destination_city"
-    - "destination_state"
-    - "entry_id"
-    - "full_load"
-    - "green_light"
-    - "origin_city"
-    - "origin_state"
-    - "ship_date"
-    - "trailer_type"
     properties:
-      origin_city:
-        type: "string"
-        minLength: 2
-        example: "chillicothe"
-      origin_state:
-        type: "string"
-        example: "\"MO\""
-      destination_city:
-        type: "string"
-        description: "This field may be returned as null."
-        minLength: 2
-        example: "chicago"
-      destination_state:
-        type: "string"
-        description: "This field may be returned as null."
-        example: "\"OR\""
-      full_load:
-        type: "boolean"
-        description: "Will always return false for trucks."
-      trailer_type:
-        type: "array"
-        description: "A string array of valid trailer types."
-        items:
-          type: "string"
-        example: "[\"F\", \"F+T\", \"F+S\"]"
-      ship_date:
-        type: "string"
-        format: "date"
-        description: "Limit the board to only show loads with X ship date. "
-        example: "\"2017-08-15\""
-      phone_number:
-        type: "integer"
-        description: "To see this you must also send an end-user-token that has the\
-          \ subscribed access level."
-        example: 8005551234
-      phone_extension:
-        type: "integer"
-        description: "To see this you must also send an end-user-token that has the\
-          \ subscribed access level."
-      receive_date:
-        type: "string"
-        format: "date"
-      company_name:
-        type: "string"
-        description: "This field is only returned for an end_user_token that has the\
-          \ subscribed access level."
-      trip_miles:
-        type: "integer"
-        description: "Distance between origin and destination."
-      dead_head:
-        type: "integer"
-        description: "Distance between request body origin_city, and response item\
-          \ origin_city. This field will be null if no origin_city is specified in\
-          \ the request body."
-      credit_score:
-        type: "integer"
-        description: "The credit score for the company associated with this item."
-      credit_report_key:
-        type: "string"
-        description: "This field is only returned for an end_user_token that has the\
-          \ subscribed access level.\n\nTo access the credit report associated with\
-          \ the company for this item, use the key returned with the following url.\n\
-          https://www.directfreight.com/home/credit_report?refid=$credit_report_key"
-      user_hid:
-        type: "boolean"
-        description: "This field is only returned for logged in searches. The value\
-          \ when true represents that the user wishes the entry hidden. Look at the\
-          \ boards/hidden_entries/ documentation for more information on how to set\
-          \ and update this value."
-      green_light:
-        type: "boolean"
-      entry_id:
-        type: "string"
-        description: "unique identifier for this item."
       age:
         type: "integer"
-        description: "Time in minutes since load/truck was first posted.  NULL is\
-          \ returned for values less than 1 minute."
-      comment:
-        type: "string"
-        description: "This field is only returned for an end_user_token that has the\
-          \ subscribed access level."
+        description: "Time in minutes since load/truck was first posted. NULL is returned\
+          \ for values less than 1 minute."
+    example: "test"
     x-restlet:
       section: "BOARDS"
   hidden_entry_object:
@@ -1845,7 +1758,7 @@ definitions:
         description: "Currently this is a 6-10 digit alphanumeric password. "
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
-  partial_match_response:
+  cityname_to_latlon_response:
     type: "object"
     required:
     - "latitude"
@@ -1876,7 +1789,7 @@ definitions:
       : \"{}\"\n}"
     x-restlet:
       section: "LOCATIONS"
-  closest_city_response:
+  latlon_to_city_response:
     type: "object"
     required:
     - "city_name"

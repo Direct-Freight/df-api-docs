@@ -1,110 +1,12 @@
+example: test
 properties:
   age:
     description: >-
-      Time in minutes since load/truck was first posted.  NULL is returned for
+      Time in minutes since load/truck was first posted. NULL is returned for
       values less than 1 minute.
     type: integer
-  comment:
-    description: >-
-      This field is only returned for an end_user_token that has the subscribed
-      access level.
-    type: string
-  company_name:
-    description: >-
-      This field is only returned for an end_user_token that has the subscribed
-      access level.
-    type: string
-  credit_report_key:
-    description: >-
-      This field is only returned for an end_user_token that has the subscribed
-      access level.
-
-
-      To access the credit report associated with the company for this item, use
-      the key returned with the following url.
-
-      https://www.directfreight.com/home/credit_report?refid=$credit_report_key
-    type: string
-  credit_score:
-    description: The credit score for the company associated with this item.
-    type: integer
-  dead_head:
-    description: >-
-      Distance between request body origin_city, and response item origin_city.
-      This field will be null if no origin_city is specified in the request
-      body.
-    type: integer
-  destination_city:
-    description: This field may be returned as null.
-    example: chicago
-    minLength: 2
-    type: string
-  destination_state:
-    description: This field may be returned as null.
-    example: '"OR"'
-    type: string
-  entry_id:
-    description: unique identifier for this item.
-    type: string
-  full_load:
-    description: Will always return false for trucks.
-    type: boolean
-  green_light:
-    type: boolean
-  origin_city:
-    example: chillicothe
-    minLength: 2
-    type: string
-  origin_state:
-    example: '"MO"'
-    type: string
-  phone_extension:
-    description: >-
-      To see this you must also send an end-user-token that has the subscribed
-      access level.
-    type: integer
-  phone_number:
-    description: >-
-      To see this you must also send an end-user-token that has the subscribed
-      access level.
-    example: 8005551234
-    type: integer
-  receive_date:
-    format: date
-    type: string
-  ship_date:
-    description: 'Limit the board to only show loads with X ship date. '
-    example: '"2017-08-15"'
-    format: date
-    type: string
-  trailer_type:
-    description: A string array of valid trailer types.
-    example: '["F", "F+T", "F+S"]'
-    items:
-      type: string
-    type: array
-  trip_miles:
-    description: Distance between origin and destination.
-    type: integer
-  user_hid:
-    description: >-
-      This field is only returned for logged in searches. The value when true
-      represents that the user wishes the entry hidden. Look at the
-      boards/hidden_entries/ documentation for more information on how to set
-      and update this value.
-    type: boolean
 required:
   - age
-  - credit_score
-  - destination_city
-  - destination_state
-  - entry_id
-  - full_load
-  - green_light
-  - origin_city
-  - origin_state
-  - ship_date
-  - trailer_type
 type: object
 x-restlet:
   section: BOARDS
