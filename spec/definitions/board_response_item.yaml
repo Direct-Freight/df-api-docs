@@ -1,15 +1,15 @@
 example: test
 properties:
-  Comment:
-    description: >-
-      This field is only returned for an end_user_token that has the subscribed
-      access level.
-    type: string
   age:
     description: >-
       Time in minutes since load/truck was first posted. NULL is returned for
       values less than 1 minute.
     type: integer
+  comment:
+    description: >-
+      This field is only returned for an end_user_token that has the subscribed
+      access level.
+    type: string
   company_name:
     description: >-
       This field is only returned for an end_user_token that has the subscribed
@@ -29,9 +29,67 @@ properties:
       This field will be null if no origin_city is specified in the request
       body.
     type: integer
+  destination_city:
+    description: '>= 2 characters This field may be returned as null.'
+    type: string
+  destination_state:
+    description: his field may be returned as null.
+    type: string
+  entry_id:
+    description: unique identifier for this item.
+    type: string
+  full_load:
+    description: Will always return false for trucks.
+    type: boolean
+  green_light:
+    type: boolean
+  origin_city:
+    description: '>= 2 characters'
+    type: string
+  origin_state:
+    type: string
+  phone_extension:
+    description: >-
+      To see this you must also send an end-user-token that has the subscribed
+      access level.
+    type: integer
+  phone_number:
+    description: >-
+      To see this you must also send an end-user-token that has the subscribed
+      access level.
+    type: integer
+  receive_date:
+    format: date
+    type: string
+  ship_date:
+    description: Limit the board to only show loads with X ship date.
+    format: date
+    type: string
+  trailer_type:
+    description: A string array of valid trailer types.
+    type: string
+  trip_miles:
+    description: Distance between origin and destination.
+    type: integer
+  user_hid:
+    description: >-
+      This field is only returned for logged in searches. The value when true
+      represents that the user wishes the entry hidden. Look at the
+      boards/hidden_entries/ documentation for more information on how to set
+      and update this value.
+    type: boolean
 required:
   - age
   - credit_score
+  - destination_city
+  - destination_state
+  - entry_id
+  - full_load
+  - green_light
+  - origin_city
+  - origin_state
+  - ship_date
+  - trailer_type
 type: object
 x-restlet:
   section: BOARDS

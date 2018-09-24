@@ -1695,12 +1695,21 @@ definitions:
     required:
     - "age"
     - "credit_score"
+    - "destination_city"
+    - "destination_state"
+    - "entry_id"
+    - "full_load"
+    - "green_light"
+    - "origin_city"
+    - "origin_state"
+    - "ship_date"
+    - "trailer_type"
     properties:
       age:
         type: "integer"
         description: "Time in minutes since load/truck was first posted. NULL is returned\
           \ for values less than 1 minute."
-      Comment:
+      comment:
         type: "string"
         description: "This field is only returned for an end_user_token that has the\
           \ subscribed access level."
@@ -1720,6 +1729,52 @@ definitions:
         description: "Distance between request body origin_city, and response item\
           \ origin_city. This field will be null if no origin_city is specified in\
           \ the request body."
+      destination_city:
+        type: "string"
+        description: ">= 2 characters This field may be returned as null."
+      destination_state:
+        type: "string"
+        description: "his field may be returned as null."
+      entry_id:
+        type: "string"
+        description: "unique identifier for this item."
+      full_load:
+        type: "boolean"
+        description: "Will always return false for trucks."
+      green_light:
+        type: "boolean"
+      origin_city:
+        type: "string"
+        description: ">= 2 characters"
+      origin_state:
+        type: "string"
+      phone_extension:
+        type: "integer"
+        description: "To see this you must also send an end-user-token that has the\
+          \ subscribed access level."
+      phone_number:
+        type: "integer"
+        description: "To see this you must also send an end-user-token that has the\
+          \ subscribed access level."
+      receive_date:
+        type: "string"
+        format: "date"
+      ship_date:
+        type: "string"
+        format: "date"
+        description: "Limit the board to only show loads with X ship date."
+      trailer_type:
+        type: "string"
+        description: "A string array of valid trailer types."
+      trip_miles:
+        type: "integer"
+        description: "Distance between origin and destination."
+      user_hid:
+        type: "boolean"
+        description: "This field is only returned for logged in searches. The value\
+          \ when true represents that the user wishes the entry hidden. Look at the\
+          \ boards/hidden_entries/ documentation for more information on how to set\
+          \ and update this value."
     example: "test"
     x-restlet:
       section: "BOARDS"
