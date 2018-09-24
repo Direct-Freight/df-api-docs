@@ -1694,11 +1694,32 @@ definitions:
     type: "object"
     required:
     - "age"
+    - "credit_score"
     properties:
       age:
         type: "integer"
         description: "Time in minutes since load/truck was first posted. NULL is returned\
           \ for values less than 1 minute."
+      Comment:
+        type: "string"
+        description: "This field is only returned for an end_user_token that has the\
+          \ subscribed access level."
+      company_name:
+        type: "string"
+        description: "This field is only returned for an end_user_token that has the\
+          \ subscribed access level."
+      credit_report_key:
+        type: "string"
+        description: "This field is only returned for an end_user_token that has the\
+          \ subscribed access level."
+      credit_score:
+        type: "integer"
+        description: "The credit score for the company associated with this item."
+      dead_head:
+        type: "integer"
+        description: "Distance between request body origin_city, and response item\
+          \ origin_city. This field will be null if no origin_city is specified in\
+          \ the request body."
     example: "test"
     x-restlet:
       section: "BOARDS"
