@@ -1709,72 +1709,93 @@ definitions:
         type: "integer"
         description: "Time in minutes since load/truck was first posted. NULL is returned\
           \ for values less than 1 minute."
+        example: 15
       comment:
         type: "string"
         description: "This field is only returned for an end_user_token that has the\
           \ subscribed access level."
+        example: "Test Load"
       company_name:
         type: "string"
         description: "This field is only returned for an end_user_token that has the\
           \ subscribed access level."
+        example: "ABC Company"
       credit_report_key:
         type: "string"
         description: "This field is only returned for an end_user_token that has the\
-          \ subscribed access level."
+          \ subscribed access level.\n\nTo access the credit report associated with\
+          \ the company for this item, use the key returned with the following url.\
+          \ https://www.directfreight.com/home/credit_report?refid=$credit_report_key"
       credit_score:
         type: "integer"
         description: "The credit score for the company associated with this item."
+        example: 99
       dead_head:
         type: "integer"
         description: "Distance between request body origin_city, and response item\
           \ origin_city. This field will be null if no origin_city is specified in\
           \ the request body."
+        example: 87
       destination_city:
         type: "string"
-        description: ">= 2 characters This field may be returned as null."
+        description: "This field may be returned as null."
+        minLength: 2
       destination_state:
         type: "string"
         description: "his field may be returned as null."
+        example: "MO"
       entry_id:
         type: "string"
         description: "unique identifier for this item."
+        example: "55555555"
       full_load:
         type: "boolean"
         description: "Will always return false for trucks."
+        example: true
       green_light:
         type: "boolean"
+        example: true
       origin_city:
         type: "string"
-        description: ">= 2 characters"
+        minLength: 2
+        example: "Chicago"
       origin_state:
         type: "string"
+        example: "IL"
       phone_extension:
         type: "integer"
         description: "To see this you must also send an end-user-token that has the\
           \ subscribed access level."
+        example: 123
       phone_number:
         type: "integer"
         description: "To see this you must also send an end-user-token that has the\
           \ subscribed access level."
+        example: "555-555-5555"
       receive_date:
         type: "string"
         format: "date"
+        example: "2018-09-24"
       ship_date:
         type: "string"
         format: "date"
         description: "Limit the board to only show loads with X ship date."
+        example: "2018-09-20"
       trailer_type:
         type: "string"
         description: "A string array of valid trailer types."
+        example: "V"
       trip_miles:
         type: "integer"
         description: "Distance between origin and destination."
+        example: 523
       user_hid:
         type: "boolean"
         description: "This field is only returned for logged in searches. The value\
           \ when true represents that the user wishes the entry hidden. Look at the\
           \ boards/hidden_entries/ documentation for more information on how to set\
           \ and update this value."
+        example: false
     example: "test"
     x-restlet:
       section: "BOARDS"
