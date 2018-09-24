@@ -1,0 +1,38 @@
+get:
+  parameters:
+    - description: >-
+        City/State term to search for.   It matches city name and state name and
+        state abbreviation.  So for instance "MI" would return Michigan,
+        Missouri, and Miami, FL
+      in: query
+      name: term
+      required: true
+      type: string
+    - description: >-
+        "state", and "city" will return only the respective information for that
+        search type. Misspelling or blank will default to both.
+      enum:
+        - city
+        - state
+        - both
+      in: query
+      name: search_type
+      required: false
+      type: string
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        properties:
+          partial_match_response:
+            $ref: '#/definitions/cityname_to_latlon_response'
+        required:
+          - partial_match_response
+        type: object
+  summary: >-
+    A string of a partial city or state name, and returns a list of possible
+    matches.
+  tags:
+    - locations
+x-restlet:
+  section: LOCATIONS
