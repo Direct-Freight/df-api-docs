@@ -27,7 +27,7 @@ properties:
       state for that city.  For searches without a specified destination_city
       this field may contain an array list of state abbreviations.
     items:
-      example: IL
+      example: TN
       maxLength: 2
       minLength: 2
       type: string
@@ -67,7 +67,6 @@ properties:
       If the origin_city field is is used, this field should contain the state
       for that city. For searches without a specified origin_city this field may
       contain an array list of state abbreviations.
-    example: MO
     items:
       example: MO
       maxLength: 2
