@@ -44,7 +44,7 @@ properties:
     minLength: 2
     type: string
   destination_state:
-    description: his field may be returned as null.
+    description: This field may be returned as null.
     example: MO
     type: string
   entry_id:
@@ -52,28 +52,35 @@ properties:
     example: '55555555'
     type: string
   full_load:
-    description: Will always return false for trucks.
+    description: >-
+      Specifies whether load is full or partial.  Will always return true for
+      trucks.
     example: true
     type: boolean
   green_light:
+    description: >-
+      Indicates whether broker/shipper for item is pre-approved for Rivera
+      Finance factoring program.
     example: true
     type: boolean
   origin_city:
+    description: Origin city of item.
     example: Chicago
     minLength: 2
     type: string
   origin_state:
+    description: Origin state of item
     example: IL
     type: string
   phone_extension:
     description: >-
-      To see this you must also send an end-user-token that has the subscribed
-      access level.
+      This field is only returned for an end_user_token that has the subscribed
+      access level.   Will return null if empty.
     example: 123
     type: integer
   phone_number:
     description: >-
-      To see this you must also send an end-user-token that has the subscribed
+      This field is only returned for an end_user_token that has the subscribed
       access level.
     example: 555-555-5555
     type: integer
@@ -82,7 +89,7 @@ properties:
     format: date
     type: string
   ship_date:
-    description: Limit the board to only show loads with X ship date.
+    description: Date item is scheduled to be loaded.
     example: '2018-09-20'
     format: date
     type: string
@@ -96,10 +103,10 @@ properties:
     type: integer
   user_hid:
     description: >-
-      This field is only returned for logged in searches. The value when true
-      represents that the user wishes the entry hidden. Look at the
-      boards/hidden_entries/ documentation for more information on how to set
-      and update this value.
+      This field is only returned for an end_user_token that has the subscribed
+      or posting access level. The value when true represents that the user
+      wishes the entry hidden. Refer to boards/hidden_entries/ documentation for
+      more information on how to set and update this value.
     example: false
     type: boolean
 required:

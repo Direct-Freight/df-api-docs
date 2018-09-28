@@ -1457,7 +1457,7 @@ definitions:
           type: "string"
           minLength: 2
           maxLength: 2
-        example: "[\"MO\"]"
+        example: "MO"
       origin_radius:
         type: "integer"
         description: "If both the origin city and state are specified, this field\
@@ -1479,9 +1479,10 @@ definitions:
           \ this field may contain an array list of state abbreviations."
         items:
           type: "string"
+          description: "\"IL\""
           minLength: 2
           maxLength: 2
-        example: "[\"IL\"]"
+          example: "IL"
       destination_radius:
         type: "integer"
         description: "If both the destination city and state are specified, this field\
@@ -1742,7 +1743,7 @@ definitions:
         minLength: 2
       destination_state:
         type: "string"
-        description: "his field may be returned as null."
+        description: "This field may be returned as null."
         example: "MO"
       entry_id:
         type: "string"
@@ -1750,26 +1751,31 @@ definitions:
         example: "55555555"
       full_load:
         type: "boolean"
-        description: "Will always return false for trucks."
+        description: "Specifies whether load is full or partial.  Will always return\
+          \ true for trucks."
         example: true
       green_light:
         type: "boolean"
+        description: "Indicates whether broker/shipper for item is pre-approved for\
+          \ Rivera Finance factoring program."
         example: true
       origin_city:
         type: "string"
+        description: "Origin city of item."
         minLength: 2
         example: "Chicago"
       origin_state:
         type: "string"
+        description: "Origin state of item"
         example: "IL"
       phone_extension:
         type: "integer"
-        description: "To see this you must also send an end-user-token that has the\
-          \ subscribed access level."
+        description: "This field is only returned for an end_user_token that has the\
+          \ subscribed access level.   Will return null if empty."
         example: 123
       phone_number:
         type: "integer"
-        description: "To see this you must also send an end-user-token that has the\
+        description: "This field is only returned for an end_user_token that has the\
           \ subscribed access level."
         example: "555-555-5555"
       receive_date:
@@ -1779,7 +1785,7 @@ definitions:
       ship_date:
         type: "string"
         format: "date"
-        description: "Limit the board to only show loads with X ship date."
+        description: "Date item is scheduled to be loaded."
         example: "2018-09-20"
       trailer_type:
         type: "string"
@@ -1791,10 +1797,10 @@ definitions:
         example: 523
       user_hid:
         type: "boolean"
-        description: "This field is only returned for logged in searches. The value\
-          \ when true represents that the user wishes the entry hidden. Look at the\
-          \ boards/hidden_entries/ documentation for more information on how to set\
-          \ and update this value."
+        description: "This field is only returned for an end_user_token that has the\
+          \ subscribed or posting access level. The value when true represents that\
+          \ the user wishes the entry hidden. Refer to boards/hidden_entries/ documentation\
+          \ for more information on how to set and update this value."
         example: false
     example: "test"
     x-restlet:
