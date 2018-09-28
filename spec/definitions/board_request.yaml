@@ -67,8 +67,8 @@ properties:
       If the origin_city field is is used, this field should contain the state
       for that city. For searches without a specified origin_city this field may
       contain an array list of state abbreviations.
-    example: '"MO"'
     items:
+      example: '"MO"'
       maxLength: 2
       minLength: 2
       type: string
