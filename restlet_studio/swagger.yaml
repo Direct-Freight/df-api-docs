@@ -1457,6 +1457,7 @@ definitions:
           type: "string"
           minLength: 2
           maxLength: 2
+          example: "MO"
         example: "MO"
       origin_radius:
         type: "integer"
@@ -1537,6 +1538,7 @@ definitions:
           - "PNEU"
           - "CONT"
           - "OTHER"
+          example: "\"F\", \"F+T\", \"F+S\""
         example: "[\"F\", \"F+T\", \"F+S\"]"
       ship_date:
         type: "array"

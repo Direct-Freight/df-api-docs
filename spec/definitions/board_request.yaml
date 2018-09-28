@@ -69,6 +69,7 @@ properties:
       contain an array list of state abbreviations.
     example: MO
     items:
+      example: MO
       maxLength: 2
       minLength: 2
       type: string
@@ -154,6 +155,7 @@ properties:
         - PNEU
         - CONT
         - OTHER
+      example: '"F", "F+T", "F+S"'
       type: string
     type: array
 type: object
