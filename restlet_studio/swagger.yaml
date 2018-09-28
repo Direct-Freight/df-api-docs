@@ -1479,7 +1479,6 @@ definitions:
           \ this field may contain an array list of state abbreviations."
         items:
           type: "string"
-          description: "\"IL\""
           minLength: 2
           maxLength: 2
           example: "IL"

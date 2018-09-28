@@ -27,7 +27,6 @@ properties:
       state for that city.  For searches without a specified destination_city
       this field may contain an array list of state abbreviations.
     items:
-      description: '"IL"'
       example: IL
       maxLength: 2
       minLength: 2
