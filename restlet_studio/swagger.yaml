@@ -1457,7 +1457,7 @@ definitions:
           type: "string"
           minLength: 2
           maxLength: 2
-          example: "MO\nKS\nTX"
+          example: "MO\",\"KS\",\"TX"
       origin_radius:
         type: "integer"
         description: "If both the origin city and state are specified, this field\
