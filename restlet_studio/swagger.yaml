@@ -137,22 +137,10 @@ paths:
       parameters:
       - name: "end-user-token"
         in: "header"
-        required: true
+        required: false
         type: "string"
         default: "01234567890"
         x-example: "01234567890"
-      - name: "blah"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "blah-this"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "blah-that"
-        in: "header"
-        required: false
-        type: "string"
       - name: "body"
         in: "body"
         required: true

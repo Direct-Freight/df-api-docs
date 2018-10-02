@@ -18,21 +18,9 @@ post:
     - default: 01234567890
       in: header
       name: end-user-token
-      required: true
+      required: false
       type: string
       x-example: 01234567890
-    - in: header
-      name: blah
-      required: false
-      type: string
-    - in: header
-      name: blah-this
-      required: true
-      type: string
-    - in: header
-      name: blah-that
-      required: false
-      type: string
     - in: body
       name: body
       required: true
