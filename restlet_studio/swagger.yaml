@@ -13,8 +13,8 @@ info:
   version: "1.0"
   title: "Direct Freight API"
   contact: {}
-host: "api.directfreight.com"
-basePath: "/v1"
+host: "www.directfreight.com"
+basePath: "/api"
 schemes:
 - "https"
 consumes:

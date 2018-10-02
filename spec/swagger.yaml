@@ -1,7 +1,7 @@
-basePath: /v1
+basePath: /api
 consumes:
   - application/json
-host: api.directfreight.com
+host: www.directfreight.com
 info:
   contact: {}
   description: >-
