@@ -36,6 +36,13 @@ produces:
   - application/json
 schemes:
   - https
+security:
+  - api-key: []
+securityDefinitions:
+  api-key:
+    in: header
+    name: api-key
+    type: apiKey
 swagger: '2.0'
 x-restlet:
   sections:

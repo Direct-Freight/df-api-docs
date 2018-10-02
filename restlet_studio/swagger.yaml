@@ -21,6 +21,8 @@ consumes:
 - "application/json"
 produces:
 - "application/json"
+security:
+- api-key: []
 paths:
   /alerts/{board_type}:
     get:
@@ -1308,6 +1310,11 @@ paths:
             $ref: "#/definitions/get_email_exists_response"
     x-restlet:
       section: "VALIDATIONS"
+securityDefinitions:
+  api-key:
+    type: "apiKey"
+    name: "api-key"
+    in: "header"
 definitions:
   alert_list:
     type: "object"
