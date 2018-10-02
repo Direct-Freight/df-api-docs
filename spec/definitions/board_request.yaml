@@ -80,6 +80,7 @@ properties:
       - IL
       - AK
       - TN
+      - TX
     items:
       maxLength: 2
       minLength: 2
