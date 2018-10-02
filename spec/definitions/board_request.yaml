@@ -78,7 +78,6 @@ properties:
     example:
       - MO
       - IL
-      - AK
       - TN
       - TX
     items:
