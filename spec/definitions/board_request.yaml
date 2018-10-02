@@ -78,7 +78,6 @@ properties:
     example:
       - MO
       - IL
-      - TN
       - TX
     items:
       maxLength: 2
