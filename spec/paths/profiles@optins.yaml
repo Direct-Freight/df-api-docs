@@ -1,6 +1,9 @@
 delete:
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '204':
       description: successful operation
@@ -9,7 +12,10 @@ delete:
     - profiles
 get:
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
@@ -20,7 +26,10 @@ get:
     - profiles
 patch:
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '204':
       description: successful operation
@@ -29,7 +38,10 @@ patch:
     - profiles
 post:
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation

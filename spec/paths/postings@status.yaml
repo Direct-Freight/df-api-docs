@@ -1,12 +1,15 @@
 get:
   description: This will return a multi post report. Multiple reports are stored.
   parameters:
-    - $ref: '#/parameters/end-user-token'
     - in: query
       name: report_id
       required: true
       type: string
       x-example: 1cc94d41bcb08de0586a39ae8460a7aa
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '200':
       description: Status 200

@@ -1,12 +1,15 @@
 get:
   parameters:
-    - $ref: '#/parameters/end-user-token'
     - in: query
       items:
         type: integer
       name: posting_id
       required: false
       type: array
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
@@ -19,7 +22,10 @@ patch:
   consumes: []
   description: Please send in at least one field to be updated.
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
     - in: body
       name: body
       required: true
@@ -34,7 +40,10 @@ patch:
 post:
   consumes: []
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
     - in: body
       name: body
       required: true

@@ -1,6 +1,9 @@
 delete:
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '204':
       description: success operation
@@ -10,7 +13,10 @@ delete:
 get:
   description: Retrieve documents
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '200':
       description: success
@@ -20,7 +26,10 @@ get:
 patch:
   consumes: []
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
     - in: body
       name: body
       required: true
@@ -35,7 +44,10 @@ patch:
 post:
   consumes: []
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
     - in: body
       name: body
       required: true

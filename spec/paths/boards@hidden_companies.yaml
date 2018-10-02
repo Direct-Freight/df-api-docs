@@ -1,9 +1,12 @@
 delete:
   parameters:
-    - $ref: '#/parameters/end-user-token'
     - description: The company that need to be marked as not hidden.
       in: query
       name: company_id
+      required: true
+      type: string
+    - in: header
+      name: end-user-token
       required: true
       type: string
   responses:
@@ -14,7 +17,6 @@ delete:
     - boards
 get:
   parameters:
-    - $ref: '#/parameters/end-user-token'
     - description: A list of id's to check if any should be visually hidden.
       in: query
       items:
@@ -22,6 +24,10 @@ get:
       name: company_name
       required: true
       type: array
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
@@ -33,7 +39,10 @@ get:
 patch:
   consumes: []
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
     - in: body
       name: body
       required: true
@@ -48,7 +57,10 @@ patch:
 post:
   consumes: []
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
     - in: body
       name: body
       required: true

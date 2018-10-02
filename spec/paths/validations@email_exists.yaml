@@ -1,9 +1,14 @@
 get:
-  description: Enter an e-mail to see if it is available. Can be used as ?email=xxx or as a JSON request.
+  description: >-
+    Enter an e-mail to see if it is available. Can be used as ?email=xxx or as a
+    JSON request.
   parameters:
-    - $ref: '#/parameters/end-user-token'
-    - name: email
-      in: query
+    - in: query
+      name: email
+      required: true
+      type: string
+    - in: header
+      name: end-user-token
       required: true
       type: string
   responses:

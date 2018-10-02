@@ -22,7 +22,7 @@ function process_parameters(parameters)
         {
         var x = 0;
         parameters.forEach(function(level5) {
-                if(level5.name == 'end-user-token')
+                if(level5.name == 'end-user-token')  //this hack is breaking curl and other code samples.
                         {
                         if(level5.required)
                                 {
@@ -54,8 +54,8 @@ Object.keys(swagger).forEach(function(level1) {
                 //methods console.log(level2);
                 Object.keys(swagger[level1][level2]).forEach(function(level3) {
                         //get/post/delete  console.log(level3); //sometimes restlet puts global path parameters at level3
-                        if(swagger[level1][level2]['parameters']) { process_parameters(swagger[level1][level2]['parameters']); }
-                        if(swagger[level1][level2][level3]['parameters']) { process_parameters(swagger[level1][level2][level3]['parameters']); }
+//                        if(swagger[level1][level2]['parameters']) { process_parameters(swagger[level1][level2]['parameters']); }
+//                        if(swagger[level1][level2][level3]['parameters']) { process_parameters(swagger[level1][level2][level3]['parameters']); }
 
                         if(swagger[level1][level2][level3]['responses'] && 
                            swagger[level1][level2][level3]['responses']['201'] &&

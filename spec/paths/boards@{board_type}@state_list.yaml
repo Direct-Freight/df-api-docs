@@ -9,6 +9,13 @@ get:
   tags:
     - boards
 parameters:
-  - $ref: '#/parameters/board_type'
+  - description: 'Valid types are "loads", and "trucks".'
+    enum:
+      - loads
+      - trucks
+    in: path
+    name: board_type
+    required: true
+    type: string
 x-restlet:
   section: BOARDS

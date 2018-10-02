@@ -1,6 +1,5 @@
 delete:
   parameters:
-    - $ref: '#/parameters/end-user-token'
     - description: You must specify which entry to remove.
       in: query
       items:
@@ -8,6 +7,10 @@ delete:
       name: posting_id
       required: true
       type: array
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '204':
       description: success operation
@@ -16,7 +19,6 @@ delete:
     - postings
 get:
   parameters:
-    - $ref: '#/parameters/end-user-token'
     - description: To just return information about some postings.
       in: query
       items:
@@ -24,6 +26,10 @@ get:
       name: posting_id
       required: false
       type: array
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
@@ -33,11 +39,27 @@ get:
   tags:
     - postings
 parameters:
-  - $ref: '#/parameters/posting_type'
+  - description: >-
+      Valid types are "loads", "trucks", "private_loads", "private_trucks",
+      "test_loads", and "test_trucks"
+    enum:
+      - loads
+      - trucks
+      - private_loads
+      - private_trucks
+      - test_loads
+      - test_trucks
+    in: path
+    name: posting_type
+    required: true
+    type: string
 patch:
   consumes: []
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
     - in: body
       name: body
       required: true
@@ -55,7 +77,10 @@ post:
     This endpoint method will post an entry. Valid posting_type are: loads,
     trucks, test_loads, test_trucks, private_loads, and private_trucks.
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
     - in: body
       name: body
       required: true

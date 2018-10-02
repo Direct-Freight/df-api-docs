@@ -1,7 +1,10 @@
 delete:
   description: This logs a user out. the end-user-token will no longer be valid.
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '204':
       description: Will not return content on a successful logout.
@@ -10,7 +13,10 @@ delete:
     - end_user_authentications
 get:
   parameters:
-    - $ref: '#/parameters/end-user-token-optional'
+    - in: header
+      name: end-user-token
+      required: false
+      type: string
   responses:
     '200':
       description: successful operation

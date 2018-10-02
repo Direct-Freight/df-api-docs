@@ -145,6 +145,14 @@ paths:
         in: "header"
         required: false
         type: "string"
+      - name: "blah-this"
+        in: "header"
+        required: true
+        type: "string"
+      - name: "blah-that"
+        in: "header"
+        required: false
+        type: "string"
       - name: "body"
         in: "body"
         required: true

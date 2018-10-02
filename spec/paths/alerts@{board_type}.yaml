@@ -1,6 +1,5 @@
 delete:
   parameters:
-    - $ref: '#/parameters/end-user-token'
     - description: Specify to just delete some alerts.
       in: query
       items:
@@ -8,6 +7,10 @@ delete:
       name: alert_id
       required: true
       type: array
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '204':
       description: successful operation
@@ -16,7 +19,6 @@ delete:
     - alerts
 get:
   parameters:
-    - $ref: '#/parameters/end-user-token'
     - description: >-
         only get a subset of alerts. As this is a get request this is specified
         as a query string parameter.
@@ -26,6 +28,10 @@ get:
       name: alert_id
       required: false
       type: array
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
   responses:
     '200':
       description: On success will return a list of alerts.
@@ -37,17 +43,27 @@ get:
   tags:
     - alerts
 parameters:
-  - $ref: '#/parameters/board_type'
+  - description: 'Valid types are "loads", and "trucks".'
+    enum:
+      - loads
+      - trucks
+    in: path
+    name: board_type
+    required: true
+    type: string
 patch:
   consumes: []
   description: >-
     Search objects are set at creation. You cannot modify them after the alert
     has been created.
   parameters:
-    - $ref: '#/parameters/end-user-token'
     - description: Specify which alert you are updating.
       in: query
       name: alert_id
+      required: true
+      type: string
+    - in: header
+      name: end-user-token
       required: true
       type: string
     - in: body
@@ -67,7 +83,10 @@ post:
     Any parameter that is defined here and is also defined on the boards GET,
     follows the same rules.
   parameters:
-    - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
     - in: body
       name: body
       required: true
