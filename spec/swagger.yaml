@@ -37,9 +37,9 @@ produces:
 schemes:
   - https
 security:
-  - api_key: []
+  - headers: []
 securityDefinitions:
-  api_key:
+  headers:
     description: >-
       This token needs to be sent as a HTTP header argument in every request to
       our API.
