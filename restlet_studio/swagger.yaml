@@ -160,9 +160,11 @@ paths:
       required: true
       type: "string"
       description: "Valid types are \"loads\", and \"trucks\"."
+      default: "loads"
       enum:
       - "loads"
       - "trucks"
+      x-example: "loads"
     x-restlet:
       section: "BOARDS"
   /boards/{board_type}/state_list:
