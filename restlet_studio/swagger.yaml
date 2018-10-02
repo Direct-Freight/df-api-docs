@@ -141,6 +141,10 @@ paths:
         type: "string"
         default: "01234567890"
         x-example: "01234567890"
+      - name: "blah"
+        in: "header"
+        required: false
+        type: "string"
       - name: "body"
         in: "body"
         required: true

@@ -8,6 +8,10 @@ post:
     only.
   parameters:
     - $ref: '#/parameters/end-user-token'
+    - in: header
+      name: blah
+      required: false
+      type: string
     - in: body
       name: body
       required: true
