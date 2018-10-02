@@ -1545,7 +1545,7 @@ definitions:
           type: "string"
           format: "date"
           description: "Please use the YYYY-MM-DD format."
-        example: ['2018-01-01','2017-02-02']
+        example: [\"2018-01-01\",\"2017-02-07\"]
       page_number:
         type: "integer"
         description: "The page you want to return. Will return an empty board on an\
