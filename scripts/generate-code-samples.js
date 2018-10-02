@@ -51,11 +51,14 @@ results.forEach(function(result)
                 var ext = '.txt';
                 var lang = snippet.id;
                 lang = lang[0].toUpperCase() + lang.substring(1); //uppercase first letter
-                if(lang == 'Shell_curl') { ext = '.sh'; lang = 'curl'; }
-                if(lang == 'Shell_wget') { ext = '.sh'; lang = 'wget'; }
+                if(lang.substring(0,2) == 'C_') { ext = '.c'; }
+                if(lang.substring(0,3) == 'Go_') { ext = '.go'; }
+                if(lang.substring(0,5) == 'Shell') { ext = '.sh'; }
                 if(lang.substring(0,4) == 'Perl') { ext = '.pl'; }
                 if(lang.substring(0,6) == 'Python') { ext = '.py'; }
                 if(lang.substring(0,3) == 'Php') { ext = '.php'; }
+                if(lang.substring(0,10) == 'Javascript') { ext = '.js'; }
+                if(lang.substring(0,4) == 'Node') { ext = '.js'; }
                 var dir = 'spec/code_samples/' + lang + '/' + path + '/';
                 mkdir('-p',dir);
                 fs.writeFile(dir + result.method.toLowerCase() + ext,snippet.content, (err) => {
