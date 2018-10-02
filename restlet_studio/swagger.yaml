@@ -1481,7 +1481,7 @@ definitions:
           type: "string"
           minLength: 2
           maxLength: 2
-        example: "IL\nMO\nTX"
+        example: "IL"
       destination_radius:
         type: "integer"
         description: "If both the destination city and state are specified, this field\
