@@ -57,7 +57,7 @@ properties:
     type: integer
   origin_city:
     description: 'If used, this field must be accompanied by an origin_state.'
-    example: chillicothe
+    example: Kansas City
     minLength: 2
     type: string
   origin_radius:

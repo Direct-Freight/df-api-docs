@@ -1468,7 +1468,7 @@ definitions:
         type: "string"
         description: "If used, this field must be accompanied by an origin_state."
         minLength: 2
-        example: "chillicothe"
+        example: "Kansas City"
       origin_state:
         type: "array"
         description: "If the origin_city field is is used, this field should contain\
