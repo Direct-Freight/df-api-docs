@@ -80,8 +80,6 @@ properties:
       - IL
       - TX
       - CA
-      - NY
-      - IL
     items:
       maxLength: 2
       minLength: 2
