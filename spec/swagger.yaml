@@ -1,7 +1,7 @@
-basePath: /api
+basePath: /v1
 consumes:
   - application/json
-host: www.directfreight.com
+host: api.directfreight.com
 info:
   contact: {}
   description: >-
@@ -29,7 +29,7 @@ info:
 
     Both Tokens are stateless, and delivered via the HTTP headers.
   title: Direct Freight API
-  version: 2.0.0
+  version: '1.0'
   x-logo:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
 produces:

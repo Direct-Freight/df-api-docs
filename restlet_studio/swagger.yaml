@@ -10,11 +10,11 @@ info:
     \ given to you via the end_user_authentications endpoint when the user logs in.\
     \ This token is needed in order to use certain features, and get certain sensitive\
     \ information.\n\nBoth Tokens are stateless, and delivered via the HTTP headers."
-  version: "2.0.0"
+  version: "1.0"
   title: "Direct Freight API"
   contact: {}
-host: "www.directfreight.com"
-basePath: "/api"
+host: "api.directfreight.com"
+basePath: "/v1"
 schemes:
 - "https"
 consumes:
@@ -1470,7 +1470,6 @@ definitions:
       destination_city:
         type: "string"
         description: "If used, this field must be accompanied by a destination_state."
-        default: "chillicothe"
         minLength: 2
         example: "chicago"
       destination_state:
