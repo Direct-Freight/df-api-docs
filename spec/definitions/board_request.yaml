@@ -7,6 +7,7 @@ properties:
     example: 5555
     type: integer
   destination_city:
+    default: chillicothe
     description: 'If used, this field must be accompanied by a destination_state.'
     example: chicago
     minLength: 2

@@ -1470,6 +1470,7 @@ definitions:
       destination_city:
         type: "string"
         description: "If used, this field must be accompanied by a destination_state."
+        default: "chillicothe"
         minLength: 2
         example: "chicago"
       destination_state:
