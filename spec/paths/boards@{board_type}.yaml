@@ -26,22 +26,6 @@ post:
       required: false
       type: string
       x-example: 01234567890abc
-    - default: application/json
-      enum:
-        - application/json
-      in: header
-      name: Accept
-      required: true
-      type: string
-      x-example: application/json
-    - default: application/json
-      enum:
-        - application/json
-      in: header
-      name: Content-Type
-      required: true
-      type: string
-      x-example: application/json
     - in: body
       name: body
       required: true
