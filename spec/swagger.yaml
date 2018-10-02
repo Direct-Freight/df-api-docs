@@ -37,11 +37,11 @@ produces:
 schemes:
   - https
 security:
-  - api-key: []
+  - api-token: []
 securityDefinitions:
-  api-key:
+  api-token:
     in: header
-    name: api-key
+    name: api-token
     type: apiKey
 swagger: '2.0'
 x-restlet:

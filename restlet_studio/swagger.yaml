@@ -22,7 +22,7 @@ consumes:
 produces:
 - "application/json"
 security:
-- api-key: []
+- api-token: []
 paths:
   /alerts/{board_type}:
     get:
@@ -135,11 +135,6 @@ paths:
         \ may be state only."
       consumes: []
       parameters:
-      - name: "api-token"
-        in: "header"
-        required: true
-        type: "string"
-        default: "6c5544b743de1f42f6f9a8a0880f837530ab2eea"
       - name: "end-user-token"
         in: "header"
         required: false
@@ -1311,9 +1306,9 @@ paths:
     x-restlet:
       section: "VALIDATIONS"
 securityDefinitions:
-  api-key:
+  api-token:
     type: "apiKey"
-    name: "api-key"
+    name: "api-token"
     in: "header"
 definitions:
   alert_list:
