@@ -32,6 +32,7 @@ properties:
       - IL
       - HI
       - NY
+      - KS
     items:
       maxLength: 2
       minLength: 2
