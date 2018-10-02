@@ -68,7 +68,7 @@ properties:
       for that city. For searches without a specified origin_city this field may
       contain an array list of state abbreviations.
     items:
-      example: 'MO","KS","TX'
+      example: '["MO","KS","TX"]'
       maxLength: 2
       minLength: 2
       type: string
