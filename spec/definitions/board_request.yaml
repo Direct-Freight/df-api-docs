@@ -35,6 +35,7 @@ properties:
       - KS
       - TX
       - MO
+      - AL
     items:
       maxLength: 2
       minLength: 2
