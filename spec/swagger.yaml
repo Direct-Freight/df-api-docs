@@ -1,6 +1,7 @@
 basePath: /v1
 consumes:
   - application/json
+  - text/plain
 host: api.directfreight.com
 info:
   contact: {}
@@ -34,6 +35,7 @@ info:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
 produces:
   - application/json
+  - text/plain
 schemes:
   - https
 security:
