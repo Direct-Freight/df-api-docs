@@ -1,7 +1,6 @@
 basePath: /v1
 consumes:
   - application/json
-  - text/plain
 host: api.directfreight.com
 info:
   contact: {}
@@ -35,19 +34,8 @@ info:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
 produces:
   - application/json
-  - text/plain
 schemes:
   - https
-security:
-  - tokens: []
-securityDefinitions:
-  tokens:
-    description: >-
-      This token needs to be sent as a HTTP header argument in every request to
-      our API.
-    in: header
-    name: api-token
-    type: apiKey
 swagger: '2.0'
 x-restlet:
   sections:

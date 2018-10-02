@@ -19,12 +19,8 @@ schemes:
 - "https"
 consumes:
 - "application/json"
-- "text/plain"
 produces:
 - "application/json"
-- "text/plain"
-security:
-- tokens: []
 paths:
   /alerts/{board_type}:
     get:
@@ -1307,13 +1303,6 @@ paths:
             $ref: "#/definitions/get_email_exists_response"
     x-restlet:
       section: "VALIDATIONS"
-securityDefinitions:
-  tokens:
-    description: "This token needs to be sent as a HTTP header argument in every request\
-      \ to our API."
-    type: "apiKey"
-    name: "api-token"
-    in: "header"
 definitions:
   alert_list:
     type: "object"
