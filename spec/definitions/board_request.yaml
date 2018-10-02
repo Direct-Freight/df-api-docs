@@ -33,6 +33,7 @@ properties:
       - HI
       - NY
       - KS
+      - TX
     items:
       maxLength: 2
       minLength: 2

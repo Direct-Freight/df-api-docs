@@ -1482,7 +1482,7 @@ definitions:
           type: "string"
           minLength: 2
           maxLength: 2
-        example: ["IL","HI","NY","KS"]
+        example: ["IL","HI","NY","KS","TX"]
       destination_radius:
         type: "integer"
         description: "If both the destination city and state are specified, this field\
