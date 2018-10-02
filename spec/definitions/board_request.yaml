@@ -34,6 +34,7 @@ properties:
       - NY
       - KS
       - TX
+      - MO
     items:
       maxLength: 2
       minLength: 2
