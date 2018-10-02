@@ -36,13 +36,6 @@ produces:
   - application/json
 schemes:
   - https
-security:
-  - Custom: []
-securityDefinitions:
-  Custom:
-    in: header
-    name: Accept
-    type: apiKey
 swagger: '2.0'
 x-restlet:
   sections:

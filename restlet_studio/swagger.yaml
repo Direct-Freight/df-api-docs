@@ -21,8 +21,6 @@ consumes:
 - "application/json"
 produces:
 - "application/json"
-security:
-- Custom: []
 paths:
   /alerts/{board_type}:
     get:
@@ -135,12 +133,32 @@ paths:
         \ may be state only."
       consumes: []
       parameters:
+      - name: "api-token"
+        in: "header"
+        required: true
+        type: "string"
       - name: "end-user-token"
         in: "header"
         required: false
         type: "string"
         default: "01234567890"
         x-example: "01234567890"
+      - name: "Accept"
+        in: "header"
+        required: true
+        type: "string"
+        default: "application/json"
+        enum:
+        - "application/json"
+        x-example: "application/json"
+      - name: "Content-Type"
+        in: "header"
+        required: true
+        type: "string"
+        default: "application/json"
+        enum:
+        - "application/json"
+        x-example: "application/json"
       - name: "body"
         in: "body"
         required: true
@@ -1305,11 +1323,6 @@ paths:
             $ref: "#/definitions/get_email_exists_response"
     x-restlet:
       section: "VALIDATIONS"
-securityDefinitions:
-  Custom:
-    type: "apiKey"
-    name: "Accept"
-    in: "header"
 definitions:
   alert_list:
     type: "object"
