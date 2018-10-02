@@ -1568,7 +1568,6 @@ definitions:
           type: "string"
           format: "date"
           description: "Please use the YYYY-MM-DD format."
-        example: []
       page_number:
         type: "integer"
         description: "The page you want to return. Will return an empty board on an\
