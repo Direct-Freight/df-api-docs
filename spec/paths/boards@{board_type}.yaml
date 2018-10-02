@@ -15,7 +15,8 @@ post:
     least an origin or destination.  The origin or destination may be state
     only.
   parameters:
-    - in: header
+    - default: 6c5544b743de1f42f6f9a8a0880f837530ab2eea
+      in: header
       name: api-token
       required: true
       type: string

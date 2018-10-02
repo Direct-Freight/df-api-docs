@@ -104,10 +104,7 @@ properties:
     type: boolean
   ship_date:
     description: Limits results to specified ship date(s).
-    example:
-      - '2016-12-02'
-      - '2015-03-03'
-      - '2019-01-01'
+    example: []
     items:
       description: Please use the YYYY-MM-DD format.
       format: date
