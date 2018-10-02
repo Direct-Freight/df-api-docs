@@ -67,11 +67,8 @@ properties:
       If the origin_city field is is used, this field should contain the state
       for that city. For searches without a specified origin_city this field may
       contain an array list of state abbreviations.
+    example: '["MO","IL","AK"]'
     items:
-      example:
-        - MO
-        - IL
-        - TX
       maxLength: 2
       minLength: 2
       type: string
@@ -94,10 +91,7 @@ properties:
     type: boolean
   ship_date:
     description: Limits results to specified ship date(s).
-    example:
-      - '2018-09-19'
-      - '2018-09-20'
-      - '2018-09-21'
+    example: '2018-01-01'
     items:
       description: Please use the YYYY-MM-DD format.
       format: date
@@ -130,7 +124,7 @@ properties:
     type: string
   trailer_type:
     description: 'A string array of valid trailer types to limit the search. '
-    example: '["F", "F+T", "F+S"]'
+    example: '[''F'', ''F+T'', ''F+S'',''V'']'
     items:
       enum:
         - V
