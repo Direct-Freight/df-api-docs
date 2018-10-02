@@ -26,7 +26,10 @@ properties:
       If the destination_city field is is used, this field should contain the
       state for that city.  For searches without a specified destination_city
       this field may contain an array list of state abbreviations.
-    example: IL
+    example:
+      - \"IL\"
+      - \"HI\"
+      - \"NY\"
     items:
       maxLength: 2
       minLength: 2
