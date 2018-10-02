@@ -44,7 +44,7 @@ var results = SwaggerSnippet.getSwaggerSnippets(SwaggerFile,
 
 results.forEach(function(result)
         {
-        var path = result.url.replace(/http.*api\//,'').replace(/\//g,'@');
+        var path = result.url.replace(/http.*v1\//,'').replace(/\//g,'@');
         const pretty = stringifyObject(result.snippets, { indent: '  ', singleQuotes: false });
         result.snippets.forEach(function(snippet)
                 {
