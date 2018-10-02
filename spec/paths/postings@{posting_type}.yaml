@@ -43,16 +43,17 @@ parameters:
       Valid types are "loads", "trucks", "private_loads", "private_trucks",
       "test_loads", and "test_trucks"
     enum:
-      - loads
-      - trucks
-      - private_loads
-      - private_trucks
       - test_loads
       - test_trucks
+      - private_loads
+      - private_trucks
+      - loads
+      - trucks
     in: path
     name: posting_type
     required: true
     type: string
+    x-example: test_loads
 patch:
   consumes: []
   parameters:
