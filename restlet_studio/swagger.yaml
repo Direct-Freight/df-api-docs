@@ -1488,6 +1488,7 @@ definitions:
           \ will limit the search to results to within # miles of the specified destination\
           \ city.   If this field is omitted during a search that includes a destination\
           \ city a default value of 30 miles will be used."
+        default: 25
         minimum: 1
         maximum: 300
         example: 100

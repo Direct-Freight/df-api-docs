@@ -12,6 +12,7 @@ properties:
     minLength: 2
     type: string
   destination_radius:
+    default: 25
     description: >-
       If both the destination city and state are specified, this field will
       limit the search to results to within # miles of the specified destination
