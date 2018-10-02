@@ -34,10 +34,14 @@ get:
     - postings
 parameters:
   - description: 'Valid types are "names", and "data".'
+    enum:
+      - names
+      - data
     in: path
     name: category_type
     required: true
     type: string
+    x-example: names
 patch:
   parameters:
     - $ref: '#/parameters/end-user-token'

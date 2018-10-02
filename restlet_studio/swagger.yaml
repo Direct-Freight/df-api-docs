@@ -786,6 +786,9 @@ paths:
       required: true
       type: "string"
       description: "Specified in the url. Valid types are \"copy\", and \"move\""
+      enum:
+      - "copy"
+      - "move"
     x-restlet:
       section: "POSTINGS"
   /postings/multiple/{posting_type}:
@@ -995,6 +998,10 @@ paths:
       required: true
       type: "string"
       description: "Valid types are \"names\", and \"data\"."
+      enum:
+      - "names"
+      - "data"
+      x-example: "names"
     x-restlet:
       section: "POSTINGS"
   /postings/status:

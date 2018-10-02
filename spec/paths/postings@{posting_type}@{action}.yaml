@@ -1,6 +1,9 @@
 parameters:
   - $ref: '#/parameters/posting_type'
   - description: 'Specified in the url. Valid types are "copy", and "move"'
+    enum:
+      - copy
+      - move
     in: path
     name: action
     required: true
