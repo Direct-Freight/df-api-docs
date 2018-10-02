@@ -22,7 +22,7 @@ consumes:
 produces:
 - "application/json"
 security:
-- headers: []
+- tokens: []
 paths:
   /alerts/{board_type}:
     get:
@@ -1306,7 +1306,7 @@ paths:
     x-restlet:
       section: "VALIDATIONS"
 securityDefinitions:
-  headers:
+  tokens:
     description: "This token needs to be sent as a HTTP header argument in every request\
       \ to our API."
     type: "apiKey"
