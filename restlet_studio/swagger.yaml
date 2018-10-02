@@ -142,8 +142,8 @@ paths:
         in: "header"
         required: false
         type: "string"
-        default: "01234567890"
-        x-example: "01234567890"
+        default: "01234567890abc"
+        x-example: "01234567890abc"
       - name: "Accept"
         in: "header"
         required: true

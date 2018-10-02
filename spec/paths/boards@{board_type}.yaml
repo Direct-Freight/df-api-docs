@@ -20,12 +20,12 @@ post:
       name: api-token
       required: true
       type: string
-    - default: 01234567890
+    - default: 01234567890abc
       in: header
       name: end-user-token
       required: false
       type: string
-      x-example: 01234567890
+      x-example: 01234567890abc
     - default: application/json
       enum:
         - application/json
