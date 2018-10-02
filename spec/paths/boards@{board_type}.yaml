@@ -7,7 +7,7 @@ post:
     least an origin or destination.  The origin or destination may be state
     only.
   parameters:
-    - $ref: '#/parameters/end-user-token-optional'
+    - $ref: '#/parameters/end-user-token'
     - in: body
       name: body
       required: true
