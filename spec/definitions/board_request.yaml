@@ -27,7 +27,14 @@ properties:
       If the destination_city field is is used, this field should contain the
       state for that city.  For searches without a specified destination_city
       this field may contain an array list of state abbreviations.
-    example: '["IL","HI","NY","KS","TX","MO","AL"]'
+    example:
+      - IL
+      - HI
+      - NY
+      - KS
+      - TX
+      - MO
+      - AL
     items:
       maxLength: 2
       minLength: 2
@@ -68,7 +75,13 @@ properties:
       If the origin_city field is is used, this field should contain the state
       for that city. For searches without a specified origin_city this field may
       contain an array list of state abbreviations.
-    example: '["MO","IL","TX","CA","NY"]'
+    example:
+      - MO
+      - IL
+      - TX
+      - CA
+      - NY
+      - IL
     items:
       maxLength: 2
       minLength: 2
@@ -124,7 +137,11 @@ properties:
     type: string
   trailer_type:
     description: 'A string array of valid trailer types to limit the search. '
-    example: '["F","F+T","F+S","V"]'
+    example:
+      - F
+      - F+T
+      - F+S
+      - V
     items:
       enum:
         - V
