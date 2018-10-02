@@ -160,7 +160,6 @@ paths:
       required: true
       type: "string"
       description: "Valid types are \"loads\", and \"trucks\"."
-      default: "loads"
       enum:
       - "loads"
       - "trucks"
