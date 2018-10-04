@@ -1,12 +1,20 @@
 delete:
   parameters:
-    - description: You must specify which entry to remove.
+    - description: >-
+        You must specify which entry to remove. Will be ignored if delete_all is
+        specified, otherwise it must be specified.
       in: query
       items:
         type: string
       name: posting_id
-      required: true
+      required: false
       type: array
+    - description: 'If included and true, will delete all loads for the logged in user.'
+      in: query
+      name: delete_all
+      required: false
+      type: boolean
+      x-example: '?delete_all=1'
     - in: header
       name: end-user-token
       required: true
@@ -65,11 +73,25 @@ patch:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/postings_patch_request'
+        properties:
+          list:
+            $ref: '#/definitions/postings_patch_request'
+        required:
+          - list
+        type: object
   responses:
-    '204':
-      description: successful operation
-  summary: STAGE=UNK Update an posting.
+    '202':
+      description: Status 202
+      schema:
+        properties:
+          list:
+            items:
+              type: string
+            type: array
+        required:
+          - list
+        type: object
+  summary: Update one or more postings.
   tags:
     - postings
 post:
@@ -86,11 +108,27 @@ post:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/postings_post_request'
+        properties:
+          list:
+            $ref: '#/definitions/postings_post_request'
+        required:
+          - list
+        type: object
   responses:
-    '201':
-      $ref: '#/responses/object_created'
-  summary: Create a posting
+    '202':
+      description: Loads accepted. Check the response for an ordered list of response.
+      examples:
+        application/json: Success
+      schema:
+        properties:
+          list:
+            items:
+              type: string
+            type: array
+        required:
+          - list
+        type: object
+  summary: Create one or more posting
   tags:
     - postings
 x-restlet:

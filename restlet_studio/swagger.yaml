@@ -676,7 +676,7 @@ paths:
     post:
       tags:
       - "postings"
-      summary: "Create a posting"
+      summary: "Create one or more posting"
       description: "This endpoint method will post an entry. Valid posting_type are:\
         \ loads, trucks, test_loads, test_trucks, private_loads, and private_trucks."
       consumes: []
@@ -689,12 +689,27 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/postings_post_request"
+          type: "object"
+          required:
+          - "list"
+          properties:
+            list:
+              $ref: "#/definitions/postings_post_request"
       responses:
-        201:
-          description: "Object created check the headers for a reference URL."
+        202:
+          description: "Loads accepted. Check the response for an ordered list of\
+            \ response."
           schema:
-            $ref: "#/definitions/create_status"
+            required:
+            - "list"
+            type: "object"
+            properties:
+              list:
+                type: "array"
+                items:
+                  type: "string"
+          examples:
+            application/json: "Success"
     delete:
       tags:
       - "postings"
@@ -702,11 +717,19 @@ paths:
       parameters:
       - name: "posting_id"
         in: "query"
-        required: true
+        required: false
         type: "array"
-        description: "You must specify which entry to remove."
+        description: "You must specify which entry to remove. Will be ignored if delete_all\
+          \ is specified, otherwise it must be specified."
         items:
           type: "string"
+      - name: "delete_all"
+        in: "query"
+        required: false
+        type: "boolean"
+        description: "If included and true, will delete all loads for the logged in\
+          \ user."
+        x-example: "?delete_all=1"
       - name: "end-user-token"
         in: "header"
         required: true
@@ -717,7 +740,7 @@ paths:
     patch:
       tags:
       - "postings"
-      summary: "STAGE=UNK Update an posting."
+      summary: "Update one or more postings."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -728,10 +751,24 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/postings_patch_request"
+          type: "object"
+          required:
+          - "list"
+          properties:
+            list:
+              $ref: "#/definitions/postings_patch_request"
       responses:
-        204:
-          description: "successful operation"
+        202:
+          description: "Status 202"
+          schema:
+            required:
+            - "list"
+            type: "object"
+            properties:
+              list:
+                type: "array"
+                items:
+                  type: "string"
     parameters:
     - name: "posting_type"
       in: "path"
@@ -792,140 +829,6 @@ paths:
       enum:
       - "copy"
       - "move"
-    x-restlet:
-      section: "POSTINGS"
-  /postings/multiple/{posting_type}:
-    get:
-      tags:
-      - "postings"
-      summary: "Get posts by this user."
-      description: "This is a convenience method. It is mapped to /postings/{posting_type}\
-        \ get behind the scenes."
-      parameters:
-      - name: "posting_id"
-        in: "query"
-        required: false
-        type: "array"
-        description: "To just return information about some postings."
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/posting_post_response"
-    post:
-      tags:
-      - "postings"
-      summary: "Create multiple postings."
-      description: "This endpoint method will post entries. Valid posting_type are:\
-        \ loads, trucks, test_loads, test_trucks, private_loads, and private_trucks."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          type: "object"
-          required:
-          - "list"
-          properties:
-            list:
-              type: "array"
-              items:
-                $ref: "#/definitions/postings_post_request"
-      responses:
-        202:
-          description: "Object created check the headers for a reference URL."
-          headers:
-            location:
-              type: "string"
-              description: "A link to a report on the status of entering multiple\
-                \ loads."
-    delete:
-      tags:
-      - "postings"
-      summary: "Remove one or more postings."
-      description: "This is a convenience method. It is mapped to /postings/{posting_type}\
-        \ delete behind the scenes."
-      parameters:
-      - name: "posting_id"
-        in: "query"
-        required: true
-        type: "array"
-        description: "You must specify which entry to remove."
-        items:
-          type: "string"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        204:
-          description: "success operation"
-    patch:
-      tags:
-      - "postings"
-      summary: "STAGE=UNK Update an posting."
-      consumes: []
-      parameters:
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          type: "object"
-          required:
-          - "list"
-          properties:
-            contact_name:
-              type: "string"
-              description: "If provided this will override the account default, but\
-                \ not information set for an individual load."
-            contact_phone_number:
-              type: "integer"
-              description: "If provided this will override the account default, but\
-                \ not information set for an individual load."
-            contact_phone_extension:
-              type: "integer"
-              description: "If provided this will override the account default, but\
-                \ not information set for an individual load."
-            list:
-              type: "array"
-              items:
-                $ref: "#/definitions/postings_patch_request"
-      responses:
-        202:
-          description: "successful operation"
-          headers:
-            location:
-              type: "string"
-              description: "A url linking to the entry report."
-    parameters:
-    - name: "posting_type"
-      in: "path"
-      required: true
-      type: "string"
-      description: "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\"\
-        , \"test_loads\", and \"test_trucks\""
-      enum:
-      - "loads"
-      - "trucks"
-      - "private_loads"
-      - "private_trucks"
-      - "test_loads"
-      - "test_trucks"
     x-restlet:
       section: "POSTINGS"
   /postings/custom_categories/{category_type}:
@@ -1005,70 +908,6 @@ paths:
       - "names"
       - "data"
       x-example: "names"
-    x-restlet:
-      section: "POSTINGS"
-  /postings/status:
-    get:
-      tags:
-      - "postings"
-      summary: "Get a report."
-      description: "This will return a multi post report. Multiple reports are stored."
-      parameters:
-      - name: "report_id"
-        in: "query"
-        required: true
-        type: "string"
-        x-example: "1cc94d41bcb08de0586a39ae8460a7aa"
-      - name: "end-user-token"
-        in: "header"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "Status 200"
-          schema:
-            required:
-            - "job_finish"
-            - "job_start"
-            - "list"
-            - "load_entered"
-            - "success_ratio"
-            type: "object"
-            properties:
-              job_start:
-                type: "string"
-                format: "date-time"
-                description: "When the submission happened."
-              job_finish:
-                type: "string"
-                format: "date-time"
-                description: "This will be null until the postings have finished being\
-                  \ entered."
-              success_ratio:
-                type: "number"
-                description: "A percentage of how many loads were entered. This information\
-                  \ dynamically changes until the report completes."
-              load_entered:
-                type: "number"
-                description: "A percentage of how many loads were entered. This information\
-                  \ dynamically changes until the report completes."
-              list:
-                type: "array"
-                items:
-                  required:
-                  - "entry_id"
-                  - "message"
-                  type: "object"
-                  properties:
-                    entry_id:
-                      type: "string"
-                      description: "Will be null on a failed entry."
-                    custom_id:
-                      type: "integer"
-                      description: "If submitted will show up in this list."
-                    message:
-                      type: "string"
-                      description: "If an error occurred, this will explain it."
     x-restlet:
       section: "POSTINGS"
   /profiles:
