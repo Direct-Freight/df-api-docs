@@ -663,6 +663,12 @@ paths:
         type: "array"
         description: "To just return information about some postings."
         items:
+          type: "integer"
+      - name: "custom_id"
+        in: "query"
+        required: false
+        type: "array"
+        items:
           type: "string"
       - name: "end-user-token"
         in: "header"

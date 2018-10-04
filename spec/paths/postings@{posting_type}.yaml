@@ -30,8 +30,14 @@ get:
     - description: To just return information about some postings.
       in: query
       items:
-        type: string
+        type: integer
       name: posting_id
+      required: false
+      type: array
+    - in: query
+      items:
+        type: string
+      name: custom_id
       required: false
       type: array
     - in: header
