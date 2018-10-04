@@ -669,7 +669,7 @@ paths:
         required: false
         type: "array"
         items:
-          type: "string"
+          type: "integer"
       - name: "end-user-token"
         in: "header"
         required: true

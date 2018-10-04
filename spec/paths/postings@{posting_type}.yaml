@@ -36,7 +36,7 @@ get:
       type: array
     - in: query
       items:
-        type: string
+        type: integer
       name: custom_id
       required: false
       type: array
