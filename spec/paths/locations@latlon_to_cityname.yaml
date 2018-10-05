@@ -14,7 +14,7 @@ get:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/latlon_to_city_response'
+        $ref: '#/definitions/latlon_to_cityname_response'
   summary: returns the nearest city to a lat/lon point. (reverse geocode)
   tags:
     - locations

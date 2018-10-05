@@ -5,30 +5,30 @@ example: |-
     "state_name": "{}"
   }
 properties:
-  city:
+  city_name:
     type: string
   latitude:
     type: number
   longitude:
     type: number
-  region_abbreviation:
-    type: object
-  region_name:
-    type: object
-  region_type:
+  record_type:
     enum:
       - country
       - state
       - province
       - city
-      - postal_code
+      - postal
     type: string
+  region_code:
+    type: string
+  region_name:
+    type: object
 required:
   - latitude
   - longitude
-  - region_abbreviation
+  - record_type
+  - region_code
   - region_name
-  - region_type
 type: object
 x-restlet:
   section: LOCATIONS

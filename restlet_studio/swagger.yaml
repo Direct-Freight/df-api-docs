@@ -606,26 +606,26 @@ paths:
         description: "City/State term to search for.   It matches city name and state\
           \ name and state abbreviation.  So for instance \"MI\" would return Michigan,\
           \ Missouri, and Miami, FL"
-      - name: "search_type"
+      - name: "return_only"
         in: "query"
         required: false
         type: "string"
-        description: "\"state\", and \"city\" will return only the respective information\
-          \ for that search type. Misspelling or blank will default to both."
+        description: "restricts the results return.  regions will only return states,\
+          \ provinces, and countries.  cities will only return cities.  The default\
+          \ is to return both cities and regions in the results."
         enum:
-        - "city"
-        - "state"
-        - "both"
+        - "cities"
+        - "regions"
+      - name: "limit"
+        in: "query"
+        required: false
+        type: "number"
+        default: 100.0
       responses:
         200:
           description: "successful operation"
           schema:
-            required:
-            - "partial_match_response"
-            type: "object"
-            properties:
-              partial_match_response:
-                $ref: "#/definitions/cityname_to_latlon_response"
+            $ref: "#/definitions/cityname_to_latlon_response"
     x-restlet:
       section: "LOCATIONS"
   /locations/latlon_to_cityname:
@@ -648,7 +648,7 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/latlon_to_city_response"
+            $ref: "#/definitions/latlon_to_cityname_response"
     x-restlet:
       section: "LOCATIONS"
   /postings/{posting_type}:
@@ -1719,24 +1719,24 @@ definitions:
     required:
     - "latitude"
     - "longitude"
-    - "region_abbreviation"
+    - "record_type"
+    - "region_code"
     - "region_name"
-    - "region_type"
     properties:
-      city:
+      city_name:
         type: "string"
-      region_abbreviation:
-        type: "object"
+      region_code:
+        type: "string"
       region_name:
         type: "object"
-      region_type:
+      record_type:
         type: "string"
         enum:
         - "country"
         - "state"
         - "province"
         - "city"
-        - "postal_code"
+        - "postal"
       latitude:
         type: "number"
       longitude:
@@ -1745,16 +1745,16 @@ definitions:
       : \"{}\"\n}"
     x-restlet:
       section: "LOCATIONS"
-  latlon_to_city_response:
+  latlon_to_cityname_response:
     type: "object"
     required:
     - "city_name"
-    - "region_abbreviation"
+    - "region_code"
     - "region_name"
     properties:
       city_name:
         type: "string"
-      region_abbreviation:
+      region_code:
         type: "string"
       region_name:
         type: "string"

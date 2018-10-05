@@ -9,26 +9,26 @@ get:
       required: true
       type: string
     - description: >-
-        "state", and "city" will return only the respective information for that
-        search type. Misspelling or blank will default to both.
+        restricts the results return.  regions will only return states,
+        provinces, and countries.  cities will only return cities.  The default
+        is to return both cities and regions in the results.
       enum:
-        - city
-        - state
-        - both
+        - cities
+        - regions
       in: query
-      name: search_type
+      name: return_only
       required: false
       type: string
+    - default: 100
+      in: query
+      name: limit
+      required: false
+      type: number
   responses:
     '200':
       description: successful operation
       schema:
-        properties:
-          partial_match_response:
-            $ref: '#/definitions/cityname_to_latlon_response'
-        required:
-          - partial_match_response
-        type: object
+        $ref: '#/definitions/cityname_to_latlon_response'
   summary: >-
     A string of a partial city or state name, and returns a list of possible
     matches.
