@@ -592,27 +592,27 @@ paths:
             $ref: "#/definitions/error_object"
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
-  /locations/cityname_to_latlon:
+  /locations/geocode_fuzzy_autocomplete:
     get:
       tags:
       - "locations"
       summary: "A string of a partial city or state name, and returns a list of possible\
         \ matches."
       parameters:
-      - name: "term"
+      - name: "location"
         in: "query"
         required: true
         type: "string"
-        description: "City/State term to search for.   It matches city name and state\
-          \ name and state abbreviation.  So for instance \"MI\" would return Michigan,\
-          \ Missouri, and Miami, FL"
+        description: "City or State or Postal  location to search for.   It matches\
+          \ city name and state name and state abbreviation.  So for instance \"MO\"\
+          \ would return Missouri, Montana, and Montreal, QC"
       - name: "return_only"
         in: "query"
         required: false
         type: "string"
         description: "restricts the results return.  regions will only return states,\
-          \ provinces, and countries.  cities will only return cities.  The default\
-          \ is to return both cities and regions in the results."
+          \ provinces, and countries.  cities will only return cities and postals.\
+          \  The default is to return both cities and regions in the results."
         enum:
         - "cities"
         - "regions"
@@ -625,10 +625,10 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/cityname_to_latlon_response"
+            $ref: "#/definitions/geocode_fuzzy_autocomplete_response"
     x-restlet:
       section: "LOCATIONS"
-  /locations/latlon_to_cityname:
+  /locations/reverse_geocode:
     get:
       tags:
       - "locations"
@@ -648,7 +648,7 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/latlon_to_cityname_response"
+            $ref: "#/definitions/reverse_geocode_response"
     x-restlet:
       section: "LOCATIONS"
   /postings/{posting_type}:
@@ -1714,7 +1714,7 @@ definitions:
         description: "Currently this is a 6-10 digit alphanumeric password. "
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
-  cityname_to_latlon_response:
+  geocode_fuzzy_autocomplete_response:
     type: "object"
     required:
     - "latitude"
@@ -1728,7 +1728,7 @@ definitions:
       region_code:
         type: "string"
       region_name:
-        type: "object"
+        type: "string"
       record_type:
         type: "string"
         enum:
@@ -1739,13 +1739,15 @@ definitions:
         - "postal"
       latitude:
         type: "number"
+        description: "The average latitude of the city or region"
       longitude:
         type: "number"
+        description: "The average longitude of the city or region"
     example: "{\n  \"city\": \"city\",\n  \"state_abbreviation\": \"{}\",\n  \"state_name\"\
       : \"{}\"\n}"
     x-restlet:
       section: "LOCATIONS"
-  latlon_to_cityname_response:
+  reverse_geocode_response:
     type: "object"
     required:
     - "city_name"
