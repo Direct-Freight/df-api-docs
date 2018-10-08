@@ -28,7 +28,7 @@ get:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/geocode_fuzzy_autocomplete_response'
+        $ref: '#/definitions/geocode_autocomplete_response'
   summary: >-
     A string of a partial city or state name, and returns a list of possible
     matches.

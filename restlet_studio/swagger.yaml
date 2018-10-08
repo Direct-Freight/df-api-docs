@@ -592,9 +592,6 @@ paths:
             $ref: "#/definitions/error_object"
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
-  /locations/geocode_fuzzy_autocomplete:
-    x-restlet:
-      section: "LOCATIONS"
   /locations/reverse_geocode:
     get:
       tags:
@@ -651,7 +648,7 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/geocode_fuzzy_autocomplete_response"
+            $ref: "#/definitions/geocode_autocomplete_response"
     x-restlet:
       section: "LOCATIONS"
   /postings/{posting_type}:
@@ -1717,7 +1714,7 @@ definitions:
         description: "Currently this is a 6-10 digit alphanumeric password. "
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
-  geocode_fuzzy_autocomplete_response:
+  geocode_autocomplete_response:
     type: "object"
     required:
     - "latitude"
