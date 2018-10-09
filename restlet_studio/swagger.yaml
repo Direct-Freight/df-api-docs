@@ -645,7 +645,11 @@ paths:
         in: "query"
         required: false
         type: "number"
+        description: "The number of records to return.  Limit 1 has a special property\
+          \ where it will only return a high confidence match."
         default: 100.0
+        minimum: 1
+        maximum: 100
       responses:
         200:
           description: "successful operation"

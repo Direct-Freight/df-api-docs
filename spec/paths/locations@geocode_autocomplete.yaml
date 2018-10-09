@@ -23,7 +23,12 @@ get:
       required: false
       type: string
     - default: 100
+      description: >-
+        The number of records to return.  Limit 1 has a special property where
+        it will only return a high confidence match.
       in: query
+      maximum: 100
+      minimum: 1
       name: limit
       required: false
       type: number
