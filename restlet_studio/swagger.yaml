@@ -1729,8 +1729,10 @@ definitions:
     - "region_code"
     - "region_name"
     properties:
-      city_name:
+      city:
         type: "string"
+        description: "The name of the city.  Only returned if record_type is city\
+          \ or postal"
       region_code:
         type: "string"
       region_name:
@@ -1749,6 +1751,10 @@ definitions:
       longitude:
         type: "number"
         description: "The average longitude of the city or region"
+      postal_code:
+        type: "string"
+        description: "The postal code of the city.  Only returned if match type is\
+          \ postal."
     example: "{\n  \"city\": \"city\",\n  \"state_abbreviation\": \"{}\",\n  \"state_name\"\
       : \"{}\"\n}"
     x-restlet:
@@ -1756,11 +1762,11 @@ definitions:
   reverse_geocode_response:
     type: "object"
     required:
-    - "city_name"
+    - "city"
     - "region_code"
     - "region_name"
     properties:
-      city_name:
+      city:
         type: "string"
       region_code:
         type: "string"

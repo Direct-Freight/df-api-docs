@@ -1,12 +1,12 @@
 properties:
-  city_name:
+  city:
     type: string
   region_code:
     type: string
   region_name:
     type: string
 required:
-  - city_name
+  - city
   - region_code
   - region_name
 type: object

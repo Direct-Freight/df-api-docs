@@ -5,7 +5,8 @@ example: |-
     "state_name": "{}"
   }
 properties:
-  city_name:
+  city:
+    description: The name of the city.  Only returned if record_type is city or postal
     type: string
   latitude:
     description: The average latitude of the city or region
@@ -13,6 +14,9 @@ properties:
   longitude:
     description: The average longitude of the city or region
     type: number
+  postal_code:
+    description: The postal code of the city.  Only returned if match type is postal.
+    type: string
   record_type:
     enum:
       - country
