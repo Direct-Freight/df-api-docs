@@ -596,7 +596,8 @@ paths:
     get:
       tags:
       - "locations"
-      summary: "returns the nearest city to a lat/lon point. (reverse geocode)"
+      summary: "reverse_geocode"
+      description: "returns the nearest city to a lat/lon point. (reverse geocode)"
       parameters:
       - name: "latitude"
         in: "query"
@@ -619,8 +620,9 @@ paths:
     get:
       tags:
       - "locations"
-      summary: "A string of a partial city or state name, and returns a list of possible\
-        \ matches."
+      summary: "geocode_autocomplete"
+      description: "A string of a partial city or state name, and returns a list of\
+        \ possible matches."
       parameters:
       - name: "location"
         in: "query"

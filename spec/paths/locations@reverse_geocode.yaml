@@ -1,4 +1,5 @@
 get:
+  description: returns the nearest city to a lat/lon point. (reverse geocode)
   parameters:
     - format: float
       in: query
@@ -15,7 +16,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/reverse_geocode_response'
-  summary: returns the nearest city to a lat/lon point. (reverse geocode)
+  summary: reverse_geocode
   tags:
     - locations
 x-restlet:
