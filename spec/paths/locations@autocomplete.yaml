@@ -9,7 +9,7 @@ get:
         Missouri, Montana, and Montreal, QC  while  ME would return Maine,
         Mexico, and Memphis, TN
       in: query
-      name: location
+      name: location_fragment
       required: true
       type: string
     - description: >-

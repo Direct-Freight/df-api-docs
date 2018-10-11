@@ -624,7 +624,7 @@ paths:
       description: "A string of a partial city or state name, and returns a list of\
         \ possible matches."
       parameters:
-      - name: "location"
+      - name: "location_fragment"
         in: "query"
         required: true
         type: "string"
