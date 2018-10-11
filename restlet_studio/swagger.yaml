@@ -616,11 +616,11 @@ paths:
             $ref: "#/definitions/reverse_geocode_response"
     x-restlet:
       section: "LOCATIONS"
-  /locations/geocode_autocomplete:
+  /locations/autocomplete:
     get:
       tags:
       - "locations"
-      summary: "geocode_autocomplete"
+      summary: "autocomplete"
       description: "A string of a partial city or state name, and returns a list of\
         \ possible matches."
       parameters:
@@ -628,9 +628,10 @@ paths:
         in: "query"
         required: true
         type: "string"
-        description: "City or State or Postal  location to search for.   It matches\
-          \ city name and state name and state abbreviation.  So for instance \"MO\"\
-          \ would return Missouri, Montana, and Montreal, QC"
+        description: "City or State or Postal code to search for.   It matches city\
+          \ name and state name and state abbreviation.  So for instance \"MO\" would\
+          \ return Missouri, Montana, and Montreal, QC  while  ME would return Maine,\
+          \ Mexico, and Memphis, TN"
       - name: "return_only"
         in: "query"
         required: false
@@ -645,8 +646,9 @@ paths:
         in: "query"
         required: false
         type: "number"
-        description: "The number of records to return.  Limit 1 has a special property\
-          \ where it will only return a high confidence match."
+        description: "The number of records to return.   Limit 1 has a special property\
+          \ where it will only return a high confidence match so it may return zero\
+          \ results if no match found."
         default: 100.0
         minimum: 1
         maximum: 100
@@ -654,7 +656,7 @@ paths:
         200:
           description: "successful operation"
           schema:
-            $ref: "#/definitions/geocode_autocomplete_response"
+            $ref: "#/definitions/autocomplete_response"
     x-restlet:
       section: "LOCATIONS"
   /postings/{posting_type}:
@@ -1720,11 +1722,9 @@ definitions:
         description: "Currently this is a 6-10 digit alphanumeric password. "
     x-restlet:
       section: "END_USER_AUTHENTICATIONS"
-  geocode_autocomplete_response:
+  autocomplete_response:
     type: "object"
     required:
-    - "latitude"
-    - "longitude"
     - "record_type"
     - "region_code"
     - "region_name"
@@ -1745,12 +1745,6 @@ definitions:
         - "province"
         - "city"
         - "postal"
-      latitude:
-        type: "number"
-        description: "The average latitude of the city or region"
-      longitude:
-        type: "number"
-        description: "The average longitude of the city or region"
       postal_code:
         type: "string"
         description: "The postal code of the city.  Only returned if match type is\
