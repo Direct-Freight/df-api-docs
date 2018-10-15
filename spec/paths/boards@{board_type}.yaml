@@ -1,5 +1,5 @@
 parameters:
-  - description: 'Valid types are "loads", and "trucks".'
+  - description: Defines the type of board requested.
     enum:
       - loads
       - trucks

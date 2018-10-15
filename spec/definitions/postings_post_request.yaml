@@ -2,7 +2,11 @@ properties:
   comment:
     type: string
   custom_id:
-    description: A unique identifier a user can provide for their own records.
+    description: >-
+      An identifier that can be provided for your own records.  (i.e.-Company
+      load number) This field can be used to retrieve loads via GET.  This value
+      should be unique however we do not enforce uniqueness.  If non unique
+      values are used a GET will return all matches.
     type: integer
   destination_city:
     description: For truck type entries this is optional.
@@ -21,37 +25,42 @@ properties:
     description: This number represents inches.
     type: integer
   length:
-    description: This number represents inches.
+    description: This number represents feet.
     type: integer
   origin_city:
-    description: Required for all entry types.
+    description: Origin city location of load or truck.  Required for all entry types.
     type: string
   origin_state:
-    description: Use the 2 digit state abbreviation.
+    description: >-
+      Origin state location of load or truck.  Use the 2 digit state
+      abbreviation.
     maxLength: 2
     minLength: 2
     type: string
   other_trailer_types:
-    description: To include custom trailer types.
+    description: Can be used to specify custom trailer types.
     type: string
   pay_rate:
-    description: 'We expect one of 2 formats. either the per mile, or total sum.'
+    description: 'This field will accept either the per mile rate, or gross rate.'
     type: integer
   phone_extension:
     description: >-
-      If not provided we will use the contact info associated with their
-      account.
+      If not provided we will use the contact info associated with the users
+      profile.
     type: integer
   phone_number:
     description: >-
-      If not provided we will use the contact info associated with their
-      account.
+      If not provided we will use the contact info associated with the users
+      profile.
     type: integer
   receive_date:
+    description: The date the load/truck should deliver.
     format: date
     type: string
   ship_date:
-    description: The date you wish the load to be shipped.
+    description: >-
+      When posting loads this is the date the load should be picked up.  When
+      posting trucks this is the date the truck is available to be loaded.
     format: date
     type: string
   trailer_type:

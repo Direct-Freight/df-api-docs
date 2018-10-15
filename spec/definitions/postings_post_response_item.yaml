@@ -96,14 +96,26 @@ properties:
     description: This number represents inches.
     type: integer
 required:
+  - comment
+  - contact_name
+  - custom_id
+  - destination_city
+  - destination_state
   - full_load
+  - height
+  - length
   - origin_city
   - origin_state
+  - other_trailer_types
+  - pay_rate
   - phone_extension
   - phone_number
   - posting_id
+  - receive_date
   - ship_date
   - trailer_type
+  - weight
+  - width
 type: object
 x-restlet:
   section: POSTINGS
