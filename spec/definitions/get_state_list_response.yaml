@@ -16,5 +16,3 @@ properties:
       "NV": 534,     "NC": 1824,     "BC": 124,     "DC": 7,     .... }
     type: object
 type: object
-x-restlet:
-  section: BOARDS

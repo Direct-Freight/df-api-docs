@@ -16,5 +16,3 @@ required:
   - description
   - error
 type: object
-x-restlet:
-  section: common_definitions

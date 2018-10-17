@@ -14,5 +14,3 @@ required:
   - source_id
   - source_posting
 type: object
-x-restlet:
-  section: not categorized yet

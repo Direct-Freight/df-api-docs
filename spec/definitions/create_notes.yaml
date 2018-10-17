@@ -1,16 +1,14 @@
-type: object
-required:
-  - body
-  - entry_id
-  - title
 properties:
   body:
     type: string
   entry_id:
-    type: integer
     description: 'The entry to associate the note with. '
+    type: integer
   title:
-    type: string
     description: 'Subject of the note. '
-x-restlet:
-  section: BOARDS
+    type: string
+required:
+  - body
+  - entry_id
+  - title
+type: object

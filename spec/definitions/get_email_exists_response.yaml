@@ -7,5 +7,3 @@ properties:
     description: Returns a true value if it is associated with an account.
     type: boolean
 type: object
-x-restlet:
-  section: not categorized yet

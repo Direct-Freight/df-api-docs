@@ -53,5 +53,3 @@ post:
   summary: Login
   tags:
     - end_user_authentications
-x-restlet:
-  section: END_USER_AUTHENTICATIONS

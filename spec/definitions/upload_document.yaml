@@ -5,5 +5,3 @@ properties:
 required:
   - The
 type: object
-x-restlet:
-  section: PROFILES

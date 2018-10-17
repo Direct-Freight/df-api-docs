@@ -67,5 +67,3 @@ post:
   summary: STAGE=UNK Create a new profile.
   tags:
     - profiles
-x-restlet:
-  section: PROFILES

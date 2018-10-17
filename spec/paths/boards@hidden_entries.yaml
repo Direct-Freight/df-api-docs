@@ -75,5 +75,3 @@ post:
   summary: Hide entries.
   tags:
     - boards
-x-restlet:
-  section: BOARDS

@@ -9,5 +9,3 @@ required:
   - current_name
   - new_name
 type: object
-x-restlet:
-  section: PROFILES

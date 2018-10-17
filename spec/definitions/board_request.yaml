@@ -172,5 +172,3 @@ properties:
       type: string
     type: array
 type: object
-x-restlet:
-  section: BOARDS

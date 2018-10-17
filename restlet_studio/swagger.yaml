@@ -124,8 +124,6 @@ paths:
       enum:
       - "loads"
       - "trucks"
-    x-restlet:
-      section: "ALERTS"
   /boards/{board_type}:
     post:
       tags:
@@ -167,8 +165,6 @@ paths:
       - "loads"
       - "trucks"
       x-example: "loads"
-    x-restlet:
-      section: "BOARDS"
   /boards/{board_type}/state_list:
     get:
       tags:
@@ -190,8 +186,6 @@ paths:
       enum:
       - "loads"
       - "trucks"
-    x-restlet:
-      section: "BOARDS"
   /boards/hidden_companies:
     get:
       tags:
@@ -273,8 +267,6 @@ paths:
       responses:
         204:
           description: "successful operation"
-    x-restlet:
-      section: "BOARDS"
   /boards/hidden_entries:
     get:
       tags:
@@ -355,8 +347,6 @@ paths:
       responses:
         204:
           description: "successful operation"
-    x-restlet:
-      section: "BOARDS"
   /boards/notes:
     get:
       tags:
@@ -437,8 +427,6 @@ paths:
       responses:
         204:
           description: "successful operation"
-    x-restlet:
-      section: "BOARDS"
   /end_user_authentication/users:
     post:
       tags:
@@ -467,8 +455,6 @@ paths:
             \ object."
           schema:
             $ref: "#/definitions/error_object"
-    x-restlet:
-      section: "END_USER_AUTHENTICATIONS"
   /end_user_authentications:
     get:
       tags:
@@ -529,8 +515,6 @@ paths:
       responses:
         204:
           description: "Will not return content on a successful logout."
-    x-restlet:
-      section: "END_USER_AUTHENTICATIONS"
   /end_user_authentications/dates:
     get:
       tags:
@@ -549,8 +533,6 @@ paths:
                 description: "The current date and time based on our server."
           examples:
             application/json: "{\n  \"now\": \"now\"\n}"
-    x-restlet:
-      section: "END_USER_AUTHENTICATIONS"
   /end_user_authentications/passwords:
     get:
       tags:
@@ -606,8 +588,6 @@ paths:
             \ object."
           schema:
             $ref: "#/definitions/error_object"
-    x-restlet:
-      section: "END_USER_AUTHENTICATIONS"
   /locations/reverse_geocode:
     get:
       tags:
@@ -630,8 +610,6 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/reverse_geocode_response"
-    x-restlet:
-      section: "LOCATIONS"
   /locations/autocomplete:
     get:
       tags:
@@ -673,8 +651,6 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/autocomplete_response"
-    x-restlet:
-      section: "LOCATIONS"
   /postings/{posting_type}:
     get:
       tags:
@@ -755,14 +731,16 @@ paths:
           \ is specified, otherwise it must be specified."
         items:
           type: "string"
-        x-example: "?posting_id=1801195749&posting_id=1801195742"
+          x-example: "1801195749"
+        minItems: 1
+        maxItems: 100
       - name: "delete_all"
         in: "query"
         required: false
         type: "boolean"
         description: "If included and true, will delete all loads for the logged in\
           \ user."
-        x-example: "?delete_all=1"
+        x-example: "1"
       - name: "end-user-token"
         in: "header"
         required: true
@@ -818,8 +796,6 @@ paths:
       - "loads"
       - "trucks"
       x-example: "test_loads"
-    x-restlet:
-      section: "POSTINGS"
   /postings/{posting_type}/{action}:
     post:
       tags:
@@ -863,8 +839,6 @@ paths:
       enum:
       - "copy"
       - "move"
-    x-restlet:
-      section: "POSTINGS"
   /postings/custom_categories/{category_type}:
     get:
       tags:
@@ -942,8 +916,6 @@ paths:
       - "names"
       - "data"
       x-example: "names"
-    x-restlet:
-      section: "POSTINGS"
   /profiles:
     get:
       tags:
@@ -1013,8 +985,6 @@ paths:
       responses:
         204:
           description: "successful operation"
-    x-restlet:
-      section: "PROFILES"
   /profiles/documents:
     get:
       tags:
@@ -1079,8 +1049,6 @@ paths:
       responses:
         204:
           description: "success"
-    x-restlet:
-      section: "PROFILES"
   /profiles/mobile_carriers:
     get:
       tags:
@@ -1099,8 +1067,6 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/mobile_carrier_response"
-    x-restlet:
-      section: "PROFILES"
   /profiles/optins:
     get:
       tags:
@@ -1154,8 +1120,6 @@ paths:
       responses:
         204:
           description: "successful operation"
-    x-restlet:
-      section: "PROFILES"
   /validations/email_exists:
     get:
       tags:
@@ -1177,8 +1141,6 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/get_email_exists_response"
-    x-restlet:
-      section: "VALIDATIONS"
 securityDefinitions:
   api-token:
     type: "apiKey"
@@ -1196,8 +1158,6 @@ definitions:
       \ object, and 1 search object, and 2 integer counts. One for the number of new\
       \ loads, and one for the number of total loads that match the search critera."
     example: "{\n  \"data\": [\n    \"{}\",\n    \"{}\"\n  ]\n}"
-    x-restlet:
-      section: "ALERTS"
   alert:
     type: "object"
     required:
@@ -1280,8 +1240,6 @@ definitions:
             type: "integer"
           load_size:
             type: "string"
-    x-restlet:
-      section: "ALERTS"
   patch_alert_properties:
     type: "object"
     properties:
@@ -1320,8 +1278,6 @@ definitions:
       time_zone:
         type: "object"
         description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
-    x-restlet:
-      section: "ALERTS"
   board_request:
     type: "object"
     properties:
@@ -1472,8 +1428,6 @@ definitions:
       return_count:
         type: "boolean"
         description: "If included this will return a total count instead of a list. "
-    x-restlet:
-      section: "BOARDS"
   board_response:
     type: "object"
     required:
@@ -1495,8 +1449,6 @@ definitions:
         description: "A count of the # of pages based on the search parameters."
     example: "{\n  \"list\": \"{}\",\n  \"page_number\": \"{}\",\n  \"total_items\"\
       : \"{}\",\n  \"total_pages\": 0\n}"
-    x-restlet:
-      section: "BOARDS"
   create_notes:
     type: "object"
     required:
@@ -1512,8 +1464,6 @@ definitions:
       title:
         type: "string"
         description: "Subject of the note. "
-    x-restlet:
-      section: "BOARDS"
   get_boards_notes_response:
     type: "object"
     properties:
@@ -1524,8 +1474,6 @@ definitions:
         items:
           type: "string"
     example: "{\n  \"entry_id\": [\n    \"entry_id\",\n    \"entry_id\"\n  ]\n}"
-    x-restlet:
-      section: "BOARDS"
   get_state_list_response:
     type: "object"
     properties:
@@ -1545,8 +1493,6 @@ definitions:
         \ \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,    \
         \ \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,     \"\
         BC\": 124,     \"DC\": 7,     .... }"
-    x-restlet:
-      section: "BOARDS"
   toggle_hidden_entries:
     type: "object"
     required:
@@ -1557,8 +1503,6 @@ definitions:
         description: "The entry that need to be toggled. "
         items:
           type: "string"
-    x-restlet:
-      section: "BOARDS"
   update_notes:
     type: "object"
     required:
@@ -1570,8 +1514,6 @@ definitions:
       title:
         type: "string"
         description: "Subject of the note. "
-    x-restlet:
-      section: "BOARDS"
   board_response_item:
     type: "object"
     required:
@@ -1703,8 +1645,6 @@ definitions:
         type: "integer"
         description: "Length in feet.  Will be null if empty."
     example: "test"
-    x-restlet:
-      section: "BOARDS"
   hidden_entry_object:
     type: "object"
     required:
@@ -1713,8 +1653,6 @@ definitions:
       entry_id:
         type: "string"
         description: "The entry that need to be marked as hidden."
-    x-restlet:
-      section: "BOARDS"
   end-user-token:
     type: "object"
     properties:
@@ -1722,8 +1660,6 @@ definitions:
         type: "string"
         description: "On success and end-user-token is returned."
         example: "XX423ASOEUHT4AESUTH"
-    x-restlet:
-      section: "END_USER_AUTHENTICATIONS"
   login_credentials:
     type: "object"
     required:
@@ -1745,8 +1681,6 @@ definitions:
       secret:
         type: "string"
         description: "The password, or token required for this login. "
-    x-restlet:
-      section: "END_USER_AUTHENTICATIONS"
   user:
     type: "object"
     required:
@@ -1759,8 +1693,6 @@ definitions:
       password:
         type: "string"
         description: "Currently this is a 6-10 digit alphanumeric password. "
-    x-restlet:
-      section: "END_USER_AUTHENTICATIONS"
   autocomplete_response:
     type: "object"
     required:
@@ -1790,8 +1722,6 @@ definitions:
           \ postal."
     example: "{\n  \"city\": \"city\",\n  \"state_abbreviation\": \"{}\",\n  \"state_name\"\
       : \"{}\"\n}"
-    x-restlet:
-      section: "LOCATIONS"
   reverse_geocode_response:
     type: "object"
     required:
@@ -1805,8 +1735,6 @@ definitions:
         type: "string"
       region_name:
         type: "string"
-    x-restlet:
-      section: "LOCATIONS"
   create_multiple_postings:
     type: "object"
     required:
@@ -1829,8 +1757,6 @@ definitions:
           \ &quot;private_trucks&quot;, &quot;test_loads&quot;, and &quot;test_trucks&quot; "
         items:
           type: "string"
-    x-restlet:
-      section: "POSTINGS"
   posting_post_response:
     type: "object"
     properties:
@@ -1840,8 +1766,6 @@ definitions:
         items:
           $ref: "#/definitions/postings_post_response_item"
     example: "{\n  \"list\": [\n    .....\n  ]\n}"
-    x-restlet:
-      section: "POSTINGS"
   postings_post_request:
     type: "object"
     required:
@@ -1952,8 +1876,6 @@ definitions:
         type: "integer"
         description: "If not provided we will use the contact info associated with\
           \ the users profile."
-    x-restlet:
-      section: "POSTINGS"
   post_posting_multiple_response:
     type: "object"
     properties:
@@ -1962,8 +1884,6 @@ definitions:
         description: "This will return true, and have a unique location in the location\
           \ header."
     example: "{\n  \"success\": true\n}"
-    x-restlet:
-      section: "POSTINGS"
   postings_patch_request:
     type: "object"
     required:
@@ -2066,8 +1986,6 @@ definitions:
         type: "integer"
         description: "If not provided we will use the contact info associated with\
           \ the users profile."
-    x-restlet:
-      section: "POSTINGS"
   postings_post_response_item:
     type: "object"
     required:
@@ -2186,8 +2104,6 @@ definitions:
       contact_name:
         type: "string"
         description: "This is generated from the logged in users profile information."
-    x-restlet:
-      section: "POSTINGS"
   profile_object:
     type: "object"
     properties:
@@ -2255,8 +2171,6 @@ definitions:
       : 123456,\n  \"mobile_carrier\": \"Company_X\",\n  \"mobile_number\": \"555-555-1234\"\
       ,\n  \"state\": \"MO\",\n  \"web_page\": \"http://www.directfreight.com\",\n\
       \  \"zip\": 55555\n}"
-    x-restlet:
-      section: "PROFILES"
   rename_document:
     type: "object"
     required:
@@ -2269,8 +2183,6 @@ definitions:
       new_name:
         type: "string"
         description: "Replacement name. "
-    x-restlet:
-      section: "PROFILES"
   upload_document:
     type: "object"
     required:
@@ -2279,15 +2191,11 @@ definitions:
       The:
         type: "object"
         description: "file to be uploaded. "
-    x-restlet:
-      section: "PROFILES"
   create_status:
     type: "object"
     properties:
       success:
         type: "integer"
-    x-restlet:
-      section: "common_definitions"
   error_object:
     type: "object"
     required:
@@ -2303,8 +2211,6 @@ definitions:
         type: "string"
     example: "{\n  \"code\": 1,\n  \"error\": \"Generic Validation\",\n  \"description\"\
       : \"The e-mail address must be valid.\"\n}"
-    x-restlet:
-      section: "common_definitions"
   get_custom_categories_response:
     type: "object"
     properties:
@@ -2315,8 +2221,6 @@ definitions:
           type: "string"
     example: "{\n  \"categories\": [\n    \"categories\",\n    \"categories\"\n  ]\n\
       }"
-    x-restlet:
-      section: "not categorized yet"
   get_email_exists_response:
     type: "object"
     properties:
@@ -2324,8 +2228,6 @@ definitions:
         type: "boolean"
         description: "Returns a true value if it is associated with an account."
     example: "{\n  \"exists\": true\n}"
-    x-restlet:
-      section: "not categorized yet"
   get_hidden_companies_response:
     type: "object"
     properties:
@@ -2336,8 +2238,6 @@ definitions:
           type: "string"
     example: "{\n  \"company_name\": [\n    \"company_name\",\n    \"company_name\"\
       \n  ]\n}"
-    x-restlet:
-      section: "not categorized yet"
   get_hidden_entries:
     type: "object"
     properties:
@@ -2350,8 +2250,6 @@ definitions:
       entry_id:
       - "entry_id"
       - "entry_id"
-    x-restlet:
-      section: "not categorized yet"
   mark_hidden_companies:
     type: "object"
     required:
@@ -2360,8 +2258,6 @@ definitions:
       company_name:
         type: "string"
         description: "The comapny that need to be marked as hidden. "
-    x-restlet:
-      section: "not categorized yet"
   mobile_carrier_response:
     type: "object"
     properties:
@@ -2375,8 +2271,6 @@ definitions:
     example:
       carrier_id: 0
       carrier_name: "{}"
-    x-restlet:
-      section: "not categorized yet"
   post_optin_code_response:
     type: "object"
     properties:
@@ -2385,8 +2279,6 @@ definitions:
         description: "A text string with the code sent."
     example:
       optin_code: "optin_code"
-    x-restlet:
-      section: "not categorized yet"
   post_posting_type_action_body:
     type: "object"
     required:
@@ -2402,8 +2294,6 @@ definitions:
         description: "The posting_type where you are moving or copying the posting\
           \ from. Optional for create. Items can only be moved to like types. loads\
           \ -> private_private loads."
-    x-restlet:
-      section: "not categorized yet"
   success_status_response:
     type: "object"
     properties:
@@ -2412,8 +2302,6 @@ definitions:
         description: "A text status like OPTIN, NORESPONSE, OPTOUT."
     example:
       status: "status"
-    x-restlet:
-      section: "not categorized yet"
   toggle_hidden_companies:
     type: "object"
     required:
@@ -2422,16 +2310,3 @@ definitions:
       company_id:
         type: "string"
         description: "The company name that need to be toggled. "
-    x-restlet:
-      section: "not categorized yet"
-x-restlet:
-  sections:
-    ALERTS: {}
-    BOARDS: {}
-    END_USER_AUTHENTICATIONS: {}
-    LOCATIONS: {}
-    POSTINGS: {}
-    PROFILES: {}
-    VALIDATIONS: {}
-    common_definitions: {}
-    not categorized yet: {}

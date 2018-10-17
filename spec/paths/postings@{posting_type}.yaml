@@ -7,16 +7,18 @@ delete:
       in: query
       items:
         type: string
+        x-example: '1801195749'
+      maxItems: 100
+      minItems: 1
       name: posting_id
       required: false
       type: array
-      x-example: '?posting_id=1801195749&posting_id=1801195742'
     - description: 'If included and true, will delete all loads for the logged in user.'
       in: query
       name: delete_all
       required: false
       type: boolean
-      x-example: '?delete_all=1'
+      x-example: '1'
     - in: header
       name: end-user-token
       required: true
@@ -141,5 +143,3 @@ post:
   summary: Create an entry.
   tags:
     - postings
-x-restlet:
-  section: POSTINGS

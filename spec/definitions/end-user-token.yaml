@@ -4,5 +4,3 @@ properties:
     example: XX423ASOEUHT4AESUTH
     type: string
 type: object
-x-restlet:
-  section: END_USER_AUTHENTICATIONS

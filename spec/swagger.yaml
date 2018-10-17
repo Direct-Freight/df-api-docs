@@ -44,14 +44,3 @@ securityDefinitions:
     name: api-token
     type: apiKey
 swagger: '2.0'
-x-restlet:
-  sections:
-    ALERTS: {}
-    BOARDS: {}
-    END_USER_AUTHENTICATIONS: {}
-    LOCATIONS: {}
-    POSTINGS: {}
-    PROFILES: {}
-    VALIDATIONS: {}
-    common_definitions: {}
-    not categorized yet: {}

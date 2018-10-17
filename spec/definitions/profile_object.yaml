@@ -74,5 +74,3 @@ properties:
   zip:
     type: string
 type: object
-x-restlet:
-  section: PROFILES

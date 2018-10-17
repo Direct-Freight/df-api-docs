@@ -9,5 +9,3 @@ required:
   - email
   - password
 type: object
-x-restlet:
-  section: END_USER_AUTHENTICATIONS

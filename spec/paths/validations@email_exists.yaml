@@ -19,5 +19,3 @@ get:
   summary: STAGE=UNK Check if an e-mail exists.
   tags:
     - validations
-x-restlet:
-  section: VALIDATIONS

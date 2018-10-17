@@ -7,5 +7,3 @@ properties:
     description: 'This will return true, and have a unique location in the location header.'
     type: boolean
 type: object
-x-restlet:
-  section: POSTINGS

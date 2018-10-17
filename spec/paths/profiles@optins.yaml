@@ -50,5 +50,3 @@ post:
   summary: 'STAGE=UNK Create, and send an Optin Code.'
   tags:
     - profiles
-x-restlet:
-  section: PROFILES

@@ -72,5 +72,3 @@ post:
   summary: 'STAGE=UNK Create new category names, or add new data.'
   tags:
     - postings
-x-restlet:
-  section: POSTINGS

@@ -76,5 +76,3 @@ post:
   summary: STAGE=UNK Hide companies.
   tags:
     - boards
-x-restlet:
-  section: BOARDS

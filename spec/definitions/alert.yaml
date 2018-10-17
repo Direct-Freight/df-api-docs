@@ -1,4 +1,72 @@
-type: object
+properties:
+  days_of_week:
+    description: >-
+      Limit the days that alerts are sent to the days listed. Send an array of
+      strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and 'Sat'.
+    type: object
+  email_address:
+    description: The address for the alert.
+    type: string
+  end_hour:
+    description: Has the same values as start_hour
+    type: object
+  expires_after:
+    description: >-
+      The last day the alert will be valid. Valid time frames are from today
+      until one year into the future.
+    type: object
+  list_order:
+    description: Any value that is valid in the boards sort_order is also valid here.
+    type: object
+  list_type:
+    description: >-
+      This specify the type of list that is returned, including disabling the
+      list from being sent at all. Valid values are 'complete-list','only-new',
+      and 'not-active'.
+    type: object
+  minute_frequency:
+    description: >-
+      How many minutes to wait before sending another alert. Valid values are
+      '15','30','60','120','240','480', and '1440'.
+    type: object
+  search:
+    properties:
+      date_available:
+        format: date
+        type: string
+      date_received:
+        format: date
+        type: string
+      destination_city:
+        type: string
+      destination_radius:
+        type: integer
+      destination_state:
+        type: string
+      load_size:
+        type: string
+      origin_city:
+        type: string
+      origin_radius:
+        type: integer
+      origin_state:
+        type: string
+      search_id:
+        type: integer
+      search_type:
+        type: string
+      trailers:
+        type: string
+    type: object
+  send_type:
+    description: 'What method to send the alert list. Valid types are ''email'',or ''text''.'
+    type: object
+  start_hour:
+    description: A value between 3-21 corresponding to the hour of the day.
+    type: object
+  time_zone:
+    description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
+    type: object
 required:
   - days_of_week
   - email_address
@@ -11,74 +79,4 @@ required:
   - send_type
   - start_hour
   - time_zone
-properties:
-  days_of_week:
-    type: object
-    description: >-
-      Limit the days that alerts are sent to the days listed. Send an array of
-      strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and 'Sat'.
-  email_address:
-    type: string
-    description: The address for the alert.
-  end_hour:
-    type: object
-    description: Has the same values as start_hour
-  expires_after:
-    type: object
-    description: >-
-      The last day the alert will be valid. Valid time frames are from today
-      until one year into the future.
-  list_order:
-    type: object
-    description: Any value that is valid in the boards sort_order is also valid here.
-  list_type:
-    type: object
-    description: >-
-      This specify the type of list that is returned, including disabling the
-      list from being sent at all. Valid values are 'complete-list','only-new',
-      and 'not-active'.
-  minute_frequency:
-    type: object
-    description: >-
-      How many minutes to wait before sending another alert. Valid values are
-      '15','30','60','120','240','480', and '1440'.
-  send_type:
-    type: object
-    description: 'What method to send the alert list. Valid types are ''email'',or ''text''.'
-  start_hour:
-    type: object
-    description: A value between 3-21 corresponding to the hour of the day.
-  time_zone:
-    type: object
-    description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
-  search:
-    type: object
-    properties:
-      search_id:
-        type: integer
-      search_type:
-        type: string
-      date_received:
-        type: string
-        format: date
-      trailers:
-        type: string
-      date_available:
-        type: string
-        format: date
-      origin_state:
-        type: string
-      origin_city:
-        type: string
-      origin_radius:
-        type: integer
-      destination_state:
-        type: string
-      destination_city:
-        type: string
-      destination_radius:
-        type: integer
-      load_size:
-        type: string
-x-restlet:
-  section: ALERTS
+type: object

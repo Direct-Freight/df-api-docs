@@ -112,5 +112,3 @@ required:
   - ship_date
   - trailer_type
 type: object
-x-restlet:
-  section: POSTINGS

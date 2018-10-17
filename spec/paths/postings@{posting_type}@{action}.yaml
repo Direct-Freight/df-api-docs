@@ -39,5 +39,3 @@ post:
   summary: STAGE=UNK Copy or Move an posting.
   tags:
     - postings
-x-restlet:
-  section: POSTINGS
