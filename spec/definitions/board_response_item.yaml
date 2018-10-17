@@ -63,6 +63,12 @@ properties:
       Finance factoring program.
     example: true
     type: boolean
+  height:
+    description: Height in inches.  Will be null if empty.
+    type: integer
+  length:
+    description: Length in feet.  Will be null if empty.
+    type: integer
   origin_city:
     description: Origin city of item.
     example: Chicago
@@ -109,18 +115,31 @@ properties:
       more information on how to set and update this value.
     example: false
     type: boolean
+  weight:
+    description: Weight in pounds.  Will be null if empty.
+    type: integer
+  width:
+    description: Width in inches.  Will be null if empty.
+    type: integer
 required:
   - age
   - credit_score
+  - dead_head
   - destination_city
   - destination_state
   - entry_id
   - full_load
   - green_light
+  - height
+  - length
   - origin_city
   - origin_state
+  - receive_date
   - ship_date
   - trailer_type
+  - trip_miles
+  - weight
+  - width
 type: object
 x-restlet:
   section: BOARDS

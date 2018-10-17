@@ -172,7 +172,8 @@ paths:
     get:
       tags:
       - "boards"
-      summary: "A convenience method to get totals by state."
+      summary: "Totals by state"
+      description: "A convenience method to get totals by state."
       parameters: []
       responses:
         200:
@@ -194,7 +195,8 @@ paths:
     get:
       tags:
       - "boards"
-      summary: "STAGE=UNK Get a list of companies that should be hidden."
+      summary: "STAGE=UNK List hidden companies."
+      description: "Get a list of companies that should be hidden."
       parameters:
       - name: "company_name"
         in: "query"
@@ -215,7 +217,8 @@ paths:
     post:
       tags:
       - "boards"
-      summary: "STAGE=UNK Mark a set of companies as hidden."
+      summary: "STAGE=UNK Hide companies."
+      description: "Mark a set of companies as hidden."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -235,7 +238,8 @@ paths:
     delete:
       tags:
       - "boards"
-      summary: "STAGE=UNK Mark a company as not hidden."
+      summary: "STAGE=UNK Unhide companies"
+      description: "Mark a company as not hidden."
       parameters:
       - name: "company_id"
         in: "query"
@@ -252,7 +256,8 @@ paths:
     patch:
       tags:
       - "boards"
-      summary: "STAGE=UNK Toggle one or more company between hidden and unhidden."
+      summary: "STAGE=UNK Change hidden status"
+      description: "Toggle one or more company between hidden and unhidden."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -273,7 +278,8 @@ paths:
     get:
       tags:
       - "boards"
-      summary: "STAGE=UNK Get a list of entries that should be hidden."
+      summary: "List hidden entries."
+      description: "Get a list of entries that should be hidden."
       parameters:
       - name: "entry_id"
         in: "query"
@@ -294,7 +300,8 @@ paths:
     post:
       tags:
       - "boards"
-      summary: "STAGE=UNK Mark an entry as hidden."
+      summary: "Hide entries."
+      description: "Mark an entry as hidden."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -314,7 +321,8 @@ paths:
     delete:
       tags:
       - "boards"
-      summary: "STAGE=UNK Mark an entry as not hidden."
+      summary: "Unhide entries"
+      description: " Mark an entry as unhidden."
       parameters:
       - name: "entry_id"
         in: "query"
@@ -330,7 +338,8 @@ paths:
     patch:
       tags:
       - "boards"
-      summary: "STAGE=UNK Toggle one or more entry between hidden and unhidden."
+      summary: "STAGE=UNK Change hidden status"
+      description: "Toggle one or more entries between hidden and unhidden."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -351,7 +360,8 @@ paths:
     get:
       tags:
       - "boards"
-      summary: "STAGE=UNK Get notes that this user has written."
+      summary: "STAGE=UNK List user notes."
+      description: "Get notes that this user has written."
       parameters:
       - name: "entry_id"
         in: "query"
@@ -373,7 +383,8 @@ paths:
     post:
       tags:
       - "boards"
-      summary: "STAGE=UNK Create a new note."
+      summary: "STAGE=UNK Create a note."
+      description: "Create a new note."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -461,7 +472,8 @@ paths:
     get:
       tags:
       - "end_user_authentications"
-      summary: "Get current authentication level for the user."
+      summary: "Get authentication level."
+      description: "Get current authentication level for the user."
       parameters:
       - name: "end-user-token"
         in: "header"
@@ -483,7 +495,7 @@ paths:
     post:
       tags:
       - "end_user_authentications"
-      summary: "Logs a user in."
+      summary: "Login"
       description: "This function sends login credentials, and retrieves a stateless\
         \ token."
       consumes: []
@@ -506,7 +518,7 @@ paths:
     delete:
       tags:
       - "end_user_authentications"
-      summary: "Logs a user out."
+      summary: "Logout"
       description: "This logs a user out. the end-user-token will no longer be valid."
       parameters:
       - name: "end-user-token"
@@ -522,7 +534,8 @@ paths:
     get:
       tags:
       - "end_user_authentications"
-      summary: "Gets an authoritative date_time string."
+      summary: "Retrieve date"
+      description: "Gets an authoritative date_time string."
       parameters: []
       responses:
         200:
@@ -541,7 +554,8 @@ paths:
     get:
       tags:
       - "end_user_authentications"
-      summary: "STAGE=UNK Request a forgotten password."
+      summary: "STAGE=UNK Retrieve password"
+      description: "Request a forgotten password."
       parameters:
       - name: "email"
         in: "query"
@@ -560,7 +574,8 @@ paths:
     patch:
       tags:
       - "end_user_authentications"
-      summary: "STAGE=UNK Update a users password."
+      summary: "STAGE=UNK Update password."
+      description: "Update a users password."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -663,7 +678,8 @@ paths:
     get:
       tags:
       - "postings"
-      summary: "Get posts by this user."
+      summary: "Retrieve entries"
+      description: "Retrieves a list of the users posted loads or trucks."
       parameters:
       - name: "posting_id"
         in: "query"
@@ -690,9 +706,9 @@ paths:
     post:
       tags:
       - "postings"
-      summary: "Create one or more posting"
-      description: "This endpoint method will post an entry. Valid posting_type are:\
-        \ loads, trucks, test_loads, test_trucks, private_loads, and private_trucks."
+      summary: "Create an entry."
+      description: "This endpoint method will post one or more entries. Valid posting_type\
+        \ are: loads, trucks, test_loads, test_trucks, private_loads, and private_trucks."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -727,7 +743,8 @@ paths:
     delete:
       tags:
       - "postings"
-      summary: "Remove one or more postings."
+      summary: "Remove an entry."
+      description: "Will delete one or more entries."
       parameters:
       - name: "posting_id"
         in: "query"
@@ -737,6 +754,7 @@ paths:
           \ is specified, otherwise it must be specified."
         items:
           type: "string"
+        x-example: "?posting_id=1801195749&posting_id=1801195742"
       - name: "delete_all"
         in: "query"
         required: false
@@ -754,7 +772,8 @@ paths:
     patch:
       tags:
       - "postings"
-      summary: "Update one or more postings."
+      summary: "Update an entry."
+      description: "Update one or more entries."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -1557,15 +1576,22 @@ definitions:
     required:
     - "age"
     - "credit_score"
+    - "dead_head"
     - "destination_city"
     - "destination_state"
     - "entry_id"
     - "full_load"
     - "green_light"
+    - "height"
+    - "length"
     - "origin_city"
     - "origin_state"
+    - "receive_date"
     - "ship_date"
     - "trailer_type"
+    - "trip_miles"
+    - "weight"
+    - "width"
     properties:
       age:
         type: "integer"
@@ -1663,6 +1689,18 @@ definitions:
           \ the user wishes the entry hidden. Refer to boards/hidden_entries/ documentation\
           \ for more information on how to set and update this value."
         example: false
+      width:
+        type: "integer"
+        description: "Width in inches.  Will be null if empty."
+      height:
+        type: "integer"
+        description: "Height in inches.  Will be null if empty."
+      weight:
+        type: "integer"
+        description: "Weight in pounds.  Will be null if empty."
+      length:
+        type: "integer"
+        description: "Length in feet.  Will be null if empty."
     example: "test"
     x-restlet:
       section: "BOARDS"
@@ -1868,10 +1906,13 @@ definitions:
           \ values are used a GET will return all matches."
       destination_city:
         type: "string"
-        description: "For truck type entries this is optional."
+        description: "Delivery location city of load/truck.  For truck type entries\
+          \ this is optional."
       destination_state:
         type: "array"
-        description: "For truck type entries this is optional."
+        description: "Delivery location state of load/truck. For truck type entries\
+          \ this field is optional or can be a list of states if the destination city\
+          \ is omitted."
         items:
           type: "string"
       height:
@@ -1984,10 +2025,10 @@ definitions:
           \ values are used a GET will return all matches."
       destination_city:
         type: "string"
-        description: "For truck type entries this is optional."
+        description: "Delivery location city of load/truck."
       destination_state:
         type: "array"
-        description: "For truck type entries this is optional."
+        description: "Delivery location city of load/truck."
         items:
           type: "string"
       height:
@@ -2052,12 +2093,10 @@ definitions:
     properties:
       origin_city:
         type: "string"
-        description: "Required for all entry types."
+        description: "Origin city location of load or truck"
       origin_state:
         type: "string"
-        description: "Use the 2 digit state abbreviation."
-        minLength: 2
-        maxLength: 2
+        description: "Origin state location of load or truck."
       trailer_type:
         type: "array"
         description: "This can have 1 or more standard trailer types."
@@ -2100,10 +2139,10 @@ definitions:
         description: "A unique identifier a user can provide for their own records."
       destination_city:
         type: "string"
-        description: "For truck type entries this is optional."
+        description: "Delivery location city of load/truck."
       destination_state:
         type: "array"
-        description: "For truck type entries this is optional."
+        description: "Delivery location state of load/truck."
         items:
           type: "string"
       height:
@@ -2114,7 +2153,7 @@ definitions:
         description: "This number represents inches."
       length:
         type: "integer"
-        description: "This number represents inches."
+        description: "This number represents feet."
       weight:
         type: "integer"
         description: "This number represents pounds."
@@ -2130,6 +2169,7 @@ definitions:
       receive_date:
         type: "string"
         format: "date"
+        description: "The date the load/truck should deliver."
       comment:
         type: "string"
       posting_id:

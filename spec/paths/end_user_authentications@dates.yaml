@@ -1,4 +1,5 @@
 get:
+  description: Gets an authoritative date_time string.
   parameters: []
   responses:
     '200':
@@ -14,7 +15,7 @@ get:
             description: The current date and time based on our server.
             type: string
         type: object
-  summary: Gets an authoritative date_time string.
+  summary: Retrieve date
   tags:
     - end_user_authentications
 x-restlet:

@@ -8,10 +8,10 @@ properties:
     description: A unique identifier a user can provide for their own records.
     type: integer
   destination_city:
-    description: For truck type entries this is optional.
+    description: Delivery location city of load/truck.
     type: string
   destination_state:
-    description: For truck type entries this is optional.
+    description: Delivery location state of load/truck.
     items:
       type: string
     type: array
@@ -22,15 +22,13 @@ properties:
     description: This number represents inches.
     type: integer
   length:
-    description: This number represents inches.
+    description: This number represents feet.
     type: integer
   origin_city:
-    description: Required for all entry types.
+    description: Origin city location of load or truck
     type: string
   origin_state:
-    description: Use the 2 digit state abbreviation.
-    maxLength: 2
-    minLength: 2
+    description: Origin state location of load or truck.
     type: string
   other_trailer_types:
     description: To include custom trailer types.
@@ -50,6 +48,7 @@ properties:
     description: This is the unique ID of this post.
     type: integer
   receive_date:
+    description: The date the load/truck should deliver.
     format: date
     type: string
   ship_date:

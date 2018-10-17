@@ -1,4 +1,5 @@
 delete:
+  description: Mark a company as not hidden.
   parameters:
     - description: The company that need to be marked as not hidden.
       in: query
@@ -12,10 +13,11 @@ delete:
   responses:
     '204':
       description: successful operation
-  summary: STAGE=UNK Mark a company as not hidden.
+  summary: STAGE=UNK Unhide companies
   tags:
     - boards
 get:
+  description: Get a list of companies that should be hidden.
   parameters:
     - description: A list of id's to check if any should be visually hidden.
       in: query
@@ -33,11 +35,12 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/get_hidden_companies_response'
-  summary: STAGE=UNK Get a list of companies that should be hidden.
+  summary: STAGE=UNK List hidden companies.
   tags:
     - boards
 patch:
   consumes: []
+  description: Toggle one or more company between hidden and unhidden.
   parameters:
     - in: header
       name: end-user-token
@@ -51,11 +54,12 @@ patch:
   responses:
     '204':
       description: successful operation
-  summary: STAGE=UNK Toggle one or more company between hidden and unhidden.
+  summary: STAGE=UNK Change hidden status
   tags:
     - boards
 post:
   consumes: []
+  description: Mark a set of companies as hidden.
   parameters:
     - in: header
       name: end-user-token
@@ -69,7 +73,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: STAGE=UNK Mark a set of companies as hidden.
+  summary: STAGE=UNK Hide companies.
   tags:
     - boards
 x-restlet:

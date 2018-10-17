@@ -9,10 +9,14 @@ properties:
       values are used a GET will return all matches.
     type: integer
   destination_city:
-    description: For truck type entries this is optional.
+    description: >-
+      Delivery location city of load/truck.  For truck type entries this is
+      optional.
     type: string
   destination_state:
-    description: For truck type entries this is optional.
+    description: >-
+      Delivery location state of load/truck. For truck type entries this field
+      is optional or can be a list of states if the destination city is omitted.
     items:
       type: string
     type: array

@@ -8,10 +8,11 @@ delete:
   responses:
     '204':
       description: Will not return content on a successful logout.
-  summary: Logs a user out.
+  summary: Logout
   tags:
     - end_user_authentications
 get:
+  description: Get current authentication level for the user.
   parameters:
     - in: header
       name: end-user-token
@@ -30,7 +31,7 @@ get:
               "Subscribed", "Posting", "Overdue", or "Not Logged In".
             type: string
         type: object
-  summary: Get current authentication level for the user.
+  summary: Get authentication level.
   tags:
     - end_user_authentications
 post:
@@ -49,7 +50,7 @@ post:
         $ref: '#/definitions/end-user-token'
     '422':
       $ref: '#/responses/error_422'
-  summary: Logs a user in.
+  summary: Login
   tags:
     - end_user_authentications
 x-restlet:
