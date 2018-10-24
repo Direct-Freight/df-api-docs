@@ -36,3 +36,5 @@ properties:
     description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
     type: object
 type: object
+x-restlet:
+  section: ALERTS

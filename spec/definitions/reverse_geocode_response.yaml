@@ -10,3 +10,5 @@ required:
   - region_code
   - region_name
 type: object
+x-restlet:
+  section: LOCATIONS

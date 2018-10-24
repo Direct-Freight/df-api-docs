@@ -99,3 +99,5 @@ post:
   summary: STAGE=UNK Create an alert.
   tags:
     - alerts
+x-restlet:
+  section: ALERTS

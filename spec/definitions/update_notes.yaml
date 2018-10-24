@@ -8,3 +8,5 @@ required:
   - body
   - title
 type: object
+x-restlet:
+  section: BOARDS

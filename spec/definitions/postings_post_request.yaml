@@ -10,16 +10,14 @@ properties:
     type: integer
   destination_city:
     description: >-
-      Delivery location city of load/truck.  For truck type entries this is
-      optional.
+      Delivery location city of load/truck. For truck type entries this field is
+      optional or can be used to specify a region.
     type: string
   destination_state:
     description: >-
       Delivery location state of load/truck. For truck type entries this field
-      is optional or can be a list of states if the destination city is omitted.
-    items:
-      type: string
-    type: array
+      is optional.
+    type: string
   full_load:
     description: >-
       The load will be defaulted to full if this argument isn't included and
@@ -112,3 +110,5 @@ required:
   - ship_date
   - trailer_type
 type: object
+x-restlet:
+  section: POSTINGS

@@ -15,3 +15,5 @@ properties:
       $ref: '#/definitions/alert'
     type: array
 type: object
+x-restlet:
+  section: ALERTS

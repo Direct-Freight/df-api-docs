@@ -12,3 +12,5 @@ properties:
       type: string
     type: array
 type: object
+x-restlet:
+  section: not categorized yet

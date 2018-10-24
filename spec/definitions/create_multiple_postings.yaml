@@ -22,3 +22,5 @@ properties:
 required:
   - list
 type: object
+x-restlet:
+  section: POSTINGS

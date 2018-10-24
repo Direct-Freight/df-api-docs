@@ -19,3 +19,5 @@ get:
   summary: reverse_geocode
   tags:
     - locations
+x-restlet:
+  section: LOCATIONS

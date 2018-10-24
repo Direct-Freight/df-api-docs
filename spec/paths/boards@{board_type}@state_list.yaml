@@ -18,3 +18,5 @@ parameters:
     name: board_type
     required: true
     type: string
+x-restlet:
+  section: BOARDS

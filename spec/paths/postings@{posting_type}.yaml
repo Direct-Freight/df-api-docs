@@ -143,3 +143,5 @@ post:
   summary: Create an entry.
   tags:
     - postings
+x-restlet:
+  section: POSTINGS

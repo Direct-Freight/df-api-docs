@@ -102,3 +102,5 @@ properties:
 required:
   - posting_id
 type: object
+x-restlet:
+  section: POSTINGS

@@ -5,3 +5,5 @@ properties:
 required:
   - company_name
 type: object
+x-restlet:
+  section: not categorized yet

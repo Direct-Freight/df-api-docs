@@ -7,3 +7,5 @@ properties:
 required:
   - entry_id
 type: object
+x-restlet:
+  section: BOARDS

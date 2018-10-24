@@ -59,3 +59,5 @@ post:
   summary: STAGE=UNK Upload a new document.
   tags:
     - profiles
+x-restlet:
+  section: PROFILES

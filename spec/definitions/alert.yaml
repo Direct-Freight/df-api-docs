@@ -80,3 +80,5 @@ required:
   - start_hour
   - time_zone
 type: object
+x-restlet:
+  section: ALERTS

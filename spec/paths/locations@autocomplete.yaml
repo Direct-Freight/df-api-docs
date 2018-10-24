@@ -42,3 +42,5 @@ get:
   summary: autocomplete
   tags:
     - locations
+x-restlet:
+  section: LOCATIONS

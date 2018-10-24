@@ -12,3 +12,5 @@ required:
   - entry_id
   - title
 type: object
+x-restlet:
+  section: BOARDS
