@@ -13,9 +13,7 @@ properties:
     type: string
   destination_state:
     description: Delivery location city of load/truck.
-    items:
-      type: string
-    type: array
+    type: string
   full_load:
     type: boolean
   height:

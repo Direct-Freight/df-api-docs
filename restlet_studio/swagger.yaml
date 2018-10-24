@@ -2027,10 +2027,8 @@ definitions:
         type: "string"
         description: "Delivery location city of load/truck."
       destination_state:
-        type: "array"
+        type: "string"
         description: "Delivery location city of load/truck."
-        items:
-          type: "string"
       height:
         type: "integer"
         description: "This number represents inches."
