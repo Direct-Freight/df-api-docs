@@ -7,7 +7,6 @@ delete:
       in: query
       items:
         type: string
-        x-example: '1801195749'
       maxItems: 100
       minItems: 1
       name: posting_id
