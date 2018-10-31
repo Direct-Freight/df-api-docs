@@ -3,11 +3,10 @@ properties:
     type: string
   custom_id:
     description: >-
-      An identifier that can be provided for your own records.  (i.e.-Company
-      load number) This field can be used to retrieve loads via GET.  This value
-      should be unique however we do not enforce uniqueness.  If non unique
-      values are used a GET will return all matches.
-    type: integer
+      This or the posting_id must be specified for every entry you wish to
+      change. You cannot update a custom_id once it is set. Please delete and
+      reenter the load to change the custom_id.
+    type: string
   destination_city:
     description: Delivery location city of load/truck.
     type: string
@@ -45,8 +44,9 @@ properties:
       profile.
     type: integer
   posting_id:
-    description: A unique id for each entry.  This value is returned via GET
-    format: int32
+    description: >-
+      A unique id for each entry.  This value is returned via GET. It or the 
+      custom_id must be sent in with every request.
     type: integer
   receive_date:
     description: The date the load/truck should deliver.
@@ -97,8 +97,6 @@ properties:
   width:
     description: This number represents inches.
     type: integer
-required:
-  - posting_id
 type: object
 x-restlet:
   section: POSTINGS

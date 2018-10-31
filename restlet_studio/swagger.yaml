@@ -750,13 +750,15 @@ paths:
       - name: "posting_id"
         in: "query"
         required: false
-        type: "array"
+        type: "integer"
         description: "You must specify which entry to remove. Will be ignored if delete_all\
-          \ is specified, otherwise it must be specified."
-        items:
-          type: "string"
-        minItems: 1
-        maxItems: 100
+          \ is specified, otherwise it or custom_id must be specified."
+      - name: "custom_id"
+        in: "query"
+        required: false
+        type: "string"
+        description: "You must specify which entry to remove. Will be ignored if delete_all\
+          \ is specified, otherwise it or posting_id must be specified."
       - name: "delete_all"
         in: "query"
         required: false
@@ -1869,17 +1871,14 @@ definitions:
       section: "POSTINGS"
   postings_patch_request:
     type: "object"
-    required:
-    - "posting_id"
     properties:
       comment:
         type: "string"
       custom_id:
-        type: "integer"
-        description: "An identifier that can be provided for your own records.  (i.e.-Company\
-          \ load number) This field can be used to retrieve loads via GET.  This value\
-          \ should be unique however we do not enforce uniqueness.  If non unique\
-          \ values are used a GET will return all matches."
+        type: "string"
+        description: "This or the posting_id must be specified for every entry you\
+          \ wish to change. You cannot update a custom_id once it is set. Please delete\
+          \ and reenter the load to change the custom_id."
       destination_city:
         type: "string"
         description: "Delivery location city of load/truck."
@@ -1916,8 +1915,8 @@ definitions:
           \ the users profile."
       posting_id:
         type: "integer"
-        format: "int32"
-        description: "A unique id for each entry.  This value is returned via GET"
+        description: "A unique id for each entry.  This value is returned via GET.\
+          \ It or the  custom_id must be sent in with every request."
       receive_date:
         type: "string"
         format: "date"
@@ -1972,6 +1971,7 @@ definitions:
   postings_post_request:
     type: "object"
     required:
+    - "custom_id"
     - "origin_city"
     - "origin_state"
     - "ship_date"
@@ -1980,11 +1980,10 @@ definitions:
       comment:
         type: "string"
       custom_id:
-        type: "integer"
+        type: "string"
         description: "An identifier that can be provided for your own records.  (i.e.-Company\
           \ load number) This field can be used to retrieve loads via GET.  This value\
-          \ should be unique however we do not enforce uniqueness.  If non unique\
-          \ values are used a GET will return all matches."
+          \ must be unique."
       destination_city:
         type: "string"
         description: "Delivery location city of load/truck. For truck type entries\

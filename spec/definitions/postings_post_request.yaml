@@ -5,9 +5,8 @@ properties:
     description: >-
       An identifier that can be provided for your own records.  (i.e.-Company
       load number) This field can be used to retrieve loads via GET.  This value
-      should be unique however we do not enforce uniqueness.  If non unique
-      values are used a GET will return all matches.
-    type: integer
+      must be unique.
+    type: string
   destination_city:
     description: >-
       Delivery location city of load/truck. For truck type entries this field is
@@ -105,6 +104,7 @@ properties:
     description: This number represents inches.
     type: integer
 required:
+  - custom_id
   - origin_city
   - origin_state
   - ship_date

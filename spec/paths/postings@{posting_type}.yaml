@@ -3,15 +3,18 @@ delete:
   parameters:
     - description: >-
         You must specify which entry to remove. Will be ignored if delete_all is
-        specified, otherwise it must be specified.
+        specified, otherwise it or custom_id must be specified.
       in: query
-      items:
-        type: string
-      maxItems: 100
-      minItems: 1
       name: posting_id
       required: false
-      type: array
+      type: integer
+    - description: >-
+        You must specify which entry to remove. Will be ignored if delete_all is
+        specified, otherwise it or posting_id must be specified.
+      in: query
+      name: custom_id
+      required: false
+      type: string
     - description: 'If included and true, will delete all loads for the logged in user.'
       in: query
       name: delete_all
