@@ -3,7 +3,7 @@ example: |-
     "address": "P.O. Box 131",
     "city": "Chillicothe",
     "company": "Direct Freight",
-    "contact_extension": "x333",
+    "contact_extension": "333",
     "contact_name": "Joe Doe",
     "contact_number": "555-555-5555",
     "dot_number": 123456,

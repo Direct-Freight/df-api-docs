@@ -279,7 +279,7 @@ paths:
     get:
       tags:
       - "boards"
-      summary: "List hidden entries."
+      summary: "STAGE=UNK List hidden entries."
       description: "Get a list of entries that should be hidden."
       parameters:
       - name: "entry_id"
@@ -1679,7 +1679,7 @@ definitions:
   get_state_list_response:
     type: "object"
     properties:
-      state_totals:
+      list:
         type: "object"
         description: "A hash of state totals."
         example: "{     \"MS\": 1449,     \"NS\": 24,     \"VT\": 145,     \"MD\"\
@@ -1688,13 +1688,13 @@ definitions:
           \     \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,\
           \     \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,\
           \     \"BC\": 124,     \"DC\": 7,     .... }"
-    example:
-      state_totals: "{     \"MS\": 1449,     \"NS\": 24,     \"VT\": 145,     \"MD\"\
-        : 520,     \"ID\": 2091,     \"SK\": 126,     \"WA\": 2207,     \"SC\": 1619,\
-        \     \"VA\": 1781,     \"PQ\": 10,     \"ON\": 270,     \"KS\": 969,    \
-        \ \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,    \
-        \ \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,     \"\
-        BC\": 124,     \"DC\": 7,     .... }"
+    example: "{\n  \"list\": \"{     \\\"MS\\\": 1449,     \\\"NS\\\": 24,     \\\"\
+      VT\\\": 145,     \\\"MD\\\": 520,     \\\"ID\\\": 2091,     \\\"SK\\\": 126,\
+      \     \\\"WA\\\": 2207,     \\\"SC\\\": 1619,     \\\"VA\\\": 1781,     \\\"\
+      PQ\\\": 10,     \\\"ON\\\": 270,     \\\"KS\\\": 969,     \\\"NE\\\": 1386,\
+      \     \\\"OR\\\": 2984,     \\\"WI\\\": 2714,     \\\"GA\\\": 3184,     \\\"\
+      IN\\\": 3363,     \\\"KY\\\": 1731,     \\\"NV\\\": 534,     \\\"NC\\\": 1824,\
+      \     \\\"BC\\\": 124,     \\\"DC\\\": 7,     .... }\"\n}"
     x-restlet:
       section: "BOARDS"
   hidden_entry_object:
@@ -2258,7 +2258,7 @@ definitions:
       zip:
         type: "string"
     example: "{\n  \"address\": \"P.O. Box 131\",\n  \"city\": \"Chillicothe\",\n\
-      \  \"company\": \"Direct Freight\",\n  \"contact_extension\": \"x333\",\n  \"\
+      \  \"company\": \"Direct Freight\",\n  \"contact_extension\": \"333\",\n  \"\
       contact_name\": \"Joe Doe\",\n  \"contact_number\": \"555-555-5555\",\n  \"\
       dot_number\": 123456,\n  \"fax_number\": \"555-555-5555\",\n  \"mc_number\"\
       : 123456,\n  \"mobile_carrier\": \"Company_X\",\n  \"mobile_number\": \"555-555-1234\"\

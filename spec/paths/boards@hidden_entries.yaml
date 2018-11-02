@@ -34,7 +34,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/get_hidden_entries'
-  summary: List hidden entries.
+  summary: STAGE=UNK List hidden entries.
   tags:
     - boards
 patch:
