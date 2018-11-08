@@ -1,0 +1,114 @@
+properties:
+  comment:
+    type: string
+  custom_id:
+    description: >-
+      An identifier that can be provided for your own records.  (i.e.-Company
+      load number) This field can be used to retrieve loads via GET.  This value
+      must be unique.
+    type: string
+  destination_city:
+    description: >-
+      Delivery location city of load/truck. For truck type entries this field is
+      optional or can be used to specify a region.
+    type: string
+  destination_state:
+    description: >-
+      Delivery location state of load/truck. For truck type entries this field
+      is optional.
+    type: string
+  full_load:
+    description: >-
+      The load will be defaulted to full if this argument isn't included and
+      marked to false.
+    type: boolean
+  height:
+    description: This number represents inches.
+    type: integer
+  length:
+    description: This number represents feet.
+    type: integer
+  origin_city:
+    description: Origin city location of load or truck.  Required for all entry types.
+    type: string
+  origin_state:
+    description: >-
+      Origin state location of load or truck.  Use the 2 digit state
+      abbreviation.
+    maxLength: 2
+    minLength: 2
+    type: string
+  other_trailer_types:
+    description: Can be used to specify custom trailer types.
+    type: string
+  pay_rate:
+    description: 'This field will accept either the per mile rate, or gross rate.'
+    type: integer
+  phone_extension:
+    description: >-
+      If not provided we will use the contact info associated with the users
+      profile.
+    type: integer
+  phone_number:
+    description: >-
+      If not provided we will use the contact info associated with the users
+      profile.
+    type: integer
+  receive_date:
+    description: The date the load/truck should deliver.
+    format: date
+    type: string
+  ship_date:
+    description: >-
+      When posting loads this is the date the load should be picked up.  When
+      posting trucks this is the date the truck is available to be loaded.
+    format: date
+    type: string
+  trailer_type:
+    description: This can have 1 or more standard trailer types.
+    items:
+      enum:
+        - V
+        - VINT
+        - SD
+        - MX
+        - HS
+        - AC
+        - LB
+        - F+T
+        - F
+        - FINT
+        - DD
+        - V+V
+        - V+A
+        - CRG
+        - HB
+        - LA
+        - PO
+        - R
+        - RINT
+        - RGN
+        - CV
+        - DT
+        - TNK
+        - F+S
+        - PNEU
+        - CONT
+        - OTHER
+      type: string
+    type: array
+  weight:
+    description: This number represents pounds.
+    type: integer
+  width:
+    description: This number represents inches.
+    type: integer
+required:
+  - custom_id
+  - origin_city
+  - origin_state
+  - ship_date
+  - trailer_type
+type: object
+x-restlet:
+  section: POSTINGS
