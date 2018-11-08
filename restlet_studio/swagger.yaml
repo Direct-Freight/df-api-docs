@@ -795,7 +795,9 @@ paths:
           - "list"
           properties:
             list:
-              $ref: "#/definitions/postings_patch_request"
+              type: "array"
+              items:
+                $ref: "#/definitions/postings_patch_object"
       responses:
         202:
           description: "Status 202"
@@ -1871,7 +1873,7 @@ definitions:
     example: "{\n  \"list\": [\n    .....\n  ]\n}"
     x-restlet:
       section: "POSTINGS"
-  postings_patch_request:
+  postings_patch_object:
     type: "object"
     properties:
       comment:
