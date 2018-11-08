@@ -679,7 +679,7 @@ paths:
     get:
       tags:
       - "postings"
-      summary: "Retrieve entries"
+      summary: "Retrieve an entry"
       description: "Retrieves a list of the users posted loads or trucks."
       parameters:
       - name: "posting_id"
@@ -704,7 +704,7 @@ paths:
     post:
       tags:
       - "postings"
-      summary: "Create an entry."
+      summary: "Create multiple entries"
       description: "This endpoint method will post one or more entries. Valid posting_type\
         \ are: loads, trucks, test_loads, test_trucks, private_loads, and private_trucks."
       consumes: []
@@ -775,7 +775,7 @@ paths:
     patch:
       tags:
       - "postings"
-      summary: "Update an entry."
+      summary: "Update multiple entries"
       description: "Update one or more entries."
       consumes: []
       parameters:

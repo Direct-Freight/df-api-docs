@@ -53,7 +53,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/posting_post_response'
-  summary: Retrieve entries
+  summary: Retrieve an entry
   tags:
     - postings
 parameters:
@@ -104,7 +104,7 @@ patch:
         required:
           - list
         type: object
-  summary: Update an entry.
+  summary: Update multiple entries
   tags:
     - postings
 post:
@@ -143,7 +143,7 @@ post:
         required:
           - list
         type: object
-  summary: Create an entry.
+  summary: Create multiple entries
   tags:
     - postings
 x-restlet:
