@@ -685,16 +685,13 @@ paths:
       - name: "posting_id"
         in: "query"
         required: false
-        type: "array"
-        description: "To just return information about some postings."
-        items:
-          type: "integer"
+        type: "integer"
+        description: "To retrieve a single entry"
       - name: "custom_id"
         in: "query"
         required: false
-        type: "array"
-        items:
-          type: "string"
+        type: "string"
+        description: "To retrieve a single entry"
       - name: "end-user-token"
         in: "header"
         required: true

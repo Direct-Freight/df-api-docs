@@ -34,19 +34,16 @@ delete:
 get:
   description: Retrieves a list of the users posted loads or trucks.
   parameters:
-    - description: To just return information about some postings.
+    - description: To retrieve a single entry
       in: query
-      items:
-        type: integer
       name: posting_id
       required: false
-      type: array
-    - in: query
-      items:
-        type: string
+      type: integer
+    - description: To retrieve a single entry
+      in: query
       name: custom_id
       required: false
-      type: array
+      type: string
     - in: header
       name: end-user-token
       required: true
