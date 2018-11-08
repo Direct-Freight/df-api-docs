@@ -725,7 +725,9 @@ paths:
           - "list"
           properties:
             list:
-              $ref: "#/definitions/postings_post_request"
+              type: "array"
+              items:
+                $ref: "#/definitions/postings_entry_object"
       responses:
         202:
           description: "Loads accepted. Check the response for an ordered list of\
@@ -1968,7 +1970,7 @@ definitions:
         description: "This number represents inches."
     x-restlet:
       section: "POSTINGS"
-  postings_post_request:
+  postings_entry_object:
     type: "object"
     required:
     - "custom_id"
