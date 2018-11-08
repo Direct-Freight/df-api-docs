@@ -694,7 +694,7 @@ paths:
         required: false
         type: "array"
         items:
-          type: "integer"
+          type: "string"
       - name: "end-user-token"
         in: "header"
         required: true
@@ -1876,13 +1876,19 @@ definitions:
   postings_patch_object:
     type: "object"
     properties:
-      comment:
-        type: "string"
+      posting_id:
+        type: "integer"
+        description: "A unique id for each entry.  This value is returned via GET.\
+          \ \nEither posting_id or custom_id is required."
       custom_id:
         type: "string"
-        description: "This or the posting_id must be specified for every entry you\
-          \ wish to change. You cannot update a custom_id once it is set. Please delete\
-          \ and reenter the load to change the custom_id."
+        description: "An identifier that can be provided for your own records. (i.e.-Company\
+          \ load number) This field can be used to retrieve loads via GET. This value\
+          \ must be unique.\nYou cannot update a custom_id once it is set. Please\
+          \ delete and reenter the load to change the custom_id.  Either posting_id\
+          \ or custom_id is required."
+      comment:
+        type: "string"
       destination_city:
         type: "string"
         description: "Delivery location city of load/truck."
@@ -1917,10 +1923,6 @@ definitions:
         type: "integer"
         description: "If not provided we will use the contact info associated with\
           \ the users profile."
-      posting_id:
-        type: "integer"
-        description: "A unique id for each entry.  This value is returned via GET.\
-          \ It or the  custom_id must be sent in with every request."
       receive_date:
         type: "string"
         format: "date"
@@ -1981,13 +1983,13 @@ definitions:
     - "ship_date"
     - "trailer_type"
     properties:
-      comment:
-        type: "string"
       custom_id:
         type: "string"
         description: "An identifier that can be provided for your own records.  (i.e.-Company\
           \ load number) This field can be used to retrieve loads via GET.  This value\
           \ must be unique."
+      comment:
+        type: "string"
       destination_city:
         type: "string"
         description: "Delivery location city of load/truck. For truck type entries\

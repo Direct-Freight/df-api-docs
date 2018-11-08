@@ -43,7 +43,7 @@ get:
       type: array
     - in: query
       items:
-        type: integer
+        type: string
       name: custom_id
       required: false
       type: array

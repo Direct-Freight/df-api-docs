@@ -3,9 +3,13 @@ properties:
     type: string
   custom_id:
     description: >-
-      This or the posting_id must be specified for every entry you wish to
-      change. You cannot update a custom_id once it is set. Please delete and
-      reenter the load to change the custom_id.
+      An identifier that can be provided for your own records. (i.e.-Company
+      load number) This field can be used to retrieve loads via GET. This value
+      must be unique.
+
+      You cannot update a custom_id once it is set. Please delete and reenter
+      the load to change the custom_id.  Either posting_id or custom_id is
+      required.
     type: string
   destination_city:
     description: Delivery location city of load/truck.
@@ -44,9 +48,9 @@ properties:
       profile.
     type: integer
   posting_id:
-    description: >-
-      A unique id for each entry.  This value is returned via GET. It or the 
-      custom_id must be sent in with every request.
+    description: |-
+      A unique id for each entry.  This value is returned via GET. 
+      Either posting_id or custom_id is required.
     type: integer
   receive_date:
     description: The date the load/truck should deliver.
