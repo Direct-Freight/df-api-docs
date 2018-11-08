@@ -12,7 +12,7 @@ delete:
   responses:
     '204':
       description: No Content
-  summary: Unhide entries
+  summary: STAGE=private Unhide a single posting
   tags:
     - boards
 get:
@@ -72,7 +72,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: Hide entries.
+  summary: STAGE=private Hide a single posting
   tags:
     - boards
 x-restlet:

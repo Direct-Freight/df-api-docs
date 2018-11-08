@@ -301,7 +301,7 @@ paths:
     post:
       tags:
       - "boards"
-      summary: "Hide entries."
+      summary: "STAGE=private Hide a single posting"
       description: "Mark an entry as hidden."
       consumes: []
       parameters:
@@ -322,7 +322,7 @@ paths:
     delete:
       tags:
       - "boards"
-      summary: "Unhide entries"
+      summary: "STAGE=private Unhide a single posting"
       description: " Mark an entry as unhidden."
       parameters:
       - name: "entry_id"
@@ -679,7 +679,7 @@ paths:
     get:
       tags:
       - "postings"
-      summary: "Retrieve a posting"
+      summary: "Retrieve a single posting"
       description: "Retrieves a list of the users posted loads or trucks."
       parameters:
       - name: "posting_id"
@@ -743,7 +743,7 @@ paths:
     delete:
       tags:
       - "postings"
-      summary: "Remove a posting"
+      summary: "Remove a single posting"
       description: "Will delete one or more entries."
       parameters:
       - name: "posting_id"
