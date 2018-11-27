@@ -730,16 +730,7 @@ paths:
           description: "Loads accepted. Check the response for an ordered list of\
             \ response."
           schema:
-            required:
-            - "list"
-            type: "object"
-            properties:
-              list:
-                type: "array"
-                items:
-                  type: "string"
-          examples:
-            application/json: "Success"
+            $ref: "#/definitions/postings-post_or_patch_response"
     delete:
       tags:
       - "postings"
@@ -787,14 +778,7 @@ paths:
         in: "body"
         required: true
         schema:
-          type: "object"
-          required:
-          - "list"
-          properties:
-            list:
-              type: "array"
-              items:
-                $ref: "#/definitions/postings_patch_object"
+          $ref: "#/definitions/postings-post_or_patch_response"
       responses:
         202:
           description: "Status 202"
@@ -986,18 +970,13 @@ paths:
           $ref: "#/definitions/profile_object"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
-          schema:
-            type: "object"
-            properties:
-              success:
-                type: "boolean"
+          description: "Object created"
           headers:
             Location:
               type: "string"
               description: "This will have a fully qualified API url you can call\
-                \ to get details of yoru load."
-              x-example: "https://directfreight.com/api/postings/loads/?posting_id=1764957218"
+                \ to get details of your profile."
+              x-example: "https://api.directfreight.com/v1/profiles/"
     patch:
       tags:
       - "profiles"
@@ -2198,6 +2177,31 @@ definitions:
       width:
         type: "integer"
         description: "This number represents inches."
+    x-restlet:
+      section: "POSTINGS"
+  postings-post_or_patch_response:
+    type: "object"
+    required:
+    - "list"
+    properties:
+      list:
+        type: "array"
+        items:
+          required:
+          - "status"
+          type: "object"
+          properties:
+            status:
+              type: "string"
+              enum:
+              - "Success"
+              - "Error"
+            code:
+              type: "integer"
+            description:
+              type: "string"
+              description: "An explanation of what each code means."
+    example: "Success"
     x-restlet:
       section: "POSTINGS"
   profile_object:

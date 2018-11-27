@@ -84,14 +84,7 @@ patch:
       name: body
       required: true
       schema:
-        properties:
-          list:
-            items:
-              $ref: '#/definitions/postings_patch_object'
-            type: array
-        required:
-          - list
-        type: object
+        $ref: '#/definitions/postings-post_or_patch_response'
   responses:
     '202':
       description: Status 202
@@ -132,17 +125,8 @@ post:
   responses:
     '202':
       description: Loads accepted. Check the response for an ordered list of response.
-      examples:
-        application/json: Success
       schema:
-        properties:
-          list:
-            items:
-              type: string
-            type: array
-        required:
-          - list
-        type: object
+        $ref: '#/definitions/postings-post_or_patch_response'
   summary: Create multiple postings
   tags:
     - postings

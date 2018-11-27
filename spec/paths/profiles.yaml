@@ -51,19 +51,14 @@ post:
         $ref: '#/definitions/profile_object'
   responses:
     '201':
-      description: Object created check the headers for a reference URL.
+      description: Object created
       headers:
         Location:
           description: >-
             This will have a fully qualified API url you can call to get details
-            of yoru load.
+            of your profile.
           type: string
-          x-example: 'https://directfreight.com/api/postings/loads/?posting_id=1764957218'
-      schema:
-        properties:
-          success:
-            type: boolean
-        type: object
+          x-example: 'https://api.directfreight.com/v1/profiles/'
   summary: STAGE=UNK Create a new profile.
   tags:
     - profiles
