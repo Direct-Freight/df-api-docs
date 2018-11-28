@@ -679,19 +679,27 @@ paths:
     get:
       tags:
       - "postings"
-      summary: "Retrieve a single posting"
-      description: "Retrieves a list of the users posted loads or trucks."
+      summary: "Retrieve multiple postings"
+      description: "Retrieves a list of the users posted loads or trucks. By default\
+        \ it retrieves all of their entries. If you specifiy multiple ids, only 100\
+        \ entries can be retrieved per request."
       parameters:
       - name: "posting_id"
         in: "query"
         required: false
-        type: "integer"
-        description: "To retrieve a single entry"
+        type: "array"
+        description: "To retrieve only a subset of entries."
+        items:
+          type: "integer"
+        maxItems: 100
       - name: "custom_id"
         in: "query"
         required: false
-        type: "string"
-        description: "To retrieve a single entry"
+        type: "array"
+        description: "To retrieve only a subset of entries."
+        items:
+          type: "string"
+        maxItems: 100
       - name: "end-user-token"
         in: "header"
         required: true
@@ -706,7 +714,8 @@ paths:
       - "postings"
       summary: "Create multiple postings"
       description: "This endpoint method will post one or more entries. Valid posting_type\
-        \ are: loads, trucks, test_loads, test_trucks, private_loads, and private_trucks."
+        \ are: loads, trucks, test_loads, test_trucks, private_loads, and private_trucks.\n\
+        \nOnly 100 entries can be created per request."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -725,6 +734,7 @@ paths:
               type: "array"
               items:
                 $ref: "#/definitions/postings_entry_object"
+              maxItems: 100
       responses:
         202:
           description: "Loads accepted. Check the response for an ordered list of\
@@ -734,21 +744,30 @@ paths:
     delete:
       tags:
       - "postings"
-      summary: "Remove a single posting"
-      description: "Will delete one or more entries."
+      summary: "Remove multiple postings"
+      description: "Will delete one or more entries. Unless the delete_all parameter\
+        \ is set, only 100 entries can be removed per request."
       parameters:
       - name: "posting_id"
         in: "query"
         required: false
-        type: "integer"
-        description: "You must specify which entry to remove. Will be ignored if delete_all\
-          \ is specified, otherwise it or custom_id must be specified."
+        type: "array"
+        description: "This parameter will be ignored if delete_all is specified, otherwise\
+          \ posting_id or custom_id must be specified. The 100 maximum is split between\
+          \ posting_id & custom_id."
+        items:
+          type: "integer"
+        maxItems: 100
       - name: "custom_id"
         in: "query"
         required: false
-        type: "string"
+        type: "array"
         description: "You must specify which entry to remove. Will be ignored if delete_all\
-          \ is specified, otherwise it or posting_id must be specified."
+          \ is specified, otherwise it or posting_id must be specified. The 100 maximum\
+          \ is split between posting_id & custom_id."
+        items:
+          type: "string"
+        maxItems: 100
       - name: "delete_all"
         in: "query"
         required: false
@@ -767,7 +786,8 @@ paths:
       tags:
       - "postings"
       summary: "Update multiple postings"
-      description: "Update one or more entries."
+      description: "Update one or more entries. Only 100 entries can be updated per\
+        \ request."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -778,7 +798,7 @@ paths:
         in: "body"
         required: true
         schema:
-          $ref: "#/definitions/postings-post_or_patch_response"
+          $ref: "#/definitions/postings_patch_object"
       responses:
         202:
           description: "Status 202"
@@ -788,9 +808,7 @@ paths:
             type: "object"
             properties:
               list:
-                type: "array"
-                items:
-                  type: "string"
+                $ref: "#/definitions/postings-post_or_patch_response"
     parameters:
     - name: "posting_type"
       in: "path"
