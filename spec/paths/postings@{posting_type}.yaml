@@ -8,29 +8,25 @@ delete:
         posting_id or custom_id must be specified. The 100 maximum is split
         between posting_id & custom_id.
       in: query
-      items:
-        type: integer
-      maxItems: 100
       name: posting_id
       required: false
-      type: array
+      type: integer
+      x-example: '?posting_id=22&posting_id=23&posting_id=24'
     - description: >-
         You must specify which entry to remove. Will be ignored if delete_all is
         specified, otherwise it or posting_id must be specified. The 100 maximum
         is split between posting_id & custom_id.
       in: query
-      items:
-        type: string
-      maxItems: 100
       name: custom_id
       required: false
-      type: array
+      type: string
+      x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
     - description: 'If included and true, will delete all loads for the logged in user.'
       in: query
       name: delete_all
       required: false
       type: boolean
-      x-example: '1'
+      x-example: '?delete_all=1'
     - in: header
       name: end-user-token
       required: true
@@ -49,20 +45,16 @@ get:
   parameters:
     - description: To retrieve only a subset of entries.
       in: query
-      items:
-        type: integer
-      maxItems: 100
       name: posting_id
       required: false
-      type: array
+      type: integer
+      x-example: '?posting_id=32&posting_id=33&posting_id=34'
     - description: To retrieve only a subset of entries.
       in: query
-      items:
-        type: string
-      maxItems: 100
       name: custom_id
       required: false
-      type: array
+      type: string
+      x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
     - in: header
       name: end-user-token
       required: true

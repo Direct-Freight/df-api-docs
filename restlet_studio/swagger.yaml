@@ -687,19 +687,15 @@ paths:
       - name: "posting_id"
         in: "query"
         required: false
-        type: "array"
+        type: "integer"
         description: "To retrieve only a subset of entries."
-        items:
-          type: "integer"
-        maxItems: 100
+        x-example: "?posting_id=32&posting_id=33&posting_id=34"
       - name: "custom_id"
         in: "query"
         required: false
-        type: "array"
+        type: "string"
         description: "To retrieve only a subset of entries."
-        items:
-          type: "string"
-        maxItems: 100
+        x-example: "?custom_id=cats&custom_id=dogs&custom_id=parrots"
       - name: "end-user-token"
         in: "header"
         required: true
@@ -751,30 +747,26 @@ paths:
       - name: "posting_id"
         in: "query"
         required: false
-        type: "array"
+        type: "integer"
         description: "This parameter will be ignored if delete_all is specified, otherwise\
           \ posting_id or custom_id must be specified. The 100 maximum is split between\
           \ posting_id & custom_id."
-        items:
-          type: "integer"
-        maxItems: 100
+        x-example: "?posting_id=22&posting_id=23&posting_id=24"
       - name: "custom_id"
         in: "query"
         required: false
-        type: "array"
+        type: "string"
         description: "You must specify which entry to remove. Will be ignored if delete_all\
           \ is specified, otherwise it or posting_id must be specified. The 100 maximum\
           \ is split between posting_id & custom_id."
-        items:
-          type: "string"
-        maxItems: 100
+        x-example: "?custom_id=cats&custom_id=dogs&custom_id=parrots"
       - name: "delete_all"
         in: "query"
         required: false
         type: "boolean"
         description: "If included and true, will delete all loads for the logged in\
           \ user."
-        x-example: "1"
+        x-example: "?delete_all=1"
       - name: "end-user-token"
         in: "header"
         required: true
