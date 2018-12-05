@@ -35,8 +35,8 @@ properties:
   dead_head:
     description: >-
       Distance between request body origin_city, and response item origin_city.
-      This field will be null if no origin_city is specified in the request
-      body.
+      This field will be null if no origin_city is specified in the request body
+      or if distance cannot be calculated.
     example: 87
     type: integer
   destination_city:
@@ -104,7 +104,9 @@ properties:
     example: V
     type: string
   trip_miles:
-    description: Distance between origin and destination.
+    description: >-
+      Distance between origin and destination.  This field will be null if
+      distance cannot be calculated.
     example: 523
     type: integer
   user_hid:

@@ -1347,14 +1347,7 @@ definitions:
           type: "string"
           minLength: 2
           maxLength: 2
-        example:
-        - "IL"
-        - "HI"
-        - "NY"
-        - "KS"
-        - "TX"
-        - "MO"
-        - "AL"
+        example: ["IL","HI","NY","KS","TX","MO","AL"]
       full_load:
         type: "boolean"
         description: "This is only valid when requesting a loads board. Omitting this\
@@ -1391,11 +1384,7 @@ definitions:
           type: "string"
           minLength: 2
           maxLength: 2
-        example:
-        - "MO"
-        - "IL"
-        - "TX"
-        - "CA"
+        example: ["MO","IL","TX","CA"]
       page_number:
         type: "integer"
         description: "The page you want to return. Will return an empty board on an\
@@ -1420,7 +1409,8 @@ definitions:
       sort_parameter:
         type: "string"
         description: "The system automatically chooses the most common order based\
-          \ on the parameter chosen. Because of this there is no reverse order option."
+          \ on the parameter chosen.  Sort order can be specified by adding -asc or\
+          \ -desc to the end."
         default: "age"
         enum:
         - "origin_city"
@@ -1474,11 +1464,7 @@ definitions:
           - "PNEU"
           - "CONT"
           - "OTHER"
-        example:
-        - "F"
-        - "F+T"
-        - "F+S"
-        - "V"
+        example: ["F","F+T","F+S","V"]
     x-restlet:
       section: "BOARDS"
   board_response_item:
@@ -1532,7 +1518,7 @@ definitions:
         type: "integer"
         description: "Distance between request body origin_city, and response item\
           \ origin_city. This field will be null if no origin_city is specified in\
-          \ the request body."
+          \ the request body or if distance cannot be calculated."
         example: 87
       destination_city:
         type: "string"
@@ -1596,7 +1582,8 @@ definitions:
         example: "V"
       trip_miles:
         type: "integer"
-        description: "Distance between origin and destination."
+        description: "Distance between origin and destination.  This field will be\
+          \ null if distance cannot be calculated."
         example: 523
       user_hid:
         type: "boolean"

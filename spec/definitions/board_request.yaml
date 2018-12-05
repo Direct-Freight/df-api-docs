@@ -111,7 +111,8 @@ properties:
     default: age
     description: >-
       The system automatically chooses the most common order based on the
-      parameter chosen. Because of this there is no reverse order option.
+      parameter chosen.  Sort order can be specified by adding -asc or -desc to
+      the end.
     enum:
       - origin_city
       - origin_state
