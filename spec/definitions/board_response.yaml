@@ -13,10 +13,10 @@ properties:
     type: array
   page_number:
     description: The page you are on.
-    type: object
+    type: integer
   total_items:
     description: A count of all the entry objects for the specified search.
-    type: object
+    type: integer
   total_pages:
     description: 'A count of the # of pages based on the search parameters.'
     type: integer

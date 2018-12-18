@@ -1074,26 +1074,6 @@ paths:
           description: "success"
     x-restlet:
       section: "PROFILES"
-  /profiles/mobile_carriers:
-    get:
-      tags:
-      - "profiles"
-      summary: "STAGE=UNK Retrieve one or more mobile carriers. "
-      description: "Retrieve a list of supported carriers."
-      parameters:
-      - name: "carrier_id"
-        in: "query"
-        required: false
-        type: "integer"
-        format: "int32"
-        description: "A way to just get back the info for just one carrier."
-      responses:
-        200:
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/mobile_carrier_response"
-    x-restlet:
-      section: "PROFILES"
   /profiles/optins:
     get:
       tags:
@@ -1612,10 +1592,10 @@ definitions:
         items:
           $ref: "#/definitions/board_response_item"
       page_number:
-        type: "object"
+        type: "integer"
         description: "The page you are on."
       total_items:
-        type: "object"
+        type: "integer"
         description: "A count of all the entry objects for the specified search."
       total_pages:
         type: "integer"
