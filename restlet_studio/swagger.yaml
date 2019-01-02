@@ -766,7 +766,7 @@ paths:
         type: "boolean"
         description: "If included and true, will delete all loads for the logged in\
           \ user."
-        x-example: "?delete_all=1"
+        x-example: "?delete_all=true"
       - name: "end-user-token"
         in: "header"
         required: true
