@@ -1156,7 +1156,6 @@ paths:
     get:
       tags:
       - "validations"
-      - "trailers"
       summary: "STAGE=UNK Find an official type to match to the customer submitted\
         \ one."
       parameters:
@@ -1188,7 +1187,6 @@ paths:
     post:
       tags:
       - "validations"
-      - "trailers"
       summary: "STAGE=UNK Add a custom trailer type match."
       description: "This is only useable via a special api-token"
       consumes: []
@@ -1223,6 +1221,8 @@ paths:
         201:
           description: "Status 201"
     delete:
+      tags:
+      - "validations"
       summary: "STAGE=UNK Remove a lookup."
       description: "This will remove a customer_type from the list. This is only useable\
         \ via a special api-token"
@@ -1244,7 +1244,6 @@ paths:
     patch:
       tags:
       - "validations"
-      - "trailers"
       summary: "STAGE=UNK Update which DF trailer_types match the customer_type"
       description: "Will update the match of the trailer_type to the customer type.\
         \ This is only useable via a special api-token"

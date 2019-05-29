@@ -19,6 +19,8 @@ delete:
     '204':
       description: Status 204
   summary: STAGE=UNK Remove a lookup.
+  tags:
+    - validations
 get:
   parameters:
     - description: The custom type that the poster is trying to submit.
@@ -50,7 +52,6 @@ get:
   summary: STAGE=UNK Find an official type to match to the customer submitted one.
   tags:
     - validations
-    - trailers
 patch:
   consumes: []
   description: >-
@@ -86,7 +87,6 @@ patch:
   summary: STAGE=UNK Update which DF trailer_types match the customer_type
   tags:
     - validations
-    - trailers
 post:
   consumes: []
   description: This is only useable via a special api-token
@@ -127,6 +127,5 @@ post:
   summary: STAGE=UNK Add a custom trailer type match.
   tags:
     - validations
-    - trailers
 x-restlet:
   section: VALIDATIONS
