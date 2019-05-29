@@ -1,0 +1,132 @@
+delete:
+  description: >-
+    This will remove a customer_type from the list. This is only useable via a
+    special api-token
+  parameters:
+    - description: This will remove this type from the list.
+      in: query
+      name: customer_type
+      required: true
+      type: string
+    - description: >-
+        If you wish to remove a customer_type associated with a username you
+        would add this parameter.
+      in: query
+      name: username
+      required: false
+      type: string
+  responses:
+    '204':
+      description: Status 204
+  summary: STAGE=UNK Remove a lookup.
+get:
+  parameters:
+    - description: The custom type that the poster is trying to submit.
+      in: query
+      name: customer_type
+      required: true
+      type: string
+      x-example: DX
+    - description: >-
+        We assume only posters will be using this endpoint. We will use their
+        end-user-token to match for a customer specific match first, and fall
+        back to a general one if it doesn't exist.
+      in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Status 200
+      schema:
+        properties:
+          trailer_type:
+            description: This will have one of DF's standard trailer types.
+            example: TNK
+            type: string
+        required:
+          - trailer_type
+        type: object
+  summary: STAGE=UNK Find an official type to match to the customer submitted one.
+  tags:
+    - validations
+    - trailers
+patch:
+  consumes: []
+  description: >-
+    Will update the match of the trailer_type to the customer type. This is only
+    useable via a special api-token
+  parameters:
+    - in: body
+      name: body
+      required: true
+      schema:
+        properties:
+          customer_type:
+            description: This is the key. It is not modified.
+            type: string
+          notes:
+            description: You can clear or replace the notes.
+            type: string
+          trailer_type:
+            $ref: '#/definitions/trailer_type'
+          username:
+            description: >-
+              This is an optional key, and is also not modifiable. If
+              customer_type is associated with a username you must also include
+              the username.
+            type: string
+        required:
+          - customer_type
+          - trailer_type
+        type: object
+  responses:
+    '202':
+      description: Status 202
+  summary: STAGE=UNK Update which DF trailer_types match the customer_type
+  tags:
+    - validations
+    - trailers
+post:
+  consumes: []
+  description: This is only useable via a special api-token
+  parameters:
+    - in: body
+      name: body
+      required: true
+      schema:
+        properties:
+          customer_type:
+            description: This is the new type we are adding to our lookup table.
+            type: string
+          notes:
+            description: Provides context. For internal use.
+            type: string
+          trailer_type:
+            $ref: '#/definitions/trailer_type'
+          username:
+            description: >-
+              This is to specify to create this definition for only this
+              specific user. You might do this if this customer_type already
+              exists and uses a different list of trailer types than this
+              customer requires.
+
+
+              This style uses the old system. It is open in that anyone with the
+              special api-token can update any user. Optionally, if we chose to
+              lock it down to end-user-token we loose that ability, could drop
+              this field and let them just send in an EUA token.
+            type: string
+        required:
+          - customer_type
+          - trailer_type
+        type: object
+  responses:
+    '201':
+      description: Status 201
+  summary: STAGE=UNK Add a custom trailer type match.
+  tags:
+    - validations
+    - trailers
+x-restlet:
+  section: VALIDATIONS
