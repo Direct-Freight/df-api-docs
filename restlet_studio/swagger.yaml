@@ -1181,9 +1181,7 @@ paths:
             type: "object"
             properties:
               trailer_type:
-                type: "string"
-                description: "This will have one of DF's standard trailer types."
-                example: "TNK"
+                $ref: "#/definitions/trailer_type"
     post:
       tags:
       - "validations"
