@@ -1152,6 +1152,131 @@ paths:
             $ref: "#/definitions/get_email_exists_response"
     x-restlet:
       section: "VALIDATIONS"
+  /validations/trailers:
+    get:
+      tags:
+      - "validations"
+      - "trailers"
+      summary: "STAGE=UNK Find an official type to match to the customer submitted\
+        \ one."
+      parameters:
+      - name: "customer_type"
+        in: "query"
+        required: true
+        type: "string"
+        description: "The custom type that the poster is trying to submit."
+        x-example: "DX"
+      - name: "end-user-token"
+        in: "header"
+        required: true
+        type: "string"
+        description: "We assume only posters will be using this endpoint. We will\
+          \ use their end-user-token to match for a customer specific match first,\
+          \ and fall back to a general one if it doesn't exist."
+      responses:
+        200:
+          description: "Status 200"
+          schema:
+            required:
+            - "trailer_type"
+            type: "object"
+            properties:
+              trailer_type:
+                type: "string"
+                description: "This will have one of DF's standard trailer types."
+                example: "TNK"
+    post:
+      tags:
+      - "validations"
+      - "trailers"
+      summary: "STAGE=UNK Add a custom trailer type match."
+      description: "This is only useable via a special api-token"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "customer_type"
+          - "trailer_type"
+          properties:
+            customer_type:
+              type: "string"
+              description: "This is the new type we are adding to our lookup table."
+            trailer_type:
+              $ref: "#/definitions/trailer_type"
+            username:
+              type: "string"
+              description: "This is to specify to create this definition for only\
+                \ this specific user. You might do this if this customer_type already\
+                \ exists and uses a different list of trailer types than this customer\
+                \ requires.\n\nThis style uses the old system. It is open in that\
+                \ anyone with the special api-token can update any user. Optionally,\
+                \ if we chose to lock it down to end-user-token we loose that ability,\
+                \ could drop this field and let them just send in an EUA token."
+            notes:
+              type: "string"
+              description: "Provides context. For internal use."
+      responses:
+        201:
+          description: "Status 201"
+    delete:
+      summary: "STAGE=UNK Remove a lookup."
+      description: "This will remove a customer_type from the list. This is only useable\
+        \ via a special api-token"
+      parameters:
+      - name: "customer_type"
+        in: "query"
+        required: true
+        type: "string"
+        description: "This will remove this type from the list."
+      - name: "username"
+        in: "query"
+        required: false
+        type: "string"
+        description: "If you wish to remove a customer_type associated with a username\
+          \ you would add this parameter."
+      responses:
+        204:
+          description: "Status 204"
+    patch:
+      tags:
+      - "validations"
+      - "trailers"
+      summary: "STAGE=UNK Update which DF trailer_types match the customer_type"
+      description: "Will update the match of the trailer_type to the customer type.\
+        \ This is only useable via a special api-token"
+      consumes: []
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          type: "object"
+          required:
+          - "customer_type"
+          - "trailer_type"
+          properties:
+            customer_type:
+              type: "string"
+              description: "This is the key. It is not modified."
+            trailer_type:
+              $ref: "#/definitions/trailer_type"
+            username:
+              type: "string"
+              description: "This is an optional key, and is also not modifiable. If\
+                \ customer_type is associated with a username you must also include\
+                \ the username."
+            notes:
+              type: "string"
+              description: "You can clear or replace the notes."
+      responses:
+        202:
+          description: "Status 202"
+    x-restlet:
+      section: "VALIDATIONS"
 securityDefinitions:
   api-token:
     type: "apiKey"
@@ -2295,6 +2420,41 @@ definitions:
         type: "string"
     example: "{\n  \"code\": 1,\n  \"error\": \"Generic Validation\",\n  \"description\"\
       : \"The e-mail address must be valid.\"\n}"
+    x-restlet:
+      section: "common_definitions"
+  trailer_type:
+    type: "array"
+    description: "These are the officially supported trailer types."
+    items:
+      type: "string"
+      enum:
+      - "V"
+      - "VINT"
+      - "SD"
+      - "MX"
+      - "HS"
+      - "AC"
+      - "LB"
+      - "F+T"
+      - "F"
+      - "FINT"
+      - "DD"
+      - "V+V"
+      - "V+A"
+      - "CRG"
+      - "HB"
+      - "LA"
+      - "PO"
+      - "R"
+      - "RINT"
+      - "RGN"
+      - "CV"
+      - "DT"
+      - "TNK"
+      - "F+S"
+      - "PNEU"
+      - "CONT"
+      - "OTHER"
     x-restlet:
       section: "common_definitions"
   get_custom_categories_response:
