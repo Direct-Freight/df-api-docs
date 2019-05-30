@@ -26,9 +26,12 @@ get:
       schema:
         properties:
           status:
-            description: >-
-              Will return the logged in user's status. Valid status's are
-              "Subscribed", "Posting", "Overdue", or "Not Logged In".
+            description: Will return the logged in user's status.
+            enum:
+              - subscribed
+              - posting
+              - overdue
+              - not_logged_in
             type: string
         type: object
   summary: Get authentication level.
