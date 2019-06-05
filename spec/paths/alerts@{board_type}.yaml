@@ -58,11 +58,6 @@ patch:
     Search objects are set at creation. You cannot modify them after the alert
     has been created.
   parameters:
-    - description: Specify which alert you are updating.
-      in: query
-      name: alert_id
-      required: true
-      type: string
     - in: header
       name: end-user-token
       required: true

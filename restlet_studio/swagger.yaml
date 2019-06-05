@@ -98,11 +98,6 @@ paths:
         \ the alert has been created."
       consumes: []
       parameters:
-      - name: "alert_id"
-        in: "query"
-        required: true
-        type: "string"
-        description: "Specify which alert you are updating."
       - name: "end-user-token"
         in: "header"
         required: true
@@ -1312,42 +1307,66 @@ definitions:
     - "time_zone"
     properties:
       days_of_week:
-        type: "object"
-        description: "Limit the days that alerts are sent to the days listed. Send\
-          \ an array of strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and\
-          \ 'Sat'."
+        type: "array"
+        description: "Limit the days that alerts are sent to the days listed."
+        items:
+          type: "string"
+          enum:
+          - "Sun"
+          - "Mon"
+          - "Tue"
+          - "Wed"
+          - "Thu"
+          - "Fri"
+          - "Sat"
       email_address:
         type: "string"
         description: "The address for the alert."
       end_hour:
-        type: "object"
-        description: "Has the same values as start_hour"
+        type: "integer"
+        description: "A  corresponding to the hour of the day."
+        minimum: 3
+        maximum: 21
       expires_after:
-        type: "object"
+        type: "string"
+        format: "date"
         description: "The last day the alert will be valid. Valid time frames are\
           \ from today until one year into the future."
+        example: "2019-12-30"
       list_order:
-        type: "object"
+        type: "string"
         description: "Any value that is valid in the boards sort_order is also valid\
           \ here."
       list_type:
-        type: "object"
+        type: "string"
         description: "This specify the type of list that is returned, including disabling\
           \ the list from being sent at all. Valid values are 'complete-list','only-new',\
           \ and 'not-active'."
+        enum:
+        - "complete-list"
+        - "only-new"
+        - "not-active"
       minute_frequency:
-        type: "object"
+        type: "integer"
         description: "How many minutes to wait before sending another alert. Valid\
           \ values are '15','30','60','120','240','480', and '1440'."
+        enum:
+        - 15
+        - 30
+        - 60
+        - 120
+        - 240
+        - 480
+        - 1440
       search:
         type: "object"
+        description: "Refer to the boards documentation for the full list of restrictions."
         properties:
-          date_available:
-            type: "string"
-            format: "date"
-          date_received:
-            type: "string"
-            format: "date"
+          ship_date:
+            type: "array"
+            items:
+              type: "string"
+              format: "date"
           destination_city:
             type: "string"
           destination_radius:
@@ -1362,62 +1381,97 @@ definitions:
             type: "integer"
           origin_state:
             type: "string"
-          search_id:
-            type: "integer"
-          search_type:
-            type: "string"
           trailers:
             type: "string"
       send_type:
-        type: "object"
-        description: "What method to send the alert list. Valid types are 'email',or\
-          \ 'text'."
+        type: "string"
+        description: "What method to send the alert list."
+        enum:
+        - "email"
+        - "text"
       start_hour:
-        type: "object"
-        description: "A value between 3-21 corresponding to the hour of the day."
+        type: "integer"
+        description: "A  corresponding to the hour of the day."
+        minimum: 3
+        maximum: 21
       time_zone:
-        type: "object"
+        type: "integer"
         description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
+        minimum: -1
+        maximum: 2
     x-restlet:
       section: "ALERTS"
   patch_alert_properties:
     type: "object"
+    required:
+    - "alert_id"
     properties:
+      alert_id:
+        type: "integer"
+        description: "Specify which alert you are updating."
       days_of_week:
-        type: "object"
-        description: "Limit the days that alerts are sent to the days listed. Send\
-          \ an array of strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and\
-          \ 'Sat'."
+        type: "array"
+        description: "Limit the days that alerts are sent to the days listed."
+        items:
+          type: "string"
+          enum:
+          - "Sun"
+          - "Mon"
+          - "Tue"
+          - "Wed"
+          - "Thu"
+          - "Fri"
+          - "Sat"
+      start_hour:
+        type: "integer"
+        description: "A value corresponding to the hour of the day."
+        minimum: 3
+        maximum: 21
       end_hour:
-        type: "object"
-        description: "Has the same values as start_hour"
+        type: "integer"
+        description: "A value corresponding to the hour of the day."
+        minimum: 3
+        maximum: 21
       expires_after:
-        type: "object"
+        type: "string"
+        format: "date"
         description: "The last day the alert will be valid. Valid time frames are\
           \ from today until one year into the future."
       list_order:
-        type: "object"
+        type: "string"
         description: "Any value that is valid in the boards sort_order is also valid\
           \ here."
       list_type:
-        type: "object"
+        type: "string"
         description: "This specify the type of list that is returned, including disabling\
-          \ the list from being sent at all. Valid values are 'complete-list','only-new',\
-          \ and 'not-active'."
+          \ the list from being sent at all."
+        enum:
+        - "complete-list"
+        - "only-new"
+        - "not-active"
       minute_frequency:
-        type: "object"
-        description: "How many minutes to wait before sending another alert. Valid\
-          \ values are '15','30','60','120','240','480', and '1440'."
+        type: "integer"
+        description: "How many minutes to wait before sending another alert."
+        enum:
+        - 15
+        - 30
+        - 60
+        - 120
+        - 240
+        - 480
+        - 1440
       send_type:
-        type: "object"
-        description: "What method to send the alert list. Valid types are 'email',or\
-          \ 'text'."
-      start_hour:
-        type: "object"
-        description: "A value between 3-21 corresponding to the hour of the day."
+        type: "string"
+        description: "What method to send the alert list."
+        enum:
+        - "email"
+        - "text"
       time_zone:
-        type: "object"
+        type: "integer"
         description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
+        default: 1
+        minimum: -1
+        maximum: 2
     x-restlet:
       section: "ALERTS"
   board_request:

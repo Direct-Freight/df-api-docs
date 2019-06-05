@@ -1,42 +1,61 @@
 properties:
   days_of_week:
-    description: >-
-      Limit the days that alerts are sent to the days listed. Send an array of
-      strings. Valid strings are 'Sun','Mon','Tue','Wed','Thu','Fri',and 'Sat'.
-    type: object
+    description: Limit the days that alerts are sent to the days listed.
+    items:
+      enum:
+        - Sun
+        - Mon
+        - Tue
+        - Wed
+        - Thu
+        - Fri
+        - Sat
+      type: string
+    type: array
   email_address:
     description: The address for the alert.
     type: string
   end_hour:
-    description: Has the same values as start_hour
-    type: object
+    description: A  corresponding to the hour of the day.
+    maximum: 21
+    minimum: 3
+    type: integer
   expires_after:
     description: >-
       The last day the alert will be valid. Valid time frames are from today
       until one year into the future.
-    type: object
+    example: '2019-12-30'
+    format: date
+    type: string
   list_order:
     description: Any value that is valid in the boards sort_order is also valid here.
-    type: object
+    type: string
   list_type:
     description: >-
       This specify the type of list that is returned, including disabling the
       list from being sent at all. Valid values are 'complete-list','only-new',
       and 'not-active'.
-    type: object
+    enum:
+      - complete-list
+      - only-new
+      - not-active
+    type: string
   minute_frequency:
     description: >-
       How many minutes to wait before sending another alert. Valid values are
       '15','30','60','120','240','480', and '1440'.
-    type: object
+    enum:
+      - 15
+      - 30
+      - 60
+      - 120
+      - 240
+      - 480
+      - 1440
+    type: integer
   search:
+    description: Refer to the boards documentation for the full list of restrictions.
     properties:
-      date_available:
-        format: date
-        type: string
-      date_received:
-        format: date
-        type: string
       destination_city:
         type: string
       destination_radius:
@@ -51,22 +70,30 @@ properties:
         type: integer
       origin_state:
         type: string
-      search_id:
-        type: integer
-      search_type:
-        type: string
+      ship_date:
+        items:
+          format: date
+          type: string
+        type: array
       trailers:
         type: string
     type: object
   send_type:
-    description: 'What method to send the alert list. Valid types are ''email'',or ''text''.'
-    type: object
+    description: What method to send the alert list.
+    enum:
+      - email
+      - text
+    type: string
   start_hour:
-    description: A value between 3-21 corresponding to the hour of the day.
-    type: object
+    description: A  corresponding to the hour of the day.
+    maximum: 21
+    minimum: 3
+    type: integer
   time_zone:
     description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
-    type: object
+    maximum: 2
+    minimum: -1
+    type: integer
 required:
   - days_of_week
   - email_address
