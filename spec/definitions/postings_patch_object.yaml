@@ -18,6 +18,7 @@ properties:
     description: Delivery location city of load/truck.
     type: string
   full_load:
+    description: This should only be used with loads.
     type: boolean
   height:
     description: This number represents inches.
