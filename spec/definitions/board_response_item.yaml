@@ -68,7 +68,7 @@ properties:
     type: integer
   length:
     description: Length in feet.  Will be null if empty.
-    type: integer
+    type: number
   origin_city:
     description: Origin city of item.
     example: Chicago
@@ -78,6 +78,9 @@ properties:
     description: Origin state of item
     example: IL
     type: string
+  pay_rate:
+    description: Will be null if empty.
+    type: number
   phone_extension:
     description: >-
       This field is only returned for an end_user_token that has the subscribed
@@ -136,6 +139,7 @@ required:
   - length
   - origin_city
   - origin_state
+  - pay_rate
   - receive_date
   - ship_date
   - trailer_type

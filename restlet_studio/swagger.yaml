@@ -1641,6 +1641,7 @@ definitions:
     - "length"
     - "origin_city"
     - "origin_state"
+    - "pay_rate"
     - "receive_date"
     - "ship_date"
     - "trailer_type"
@@ -1705,7 +1706,7 @@ definitions:
         type: "integer"
         description: "Height in inches.  Will be null if empty."
       length:
-        type: "integer"
+        type: "number"
         description: "Length in feet.  Will be null if empty."
       origin_city:
         type: "string"
@@ -1716,6 +1717,9 @@ definitions:
         type: "string"
         description: "Origin state of item"
         example: "IL"
+      pay_rate:
+        type: "number"
+        description: "Will be null if empty."
       phone_extension:
         type: "integer"
         description: "This field is only returned for an end_user_token that has the\
@@ -2034,7 +2038,7 @@ definitions:
         type: "integer"
         description: "This number represents inches."
       length:
-        type: "integer"
+        type: "number"
         description: "This number represents feet."
       origin_city:
         type: "string"
@@ -2046,7 +2050,7 @@ definitions:
         type: "string"
         description: "Can be used to specify custom trailer types."
       pay_rate:
-        type: "integer"
+        type: "number"
         description: "This field will accept either the per mile rate, or gross rate."
       phone_extension:
         type: "integer"
@@ -2139,7 +2143,7 @@ definitions:
         type: "integer"
         description: "This number represents inches."
       length:
-        type: "integer"
+        type: "number"
         description: "This number represents feet."
       origin_city:
         type: "string"
@@ -2155,7 +2159,7 @@ definitions:
         type: "string"
         description: "Can be used to specify custom trailer types."
       pay_rate:
-        type: "integer"
+        type: "number"
         description: "This field will accept either the per mile rate, or gross rate."
       phone_extension:
         type: "integer"
@@ -2263,7 +2267,7 @@ definitions:
         type: "integer"
         description: "This number represents inches."
       length:
-        type: "integer"
+        type: "number"
         description: "This number represents feet."
       origin_city:
         type: "string"
@@ -2275,7 +2279,7 @@ definitions:
         type: "string"
         description: "To include custom trailer types."
       pay_rate:
-        type: "integer"
+        type: "number"
         description: "We expect one of 2 formats. either the per mile, or total sum."
       phone_extension:
         type: "integer"

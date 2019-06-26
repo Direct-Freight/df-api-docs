@@ -23,7 +23,7 @@ properties:
     type: integer
   length:
     description: This number represents feet.
-    type: integer
+    type: number
   origin_city:
     description: Origin city location of load or truck
     type: string
@@ -35,7 +35,7 @@ properties:
     type: string
   pay_rate:
     description: 'We expect one of 2 formats. either the per mile, or total sum.'
-    type: integer
+    type: number
   phone_extension:
     description: If not supplied and not in the user's profile this will be null.
     type: integer
