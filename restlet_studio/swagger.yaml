@@ -1360,29 +1360,32 @@ definitions:
         - 1440
       search:
         type: "object"
-        description: "Refer to the boards documentation for the full list of restrictions."
+        description: "Refer to the boards documentation for the full list of restrictions\
+          \ for each field."
         properties:
-          ship_date:
-            type: "array"
-            items:
-              type: "string"
-              format: "date"
           destination_city:
             type: "string"
           destination_radius:
             type: "integer"
           destination_state:
             type: "string"
-          load_size:
-            type: "string"
+          full_load:
+            type: "boolean"
           origin_city:
+            type: "string"
+          origin_state:
             type: "string"
           origin_radius:
             type: "integer"
-          origin_state:
-            type: "string"
-          trailers:
-            type: "string"
+          ship_date:
+            type: "array"
+            items:
+              type: "string"
+              format: "date"
+          trailer_type:
+            type: "array"
+            items:
+              type: "string"
       send_type:
         type: "string"
         description: "What method to send the alert list."
