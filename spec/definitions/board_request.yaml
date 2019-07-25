@@ -6,6 +6,9 @@ properties:
       more information on setting up alerts.
     example: 5555
     type: integer
+  company_name:
+    description: Search only for loads posted by this company.
+    type: string
   destination_city:
     description: 'If used, this field must be accompanied by a destination_state.'
     example: chicago
@@ -116,7 +119,6 @@ properties:
     enum:
       - origin_city
       - origin_state
-      - origin_radius
       - destination_city
       - destination_state
       - trailer_type

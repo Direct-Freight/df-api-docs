@@ -58,6 +58,9 @@ properties:
       Refer to the boards documentation for the full list of restrictions for
       each field.
     properties:
+      delivery_date:
+        format: date
+        type: string
       destination_city:
         type: string
       destination_radius:

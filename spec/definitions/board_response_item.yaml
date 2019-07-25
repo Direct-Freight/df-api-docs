@@ -102,6 +102,13 @@ properties:
     example: '2018-09-20'
     format: date
     type: string
+  trade_orgs:
+    description: Approved Trade Organizations
+    properties:
+      tia_approved:
+        description: TIA Approved (yes/no)
+        type: string
+    type: object
   trailer_type:
     description: A string array of valid trailer types.
     example: V

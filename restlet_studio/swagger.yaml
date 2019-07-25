@@ -1386,6 +1386,9 @@ definitions:
             type: "array"
             items:
               type: "string"
+          delivery_date:
+            type: "string"
+            format: "date"
       send_type:
         type: "string"
         description: "What method to send the alert list."
@@ -1577,7 +1580,6 @@ definitions:
         enum:
         - "origin_city"
         - "origin_state"
-        - "origin_radius"
         - "destination_city"
         - "destination_state"
         - "trailer_type"
@@ -1627,6 +1629,9 @@ definitions:
           - "CONT"
           - "OTHER"
         example: ["F","F+T","F+S","V"]
+      company_name:
+        type: "string"
+        description: "Search only for loads posted by this company."
     x-restlet:
       section: "BOARDS"
   board_response_item:
@@ -1764,6 +1769,13 @@ definitions:
       width:
         type: "integer"
         description: "Width in inches.  Will be null if empty."
+      trade_orgs:
+        type: "object"
+        description: "Approved Trade Organizations"
+        properties:
+          tia_approved:
+            type: "string"
+            description: "TIA Approved (yes/no)"
     example: "test"
     x-restlet:
       section: "BOARDS"
