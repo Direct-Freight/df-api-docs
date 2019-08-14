@@ -42,7 +42,7 @@ get:
     - boards
 patch:
   consumes: []
-  description: Toggle one or more company between hidden and unhidden.
+  description: Toggle one  company between hidden and unhidden.
   parameters:
     - in: header
       name: end-user-token
@@ -74,7 +74,7 @@ post:
         $ref: '#/definitions/mark_hidden_companies'
   responses:
     '201':
-      $ref: '#/responses/object_created'
+      description: Object Created
   summary: STAGE=UNK Hide companies.
   tags:
     - boards

@@ -230,8 +230,6 @@ paths:
       responses:
         201:
           description: "Object Created"
-          schema:
-            $ref: "#/definitions/create_status"
     delete:
       tags:
       - "boards"
@@ -254,7 +252,7 @@ paths:
       tags:
       - "boards"
       summary: "STAGE=UNK Change hidden status"
-      description: "Toggle one or more company between hidden and unhidden."
+      description: "Toggle one  company between hidden and unhidden."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -2641,9 +2639,9 @@ definitions:
   toggle_hidden_companies:
     type: "object"
     required:
-    - "company_id"
+    - "company_name"
     properties:
-      company_id:
+      company_name:
         type: "string"
         description: "The company name that need to be toggled. "
     x-restlet:
