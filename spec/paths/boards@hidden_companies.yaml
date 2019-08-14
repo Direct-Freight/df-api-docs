@@ -3,7 +3,7 @@ delete:
   parameters:
     - description: The company that need to be marked as not hidden.
       in: query
-      name: company_name
+      name: company_id
       required: true
       type: string
     - in: header
@@ -19,14 +19,12 @@ delete:
 get:
   description: Get a list of companies that should be hidden.
   parameters:
-    - description: >-
-        A list of company names to check if any should be visually hidden.  If
-        this field is blank all hidden companies will be returned.
+    - description: A list of id's to check if any should be visually hidden.
       in: query
       items:
         type: string
       name: company_name
-      required: false
+      required: true
       type: array
     - in: header
       name: end-user-token
@@ -42,7 +40,7 @@ get:
     - boards
 patch:
   consumes: []
-  description: Toggle one  company between hidden and unhidden.
+  description: Toggle one or more company between hidden and unhidden.
   parameters:
     - in: header
       name: end-user-token
@@ -74,7 +72,7 @@ post:
         $ref: '#/definitions/mark_hidden_companies'
   responses:
     '201':
-      description: Object Created
+      $ref: '#/responses/object_created'
   summary: STAGE=UNK Hide companies.
   tags:
     - boards

@@ -196,10 +196,9 @@ paths:
       parameters:
       - name: "company_name"
         in: "query"
-        required: false
+        required: true
         type: "array"
-        description: "A list of company names to check if any should be visually hidden.\
-          \  If this field is blank all hidden companies will be returned."
+        description: "A list of id's to check if any should be visually hidden."
         items:
           type: "string"
       - name: "end-user-token"
@@ -229,14 +228,16 @@ paths:
           $ref: "#/definitions/mark_hidden_companies"
       responses:
         201:
-          description: "Object Created"
+          description: "Object created check the headers for a reference URL."
+          schema:
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - "boards"
       summary: "STAGE=UNK Unhide companies"
       description: "Mark a company as not hidden."
       parameters:
-      - name: "company_name"
+      - name: "company_id"
         in: "query"
         required: true
         type: "string"
@@ -252,7 +253,7 @@ paths:
       tags:
       - "boards"
       summary: "STAGE=UNK Change hidden status"
-      description: "Toggle one  company between hidden and unhidden."
+      description: "Toggle one or more company between hidden and unhidden."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -1198,6 +1199,9 @@ paths:
             customer_type:
               type: "string"
               description: "This is the new type we are adding to our lookup table."
+            notes:
+              type: "string"
+              description: "Provides context. For internal use."
             trailer_type:
               $ref: "#/definitions/trailer_type"
             username:
@@ -1209,9 +1213,6 @@ paths:
                 \ anyone with the special api-token can update any user. Optionally,\
                 \ if we chose to lock it down to end-user-token we loose that ability,\
                 \ could drop this field and let them just send in an EUA token."
-            notes:
-              type: "string"
-              description: "Provides context. For internal use."
       responses:
         201:
           description: "Status 201"
@@ -1256,6 +1257,9 @@ paths:
             customer_type:
               type: "string"
               description: "This is the key. It is not modified."
+            notes:
+              type: "string"
+              description: "You can clear or replace the notes."
             trailer_type:
               $ref: "#/definitions/trailer_type"
             username:
@@ -1263,9 +1267,6 @@ paths:
               description: "This is an optional key, and is also not modifiable. If\
                 \ customer_type is associated with a username you must also include\
                 \ the username."
-            notes:
-              type: "string"
-              description: "You can clear or replace the notes."
       responses:
         202:
           description: "Status 202"
@@ -1349,19 +1350,14 @@ definitions:
         type: "integer"
         description: "How many minutes to wait before sending another alert. Valid\
           \ values are '15','30','60','120','240','480', and '1440'."
-        enum:
-        - 15
-        - 30
-        - 60
-        - 120
-        - 240
-        - 480
-        - 1440
       search:
         type: "object"
         description: "Refer to the boards documentation for the full list of restrictions\
           \ for each field."
         properties:
+          delivery_date:
+            type: "string"
+            format: "date"
           destination_city:
             type: "string"
           destination_radius:
@@ -1372,10 +1368,10 @@ definitions:
             type: "boolean"
           origin_city:
             type: "string"
-          origin_state:
-            type: "string"
           origin_radius:
             type: "integer"
+          origin_state:
+            type: "string"
           ship_date:
             type: "array"
             items:
@@ -1385,9 +1381,6 @@ definitions:
             type: "array"
             items:
               type: "string"
-          delivery_date:
-            type: "string"
-            format: "date"
       send_type:
         type: "string"
         description: "What method to send the alert list."
@@ -1427,11 +1420,6 @@ definitions:
           - "Thu"
           - "Fri"
           - "Sat"
-      start_hour:
-        type: "integer"
-        description: "A value corresponding to the hour of the day."
-        minimum: 3
-        maximum: 21
       end_hour:
         type: "integer"
         description: "A value corresponding to the hour of the day."
@@ -1457,24 +1445,20 @@ definitions:
       minute_frequency:
         type: "integer"
         description: "How many minutes to wait before sending another alert."
-        enum:
-        - 15
-        - 30
-        - 60
-        - 120
-        - 240
-        - 480
-        - 1440
       send_type:
         type: "string"
         description: "What method to send the alert list."
         enum:
         - "email"
         - "text"
+      start_hour:
+        type: "integer"
+        description: "A value corresponding to the hour of the day."
+        minimum: 3
+        maximum: 21
       time_zone:
         type: "integer"
         description: "A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST"
-        default: 1
         minimum: -1
         maximum: 2
     x-restlet:
@@ -1488,6 +1472,9 @@ definitions:
           \ seen by this user, and associate it with their alert.   See /alerts documentation\
           \ for more information on setting up alerts."
         example: 5555
+      company_name:
+        type: "string"
+        description: "Search only for loads posted by this company."
       destination_city:
         type: "string"
         description: "If used, this field must be accompanied by a destination_state."
@@ -1511,7 +1498,14 @@ definitions:
           type: "string"
           minLength: 2
           maxLength: 2
-        example: ["IL","HI","NY","KS","TX","MO","AL"]
+        example:
+        - "IL"
+        - "HI"
+        - "NY"
+        - "KS"
+        - "TX"
+        - "MO"
+        - "AL"
       full_load:
         type: "boolean"
         description: "This is only valid when requesting a loads board. Omitting this\
@@ -1548,7 +1542,11 @@ definitions:
           type: "string"
           minLength: 2
           maxLength: 2
-        example: ["MO","IL","TX","CA"]
+        example:
+        - "MO"
+        - "IL"
+        - "TX"
+        - "CA"
       page_number:
         type: "integer"
         description: "The page you want to return. Will return an empty board on an\
@@ -1627,10 +1625,11 @@ definitions:
           - "PNEU"
           - "CONT"
           - "OTHER"
-        example: ["F","F+T","F+S","V"]
-      company_name:
-        type: "string"
-        description: "Search only for loads posted by this company."
+        example:
+        - "F"
+        - "F+T"
+        - "F+S"
+        - "V"
     x-restlet:
       section: "BOARDS"
   board_response_item:
@@ -1746,6 +1745,13 @@ definitions:
         format: "date"
         description: "Date item is scheduled to be loaded."
         example: "2018-09-20"
+      trade_orgs:
+        type: "object"
+        description: "Approved Trade Organizations"
+        properties:
+          tia_approved:
+            type: "string"
+            description: "TIA Approved (yes/no)"
       trailer_type:
         type: "string"
         description: "A string array of valid trailer types."
@@ -1768,13 +1774,6 @@ definitions:
       width:
         type: "integer"
         description: "Width in inches.  Will be null if empty."
-      trade_orgs:
-        type: "object"
-        description: "Approved Trade Organizations"
-        properties:
-          tia_approved:
-            type: "string"
-            description: "TIA Approved (yes/no)"
     example: "test"
     x-restlet:
       section: "BOARDS"
@@ -2023,31 +2022,34 @@ definitions:
     example: "{\n  \"list\": [\n    .....\n  ]\n}"
     x-restlet:
       section: "POSTINGS"
-  postings_patch_object:
+  postings_entry_object:
     type: "object"
+    required:
+    - "custom_id"
+    - "origin_city"
+    - "origin_state"
+    - "ship_date"
+    - "trailer_type"
     properties:
-      posting_id:
-        type: "integer"
-        description: "A unique id for each entry.  This value is returned via GET.\
-          \ \nEither posting_id or custom_id is required."
-      custom_id:
-        type: "string"
-        description: "An identifier that can be provided for your own records. (i.e.-Company\
-          \ load number) This field can be used to retrieve loads via GET. This value\
-          \ must be unique.\nYou cannot update a custom_id once it is set. Please\
-          \ delete and reenter the load to change the custom_id.  Either posting_id\
-          \ or custom_id is required."
       comment:
         type: "string"
+      custom_id:
+        type: "string"
+        description: "An identifier that can be provided for your own records.  (i.e.-Company\
+          \ load number) This field can be used to retrieve loads via GET.  This value\
+          \ must be unique."
       destination_city:
         type: "string"
-        description: "Delivery location city of load/truck."
+        description: "Delivery location city of load/truck. For truck type entries\
+          \ this field is optional or can be used to specify a region."
       destination_state:
         type: "string"
-        description: "Delivery location city of load/truck."
+        description: "Delivery location state of load/truck. For truck type entries\
+          \ this field is optional."
       full_load:
         type: "boolean"
-        description: "This should only be used with loads."
+        description: "The load will be defaulted to full if this argument isn't included\
+          \ and marked to false."
       height:
         type: "integer"
         description: "This number represents inches."
@@ -2056,10 +2058,14 @@ definitions:
         description: "This number represents feet."
       origin_city:
         type: "string"
-        description: "Origin city location of load or truck"
+        description: "Origin city location of load or truck.  Required for all entry\
+          \ types."
       origin_state:
         type: "string"
-        description: "Origin state location of load or truck"
+        description: "Origin state location of load or truck.  Use the 2 digit state\
+          \ abbreviation."
+        minLength: 2
+        maxLength: 2
       other_trailer_types:
         type: "string"
         description: "Can be used to specify custom trailer types."
@@ -2125,34 +2131,27 @@ definitions:
         description: "This number represents inches."
     x-restlet:
       section: "POSTINGS"
-  postings_entry_object:
+  postings_patch_object:
     type: "object"
-    required:
-    - "custom_id"
-    - "origin_city"
-    - "origin_state"
-    - "ship_date"
-    - "trailer_type"
     properties:
-      custom_id:
-        type: "string"
-        description: "An identifier that can be provided for your own records.  (i.e.-Company\
-          \ load number) This field can be used to retrieve loads via GET.  This value\
-          \ must be unique. Custom Id's can have a maximum of 25 characters."
       comment:
         type: "string"
+      custom_id:
+        type: "string"
+        description: "An identifier that can be provided for your own records. (i.e.-Company\
+          \ load number) This field can be used to retrieve loads via GET. This value\
+          \ must be unique.\nYou cannot update a custom_id once it is set. Please\
+          \ delete and reenter the load to change the custom_id.  Either posting_id\
+          \ or custom_id is required."
       destination_city:
         type: "string"
-        description: "Delivery location city of load/truck. For truck type entries\
-          \ this field is optional or can be used to specify a region."
+        description: "Delivery location city of load/truck."
       destination_state:
         type: "string"
-        description: "Delivery location state of load/truck. For truck type entries\
-          \ this field is optional."
+        description: "Delivery location city of load/truck."
       full_load:
         type: "boolean"
-        description: "The load will be defaulted to full if this argument isn't included\
-          \ and marked to false."
+        description: "This should only be used with loads."
       height:
         type: "integer"
         description: "This number represents inches."
@@ -2161,14 +2160,10 @@ definitions:
         description: "This number represents feet."
       origin_city:
         type: "string"
-        description: "Origin city location of load or truck.  Required for all entry\
-          \ types."
+        description: "Origin city location of load or truck"
       origin_state:
         type: "string"
-        description: "Origin state location of load or truck.  Use the 2 digit state\
-          \ abbreviation."
-        minLength: 2
-        maxLength: 2
+        description: "Origin state location of load or truck"
       other_trailer_types:
         type: "string"
         description: "Can be used to specify custom trailer types."
@@ -2183,6 +2178,10 @@ definitions:
         type: "integer"
         description: "If not provided we will use the contact info associated with\
           \ the users profile."
+      posting_id:
+        type: "integer"
+        description: "A unique id for each entry.  This value is returned via GET.\
+          \ \nEither posting_id or custom_id is required."
       receive_date:
         type: "string"
         format: "date"
@@ -2366,16 +2365,16 @@ definitions:
           - "status"
           type: "object"
           properties:
-            status:
-              type: "string"
-              enum:
-              - "Success"
-              - "Error"
             code:
               type: "integer"
             description:
               type: "string"
               description: "An explanation of what each code means."
+            status:
+              type: "string"
+              enum:
+              - "Success"
+              - "Error"
     example: "Success"
     x-restlet:
       section: "POSTINGS"
@@ -2473,6 +2472,9 @@ definitions:
       section: "PROFILES"
   create_status:
     type: "object"
+    properties:
+      success:
+        type: "integer"
     x-restlet:
       section: "common_definitions"
   error_object:
@@ -2581,7 +2583,7 @@ definitions:
     properties:
       company_name:
         type: "string"
-        description: "The company that need to be marked as hidden."
+        description: "The comapny that need to be marked as hidden. "
     x-restlet:
       section: "not categorized yet"
   mobile_carrier_response:
@@ -2639,9 +2641,9 @@ definitions:
   toggle_hidden_companies:
     type: "object"
     required:
-    - "company_name"
+    - "company_id"
     properties:
-      company_name:
+      company_id:
         type: "string"
         description: "The company name that need to be toggled. "
     x-restlet:

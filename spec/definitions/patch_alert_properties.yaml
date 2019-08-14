@@ -40,14 +40,6 @@ properties:
     type: string
   minute_frequency:
     description: How many minutes to wait before sending another alert.
-    enum:
-      - 15
-      - 30
-      - 60
-      - 120
-      - 240
-      - 480
-      - 1440
     type: integer
   send_type:
     description: What method to send the alert list.
@@ -61,7 +53,6 @@ properties:
     minimum: 3
     type: integer
   time_zone:
-    default: 1
     description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
     maximum: 2
     minimum: -1

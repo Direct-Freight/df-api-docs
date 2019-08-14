@@ -44,14 +44,6 @@ properties:
     description: >-
       How many minutes to wait before sending another alert. Valid values are
       '15','30','60','120','240','480', and '1440'.
-    enum:
-      - 15
-      - 30
-      - 60
-      - 120
-      - 240
-      - 480
-      - 1440
     type: integer
   search:
     description: >-
