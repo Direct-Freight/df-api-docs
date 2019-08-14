@@ -12,7 +12,7 @@ delete:
       type: string
   responses:
     '204':
-      description: successful operation
+      description: No content
   summary: STAGE=UNK Unhide companies
   tags:
     - boards
