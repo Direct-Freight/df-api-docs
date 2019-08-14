@@ -1,6 +1,6 @@
 properties:
   company_name:
-    description: 'The comapny that need to be marked as hidden. '
+    description: The company that need to be marked as hidden.
     type: string
 required:
   - company_name

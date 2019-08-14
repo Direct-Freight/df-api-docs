@@ -196,9 +196,10 @@ paths:
       parameters:
       - name: "company_name"
         in: "query"
-        required: true
+        required: false
         type: "array"
-        description: "A list of id's to check if any should be visually hidden."
+        description: "A list of company names to check if any should be visually hidden.\
+          \  If this field is blank all hidden companies will be returned."
         items:
           type: "string"
       - name: "end-user-token"
@@ -228,7 +229,7 @@ paths:
           $ref: "#/definitions/mark_hidden_companies"
       responses:
         201:
-          description: "Object created check the headers for a reference URL."
+          description: "Object Created"
           schema:
             $ref: "#/definitions/create_status"
     delete:
@@ -237,7 +238,7 @@ paths:
       summary: "STAGE=UNK Unhide companies"
       description: "Mark a company as not hidden."
       parameters:
-      - name: "company_id"
+      - name: "company_name"
         in: "query"
         required: true
         type: "string"
@@ -253,7 +254,7 @@ paths:
       tags:
       - "boards"
       summary: "STAGE=UNK Change hidden status"
-      description: "Toggle one or more company between hidden and unhidden."
+      description: "Toggle one  company between hidden and unhidden."
       consumes: []
       parameters:
       - name: "end-user-token"
@@ -2037,7 +2038,7 @@ definitions:
         type: "string"
         description: "An identifier that can be provided for your own records.  (i.e.-Company\
           \ load number) This field can be used to retrieve loads via GET.  This value\
-          \ must be unique."
+          \ must be unique. Custom Id's can have a maximum of 25 characters."
       destination_city:
         type: "string"
         description: "Delivery location city of load/truck. For truck type entries\
@@ -2583,7 +2584,7 @@ definitions:
     properties:
       company_name:
         type: "string"
-        description: "The comapny that need to be marked as hidden. "
+        description: "The company that need to be marked as hidden."
     x-restlet:
       section: "not categorized yet"
   mobile_carrier_response:
@@ -2641,9 +2642,9 @@ definitions:
   toggle_hidden_companies:
     type: "object"
     required:
-    - "company_id"
+    - "company_name"
     properties:
-      company_id:
+      company_name:
         type: "string"
         description: "The company name that need to be toggled. "
     x-restlet:
