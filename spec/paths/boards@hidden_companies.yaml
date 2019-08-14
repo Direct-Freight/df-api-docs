@@ -3,7 +3,7 @@ delete:
   parameters:
     - description: The company that need to be marked as not hidden.
       in: query
-      name: company_id
+      name: company_name
       required: true
       type: string
     - in: header
@@ -19,12 +19,14 @@ delete:
 get:
   description: Get a list of companies that should be hidden.
   parameters:
-    - description: A list of id's to check if any should be visually hidden.
+    - description: >-
+        A list of company names to check if any should be visually hidden.  If
+        this field is blank all hidden companies will be returned.
       in: query
       items:
         type: string
       name: company_name
-      required: true
+      required: false
       type: array
     - in: header
       name: end-user-token
