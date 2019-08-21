@@ -297,7 +297,7 @@ paths:
     post:
       tags:
       - "boards"
-      summary: "STAGE=private Hide a single posting"
+      summary: "STAGE=private Hide 1 or more postings"
       description: "Mark an entry as hidden."
       consumes: []
       parameters:
@@ -318,13 +318,15 @@ paths:
     delete:
       tags:
       - "boards"
-      summary: "STAGE=private Unhide a single posting"
+      summary: "STAGE=private Unhide 1 or more postings"
       description: " Mark an entry as unhidden."
       parameters:
       - name: "entry_id"
         in: "query"
         required: true
-        type: "string"
+        type: "array"
+        items:
+          type: "string"
       - name: "end-user-token"
         in: "header"
         required: true
@@ -1857,8 +1859,10 @@ definitions:
     - "entry_id"
     properties:
       entry_id:
-        type: "string"
-        description: "The entry that need to be marked as hidden."
+        type: "array"
+        description: "The entry(s) that need to be marked as hidden."
+        items:
+          type: "string"
     x-restlet:
       section: "BOARDS"
   toggle_hidden_entries:

@@ -2,9 +2,11 @@ delete:
   description: ' Mark an entry as unhidden.'
   parameters:
     - in: query
+      items:
+        type: string
       name: entry_id
       required: true
-      type: string
+      type: array
     - in: header
       name: end-user-token
       required: true
@@ -12,7 +14,7 @@ delete:
   responses:
     '204':
       description: No Content
-  summary: STAGE=private Unhide a single posting
+  summary: STAGE=private Unhide 1 or more postings
   tags:
     - boards
 get:
@@ -72,7 +74,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: STAGE=private Hide a single posting
+  summary: STAGE=private Hide 1 or more postings
   tags:
     - boards
 x-restlet:
