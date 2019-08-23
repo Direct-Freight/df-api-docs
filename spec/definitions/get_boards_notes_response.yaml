@@ -6,11 +6,13 @@ example: |-
     ]
   }
 properties:
-  entry_id:
-    description: 'A hash with each entry id as the name, and a note_object as the value.'
+  list:
+    description: A list of requested notes
     items:
-      type: string
+      $ref: '#/definitions/notes_response_item'
     type: array
+required:
+  - list
 type: object
 x-restlet:
   section: BOARDS

@@ -1,6 +1,10 @@
 properties:
+  note_id:
+    type: integer
   success:
     type: integer
+required:
+  - note_id
 type: object
 x-restlet:
   section: common_definitions

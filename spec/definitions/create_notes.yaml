@@ -3,7 +3,7 @@ properties:
     type: string
   entry_id:
     description: 'The entry to associate the note with. '
-    type: integer
+    type: string
   title:
     description: 'Subject of the note. '
     type: string

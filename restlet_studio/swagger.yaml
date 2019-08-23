@@ -1813,7 +1813,7 @@ definitions:
       body:
         type: "string"
       entry_id:
-        type: "integer"
+        type: "string"
         description: "The entry to associate the note with. "
       title:
         type: "string"
@@ -1822,14 +1822,64 @@ definitions:
       section: "BOARDS"
   get_boards_notes_response:
     type: "object"
+    required:
+    - "list"
     properties:
-      entry_id:
+      list:
         type: "array"
-        description: "A hash with each entry id as the name, and a note_object as\
-          \ the value."
+        description: "A list of requested notes"
         items:
-          type: "string"
+          $ref: "#/definitions/notes_response_item"
     example: "{\n  \"entry_id\": [\n    \"entry_id\",\n    \"entry_id\"\n  ]\n}"
+    x-restlet:
+      section: "BOARDS"
+  notes_response_item:
+    type: "object"
+    required:
+    - "body"
+    - "date_added"
+    - "date_modified"
+    - "deleted"
+    - "entry_id"
+    - "id"
+    - "important"
+    - "title"
+    properties:
+      body:
+        type: "string"
+        description: "Body of the note"
+        example: "This is a test note."
+      date_added:
+        type: "string"
+        format: "date"
+        description: "The date the note was created."
+        example: "2019-08-23"
+      date_modified:
+        type: "string"
+        format: "date"
+        description: "Date of the last update to this note"
+        example: "2019-08-24"
+      deleted:
+        type: "string"
+        description: "Not sure what this field is?  Is this the date the note was\
+          \ deleted or the status of the load?"
+      entry_id:
+        type: "string"
+        description: "Entry id of the load associated with this note."
+        example: "93b30df654ccd860eb34775214877921"
+      id:
+        type: "integer"
+        description: "The id of the note."
+        example: 55551
+      important:
+        type: "boolean"
+        description: "Identifies notes marked as important."
+        example: true
+      title:
+        type: "string"
+        description: "Title of note."
+        example: "MO"
+    example: "test"
     x-restlet:
       section: "BOARDS"
   get_state_list_response:
@@ -2477,8 +2527,12 @@ definitions:
       section: "PROFILES"
   create_status:
     type: "object"
+    required:
+    - "note_id"
     properties:
       success:
+        type: "integer"
+      note_id:
         type: "integer"
     x-restlet:
       section: "common_definitions"
