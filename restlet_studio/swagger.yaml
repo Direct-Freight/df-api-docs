@@ -433,8 +433,10 @@ paths:
         schema:
           $ref: "#/definitions/update_notes"
       responses:
-        204:
+        201:
           description: "successful operation"
+          schema:
+            $ref: "#/definitions/update_notes_status"
     x-restlet:
       section: "BOARDS"
   /end_user_authentication/users:
@@ -1830,7 +1832,6 @@ definitions:
         description: "A list of requested notes"
         items:
           $ref: "#/definitions/notes_response_item"
-    example: "{\n  \"entry_id\": [\n    \"entry_id\",\n    \"entry_id\"\n  ]\n}"
     x-restlet:
       section: "BOARDS"
   notes_response_item:
@@ -1931,6 +1932,7 @@ definitions:
     type: "object"
     required:
     - "body"
+    - "note_id"
     - "title"
     properties:
       body:
@@ -1938,6 +1940,9 @@ definitions:
       title:
         type: "string"
         description: "Subject of the note. "
+      note_id:
+        type: "integer"
+        description: "Id of the note"
     x-restlet:
       section: "BOARDS"
   end-user-token:
@@ -2586,6 +2591,13 @@ definitions:
       - "PNEU"
       - "CONT"
       - "OTHER"
+    x-restlet:
+      section: "common_definitions"
+  update_notes_status:
+    type: "object"
+    properties:
+      success:
+        type: "integer"
     x-restlet:
       section: "common_definitions"
   get_custom_categories_response:

@@ -50,8 +50,10 @@ patch:
       schema:
         $ref: '#/definitions/update_notes'
   responses:
-    '204':
+    '201':
       description: successful operation
+      schema:
+        $ref: '#/definitions/update_notes_status'
   summary: STAGE=UNK Update a note.
   tags:
     - boards

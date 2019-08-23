@@ -1,11 +1,15 @@
 properties:
   body:
     type: string
+  note_id:
+    description: Id of the note
+    type: integer
   title:
     description: 'Subject of the note. '
     type: string
 required:
   - body
+  - note_id
   - title
 type: object
 x-restlet:
