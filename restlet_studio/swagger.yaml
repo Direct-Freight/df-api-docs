@@ -399,7 +399,7 @@ paths:
         201:
           description: "Object created check the headers for a reference URL."
           schema:
-            $ref: "#/definitions/create_status"
+            $ref: "#/definitions/note_create_status"
     delete:
       tags:
       - "boards"
@@ -2532,12 +2532,8 @@ definitions:
       section: "PROFILES"
   create_status:
     type: "object"
-    required:
-    - "note_id"
     properties:
       success:
-        type: "integer"
-      note_id:
         type: "integer"
     x-restlet:
       section: "common_definitions"
@@ -2598,6 +2594,18 @@ definitions:
     properties:
       success:
         type: "integer"
+    x-restlet:
+      section: "common_definitions"
+  note_create_status:
+    type: "object"
+    required:
+    - "note_id"
+    properties:
+      success:
+        type: "integer"
+      note_id:
+        type: "integer"
+        description: "Id of the note."
     x-restlet:
       section: "common_definitions"
   get_custom_categories_response:

@@ -72,7 +72,9 @@ post:
         $ref: '#/definitions/create_notes'
   responses:
     '201':
-      $ref: '#/responses/object_created'
+      description: Object created check the headers for a reference URL.
+      schema:
+        $ref: '#/definitions/note_create_status'
   summary: STAGE=UNK Create a note.
   tags:
     - boards
