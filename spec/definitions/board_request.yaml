@@ -133,6 +133,8 @@ properties:
       - company_name
       - ship_date
       - receive_date
+      - tia_user
+      - green_light
     example: age
     type: string
   trailer_type:

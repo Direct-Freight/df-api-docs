@@ -32,8 +32,10 @@ patch:
       schema:
         $ref: '#/definitions/profile_object'
   responses:
-    '204':
+    '200':
       description: successful operation
+      schema:
+        $ref: '#/definitions/profile_object'
   summary: STAGE=UNK Update profile information.
   tags:
     - profiles
