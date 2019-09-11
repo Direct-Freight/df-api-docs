@@ -951,12 +951,6 @@ paths:
       - "profiles"
       summary: "STAGE=UNK Request the logged in user's profile."
       parameters:
-      - name: "posting_id"
-        in: "query"
-        required: false
-        type: "array"
-        items:
-          type: "integer"
       - name: "end-user-token"
         in: "header"
         required: true

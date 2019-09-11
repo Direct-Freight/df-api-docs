@@ -1,11 +1,5 @@
 get:
   parameters:
-    - in: query
-      items:
-        type: integer
-      name: posting_id
-      required: false
-      type: array
     - in: header
       name: end-user-token
       required: true
