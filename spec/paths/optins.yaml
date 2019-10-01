@@ -159,5 +159,7 @@ post:
     '201':
       description: Status 201
   summary: STAGE=UNK Submit a request to be opted in.
+  tags:
+    - optins
 x-restlet:
   section: Optins

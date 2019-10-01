@@ -34,5 +34,7 @@ get:
           - update_url
         type: object
   summary: Get any available update information.
+  tags:
+    - mobile update
 x-restlet:
   section: Mobile Update
