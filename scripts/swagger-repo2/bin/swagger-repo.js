@@ -38,7 +38,7 @@ program.command('sync-with-swagger')
 program.command('validate')
   .description('Validate Swagger file')
   .action(function(filename, options) {
-    console.log('JG version');
+    console.log('JG version: scripts/swagger-repo2/bin/swagger-repo.js');
     var swagger = api.bundle();
     api.validate(swagger, function (error, result) {
       var isErrors = !_.isEmpty(result.errors);
