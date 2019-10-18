@@ -5,7 +5,11 @@ host: api.directfreight.com
 info:
   contact: {}
   description: |-
+<<<<<<< HEAD
     In order to use the Direct Freight API please first contact us to get an API Token. This token needs to be sent as a HTTP header argument in every request to our API.
+=======
+    In order to use the Direct Freight API swaggerhubtest3 please first contact us to get an API Token. This token needs to be sent as a HTTP header argument in every request to our API.
+>>>>>>> da68ec3da71fbf30bd9f4314191c5d44fdda233c
 
     api-token="SECRET KEY"
 
