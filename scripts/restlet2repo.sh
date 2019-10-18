@@ -1,9 +1,11 @@
 #!/bin/bash
 export repo=$1 #df-api-docs OR ts-api-docs
 export project=$2 #directfreight OR truckersearch
-export email="$3"
-export message="$4"
+export branch=$3 #directfreight OR truckersearch
+export email="$4"
+export message="$5"
 cd /var/www/dfwdbi/api/$repo
+git checkout $branch
 git pull --no-edit
 #cp restlet_studio/swagger.yaml /home/catalyst/Dropbox/directfreight/apidocs/$project/swagger20-with-extensions.yaml
 cp restlet_studio/swagger.yaml web_deploy/swagger-nocode.yaml
