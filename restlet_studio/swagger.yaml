@@ -1344,7 +1344,7 @@ paths:
       responses:
         '204':
           description: Status 204
-      summary: STAGE=UNK Remove a lookup.
+      summary: STAGE=NOT-NEEDED Remove a lookup.
       tags:
         - validations
     get:
@@ -1370,7 +1370,7 @@ paths:
             required:
               - trailer_type
             type: object
-      summary: STAGE=PRIVATE Find an official type to match to the customer submitted one.
+      summary: STAGE=PRIVATE-LIVE Find an official type to match to the customer submitted one.
       tags:
         - validations
     patch:
@@ -1400,7 +1400,7 @@ paths:
       responses:
         '202':
           description: Status 202
-      summary: STAGE=UNK Update which DF trailer_types match the customer_type
+      summary: STAGE=NOT-NEEDED Update which DF trailer_types match the customer_type
       tags:
         - validations
     post:
