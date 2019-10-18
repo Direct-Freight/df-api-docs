@@ -47,7 +47,7 @@ get:
         required:
           - trailer_type
         type: object
-  summary: STAGE=UNK Find an official type to match to the customer submitted one.
+  summary: STAGE=PRIVATE Find an official type to match to the customer submitted one.
   tags:
     - validations
 patch:
