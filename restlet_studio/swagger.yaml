@@ -5,7 +5,7 @@ host: api.directfreight.com
 info:
   contact: {}
   description: |-
-    In order to use the swaggerhub-branch Direct Freight API please first contact us to get an API Token. This token needs to be sent as a HTTP header argument in every request to our API.
+    In order to use the swaggerhub-branch try2 Direct Freight API please first contact us to get an API Token. This token needs to be sent as a HTTP header argument in every request to our API.
 
     api-token="SECRET KEY"
 
