@@ -18,7 +18,7 @@ delete:
   responses:
     '204':
       description: Status 204
-  summary: STAGE=NOT-NEEDED Remove a lookup.
+  summary: STAGE=UNIMPLEMENTED-NO-NEED Remove a lookup.
   tags:
     - validations
 get:
@@ -84,7 +84,9 @@ patch:
   responses:
     '202':
       description: Status 202
-  summary: STAGE=NOT-NEEDED Update which DF trailer_types match the customer_type
+  summary: >-
+    STAGE=UNIMPLEMENTED-NO-NEED Update which DF trailer_types match the
+    customer_type
   tags:
     - validations
 post:
@@ -124,7 +126,7 @@ post:
   responses:
     '201':
       description: Status 201
-  summary: STAGE=UNK Add a custom trailer type match.
+  summary: STAGE=UNIMPLEMENTED-NO-NEED Add a custom trailer type match.
   tags:
     - validations
 x-restlet:
