@@ -677,6 +677,9 @@ paths:
         - end_user_authentications
     x-restlet:
       section: END_USER_AUTHENTICATIONS
+/end_user_authentications/social_login:
+  get:
+  
   /locations/autocomplete:
     get:
       description: 'A string of a partial city or state name, and returns a list of possible matches.'
