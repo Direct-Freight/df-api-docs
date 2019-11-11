@@ -5,7 +5,8 @@ host: api.directfreight.com
 info:
   contact: {}
   description: |-
-    In order to use the Direct Freight API please first contact us to get an API Token. This token needs to be sent as a HTTP header argument in every request to our API.
+    In order to use the Direct Freight API please first contact us to get an API Token. 
+    This token needs to be sent as a HTTP header argument in every request to our API.
 
     api-token="SECRET KEY"
 
@@ -677,29 +678,34 @@ paths:
         - end_user_authentications
     x-restlet:
       section: END_USER_AUTHENTICATIONS
-/end_user_authentications/social_login:
-  get:
-    description: Gets an authoritative date_time string.
-      parameters: []
+  /end_user_authentications/social_login:
+    get:
+      description: Logs in or creates a new account for the user based on their email. "new_account" is what indicates if a new account was created, or if an existing account was used to login.
+      parameters:
+        - in: header
+          name: api-token
+          required: true
+          type: string
+        - description: UUID returned by oneall used to identify the user.
+          in: query
+          name: connection_token
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
           examples:
             application/json: |-
               {
-                "now": "now"
+                "email": "jose@directfreight.com",
+                "end-user-token": "dbfa6de5f83cd905b122299ce6178120eafcd552",
+                "new_account": false
               }
-          schema:
-            properties:
-              now:
-                description: The current date and time based on our server.
-                type: string
-            type: object
-      summary: Retrieve date
+      summary: OneALl Social Login/Create Account
       tags:
         - end_user_authentications
     x-restlet:
-      section: END_USER_AUTHENTICATIONS  
+      section: END_USER_AUTHENTICATIONS
   /locations/autocomplete:
     get:
       description: 'A string of a partial city or state name, and returns a list of possible matches.'
