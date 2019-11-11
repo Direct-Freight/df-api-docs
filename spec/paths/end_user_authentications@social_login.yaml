@@ -1,0 +1,30 @@
+get:
+  description: >-
+    Logs in or creates a new account for the user based on their email.
+    "new_account" is what indicates if a new account was created, or if an
+    existing account was used to login.
+  parameters:
+    - in: header
+      name: api-token
+      required: true
+      type: string
+    - description: UUID returned by oneall used to identify the user.
+      in: query
+      name: connection_token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: successful operation
+      examples:
+        application/json: |-
+          {
+            "email": "jose@directfreight.com",
+            "end-user-token": "dbfa6de5f83cd905b122299ce6178120eafcd552",
+            "new_account": false
+          }
+  summary: OneALl Social Login/Create Account
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS
