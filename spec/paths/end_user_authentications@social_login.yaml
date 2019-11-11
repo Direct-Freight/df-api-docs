@@ -5,7 +5,7 @@ get:
     existing account was used to login.
   parameters:
     - in: header
-      name: apitest-token
+      name: api-token
       required: true
       type: string
     - description: UUID returned by oneall used to identify the user.
