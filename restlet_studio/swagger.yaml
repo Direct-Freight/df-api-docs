@@ -683,7 +683,7 @@ paths:
       description: Logs in or creates a new account for the user based on their email. "new_account" is what indicates if a new account was created, or if an existing account was used to login.
       parameters:
         - in: header
-          name: apitest-token
+          name: api-token
           required: true
           type: string
         - description: UUID returned by oneall used to identify the user.
