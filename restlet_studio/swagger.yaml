@@ -1534,6 +1534,11 @@ definitions:
                 - "HOP"
                 - "TANK"
                 - "S"
+          team_preference:
+            type: "string"
+            enum:
+            - "single"
+            - "team"
           driver_experience:
             type: "integer"
           driver_distance:
