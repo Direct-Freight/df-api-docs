@@ -17,7 +17,7 @@ get:
     '201':
       description: successful operation
       schema:
-        $ref: '#/definitions/end-user-token'
+        $ref: '#/definitions/social-login-end-user-token'
     '422':
       $ref: '#/responses/error_422'
   summary: OneALl Social Login/Create Account
