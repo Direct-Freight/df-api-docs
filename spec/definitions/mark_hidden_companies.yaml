@@ -1,0 +1,9 @@
+properties:
+  company_name:
+    description: The company that need to be marked as hidden.
+    type: string
+required:
+  - company_name
+type: object
+x-restlet:
+  section: not categorized yet

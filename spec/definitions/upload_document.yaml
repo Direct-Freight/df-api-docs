@@ -1,0 +1,9 @@
+properties:
+  The:
+    description: 'file to be uploaded. '
+    type: object
+required:
+  - The
+type: object
+x-restlet:
+  section: PROFILES

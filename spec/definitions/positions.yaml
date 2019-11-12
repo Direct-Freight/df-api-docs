@@ -1,8 +1,0 @@
-enum:
-  - other
-  - student
-  - company
-  - owner/operator
-type: string
-x-restlet:
-  section: common_definitions

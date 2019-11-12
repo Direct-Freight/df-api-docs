@@ -1,0 +1,82 @@
+delete:
+  parameters:
+    - description: 'The entry to associate the note with. '
+      in: query
+      name: note_id
+      required: true
+      type: string
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '204':
+      description: successful operation
+  summary: STAGE=UNK Delete a note.
+  tags:
+    - boards
+get:
+  description: Get notes that this user has written.
+  parameters:
+    - description: 'Optionally just check if certain loads have notes associated with them. '
+      in: query
+      items:
+        type: string
+      name: entry_id
+      required: false
+      type: array
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/get_boards_notes_response'
+  summary: STAGE=UNK List user notes.
+  tags:
+    - boards
+patch:
+  consumes: []
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/update_notes'
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/update_notes_status'
+  summary: STAGE=UNK Update a note.
+  tags:
+    - boards
+post:
+  consumes: []
+  description: Create a new note.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/create_notes'
+  responses:
+    '201':
+      description: Object created check the headers for a reference URL.
+      schema:
+        $ref: '#/definitions/note_create_status'
+  summary: STAGE=UNK Create a note.
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS

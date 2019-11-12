@@ -1,0 +1,180 @@
+properties:
+  alert_id:
+    description: >-
+      By specifying an alert_id we will record the loads or trucks seen by this
+      user, and associate it with their alert.   See /alerts documentation for
+      more information on setting up alerts.
+    example: 5555
+    type: integer
+  company_name:
+    description: Search only for loads posted by this company.
+    type: string
+  destination_city:
+    description: 'If used, this field must be accompanied by a destination_state.'
+    example: chicago
+    minLength: 2
+    type: string
+  destination_radius:
+    description: >-
+      If both the destination city and state are specified, this field will
+      limit the search to results to within # miles of the specified destination
+      city.   If this field is omitted during a search that includes a
+      destination city a default value of 30 miles will be used.
+    example: 100
+    maximum: 300
+    minimum: 1
+    type: integer
+  destination_state:
+    description: >-
+      If the destination_city field is is used, this field should contain the
+      state for that city.  For searches without a specified destination_city
+      this field may contain an array list of state abbreviations.
+    example:
+      - IL
+      - HI
+      - NY
+      - KS
+      - TX
+      - MO
+      - AL
+    items:
+      maxLength: 2
+      minLength: 2
+      type: string
+    type: array
+  full_load:
+    description: >-
+      This is only valid when requesting a loads board. Omitting this field will
+      return both full and partial loads. A true value will limit results to
+      full loads loads only.  False will return partial loads only.
+    example: true
+    type: boolean
+  item_count:
+    description: >-
+      This argument adjusts how many items per page will be returned.  Omitting
+      this field will return the default of 50 items per page
+    example: 25
+    maximum: 100
+    minimum: 1
+    type: integer
+  origin_city:
+    description: 'If used, this field must be accompanied by an origin_state.'
+    example: Kansas City
+    minLength: 2
+    type: string
+  origin_radius:
+    description: >-
+      If both the origin city and state are specified, this field will limit the
+      search to results to within # miles of the specified origin city. If this
+      field is omitted during a search that includes an origin city a default
+      value of 25 miles will be used.
+    example: 150
+    maximum: 300
+    minimum: 1
+    type: integer
+  origin_state:
+    description: >-
+      If the origin_city field is is used, this field should contain the state
+      for that city. For searches without a specified origin_city this field may
+      contain an array list of state abbreviations.
+    example:
+      - MO
+      - IL
+      - TX
+      - CA
+    items:
+      maxLength: 2
+      minLength: 2
+      type: string
+    type: array
+  page_number:
+    description: >-
+      The page you want to return. Will return an empty board on an invalid
+      page.
+    minimum: 1
+    type: integer
+  return_count:
+    description: 'If included this will return a total count instead of a list. '
+    type: boolean
+  return_only_new:
+    description: >-
+      A true value will only return results that have not been viewed by the
+      user. This field requires a valid alert_id to be specified in order to
+      return unviewed items.  See /alerts for more information on setting up and
+      using alerts.
+    type: boolean
+  ship_date:
+    description: Limits results to specified ship date(s).
+    items:
+      description: Please use the YYYY-MM-DD format.
+      format: date
+      type: string
+    type: array
+  sort_parameter:
+    default: age
+    description: >-
+      The system automatically chooses the most common order based on the
+      parameter chosen.  Sort order can be specified by adding -asc or -desc to
+      the end.
+    enum:
+      - origin_city
+      - origin_state
+      - destination_city
+      - destination_state
+      - trailer_type
+      - load_size
+      - pay_rate
+      - credit_score
+      - age
+      - trip_miles
+      - dead_head
+      - length
+      - weight
+      - company_name
+      - ship_date
+      - receive_date
+      - tia_user
+      - green_light
+    example: age
+    type: string
+  trailer_type:
+    description: 'A string array of valid trailer types to limit the search. '
+    example:
+      - F
+      - F+T
+      - F+S
+      - V
+    items:
+      enum:
+        - V
+        - VINT
+        - SD
+        - MX
+        - HS
+        - AC
+        - LB
+        - F+T
+        - F
+        - FINT
+        - DD
+        - V+V
+        - V+A
+        - CRG
+        - HB
+        - LA
+        - PO
+        - R
+        - RINT
+        - RGN
+        - CV
+        - DT
+        - TNK
+        - F+S
+        - PNEU
+        - CONT
+        - OTHER
+      type: string
+    type: array
+type: object
+x-restlet:
+  section: BOARDS

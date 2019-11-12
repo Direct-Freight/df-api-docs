@@ -1,5 +1,6 @@
 patch:
   consumes: []
+  description: Update a users email address.
   parameters:
     - in: header
       name: end-user-token
@@ -11,14 +12,17 @@ patch:
       schema:
         properties:
           email:
+            description: The user's new email address.
             type: string
         required:
           - email
         type: object
   responses:
     '204':
-      description: Status 204
-  summary: Update Email
+      description: A successful operation.
+    '422':
+      $ref: '#/responses/error_422'
+  summary: STAGE=UNK Update email.
   tags:
     - end_user_authentications
 x-restlet:

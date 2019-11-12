@@ -1,0 +1,43 @@
+parameters:
+  - description: >-
+      Valid types are "loads", "trucks", "private_loads", "private_trucks",
+      "test_loads", and "test_trucks"
+    enum:
+      - loads
+      - trucks
+      - private_loads
+      - private_trucks
+      - test_loads
+      - test_trucks
+    in: path
+    name: posting_type
+    required: true
+    type: string
+  - description: 'Specified in the url. Valid types are "copy", and "move"'
+    enum:
+      - copy
+      - move
+    in: path
+    name: action
+    required: true
+    type: string
+post:
+  consumes: []
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/post_posting_type_action_body'
+  responses:
+    '201':
+      $ref: '#/responses/object_created'
+  summary: STAGE=UNK Copy or Move an posting.
+  tags:
+    - postings
+x-restlet:
+  section: POSTINGS
