@@ -694,15 +694,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        '201':
           description: successful operation
-          examples:
-            application/json: |-
-              {
-                "email": "jose@directfreight.com",
-                "end-user-token": "dbfa6de5f83cd905b122299ce6178120eafcd552",
-                "new_account": false
-              }
+          schema:
+            $ref: '#/definitions/end-user-token'
+        '422':
+          $ref: '#/responses/error_422'          
+      # responses:
+      #   '200':
+      #     description: successful operation
+      #     examples:
+      #       application/json: |-
+      #         {
+      #           "email": "jose@directfreight.com",
+      #           "end-user-token": "dbfa6de5f83cd905b122299ce6178120eafcd552",
+      #           "new_account": false
+      #         }
       summary: OneALl Social Login/Create Account
       tags:
         - end_user_authentications
@@ -1977,12 +1984,21 @@ definitions:
   end-user-token:
     properties:
       end-user-token:
-        description: On success and end-user-token is returned.
+        description: On success an end-user-token is returned.
         example: XX423ASOEUHT4AESUTH
         type: string
     type: object
     x-restlet:
       section: END_USER_AUTHENTICATIONS
+  social-login-end-user-token:
+    properties:
+      end-user-token:
+        description: On success and end-user-token is returned, as well as a new_account property which lets you know if a new account was created, or ir an account already existed for that email.
+        example: XX423ASOEUHT4AESUTH
+        type: string
+    type: object
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS      
   error_object:
     example: |-
       {
