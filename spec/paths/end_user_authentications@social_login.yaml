@@ -4,10 +4,6 @@ get:
     "new_account" is what indicates if a new account was created, or if an
     existing account was used to login.
   parameters:
-    - in: header
-      name: api-token
-      required: true
-      type: string
     - description: UUID returned by oneall used to identify the user.
       in: query
       name: connection_token
