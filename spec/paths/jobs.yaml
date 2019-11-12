@@ -1,0 +1,83 @@
+delete:
+  parameters:
+    - description: >-
+        You can only delete 1 job at a time, and only if that Job is both not
+        active, and does not have any days left.
+      in: query
+      name: job_id
+      required: true
+      type: string
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '204':
+      description: Status 204
+  summary: STAGE=UNK Delete the users job ad.
+  tags:
+    - jobs
+get:
+  description: Get a list of the logged in users jobs.
+  parameters:
+    - description: Optionally just return a few jobs.
+      in: query
+      name: job_id
+      required: false
+      type: string
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Status 200
+      schema:
+        $ref: '#/definitions/job_list_user'
+  summary: STAGE=UNK Get logged in user's job ads.
+  tags:
+    - jobs
+patch:
+  consumes: []
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/job_data_patch'
+  responses:
+    '204':
+      description: Status 204
+  summary: STAGE=UNK Update a Job ad.
+  tags:
+    - jobs
+post:
+  consumes: []
+  description: Create a new Job ad for the currently logged in user.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/job_data'
+  responses:
+    '201':
+      description: Status 201
+      headers:
+        url:
+          description: A url pointing to the newly created resource.
+          type: string
+          x-example: .../jobs/?id=1234
+  summary: STAGE=UNK Post a new job ad.
+  tags:
+    - jobs
+x-restlet:
+  section: JOBS

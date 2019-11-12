@@ -1,0 +1,91 @@
+properties:
+  contact:
+    properties:
+      address:
+        maxLength: 64
+        type: string
+      city:
+        maxLength: 45
+        type: string
+      contact:
+        maxLength: 45
+        type: string
+      email:
+        maxLength: 45
+        type: string
+      name:
+        maxLength: 45
+        type: string
+      phone:
+        type: integer
+      state:
+        maxLength: 2
+        type: string
+      website:
+        maxLength: 500
+        type: string
+      zip:
+        maxLength: 10
+        type: string
+    required:
+      - address
+      - city
+      - contact
+      - email
+      - name
+      - phone
+      - state
+      - website
+      - zip
+    type: object
+  position:
+    properties:
+      Image_url:
+        description: >-
+          We will download the image from the URL. If no image is found we will
+          automatically generate one. We accept an image file of up to 1MB in
+          size. All images will be resized to 200x200. If this value is
+          specified image_data cannot be used.
+        type: string
+      description:
+        description: This can be long form text.
+        type: string
+      distance_preference:
+        default: OTR
+        enum:
+          - OTR
+          - local
+        type: string
+      image_data:
+        description: >-
+          Base64 string of image. Base64 data must decode into a valid jpg or
+          png file no more than 1MB in size. All images will be resized to
+          200x200. If this value is specified image_url cannot be used.
+        type: string
+      locations:
+        description: >-
+          If included the array only accepts 2 digit state codes. MO, BC, AR,
+          and so on. 
+
+
+          How did Jon implement country level coding? I think at the time I said
+          it should be done by the "front end", I am still for that, but if the
+          hack is already in place in the backend I am open to leveraging it.
+        items:
+          type: string
+        type: array
+      region_preference:
+        $ref: '#/definitions/regions'
+      team_preference:
+        default: single
+        enum:
+          - single
+          - team
+        type: string
+    type: object
+required:
+  - contact
+  - position
+type: object
+x-restlet:
+  section: JOBS

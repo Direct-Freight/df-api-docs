@@ -1,0 +1,45 @@
+properties:
+  address:
+    type: string
+  city:
+    type: string
+  company:
+    type: string
+  contact_extension:
+    description: Limited to 3 digits.
+    type: integer
+  contact_number:
+    type: integer
+  fax_number:
+    type: integer
+  first_name:
+    type: string
+  last_name:
+    type: string
+  mobile_carrier:
+    $ref: '#/definitions/mobile_carriers'
+  mobile_number:
+    type: integer
+  state:
+    type: string
+  web_page:
+    type: string
+  zip:
+    type: string
+required:
+  - address
+  - city
+  - company
+  - contact_extension
+  - contact_number
+  - fax_number
+  - first_name
+  - last_name
+  - mobile_carrier
+  - mobile_number
+  - state
+  - web_page
+  - zip
+type: object
+x-restlet:
+  section: PROFILES

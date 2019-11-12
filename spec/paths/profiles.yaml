@@ -6,15 +6,14 @@ get:
       type: string
   responses:
     '200':
-      description: successful operation
+      description: Status 200
       schema:
-        $ref: '#/definitions/profile_object'
-  summary: STAGE=UNK Request the logged in user's profile.
+        $ref: '#/definitions/profile_response'
+  summary: STAGE=UNK Get their profile
   tags:
     - profiles
 patch:
   consumes: []
-  description: Please send in at least one field to be updated.
   parameters:
     - in: header
       name: end-user-token
@@ -24,13 +23,13 @@ patch:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/profile_object'
+        $ref: '#/definitions/profile_request'
   responses:
     '200':
-      description: successful operation
+      description: Status 200
       schema:
-        $ref: '#/definitions/profile_object'
-  summary: STAGE=UNK Update profile information.
+        $ref: '#/definitions/profile_patch_response'
+  summary: STAGE=UNK Update a profile.
   tags:
     - profiles
 post:
@@ -44,18 +43,14 @@ post:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/profile_object'
+        $ref: '#/definitions/profile_request'
   responses:
     '201':
-      description: Object created
+      description: Status 201
       headers:
-        Location:
-          description: >-
-            This will have a fully qualified API url you can call to get details
-            of your profile.
+        url:
           type: string
-          x-example: 'https://api.directfreight.com/v1/profiles/'
-  summary: STAGE=UNK Create a new profile.
+  summary: STAGE=UNK Create a profile
   tags:
     - profiles
 x-restlet:

@@ -1,0 +1,73 @@
+properties:
+  comments:
+    type: string
+  driving_record:
+    properties:
+      accidents:
+        minimum: 0
+        type: integer
+      age:
+        enum:
+          - 18-20
+          - 21-25
+          - 26-30
+          - Over 30
+        type: string
+      gender:
+        enum:
+          - male
+          - female
+        type: string
+      license:
+        enum:
+          - A
+          - B
+        type: string
+      tickets:
+        minimum: 0
+        type: integer
+    type: object
+  experience:
+    properties:
+      current_employer:
+        maxLength: 40
+        type: string
+      current_years_experience:
+        minimum: 0
+        type: integer
+      felony_reason:
+        type: string
+      has_felony:
+        type: boolean
+      previous_emplayer:
+        maxLength: 40
+        type: string
+      previous_years_experience:
+        minimum: 0
+        type: integer
+      total_years_experience:
+        minimum: 0
+        type: integer
+      trailer_experience:
+        $ref: '#/definitions/trailers'
+    type: object
+  job_preference:
+    properties:
+      distance_preference:
+        enum:
+          - OTR
+          - local
+        type: string
+      position:
+        $ref: '#/definitions/positions'
+      region_preference:
+        $ref: '#/definitions/regions'
+      team_preference:
+        enum:
+          - single
+          - team
+        type: string
+    type: object
+type: object
+x-restlet:
+  section: RESUMES

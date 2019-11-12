@@ -1,0 +1,82 @@
+delete:
+  description: No extra information is needed because we only allow one resume per account.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '204':
+      description: Status 204
+  summary: Delete the user's resume
+  tags:
+    - resumes
+get:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Status 200
+      schema:
+        $ref: '#/definitions/resume_data_optional'
+  summary: Get the user's resume.
+  tags:
+    - resumes
+patch:
+  consumes: []
+  description: >-
+    Each user only has 1 resume. Setting any field to null will set it to a null
+    or for a number 0.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/resume_data_optional'
+  responses:
+    '200':
+      description: Status 200
+  summary: Update the user's resume.
+  tags:
+    - resumes
+post:
+  consumes: []
+  description: >-
+    You must send in at least one valid request parameter in the body. It
+    doesn't matter which one, but at least one.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/resume_data_optional'
+      x-examples:
+        application/json: |-
+          {
+            "experience": {
+              "current_employer": "Jim Swift's Logistics"
+            }
+          }
+  responses:
+    '201':
+      description: Object created
+      headers:
+        url:
+          description: Link to the newly created resume.
+          type: string
+  summary: Submit the user's resume.
+  tags:
+    - resumes
+x-restlet:
+  section: RESUMES

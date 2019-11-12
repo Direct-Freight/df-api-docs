@@ -1,0 +1,87 @@
+delete:
+  parameters:
+    - description: The job ad to deactivate.
+      in: query
+      name: job_id
+      required: true
+      type: integer
+    - in: header
+      name: end-user-auth
+      required: true
+      type: string
+  responses:
+    '204':
+      description: Status 204
+  summary: STAGE=UNK Decativate a Job ad
+  tags:
+    - jobs_status
+get:
+  description: >-
+    This method will return back enough information to determine if a job ad is
+    runnig, and when it will stop.
+  parameters:
+    - in: query
+      name: job_id
+      required: true
+      type: integer
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Status 200
+      schema:
+        properties:
+          bill_method:
+            enum:
+              - manual
+              - automatic
+            type: string
+          days_left:
+            description: >-
+              If the Job is not active, this value tells how many days the Job
+              can be run for before payment.
+            type: integer
+          expires_after:
+            format: date
+            type: string
+        required:
+          - bill_method
+          - days_left
+          - expires_after
+        type: object
+  summary: STAGE=UNK Get the status of a job ad.
+  tags:
+    - jobs_status
+post:
+  consumes: []
+  description: >-
+    This method will only work if the add has days left of > 0, otherwise in
+    theory it should return a url to a chargebee payment portal. 
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        properties:
+          job_id:
+            description: The id of the job ad to activate.
+            type: string
+        type: object
+  responses:
+    '201':
+      description: Status 201
+      headers:
+        url:
+          description: The board location of the active job ad.
+          type: string
+  summary: STAGE=UNK Activate a job ad.
+  tags:
+    - jobs_status
+x-restlet:
+  section: JOBS

@@ -1,0 +1,28 @@
+get:
+  parameters:
+    - enum:
+        - resume
+        - job
+      in: query
+      name: favorite_type
+      required: true
+      type: string
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Status 200
+      schema:
+        properties:
+          count:
+            type: integer
+        required:
+          - count
+        type: object
+  summary: STAGE=UNK Get a count of favorites
+  tags:
+    - favorites
+x-restlet:
+  section: FAVORITES

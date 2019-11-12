@@ -1,0 +1,18 @@
+description: >-
+  This is a list of possible regions. This matches the regions from searching
+  and posting a job ad on our website. I am adding it to the API with the
+  assumption that we can expand our resume regions to match. This should aviod
+  some confusion and weirdness. An example would be alert options. 
+enum:
+  - east coast
+  - west coast
+  - mid west
+  - nationwide
+  - north east
+  - north west
+  - south east
+  - south west
+  - local
+type: string
+x-restlet:
+  section: common_definitions

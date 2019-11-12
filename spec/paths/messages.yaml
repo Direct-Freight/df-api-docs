@@ -1,0 +1,60 @@
+get:
+  description: >-
+    This is the method that pulls down a conversation. For our site this is the
+    main portion of the page. Internally we have other statuses like pending,
+    and rejected, but a public users of our API doesn t have access to them.
+  parameters:
+    - description: Who the conversation is with.
+      in: query
+      name: contact_id
+      required: false
+      type: string
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Status 200
+      schema:
+        $ref: '#/definitions/conversation_list'
+  summary: Get a conversation.
+  tags:
+    - messages
+post:
+  consumes: []
+  description: >-
+    This will send a message to any other user. Currently there are no blocks or
+    set restrictions if an API user just started guessing. In order to get a
+    contact_id a contact user would need to pull that info from a resume, or a
+    job ad.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        properties:
+          contact_id:
+            description: Who the message is being sent to.
+            type: integer
+          message:
+            description: This can contain a small list of html tags.
+            type: string
+        required:
+          - contact_id
+          - message
+        type: object
+  responses:
+    '202':
+      description: Status 202
+      schema:
+        $ref: '#/definitions/conversation_list'
+  summary: Send a message
+  tags:
+    - messages
+x-restlet:
+  section: MESSAGES

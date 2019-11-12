@@ -1,0 +1,9 @@
+properties:
+  favorite_id:
+    description: A subset of this users favorite resumes or job ids
+    items:
+      type: string
+    type: array
+type: object
+x-restlet:
+  section: common_definitions

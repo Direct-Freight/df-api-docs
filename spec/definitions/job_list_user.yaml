@@ -1,0 +1,117 @@
+properties:
+  list:
+    items:
+      properties:
+        bill_method:
+          description: Whether or not the add will automatically renew.
+          enum:
+            - manual
+            - automatic
+          type: string
+        contact:
+          description: The contact information for this ad.
+          properties:
+            address:
+              maxLength: 64
+              type: string
+            city:
+              maxLength: 45
+              type: string
+            contact:
+              maxLength: 45
+              type: string
+            email:
+              maxLength: 45
+              type: string
+            name:
+              maxLength: 45
+              type: string
+            phone:
+              type: integer
+            state:
+              maxLength: 2
+              type: string
+            website:
+              maxLength: 500
+              type: string
+            zip:
+              maxLength: 10
+              type: string
+          required:
+            - address
+            - city
+            - contact
+            - name
+            - phone
+            - state
+            - zip
+          type: object
+        days_left:
+          description: >-
+            A positive value indicates the ad is both inactive, and can be run
+            for that number of days.
+          type: integer
+        expires_after:
+          description: >-
+            If this date is set for today or in the future the job ad is
+            currently active.
+          format: date
+          type: string
+        job_id:
+          type: number
+        position:
+          properties:
+            description:
+              description: This is a large text field.
+              type: string
+            distance_preference:
+              enum:
+                - local
+                - OTR
+              type: string
+            image_url:
+              description: the uri path to the image.
+              example: 'http://df.co/job_images/ASOETUHAOSENTUHAOENUTSH.png'
+              maxLength: 32
+              type: string
+            locations:
+              items:
+                type: string
+              type: array
+            region_preference:
+              $ref: '#/definitions/regions'
+            team_preference:
+              enum:
+                - team
+                - single
+              type: string
+          required:
+            - description
+            - distance_preference
+            - image_url
+            - region_preference
+            - team_preference
+          type: object
+      required:
+        - bill_method
+        - contact
+        - days_left
+        - expires_after
+        - job_id
+        - position
+      type: object
+    type: array
+  page_number:
+    type: integer
+  total_items:
+    type: integer
+  total_pages:
+    type: integer
+required:
+  - list
+  - page_number
+  - total_items
+  - total_pages
+type: object
+x-restlet:
+  section: JOBS

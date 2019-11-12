@@ -1,20 +1,8 @@
-example: |-
-  {
-    "code": 1,
-    "error": "Generic Validation",
-    "description": "The e-mail address must be valid."
-  }
 properties:
-  code:
-    type: integer
-  description:
-    type: string
-  error:
+  end-user-token:
     type: string
 required:
-  - code
-  - description
-  - error
+  - end-user-token
 type: object
 x-restlet:
-  section: common_definitions
+  section: END_USER_AUTHENTICATIONS

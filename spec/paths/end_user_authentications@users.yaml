@@ -1,0 +1,34 @@
+post:
+  consumes: []
+  description: Create a new user
+  parameters:
+    - in: body
+      name: body
+      required: true
+      schema:
+        properties:
+          email:
+            type: string
+          password:
+            type: string
+        required:
+          - email
+          - password
+        type: object
+  responses:
+    '201':
+      description: Status 201
+      schema:
+        description: 'Will automatically log them in, and return the needed token.'
+        properties:
+          end-user-token:
+            description: Their token to show they are logged in.
+            type: string
+        required:
+          - end-user-token
+        type: object
+  summary: Create user
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

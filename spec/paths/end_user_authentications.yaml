@@ -1,5 +1,4 @@
 delete:
-  description: This logs a user out. the end-user-token will no longer be valid.
   parameters:
     - in: header
       name: end-user-token
@@ -7,53 +6,76 @@ delete:
       type: string
   responses:
     '204':
-      description: Will not return content on a successful logout.
-  summary: Logout
+      description: Status 204
+  summary: Log out.
   tags:
     - end_user_authentications
 get:
-  description: Get current authentication level for the user.
   parameters:
     - in: header
       name: end-user-token
-      required: false
+      required: true
       type: string
   responses:
     '200':
-      description: successful operation
-      examples:
-        application/json: '{status: "Subscribed"}'
+      description: Status 200
       schema:
         properties:
           status:
-            description: Will return the logged in user's status.
             enum:
-              - subscribed
-              - posting
-              - overdue
+              - premium_employer
+              - driver
+              - employer
               - not_logged_in
+              - overdue_employer
             type: string
+        required:
+          - status
         type: object
-  summary: Get authentication level.
+  summary: Get a users status.
   tags:
     - end_user_authentications
 post:
   consumes: []
-  description: 'This function sends login credentials, and retrieves a stateless token.'
   parameters:
     - in: body
       name: body
       required: true
       schema:
-        $ref: '#/definitions/login_credentials'
+        properties:
+          login:
+            type: string
+          realm:
+            description: 'email, username.'
+            type: string
+          secret:
+            type: string
+        required:
+          - login
+          - realm
+          - secret
+        type: object
   responses:
     '201':
-      description: successful operation
+      description: Status 201
       schema:
-        $ref: '#/definitions/end-user-token'
+        $ref: '#/definitions/error_object'
     '422':
-      $ref: '#/responses/error_422'
-  summary: Login
+      description: Status 422
+      schema:
+        properties:
+          code:
+            type: integer
+          description:
+            type: string
+          error:
+            type: string
+        required:
+          - code
+          - description
+          - error
+        type: object
+  summary: Log in.
   tags:
     - end_user_authentications
 x-restlet:
