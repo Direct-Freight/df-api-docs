@@ -39,6 +39,11 @@ properties:
     type: string
   state:
     type: string
+  team_preference:
+    enum:
+      - single
+      - team
+    type: string
   trailer_experience:
     items:
       enum:
