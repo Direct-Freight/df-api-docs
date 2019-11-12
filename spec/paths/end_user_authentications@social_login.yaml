@@ -14,15 +14,12 @@ get:
       required: true
       type: string
   responses:
-    '200':
+    '201':
       description: successful operation
-      examples:
-        application/json: |-
-          {
-            "email": "jose@directfreight.com",
-            "end-user-token": "dbfa6de5f83cd905b122299ce6178120eafcd552",
-            "new_account": false
-          }
+      schema:
+        $ref: '#/definitions/end-user-token'
+    '422':
+      $ref: '#/responses/error_422'
   summary: OneALl Social Login/Create Account
   tags:
     - end_user_authentications
