@@ -1993,9 +1993,17 @@ definitions:
   social-login-end-user-token:
     properties:
       end-user-token:
-        description: On success and end-user-token is returned, as well as a new_account property which lets you know if a new account was created, or ir an account already existed for that email.
+        description: On success and end-user-token is returned.
         example: XX423ASOEUHT4AESUTH
         type: string
+      email:
+        description: The email address that was used to login.
+        example: example@directfreight.com
+        type: string   
+      new_account:
+        description: Indicates if a new account was created or an existing one was used to login.
+        example: false
+        type: bool           
     type: object
     x-restlet:
       section: END_USER_AUTHENTICATIONS      
