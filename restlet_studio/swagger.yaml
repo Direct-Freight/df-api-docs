@@ -1509,9 +1509,6 @@ definitions:
         example: '2019-12-30'
         format: date
         type: string
-      sort_parameter:
-        description: Any value that is valid in the boards sort_order is also valid here.
-        type: string
       list_type:
         description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', and ''not-active''.'
         enum:
@@ -1544,6 +1541,8 @@ definitions:
               format: date
               type: string
             type: array
+          sort_parameter:
+            type: string
           trailer_type:
             items:
               type: string
