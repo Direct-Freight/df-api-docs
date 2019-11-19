@@ -82,7 +82,7 @@ responses:
   object_created:
     description: Object created check the headers for a reference URL.
     schema:
-      $ref: '#/definitions/create_status_alert'
+      $ref: '#/definitions/create_status'
 schemes:
   - https
 security:
