@@ -46,6 +46,7 @@ properties:
     enum:
       - email
       - text
+      - push
     type: string
   start_hour:
     description: A value corresponding to the hour of the day.
