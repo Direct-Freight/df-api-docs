@@ -12,9 +12,6 @@ properties:
         - Sat
       type: string
     type: array
-  email_address:
-    description: The address for the alert.
-    type: string
   end_hour:
     description: A  corresponding to the hour of the day.
     maximum: 21
@@ -93,7 +90,6 @@ properties:
     type: integer
 required:
   - days_of_week
-  - email_address
   - end_hour
   - expires_after
   - list_order
