@@ -1509,7 +1509,7 @@ definitions:
         example: '2019-12-30'
         format: date
         type: string
-      list_order:
+      sort_parameter:
         description: Any value that is valid in the boards sort_order is also valid here.
         type: string
       list_type:
