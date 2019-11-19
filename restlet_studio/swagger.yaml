@@ -89,7 +89,7 @@ responses:
   object_created:
     description: Object created check the headers for a reference URL.
     schema:
-      $ref: '#/definitions/create_status'
+      $ref: '#/definitions/create_status_alert'
 paths:
   '/alerts/{board_type}':
     delete:
@@ -1527,7 +1527,9 @@ definitions:
           destination_radius:
             type: integer
           destination_state:
-            type: string
+            items:
+              type: string
+            type: array
           full_load:
             type: boolean
           origin_city:
@@ -1535,7 +1537,9 @@ definitions:
           origin_radius:
             type: integer
           origin_state:
-            type: string
+            items:
+              type: string
+            type: array
           ship_date:
             items:
               format: date
@@ -1962,6 +1966,13 @@ definitions:
   create_status:
     properties:
       success:
+        type: integer
+    type: object
+    x-restlet:
+      section: common_definitions
+  create_status_alert:
+    properties:
+      alert_id:
         type: integer
     type: object
     x-restlet:
