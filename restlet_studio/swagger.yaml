@@ -89,7 +89,7 @@ responses:
   object_created:
     description: Object created check the headers for a reference URL.
     schema:
-      $ref: '#/definitions/create_status_alert'
+      $ref: '#/definitions/create_status'
 paths:
   '/alerts/{board_type}':
     delete:
@@ -1965,7 +1965,7 @@ definitions:
       section: BOARDS
   create_status:
     properties:
-      success:
+      success1:
         type: integer
     type: object
     x-restlet:
