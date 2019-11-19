@@ -49,7 +49,9 @@ properties:
       destination_radius:
         type: integer
       destination_state:
-        type: string
+        items:
+          type: string
+        type: array
       full_load:
         type: boolean
       origin_city:
@@ -57,7 +59,9 @@ properties:
       origin_radius:
         type: integer
       origin_state:
-        type: string
+        items:
+          type: string
+        type: array
       ship_date:
         items:
           format: date
