@@ -91,7 +91,6 @@ required:
   - days_of_week
   - end_hour
   - expires_after
-  - list_order
   - list_type
   - minute_frequency
   - search
