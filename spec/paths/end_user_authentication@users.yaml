@@ -19,7 +19,7 @@ post:
         type: object
     '422':
       $ref: '#/responses/error_422'
-  summary: STAGE=UNK Create a new user.
+  summary: Create a new user.
   tags:
     - end_user_authentications
 x-restlet:

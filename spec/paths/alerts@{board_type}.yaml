@@ -90,7 +90,9 @@ post:
         $ref: '#/definitions/alert'
   responses:
     '201':
-      $ref: '#/responses/object_created'
+      description: Object created check the headers for a reference URL
+      schema:
+        $ref: '#/definitions/create_status_alert'
   summary: STAGE=UNK Create an alert.
   tags:
     - alerts

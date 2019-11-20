@@ -16,7 +16,7 @@ delete:
       description: 200 OK
   summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
   tags:
-    - postings
+    - postings/custom_categories
 get:
   parameters:
     - description: To just return information about some postings.
@@ -37,7 +37,7 @@ get:
         $ref: '#/definitions/get_custom_categories_response'
   summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
   tags:
-    - postings
+    - postings/custom_categories
 parameters:
   - description: 'Valid types are "names", and "data".'
     enum:
@@ -59,7 +59,7 @@ patch:
       description: successful operation
   summary: 'STAGE=UNK Update a category name, or value.'
   tags:
-    - postings
+    - postings/custom_categories
 post:
   parameters:
     - in: header
@@ -71,6 +71,6 @@ post:
       $ref: '#/responses/object_created'
   summary: 'STAGE=UNK Create new category names, or add new data.'
   tags:
-    - postings
+    - postings/custom_categories
 x-restlet:
-  section: POSTINGS
+  section: POSTINGS/CUSTOM_CATEGORIES

@@ -18,7 +18,7 @@ delete:
   responses:
     '204':
       description: Status 204
-  summary: STAGE=UNK Remove a lookup.
+  summary: STAGE=UNIMPLEMENTED-NO-NEED Remove a lookup.
   tags:
     - validations
 get:
@@ -47,7 +47,9 @@ get:
         required:
           - trailer_type
         type: object
-  summary: STAGE=UNK Find an official type to match to the customer submitted one.
+  summary: >-
+    STAGE=PRIVATE-LIVE Find an official type to match to the customer submitted
+    one.
   tags:
     - validations
 patch:
@@ -82,7 +84,9 @@ patch:
   responses:
     '202':
       description: Status 202
-  summary: STAGE=UNK Update which DF trailer_types match the customer_type
+  summary: >-
+    STAGE=UNIMPLEMENTED-NO-NEED Update which DF trailer_types match the
+    customer_type
   tags:
     - validations
 post:
@@ -122,7 +126,7 @@ post:
   responses:
     '201':
       description: Status 201
-  summary: STAGE=UNK Add a custom trailer type match.
+  summary: STAGE=UNIMPLEMENTED-NO-NEED Add a custom trailer type match.
   tags:
     - validations
 x-restlet:

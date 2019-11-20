@@ -1,4 +1,7 @@
 properties:
+  alert_id:
+    description: The ID of the alert
+    type: integer
   days_of_week:
     description: Limit the days that alerts are sent to the days listed.
     items:
@@ -23,6 +26,16 @@ properties:
       until one year into the future.
     example: '2019-12-30'
     format: date
+    type: string
+  last_modified:
+    description: The last time this alert was modified.
+    example: '2019-11-20 10:05:35'
+    format: datetime
+    type: string
+  last_sent:
+    description: The last time this alert was sent.
+    example: '2019-11-20 10:05:35'
+    format: datetime
     type: string
   list_type:
     description: >-
@@ -62,6 +75,10 @@ properties:
         items:
           type: string
         type: array
+      search_id:
+        type: integer
+      search_type:
+        type: string
       ship_date:
         items:
           format: date
@@ -90,6 +107,9 @@ properties:
     description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
     maximum: 2
     minimum: -1
+    type: integer
+  user_id:
+    description: The ID of the user
     type: integer
 required:
   - days_of_week

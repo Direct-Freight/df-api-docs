@@ -110,7 +110,7 @@ patch:
 post:
   consumes: []
   description: >-
-    Currently only Push notifications are implemneted. With them a post creates
+    Currently only Push notifications are implemented. With them a post creates
     and approves the optin. Later on when text/email is ported post will create
     the optin with the status of 'no response' meaning they haven't replied with
     the propper code, or clicked an authorization link.

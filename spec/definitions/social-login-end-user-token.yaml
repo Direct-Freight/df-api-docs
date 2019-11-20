@@ -1,0 +1,18 @@
+properties:
+  email:
+    description: The email address that was used to login.
+    example: example@directfreight.com
+    type: string
+  end-user-token:
+    description: On success and end-user-token is returned.
+    example: XX423ASOEUHT4AESUTH
+    type: string
+  new_account:
+    description: >-
+      Indicates if a new account was created or an existing one was used to
+      login.
+    example: false
+    type: boolean
+type: object
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

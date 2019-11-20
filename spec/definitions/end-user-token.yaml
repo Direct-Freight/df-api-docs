@@ -1,6 +1,6 @@
 properties:
   end-user-token:
-    description: On success and end-user-token is returned.
+    description: On success an end-user-token is returned.
     example: XX423ASOEUHT4AESUTH
     type: string
 type: object
