@@ -702,7 +702,7 @@ paths:
             $ref: '#/definitions/social-login-end-user-token'
         '422':
           $ref: '#/responses/error_422'          
-      summary: OneALl Social Login/Create Account
+      summary:  STAGE=Private OneALl Social Login/Create Account
       tags:
         - end_user_authentications
     x-restlet:
