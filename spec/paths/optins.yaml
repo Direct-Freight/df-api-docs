@@ -28,6 +28,8 @@ delete:
     '204':
       description: Status 204
   summary: STAGE=UNK Opt someone out of one or more mediums and channels.
+  tags:
+    - optins
 get:
   parameters:
     - description: To limit your list to just one medium.
@@ -77,6 +79,8 @@ get:
           - list
         type: object
   summary: STAGE=UNK Get the optin status of a user.
+  tags:
+    - optins
 patch:
   consumes: []
   parameters:
@@ -107,6 +111,8 @@ patch:
     '204':
       description: Status 204
   summary: STAGE=UNK Confirm an optin.
+  tags:
+    - optins
 post:
   consumes: []
   description: >-

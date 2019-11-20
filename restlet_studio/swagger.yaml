@@ -702,7 +702,7 @@ paths:
             $ref: '#/definitions/social-login-end-user-token'
         '422':
           $ref: '#/responses/error_422'          
-      summary: OneALl Social Login/Create Account
+      summary:  STAGE=Private OneALl Social Login/Create Account
       tags:
         - end_user_authentications
     x-restlet:
@@ -802,7 +802,7 @@ paths:
               - title
               - update_url
             type: object
-      summary: Get any available update information.
+      summary:  STAGE=Private Get any available update information.
       tags:
         - mobile update
     x-restlet:
@@ -836,6 +836,8 @@ paths:
         '204':
           description: Status 204
       summary: STAGE=UNK Opt someone out of one or more mediums and channels.
+      tags:
+        - optins
     get:
       parameters:
         - description: To limit your list to just one medium.
@@ -885,6 +887,8 @@ paths:
               - list
             type: object
       summary: STAGE=UNK Get the optin status of a user.
+      tags:
+        - optins
     patch:
       consumes: []
       parameters:
@@ -913,6 +917,8 @@ paths:
         '204':
           description: Status 204
       summary: STAGE=UNK Confirm an optin.
+      tags:
+        - optins
     post:
       consumes: []
       description: 'Currently only Push notifications are implemented. With them a post creates and approves the optin. Later on when text/email is ported post will create the optin with the status of ''no response'' meaning they haven''t replied with the propper code, or clicked an authorization link.'
