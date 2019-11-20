@@ -1,5 +1,5 @@
 properties:
-  success1:
+  success:
     type: integer
 type: object
 x-restlet:

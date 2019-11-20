@@ -26,9 +26,6 @@ properties:
       until one year into the future.
     format: date
     type: string
-  list_order:
-    description: Any value that is valid in the boards sort_order is also valid here.
-    type: string
   list_type:
     description: >-
       This specify the type of list that is returned, including disabling the
