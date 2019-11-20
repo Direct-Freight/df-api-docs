@@ -33,7 +33,7 @@ get:
           - title
           - update_url
         type: object
-  summary: Get any available update information.
+  summary: STAGE=Private Get any available update information.
   tags:
     - mobile update
 x-restlet:
