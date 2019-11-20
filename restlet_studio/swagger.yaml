@@ -1479,7 +1479,7 @@ definitions:
         ]
       }
     properties:
-      data:
+      alerts:
         items:
           $ref: '#/definitions/alert_response_item'
         type: array
