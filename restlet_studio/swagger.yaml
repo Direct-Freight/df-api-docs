@@ -513,7 +513,7 @@ paths:
             type: object
         '422':
           $ref: '#/responses/error_422'
-      summary: STAGE=UNK Create a new user.
+      summary: Create a new user.
       tags:
         - end_user_authentications
     x-restlet:
@@ -1222,7 +1222,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/profile_object'
-      summary: STAGE=UNK Request the logged in user's profile.
+      summary: Request the logged in user's profile.
       tags:
         - profiles
     patch:
@@ -1243,7 +1243,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/profile_object'
-      summary: STAGE=UNK Update profile information.
+      summary: Update profile information.
       tags:
         - profiles
     post:
@@ -1266,7 +1266,7 @@ paths:
               description: This will have a fully qualified API url you can call to get details of your profile.
               type: string
               x-example: 'https://api.directfreight.com/v1/profiles/'
-      summary: STAGE=UNK Create a new profile.
+      summary: Create a new profile.
       tags:
         - profiles
     x-restlet:
@@ -1967,7 +1967,7 @@ definitions:
       section: BOARDS
   create_status:
     properties:
-      success1:
+      success:
         type: integer
     type: object
     x-restlet:
@@ -2255,9 +2255,6 @@ definitions:
       expires_after:
         description: The last day the alert will be valid. Valid time frames are from today until one year into the future.
         format: date
-        type: string
-      list_order:
-        description: Any value that is valid in the boards sort_order is also valid here.
         type: string
       list_type:
         description: 'This specify the type of list that is returned, including disabling the list from being sent at all.'
