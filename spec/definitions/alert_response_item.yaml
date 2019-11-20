@@ -1,0 +1,116 @@
+properties:
+  alert_id:
+    description: The ID of the alert
+    type: integer
+  days_of_week:
+    description: Limit the days that alerts are sent to the days listed.
+    items:
+      enum:
+        - Sun
+        - Mon
+        - Tue
+        - Wed
+        - Thu
+        - Fri
+        - Sat
+      type: string
+    type: array
+  end_hour:
+    description: A  corresponding to the hour of the day.
+    maximum: 21
+    minimum: 3
+    type: integer
+  expires_after:
+    description: >-
+      The last day the alert will be valid. Valid time frames are from today
+      until one year into the future.
+    example: '2019-12-30'
+    format: date
+    type: string
+  list_type:
+    description: >-
+      This specify the type of list that is returned, including disabling the
+      list from being sent at all. Valid values are 'complete-list','only-new',
+      and 'not-active'.
+    enum:
+      - complete-list
+      - only-new
+      - not-active
+    type: string
+  minute_frequency:
+    description: >-
+      How many minutes to wait before sending another alert. Valid values are
+      '15','30','60','120','240','480', and '1440'.
+    type: integer
+  search:
+    description: >-
+      Refer to the boards documentation for the full list of restrictions for
+      each field.
+    properties:
+      destination_city:
+        type: string
+      destination_radius:
+        type: integer
+      destination_state:
+        items:
+          type: string
+        type: array
+      full_load:
+        type: boolean
+      origin_city:
+        type: string
+      origin_radius:
+        type: integer
+      origin_state:
+        items:
+          type: string
+        type: array
+      search_id:
+        type: integer
+      search_type:
+        type: string
+      ship_date:
+        items:
+          format: date
+          type: string
+        type: array
+      sort_parameter:
+        type: string
+      trailer_type:
+        items:
+          type: string
+        type: array
+    type: object
+  send_type:
+    description: What method to send the alert list.
+    enum:
+      - email
+      - text
+      - push
+    type: string
+  start_hour:
+    description: A  corresponding to the hour of the day.
+    maximum: 21
+    minimum: 3
+    type: integer
+  time_zone:
+    description: 'A number between -1 and 2. -1 = EST, 0 = CST, 1 = MST, 2 = PST'
+    maximum: 2
+    minimum: -1
+    type: integer
+  user_id:
+    description: The ID of the user
+    type: integer
+required:
+  - days_of_week
+  - end_hour
+  - expires_after
+  - list_type
+  - minute_frequency
+  - search
+  - send_type
+  - start_hour
+  - time_zone
+type: object
+x-restlet:
+  section: ALERTS
