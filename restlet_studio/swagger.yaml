@@ -163,7 +163,7 @@ paths:
         - alerts
     post:
       consumes: []
-      description: 'Any parameter that is defined here and is also defined on the boards GET, follows the same rules.'
+      description: 'This method will update or create an alert. The POST action with the same search parameters but different alert parameters will update the existing alert. The one caveaut to this is send_type. You can have 2 alerts with the same search parameters but different send_types. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
       parameters:
         - in: header
           name: end-user-token
