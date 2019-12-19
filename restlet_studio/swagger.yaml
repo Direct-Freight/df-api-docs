@@ -2122,6 +2122,10 @@ definitions:
         description: The email address that was used to login.
         example: example@directfreight.com
         type: string   
+      username:
+        description: The username that was used to login.
+        example: DFUSER12345
+        type: string           
       new_account:
         description: Indicates if a new account was created or an existing one was used to login.
         example: false
