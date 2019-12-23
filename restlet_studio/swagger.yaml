@@ -2043,6 +2043,9 @@ definitions:
       total_items:
         description: A count of all the entry objects for the specified search.
         type: integer
+      total_new:
+        description: A count of all the NEW entry objects for the specified search.
+        type: integer        
       total_pages:
         description: 'A count of the # of pages based on the search parameters.'
         type: integer
