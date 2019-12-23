@@ -3,7 +3,8 @@ example: |-
     "list": "{}",
     "page_number": "{}",
     "total_items": "{}",
-    "total_pages": 0
+    "total_pages": 0,
+    "total_new": 0        
   }
 properties:
   list:
