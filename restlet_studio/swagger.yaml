@@ -1513,9 +1513,9 @@ definitions:
         minimum: 3
         type: integer
       expires_after:
-        description: The last day the alert will be valid. Valid time frames are from today until one year into the future.
-        example: '2019-12-30'
-        format: date
+        description: The last day and time the alert will be valid. Valid time frames are from today until one year into the future.  This field will accept date only or a date and time.  If the date only is submitted the time will default to 23:59:59
+        example: '2020-01-01 14:30:24'
+        format: date time
         type: string
       list_type:
         description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', and ''not-active''.'
