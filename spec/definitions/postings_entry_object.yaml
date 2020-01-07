@@ -19,8 +19,8 @@ properties:
     type: string
   full_load:
     description: >-
-      The load will be defaulted to full if this argument isn't included and
-      marked to false.
+      The load will be assumed to be full if this argument isn't included and
+      marked to true.
     type: boolean
   height:
     description: This number represents inches.

@@ -13,6 +13,10 @@ properties:
       login.
     example: false
     type: boolean
+  username:
+    description: The username that was used to login.
+    example: DFUSER12345
+    type: string
 type: object
 x-restlet:
   section: END_USER_AUTHENTICATIONS

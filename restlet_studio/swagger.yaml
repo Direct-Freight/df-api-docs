@@ -163,7 +163,7 @@ paths:
         - alerts
     post:
       consumes: []
-      description: 'Any parameter that is defined here and is also defined on the boards GET, follows the same rules.'
+      description: 'This method will update or create an alert. The POST action with the same search parameters but different alert parameters will update the existing alert. The one caveaut to this is send_type. You can have 2 alerts with the same search parameters but different send_types. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
       parameters:
         - in: header
           name: end-user-token
@@ -1513,9 +1513,9 @@ definitions:
         minimum: 3
         type: integer
       expires_after:
-        description: The last day the alert will be valid. Valid time frames are from today until one year into the future.
-        example: '2019-12-30'
-        format: date
+        description: The last day and time the alert will be valid. Valid time frames are from today until one year into the future.  This field will accept date only or a date and time.  If the date only is submitted the time will default to 23:59:59
+        example: '2020-01-01 14:30:24'
+        format: date time
         type: string
       list_type:
         description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', and ''not-active''.'
@@ -1777,7 +1777,7 @@ definitions:
           type: string
         type: array
       full_load:
-        description: This is only valid when requesting a loads board. Omitting this field will return both full and partial loads. A true value will limit results to full loads loads only.  False will return partial loads only.
+        description: This is only valid when requesting a loads board. Omitting this field will return both full and partial loads. A true value will limit results to full loads only.  False will return partial loads only.
         example: true
         type: boolean
       item_count:
@@ -2029,7 +2029,8 @@ definitions:
         "list": "{}",
         "page_number": "{}",
         "total_items": "{}",
-        "total_pages": 0
+        "total_pages": 0,
+        "total_new": 0        
       }
     properties:
       list:
@@ -2043,6 +2044,9 @@ definitions:
       total_items:
         description: A count of all the entry objects for the specified search.
         type: integer
+      total_new:
+        description: A count of all the NEW entry objects for the specified search.
+        type: integer        
       total_pages:
         description: 'A count of the # of pages based on the search parameters.'
         type: integer
@@ -2051,27 +2055,7 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
-  create_multiple_postings:
-    properties:
-      contact_name:
-        description: 'The dispatchers name. By default we use the profile information. '
-        type: string
-      contact_phone:
-        description: 'By default we use the number listed in their profile. '
-        type: string
-      delete_current_before_posting:
-        description: 'An optional argument that will first delete all of the users loads before entering the fresh list. Caution, this will still delete everything even if some of the entries fail to be created. '
-        type: boolean
-      list:
-        description: 'Valid types are &quot;loads&quot;, &quot;trucks&quot;, &quot;private_loads&quot;, &quot;private_trucks&quot;, &quot;test_loads&quot;, and &quot;test_trucks&quot; '
-        items:
-          type: string
-        type: array
-    required:
-      - list
-    type: object
-    x-restlet:
-      section: POSTINGS
+
   create_notes:
     properties:
       body:
@@ -2122,6 +2106,10 @@ definitions:
         description: The email address that was used to login.
         example: example@directfreight.com
         type: string   
+      username:
+        description: The username that was used to login.
+        example: DFUSER12345
+        type: string           
       new_account:
         description: Indicates if a new account was created or an existing one was used to login.
         example: false
@@ -2422,18 +2410,7 @@ definitions:
     type: object
     x-restlet:
       section: not categorized yet
-  post_posting_multiple_response:
-    example: |-
-      {
-        "success": true
-      }
-    properties:
-      success:
-        description: 'This will return true, and have a unique location in the location header.'
-        type: boolean
-    type: object
-    x-restlet:
-      section: POSTINGS
+
   post_posting_type_action_body:
     properties:
       source_id:
@@ -2478,7 +2455,7 @@ definitions:
         description: Delivery location state of load/truck. For truck type entries this field is optional.
         type: string
       full_load:
-        description: The load will be defaulted to full if this argument isn't included and marked to false.
+        description: The load will be assumed to be full if this argument isn't included and marked to true.
         type: boolean
       height:
         description: This number represents inches.
@@ -2911,16 +2888,7 @@ definitions:
     type: object
     x-restlet:
       section: LOCATIONS
-  success_status_response:
-    example:
-      status: status
-    properties:
-      status:
-        description: 'A text status like OPTIN, NORESPONSE, OPTOUT.'
-        type: string
-    type: object
-    x-restlet:
-      section: not categorized yet
+  
   toggle_hidden_companies:
     properties:
       company_name:

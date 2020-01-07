@@ -46,7 +46,7 @@ properties:
     description: >-
       This is only valid when requesting a loads board. Omitting this field will
       return both full and partial loads. A true value will limit results to
-      full loads loads only.  False will return partial loads only.
+      full loads only.  False will return partial loads only.
     example: true
     type: boolean
   item_count:

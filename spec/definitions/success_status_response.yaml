@@ -1,9 +1,0 @@
-example:
-  status: status
-properties:
-  status:
-    description: 'A text status like OPTIN, NORESPONSE, OPTOUT.'
-    type: string
-type: object
-x-restlet:
-  section: not categorized yet
