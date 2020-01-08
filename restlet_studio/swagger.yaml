@@ -1848,6 +1848,7 @@ definitions:
           - receive_date
           - tia_user
           - green_light
+          - new
         example: age
         type: string
       trailer_type:
@@ -1946,6 +1947,10 @@ definitions:
       length:
         description: Length in feet.  Will be null if empty.
         type: number
+      new:
+        description: Indicates whether the load is new to the the user. True indicates that this load has never been returned to the user or has been submitted within the last 5 minutes.
+        example: true
+        type: boolean
       origin_city:
         description: Origin city of item.
         example: Chicago
