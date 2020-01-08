@@ -135,6 +135,7 @@ properties:
       - receive_date
       - tia_user
       - green_light
+      - new
     example: age
     type: string
   trailer_type:
