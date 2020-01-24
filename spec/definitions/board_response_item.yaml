@@ -105,7 +105,9 @@ properties:
     format: date
     type: string
   ship_date:
-    description: Date item is scheduled to be loaded.
+    description: >-
+      The date the load is scheduled to be picked up.  For trucks this is the
+      date the truck is available.
     example: '2018-09-20'
     format: date
     type: string
