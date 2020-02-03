@@ -1947,10 +1947,7 @@ definitions:
       length:
         description: Length in feet.  Will be null if empty.
         type: number
-      new:
-        description: Indicates whether the load is new to the the user. True indicates that this load has never been returned to the user or has been submitted within the last 5 minutes.
-        example: true
-        type: boolean
+      
       origin_city:
         description: Origin city of item.
         example: Chicago
@@ -1980,6 +1977,12 @@ definitions:
         example: '2018-09-20'
         format: date
         type: string
+      tags:
+        description: Indicates special characteristics of a load record.  This field may be returned as a blank array.  Currently (new) is the only value that will be returned.
+        example: new
+        items:
+          type: string
+        type: array
       trade_orgs:
         description: Approved Trade Organizations
         properties:
@@ -1990,7 +1993,9 @@ definitions:
       trailer_type:
         description: A string array of valid trailer types.
         example: V
-        type: string
+        items:
+          type: string
+        type: array  
       trip_miles:
         description: Distance between origin and destination.  This field will be null if distance cannot be calculated.
         example: 523
