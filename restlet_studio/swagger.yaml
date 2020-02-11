@@ -112,7 +112,7 @@ paths:
       tags:
         - alerts
     get:
-      description: Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
+      description: Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id. Returns 50 alerts by default.
       parameters:
         - description: only get a subset of alerts. As this is a get request this is specified as a query string parameter.
           in: query
@@ -121,6 +121,11 @@ paths:
           name: alert_id
           required: false
           type: array
+        - description: Page number to fetch, defaults to 1
+          in: query
+          name: page_number
+          required: false
+          type: integer          
         - in: header
           name: end-user-token
           required: true
