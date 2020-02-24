@@ -104,11 +104,11 @@ properties:
       using alerts.  For the new status of loads to be reset after submitting a
       true value for this field you must request a GET from the alerts endpoint.
       ----------------When submitting this field as true the total_items  in the
-      boards total section of the response will be the number of new loads for
-      this request.  The request will also return a total_new value which is a
-      total of all loads that receive the new tag.  The new tag is only given to
-      loads that are new since the last search if the 2 searches are done in the
-      same day.
+      boards total section of the response will be the number of loads never
+      viewed by the user for this request.  The request will also return a
+      total_new value which is a total of all loads that receive the new tag. 
+      The new tag is only given to loads that are new since the previous search
+      if the 2 searches are both done in the same day.
     type: boolean
   ship_date:
     description: Limits results to specified ship date(s).
