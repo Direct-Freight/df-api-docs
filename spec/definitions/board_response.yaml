@@ -19,10 +19,18 @@ properties:
     description: A count of all the entry objects for the specified search.
     type: integer
   total_new:
-    description: A count of all the NEW entry objects for the specified search.
+    description: >-
+      This is the total number of loads that are given a new tag. In an effort
+      to declutter the initial search each day new tags are not always given to
+      new loads.
     type: integer
   total_pages:
     description: 'A count of the # of pages based on the search parameters.'
+    type: integer
+  total_search_matches:
+    description: >-
+      This is the total number of loads that would be returned by this boards
+      request if the boards request ignored the return only new attribute
     type: integer
 required:
   - list
