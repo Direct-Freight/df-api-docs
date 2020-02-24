@@ -1597,6 +1597,9 @@ definitions:
       section: ALERTS
   alert_response_item:
     properties:
+      alert_active:
+        description: 'Identifies whether an alert meets the criteria to send notifications by one of the notification methods.  Alert activation is  primarily controlled by the datetime field expires_after.  This field is a convenience method to eliminate the need to determine the users time zone and verify server time.'
+        type: boolean
       alert_id:
         description: 'The ID of the alert'
         type: integer
@@ -1624,10 +1627,15 @@ definitions:
         format: date
         type: string
       last_modified:
-        description: The last time this alert was modified.
+        description: 'The last time this alert was modified.'
         example: '2019-11-20 10:05:35'
         format: datetime
         type: string
+      last_search:
+        description: 'The last time this alert was used in a boards request.'
+        example: '2019-11-20 10:05:35'
+        format: datetime
+        type: string  
       last_sent:
         description: The last time this alert was sent.
         example: '2019-11-20 10:05:35'
@@ -1643,6 +1651,11 @@ definitions:
       minute_frequency:
         description: 'How many minutes to wait before sending another alert. Valid values are ''15'',''30'',''60'',''120'',''240'',''480'', and ''1440''.'
         type: integer
+      previous_search:
+        description: 'The second to last time this alert was used in a boards request.'
+        example: '2019-11-20 10:05:35'
+        format: datetime
+        type: string  
       search:
         description: Refer to the boards documentation for the full list of restrictions for each field.
         properties:
@@ -1822,7 +1835,7 @@ definitions:
         description: 'If included this will return a total count instead of a list. '
         type: boolean
       return_only_new:
-        description: A true value will only return results that have not been viewed by the user. This field requires a valid alert_id to be specified in order to return unviewed items.  See /alerts for more information on setting up and using alerts.
+        description: 'A true value will only return results that have not been viewed by the user. This field requires a valid alert_id to be specified in order to return unviewed items. See /alerts for more information on setting up and using alerts.  For the new status of loads to be reset after submitting a true value for this field you must request a GET from the alerts endpoint. ----------------When submitting this field as true the total_items  in the boards total section of the response will be the number of new loads for this request.  The request will also return a total_new value which is a total of all loads that receive the new tag.  The new tag is only given to loads that are new since the last search if the 2 searches are done in the same day.'
         type: boolean
       ship_date:
         description: Limits results to specified ship date(s).
@@ -2049,22 +2062,25 @@ definitions:
       }
     properties:
       list:
-        description: A list of entries for this board.
+        description: 'A list of entries for this board.'
         items:
           $ref: '#/definitions/board_response_item'
         type: array
       page_number:
-        description: The page you are on.
+        description: 'The page you are on.'
         type: integer
       total_items:
-        description: A count of all the entry objects for the specified search.
+        description: 'A count of all the entry objects for the specified search.'
         type: integer
       total_new:
-        description: A count of all the NEW entry objects for the specified search.
+        description: 'This is the total number of loads that are given a new tag. In an effort to declutter the initial search each day new tags are not always given to new loads.'
         type: integer        
       total_pages:
         description: 'A count of the # of pages based on the search parameters.'
         type: integer
+      total_search_matches:
+        description: 'This is the total number of loads that would be returned by this boards request if the boards request ignored the return only new attribute'
+        type: integer  
     required:
       - list
     type: object
