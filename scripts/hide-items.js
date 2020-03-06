@@ -17,13 +17,17 @@ function hide_items(tree) {
         Object.keys(tree).forEach(function(key) { 
                 if(typeof(tree[key]) === 'object') 
                         {
-                        hide_methods(tree[key]); 
+                        hide_items(tree[key]); 
+                        if (typeof(tree[key]['delete_me']) === 'string') 
+                                { 
+                                delete tree[key]; 
+                                }
                         } 
                 if(typeof(tree[key]) === 'string' && tree[key].indexOf('STAGE=') >= 0) 
                         {
-                        delete tree[key];
+                        tree['delete_me'] = "delete_me";
                         }
-        });
+                });
 }
 
 hide_items(swagger);
