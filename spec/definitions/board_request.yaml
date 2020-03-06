@@ -98,9 +98,9 @@ properties:
     type: boolean
   return_only:
     description: >-
-      This field is an additional filter that limits the boards response for
-      attributes that are not defined by the load record. Currently the
-      following attributes are valid for this field.
+      STAGE=PRIVATE  This field is an additional filter that limits the boards
+      response for attributes that are not defined by the load record. Currently
+      the following attributes are valid for this field.
 
 
       unviewed-loads that have not been viewed by the user (Loads will continue
