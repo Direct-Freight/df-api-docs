@@ -13,6 +13,22 @@ if(process.argv[2] != 'skip-regenerate')
 //now load that file
 var swagger = YAML.safeLoad(fs.readFileSync('web_deploy/swagger.yaml', 'utf-8'));
 
+function hide_items(tree) {
+        Object.keys(tree).forEach(function(key) { 
+                if(typeof(tree[key]) === 'object') 
+                        {
+                        hide_methods(tree[key]); 
+                        } 
+                if(typeof(tree[key]) === 'string' && tree[key].indexOf('STAGE=') >= 0) 
+                        {
+                        delete tree[key];
+                        }
+        });
+}
+
+hide_items(swagger);
+
+/*  OLD METHOD THAT JUST HID SUMMARY NOT ANY NODE
 Object.keys(swagger).forEach(function(level1) {
         //toplevels console.log(level1);
         Object.keys(swagger[level1]).forEach(function(level2) {
@@ -26,6 +42,7 @@ Object.keys(swagger).forEach(function(level1) {
                 });
         });
 });
+*/
 
 console.log('Saving modified yaml');
 fs.writeFile('web_deploy/swagger.yaml', YAML.safeDump(swagger, {indent: 2, lineWidth: -1, noRefs: true, sortKeys: true}), (err) => {
