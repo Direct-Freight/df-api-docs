@@ -23,11 +23,11 @@ properties:
     type: integer
   total_unviewed_plus_viewed:
     description: >-
-      This is the total number of loads that would be returned by this boards
-      request if the boards request ignored the return_only "unviewed"
-      attribute. The return_only field is an advanced field that allows for
-      additional filter options.  Please contact Direct Freight for more
-      information on gaining access to this field
+      STAGE=PRIVATE  This is the total number of loads that would be returned by
+      this boards request if the boards request ignored the return_only
+      "unviewed" attribute. The return_only field is an advanced field that
+      allows for additional filter options.  Please contact Direct Freight for
+      more information on gaining access to this field
     type: integer
 required:
   - list
