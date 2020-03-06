@@ -1834,9 +1834,22 @@ definitions:
       return_count:
         description: 'If included this will return a total count instead of a list. '
         type: boolean
-      return_only_new:
-        description: 'A true value will only return results that have not been viewed by the user. This field requires a valid alert_id to be specified in order to return unviewed items. See /alerts for more information on setting up and using alerts.  For the new status of loads to be reset after submitting a true value for this field you must request a GET from the alerts endpoint. ----------------When submitting this field as true the total_items  in the boards total section of the response will be the number of loads never viewed by the user for this request.  The request will also return a total_new value which is a total of all loads that receive the new tag.  The new tag is only given to loads that are new since the previous search if the 2 searches are both done in the same day.'
-        type: boolean
+      return_only:
+        description: This field is an additional filter that limits the boards response for attributes that are not defined by the load record. Currently the following attributes are valid for this field.
+          
+          
+          unviewed-loads that have not been viewed by the user (Loads will continue to be returned by boards as unviewed until a GET is requested from the alerts endpoint.  Requesting the alerts resets the timestamp for determining when a load is new to the time of the last search).
+          
+          
+          unsent-Loads that have not been sent to or viewed by a user.
+          
+         
+          newtag- Loads that are given a new tag.  The new tag is only given to loads that are new since the previous search if the 2 searches are both done in the same day.
+        enum:
+          - unviewed
+          - unsent
+          - newtag
+        type: string
       ship_date:
         description: Limits results to specified ship date(s).
         items:
