@@ -1835,7 +1835,7 @@ definitions:
         description: 'If included this will return a total count instead of a list. '
         type: boolean
       return_only:
-        description: This field is an additional filter that limits the boards response for attributes that are not defined by the load record. Currently the following attributes are valid for this field.
+        description: STAGE=PRIVATE  This field is an additional filter that limits the boards response for attributes that are not defined by the load record. Currently the following attributes are valid for this field.
           
           
           unviewed-loads that have not been viewed by the user (Loads will continue to be returned by boards as unviewed until a GET is requested from the alerts endpoint.  Requesting the alerts resets the timestamp for determining when a load is new to the time of the last search).
