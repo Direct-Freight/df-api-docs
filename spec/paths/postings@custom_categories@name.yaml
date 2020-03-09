@@ -37,7 +37,7 @@ get:
         $ref: '#/definitions/get_custom_categories_response'
   summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
   tags:
-    - postings/custom_categories
+    - postings/custom_categories/name
 parameters:
   - description: 'Valid types are "names", and "data".'
     enum:
@@ -59,7 +59,7 @@ patch:
       description: successful operation
   summary: 'STAGE=UNK Update a category name, or value.'
   tags:
-    - postings/custom_categories
+    - postings/custom_categories/name
 post:
   parameters:
     - in: header
@@ -73,4 +73,4 @@ post:
   tags:
     - postings/custom_categories
 x-restlet:
-  section: POSTINGS/CUSTOM_CATEGORIES
+  section: POSTINGS/CUSTOM_CATEGORIES/NAME
