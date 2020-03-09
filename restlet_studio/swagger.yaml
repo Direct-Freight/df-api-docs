@@ -1265,20 +1265,16 @@ paths:
         - postings/custom_fields
     patch:
       parameters:
-        - description: the field_name associated with the data you want updated.
+        - name: field_name
+          description: the field_name associated with the data you want updated.
           in: query
-          items:
-            type: string
-          name: field_name
           required: true
-          type: array
-        - description: the posting_id associated with the data you want updated.
+          type: string
+        - name: posting_id
+          description: the posting_id associated with the data you want updated.
           in: query
-          items:
-            type: string
-          name: posting_id
           required: true
-          type: array
+          type: string
         - in: header
           name: end-user-token
           required: true
