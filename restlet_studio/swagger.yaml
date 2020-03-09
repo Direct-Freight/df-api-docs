@@ -1147,15 +1147,13 @@ paths:
   '/postings/custom_fields/names':
     delete:
       parameters:
-        - description: column/field that you want deleted
-          in: query
-          items:
-            type: string
-          name: field_name
+        - name: end-user-token
+          in: header
           required: true
-          type: array
-        - in: header
-          name: end-user-token
+          type: string
+        - name: field_name
+          description: column/field that you want deleted
+          in: query
           required: true
           type: string
       responses:
@@ -1166,8 +1164,8 @@ paths:
         - postings/custom_fields
     get:
       parameters:
-        - in: header
-          name: end-user-token
+        - name: end-user-token
+          in: header
           required: true
           type: string
       responses:
@@ -1180,8 +1178,18 @@ paths:
         - postings/custom_fields
     patch:
       parameters:
-        - in: header
-          name: end-user-token
+        - name: end-user-token
+          in: header
+          required: true
+          type: string
+        - name: field_name
+          description: column/field that you want deleted
+          in: query
+          required: true
+          type: string
+        - name: new_field_name
+          description: column/field that you want deleted
+          in: query
           required: true
           type: string
       responses:
@@ -1192,8 +1200,8 @@ paths:
         - postings/custom_fields
     post:
       parameters:
-        - in: header
-          name: end-user-token
+        - name: end-user-token
+          in: header
           required: true
           type: string
       responses:
