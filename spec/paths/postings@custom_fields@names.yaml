@@ -1,14 +1,12 @@
 delete:
   parameters:
-    - description: column/field that you want deleted
-      in: query
-      items:
-        type: string
-      name: field_name
-      required: true
-      type: array
     - in: header
       name: end-user-token
+      required: true
+      type: string
+    - description: column/field that you want deleted
+      in: query
+      name: field_name
       required: true
       type: string
   responses:
@@ -35,6 +33,16 @@ patch:
   parameters:
     - in: header
       name: end-user-token
+      required: true
+      type: string
+    - description: column/field that you want deleted
+      in: query
+      name: field_name
+      required: true
+      type: string
+    - description: column/field that you want deleted
+      in: query
+      name: new_field_name
       required: true
       type: string
   responses:
