@@ -1192,6 +1192,11 @@ paths:
           in: query
           required: true
           type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/rename_custom_field'
       responses:
         '204':
           description: successful operation
@@ -2990,6 +2995,20 @@ definitions:
         type: string
       zip:
         type: string
+    type: object
+    x-restlet:
+      section: PROFILES
+  rename_custom_field:
+    properties:
+      current_name:
+        description: 'The field/column to be renamed. '
+        type: string
+      new_name:
+        description: 'Replacement name. '
+        type: string
+    required:
+      - current_name
+      - new_name
     type: object
     x-restlet:
       section: PROFILES
