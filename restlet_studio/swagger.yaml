@@ -1233,11 +1233,18 @@ paths:
         - postings/custom_fields
     get:
       parameters:
-        - description: To just return information about some postings.
+        - description: the posting_id associated with the data you want to get.
           in: query
           items:
             type: string
           name: posting_id
+          required: true
+          type: array
+        - description: the field associated with the data you want to get.
+          in: query
+          items:
+            type: string
+          name: field_name
           required: true
           type: array
         - in: header
@@ -1249,7 +1256,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/get_custom_fields_response'
-      summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
+      summary: 'STAGE=UNK Get data for a custom field.'
       tags:
         - postings/custom_fields
     patch:
