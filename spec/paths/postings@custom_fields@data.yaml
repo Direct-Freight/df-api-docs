@@ -79,7 +79,7 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: 'STAGE=UNK Create new category names, or add new data.'
+  summary: STAGE=UNK add new data.
   tags:
     - postings/custom_fields
 x-restlet:

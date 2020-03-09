@@ -57,7 +57,7 @@ post:
       name: end-user-token
       required: true
       type: string
-    - description: column/field that you want deleted
+    - description: column/field that you want created
       in: query
       name: field_name
       required: true
