@@ -52,18 +52,14 @@ patch:
   parameters:
     - description: the field_name associated with the data you want updated.
       in: query
-      items:
-        type: string
       name: field_name
       required: true
-      type: array
+      type: string
     - description: the posting_id associated with the data you want updated.
       in: query
-      items:
-        type: string
       name: posting_id
       required: true
-      type: array
+      type: string
     - in: header
       name: end-user-token
       required: true
