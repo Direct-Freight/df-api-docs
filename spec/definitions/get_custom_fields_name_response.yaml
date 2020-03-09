@@ -1,8 +1,8 @@
 example: |-
   {
     "fields": [
-      "fields",
-      "fields"
+      "field1",
+      "field2"
     ]
   }
 properties:
