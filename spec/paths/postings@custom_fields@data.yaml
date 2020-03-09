@@ -1,6 +1,13 @@
 delete:
   parameters:
-    - description: Delete data from a custom field.
+    - description: the field associated with the data you want deleted.
+      in: query
+      items:
+        type: string
+      name: field_name
+      required: true
+      type: array
+    - description: the posting_id associated with the data you want deleted.
       in: query
       items:
         type: string
@@ -14,7 +21,7 @@ delete:
   responses:
     '204':
       description: 200 OK
-  summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
+  summary: STAGE=UNK Delete data from a custom field.
   tags:
     - postings/custom_fields
 get:
@@ -40,7 +47,14 @@ get:
     - postings/custom_fields
 patch:
   parameters:
-    - description: To just return information about some postings.
+    - description: the field associated with the data you want updated.
+      in: query
+      items:
+        type: string
+      name: field_name
+      required: true
+      type: array
+    - description: the posting_id associated with the data you want updated.
       in: query
       items:
         type: string
