@@ -1217,18 +1217,14 @@ paths:
       parameters:
         - description: the field associated with the data you want deleted.
           in: query
-          items:
-            type: string
           name: field_name
           required: true
-          type: array
+          type: string
         - description: the posting_id associated with the data you want deleted.
           in: query
-          items:
-            type: string
           name: posting_id
           required: true
-          type: array
+          type: string
         - in: header
           name: end-user-token
           required: true
