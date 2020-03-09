@@ -1,11 +1,11 @@
 delete:
   parameters:
-    - description: Delete A custom categor
+    - description: Delete a custom field
       in: query
       items:
         type: string
-      name: category_name
-      required: false
+      name: field_name
+      required: true
       type: array
     - in: header
       name: end-user-token
@@ -16,16 +16,9 @@ delete:
       description: 200 OK
   summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
   tags:
-    - postings/custom_categories
+    - postings/custom_fields
 get:
   parameters:
-    - description: To just return information about some postings.
-      in: query
-      items:
-        type: string
-      name: category_id
-      required: false
-      type: array
     - in: header
       name: end-user-token
       required: true
@@ -37,7 +30,7 @@ get:
         $ref: '#/definitions/get_custom_categories_response'
   summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
   tags:
-    - postings/custom_categories
+    - postings/custom_fields
 patch:
   parameters:
     - in: header
@@ -47,9 +40,9 @@ patch:
   responses:
     '204':
       description: successful operation
-  summary: 'STAGE=UNK Update a category name, or value.'
+  summary: STAGE=UNK Rename a custom field.
   tags:
-    - postings/custom_categories
+    - postings/custom_fields
 post:
   parameters:
     - in: header
@@ -59,8 +52,8 @@ post:
   responses:
     '201':
       $ref: '#/responses/object_created'
-  summary: 'STAGE=UNK Create new category names, or add new data.'
+  summary: STAGE=UNK Create new custom field.
   tags:
-    - postings/custom_categories
+    - postings/custom_fields
 x-restlet:
   section: POSTINGS/CUSTOM_CATEGORIES
