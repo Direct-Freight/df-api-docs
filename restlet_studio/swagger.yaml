@@ -1144,7 +1144,7 @@ paths:
         - postings
     x-restlet:
       section: POSTINGS
-  '/postings/custom_categories/{category_type}':
+  '/postings/custom_categories/name':
     delete:
       parameters:
         - description: To just delete information about some postings.
@@ -1184,7 +1184,7 @@ paths:
             $ref: '#/definitions/get_custom_categories_response'
       summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
       tags:
-        - postings/custom_categories
+        - postings/custom_categories/name
     parameters:
       - description: 'Valid types are "names", and "data".'
         enum:
@@ -1206,7 +1206,7 @@ paths:
           description: successful operation
       summary: 'STAGE=UNK Update a category name, or value.'
       tags:
-        - postings/custom_categories
+        - postings/custom_categories/name
     post:
       parameters:
         - in: header
@@ -1220,7 +1220,84 @@ paths:
       tags:
         - postings/custom_categories
     x-restlet:
-      section: POSTINGS/CUSTOM_CATEGORIES
+      section: POSTINGS/CUSTOM_CATEGORIES/NAME
+  '/postings/custom_categories/data':
+    delete:
+      parameters:
+        - description: To just delete information about some postings.
+          in: query
+          items:
+            type: string
+          name: category_id
+          required: false
+          type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '204':
+          description: 200 OK
+      summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
+      tags:
+        - postings/custom_categories/data
+    get:
+      parameters:
+        - description: To just return information about some postings.
+          in: query
+          items:
+            type: string
+          name: category_id
+          required: false
+          type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/get_custom_categories_response'
+      summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
+      tags:
+        - postings/custom_categories/data
+    parameters:
+      - description: 'Valid types are "names", and "data".'
+        enum:
+          - names
+          - data
+        in: path
+        name: category_type
+        required: true
+        type: string
+        x-example: names
+    patch:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '204':
+          description: successful operation
+      summary: 'STAGE=UNK Update a category name, or value.'
+      tags:
+        - postings/custom_categories/data
+    post:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '201':
+          $ref: '#/responses/object_created'
+      summary: 'STAGE=UNK Create new category names, or add new data.'
+      tags:
+        - postings/custom_categories/data
+    x-restlet:
+      section: POSTINGS/CUSTOM_CATEGORIES/data
   /profiles:
     get:
       parameters:
