@@ -1205,7 +1205,7 @@ paths:
           required: true
           type: string
         - name: field_name
-          description: column/field that you want deleted
+          description: column/field that you want created
           in: query
           required: true
           type: string
@@ -1299,7 +1299,7 @@ paths:
       responses:
         '201':
           $ref: '#/responses/object_created'
-      summary: 'STAGE=UNK Create new category names, or add new data.'
+      summary: 'STAGE=UNK add new data.'
       tags:
         - postings/custom_fields
     x-restlet:
