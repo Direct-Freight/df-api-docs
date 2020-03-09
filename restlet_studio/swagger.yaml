@@ -1182,16 +1182,6 @@ paths:
           in: header
           required: true
           type: string
-        - name: field_name
-          description: column/field that you want deleted
-          in: query
-          required: true
-          type: string
-        - name: new_field_name
-          description: column/field that you want deleted
-          in: query
-          required: true
-          type: string
         - in: body
           name: body
           required: true
