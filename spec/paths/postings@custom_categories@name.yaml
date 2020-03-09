@@ -1,10 +1,10 @@
 delete:
   parameters:
-    - description: To just delete information about some postings.
+    - description: Delete A custom categor
       in: query
       items:
         type: string
-      name: category_id
+      name: category_name
       required: false
       type: array
     - in: header
