@@ -1204,6 +1204,11 @@ paths:
           in: header
           required: true
           type: string
+        - name: field_name
+          description: column/field that you want deleted
+          in: query
+          required: true
+          type: string
       responses:
         '201':
           $ref: '#/responses/object_created'
