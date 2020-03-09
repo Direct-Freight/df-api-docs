@@ -1242,11 +1242,11 @@ paths:
         - postings/custom_fields
     get:
       parameters:
-        - description: the posting_ids associated with the data you want to get.
+        - name: posting_id
+          description: the posting_ids associated with the data you want to get.
           in: query
           items:
             type: string
-          name: posting_id
           required: false
           type: array
         - in: header
