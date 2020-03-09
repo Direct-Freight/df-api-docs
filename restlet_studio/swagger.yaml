@@ -1249,13 +1249,6 @@ paths:
           name: posting_id
           required: false
           type: array
-        - description: the field_names associated with the data you want to get.
-          in: query
-          items:
-            type: string
-          name: field_name
-          required: false
-          type: array
         - in: header
           name: end-user-token
           required: true
