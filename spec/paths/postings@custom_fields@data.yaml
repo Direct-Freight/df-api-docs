@@ -1,6 +1,6 @@
 delete:
   parameters:
-    - description: the field associated with the data you want deleted.
+    - description: the field_name associated with the data you want deleted.
       in: query
       name: field_name
       required: true
@@ -29,7 +29,7 @@ get:
       name: posting_id
       required: true
       type: array
-    - description: the field associated with the data you want to get.
+    - description: the field_name associated with the data you want to get.
       in: query
       items:
         type: string
@@ -50,7 +50,7 @@ get:
     - postings/custom_fields
 patch:
   parameters:
-    - description: the field associated with the data you want updated.
+    - description: the field_name associated with the data you want updated.
       in: query
       items:
         type: string
