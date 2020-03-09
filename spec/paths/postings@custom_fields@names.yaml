@@ -35,16 +35,6 @@ patch:
       name: end-user-token
       required: true
       type: string
-    - description: column/field that you want deleted
-      in: query
-      name: field_name
-      required: true
-      type: string
-    - description: column/field that you want deleted
-      in: query
-      name: new_field_name
-      required: true
-      type: string
     - in: body
       name: body
       required: true
