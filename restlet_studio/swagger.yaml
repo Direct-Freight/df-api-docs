@@ -3041,7 +3041,6 @@ definitions:
     type: object
     x-restlet:
       section: LOCATIONS
-  
   toggle_hidden_companies:
     properties:
       company_name:
