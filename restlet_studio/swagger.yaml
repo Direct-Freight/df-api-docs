@@ -1199,11 +1199,11 @@ paths:
           in: header
           required: true
           type: string
-        - name: field_name
-          description: column/field that you want created
-          in: query
+        - in: body
+          name: body
           required: true
-          type: string
+          schema:
+            $ref: '#/definitions/create_custom_field'
       responses:
         '201':
           $ref: '#/responses/object_created'
@@ -2167,7 +2167,6 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
-
   create_notes:
     properties:
       body:
@@ -2185,6 +2184,21 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
+  create_custom_field:
+    properties:
+      body:
+        type: string
+      entry_id:
+        description: 'The entry to associate the note with. '
+        type: string
+      title:
+        description: 'Subject of the note. '
+        type: string
+    required:
+      - body
+      - entry_id
+      - title
+    type: object
   create_status:
     properties:
       success:
@@ -3114,11 +3128,11 @@ definitions:
       section: BOARDS
   upload_document:
     properties:
-      The:
-        description: 'file to be uploaded. '
+      filename:
+        description: 'The file to be uploaded. '
         type: object
     required:
-      - The
+      - filename
     type: object
     x-restlet:
       section: PROFILES
