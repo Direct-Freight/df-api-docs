@@ -1147,7 +1147,7 @@ paths:
   '/postings/custom_fields/names':
     delete:
       parameters:
-        - description: Delete a custom field
+        - description: column/field that you want deleted
           in: query
           items:
             type: string
@@ -1161,7 +1161,7 @@ paths:
       responses:
         '204':
           description: 200 OK
-      summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
+      summary: 'STAGE=UNK Delete a custom column/field'
       tags:
         - postings/custom_fields
     get:
@@ -1175,7 +1175,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/get_custom_fields_response'
-      summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
+      summary: 'STAGE=UNK Get a list of all defined custom fields/columns.'
       tags:
         - postings/custom_fields
     patch:
@@ -1187,7 +1187,7 @@ paths:
       responses:
         '204':
           description: successful operation
-      summary: 'STAGE=UNK Rename a custom field.'
+      summary: 'STAGE=UNK Rename a custom field/column.'
       tags:
         - postings/custom_fields
     post:
@@ -1199,15 +1199,22 @@ paths:
       responses:
         '201':
           $ref: '#/responses/object_created'
-      summary: 'STAGE=UNK Create new custom field.'
+      summary: 'STAGE=UNK Create new custom field/column.'
       tags:
         - postings/custom_fields
     x-restlet:
-      section: POSTINGS/CUSTOM_CATEGORIES
+      section: POSTINGS/CUSTOM_FIELDS
   '/postings/custom_fields/data':
     delete:
       parameters:
-        - description: Delete data from a custom field.
+        - description: the field associated with the data you want deleted.
+          in: query
+          items:
+            type: string
+          name: field_name
+          required: true
+          type: array
+        - description: the posting_id associated with the data you want deleted.
           in: query
           items:
             type: string
@@ -1221,7 +1228,7 @@ paths:
       responses:
         '204':
           description: 200 OK
-      summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
+      summary: 'STAGE=UNK Delete data from a custom field.'
       tags:
         - postings/custom_fields
     get:
@@ -1247,7 +1254,14 @@ paths:
         - postings/custom_fields
     patch:
       parameters:
-        - description: To just return information about some postings.
+        - description: the field associated with the data you want updated.
+          in: query
+          items:
+            type: string
+          name: field_name
+          required: true
+          type: array
+        - description: the posting_id associated with the data you want updated.
           in: query
           items:
             type: string
