@@ -1144,15 +1144,15 @@ paths:
         - postings
     x-restlet:
       section: POSTINGS
-  '/postings/custom_categories/name':
+  '/postings/custom_fields/names':
     delete:
       parameters:
-        - description: Delete A custom categor
+        - description: Delete a custom field
           in: query
           items:
             type: string
-          name: category_name
-          required: false
+          name: field_name
+          required: true
           type: array
         - in: header
           name: end-user-token
@@ -1163,15 +1163,75 @@ paths:
           description: 200 OK
       summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
       tags:
-        - postings/custom_categories
+        - postings/custom_fields
+    get:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/get_custom_categories_response'
+      summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
+      tags:
+        - postings/custom_fields
+    patch:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '204':
+          description: successful operation
+      summary: 'STAGE=UNK Rename a custom field.'
+      tags:
+        - postings/custom_fields
+    post:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '201':
+          $ref: '#/responses/object_created'
+      summary: 'STAGE=UNK Create new custom field.'
+      tags:
+        - postings/custom_fields
+    x-restlet:
+      section: POSTINGS/CUSTOM_CATEGORIES
+  '/postings/custom_fields/data':
+    delete:
+      parameters:
+        - description: Delete data from a custom field.
+          in: query
+          items:
+            type: string
+          name: posting_id
+          required: true
+          type: array
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '204':
+          description: 200 OK
+      summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
+      tags:
+        - postings/custom_fields
     get:
       parameters:
         - description: To just return information about some postings.
           in: query
           items:
             type: string
-          name: category_id
-          required: false
+          name: posting_id
+          required: true
           type: array
         - in: header
           name: end-user-token
@@ -1184,76 +1244,16 @@ paths:
             $ref: '#/definitions/get_custom_categories_response'
       summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
       tags:
-        - postings/custom_categories
+        - postings/custom_fields
     patch:
-      parameters:
-        - in: header
-          name: end-user-token
-          required: true
-          type: string
-      responses:
-        '204':
-          description: successful operation
-      summary: 'STAGE=UNK Update a category name, or value.'
-      tags:
-        - postings/custom_categories
-    post:
-      parameters:
-        - in: header
-          name: end-user-token
-          required: true
-          type: string
-      responses:
-        '201':
-          $ref: '#/responses/object_created'
-      summary: 'STAGE=UNK Create new category names, or add new data.'
-      tags:
-        - postings/custom_categories
-    x-restlet:
-      section: POSTINGS/CUSTOM_CATEGORIES
-  '/postings/custom_categories/data':
-    delete:
-      parameters:
-        - description: To just delete information about some postings.
-          in: query
-          items:
-            type: string
-          name: category_id
-          required: false
-          type: array
-        - in: header
-          name: end-user-token
-          required: true
-          type: string
-      responses:
-        '204':
-          description: 200 OK
-      summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
-      tags:
-        - postings/custom_categories
-    get:
       parameters:
         - description: To just return information about some postings.
           in: query
           items:
             type: string
-          name: category_id
-          required: false
-          type: array
-        - in: header
-          name: end-user-token
+          name: posting_id
           required: true
-          type: string
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/get_custom_categories_response'
-      summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
-      tags:
-        - postings/custom_categories
-    patch:
-      parameters:
+          type: array
         - in: header
           name: end-user-token
           required: true
@@ -1261,9 +1261,9 @@ paths:
       responses:
         '204':
           description: successful operation
-      summary: 'STAGE=UNK Update a category name, or value.'
+      summary: 'STAGE=UNK Update custom field data.'
       tags:
-        - postings/custom_categories
+        - postings/custom_fields
     post:
       parameters:
         - in: header
@@ -1275,9 +1275,9 @@ paths:
           $ref: '#/responses/object_created'
       summary: 'STAGE=UNK Create new category names, or add new data.'
       tags:
-        - postings/custom_categories
+        - postings/custom_fields
     x-restlet:
-      section: POSTINGS/CUSTOM_CATEGORIES
+      section: POSTINGS/CUSTOM_FIELDS
   /profiles:
     get:
       parameters:
