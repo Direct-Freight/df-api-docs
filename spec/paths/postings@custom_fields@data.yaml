@@ -22,19 +22,19 @@ delete:
     - postings/custom_fields
 get:
   parameters:
-    - description: the posting_id associated with the data you want to get.
+    - description: the posting_ids associated with the data you want to get.
       in: query
       items:
         type: string
       name: posting_id
-      required: true
+      required: false
       type: array
-    - description: the field_name associated with the data you want to get.
+    - description: the field_names associated with the data you want to get.
       in: query
       items:
         type: string
       name: field_name
-      required: true
+      required: false
       type: array
     - in: header
       name: end-user-token
