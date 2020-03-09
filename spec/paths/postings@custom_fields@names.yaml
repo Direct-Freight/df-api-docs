@@ -45,6 +45,11 @@ patch:
       name: new_field_name
       required: true
       type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/rename_custom_field'
   responses:
     '204':
       description: successful operation
