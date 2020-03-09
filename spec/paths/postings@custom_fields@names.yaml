@@ -57,6 +57,11 @@ post:
       name: end-user-token
       required: true
       type: string
+    - description: column/field that you want deleted
+      in: query
+      name: field_name
+      required: true
+      type: string
   responses:
     '201':
       $ref: '#/responses/object_created'
