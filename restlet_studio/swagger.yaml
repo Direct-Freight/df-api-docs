@@ -1020,7 +1020,16 @@ paths:
           in: query
           name: sort_parameter
           required: false
-          type: string
+          enum:
+            - origin_city
+            - origin_state
+            - destination_city
+            - destination_state
+            - trailer_type
+            - load_size
+            - ship_date
+            - receive_date
+            - comment
           x-example: '?sort_parameter=origin_city'          
         - in: header
           name: end-user-token
