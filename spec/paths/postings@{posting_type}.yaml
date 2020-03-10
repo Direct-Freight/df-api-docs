@@ -56,10 +56,19 @@ get:
       type: string
       x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
     - description: Sort results by a certain field.
+      enum:
+        - origin_city
+        - origin_state
+        - destination_city
+        - destination_state
+        - trailer_type
+        - load_size
+        - ship_date
+        - receive_date
+        - comment
       in: query
       name: sort_parameter
       required: false
-      type: string
       x-example: '?sort_parameter=origin_city'
     - in: header
       name: end-user-token
