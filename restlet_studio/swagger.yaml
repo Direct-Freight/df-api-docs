@@ -1266,8 +1266,9 @@ paths:
             type: string
           required: false
           type: array
-        - in: header
-          name: end-user-token
+          x-example: '?posting_id=22&posting_id=23&posting_id=24'
+        - name: end-user-token
+          in: header
           required: true
           type: string
       responses:
