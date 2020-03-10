@@ -29,6 +29,7 @@ get:
       name: posting_id
       required: false
       type: array
+      x-example: '?posting_id=22&posting_id=23&posting_id=24'
     - in: header
       name: end-user-token
       required: true
