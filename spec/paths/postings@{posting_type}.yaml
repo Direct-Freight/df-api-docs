@@ -69,6 +69,7 @@ get:
       in: query
       name: sort_parameter
       required: false
+      type: string
       x-example: '?sort_parameter=origin_city'
     - description: >-
         The page you want to return. Will return an empty board on an invalid
