@@ -1179,7 +1179,7 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        '200':
           description: 200 OK
       summary: 'STAGE=UNK Delete a custom column/field'
       tags:
