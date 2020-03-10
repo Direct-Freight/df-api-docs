@@ -1016,6 +1016,12 @@ paths:
           required: false
           type: string
           x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
+        - description: Sort results by a certain field.
+          in: query
+          name: sort_parameter
+          required: false
+          type: string
+          x-example: '?sort_parameter=origin_city'          
         - in: header
           name: end-user-token
           required: true
