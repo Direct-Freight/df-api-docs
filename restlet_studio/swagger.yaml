@@ -2209,13 +2209,8 @@ definitions:
       section: BOARDS
   create_custom_field:
     properties:
-      body:
-        type: string
-      entry_id:
-        description: 'The entry to associate the note with. '
-        type: string
-      title:
-        description: 'Subject of the note. '
+      name:
+        description: 'Custom field name.'
         type: string
     required:
       - body
