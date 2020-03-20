@@ -3,7 +3,5 @@ properties:
     description: Custom field name.
     type: string
 required:
-  - body
-  - entry_id
-  - title
+  - name
 type: object

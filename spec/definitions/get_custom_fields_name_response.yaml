@@ -1,6 +1,6 @@
 example: |-
   {
-    "fields": [
+    "list": [
       "field1",
       "field2"
     ]

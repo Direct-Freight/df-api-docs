@@ -1,4 +1,9 @@
 properties:
+  new_load_custom_id:
+    description: >-
+      Optionally specify the custom_id that should be assigned to the new load.
+      This only applies to the copy command.
+    type: string
   source_id:
     description: >-
       The posting id of the posting you are moving or copying. Optional for

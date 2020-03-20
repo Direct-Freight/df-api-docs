@@ -1,4 +1,14 @@
 properties:
+  category:
+    description: 'This option only applies to "private_loads", "private_trucks"'
+    items:
+      enum:
+        - in_route
+        - template
+        - pending
+        - delivered
+      type: string
+    type: string
   comment:
     type: string
   custom_id:
