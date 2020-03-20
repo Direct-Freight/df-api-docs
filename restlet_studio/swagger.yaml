@@ -1161,12 +1161,12 @@ paths:
       responses:
         '201':
           $ref: '#/responses/object_created'
-      summary: STAGE=UNK Copy or Move an posting.
+      summary: STAGE=UNK Copy or Move a posting.
       tags:
         - postings
     x-restlet:
       section: POSTINGS
-  '/postings/custom_fields/names':
+  '/postings/custom_fields/names/':
     delete:
       parameters:
         - name: end-user-token
@@ -1234,7 +1234,7 @@ paths:
         - postings/custom_fields
     x-restlet:
       section: POSTINGS/CUSTOM_FIELDS
-  '/postings/custom_fields/data':
+  '/postings/custom_fields/data/{posting_type}':
     delete:
       parameters:
         - description: the field_name associated with the data you want deleted.
@@ -1251,6 +1251,19 @@ paths:
           name: end-user-token
           required: true
           type: string
+        - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+          enum:
+          - test_loads
+          - test_trucks
+          - private_loads
+          - private_trucks
+          - loads
+          - trucks
+          in: path
+          name: posting_type
+          required: true
+          type: string
+          x-example: test_loads             
       responses:
         '204':
           description: 200 OK
@@ -1271,6 +1284,19 @@ paths:
           in: header
           required: true
           type: string
+        - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+          enum:
+          - test_loads
+          - test_trucks
+          - private_loads
+          - private_trucks
+          - loads
+          - trucks
+          in: path
+          name: posting_type
+          required: true
+          type: string
+          x-example: test_loads             
       responses:
         '200':
           description: successful operation
@@ -1281,20 +1307,28 @@ paths:
         - postings/custom_fields
     patch:
       parameters:
-        - name: field_name
-          description: the field_name associated with the data you want updated.
-          in: query
-          required: true
-          type: string
-        - name: posting_id
-          description: the posting_id associated with the data you want updated.
-          in: query
-          required: true
-          type: string
         - in: header
           name: end-user-token
           required: true
           type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/create_custom_field_data' 
+        - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+          enum:
+          - test_loads
+          - test_trucks
+          - private_loads
+          - private_trucks
+          - loads
+          - trucks
+          in: path
+          name: posting_type
+          required: true
+          type: string
+          x-example: test_loads               
       responses:
         '204':
           description: successful operation
@@ -1307,6 +1341,24 @@ paths:
           name: end-user-token
           required: true
           type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/create_custom_field_data'
+        - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+          enum:
+          - test_loads
+          - test_trucks
+          - private_loads
+          - private_trucks
+          - loads
+          - trucks
+          in: path
+          name: posting_type
+          required: true
+          type: string
+          x-example: test_loads              
       responses:
         '201':
           $ref: '#/responses/object_created'
@@ -2213,10 +2265,24 @@ definitions:
         description: 'Custom field name.'
         type: string
     required:
-      - body
-      - entry_id
-      - title
+      - name
     type: object
+  create_custom_field_data:
+    properties:
+      field_name:
+        description: 'Custom field name.'
+        type: string
+      posting_id:
+        description: 'Posting ID.'
+        type: integer
+      value:
+        description: 'Value.'
+        type: string        
+    required:
+      - field_name
+      - posting_id
+      - value
+    type: object    
   create_status:
     properties:
       success:
@@ -2297,7 +2363,7 @@ definitions:
   get_custom_fields_name_response:
     example: |-
       {
-        "fields": [
+        "list": [
           "field1",
           "field2"
         ]
@@ -2315,8 +2381,8 @@ definitions:
     example: |-
       {
         "load_id": [
-          "field1" => "data1",
-          "field2" => "data2"
+          "field1" : "data1",
+          "field2" : "data2"
         ]
       }
     properties:
@@ -2580,6 +2646,9 @@ definitions:
       source_posting:
         description: The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads.
         type: string
+      new_load_custom_id:
+        description: Optionally specify the custom_id that should be assigned to the new load. This only applies to the copy command.
+        type: string        
     required:
       - source_id
       - source_posting
@@ -2691,6 +2760,16 @@ definitions:
       width:
         description: This number represents inches.
         type: integer
+      category:
+        description: This option only applies to "private_loads", "private_trucks"
+        items:
+          enum:
+            - in_route
+            - template
+            - pending
+            - delivered
+          type: string
+        type: string
     required:
       - custom_id
       - origin_city
@@ -2794,6 +2873,16 @@ definitions:
       width:
         description: This number represents inches.
         type: integer
+      category:
+        description: This option only applies to "private_loads", "private_trucks"
+        items:
+          enum:
+            - in_route
+            - template
+            - pending
+            - delivered
+          type: string
+        type: string        
     type: object
     x-restlet:
       section: POSTINGS
