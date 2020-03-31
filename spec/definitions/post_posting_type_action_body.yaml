@@ -2,7 +2,8 @@ properties:
   new_load_custom_id:
     description: >-
       Optionally specify the custom_id that should be assigned to the new load.
-      This only applies to the copy command.
+      This is required for the copy command, for the move command it will be
+      auto-generated if one is not specified.
     type: string
   source_id:
     description: >-
@@ -18,6 +19,7 @@ properties:
 required:
   - source_id
   - source_posting
+  - new_load_custom_id
 type: object
 x-restlet:
   section: not categorized yet
