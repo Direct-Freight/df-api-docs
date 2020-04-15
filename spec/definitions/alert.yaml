@@ -13,8 +13,11 @@ properties:
       type: string
     type: array
   end_hour:
-    description: A  corresponding to the hour of the day.
-    maximum: 21
+    description: >-
+      A  corresponding to the hour of the day. (This field will accept 23
+      however there is a known logic issue for values over 21 with time zone set
+      to 2)
+    maximum: 23
     minimum: 3
     type: integer
   expires_after:
@@ -84,8 +87,11 @@ properties:
       - push
     type: string
   start_hour:
-    description: A  corresponding to the hour of the day.
-    maximum: 21
+    description: >-
+      A  corresponding to the hour of the day.  (This field will accept 23
+      however there is a known logic issue for values over 21 with time zone set
+      to 2)
+    maximum: 23
     minimum: 3
     type: integer
   time_zone:

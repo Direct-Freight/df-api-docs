@@ -55,6 +55,30 @@ get:
       required: false
       type: string
       x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
+    - description: Sort results by a certain field.
+      enum:
+        - origin_city
+        - origin_state
+        - destination_city
+        - destination_state
+        - trailer_type
+        - load_size
+        - ship_date
+        - receive_date
+        - comment
+      in: query
+      name: sort_parameter
+      required: false
+      type: string
+      x-example: '?sort_parameter=origin_city'
+    - description: >-
+        The page you want to return. Will return an empty board on an invalid
+        page.
+      in: query
+      name: page_number
+      required: false
+      type: integer
+      x-example: '?page_number=2'
     - in: header
       name: end-user-token
       required: true

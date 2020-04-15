@@ -1,0 +1,140 @@
+delete:
+  parameters:
+    - description: the field_name associated with the data you want deleted.
+      in: query
+      name: field_name
+      required: true
+      type: string
+    - description: the posting_id associated with the data you want deleted.
+      in: query
+      name: posting_id
+      required: true
+      type: string
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - description: >-
+        Valid types are "loads", "trucks", "private_loads", "private_trucks",
+        "test_loads", and "test_trucks"
+      enum:
+        - test_loads
+        - test_trucks
+        - private_loads
+        - private_trucks
+        - loads
+        - trucks
+      in: path
+      name: posting_type
+      required: true
+      type: string
+      x-example: test_loads
+  responses:
+    '204':
+      description: 200 OK
+  summary: STAGE=UNK Delete data from a custom field.
+  tags:
+    - postings/custom_fields
+get:
+  parameters:
+    - description: the posting_ids associated with the data you want to get.
+      in: query
+      items:
+        type: string
+      name: posting_id
+      required: false
+      type: array
+      x-example: '?posting_id=22&posting_id=23&posting_id=24'
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - description: >-
+        Valid types are "loads", "trucks", "private_loads", "private_trucks",
+        "test_loads", and "test_trucks"
+      enum:
+        - test_loads
+        - test_trucks
+        - private_loads
+        - private_trucks
+        - loads
+        - trucks
+      in: path
+      name: posting_type
+      required: true
+      type: string
+      x-example: test_loads
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/get_custom_fields_data_response'
+  summary: STAGE=UNK Get data for a custom field.
+  tags:
+    - postings/custom_fields
+patch:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/create_custom_field_data'
+    - description: >-
+        Valid types are "loads", "trucks", "private_loads", "private_trucks",
+        "test_loads", and "test_trucks"
+      enum:
+        - test_loads
+        - test_trucks
+        - private_loads
+        - private_trucks
+        - loads
+        - trucks
+      in: path
+      name: posting_type
+      required: true
+      type: string
+      x-example: test_loads
+  responses:
+    '204':
+      description: successful operation
+  summary: STAGE=UNK Update custom field data.
+  tags:
+    - postings/custom_fields
+post:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/create_custom_field_data'
+    - description: >-
+        Valid types are "loads", "trucks", "private_loads", "private_trucks",
+        "test_loads", and "test_trucks"
+      enum:
+        - test_loads
+        - test_trucks
+        - private_loads
+        - private_trucks
+        - loads
+        - trucks
+      in: path
+      name: posting_type
+      required: true
+      type: string
+      x-example: test_loads
+  responses:
+    '201':
+      $ref: '#/responses/object_created'
+  summary: STAGE=UNK add new data.
+  tags:
+    - postings/custom_fields
+x-restlet:
+  section: POSTINGS/CUSTOM_FIELDS

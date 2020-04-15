@@ -98,10 +98,21 @@ properties:
     format: date
     type: string
   ship_date:
-    description: Date item is scheduled to be loaded.
+    description: >-
+      The date the load is scheduled to be picked up.  For trucks this is the
+      date the truck is available.
     example: '2018-09-20'
     format: date
     type: string
+  tags:
+    description: >-
+      Indicates special characteristics of a load record.  This field may be
+      returned as a blank array.  Currently (new) is the only value that will be
+      returned.
+    example: new
+    items:
+      type: string
+    type: array
   trade_orgs:
     description: Approved Trade Organizations
     properties:
@@ -112,7 +123,9 @@ properties:
   trailer_type:
     description: A string array of valid trailer types.
     example: V
-    type: string
+    items:
+      type: string
+    type: array
   trip_miles:
     description: >-
       Distance between origin and destination.  This field will be null if

@@ -108,11 +108,11 @@ paths:
       responses:
         '204':
           description: successful operation
-      summary: STAGE=UNK Delete an alert.
+      summary: STAGE=UNKNOWN Delete an alert.
       tags:
         - alerts
     get:
-      description: Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id.
+      description: Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id. Returns 50 alerts by default.
       parameters:
         - description: only get a subset of alerts. As this is a get request this is specified as a query string parameter.
           in: query
@@ -121,6 +121,11 @@ paths:
           name: alert_id
           required: false
           type: array
+        - description: Page number to fetch, defaults to 1
+          in: query
+          name: page_number
+          required: false
+          type: integer          
         - in: header
           name: end-user-token
           required: true
@@ -130,7 +135,7 @@ paths:
           description: On success will return a list of alerts.
           schema:
             $ref: '#/definitions/alert_list'
-      summary: STAGE=UNK Retrieve alerts.
+      summary: STAGE=UNKNOWN Retrieve alerts.
       tags:
         - alerts
     parameters:
@@ -179,7 +184,7 @@ paths:
           description: Object created check the headers for a reference URL
           schema:
             $ref: '#/definitions/create_status_alert'
-      summary: STAGE=UNK Create an alert.
+      summary: STAGE=UNKNOWN Create an alert.
       tags:
         - alerts
     x-restlet:
@@ -1011,6 +1016,28 @@ paths:
           required: false
           type: string
           x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
+        - description: Sort results by a certain field.
+          in: query
+          name: sort_parameter
+          required: false
+          type : string
+          enum:
+            - origin_city
+            - origin_state
+            - destination_city
+            - destination_state
+            - trailer_type
+            - load_size
+            - ship_date
+            - receive_date
+            - comment
+          x-example: '?sort_parameter=origin_city'          
+        - description: The page you want to return. Will return an empty board on an invalid page.
+          in: query
+          name: page_number
+          required: false
+          type: integer
+          x-example: '?page_number=2'          
         - in: header
           name: end-user-token
           required: true
@@ -1134,88 +1161,212 @@ paths:
       responses:
         '201':
           $ref: '#/responses/object_created'
-      summary: STAGE=UNK Copy or Move an posting.
+      summary: STAGE=UNK Copy or Move a posting.
       tags:
         - postings
     x-restlet:
       section: POSTINGS
-  '/postings/custom_categories/{category_type}':
+  '/postings/custom_fields/names/':
     delete:
       parameters:
-        - description: To just delete information about some postings.
+        - name: end-user-token
+          in: header
+          required: true
+          type: string
+        - name: field_name
+          description: column/field that you want deleted
           in: query
-          items:
-            type: string
-          name: category_id
-          required: false
-          type: array
-        - in: header
-          name: end-user-token
           required: true
           type: string
       responses:
-        '204':
+        '200':
           description: 200 OK
-      summary: 'STAGE=UNK Delete some or all custom columns, or custom_column data.'
+      summary: 'STAGE=UNK Delete a custom column/field'
       tags:
-        - postings/custom_categories
+        - postings/custom_fields
     get:
       parameters:
-        - description: To just return information about some postings.
-          in: query
-          items:
-            type: string
-          name: category_id
-          required: false
-          type: array
-        - in: header
-          name: end-user-token
+        - name: end-user-token
+          in: header
           required: true
           type: string
       responses:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/get_custom_categories_response'
-      summary: 'STAGE=UNK Get a list of custom columns, or custom_column data.'
+            $ref: '#/definitions/get_custom_fields_name_response'
+      summary: 'STAGE=UNK Get a list of all defined custom fields/columns.'
       tags:
-        - postings/custom_categories
-    parameters:
-      - description: 'Valid types are "names", and "data".'
-        enum:
-          - names
-          - data
-        in: path
-        name: category_type
-        required: true
-        type: string
-        x-example: names
+        - postings/custom_fields
+    patch:
+      parameters:
+        - name: end-user-token
+          in: header
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/rename_custom_field'
+      responses:
+        '204':
+          description: successful operation
+      summary: 'STAGE=UNK Rename a custom field/column.'
+      tags:
+        - postings/custom_fields
+    post:
+      parameters:
+        - name: end-user-token
+          in: header
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/create_custom_field'
+      responses:
+        '201':
+          $ref: '#/responses/object_created'
+      summary: 'STAGE=UNK Create new custom field/column.'
+      tags:
+        - postings/custom_fields
+    x-restlet:
+      section: POSTINGS/CUSTOM_FIELDS
+  '/postings/custom_fields/data/{posting_type}':
+    delete:
+      parameters:
+        - description: the field_name associated with the data you want deleted.
+          in: query
+          name: field_name
+          required: true
+          type: string
+        - description: the posting_id associated with the data you want deleted.
+          in: query
+          name: posting_id
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+          enum:
+          - test_loads
+          - test_trucks
+          - private_loads
+          - private_trucks
+          - loads
+          - trucks
+          in: path
+          name: posting_type
+          required: true
+          type: string
+          x-example: test_loads             
+      responses:
+        '204':
+          description: 200 OK
+      summary: 'STAGE=UNK Delete data from a custom field.'
+      tags:
+        - postings/custom_fields
+    get:
+      parameters:
+        - name: posting_id
+          description: the posting_ids associated with the data you want to get.
+          in: query
+          items:
+            type: string
+          required: false
+          type: array
+          x-example: '?posting_id=22&posting_id=23&posting_id=24'
+        - name: end-user-token
+          in: header
+          required: true
+          type: string
+        - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+          enum:
+          - test_loads
+          - test_trucks
+          - private_loads
+          - private_trucks
+          - loads
+          - trucks
+          in: path
+          name: posting_type
+          required: true
+          type: string
+          x-example: test_loads             
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/get_custom_fields_data_response'
+      summary: 'STAGE=UNK Get data for a custom field.'
+      tags:
+        - postings/custom_fields
     patch:
       parameters:
         - in: header
           name: end-user-token
           required: true
           type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/create_custom_field_data' 
+        - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+          enum:
+          - test_loads
+          - test_trucks
+          - private_loads
+          - private_trucks
+          - loads
+          - trucks
+          in: path
+          name: posting_type
+          required: true
+          type: string
+          x-example: test_loads               
       responses:
         '204':
           description: successful operation
-      summary: 'STAGE=UNK Update a category name, or value.'
+      summary: 'STAGE=UNK Update custom field data.'
       tags:
-        - postings/custom_categories
+        - postings/custom_fields
     post:
       parameters:
         - in: header
           name: end-user-token
           required: true
           type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/create_custom_field_data'
+        - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+          enum:
+          - test_loads
+          - test_trucks
+          - private_loads
+          - private_trucks
+          - loads
+          - trucks
+          in: path
+          name: posting_type
+          required: true
+          type: string
+          x-example: test_loads              
       responses:
         '201':
           $ref: '#/responses/object_created'
-      summary: 'STAGE=UNK Create new category names, or add new data.'
+      summary: 'STAGE=UNK add new data.'
       tags:
-        - postings/custom_categories
+        - postings/custom_fields
     x-restlet:
-      section: POSTINGS/CUSTOM_CATEGORIES
+      section: POSTINGS/CUSTOM_FIELDS
   /profiles:
     get:
       parameters:
@@ -1508,8 +1659,8 @@ definitions:
           type: string
         type: array
       end_hour:
-        description: A  corresponding to the hour of the day.
-        maximum: 21
+        description: A  corresponding to the hour of the day. (This field will accept 23 however there is a known logic issue for values over 21 with time zone set to 2)
+        maximum: 23
         minimum: 3
         type: integer
       expires_after:
@@ -1568,8 +1719,8 @@ definitions:
           - push
         type: string
       start_hour:
-        description: A  corresponding to the hour of the day.
-        maximum: 21
+        description: A  corresponding to the hour of the day.  (This field will accept 23 however there is a known logic issue for values over 21 with time zone set to 2)
+        maximum: 23
         minimum: 3
         type: integer
       time_zone:
@@ -1592,6 +1743,9 @@ definitions:
       section: ALERTS
   alert_response_item:
     properties:
+      alert_active:
+        description: 'Identifies whether an alert meets the criteria to send notifications by one of the notification methods.  Alert activation is  primarily controlled by the datetime field expires_after.  This field is a convenience method to eliminate the need to determine the users time zone and verify server time.'
+        type: boolean
       alert_id:
         description: 'The ID of the alert'
         type: integer
@@ -1619,10 +1773,15 @@ definitions:
         format: date
         type: string
       last_modified:
-        description: The last time this alert was modified.
+        description: 'The last time this alert was modified.'
         example: '2019-11-20 10:05:35'
         format: datetime
         type: string
+      last_search:
+        description: 'The last time this alert was used in a boards request.'
+        example: '2019-11-20 10:05:35'
+        format: datetime
+        type: string  
       last_sent:
         description: The last time this alert was sent.
         example: '2019-11-20 10:05:35'
@@ -1638,6 +1797,11 @@ definitions:
       minute_frequency:
         description: 'How many minutes to wait before sending another alert. Valid values are ''15'',''30'',''60'',''120'',''240'',''480'', and ''1440''.'
         type: integer
+      previous_search:
+        description: 'The second to last time this alert was used in a boards request.'
+        example: '2019-11-20 10:05:35'
+        format: datetime
+        type: string  
       search:
         description: Refer to the boards documentation for the full list of restrictions for each field.
         properties:
@@ -1816,9 +1980,22 @@ definitions:
       return_count:
         description: 'If included this will return a total count instead of a list. '
         type: boolean
-      return_only_new:
-        description: A true value will only return results that have not been viewed by the user. This field requires a valid alert_id to be specified in order to return unviewed items.  See /alerts for more information on setting up and using alerts.
-        type: boolean
+      return_only:
+        description: STAGE=PRIVATE  This field is an additional filter that limits the boards response for attributes that are not defined by the load record. Currently the following attributes are valid for this field.
+          
+          
+          unviewed-loads that have not been viewed by the user (Loads will continue to be returned by boards as unviewed until a GET is requested from the alerts endpoint.  Requesting the alerts resets the timestamp for determining when a load is new to the time of the last search).
+          
+          
+          unsent-Loads that have not been sent to or viewed by a user.
+          
+         
+          newtag- Loads that are given a new tag.  The new tag is only given to loads that are new since the previous search if the 2 searches are both done in the same day.
+        enum:
+          - unviewed
+          - unsent
+          - newtag
+        type: string
       ship_date:
         description: Limits results to specified ship date(s).
         items:
@@ -1848,6 +2025,7 @@ definitions:
           - receive_date
           - tia_user
           - green_light
+          - new
         example: age
         type: string
       trailer_type:
@@ -1946,6 +2124,7 @@ definitions:
       length:
         description: Length in feet.  Will be null if empty.
         type: number
+      
       origin_city:
         description: Origin city of item.
         example: Chicago
@@ -1971,10 +2150,16 @@ definitions:
         format: date
         type: string
       ship_date:
-        description: Date item is scheduled to be loaded.
+        description: The date the load is scheduled to be picked up.  For trucks this is the date the truck is available.
         example: '2018-09-20'
         format: date
         type: string
+      tags:
+        description: Indicates special characteristics of a load record.  This field may be returned as a blank array.  Currently (new) is the only value that will be returned.
+        example: new
+        items:
+          type: string
+        type: array
       trade_orgs:
         description: Approved Trade Organizations
         properties:
@@ -1985,7 +2170,9 @@ definitions:
       trailer_type:
         description: A string array of valid trailer types.
         example: V
-        type: string
+        items:
+          type: string
+        type: array  
       trip_miles:
         description: Distance between origin and destination.  This field will be null if distance cannot be calculated.
         example: 523
@@ -2034,28 +2221,27 @@ definitions:
       }
     properties:
       list:
-        description: A list of entries for this board.
+        description: 'A list of entries for this board.'
         items:
           $ref: '#/definitions/board_response_item'
         type: array
       page_number:
-        description: The page you are on.
+        description: 'The page you are on.'
         type: integer
       total_items:
-        description: A count of all the entry objects for the specified search.
+        description: 'A count of all the entry objects for the specified search.'
         type: integer
-      total_new:
-        description: A count of all the NEW entry objects for the specified search.
-        type: integer        
       total_pages:
         description: 'A count of the # of pages based on the search parameters.'
         type: integer
+      total_unviewed_plus_viewed:
+        description: 'STAGE=PRIVATE  This is the total number of loads that would be returned by this boards request if the boards request ignored the return_only "unviewed" attribute. The return_only field is an advanced field that allows for additional filter options.  Please contact Direct Freight for more information on gaining access to this field'
+        type: integer  
     required:
       - list
     type: object
     x-restlet:
       section: BOARDS
-
   create_notes:
     properties:
       body:
@@ -2073,6 +2259,30 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
+  create_custom_field:
+    properties:
+      name:
+        description: 'Custom field name.'
+        type: string
+    required:
+      - name
+    type: object
+  create_custom_field_data:
+    properties:
+      field_name:
+        description: 'Custom field name.'
+        type: string
+      posting_id:
+        description: 'Posting ID.'
+        type: integer
+      value:
+        description: 'Value.'
+        type: string        
+    required:
+      - field_name
+      - posting_id
+      - value
+    type: object    
   create_status:
     properties:
       success:
@@ -2150,17 +2360,34 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
-  get_custom_categories_response:
+  get_custom_fields_name_response:
     example: |-
       {
-        "categories": [
-          "categories",
-          "categories"
+        "list": [
+          "field1",
+          "field2"
         ]
       }
     properties:
-      categories:
-        description: 'A list of each category, type and it''s corresponding position.'
+      fields:
+        description: 'A list of each custom field, type and it''s corresponding position.'
+        items:
+          type: string
+        type: array
+    type: object
+    x-restlet:
+      section: not categorized yet
+  get_custom_fields_data_response:
+    example: |-
+      {
+        "load_id": [
+          "field1" : "data1",
+          "field2" : "data2"
+        ]
+      }
+    properties:
+      fields:
+        description: 'A list of each custom field, type and it''s corresponding position.'
         items:
           type: string
         type: array
@@ -2419,9 +2646,13 @@ definitions:
       source_posting:
         description: The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads.
         type: string
+      new_load_custom_id:
+        description: Optionally specify the custom_id that should be assigned to the new load. This is required for the copy command, for the move command it will be auto-generated if one is not specified.
+        type: string        
     required:
       - source_id
       - source_posting
+      - new_load_custom_id
     type: object
     x-restlet:
       section: not categorized yet
@@ -2530,6 +2761,16 @@ definitions:
       width:
         description: This number represents inches.
         type: integer
+      category:
+        description: This option only applies to "private_loads", "private_trucks"
+        items:
+          enum:
+            - in_route
+            - template
+            - pending
+            - delivered
+          type: string
+        type: string
     required:
       - custom_id
       - origin_city
@@ -2633,6 +2874,16 @@ definitions:
       width:
         description: This number represents inches.
         type: integer
+      category:
+        description: This option only applies to "private_loads", "private_trucks"
+        items:
+          enum:
+            - in_route
+            - template
+            - pending
+            - delivered
+          type: string
+        type: string        
     type: object
     x-restlet:
       section: POSTINGS
@@ -2859,6 +3110,20 @@ definitions:
     type: object
     x-restlet:
       section: PROFILES
+  rename_custom_field:
+    properties:
+      current_name:
+        description: 'The field/column to be renamed. '
+        type: string
+      new_name:
+        description: 'Replacement name. '
+        type: string
+    required:
+      - current_name
+      - new_name
+    type: object
+    x-restlet:
+      section: PROFILES
   rename_document:
     properties:
       current_name:
@@ -2888,7 +3153,6 @@ definitions:
     type: object
     x-restlet:
       section: LOCATIONS
-  
   toggle_hidden_companies:
     properties:
       company_name:
@@ -2972,11 +3236,11 @@ definitions:
       section: BOARDS
   upload_document:
     properties:
-      The:
-        description: 'file to be uploaded. '
+      filename:
+        description: 'The file to be uploaded. '
         type: object
     required:
-      - The
+      - filename
     type: object
     x-restlet:
       section: PROFILES

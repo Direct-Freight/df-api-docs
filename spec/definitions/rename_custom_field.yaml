@@ -1,0 +1,13 @@
+properties:
+  current_name:
+    description: 'The field/column to be renamed. '
+    type: string
+  new_name:
+    description: 'Replacement name. '
+    type: string
+required:
+  - current_name
+  - new_name
+type: object
+x-restlet:
+  section: PROFILES

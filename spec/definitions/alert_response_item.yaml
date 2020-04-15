@@ -1,4 +1,12 @@
 properties:
+  alert_active:
+    description: >-
+      Identifies whether an alert meets the criteria to send notifications by
+      one of the notification methods.  Alert activation is  primarily
+      controlled by the datetime field expires_after.  This field is a
+      convenience method to eliminate the need to determine the users time zone
+      and verify server time.
+    type: boolean
   alert_id:
     description: The ID of the alert
     type: integer
@@ -32,6 +40,11 @@ properties:
     example: '2019-11-20 10:05:35'
     format: datetime
     type: string
+  last_search:
+    description: The last time this alert was used in a boards request.
+    example: '2019-11-20 10:05:35'
+    format: datetime
+    type: string
   last_sent:
     description: The last time this alert was sent.
     example: '2019-11-20 10:05:35'
@@ -52,6 +65,11 @@ properties:
       How many minutes to wait before sending another alert. Valid values are
       '15','30','60','120','240','480', and '1440'.
     type: integer
+  previous_search:
+    description: The second to last time this alert was used in a boards request.
+    example: '2019-11-20 10:05:35'
+    format: datetime
+    type: string
   search:
     description: >-
       Refer to the boards documentation for the full list of restrictions for

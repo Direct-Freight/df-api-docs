@@ -1,0 +1,16 @@
+example: |-
+  {
+    "load_id": [
+      "field1" : "data1",
+      "field2" : "data2"
+    ]
+  }
+properties:
+  fields:
+    description: 'A list of each custom field, type and it''s corresponding position.'
+    items:
+      type: string
+    type: array
+type: object
+x-restlet:
+  section: not categorized yet

@@ -14,13 +14,13 @@ delete:
   responses:
     '204':
       description: successful operation
-  summary: STAGE=UNK Delete an alert.
+  summary: STAGE=UNKNOWN Delete an alert.
   tags:
     - alerts
 get:
   description: >-
     Get a list of alerts. You can optionally limit the list by specifcying
-    alerts by their alert_id.
+    alerts by their alert_id. Returns 50 alerts by default.
   parameters:
     - description: >-
         only get a subset of alerts. As this is a get request this is specified
@@ -31,6 +31,11 @@ get:
       name: alert_id
       required: false
       type: array
+    - description: 'Page number to fetch, defaults to 1'
+      in: query
+      name: page_number
+      required: false
+      type: integer
     - in: header
       name: end-user-token
       required: true
@@ -40,7 +45,7 @@ get:
       description: On success will return a list of alerts.
       schema:
         $ref: '#/definitions/alert_list'
-  summary: STAGE=UNK Retrieve alerts.
+  summary: STAGE=UNKNOWN Retrieve alerts.
   tags:
     - alerts
 parameters:
@@ -97,7 +102,7 @@ post:
       description: Object created check the headers for a reference URL
       schema:
         $ref: '#/definitions/create_status_alert'
-  summary: STAGE=UNK Create an alert.
+  summary: STAGE=UNKNOWN Create an alert.
   tags:
     - alerts
 x-restlet:

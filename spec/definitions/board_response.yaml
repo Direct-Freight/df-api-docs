@@ -18,11 +18,16 @@ properties:
   total_items:
     description: A count of all the entry objects for the specified search.
     type: integer
-  total_new:
-    description: A count of all the NEW entry objects for the specified search.
-    type: integer
   total_pages:
     description: 'A count of the # of pages based on the search parameters.'
+    type: integer
+  total_unviewed_plus_viewed:
+    description: >-
+      STAGE=PRIVATE  This is the total number of loads that would be returned by
+      this boards request if the boards request ignored the return_only
+      "unviewed" attribute. The return_only field is an advanced field that
+      allows for additional filter options.  Please contact Direct Freight for
+      more information on gaining access to this field
     type: integer
 required:
   - list
