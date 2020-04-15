@@ -23,7 +23,7 @@
     "sleep": "^5.1.1",
     "stringify-object": "^3.2.2",
     "swagger-snippet": "^0.5.1",
-    "swagger-ui": "^2.2.10",
+    "swagger-ui": "^3.25.0",
     "swaggerui-snippets": "^1.0.1",
     "sway": "^1.0.0",
     "tape": "^4.8.0"
