@@ -108,7 +108,7 @@ paths:
       responses:
         '204':
           description: successful operation
-      summary: STAGE=UNK Delete an alert.
+      summary: STAGE=UNKNOWN Delete an alert.
       tags:
         - alerts
     get:
@@ -135,7 +135,7 @@ paths:
           description: On success will return a list of alerts.
           schema:
             $ref: '#/definitions/alert_list'
-      summary: STAGE=UNK Retrieve alerts.
+      summary: STAGE=UNKNOWN Retrieve alerts.
       tags:
         - alerts
     parameters:
