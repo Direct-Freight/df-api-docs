@@ -155,6 +155,22 @@ properties:
       - new
     example: age
     type: string
+  tier:
+    description: >-
+      This field is an optional filter that limits board response to "free" or
+      "premium" loads. If this field is not specified it defaults to "all"
+      loads.
+
+      free loads - are loads that are more than 2 hours old. contact information
+      and comments are visible even if this request comes from an unsubscribed
+      account.
+
+      premium loads - loads that are less than 2 hours old. contact information
+      and comments are only visible for premium accounts.
+    enum:
+      - all
+      - free
+      - premium
   trailer_type:
     description: 'A string array of valid trailer types to limit the search. '
     example:
