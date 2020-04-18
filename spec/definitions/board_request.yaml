@@ -171,6 +171,7 @@ properties:
       - all
       - free
       - premium
+    type: string
   trailer_type:
     description: 'A string array of valid trailer types to limit the search. '
     example:
