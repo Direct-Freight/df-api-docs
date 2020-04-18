@@ -2007,6 +2007,7 @@ definitions:
           - all
           - free
           - premium
+        type: string
       ship_date:
         description: Limits results to specified ship date(s).
         items:
