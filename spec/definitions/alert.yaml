@@ -33,10 +33,11 @@ properties:
     description: >-
       This specify the type of list that is returned, including disabling the
       list from being sent at all. Valid values are 'complete-list','only-new',
-      and 'not-active'.
+      'only-new-free' and 'not-active'.
     enum:
       - complete-list
       - only-new
+      - only-new-free
       - not-active
     type: string
   minute_frequency:

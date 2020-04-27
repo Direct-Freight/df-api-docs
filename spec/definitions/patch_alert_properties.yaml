@@ -33,6 +33,7 @@ properties:
     enum:
       - complete-list
       - only-new
+      - only-new-free
       - not-active
     type: string
   minute_frequency:
