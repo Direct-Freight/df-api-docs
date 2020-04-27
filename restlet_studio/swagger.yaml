@@ -1669,10 +1669,11 @@ definitions:
         format: date time
         type: string
       list_type:
-        description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', and ''not-active''.'
+        description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', ''only-new-free'' and ''not-active''.'
         enum:
           - complete-list
           - only-new
+          - only-new-free          
           - not-active
         type: string
       minute_frequency:
@@ -1788,10 +1789,11 @@ definitions:
         format: datetime
         type: string  
       list_type:
-        description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', and ''not-active''.'
+        description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', ''only-new-free'' and ''not-active''.'
         enum:
           - complete-list
           - only-new
+          - only-new-free
           - not-active
         type: string
       minute_frequency:
@@ -2612,6 +2614,7 @@ definitions:
         enum:
           - complete-list
           - only-new
+          - only-new-free          
           - not-active
         type: string
       minute_frequency:
