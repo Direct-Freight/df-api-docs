@@ -1179,8 +1179,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: 200 OK
+        '204':
+          description: 204 OK
       summary: 'STAGE=UNK Delete a custom column/field'
       tags:
         - postings/custom_fields
@@ -2383,7 +2383,7 @@ definitions:
         ]
       }
     properties:
-      fields:
+      lists:
         description: 'A list of each custom field, type and it''s corresponding position.'
         items:
           type: string
