@@ -6,7 +6,7 @@ example: |-
     ]
   }
 properties:
-  fields:
+  lists:
     description: 'A list of each custom field, type and it''s corresponding position.'
     items:
       type: string
