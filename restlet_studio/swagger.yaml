@@ -3049,27 +3049,21 @@ definitions:
     x-restlet:
       section: POSTINGS
   postings-copy_or_move_response:
-    example: Success
     properties:
-      list:
-        items:
+      success:
           properties:
-            code:
+            posting_id:
               type: integer
-            description:
+            message:
               description: An explanation of what each code means.
               type: string
             status:
-              enum:
-                - Success
-                - Error
-              type: string
+              type: integer
           required:
             - status
+            - posting_id
+            - message
           type: object
-        type: array
-    required:
-      - list
     type: object
     x-restlet:
       section: POSTINGS
