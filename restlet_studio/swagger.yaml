@@ -1160,7 +1160,8 @@ paths:
             $ref: '#/definitions/post_posting_type_action_body'
       responses:
         '201':
-        schema:
+          description: Success
+          schema:
             $ref: '#/definitions/postings-copy_or_move_response'
       summary: STAGE=UNK Copy or Move a posting.
       tags:
