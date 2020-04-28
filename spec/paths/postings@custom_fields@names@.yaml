@@ -11,7 +11,7 @@ delete:
       type: string
   responses:
     '204':
-      description: 204 OK
+      description: No Content
   summary: STAGE=UNK Delete a custom column/field
   tags:
     - postings/custom_fields
