@@ -1180,7 +1180,7 @@ paths:
           type: string
       responses:
         '204':
-          description: 204 OK
+          description:  No Content
       summary: 'STAGE=UNK Delete a custom column/field'
       tags:
         - postings/custom_fields
@@ -1266,7 +1266,7 @@ paths:
           x-example: test_loads             
       responses:
         '204':
-          description: 200 OK
+          description: No Content
       summary: 'STAGE=UNK Delete data from a custom field.'
       tags:
         - postings/custom_fields
