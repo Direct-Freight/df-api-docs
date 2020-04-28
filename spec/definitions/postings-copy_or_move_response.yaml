@@ -1,24 +1,18 @@
-example: Success
 properties:
-  list:
-    items:
-      properties:
-        code:
-          type: integer
-        description:
-          description: An explanation of what each code means.
-          type: string
-        status:
-          enum:
-            - Success
-            - Error
-          type: string
-      required:
-        - status
-      type: object
-    type: array
-required:
-  - list
+  success:
+    properties:
+      message:
+        description: An explanation of what each code means.
+        type: string
+      posting_id:
+        type: integer
+      status:
+        type: integer
+    required:
+      - status
+      - posting_id
+      - message
+    type: object
 type: object
 x-restlet:
   section: POSTINGS
