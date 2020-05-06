@@ -6,6 +6,7 @@ properties:
       more information on setting up alerts.
     example: 5555
     type: integer
+    x-example: undefined
   company_name:
     description: Search only for loads posted by this company.
     type: string
