@@ -1913,7 +1913,7 @@ definitions:
     properties:
       alert_id:
         description: 'By specifying an alert_id we will record the loads or trucks seen by this user, and associate it with their alert.   See /alerts documentation for more information on setting up alerts.'
-        example: 5555
+        example: 1155
         x-example: undefined
         type: integer
       company_name:
