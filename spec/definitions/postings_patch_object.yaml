@@ -1,24 +1,23 @@
 example:
-  list:
-    - comment: hello world
-      custom_id: 321cba
-      destination_city: cincinnati
-      destination_state: OH
-      full_load: true
-      height: 11
-      length: 11
-      origin_city: pittsburg
-      origin_state: PA
-      other_trailer_types: hot shot
-      pay_rate: 11
-      phone_extension: 777
-      phone_number: 777777777
-      receive_date: '2020-05-07'
-      ship_date: '2020-05-06'
-      trailer_type:
-        - V+V
-      weight: 1100
-      width: 11
+  comment: hello world
+  custom_id: abc123
+  destination_city: cincinnati
+  destination_state: OH
+  full_load: true
+  height: 11
+  length: 11
+  origin_city: pittsburg
+  origin_state: PA
+  other_trailer_types: hot shot
+  pay_rate: 11
+  phone_extension: 777
+  phone_number: 777777777
+  receive_date: '2020-05-07'
+  ship_date: '2020-05-06'
+  trailer_type:
+    - V+V
+  weight: 1100
+  width: 11
 properties:
   category:
     description: 'This option only applies to "private_loads", "private_trucks"'

@@ -119,7 +119,10 @@ patch:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/postings_patch_object'
+        properties:
+          list:
+            items:
+              $ref: '#/definitions/postings_patch_object'
   responses:
     '202':
       description: Status 202
