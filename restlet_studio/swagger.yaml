@@ -1076,7 +1076,10 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/postings_patch_object'
+            properties:
+              list:
+                items:
+                  $ref: '#/definitions/postings_patch_object'
       responses:
         '202':
           description: Status 202
@@ -2841,9 +2844,7 @@ definitions:
       section: POSTINGS
   postings_patch_object:
     example: {
-      "list": [
-      	{
-        "custom_id": "321cba",	
+        "custom_id": "abc123",	
         "comment": "hello world",
         "destination_city": "cincinnati",
         "destination_state": "OH",
@@ -2862,8 +2863,6 @@ definitions:
         "weight": 1100,
         "width":11
         }
-      ]
-      }
     properties:
       comment:
         type: string
