@@ -1910,6 +1910,27 @@ definitions:
     x-restlet:
       section: LOCATIONS
   board_request:
+    example:
+      {
+        "destination_city": "chicago",
+        "destination_radius": 300,
+        "destination_state":[
+        "IL"],
+        "full_load": true,
+        "origin_city": "Kansas City",
+        "origin_radius": 300,
+        "origin_state":[
+        "MO"],
+        "page_number": 1,
+        "ship_date": [
+        "2020-05-06"
+        ],
+        "sort_parameter": "age",
+        "trailer_type": [
+        "V",
+        "R"
+        ]
+      }
     properties:
       alert_id:
         description: 'By specifying an alert_id we will record the loads or trucks seen by this user, and associate it with their alert.   See /alerts documentation for more information on setting up alerts.'
@@ -2691,6 +2712,26 @@ definitions:
     x-restlet:
       section: POSTINGS
   postings_entry_object:
+    example: {
+      "comment": "hello world",
+      "custom_id": "abc123",
+      "destination_city": "San Francisco",
+      "destination_state": "CA",
+      "full_load": true,
+      "height": 22,
+      "length": 22,
+      "origin_city": "seattle",
+      "origin_state": "WA",
+      "other_trailer_types": "Lowboy",
+      "pay_rate": 0.22,
+      "phone_extension": 666,
+      "phone_number": 6666666666,
+      "receive_date": "2020-05-06",
+      "ship_date": "2020-05-06",
+      "trailer_type": ["R"],
+      "weight": 2200,
+      "width": 22
+      }
     properties:
       comment:
         type: string
@@ -2799,6 +2840,30 @@ definitions:
     x-restlet:
       section: POSTINGS
   postings_patch_object:
+    example: {
+      "list": [
+      	{
+        "custom_id": "321cba",	
+        "comment": "hello world",
+        "destination_city": "cincinnati",
+        "destination_state": "OH",
+        "full_load": true,
+        "height":11,
+        "length":11,
+        "origin_city": "pittsburg",
+        "origin_state": "PA",
+        "other_trailer_types": "hot shot",
+        "ship_date": "2020-05-06",
+        "pay_rate": 11,
+        "phone_extension": 777,
+        "phone_number": 777777777,
+        "receive_date":"2020-05-07",
+        "trailer_type": ["V+V"],
+        "weight": 1100,
+        "width":11
+        }
+      ]
+      }
     properties:
       comment:
         type: string
@@ -3069,23 +3134,24 @@ definitions:
     x-restlet:
       section: POSTINGS
   profile_object:
-    example: |-
-      {
-        "address": "P.O. Box 131",
-        "city": "Chillicothe",
-        "company": "Direct Freight",
-        "contact_extension": 333,
-        "contact_name": "Joe Doe",
-        "contact_number": 555-555-5555,
-        "dot_number": 123456,
-        "fax_number": "555-555-5555",
-        "mc_number": 123456,
-        "mobile_carrier": "Company_X",
-        "mobile_number": "555-555-1234",
-        "state": "MO",
-        "web_page": "http://www.directfreight.com",
-        "zip": 55555
-      }
+    example: {
+    	"address": "11 Wall Street",
+    	"city": "New York",
+    	"company": "NY Stock Exchange",
+    	"contact_extension": 111,
+    	"contact_name": "J.P. Morgan",
+    	"contact_number": 8885559999,
+    	"dispatch_extension": 123,
+    	"dispatch_number": 4445556666,
+    	"dot_number": "345345345",
+    	"fax_number": 1112223333,
+    	"mc_number": "354345345",
+    	"mobile_carrier": "Sprint",
+        "mobile_number":4445556666,
+        "state": "NY",
+        "web_page": "www.directfreight.com",
+        "zip": "12345"
+   }
     properties:
       address:
         type: string
