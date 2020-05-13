@@ -1080,6 +1080,11 @@ paths:
               list:
                 items:
                   $ref: '#/definitions/postings_patch_object'
+                maxItems: 100
+                type: array
+            required:
+              - list
+            type: object
       responses:
         '202':
           description: Status 202
