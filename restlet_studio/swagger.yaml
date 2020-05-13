@@ -1083,7 +1083,6 @@ paths:
           schema:
             properties:
               list:
-                items:
                  $ref: '#/definitions/postings-post_or_patch_response'
             required:
               - list
