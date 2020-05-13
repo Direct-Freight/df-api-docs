@@ -1,20 +1,20 @@
-example: |-
-  {
-    "address": "P.O. Box 131",
-    "city": "Chillicothe",
-    "company": "Direct Freight",
-    "contact_extension": 333,
-    "contact_name": "Joe Doe",
-    "contact_number": 555-555-5555,
-    "dot_number": 123456,
-    "fax_number": "555-555-5555",
-    "mc_number": 123456,
-    "mobile_carrier": "Company_X",
-    "mobile_number": "555-555-1234",
-    "state": "MO",
-    "web_page": "http://www.directfreight.com",
-    "zip": 55555
-  }
+example:
+  address: 11 Wall Street
+  city: New York
+  company: NY Stock Exchange
+  contact_extension: 111
+  contact_name: J.P. Morgan
+  contact_number: 8885559999
+  dispatch_extension: 123
+  dispatch_number: 4445556666
+  dot_number: '345345345'
+  fax_number: 1112223333
+  mc_number: '354345345'
+  mobile_carrier: Sprint
+  mobile_number: 4445556666
+  state: NY
+  web_page: www.directfreight.com
+  zip: '12345'
 properties:
   address:
     type: string
