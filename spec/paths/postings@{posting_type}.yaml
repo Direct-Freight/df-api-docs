@@ -126,7 +126,8 @@ patch:
       schema:
         properties:
           list:
-            $ref: '#/definitions/postings-post_or_patch_response'
+            items:
+              $ref: '#/definitions/postings-post_or_patch_response'
         required:
           - list
         type: object
