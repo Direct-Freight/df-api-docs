@@ -700,6 +700,11 @@ paths:
           name: connection_token
           required: true
           type: string
+        - description: If set to a positive value (1), this endpoint will create a DF account if it doesnt already exist.
+          in: query
+          name: create_missing_account
+          required: false
+          type: boolean
       responses:
         '201':
           description: successful operation
@@ -2849,7 +2854,7 @@ definitions:
       section: POSTINGS
   postings_patch_object:
     example: {
-        "custom_id": "abc123",	
+        "custom_id": "abc123",  
         "comment": "hello world",
         "destination_city": "cincinnati",
         "destination_state": "OH",
@@ -3139,18 +3144,18 @@ definitions:
       section: POSTINGS
   profile_object:
     example: {
-    	"address": "11 Wall Street",
-    	"city": "New York",
-    	"company": "NY Stock Exchange",
-    	"contact_extension": 111,
-    	"contact_name": "J.P. Morgan",
-    	"contact_number": 8885559999,
-    	"dispatch_extension": 123,
-    	"dispatch_number": 4445556666,
-    	"dot_number": "345345345",
-    	"fax_number": 1112223333,
-    	"mc_number": "354345345",
-    	"mobile_carrier": "Sprint",
+      "address": "11 Wall Street",
+      "city": "New York",
+      "company": "NY Stock Exchange",
+      "contact_extension": 111,
+      "contact_name": "J.P. Morgan",
+      "contact_number": 8885559999,
+      "dispatch_extension": 123,
+      "dispatch_number": 4445556666,
+      "dot_number": "345345345",
+      "fax_number": 1112223333,
+      "mc_number": "354345345",
+      "mobile_carrier": "Sprint",
         "mobile_number":4445556666,
         "state": "NY",
         "web_page": "www.directfreight.com",
