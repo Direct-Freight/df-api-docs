@@ -9,6 +9,13 @@ get:
       name: connection_token
       required: true
       type: string
+    - description: >-
+        If set to a positive value (1), this endpoint will create a DF account
+        if it doesnt already exist.
+      in: query
+      name: create_missing_account
+      required: false
+      type: boolean
   responses:
     '201':
       description: successful operation
