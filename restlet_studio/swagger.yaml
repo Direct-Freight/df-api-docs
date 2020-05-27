@@ -2196,6 +2196,10 @@ definitions:
         description: This field is only returned for an end_user_token that has the subscribed access level.
         example: 555-555-5555
         type: integer
+      rate_per_mile_est:
+        description: Rate per mile estimate
+        example: 1.50
+        type: number
       receive_date:
         example: '2018-09-24'
         format: date
