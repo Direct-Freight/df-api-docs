@@ -2529,6 +2529,27 @@ definitions:
     type: object
     x-restlet:
       section: END_USER_AUTHENTICATIONS
+  social_login_credentials:
+    properties:
+      login:
+        description: 'The e-mail, or username information needed to log in. '
+        type: string
+      realm:
+        description: 'This specifies who to log in with. If left blank we will assume email/password. Valid realms are username, email, facebook(not implemneted), google(not implemented), and linkedin(not implemented). '
+        enum:
+          - username
+          - email
+        type: string
+      secret:
+        description: 'The password, or token required for this login. '
+        type: string
+    required:
+      - login
+      - realm
+      - secret
+    type: object
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS      
   mark_hidden_companies:
     properties:
       company_name:
