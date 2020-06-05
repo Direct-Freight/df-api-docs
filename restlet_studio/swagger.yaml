@@ -703,7 +703,7 @@ paths:
             $ref: '#/definitions/social-login-end-user-token'
         '422':
           $ref: '#/responses/error_422'          
-      summary:  STAGE=Private OneALl Social Login/Create Account
+      summary:  STAGE=Private Social Login/Create Account
       tags:
         - end_user_authentications
     x-restlet:
@@ -2531,22 +2531,29 @@ definitions:
       section: END_USER_AUTHENTICATIONS
   social_login_credentials:
     properties:
-      login:
-        description: 'The e-mail, or username information needed to log in. '
+      token:
+        description: '
+          The token returned by the social login service.
+          For Google the value expected is : 
+          data.code
+          For Facebook the value expected is : 
+          data.authResponse.accessToken
+          For Apple the value expected is : 
+          data.detail.authorization.id_token'
         type: string
-      realm:
-        description: 'This specifies who to log in with. If left blank we will assume email/password. Valid realms are username, email, facebook(not implemneted), google(not implemented), and linkedin(not implemented). '
+      service:
+        description: 'Takes a social login service name,'
         enum:
-          - username
-          - email
+          - google
+          - facebook          
+          - apple
         type: string
-      secret:
-        description: 'The password, or token required for this login. '
-        type: string
+      create_missing_account:
+        description: 'If true the endpoint will create the users account in case it doesnt already exist.'
+        type: boolean
     required:
-      - login
-      - realm
-      - secret
+      - token
+      - service
     type: object
     x-restlet:
       section: END_USER_AUTHENTICATIONS      
