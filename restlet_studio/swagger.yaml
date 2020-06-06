@@ -2546,6 +2546,7 @@ definitions:
         enum:
           - google
           - facebook          
+          - facebook-code
           - apple
         type: string
       create_missing_account:
