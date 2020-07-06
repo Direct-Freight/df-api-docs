@@ -13,10 +13,15 @@ properties:
       login.
     example: false
     type: boolean
-  username:
-    description: The username that was used to login.
-    example: DFUSER12345
-    type: string
+  social_login:
+    example: |-
+      {
+          "lastname" : "Doe",
+          "name" : "John",
+          "service": "google",
+          "status":1
+      }        
+    type: object
 type: object
 x-restlet:
   section: END_USER_AUTHENTICATIONS
