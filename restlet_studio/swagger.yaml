@@ -2056,6 +2056,7 @@ definitions:
           - trailer_type
           - load_size
           - pay_rate
+          - rate_per_mile_est
           - credit_score
           - age
           - trip_miles
