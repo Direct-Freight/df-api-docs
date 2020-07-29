@@ -1,0 +1,46 @@
+get:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Status 200
+      schema:
+        properties:
+          enabled:
+            type: boolean
+        type: object
+  summary: >-
+    STAGE=UNK Check if a user has enabled audio notifications on the web for new
+    load alerts.
+  tags:
+    - optins
+patch:
+  consumes: []
+  description: Toggle audio notifications.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        properties:
+          enabled:
+            description: true/false
+            type: boolean
+        required:
+          - enabled
+        type: object
+  responses:
+    '204':
+      description: Status 204
+  summary: STAGE=UNK Toggles audio notifications for web new load load alerts.
+  tags:
+    - optins
+x-restlet:
+  section: Optins
