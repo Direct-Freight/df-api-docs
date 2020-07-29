@@ -1027,8 +1027,13 @@ paths:
               - player_id
             type: object
       responses:
-        '201':
-          description: Status 201
+        '202':
+          description: Accepted
+          schema:
+            properties:
+              subscribed:
+                type: boolean
+            type: object
       summary: STAGE=UNK Register a OneSignal player_id in the DirectFreight database.
       tags:
         - optins
