@@ -965,6 +965,75 @@ paths:
         - optins
     x-restlet:
       section: Optins
+  /optins/web_push:
+    delete:
+      description: Opt Out of web push notifications.
+      parameters:
+        - description: the onesignal player_id as returned by them when a user subscribes.
+          in: query
+          name: player_id
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Status 204
+      summary: STAGE=UNK Opt someone out of web push notifications.
+      tags:
+        - optins
+    get:
+      parameters:
+        - description: The OneSignal player_id as returned by them when a user subscribes.
+          in: query
+          name: player_id
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Status 200
+          schema:
+            properties:
+              subscribed:
+                type: boolean
+            type: object
+      summary: STAGE=UNK Check if a users player_id is subscribed to web push notifications.
+      tags:
+        - optins
+    post:
+      consumes: []
+      description: 'Register a OneSignal player_id in DirectFreight for web push notifications.'
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              player_id:
+                default: all
+                description: 'The OneSignal player_id as returned by them when a user subscribes.'
+                type: string
+            required:
+              - player_id
+            type: object
+      responses:
+        '201':
+          description: Status 201
+      summary: STAGE=UNK Register a OneSignal player_id in the DirectFreight database.
+      tags:
+        - optins
+    x-restlet:
+      section: Optins      
   '/postings/{posting_type}':
     delete:
       description: 'Will delete one or more entries. Unless the delete_all parameter is set, only 100 entries can be removed per request.'
