@@ -2423,78 +2423,44 @@ definitions:
   boards_profit_response:
     type: "object"
     properties:
-      comments:
-        type: "string"
-      driving_record:
+      load_info:
         type: "object"
         properties:
-          accidents:
-            type: "integer"
-            minimum: 0
-          age:
-            type: "string"
-            enum:
-            - "18-20"
-            - "21-25"
-            - "26-30"
-            - "Over 30"
-          gender:
-            type: "string"
-            enum:
-            - "male"
-            - "female"
-          license_type:
-            type: "string"
-            enum:
-            - "A"
-            - "B"
-            - "1"
-            - "2"
-            - "3"            
-          tickets:
-            type: "integer"
-            minimum: 0
-      experience:
-        type: "object"
-        properties:
-          current_employer:
-            type: "string"
-            maxLength: 40
-          current_years_experience:
-            type: "integer"
-            minimum: 0
-          felony_reason:
-            type: "string"
-          has_felony:
-            type: "boolean"
-          previous_emplayer:
-            type: "string"
-            maxLength: 40
-          previous_years_experience:
-            type: "integer"
-            minimum: 0
-          total_years_experience:
-            type: "integer"
-            minimum: 0
-          trailer_experience:
-            $ref: "#/definitions/trailers"
-      job_preference:
-        type: "object"
-        properties:
-          distance_preference:
-            type: "string"
-            enum:
-            - "OTR"
-            - "local"
-          position:
-            $ref: "#/definitions/positions"
-          region_preference:
-            $ref: "#/definitions/regions"
-          team_preference:
-            type: "string"
-            enum:
-            - "single"
-            - "team"
+          origin_city:
+            type: string
+            description: Origin City, returned as a convinience.
+          origin_state:
+            type: string
+            description: Two letter origin state abbreviation, returned as a convinience.            
+          destination_city:
+            type: string
+            description: Origin City, returned as a convinience.
+          destination_state:
+            type: string
+            description: Two letter origin state abbreviation, returned as a convinience.        
+          pay_rate:
+            type: number
+            description: Returned as a convenience or "N/A" if value was not submitted.        
+          trip_miles:
+            type: integer
+            description: Calculated distance, same value as when load was posted. 
+          rate_per_mile_est:
+            type: integer
+            description: Calculated using the same method as a boards load request.
+          tolls:
+            type: number
+            description: Estimated cost of tolls.            
+          fuel_used:
+            type: integer
+            description: Estimated fuel needed for trip.
+          fuel_cost:
+            type: integer
+            description: Estimated cost of fuel.
+          maint_cost:
+            type: integer
+            description: Estimated maintenance costs.
+            
+            
     x-restlet:
       section: BOARDS
   board_response:
