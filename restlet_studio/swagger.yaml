@@ -3437,10 +3437,16 @@ definitions:
       "fax_number": 1112223333,
       "mc_number": "354345345",
       "mobile_carrier": "Sprint",
-        "mobile_number":4445556666,
-        "state": "NY",
-        "web_page": "www.directfreight.com",
-        "zip": "12345"
+      "mobile_number":4445556666,
+      "state": "NY",
+      "web_page": "www.directfreight.com",
+      "zip": "12345",
+      "miles_per_gal": 1.23,
+      "maint_per_mile": 1.23,
+      "driver_per_mile": 1.23,
+      "truck_ownership_per_mile": 1.23,
+      "ins_permits_per_mile": 1.23,
+      "fuel_capacity": 1.23      
    }
     properties:
       address:
@@ -3500,6 +3506,20 @@ definitions:
         type: string
       zip:
         type: string
+      miles_per_gal:
+        type: number
+      maint_per_mile:
+        type: number      
+      driver_per_mile:
+        type: number      
+      truck_ownership_per_mile:
+        type: number      
+      ins_permits_per_mile:
+        type: number      
+      fuel_capacity:
+        type: number      
+      user_id:      
+        type: number      
     type: object
     x-restlet:
       section: PROFILES
