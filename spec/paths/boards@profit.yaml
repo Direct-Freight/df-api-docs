@@ -4,18 +4,38 @@ get:
   parameters:
     - description: Origin City name
       in: query
-      name: alert_id
-      required: false
+      name: origin_city
+      required: true
       type: string
+    - description: 'Origin State, two letter abbreviation'
+      in: query
+      name: origin_state
+      required: true
+      type: string
+    - description: Destination City name
+      in: query
+      name: destination_city
+      required: true
+      type: string
+    - description: 'Destination State, two letter abbreviation'
+      in: query
+      name: destination_state
+      required: true
+      type: string
+    - description: 'This field will accept either the per mile rate, or gross rate.'
+      in: query
+      name: pay_rate
+      required: false
+      type: number
     - in: header
       name: end-user-token
       required: true
       type: string
   responses:
     '201':
-      description: Object created check the headers for a reference URL.
+      description: Details about the profitability of this trip.
       schema:
-        $ref: '#/definitions/note_create_status'
+        $ref: '#/definitions/boards_profit_response'
   summary: STAGE=UNK Create a note.
   tags:
     - boards
