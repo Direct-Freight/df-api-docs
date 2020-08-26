@@ -1,75 +1,39 @@
 properties:
-  comments:
-    type: string
-  driving_record:
+  load_info:
     properties:
-      accidents:
-        minimum: 0
+      destination_city:
+        description: 'Origin City, returned as a convinience.'
+        type: string
+      destination_state:
+        description: 'Two letter origin state abbreviation, returned as a convinience.'
+        type: string
+      fuel_cost:
+        description: Estimated cost of fuel.
         type: integer
-      age:
-        enum:
-          - 18-20
-          - 21-25
-          - 26-30
-          - Over 30
-        type: string
-      gender:
-        enum:
-          - male
-          - female
-        type: string
-      license_type:
-        enum:
-          - A
-          - B
-          - '1'
-          - '2'
-          - '3'
-        type: string
-      tickets:
-        minimum: 0
+      fuel_used:
+        description: Estimated fuel needed for trip.
         type: integer
-    type: object
-  experience:
-    properties:
-      current_employer:
-        maxLength: 40
-        type: string
-      current_years_experience:
-        minimum: 0
+      maint_cost:
+        description: Estimated maintenance costs.
         type: integer
-      felony_reason:
+      origin_city:
+        description: 'Origin City, returned as a convinience.'
         type: string
-      has_felony:
-        type: boolean
-      previous_emplayer:
-        maxLength: 40
+      origin_state:
+        description: 'Two letter origin state abbreviation, returned as a convinience.'
         type: string
-      previous_years_experience:
-        minimum: 0
+      pay_rate:
+        description: Returned as a convenience or "N/A" if value was not submitted.
+        type: number
+      rate_per_mile_est:
+        description: Calculated using the same method as a boards load request.
         type: integer
-      total_years_experience:
-        minimum: 0
+      tolls:
+        description: Estimated cost of tolls.
+        type: number
+      trip_miles:
+        description: 'Calculated distance, same value as when load was posted.'
         type: integer
-      trailer_experience:
-        $ref: '#/definitions/trailers'
-    type: object
-  job_preference:
-    properties:
-      distance_preference:
-        enum:
-          - OTR
-          - local
-        type: string
-      position:
-        $ref: '#/definitions/positions'
-      region_preference:
-        $ref: '#/definitions/regions'
-      team_preference:
-        enum:
-          - single
-          - team
-        type: string
     type: object
 type: object
 x-restlet:
