@@ -7,11 +7,17 @@ properties:
       destination_state:
         description: 'Two letter origin state abbreviation, returned as a convinience.'
         type: string
+      driver_cost:
+        description: Estimated driver costs.
+        type: integer
       fuel_cost:
         description: Estimated cost of fuel.
         type: integer
       fuel_used:
         description: Estimated fuel needed for trip.
+        type: integer
+      ins_permit:
+        description: Estimated INS permit cost.
         type: integer
       maint_cost:
         description: Estimated maintenance costs.
@@ -31,8 +37,20 @@ properties:
       tolls:
         description: Estimated cost of tolls.
         type: number
+      total_trip_cost:
+        description: Total trip cost.
+        type: integer
       trip_miles:
         description: 'Calculated distance, same value as when load was posted.'
+        type: integer
+      truck_ownership:
+        description: Estimated truck ownership costs.
+        type: integer
+    type: object
+  truck_info:
+    properties:
+      miles_per_gal:
+        description: Retrieved from user profile.
         type: integer
     type: object
 type: object
