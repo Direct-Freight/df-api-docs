@@ -47,9 +47,38 @@ properties:
         description: Estimated truck ownership costs.
         type: integer
     type: object
+  route_info:
+    properties:
+      avg_dest_rate:
+        type: integer
+      avg_fuel_price_trip:
+        description: Total sum of route costs.
+        type: integer
+      avg_lane_rate_30:
+        type: integer
+      avg_lane_rate_7:
+        type: integer
+      avg_lane_rate_90:
+        type: integer
+    type: object
   truck_info:
     properties:
+      driver_per_mile:
+        description: Retrieved from user profile.
+        type: integer
+      fuel_capacity:
+        description: Retrieved from user profile.
+        type: integer
+      ins_permit_per_mile:
+        description: Retrieved from user profile.
+        type: integer
+      maint_per_mile:
+        description: Retrieved from user profile.
+        type: integer
       miles_per_gal:
+        description: Retrieved from user profile.
+        type: integer
+      truck_ownership_per_mile:
         description: Retrieved from user profile.
         type: integer
     type: object
