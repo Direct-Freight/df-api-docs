@@ -496,6 +496,30 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
+  /boards/profit:      
+    get:
+      consumes: []
+      description: Calculate trip profit.
+      parameters:
+        - name: alert_id
+          description: Origin City name
+          in: query
+          required: false
+          type: string
+        - in: header
+          name: end-user-token
+          required: true
+          type: string   
+      responses:
+        '201':
+          description: Object created check the headers for a reference URL.
+          schema:
+            $ref: '#/definitions/note_create_status'
+      summary: STAGE=UNK Create a note.
+      tags:
+        - boards
+    x-restlet:
+      section: BOARDS            
   /end_user_authentication/users:
     post:
       consumes: []
