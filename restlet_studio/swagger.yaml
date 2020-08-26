@@ -2459,6 +2459,24 @@ definitions:
           maint_cost:
             type: integer
             description: Estimated maintenance costs.
+          driver_cost:
+            type: integer
+            description: Estimated driver costs.            
+          truck_ownership:
+            type: integer
+            description: Estimated truck ownership costs.                
+          ins_permit:
+            type: integer
+            description: Estimated INS permit cost.               
+          total_trip_cost:
+            type: integer
+            description: Total trip cost.         
+      truck_info:
+        type: "object"
+        properties:
+          miles_per_gal:
+            type: integer
+            description: Retrieved from user profile.
             
             
     x-restlet:
