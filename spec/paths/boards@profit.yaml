@@ -1,0 +1,23 @@
+get:
+  consumes: []
+  description: Calculate trip profit.
+  parameters:
+    - description: Origin City name
+      in: query
+      name: alert_id
+      required: false
+      type: string
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '201':
+      description: Object created check the headers for a reference URL.
+      schema:
+        $ref: '#/definitions/note_create_status'
+  summary: STAGE=UNK Create a note.
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS
