@@ -2477,8 +2477,35 @@ definitions:
           miles_per_gal:
             type: integer
             description: Retrieved from user profile.
-            
-            
+          maint_per_mile:
+            type: integer
+            description: Retrieved from user profile.
+          driver_per_mile:
+            type: integer
+            description: Retrieved from user profile.
+          truck_ownership_per_mile:
+            type: integer
+            description: Retrieved from user profile.
+          ins_permit_per_mile:
+            type: integer
+            description: Retrieved from user profile.
+          fuel_capacity:
+            type: integer
+            description: Retrieved from user profile.
+      route_info:
+        type: "object"
+        properties:
+          avg_lane_rate_7:
+            type: integer
+          avg_lane_rate_30:
+            type: integer
+          avg_lane_rate_90:
+            type: integer
+          avg_dest_rate:
+            type: integer
+          avg_fuel_price_trip:
+            type: integer
+            description: Total sum of route costs.
     x-restlet:
       section: BOARDS
   board_response:
