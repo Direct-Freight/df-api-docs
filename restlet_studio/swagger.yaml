@@ -2420,7 +2420,7 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
-  boards_data_response:
+  boards_profit_response:
     type: "object"
     properties:
       comments:
@@ -2496,7 +2496,7 @@ definitions:
             - "single"
             - "team"
     x-restlet:
-      section: "BOARDS"      
+      section: BOARDS
   board_response:
     example: |-
       {
