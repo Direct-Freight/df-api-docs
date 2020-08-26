@@ -8,11 +8,17 @@ example:
   dispatch_extension: 123
   dispatch_number: 4445556666
   dot_number: '345345345'
+  driver_per_mile: 1.23
   fax_number: 1112223333
+  fuel_capacity: 1.23
+  ins_permits_per_mile: 1.23
+  maint_per_mile: 1.23
   mc_number: '354345345'
+  miles_per_gal: 1.23
   mobile_carrier: Sprint
   mobile_number: 4445556666
   state: NY
+  truck_ownership_per_mile: 1.23
   web_page: www.directfreight.com
   zip: '12345'
 properties:
@@ -37,10 +43,20 @@ properties:
     type: integer
   dot_number:
     type: string
+  driver_per_mile:
+    type: number
   fax_number:
     type: integer
+  fuel_capacity:
+    type: number
+  ins_permits_per_mile:
+    type: number
+  maint_per_mile:
+    type: number
   mc_number:
     type: string
+  miles_per_gal:
+    type: number
   mobile_carrier:
     enum:
       - Other/Unknown
@@ -69,6 +85,10 @@ properties:
     type: integer
   state:
     type: string
+  truck_ownership_per_mile:
+    type: number
+  user_id:
+    type: number
   web_page:
     type: string
   zip:
