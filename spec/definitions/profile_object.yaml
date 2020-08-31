@@ -87,8 +87,6 @@ properties:
     type: string
   truck_ownership_per_mile:
     type: number
-  user_id:
-    type: number
   web_page:
     type: string
   zip:
