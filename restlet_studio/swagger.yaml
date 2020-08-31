@@ -3517,9 +3517,7 @@ definitions:
       ins_permits_per_mile:
         type: number      
       fuel_capacity:
-        type: number      
-      user_id:      
-        type: number      
+        type: number 
     type: object
     x-restlet:
       section: PROFILES
