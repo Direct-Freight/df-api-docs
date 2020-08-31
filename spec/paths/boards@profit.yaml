@@ -36,7 +36,7 @@ get:
       description: Details about the profitability of this trip.
       schema:
         $ref: '#/definitions/boards_profit_response'
-  summary: STAGE=UNK Create a note.
+  summary: STAGE=Private Get profit data.
   tags:
     - boards
 x-restlet:
