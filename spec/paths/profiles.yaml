@@ -1,3 +1,15 @@
+delete:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '204':
+      description: success operation
+  summary: STAGE=UNK Delete the profile.
+  tags:
+    - profiles
 get:
   parameters:
     - in: header
