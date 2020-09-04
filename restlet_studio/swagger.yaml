@@ -1595,6 +1595,18 @@ paths:
       summary: Create a new profile.
       tags:
         - profiles
+    delete:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '204':
+          description: success operation
+      summary: STAGE=UNK Delete the profile.
+      tags:
+        - profiles        
     x-restlet:
       section: PROFILES
   /profiles/truck_info:
@@ -1609,7 +1621,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/truck_info_object'
-      summary: Request the logged in user's profile.
+      summary: Request the logged in user's truck info.
       tags:
         - profiles
     patch:
@@ -1630,7 +1642,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/truck_info_object'
-      summary: Update profile information.
+      summary: Update truck information.
       tags:
         - profiles
     x-restlet:
