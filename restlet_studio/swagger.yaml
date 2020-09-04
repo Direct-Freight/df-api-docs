@@ -1563,12 +1563,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/profile_object'
+            $ref: '#/definitions/profile_object_patch'
       responses:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/profile_object'
+            $ref: '#/definitions/profile_object_patch'
       summary: Update profile information.
       tags:
         - profiles
@@ -3518,6 +3518,86 @@ definitions:
         type: number      
       fuel_capacity:
         type: number 
+    type: object
+    x-restlet:
+      section: PROFILES      
+  profile_object_patch:
+    example: {
+      "address": "11 Wall Street",
+      "city": "New York",
+      "company": "NY Stock Exchange",
+      "contact_extension": 111,
+      "contact_name": "J.P. Morgan",
+      "contact_number": 8885559999,
+      "dispatch_extension": 123,
+      "dispatch_number": 4445556666,
+      "dot_number": "345345345",
+      "fax_number": 1112223333,
+      "mc_number": "354345345",
+      "mobile_carrier": "Sprint",
+      "mobile_number":4445556666,
+      "state": "NY",
+      "web_page": "www.directfreight.com",
+      "zip": "12345"
+   }
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      company:
+        description: 'Company name. '
+        type: string
+      contact_extension:
+        type: integer
+      contact_name:
+        description: 'Contact name. '
+        type: string
+      contact_number:
+        type: integer
+      dispatch_extension:
+        description: Limited to 3 integers
+        type: integer
+      dispatch_number:
+        type: integer
+      dot_number:
+        type: string
+      fax_number:
+        type: integer
+      mc_number:
+        type: string
+      mobile_carrier:
+        enum:
+          - Other/Unknown
+          - AT&T
+          - Verizon
+          - Sprint
+          - T-Mobile
+          - US Cellular
+          - Nextel
+          - Virgin Mobile
+          - Boost Mobile
+          - Straight Talk
+          - Tracfone
+          - NET10
+          - Metro PCS
+          - Cricket
+          - Rogers
+          - Fido
+          - Bell Mobility
+          - Telus
+          - Clearnet
+          - Solo Mobile
+          - Koodo Mobile
+        type: string
+      mobile_number:
+        type: integer
+      state:
+        type: string
+      web_page:
+        type: string
+      zip:
+        type: string
     type: object
     x-restlet:
       section: PROFILES
