@@ -33,30 +33,5 @@ patch:
   summary: Update profile information.
   tags:
     - profiles
-post:
-  consumes: []
-  parameters:
-    - in: header
-      name: end-user-token
-      required: true
-      type: string
-    - in: body
-      name: body
-      required: true
-      schema:
-        $ref: '#/definitions/profile_object'
-  responses:
-    '201':
-      description: Object created
-      headers:
-        Location:
-          description: >-
-            This will have a fully qualified API url you can call to get details
-            of your profile.
-          type: string
-          x-example: 'https://api.directfreight.com/v1/profiles/'
-  summary: Create a new profile.
-  tags:
-    - profiles
 x-restlet:
   section: PROFILES
