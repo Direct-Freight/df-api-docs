@@ -1,4 +1,5 @@
 example:
+  deadhead_per_mile: 1.23
   driver_per_mile: 1.23
   fuel_capacity: 1.23
   ins_permits_per_mile: 1.23
