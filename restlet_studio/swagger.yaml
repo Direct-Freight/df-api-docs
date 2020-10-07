@@ -3677,6 +3677,8 @@ definitions:
         type: number      
       fuel_capacity:
         type: number 
+      deadhead_per_mile:
+        type: number        
     type: object
     x-restlet:
       section: PROFILES  
