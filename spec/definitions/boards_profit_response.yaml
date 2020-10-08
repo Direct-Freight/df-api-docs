@@ -1,4 +1,78 @@
+example:
+  executive_summary: >-
+    Based on all of the information we have about your truck and this load we
+    believe this load would have a net profit of $-736.27 after you paid the
+    driver(yourself) and all of the expenses. Fuel costs vary across your route
+    you might consider buying fuel in MO, where fuel costs are $0.458 lower than
+    the average fuel price along this route. 
+  load_info:
+    destination_city: New York
+    destination_state: NY
+    driver_cost: 2011.68
+    fuel_cost: 7275.58
+    fuel_used: '429.85'
+    ins_permits: 363.22
+    maint_cost: 474.98
+    origin_city: San Diego
+    origin_state: CA
+    pay_rate: '6000'
+    rate_per_mile_est: 2.15
+    toll_cost: 1
+    total_profit: -6892.52
+    total_trip_cost: 12892.52
+    trip_miles: 2794
+    truck_ownership: 2766.06
+  route_info:
+    avg_fuel_price_trip: 2.604
+    fuel_by_state:
+      - avg_fuel_price: 2.625
+        miles: 544
+        state: AZ
+      - avg_fuel_price: 3.218
+        miles: 166
+        state: CA
+      - avg_fuel_price: 2.452
+        miles: 465
+        state: CO
+      - avg_fuel_price: 2.454
+        miles: 155
+        state: IL
+      - avg_fuel_price: 2.558
+        miles: 156
+        state: IN
+      - avg_fuel_price: 2.351
+        miles: 479
+        state: KS
+      - avg_fuel_price: 2.146
+        miles: 247
+        state: MO
+      - avg_fuel_price: 2.725
+        miles: 70
+        state: NJ
+      - avg_fuel_price: 2.809
+        miles: 4
+        state: NY
+      - avg_fuel_price: 2.531
+        miles: 225
+        state: OH
+      - avg_fuel_price: 2.831
+        miles: 336
+        state: PA
+      - avg_fuel_price: 2.544
+        miles: 14
+        state: WV
+  truck_info:
+    deadhead_per_mile: 1.29
+    driver_per_mile: 0.72
+    fuel_capacity: 200
+    ins_permits_per_mile: 0.13
+    maint_per_mile: 0.17
+    miles_per_gal: 6.5
+    truck_ownership_per_mile: 0.27
 properties:
+  executive_summary:
+    description: Executive summary of trip profitability.
+    type: string
   load_info:
     properties:
       destination_city:
@@ -79,6 +153,7 @@ properties:
         description: Retrieved from user profile.
         type: integer
       miles_per_gal:
+        default: 33
         description: Retrieved from user profile.
         type: integer
       truck_ownership_per_mile:
