@@ -2702,20 +2702,10 @@ definitions:
       section: BOARDS
   boards_freight_rate_response:
     properties:
-      success:
-          properties:
-            posting_id:
-              type: integer
-            message:
-              description: An explanation of what each code means.
-              type: string
-            status:
-              type: integer
-          required:
-            - status
-            - posting_id
-            - message
-          type: object
+      loads:
+        type: integer
+      average_pay_rate:
+        type: number
     type: object
     x-restlet:
       section: BOARDS
