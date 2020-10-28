@@ -1,0 +1,40 @@
+get:
+  consumes: []
+  description: Calculate trip profit.
+  parameters:
+    - description: Metro Area Origin ID
+      in: query
+      name: metro_origin_id
+      required: true
+      type: string
+    - description: Metro Area Destination ID
+      in: query
+      name: metro_destination_id
+      required: true
+      type: string
+    - description: Date
+      in: query
+      name: date
+      required: true
+      type: string
+    - description: >-
+        Frequency, can be daily, weekly or monthly. Default to "daily" if not
+        specified.
+      in: query
+      name: frequency
+      required: false
+      type: string
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '201':
+      description: Details about the profitability of this trip.
+      schema:
+        $ref: '#/definitions/boards_freight_rate_response'
+  summary: STAGE=Private Get profit data.
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS
