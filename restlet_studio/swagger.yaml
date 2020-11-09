@@ -1069,10 +1069,10 @@ paths:
         - optins
     get:
       parameters:
-        - description: The OneSignal player_id as returned by them when a user subscribes.
+        - description: The OneSignal player_id as returned by them when a user subscribes. If this parameter is not provided the API will return true if the User has any player_id subscribed.
           in: query
           name: player_id
-          required: true
+          required: false
           type: string
         - in: header
           name: end-user-token
