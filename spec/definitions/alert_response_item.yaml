@@ -116,6 +116,7 @@ properties:
       - email
       - text
       - push
+      - desktop
     type: string
   start_hour:
     description: A  corresponding to the hour of the day.
