@@ -1976,6 +1976,7 @@ definitions:
           - email
           - text
           - push
+          - desktop
         type: string
       start_hour:
         description: A  corresponding to the hour of the day.  (This field will accept 23 however there is a known logic issue for values over 21 with time zone set to 2)
@@ -2105,6 +2106,7 @@ definitions:
           - email
           - text
           - push
+          - desktop
         type: string
       start_hour:
         description: A  corresponding to the hour of the day.
@@ -3145,6 +3147,7 @@ definitions:
           - email
           - text
           - push
+          - desktop
         type: string
       start_hour:
         description: A value corresponding to the hour of the day.
