@@ -1202,17 +1202,21 @@ paths:
     get:
       description: 'Retrieves a list of the users posted loads or trucks. By default it retrieves all of their entries. If you specifiy multiple ids, only 100 entries can be retrieved per request.'
       parameters:
-        - description: To retrieve only a subset of entries.
+        - name: posting_id
+          description: the posting_ids associated with the data you want to get.
           in: query
-          name: posting_id
+          items:
+            type: integer
           required: false
-          type: integer
-          x-example: '?posting_id=32&posting_id=33&posting_id=34'
-        - description: To retrieve only a subset of entries.
+          type: array
+          x-example: '?posting_id=22&posting_id=23&posting_id=24'
+        - name: custom_id 
+          description: To retrieve only a subset of entries.
           in: query
-          name: custom_id
           required: false
-          type: string
+          type: array
+          items:
+            type: string
           x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
         - description: Sort results by a certain field.
           in: query
