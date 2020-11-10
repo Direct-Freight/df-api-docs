@@ -1,11 +1,29 @@
+example:
+  destination_city: chicago
+  destination_radius: 300
+  destination_state:
+    - IL
+  full_load: true
+  origin_city: Kansas City
+  origin_radius: 300
+  origin_state:
+    - MO
+  page_number: 1
+  ship_date:
+    - '2020-05-06'
+  sort_parameter: age
+  trailer_type:
+    - V
+    - R
 properties:
   alert_id:
     description: >-
       By specifying an alert_id we will record the loads or trucks seen by this
       user, and associate it with their alert.   See /alerts documentation for
       more information on setting up alerts.
-    example: 5555
+    example: 1155
     type: integer
+    x-example: undefined
   company_name:
     description: Search only for loads posted by this company.
     type: string
@@ -141,6 +159,7 @@ properties:
       - trailer_type
       - load_size
       - pay_rate
+      - rate_per_mile_est
       - credit_score
       - age
       - trip_miles
@@ -154,6 +173,23 @@ properties:
       - green_light
       - new
     example: age
+    type: string
+  tier:
+    description: >-
+      This field is an optional filter that limits board response to "free" or
+      "premium" loads. If this field is not specified it defaults to "all"
+      loads.
+
+      free loads - are loads that are more than 2 hours old. contact information
+      and comments are visible even if this request comes from an unsubscribed
+      account.
+
+      premium loads - loads that are less than 2 hours old. contact information
+      and comments are only visible for premium accounts.
+    enum:
+      - all
+      - free
+      - premium
     type: string
   trailer_type:
     description: 'A string array of valid trailer types to limit the search. '

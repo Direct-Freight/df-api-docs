@@ -23,7 +23,7 @@ properties:
   expires_after:
     description: >-
       The last day the alert will be valid. Valid time frames are from today
-      until one year into the future.
+      until one year into the future. Cannot be changed if alert is inactive.
     format: date
     type: string
   list_type:
@@ -33,6 +33,7 @@ properties:
     enum:
       - complete-list
       - only-new
+      - only-new-free
       - not-active
     type: string
   minute_frequency:
@@ -44,6 +45,7 @@ properties:
       - email
       - text
       - push
+      - desktop
     type: string
   start_hour:
     description: A value corresponding to the hour of the day.

@@ -1,14 +1,14 @@
-get:
+post:
   description: >-
     Logs in or creates a new account for the user based on their email.
     "new_account" is what indicates if a new account was created, or if an
     existing account was used to login.
   parameters:
-    - description: UUID returned by oneall used to identify the user.
-      in: query
-      name: connection_token
+    - in: body
+      name: body
       required: true
-      type: string
+      schema:
+        $ref: '#/definitions/social_login_credentials'
   responses:
     '201':
       description: successful operation
@@ -16,7 +16,7 @@ get:
         $ref: '#/definitions/social-login-end-user-token'
     '422':
       $ref: '#/responses/error_422'
-  summary: STAGE=Private OneALl Social Login/Create Account
+  summary: STAGE=Private Social Login/Create Account
   tags:
     - end_user_authentications
 x-restlet:

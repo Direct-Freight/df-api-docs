@@ -1,0 +1,18 @@
+properties:
+  success:
+    properties:
+      message:
+        description: An explanation of what each code means.
+        type: string
+      posting_id:
+        type: integer
+      status:
+        type: integer
+    required:
+      - status
+      - posting_id
+      - message
+    type: object
+type: object
+x-restlet:
+  section: POSTINGS

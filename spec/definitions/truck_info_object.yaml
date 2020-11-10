@@ -1,0 +1,26 @@
+example:
+  deadhead_per_mile: 1.29
+  driver_per_mile: 0.72
+  fuel_capacity: 200
+  ins_permits_per_mile: 0.13
+  maint_per_mile: 0.17
+  miles_per_gal: 6.5
+  truck_ownership_per_mile: 0.27
+properties:
+  deadhead_per_mile:
+    type: number
+  driver_per_mile:
+    type: number
+  fuel_capacity:
+    type: number
+  ins_permits_per_mile:
+    type: number
+  maint_per_mile:
+    type: number
+  miles_per_gal:
+    type: number
+  truck_ownership_per_mile:
+    type: number
+type: object
+x-restlet:
+  section: PROFILES

@@ -1,0 +1,43 @@
+get:
+  consumes: []
+  description: Calculate trip profit.
+  parameters:
+    - description: Origin City name
+      in: query
+      name: origin_city
+      required: true
+      type: string
+    - description: 'Origin State, two letter abbreviation'
+      in: query
+      name: origin_state
+      required: true
+      type: string
+    - description: Destination City name
+      in: query
+      name: destination_city
+      required: true
+      type: string
+    - description: 'Destination State, two letter abbreviation'
+      in: query
+      name: destination_state
+      required: true
+      type: string
+    - description: 'This field will accept either the per mile rate, or gross rate.'
+      in: query
+      name: pay_rate
+      required: false
+      type: number
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '201':
+      description: Details about the profitability of this trip.
+      schema:
+        $ref: '#/definitions/boards_profit_response'
+  summary: STAGE=Private Get profit data.
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS

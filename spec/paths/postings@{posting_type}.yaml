@@ -43,17 +43,21 @@ get:
     retrieves all of their entries. If you specifiy multiple ids, only 100
     entries can be retrieved per request.
   parameters:
-    - description: To retrieve only a subset of entries.
+    - description: the posting_ids associated with the data you want to get.
       in: query
+      items:
+        type: integer
       name: posting_id
       required: false
-      type: integer
-      x-example: '?posting_id=32&posting_id=33&posting_id=34'
+      type: array
+      x-example: '?posting_id=22&posting_id=23&posting_id=24'
     - description: To retrieve only a subset of entries.
       in: query
+      items:
+        type: string
       name: custom_id
       required: false
-      type: string
+      type: array
       x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
     - description: Sort results by a certain field.
       enum:
@@ -119,7 +123,15 @@ patch:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/postings_patch_object'
+        properties:
+          list:
+            items:
+              $ref: '#/definitions/postings_patch_object'
+            maxItems: 100
+            type: array
+        required:
+          - list
+        type: object
   responses:
     '202':
       description: Status 202

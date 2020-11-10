@@ -496,6 +496,89 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
+  /boards/profit:      
+    get:
+      consumes: []
+      description: Calculate trip profit.
+      parameters:
+        - name: origin_city
+          description: Origin City name
+          in: query
+          required: true
+          type: string
+        - name: origin_state
+          description: Origin State, two letter abbreviation
+          in: query
+          required: true
+          type: string          
+        - name: destination_city
+          description: Destination City name
+          in: query
+          required: true
+          type: string
+        - name: destination_state
+          description: Destination State, two letter abbreviation
+          in: query
+          required: true
+          type: string    
+        - name: pay_rate
+          description: 'This field will accept either the per mile rate, or gross rate.'
+          in: query          
+          required: false
+          type: number          
+        - in: header
+          name: end-user-token
+          required: true
+          type: string   
+      responses:
+        '201':
+          description: Details about the profitability of this trip.
+          schema:
+            $ref: '#/definitions/boards_profit_response'
+      summary: STAGE=Private Get profit data.
+      tags:
+        - boards
+    x-restlet:
+      section: BOARDS           
+  /boards/freight_rate:      
+    get:
+      consumes: []
+      description: Calculate trip profit.
+      parameters:
+        - name: metro_origin_id
+          description: Metro Area Origin ID
+          in: query
+          required: true
+          type: string
+        - name: metro_destination_id
+          description: Metro Area Destination ID
+          in: query
+          required: true
+          type: string          
+        - name: date
+          description: Date
+          in: query
+          required: true
+          type: string
+        - name: frequency
+          description: Frequency, can be daily, weekly or monthly. Default to "daily" if not specified.
+          in: query
+          required: false
+          type: string    
+        - in: header
+          name: end-user-token
+          required: true
+          type: string   
+      responses:
+        '201':
+          description: Details about the profitability of this trip.
+          schema:
+            $ref: '#/definitions/boards_freight_rate_response'
+      summary: STAGE=Private Get profit data.
+      tags:
+        - boards
+    x-restlet:
+      section: BOARDS                  
   /end_user_authentication/users:
     post:
       consumes: []
@@ -688,18 +771,14 @@ paths:
     x-restlet:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications/social_login:
-    get:
+    post:
       description: Logs in or creates a new account for the user based on their email. "new_account" is what indicates if a new account was created, or if an existing account was used to login.
       parameters:
-        # - in: header
-        #   name: api-token
-        #   required: true
-        #   type: string
-        - description: UUID returned by oneall used to identify the user.
-          in: query
-          name: connection_token
+        - in: body
+          name: body
           required: true
-          type: string
+          schema:
+            $ref: '#/definitions/social_login_credentials'
       responses:
         '201':
           description: successful operation
@@ -707,7 +786,7 @@ paths:
             $ref: '#/definitions/social-login-end-user-token'
         '422':
           $ref: '#/responses/error_422'          
-      summary:  STAGE=Private OneALl Social Login/Create Account
+      summary:  STAGE=Private Social Login/Create Account
       tags:
         - end_user_authentications
     x-restlet:
@@ -969,6 +1048,125 @@ paths:
         - optins
     x-restlet:
       section: Optins
+  /optins/web_push:
+    delete:
+      description: Opt Out of web push notifications.
+      parameters:
+        - description: the onesignal player_id as returned by them when a user subscribes.
+          in: query
+          name: player_id
+          required: true
+          type: string
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Status 204
+      summary: STAGE=UNK Opt someone out of web push notifications.
+      tags:
+        - optins
+    get:
+      parameters:
+        - description: The OneSignal player_id as returned by them when a user subscribes. If this parameter is not provided the API will return true if the User has any player_id subscribed.
+          in: query
+          name: player_id
+          required: false
+          type: string
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Status 200
+          schema:
+            properties:
+              subscribed:
+                type: boolean
+            type: object
+      summary: STAGE=UNK Check if a users player_id is subscribed to web push notifications.
+      tags:
+        - optins
+    post:
+      consumes: []
+      description: 'Register a OneSignal player_id in DirectFreight for web push notifications.'
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              player_id:
+                default: all
+                description: 'The OneSignal player_id as returned by them when a user subscribes.'
+                type: string
+            required:
+              - player_id
+            type: object
+      responses:
+        '202':
+          description: Accepted
+          schema:
+            properties:
+              subscribed:
+                type: boolean
+            type: object
+      summary: STAGE=UNK Register a OneSignal player_id in the DirectFreight database.
+      tags:
+        - optins
+    x-restlet:
+      section: Optins      
+  /optins/load_alert_sound:
+    get:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Status 200
+          schema:
+            properties:
+              enabled:
+                type: boolean
+            type: object
+      summary: STAGE=UNK Check if a user has enabled audio notifications on the web for new load alerts.
+      tags:
+        - optins
+    patch:
+      consumes: []
+      description: 'Toggle audio notifications.'
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            properties:
+              enabled:
+                description: 'true/false'
+                type: boolean
+            required:
+              - enabled
+            type: object
+      responses:
+        '204':
+          description: Status 204
+      summary: STAGE=UNK Toggles audio notifications for web new load load alerts.
+      tags:
+        - optins
+    x-restlet:
+      section: Optins         
   '/postings/{posting_type}':
     delete:
       description: 'Will delete one or more entries. Unless the delete_all parameter is set, only 100 entries can be removed per request.'
@@ -1004,17 +1202,21 @@ paths:
     get:
       description: 'Retrieves a list of the users posted loads or trucks. By default it retrieves all of their entries. If you specifiy multiple ids, only 100 entries can be retrieved per request.'
       parameters:
-        - description: To retrieve only a subset of entries.
+        - name: posting_id
+          description: the posting_ids associated with the data you want to get.
           in: query
-          name: posting_id
+          items:
+            type: integer
           required: false
-          type: integer
-          x-example: '?posting_id=32&posting_id=33&posting_id=34'
-        - description: To retrieve only a subset of entries.
+          type: array
+          x-example: '?posting_id=22&posting_id=23&posting_id=24'
+        - name: custom_id 
+          description: To retrieve only a subset of entries.
           in: query
-          name: custom_id
           required: false
-          type: string
+          type: array
+          items:
+            type: string
           x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
         - description: Sort results by a certain field.
           in: query
@@ -1076,7 +1278,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/postings_patch_object'
+            properties:
+              list:
+                items:
+                  $ref: '#/definitions/postings_patch_object'
+                maxItems: 100
+                type: array
+            required:
+              - list
+            type: object
       responses:
         '202':
           description: Status 202
@@ -1160,7 +1370,9 @@ paths:
             $ref: '#/definitions/post_posting_type_action_body'
       responses:
         '201':
-          $ref: '#/responses/object_created'
+          description: Success
+          schema:
+            $ref: '#/definitions/postings-copy_or_move_response'
       summary: STAGE=UNK Copy or Move a posting.
       tags:
         - postings
@@ -1179,8 +1391,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: 200 OK
+        '204':
+          description:  No Content
       summary: 'STAGE=UNK Delete a custom column/field'
       tags:
         - postings/custom_fields
@@ -1266,7 +1478,7 @@ paths:
           x-example: test_loads             
       responses:
         '204':
-          description: 200 OK
+          description: No Content
       summary: 'STAGE=UNK Delete data from a custom field.'
       tags:
         - postings/custom_fields
@@ -1394,12 +1606,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/profile_object'
+            $ref: '#/definitions/profile_object_patch'
       responses:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/profile_object'
+            $ref: '#/definitions/profile_object_patch'
       summary: Update profile information.
       tags:
         - profiles
@@ -1426,8 +1638,58 @@ paths:
       summary: Create a new profile.
       tags:
         - profiles
+    delete:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '204':
+          description: success operation
+      summary: STAGE=UNK Delete the profile.
+      tags:
+        - profiles        
     x-restlet:
       section: PROFILES
+  /profiles/truck_info:
+    get:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/truck_info_object'
+      summary: Request the logged in user's truck info.
+      tags:
+        - profiles
+    patch:
+      consumes: []
+      description: Please send in at least one field to be updated.
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/truck_info_object'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/truck_info_object'
+      summary: Update truck information.
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES  
   /profiles/documents:
     delete:
       parameters:
@@ -1669,10 +1931,11 @@ definitions:
         format: date time
         type: string
       list_type:
-        description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', and ''not-active''.'
+        description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', ''only-new-free'' and ''not-active''.'
         enum:
           - complete-list
           - only-new
+          - only-new-free          
           - not-active
         type: string
       minute_frequency:
@@ -1717,6 +1980,7 @@ definitions:
           - email
           - text
           - push
+          - desktop
         type: string
       start_hour:
         description: A  corresponding to the hour of the day.  (This field will accept 23 however there is a known logic issue for values over 21 with time zone set to 2)
@@ -1788,10 +2052,11 @@ definitions:
         format: datetime
         type: string  
       list_type:
-        description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', and ''not-active''.'
+        description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', ''only-new-free'' and ''not-active''.'
         enum:
           - complete-list
           - only-new
+          - only-new-free
           - not-active
         type: string
       minute_frequency:
@@ -1845,6 +2110,7 @@ definitions:
           - email
           - text
           - push
+          - desktop
         type: string
       start_hour:
         description: A  corresponding to the hour of the day.
@@ -1906,10 +2172,32 @@ definitions:
     x-restlet:
       section: LOCATIONS
   board_request:
+    example:
+      {
+        "destination_city": "chicago",
+        "destination_radius": 300,
+        "destination_state":[
+        "IL"],
+        "full_load": true,
+        "origin_city": "Kansas City",
+        "origin_radius": 300,
+        "origin_state":[
+        "MO"],
+        "page_number": 1,
+        "ship_date": [
+        "2020-05-06"
+        ],
+        "sort_parameter": "age",
+        "trailer_type": [
+        "V",
+        "R"
+        ]
+      }
     properties:
       alert_id:
         description: 'By specifying an alert_id we will record the loads or trucks seen by this user, and associate it with their alert.   See /alerts documentation for more information on setting up alerts.'
-        example: 5555
+        example: 1155
+        x-example: undefined
         type: integer
       company_name:
         description: Search only for loads posted by this company.
@@ -1996,6 +2284,18 @@ definitions:
           - unsent
           - newtag
         type: string
+      tier:
+        description: This field is an optional filter that limits board response to "free" or "premium" loads. If this field is not specified it defaults to "all" loads.
+        
+          free loads - are loads that are more than 2 hours old. contact information and comments are visible even if this request comes from an unsubscribed account.
+          
+          premium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.
+          
+        enum:
+          - all
+          - free
+          - premium
+        type: string
       ship_date:
         description: Limits results to specified ship date(s).
         items:
@@ -2014,6 +2314,7 @@ definitions:
           - trailer_type
           - load_size
           - pay_rate
+          - rate_per_mile_est
           - credit_score
           - age
           - trip_miles
@@ -2145,6 +2446,10 @@ definitions:
         description: This field is only returned for an end_user_token that has the subscribed access level.
         example: 555-555-5555
         type: integer
+      rate_per_mile_est:
+        description: Rate per mile estimate
+        example: 1.50
+        type: number
       receive_date:
         example: '2018-09-24'
         format: date
@@ -2207,6 +2512,206 @@ definitions:
       - trip_miles
       - weight
       - width
+    type: object
+    x-restlet:
+      section: BOARDS
+  boards_profit_response:
+    example:
+      {
+        "executive_summary": "Based on all of the information we have about your truck and this load we believe this load would have a net profit of $-736.27 after you paid the driver(yourself) and all of the expenses. Fuel costs vary across your route you might consider buying fuel in MO, where fuel costs are $0.458 lower than the average fuel price along this route. ",
+          "load_info": {
+              "destination_city": "New York",
+              "destination_state": "NY",
+              "driver_cost": 2011.68,
+              "fuel_cost": 7275.58,
+              "fuel_used": "429.85",
+              "ins_permits": 363.22,
+              "maint_cost": 474.98,
+              "origin_city": "San Diego",
+              "origin_state": "CA",
+              "pay_rate": "6000",
+              "rate_per_mile_est": 2.15,
+              "toll_cost": 1.0,
+              "total_profit": -6892.52,
+              "total_trip_cost": 12892.52,
+              "trip_miles": 2794,
+              "truck_ownership": 2766.06
+          },
+          "route_info": {
+              "avg_fuel_price_trip": 2.604,
+              "fuel_by_state": [
+                  {
+                      "avg_fuel_price": 2.625,
+                      "miles": 544,
+                      "state": "AZ"
+                  },
+                  {
+                      "avg_fuel_price": 3.218,
+                      "miles": 166,
+                      "state": "CA"
+                  },
+                  {
+                      "avg_fuel_price": 2.452,
+                      "miles": 465,
+                      "state": "CO"
+                  },
+                  {
+                      "avg_fuel_price": 2.454,
+                      "miles": 155,
+                      "state": "IL"
+                  },
+                  {
+                      "avg_fuel_price": 2.558,
+                      "miles": 156,
+                      "state": "IN"
+                  },
+                  {
+                      "avg_fuel_price": 2.351,
+                      "miles": 479,
+                      "state": "KS"
+                  },
+                  {
+                      "avg_fuel_price": 2.146,
+                      "miles": 247,
+                      "state": "MO"
+                  },
+                  {
+                      "avg_fuel_price": 2.725,
+                      "miles": 70,
+                      "state": "NJ"
+                  },
+                  {
+                      "avg_fuel_price": 2.809,
+                      "miles": 4,
+                      "state": "NY"
+                  },
+                  {
+                      "avg_fuel_price": 2.531,
+                      "miles": 225,
+                      "state": "OH"
+                  },
+                  {
+                      "avg_fuel_price": 2.831,
+                      "miles": 336,
+                      "state": "PA"
+                  },
+                  {
+                      "avg_fuel_price": 2.544,
+                      "miles": 14,
+                      "state": "WV"
+                  }
+              ]
+          },
+          "truck_info": {
+            "miles_per_gal": 6.50,
+            "maint_per_mile": 0.17,
+            "driver_per_mile": 0.72,
+            "truck_ownership_per_mile": 0.27,
+            "ins_permits_per_mile": 0.13,
+            "fuel_capacity": 200.00,
+            "deadhead_per_mile": 1.29   
+          }
+      }
+    type: "object"
+    properties:
+      executive_summary:
+        type: "string"
+        description: Executive summary of trip profitability.
+      load_info:
+        type: "object"
+        properties:
+          origin_city:
+            type: string
+            description: Origin City, returned as a convinience.
+          origin_state:
+            type: string
+            description: Two letter origin state abbreviation, returned as a convinience.            
+          destination_city:
+            type: string
+            description: Origin City, returned as a convinience.
+          destination_state:
+            type: string
+            description: Two letter origin state abbreviation, returned as a convinience.        
+          pay_rate:
+            type: number
+            description: Returned as a convenience or "N/A" if value was not submitted.        
+          trip_miles:
+            type: integer
+            description: Calculated distance, same value as when load was posted. 
+          rate_per_mile_est:
+            type: integer
+            description: Calculated using the same method as a boards load request.
+          tolls:
+            type: number
+            description: Estimated cost of tolls.            
+          fuel_used:
+            type: integer
+            description: Estimated fuel needed for trip.
+          fuel_cost:
+            type: integer
+            description: Estimated cost of fuel.
+          maint_cost:
+            type: integer
+            description: Estimated maintenance costs.
+          driver_cost:
+            type: integer
+            description: Estimated driver costs.            
+          truck_ownership:
+            type: integer
+            description: Estimated truck ownership costs.                
+          ins_permit:
+            type: integer
+            description: Estimated INS permit cost.               
+          total_trip_cost:
+            type: integer
+            description: Total trip cost.         
+      truck_info:
+        type: "object"
+        properties:
+          miles_per_gal:
+            type: integer
+            description: Retrieved from user profile.
+            default: 33
+          maint_per_mile:
+            type: integer
+            description: Retrieved from user profile.
+          driver_per_mile:
+            type: integer
+            description: Retrieved from user profile.
+          truck_ownership_per_mile:
+            type: integer
+            description: Retrieved from user profile.
+          ins_permit_per_mile:
+            type: integer
+            description: Retrieved from user profile.
+          fuel_capacity:
+            type: integer
+            description: Retrieved from user profile.
+          deadhead_per_mile:            
+            type: integer
+            description: Retrieved from user profile.
+      route_info:
+        type: "object"
+        properties:
+          avg_lane_rate_7:
+            type: integer
+          avg_lane_rate_30:
+            type: integer
+          avg_lane_rate_90:
+            type: integer
+          avg_dest_rate:
+            type: integer
+          avg_fuel_price_trip:
+            type: integer
+            description: Total sum of route costs.
+    x-restlet:
+      section: BOARDS
+  boards_freight_rate_response:
+    properties:
+      loads:
+        type: integer
+      average_pay_rate:
+        type: number
     type: object
     x-restlet:
       section: BOARDS
@@ -2316,10 +2821,15 @@ definitions:
         description: The email address that was used to login.
         example: example@directfreight.com
         type: string   
-      username:
-        description: The username that was used to login.
-        example: DFUSER12345
-        type: string           
+      social_login:
+        type: object        
+        example: |-
+          {
+              "lastname" : "Doe",
+              "name" : "John",
+              "service": "google",
+              "status":1
+          }        
       new_account:
         description: Indicates if a new account was created or an existing one was used to login.
         example: false
@@ -2369,7 +2879,7 @@ definitions:
         ]
       }
     properties:
-      fields:
+      lists:
         description: 'A list of each custom field, type and it''s corresponding position.'
         items:
           type: string
@@ -2386,7 +2896,7 @@ definitions:
         ]
       }
     properties:
-      fields:
+      lists:
         description: 'A list of each custom field, type and it''s corresponding position.'
         items:
           type: string
@@ -2483,6 +2993,35 @@ definitions:
     type: object
     x-restlet:
       section: END_USER_AUTHENTICATIONS
+  social_login_credentials:
+    properties:
+      token:
+        description: '
+          The token returned by the social login service.
+          For Google the value expected is : 
+          data.code
+          For Facebook the value expected is : 
+          data.authResponse.accessToken
+          For Apple the value expected is : 
+          data.detail.authorization.id_token'
+        type: string
+      service:
+        description: 'Takes a social login service name,'
+        enum:
+          - google
+          - facebook          
+          - facebook-code
+          - apple
+        type: string
+      create_missing_account:
+        description: 'If true the endpoint will create the users account in case it doesnt already exist.'
+        type: boolean
+    required:
+      - token
+      - service
+    type: object
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS      
   mark_hidden_companies:
     properties:
       company_name:
@@ -2592,7 +3131,7 @@ definitions:
         minimum: 3
         type: integer
       expires_after:
-        description: The last day the alert will be valid. Valid time frames are from today until one year into the future.
+        description: The last day the alert will be valid. Valid time frames are from today until one year into the future. Cannot be changed if alert is inactive.
         format: date
         type: string
       list_type:
@@ -2600,6 +3139,7 @@ definitions:
         enum:
           - complete-list
           - only-new
+          - only-new-free          
           - not-active
         type: string
       minute_frequency:
@@ -2611,6 +3151,7 @@ definitions:
           - email
           - text
           - push
+          - desktop
         type: string
       start_hour:
         description: A value corresponding to the hour of the day.
@@ -2673,6 +3214,26 @@ definitions:
     x-restlet:
       section: POSTINGS
   postings_entry_object:
+    example: {
+      "comment": "hello world",
+      "custom_id": "abc123",
+      "destination_city": "San Francisco",
+      "destination_state": "CA",
+      "full_load": true,
+      "height": 22,
+      "length": 22,
+      "origin_city": "seattle",
+      "origin_state": "WA",
+      "other_trailer_types": "Lowboy",
+      "pay_rate": 0.22,
+      "phone_extension": 666,
+      "phone_number": 6666666666,
+      "receive_date": "2020-05-06",
+      "ship_date": "2020-05-06",
+      "trailer_type": ["R"],
+      "weight": 2200,
+      "width": 22
+      }
     properties:
       comment:
         type: string
@@ -2781,6 +3342,26 @@ definitions:
     x-restlet:
       section: POSTINGS
   postings_patch_object:
+    example: {
+        "custom_id": "abc123",  
+        "comment": "hello world",
+        "destination_city": "cincinnati",
+        "destination_state": "OH",
+        "full_load": true,
+        "height":11,
+        "length":11,
+        "origin_city": "pittsburg",
+        "origin_state": "PA",
+        "other_trailer_types": "hot shot",
+        "ship_date": "2020-05-06",
+        "pay_rate": 11,
+        "phone_extension": 777,
+        "phone_number": 777777777,
+        "receive_date":"2020-05-07",
+        "trailer_type": ["V+V"],
+        "weight": 1100,
+        "width":11
+        }
     properties:
       comment:
         type: string
@@ -3031,24 +3612,143 @@ definitions:
     type: object
     x-restlet:
       section: POSTINGS
+  postings-copy_or_move_response:
+    properties:
+      success:
+          properties:
+            posting_id:
+              type: integer
+            message:
+              description: An explanation of what each code means.
+              type: string
+            status:
+              type: integer
+          required:
+            - status
+            - posting_id
+            - message
+          type: object
+    type: object
+    x-restlet:
+      section: POSTINGS
   profile_object:
-    example: |-
-      {
-        "address": "P.O. Box 131",
-        "city": "Chillicothe",
-        "company": "Direct Freight",
-        "contact_extension": 333,
-        "contact_name": "Joe Doe",
-        "contact_number": 555-555-5555,
-        "dot_number": 123456,
-        "fax_number": "555-555-5555",
-        "mc_number": 123456,
-        "mobile_carrier": "Company_X",
-        "mobile_number": "555-555-1234",
-        "state": "MO",
-        "web_page": "http://www.directfreight.com",
-        "zip": 55555
-      }
+    example: {
+      "address": "11 Wall Street",
+      "city": "New York",
+      "company": "NY Stock Exchange",
+      "contact_extension": 111,
+      "contact_name": "J.P. Morgan",
+      "contact_number": 8885559999,
+      "dispatch_extension": 123,
+      "dispatch_number": 4445556666,
+      "dot_number": "345345345",
+      "fax_number": 1112223333,
+      "mc_number": "354345345",
+      "mobile_carrier": "Sprint",
+      "mobile_number":4445556666,
+      "state": "NY",
+      "web_page": "www.directfreight.com",
+      "zip": "12345",
+      "miles_per_gal": 6.50,
+      "maint_per_mile": 0.17,
+      "driver_per_mile": 0.72,
+      "truck_ownership_per_mile": 0.27,
+      "ins_permits_per_mile": 0.13,
+      "fuel_capacity": 200.00,
+      "deadhead_per_mile": 1.29
+   }
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      company:
+        description: 'Company name. '
+        type: string
+      contact_extension:
+        type: integer
+      contact_name:
+        description: 'Contact name. '
+        type: string
+      contact_number:
+        type: integer
+      dispatch_extension:
+        description: Limited to 3 integers
+        type: integer
+      dispatch_number:
+        type: integer
+      dot_number:
+        type: string
+      fax_number:
+        type: integer
+      mc_number:
+        type: string
+      mobile_carrier:
+        enum:
+          - Other/Unknown
+          - AT&T
+          - Verizon
+          - Sprint
+          - T-Mobile
+          - US Cellular
+          - Nextel
+          - Virgin Mobile
+          - Boost Mobile
+          - Straight Talk
+          - Tracfone
+          - NET10
+          - Metro PCS
+          - Cricket
+          - Rogers
+          - Fido
+          - Bell Mobility
+          - Telus
+          - Clearnet
+          - Solo Mobile
+          - Koodo Mobile
+        type: string
+      mobile_number:
+        type: integer
+      state:
+        type: string
+      web_page:
+        type: string
+      zip:
+        type: string
+      miles_per_gal:
+        type: number
+      maint_per_mile:
+        type: number      
+      driver_per_mile:
+        type: number      
+      truck_ownership_per_mile:
+        type: number      
+      ins_permits_per_mile:
+        type: number      
+      fuel_capacity:
+        type: number 
+    type: object
+    x-restlet:
+      section: PROFILES      
+  profile_object_patch:
+    example: {
+      "address": "11 Wall Street",
+      "city": "New York",
+      "company": "NY Stock Exchange",
+      "contact_extension": 111,
+      "contact_name": "J.P. Morgan",
+      "contact_number": 8885559999,
+      "dispatch_extension": 123,
+      "dispatch_number": 4445556666,
+      "dot_number": "345345345",
+      "fax_number": 1112223333,
+      "mc_number": "354345345",
+      "mobile_carrier": "Sprint",
+      "mobile_number":4445556666,
+      "state": "NY",
+      "web_page": "www.directfreight.com",
+      "zip": "12345"
+   }
     properties:
       address:
         type: string
@@ -3110,6 +3810,34 @@ definitions:
     type: object
     x-restlet:
       section: PROFILES
+  truck_info_object:
+    example: {
+      "miles_per_gal": 6.50,
+      "maint_per_mile": 0.17,
+      "driver_per_mile": 0.72,
+      "truck_ownership_per_mile": 0.27,
+      "ins_permits_per_mile": 0.13,
+      "fuel_capacity": 200.00,
+      "deadhead_per_mile": 1.29      
+    }
+    properties:
+      miles_per_gal:
+        type: number
+      maint_per_mile:
+        type: number      
+      driver_per_mile:
+        type: number      
+      truck_ownership_per_mile:
+        type: number      
+      ins_permits_per_mile:
+        type: number      
+      fuel_capacity:
+        type: number 
+      deadhead_per_mile:
+        type: number        
+    type: object
+    x-restlet:
+      section: PROFILES  
   rename_custom_field:
     properties:
       current_name:

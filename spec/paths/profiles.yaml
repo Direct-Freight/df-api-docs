@@ -1,3 +1,15 @@
+delete:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '204':
+      description: success operation
+  summary: STAGE=UNK Delete the profile.
+  tags:
+    - profiles
 get:
   parameters:
     - in: header
@@ -24,12 +36,12 @@ patch:
       name: body
       required: true
       schema:
-        $ref: '#/definitions/profile_object'
+        $ref: '#/definitions/profile_object_patch'
   responses:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/profile_object'
+        $ref: '#/definitions/profile_object_patch'
   summary: Update profile information.
   tags:
     - profiles

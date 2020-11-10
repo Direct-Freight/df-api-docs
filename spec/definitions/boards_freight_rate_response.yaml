@@ -1,0 +1,8 @@
+properties:
+  average_pay_rate:
+    type: number
+  loads:
+    type: integer
+type: object
+x-restlet:
+  section: BOARDS

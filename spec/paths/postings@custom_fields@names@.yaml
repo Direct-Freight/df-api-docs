@@ -10,8 +10,8 @@ delete:
       required: true
       type: string
   responses:
-    '200':
-      description: 200 OK
+    '204':
+      description: No Content
   summary: STAGE=UNK Delete a custom column/field
   tags:
     - postings/custom_fields
