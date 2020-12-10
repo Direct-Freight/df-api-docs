@@ -210,6 +210,13 @@ paths:
           required: false
           type: string
           x-example: 01234567890abc
+        - default: 0
+          in: header
+          name: x-dont-update-user-last-date
+          required: false
+          type: number
+          x-example: 1
+          description: "If this optional header is sent and set to a positive value, the API will not update the users last_date, this option is used internally when sending email alerts."
         - in: body
           name: body
           required: true
