@@ -533,6 +533,11 @@ paths:
           in: query          
           required: false
           type: number          
+        - name: deadhead_distance
+          description: 'Total deadhead distance in miles, if this value is provided the response will include the deadhead_cost.'
+          in: query          
+          required: false
+          type: number                    
         - in: header
           name: end-user-token
           required: true
