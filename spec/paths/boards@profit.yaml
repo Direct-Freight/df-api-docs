@@ -27,6 +27,13 @@ get:
       name: pay_rate
       required: false
       type: number
+    - description: >-
+        Total deadhead distance in miles, if this value is provided the response
+        will include the deadhead_cost.
+      in: query
+      name: deadhead_distance
+      required: false
+      type: number
     - in: header
       name: end-user-token
       required: true
