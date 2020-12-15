@@ -29,6 +29,14 @@ properties:
     example: '2020-01-01 14:30:24'
     format: date time
     type: string
+  item_count:
+    description: >-
+      Allowed as a convenience to create consistency with a boards request, but
+      is ignored during alert creation.
+    example: 25
+    maximum: 100
+    minimum: 1
+    type: integer
   list_type:
     description: >-
       This specify the type of list that is returned, including disabling the
@@ -45,6 +53,17 @@ properties:
       How many minutes to wait before sending another alert. Valid values are
       '15','30','60','120','240','480', and '1440'.
     type: integer
+  page_number:
+    description: >-
+      Allowed as a convenience to create consistency with a boards request, but
+      is ignored during alert creation.
+    minimum: 1
+    type: integer
+  return_count:
+    description: >-
+      Allowed as a convenience to create consistency with a boards request, but
+      is ignored during alert creation. 
+    type: boolean
   search:
     description: >-
       Refer to the boards documentation for the full list of restrictions for
