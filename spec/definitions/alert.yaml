@@ -91,6 +91,7 @@ properties:
         description: >-
           Allowed as a convenience to create consistency with a boards request,
           but is ignored during alert creation. 
+        type: string
       ship_date:
         items:
           format: date
