@@ -1987,6 +1987,8 @@ definitions:
             items:
               type: string
             type: array
+          return_only:
+            description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. '
           ship_date:
             items:
               format: date
