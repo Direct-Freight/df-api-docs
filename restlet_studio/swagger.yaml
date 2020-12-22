@@ -2675,7 +2675,7 @@ definitions:
           rate_per_mile_est:
             type: integer
             description: Calculated using the same method as a boards load request.
-          tolls:
+          toll_cost:
             type: number
             description: Estimated cost of tolls.            
           fuel_used:
