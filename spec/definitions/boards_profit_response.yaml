@@ -108,7 +108,7 @@ properties:
       rate_per_mile_est:
         description: Calculated using the same method as a boards load request.
         type: integer
-      tolls:
+      toll_cost:
         description: Estimated cost of tolls.
         type: number
       total_trip_cost:
