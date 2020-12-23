@@ -90,7 +90,7 @@ properties:
       fuel_used:
         description: Estimated fuel needed for trip.
         type: integer
-      ins_permit:
+      ins_permits:
         description: Estimated INS permit cost.
         type: integer
       maint_cost:
@@ -117,7 +117,7 @@ properties:
       trip_miles:
         description: 'Calculated distance, same value as when load was posted.'
         type: integer
-      truck_ownership:
+      truck_ownership_per_mile:
         description: Estimated truck ownership costs.
         type: integer
     type: object
@@ -146,7 +146,7 @@ properties:
       fuel_capacity:
         description: Retrieved from user profile.
         type: integer
-      ins_permit_per_mile:
+      ins_permits_per_mile:
         description: Retrieved from user profile.
         type: integer
       maint_per_mile:
