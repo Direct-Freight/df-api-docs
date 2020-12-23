@@ -2690,10 +2690,10 @@ definitions:
           driver_cost:
             type: integer
             description: Estimated driver costs.            
-          truck_ownership:
+          truck_ownership_per_mile:
             type: integer
             description: Estimated truck ownership costs.                
-          ins_permit:
+          ins_permits:
             type: integer
             description: Estimated INS permit cost.               
           total_trip_cost:
@@ -2715,7 +2715,7 @@ definitions:
           truck_ownership_per_mile:
             type: integer
             description: Retrieved from user profile.
-          ins_permit_per_mile:
+          ins_permits_per_mile:
             type: integer
             description: Retrieved from user profile.
           fuel_capacity:
