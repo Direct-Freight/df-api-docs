@@ -10,11 +10,13 @@ example:
     destination_state: NY
     driver_cost: 2011.68
     fuel_cost: 7275.58
+    fuel_per_gallon: '2.55'
     fuel_used: '429.85'
     ins_permits: 363.22
     maint_cost: 474.98
     origin_city: San Diego
     origin_state: CA
+    other_trip_costs_total: 555.22
     pay_rate: '6000'
     rate_per_mile_est: 2.15
     toll_cost: 1
@@ -87,6 +89,9 @@ properties:
       fuel_cost:
         description: Estimated cost of fuel.
         type: integer
+      fuel_per_gallon:
+        description: Estimated cost of fuel per gallon.
+        type: integer
       fuel_used:
         description: Estimated fuel needed for trip.
         type: integer
@@ -102,6 +107,9 @@ properties:
       origin_state:
         description: 'Two letter origin state abbreviation, returned as a convinience.'
         type: string
+      other_trip_costs_total:
+        description: Tolls + Maintenance + Truck Ownership + INS/Permits.
+        type: integer
       pay_rate:
         description: Returned as a convenience or "N/A" if value was not submitted.
         type: number
