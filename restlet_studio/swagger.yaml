@@ -2559,7 +2559,9 @@ definitions:
               "driver_cost": 2011.68,
               "fuel_cost": 7275.58,
               "fuel_used": "429.85",
+              "fuel_per_gallon": "2.55",
               "ins_permits": 363.22,
+              "other_trip_costs_total": 555.22,              
               "maint_cost": 474.98,
               "origin_city": "San Diego",
               "origin_state": "CA",
@@ -2684,6 +2686,9 @@ definitions:
           fuel_cost:
             type: integer
             description: Estimated cost of fuel.
+          fuel_per_gallon:
+            type: integer
+            description: Estimated cost of fuel per gallon.            
           maint_cost:
             type: integer
             description: Estimated maintenance costs.
@@ -2695,7 +2700,10 @@ definitions:
             description: Estimated truck ownership costs.                
           ins_permits:
             type: integer
-            description: Estimated INS permit cost.               
+            description: Estimated INS permit cost.
+          other_trip_costs_total:
+            type: integer
+            description: Tolls + Maintenance + Truck Ownership + INS/Permits.              
           total_trip_cost:
             type: integer
             description: Total trip cost.         
