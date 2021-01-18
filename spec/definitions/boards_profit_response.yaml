@@ -87,10 +87,7 @@ properties:
         description: Estimated driver costs.
         type: integer
       fuel_cost:
-        description: Estimated cost of fuel.
-        type: integer
-      fuel_per_gallon:
-        description: Estimated cost of fuel per gallon.
+        description: Estimated cost of fuel.  fuel_used x avg_fuel_price_trip
         type: integer
       fuel_used:
         description: Estimated fuel needed for trip.
@@ -134,7 +131,9 @@ properties:
       avg_dest_rate:
         type: integer
       avg_fuel_price_trip:
-        description: Total sum of route costs.
+        description: >-
+          Simple avg of all fuel prices.  Does not account for miles traveled in
+          each state.
         type: integer
       avg_lane_rate_30:
         type: integer
