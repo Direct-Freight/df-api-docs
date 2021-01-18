@@ -2742,7 +2742,7 @@ definitions:
             type: integer
           avg_fuel_price_trip:
             type: integer
-            description: Simple avg of all fuel prices.  Does not account for miles traveled in each state.
+            description: Simple avgerage of all state average fuel prices for trip.  Does not account for miles traveled in each state.
     x-restlet:
       section: BOARDS
   boards_freight_rate_response:
