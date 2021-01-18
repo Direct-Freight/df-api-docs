@@ -132,8 +132,8 @@ properties:
         type: integer
       avg_fuel_price_trip:
         description: >-
-          Simple avg of all fuel prices.  Does not account for miles traveled in
-          each state.
+          Simple avgerage of all state average fuel prices for trip.  Does not
+          account for miles traveled in each state.
         type: integer
       avg_lane_rate_30:
         type: integer
