@@ -2225,7 +2225,11 @@ definitions:
         "trailer_type": [
         "V",
         "R"
-        ]
+        ],
+        "min_width": 15,
+        "max_width": 300,
+        "min_length": 15,
+        "max_length": 300        
       }
     properties:
       alert_id:
@@ -2295,6 +2299,22 @@ definitions:
           minLength: 2
           type: string
         type: array
+      min_width:
+        description: 'Return items that weight at least this much.'
+        example: 15
+        type: integer        
+      max_width:
+        description: 'Return items that weight less than this.'
+        example: 300
+        type: integer           
+      min_length:
+        description: 'Return items at least this long.'
+        example: 15
+        type: integer        
+      max_length:
+        description: 'Return items no longer than this.'
+        example: 300
+        type: integer          
       page_number:
         description: The page you want to return. Will return an empty board on an invalid page.
         minimum: 1
