@@ -4,6 +4,10 @@ example:
   destination_state:
     - IL
   full_load: true
+  max_length: 300
+  max_width: 300
+  min_length: 15
+  min_width: 15
   origin_city: Kansas City
   origin_radius: 300
   origin_state:
@@ -74,6 +78,22 @@ properties:
     example: 25
     maximum: 100
     minimum: 1
+    type: integer
+  max_length:
+    description: Return items no longer than this.
+    example: 300
+    type: integer
+  max_width:
+    description: Return items that weight less than this.
+    example: 300
+    type: integer
+  min_length:
+    description: Return items at least this long.
+    example: 15
+    type: integer
+  min_width:
+    description: Return items that weight at least this much.
+    example: 15
     type: integer
   origin_city:
     description: 'If used, this field must be accompanied by an origin_state.'
