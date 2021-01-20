@@ -2723,7 +2723,10 @@ definitions:
             description: Tolls + Maintenance + Truck Ownership + INS/Permits.              
           total_trip_cost:
             type: integer
-            description: Total trip cost.         
+            description: Total trip cost.     
+          total_profit:
+            type: number
+            description: Pay Rate - total_trip_cost
       truck_info:
         type: "object"
         properties:
