@@ -116,6 +116,9 @@ properties:
       toll_cost:
         description: Estimated cost of tolls.
         type: number
+      total_profit:
+        description: Pay Rate - total_trip_cost
+        type: number
       total_trip_cost:
         description: Total trip cost.
         type: integer
