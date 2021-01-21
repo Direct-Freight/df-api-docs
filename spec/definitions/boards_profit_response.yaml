@@ -12,15 +12,16 @@ example:
     fuel_cost: 7275.58
     fuel_per_gallon: '2.55'
     fuel_used: '429.85'
+    gross_profit: -6892.52
     ins_permits: 363.22
     maint_cost: 474.98
+    net_profit: -4482.25
     origin_city: San Diego
     origin_state: CA
     other_trip_costs_total: 555.22
     pay_rate: '6000'
     rate_per_mile_est: 2.15
     toll_cost: 1
-    total_profit: -6892.52
     total_trip_cost: 12892.52
     trip_miles: 2794
     truck_ownership: 2766.06
@@ -92,12 +93,18 @@ properties:
       fuel_used:
         description: Estimated fuel needed for trip.
         type: integer
+      gross_profit:
+        description: Pay Rate - total_trip_cost
+        type: number
       ins_permits:
         description: Estimated INS permit cost.
         type: integer
       maint_cost:
         description: Estimated maintenance costs.
         type: integer
+      net_profit:
+        description: Pay Rate - total_trip_cost - driver_cost
+        type: number
       origin_city:
         description: 'Origin City, returned as a convinience.'
         type: string
@@ -115,9 +122,6 @@ properties:
         type: integer
       toll_cost:
         description: Estimated cost of tolls.
-        type: number
-      total_profit:
-        description: Pay Rate - total_trip_cost
         type: number
       total_trip_cost:
         description: Total trip cost.
