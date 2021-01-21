@@ -2588,7 +2588,8 @@ definitions:
               "pay_rate": "6000",
               "rate_per_mile_est": 2.15,
               "toll_cost": 1.0,
-              "total_profit": -6892.52,
+              "gross_profit": -6892.52,
+              "net_profit": -4482.25,              
               "total_trip_cost": 12892.52,
               "trip_miles": 2794,
               "truck_ownership": 2766.06
@@ -2724,9 +2725,12 @@ definitions:
           total_trip_cost:
             type: integer
             description: Total trip cost.     
-          total_profit:
+          gross_profit:
             type: number
             description: Pay Rate - total_trip_cost
+          net_profit:
+            type: number
+            description: Pay Rate - total_trip_cost - driver_cost
       truck_info:
         type: "object"
         properties:
