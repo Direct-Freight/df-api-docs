@@ -2229,7 +2229,8 @@ definitions:
         "min_width": 15,
         "max_width": 300,
         "min_length": 15,
-        "max_length": 300        
+        "max_length": 300,
+        "google_recaptcha_response": 0.7
       }
     properties:
       alert_id:
@@ -2338,6 +2339,9 @@ definitions:
           - unsent
           - newtag
         type: string
+      google_recaptcha_response:
+        description: Google ReCAPTCHA score, for logging purposes. This field is optional. Should be a decimal number between 0 and 1.
+        type: number
       tier:
         description: This field is an optional filter that limits board response to "free" or "premium" loads. If this field is not specified it defaults to "all" loads.
         
