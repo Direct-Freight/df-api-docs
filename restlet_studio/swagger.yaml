@@ -2230,7 +2230,7 @@ definitions:
         "max_width": 300,
         "min_length": 15,
         "max_length": 300,
-        "google_recaptcha_response": 0.7
+        "google_recaptcha_score": 0.7
       }
     properties:
       alert_id:
@@ -2339,7 +2339,7 @@ definitions:
           - unsent
           - newtag
         type: string
-      google_recaptcha_response:
+      google_recaptcha_score:
         description: Google ReCAPTCHA score, for logging purposes. This field is optional. Should be a decimal number between 0 and 1.
         type: number
       tier:
