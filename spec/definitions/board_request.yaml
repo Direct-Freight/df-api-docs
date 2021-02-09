@@ -4,6 +4,7 @@ example:
   destination_state:
     - IL
   full_load: true
+  google_recaptcha_response: 0.7
   max_length: 300
   max_width: 300
   min_length: 15
@@ -71,6 +72,11 @@ properties:
       full loads only.  False will return partial loads only.
     example: true
     type: boolean
+  google_recaptcha_response:
+    description: >-
+      Google ReCAPTCHA score, for logging purposes. This field is optional.
+      Should be a decimal number between 0 and 1.
+    type: number
   item_count:
     description: >-
       This argument adjusts how many items per page will be returned.  Omitting
