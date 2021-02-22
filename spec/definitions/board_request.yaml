@@ -16,6 +16,7 @@ example:
   page_number: 1
   ship_date:
     - '2020-05-06'
+  sort_direction: asc
   sort_parameter: age
   trailer_type:
     - V
@@ -171,12 +172,22 @@ properties:
       format: date
       type: string
     type: array
+  sort_direction:
+    default: asc
+    description: >-
+      The system automatically chooses the most common order based on the
+      parameter chosen. Use this option if you want a specific sort direction.
+    enum:
+      - asc
+      - desc
+    example: asc
+    type: string
   sort_parameter:
     default: age
     description: >-
       The system automatically chooses the most common order based on the
-      parameter chosen.  Sort order can be specified by adding -asc or -desc to
-      the end.
+      parameter chosen.  Sort order can be specified by using the
+      "sort_direction" parameter.
     enum:
       - origin_city
       - origin_state
