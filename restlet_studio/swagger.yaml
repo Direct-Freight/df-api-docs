@@ -555,7 +555,7 @@ paths:
   /boards/freight_rate:      
     get:
       consumes: []
-      description: Calculate trip profit.
+      description: Calculate Freight Rates
       parameters:
         - name: metro_origin_id
           description: Metro Area Origin ID
