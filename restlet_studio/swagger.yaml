@@ -583,10 +583,10 @@ paths:
           type: string   
       responses:
         '201':
-          description: Details about the profitability of this trip.
+          description: Details about average rates for this trip.
           schema:
             $ref: '#/definitions/boards_freight_rate_response'
-      summary: STAGE=Private Get profit data.
+      summary: STAGE=Private Get Freight Rates.
       tags:
         - boards
     x-restlet:
