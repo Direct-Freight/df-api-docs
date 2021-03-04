@@ -557,26 +557,36 @@ paths:
       consumes: []
       description: Calculate Freight Rates
       parameters:
-        - name: metro_origin_id
-          description: Metro Area Origin ID
+        - name: origin_city
+          description: Origin City
           in: query
           required: true
           type: string
-        - name: metro_destination_id
-          description: Metro Area Destination ID
+        - name: origin_state
+          description: Origin State
           in: query
           required: true
           type: string          
-        - name: date
-          description: Date
+        - name: destination_city
+          description: Destination City
           in: query
           required: true
           type: string
-        - name: frequency
-          description: Frequency, can be daily, weekly or monthly. Default to "daily" if not specified.
+        - name: destination_state
+          description: Destination State
+          in: query
+          required: true
+          type: string             
+        - name: start_date
+          description: Start Date. Optional value, must be used in conjunction with end_date. If not specified defaults to yesterday.
           in: query
           required: false
-          type: string    
+          type: string
+        - name: end_date
+          description: End Date. Optional value, must be used in conjunction with start_date. If not specified defaults to yesterday.
+          in: query
+          required: false
+          type: string          
         - in: header
           name: end-user-token
           required: true
