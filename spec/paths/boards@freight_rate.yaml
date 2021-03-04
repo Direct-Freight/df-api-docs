@@ -1,6 +1,6 @@
 get:
   consumes: []
-  description: Calculate trip profit.
+  description: Calculate Freight Rates
   parameters:
     - description: Metro Area Origin ID
       in: query
