@@ -36,6 +36,18 @@ get:
       name: end_date
       required: false
       type: string
+    - description: 'Trailer Type, defaults to "all" if not specied.'
+      enum:
+        - all
+        - van_only
+        - van_all
+        - reefer_only
+        - reefer_all
+        - flat_only
+        - flat_all
+      in: query
+      name: trailer_type
+      type: string
     - in: header
       name: end-user-token
       required: true
