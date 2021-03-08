@@ -586,6 +586,18 @@ paths:
           description: End Date. Optional value, must be used in conjunction with start_date. If not specified defaults to yesterday.
           in: query
           required: false
+          type: string        
+        - name: trailer_type
+          description: Trailer Type, defaults to "all" if not specied.
+          in: query
+          enum:
+            - all
+            - van_only
+            - van_all
+            - reefer_only
+            - reefer_all
+            - flat_only
+            - flat_all
           type: string          
         - in: header
           name: end-user-token
