@@ -587,6 +587,11 @@ paths:
           in: query
           required: false
           type: string        
+        - name: min_loads
+          description: Only include days with at least this many loads, defaults to 10.
+          in: query
+          required: false
+          type: number              
         - name: trailer_type
           description: Trailer Type, defaults to "all" if not specied. This option can be specified multiple times.
           in: query
