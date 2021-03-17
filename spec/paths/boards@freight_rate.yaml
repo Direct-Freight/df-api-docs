@@ -36,6 +36,11 @@ get:
       name: end_date
       required: false
       type: string
+    - description: 'Only include days with at least this many loads, defaults to 10.'
+      in: query
+      name: min_loads
+      required: false
+      type: number
     - description: >-
         Trailer Type, defaults to "all" if not specied. This option can be
         specified multiple times.
