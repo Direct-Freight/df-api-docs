@@ -588,7 +588,7 @@ paths:
           required: false
           type: string        
         - name: trailer_type
-          description: Trailer Type, defaults to "all" if not specied.
+          description: Trailer Type, defaults to "all" if not specied. This option can be specified multiple times.
           in: query
           enum:
             - all
