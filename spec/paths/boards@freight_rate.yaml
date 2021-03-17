@@ -36,7 +36,9 @@ get:
       name: end_date
       required: false
       type: string
-    - description: 'Trailer Type, defaults to "all" if not specied.'
+    - description: >-
+        Trailer Type, defaults to "all" if not specied. This option can be
+        specified multiple times.
       enum:
         - all
         - van_only
