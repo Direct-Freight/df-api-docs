@@ -2305,6 +2305,10 @@ definitions:
         maximum: 100
         minimum: 1
         type: integer
+      md5:
+        description: 'Return only this specific MD5 ID.'
+        example: 850FBE52A5345119FD9C79FDE4E27308
+        type: string        
       origin_city:
         description: 'If used, this field must be accompanied by an origin_state.'
         example: Kansas City
