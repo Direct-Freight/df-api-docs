@@ -94,6 +94,10 @@ properties:
     description: Return items that weight less than this.
     example: 300
     type: integer
+  md5:
+    description: Return only this specific MD5 ID.
+    example: 850FBE52A5345119FD9C79FDE4E27308
+    type: string
   min_length:
     description: Return items at least this long.
     example: 15
