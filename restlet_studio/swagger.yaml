@@ -785,7 +785,7 @@ paths:
       parameters:
         - description: DirectFreight website URI to redirect to after login. Example, /loads/results
           in: query
-          name: redirect_uri
+          name: redirect_url
           required: false
           type: string
       responses:
