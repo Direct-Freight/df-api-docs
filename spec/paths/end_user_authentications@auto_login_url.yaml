@@ -3,7 +3,7 @@ get:
   parameters:
     - description: >-
         DirectFreight website URI to redirect to after login. Example,
-        /loads/results
+        {{url}}/v1/end_user_authentications/auto_login_url?redirect_url=/loads/results
       in: query
       name: redirect_url
       required: false
@@ -12,7 +12,7 @@ get:
     '200':
       description: >-
         Will return a DirectFreight URI that can be used to auto login and
-        redirect.
+        redirect.  The URI is valid for 5 minutes
   tags:
     - end_user_authentications
 x-restlet:
