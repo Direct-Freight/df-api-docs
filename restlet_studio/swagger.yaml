@@ -789,7 +789,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        '201':
           description: Will return a DirectFreight URI that can be used to auto login and redirect.  The URI is valid for 5 minutes
       tags:
         - end_user_authentications
