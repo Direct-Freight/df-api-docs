@@ -70,7 +70,7 @@
     "mkdirp": "^0.5.1",
     "require-dir": "^0.3.1",
     "swagger-editor": "^2.10.3",
-    "swagger-ui": "^2.1.4",
+    "swagger-ui": "^3.24.0",
     "sway": "^0.6.0"
   },
   "description": "CLI tool to help you manage your OpenAPI(fka Swagger) repo.",
