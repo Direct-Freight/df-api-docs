@@ -39,7 +39,7 @@ get:
       required: true
       type: string
   responses:
-    '201':
+    '200':
       description: Details about the profitability of this trip.
       schema:
         $ref: '#/definitions/boards_profit_response'
