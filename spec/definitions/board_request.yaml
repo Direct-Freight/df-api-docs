@@ -90,9 +90,9 @@ properties:
     description: Return items no longer than this.
     example: 300
     type: integer
-  max_width:
+  max_weight:
     description: Return items that weight less than this.
-    example: 300
+    example: 40000
     type: integer
   md5:
     description: Return only this specific MD5 ID.
@@ -102,9 +102,9 @@ properties:
     description: Return items at least this long.
     example: 15
     type: integer
-  min_width:
+  min_weight:
     description: Return items that weight at least this much.
-    example: 15
+    example: 1000
     type: integer
   origin_city:
     description: 'If used, this field must be accompanied by an origin_state.'
