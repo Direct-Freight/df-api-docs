@@ -2348,13 +2348,13 @@ definitions:
           minLength: 2
           type: string
         type: array
-      min_width:
+      min_weight:
         description: 'Return items that weight at least this much.'
-        example: 15
+        example: 1000
         type: integer        
-      max_width:
+      max_weight:
         description: 'Return items that weight less than this.'
-        example: 300
+        example: 40000
         type: integer           
       min_length:
         description: 'Return items at least this long.'
