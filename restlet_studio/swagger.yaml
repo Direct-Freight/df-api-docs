@@ -543,7 +543,7 @@ paths:
           required: true
           type: string   
       responses:
-        '201':
+        '200':
           description: Details about the profitability of this trip.
           schema:
             $ref: '#/definitions/boards_profit_response'
@@ -2270,8 +2270,8 @@ definitions:
         "V",
         "R"
         ],
-        "min_width": 15,
-        "max_width": 300,
+        "min_weight": 1000,
+        "max_weight": 40000,
         "min_length": 15,
         "max_length": 300,
         "google_recaptcha_score": 0.7
