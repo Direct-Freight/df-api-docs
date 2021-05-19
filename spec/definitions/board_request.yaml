@@ -143,7 +143,7 @@ properties:
     minimum: 1
     type: integer
   return_count:
-    description: 'If included this will return a total count instead of a list. '
+    description: If included this will return a total count instead of a list.
     type: boolean
   return_only:
     description: >-
@@ -169,6 +169,11 @@ properties:
       - unsent
       - newtag
     type: string
+  return_web_url:
+    description: >-
+      If included this will return a URL that can be searched to perform this
+      search on the DirectFreight Website.
+    type: boolean
   ship_date:
     description: Limits results to specified ship date(s).
     items:
