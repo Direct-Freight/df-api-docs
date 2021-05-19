@@ -2369,8 +2369,11 @@ definitions:
         minimum: 1
         type: integer
       return_count:
-        description: 'If included this will return a total count instead of a list. '
+        description: 'If included this will return a total count instead of a list.'
         type: boolean
+      return_web_url:
+        description: 'If included this will return a URL that can be searched to perform this search on the DirectFreight Website.'
+        type: boolean        
       return_only:
         description: STAGE=PRIVATE  This field is an additional filter that limits the boards response for attributes that are not defined by the load record. Currently the following attributes are valid for this field.
           
