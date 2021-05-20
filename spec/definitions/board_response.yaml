@@ -5,7 +5,7 @@ example: |-
     "total_items": "{}",
     "total_pages": 0,
     "total_new": 0,
-    "return_web_url": "https://www.directfreight.com/..."
+    "search_url": "https://www.directfreight.com/..."
   }
 properties:
   list:
@@ -16,6 +16,11 @@ properties:
   page_number:
     description: The page you are on.
     type: integer
+  search_url:
+    description: >-
+      URL that can be used to perform this same search on the DirectFreight
+      Website. Will only be returned if return_web_url is requested.
+    type: string
   total_items:
     description: A count of all the entry objects for the specified search.
     type: integer
@@ -30,11 +35,6 @@ properties:
       allows for additional filter options.  Please contact Direct Freight for
       more information on gaining access to this field
     type: integer
-  web_url:
-    description: >-
-      URL that can be used to perform this same search on the DirectFreight
-      Website. Will only be returned if return_web_url is requested.
-    type: string
 required:
   - list
 type: object

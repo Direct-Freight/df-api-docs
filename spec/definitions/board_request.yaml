@@ -171,8 +171,8 @@ properties:
     type: string
   return_web_url:
     description: >-
-      If included this will return a "web_url" property that has a URL that can
-      be used to perform this same search on the DirectFreight Website.
+      If included this will return a "search_url" property that has a URL that
+      can be used to perform this same search on the DirectFreight Website.
     type: boolean
   ship_date:
     description: Limits results to specified ship date(s).
