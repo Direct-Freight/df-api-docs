@@ -2851,7 +2851,8 @@ definitions:
         "page_number": "{}",
         "total_items": "{}",
         "total_pages": 0,
-        "total_new": 0        
+        "total_new": 0,
+        "return_web_url": "https://www.directfreight.com/..."
       }
     properties:
       list:
@@ -2871,6 +2872,9 @@ definitions:
       total_unviewed_plus_viewed:
         description: 'STAGE=PRIVATE  This is the total number of loads that would be returned by this boards request if the boards request ignored the return_only "unviewed" attribute. The return_only field is an advanced field that allows for additional filter options.  Please contact Direct Freight for more information on gaining access to this field'
         type: integer  
+      web_url:
+        description: 'URL that can be used to perform this same search on the DirectFreight Website. Will only be returned if return_web_url is requested.'
+        type: string        
     required:
       - list
     type: object
