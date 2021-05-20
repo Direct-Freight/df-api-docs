@@ -2372,7 +2372,7 @@ definitions:
         description: 'If included this will return a total count instead of a list.'
         type: boolean
       return_web_url:
-        description: 'If included this will return a "web_url" property that has a URL that can be used to perform this same search on the DirectFreight Website.'
+        description: 'If included this will return a "search_url" property that has a URL that can be used to perform this same search on the DirectFreight Website.'
         type: boolean        
       return_only:
         description: STAGE=PRIVATE  This field is an additional filter that limits the boards response for attributes that are not defined by the load record. Currently the following attributes are valid for this field.
@@ -2852,7 +2852,7 @@ definitions:
         "total_items": "{}",
         "total_pages": 0,
         "total_new": 0,
-        "return_web_url": "https://www.directfreight.com/..."
+        "search_url": "https://www.directfreight.com/..."
       }
     properties:
       list:
@@ -2872,7 +2872,7 @@ definitions:
       total_unviewed_plus_viewed:
         description: 'STAGE=PRIVATE  This is the total number of loads that would be returned by this boards request if the boards request ignored the return_only "unviewed" attribute. The return_only field is an advanced field that allows for additional filter options.  Please contact Direct Freight for more information on gaining access to this field'
         type: integer  
-      web_url:
+      search_url:
         description: 'URL that can be used to perform this same search on the DirectFreight Website. Will only be returned if return_web_url is requested.'
         type: string        
     required:
