@@ -2283,7 +2283,7 @@ definitions:
         x-example: undefined
         type: integer
       company_name:
-        description: Search only for loads posted by this company.
+        description: Search only for loads posted by this company. Stage=private
         type: string
       destination_city:
         description: 'If used, this field must be accompanied by a destination_state.'
