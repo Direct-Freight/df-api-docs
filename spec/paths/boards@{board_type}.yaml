@@ -25,7 +25,7 @@ post:
       description: >-
         If this optional header is sent and set to a positive value, the API
         will not update the users last_date, this option is used internally when
-        sending email alerts.
+        sending email alerts. STAGE=Private
       in: header
       name: x-dont-update-user-last-date
       required: false

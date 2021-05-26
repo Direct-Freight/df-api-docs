@@ -76,7 +76,7 @@ properties:
   google_recaptcha_score:
     description: >-
       Google ReCAPTCHA score, for logging purposes. This field is optional.
-      Should be a decimal number between 0 and 1.
+      Should be a decimal number between 0 and 1.   STAGE=Private
     type: number
   item_count:
     description: >-
@@ -231,7 +231,7 @@ properties:
       account.
 
       premium loads - loads that are less than 2 hours old. contact information
-      and comments are only visible for premium accounts.
+      and comments are only visible for premium accounts.   STAGE=Private
     enum:
       - all
       - free
