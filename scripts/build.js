@@ -32,7 +32,7 @@ cp('-R', SWAGGER_UI_DIST, 'web_deploy/swagger-ui/')
 sed('-i', 'http://petstore.swagger.io/v2/swagger.json', '../swagger.json', 'web_deploy/swagger-ui/index.html')
 
 console.log("create a version with everything including code");
-mkdir('-p', 'web_deploy/everything/swagger-ui/')
+mkdir('-p', 'web_deploy/everything/swagger-ui/');
 cp('web_deploy/*.*', 'web_deploy/everything/');
 cp('-R', 'web_deploy/swagger-ui/', 'web_deploy/everything/swagger-ui/');
 
