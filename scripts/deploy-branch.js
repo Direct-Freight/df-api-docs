@@ -12,6 +12,7 @@ if (branch && branch !== 'gh-pages') {
   var branchPath = path.join('.tmp', 'preview', branch, '/');
   mkdir('-p', branchPath);
   exec('npm run swagger bundle -- -o ' + branchPath + 'swagger.json');
+  exec('npm run swagger bundle -- --yaml -o ' + branchPath + 'swagger.yaml');
   exec('npm run hide-items ' + branchPath + ' skip-regenerate');
   console.log("copying index.html");
   cp('web/index.html', branchPath);
