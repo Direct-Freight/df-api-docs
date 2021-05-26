@@ -1,4 +1,9 @@
 language: node_js
+os: linux
+arch:
+  - arm64
+#  - ppc64le Partner Credits https://docs.travis-ci.com/user/billing-overview/
+#  - s390x
 node_js:
   - "11"
 deploy:
