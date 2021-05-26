@@ -21,8 +21,9 @@ function hide_items(tree) {
                         hide_items(tree[key]); 
                         if (typeof(tree[key]['delete_me']) === 'string') 
                                 { 
-                                //delete tree[key];  #delete was breaking arrays.  trying splice
-                                tree.splice(key,1);
+                                //delete was breaking arrays so using splice on arrays.
+                                if(typeof(tree) === 'object' && !isNaN(key)) tree.splice(key,1);
+                                else delete tree[key];  
                                 }
                         } 
                 if(typeof(tree[key]) === 'string' && tree[key].indexOf('STAGE=') >= 0) 
