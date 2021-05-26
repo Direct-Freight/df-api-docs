@@ -647,7 +647,7 @@ paths:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications:
     delete:
-      description: This logs a user out. the end-user-token will no longer be valid.
+      description: This logs a user out. the end-user-token will no longer be valid.  JGtest
       parameters:
         - in: header
           name: end-user-token
