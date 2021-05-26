@@ -31,7 +31,7 @@ properties:
     type: integer
     x-example: undefined
   company_name:
-    description: Search only for loads posted by this company.
+    description: Search only for loads posted by this company. Stage=private
     type: string
   destination_city:
     description: 'If used, this field must be accompanied by a destination_state.'
