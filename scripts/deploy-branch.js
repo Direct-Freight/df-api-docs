@@ -13,15 +13,14 @@ if (branch && branch !== 'gh-pages') {
   mkdir('-p', branchPath);
   exec('npm run swagger bundle -- -o ' + branchPath + 'swagger.json');
   exec('npm run swagger bundle -- --yaml -o ' + branchPath + 'swagger.yaml');
+  cp('web/index.html', branchPath);
 
   mkdir('-p', branchPath + '/everything/swagger-ui/');
   cp(branchPath + '/*.*', branchPath + '/everything/');
   //cp('-R', branchPath + '/swagger-ui/', branchPath + '/everything/swagger-ui/');
-  
 
   exec('npm run hide-items ' + branchPath + ' skip-regenerate');
-  console.log("copying index.html");
-  cp('web/index.html', branchPath);
+
   exec('deploy-to-gh-pages --update .tmp');
 }
 console.log('jglog: deploy-branch END');
