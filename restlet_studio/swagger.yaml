@@ -216,7 +216,7 @@ paths:
           required: false
           type: number
           x-example: 1
-          description: "If this optional header is sent and set to a positive value, the API will not update the users last_date, this option is used internally when sending email alerts. STAGE=Private"
+          description: If this optional header is sent and set to a positive value, the API will not update the users last_date, this option is used internally when sending email alerts. STAGE=Private
         - in: body
           name: body
           required: true
