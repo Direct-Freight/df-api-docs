@@ -222,8 +222,8 @@ properties:
     type: string
   tier:
     description: >-
-      This field is an optional filter that limits board response to "free" or
-      "premium" loads. If this field is not specified it defaults to "all"
+      This field is an optional filter that limits board response to 'free' or
+      'premium' loads. If this field is not specified it defaults to 'all'
       loads.
 
       free loads - are loads that are more than 2 hours old. contact information
