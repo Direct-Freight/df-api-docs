@@ -9,7 +9,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/truck_info_object'
-  summary: Request the logged in user's truck info.
+  summary: Request the logged in user's truck info. STAGE=Private
   tags:
     - profiles
 patch:
@@ -30,7 +30,7 @@ patch:
       description: successful operation
       schema:
         $ref: '#/definitions/truck_info_object'
-  summary: Update truck information.
+  summary: Update truck information. STAGE=Private
   tags:
     - profiles
 x-restlet:

@@ -12,7 +12,7 @@ get:
     '201':
       description: >-
         Will return a DirectFreight URI that can be used to auto login and
-        redirect.  The URI is valid for 5 minutes
+        redirect.  The URI is valid for 5 minutes.  STAGE=Private
   tags:
     - end_user_authentications
 x-restlet:
