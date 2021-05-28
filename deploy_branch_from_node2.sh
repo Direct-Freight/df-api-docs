@@ -4,5 +4,6 @@ git remote -v
 git remote set-url origin https://github.com/Direct-Freight/df-api-docs.git
 git remote -v
 
-../set_gh_token.df
+source ../set_gh_token.df  #set the GH_TOKEN
+
 npm run deploy-branch
