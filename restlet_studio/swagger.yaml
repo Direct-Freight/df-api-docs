@@ -790,7 +790,7 @@ paths:
           type: string
       responses:
         '201':
-          description: Will return a DirectFreight URI that can be used to auto login and redirect.  The URI is valid for 5 minutes
+          description: Will return a DirectFreight URI that can be used to auto login and redirect.  The URI is valid for 5 minutes.  STAGE=Private
       tags:
         - end_user_authentications
     x-restlet:
@@ -1719,7 +1719,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/truck_info_object'
-      summary: Request the logged in user's truck info.
+      summary: Request the logged in user's truck info. STAGE=Private
       tags:
         - profiles
     patch:
@@ -1740,7 +1740,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/truck_info_object'
-      summary: Update truck information.
+      summary: Update truck information. STAGE=Private
       tags:
         - profiles
     x-restlet:
@@ -2322,7 +2322,7 @@ definitions:
         minimum: 1
         type: integer
       md5:
-        description: 'Return only this specific MD5 ID.'
+        description: 'Return only this specific MD5 ID. STAGE=Private'
         example: 850FBE52A5345119FD9C79FDE4E27308
         type: string        
       origin_city:
@@ -3849,16 +3849,22 @@ definitions:
         type: string
       miles_per_gal:
         type: number
+        description: 'STAGE=Private'
       maint_per_mile:
-        type: number      
+        type: number
+        description: 'STAGE=Private'
       driver_per_mile:
         type: number      
+        description: 'STAGE=Private'
       truck_ownership_per_mile:
         type: number      
+        description: 'STAGE=Private'
       ins_permits_per_mile:
         type: number      
+        description: 'STAGE=Private'
       fuel_capacity:
         type: number 
+        description: 'STAGE=Private'
     type: object
     x-restlet:
       section: PROFILES      
