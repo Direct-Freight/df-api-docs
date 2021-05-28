@@ -1,10 +1,9 @@
 get:
-  description: Get a auto login url
+  description: Get a auto login url STAGE=Private
   parameters:
     - description: >-
         DirectFreight website URI to redirect to after login. Example,
-        {{url}}/v1/end_user_authentications/auto_login_url?redirect_url=/loads/results 
-        STAGE=Private
+        {{url}}/v1/end_user_authentications/auto_login_url?redirect_url=/loads/results
       in: query
       name: redirect_url
       required: false
