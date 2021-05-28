@@ -45,18 +45,23 @@ properties:
   dot_number:
     type: string
   driver_per_mile:
+    description: STAGE=Private
     type: number
   fax_number:
     type: integer
   fuel_capacity:
+    description: STAGE=Private
     type: number
   ins_permits_per_mile:
+    description: STAGE=Private
     type: number
   maint_per_mile:
+    description: STAGE=Private
     type: number
   mc_number:
     type: string
   miles_per_gal:
+    description: STAGE=Private
     type: number
   mobile_carrier:
     enum:
@@ -87,6 +92,7 @@ properties:
   state:
     type: string
   truck_ownership_per_mile:
+    description: STAGE=Private
     type: number
   web_page:
     type: string

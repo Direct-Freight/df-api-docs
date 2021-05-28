@@ -210,6 +210,13 @@ paths:
           required: false
           type: string
           x-example: 01234567890abc
+        - default: 0
+          in: header
+          name: x-dont-update-user-last-date
+          required: false
+          type: number
+          x-example: 1
+          description: If this optional header is sent and set to a positive value, the API will not update the users last_date, this option is used internally when sending email alerts. STAGE=Private
         - in: body
           name: body
           required: true
@@ -526,12 +533,17 @@ paths:
           in: query          
           required: false
           type: number          
+        - name: deadhead_distance
+          description: 'Total deadhead distance in miles, if this value is provided the response will include the deadhead_cost.'
+          in: query          
+          required: false
+          type: number                    
         - in: header
           name: end-user-token
           required: true
           type: string   
       responses:
-        '201':
+        '200':
           description: Details about the profitability of this trip.
           schema:
             $ref: '#/definitions/boards_profit_response'
@@ -543,38 +555,65 @@ paths:
   /boards/freight_rate:      
     get:
       consumes: []
-      description: Calculate trip profit.
+      description: Calculate Freight Rates
       parameters:
-        - name: metro_origin_id
-          description: Metro Area Origin ID
+        - name: origin_city
+          description: Origin City
           in: query
           required: true
           type: string
-        - name: metro_destination_id
-          description: Metro Area Destination ID
+        - name: origin_state
+          description: Origin State
           in: query
           required: true
           type: string          
-        - name: date
-          description: Date
+        - name: destination_city
+          description: Destination City
           in: query
           required: true
           type: string
-        - name: frequency
-          description: Frequency, can be daily, weekly or monthly. Default to "daily" if not specified.
+        - name: destination_state
+          description: Destination State
+          in: query
+          required: true
+          type: string             
+        - name: start_date
+          description: Start Date. Optional value, must be used in conjunction with end_date. If not specified defaults to yesterday.
           in: query
           required: false
-          type: string    
+          type: string
+        - name: end_date
+          description: End Date. Optional value, must be used in conjunction with start_date. If not specified defaults to yesterday.
+          in: query
+          required: false
+          type: string        
+        - name: min_loads
+          description: Only include days with at least this many loads, defaults to 10.
+          in: query
+          required: false
+          type: number              
+        - name: trailer_type
+          description: Trailer Type, defaults to "all" if not specied. This option can be specified multiple times.
+          in: query
+          enum:
+            - all
+            - van_only
+            - van_all
+            - reefer_only
+            - reefer_all
+            - flat_only
+            - flat_all
+          type: string          
         - in: header
           name: end-user-token
           required: true
           type: string   
       responses:
         '201':
-          description: Details about the profitability of this trip.
+          description: Details about average rates for this trip.
           schema:
             $ref: '#/definitions/boards_freight_rate_response'
-      summary: STAGE=Private Get profit data.
+      summary: STAGE=Private Get Freight Rates.
       tags:
         - boards
     x-restlet:
@@ -740,6 +779,22 @@ paths:
         - end_user_authentications
     x-restlet:
       section: END_USER_AUTHENTICATIONS
+  /end_user_authentications/auto_login_url:
+    get:
+      description: Get a auto login url STAGE=Private
+      parameters:
+        - description: DirectFreight website URI to redirect to after login. Example, {{url}}/v1/end_user_authentications/auto_login_url?redirect_url=/loads/results  
+          in: query
+          name: redirect_url
+          required: false
+          type: string
+      responses:
+        '201':
+          description: Will return a DirectFreight URI that can be used to auto login and redirect.  The URI is valid for 5 minutes.  
+      tags:
+        - end_user_authentications
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS      
   /end_user_authentications/email:
     patch:
       consumes: []
@@ -1664,7 +1719,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/truck_info_object'
-      summary: Request the logged in user's truck info.
+      summary: Request the logged in user's truck info. STAGE=Private
       tags:
         - profiles
     patch:
@@ -1685,7 +1740,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/truck_info_object'
-      summary: Update truck information.
+      summary: Update truck information. STAGE=Private
       tags:
         - profiles
     x-restlet:
@@ -1907,6 +1962,9 @@ definitions:
       section: ALERTS
   alert:
     properties:
+      alert_id:
+        description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation.'
+        type: integer
       days_of_week:
         description: Limit the days that alerts are sent to the days listed.
         items:
@@ -1930,6 +1988,12 @@ definitions:
         example: '2020-01-01 14:30:24'
         format: date time
         type: string
+      item_count:
+        description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation.'
+        example: 25
+        maximum: 100
+        minimum: 1
+        type: integer
       list_type:
         description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', ''only-new-free'' and ''not-active''.'
         enum:
@@ -1941,6 +2005,13 @@ definitions:
       minute_frequency:
         description: 'How many minutes to wait before sending another alert. Valid values are ''15'',''30'',''60'',''120'',''240'',''480'', and ''1440''.'
         type: integer
+      page_number:
+        description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation.'
+        minimum: 1
+        type: integer
+      return_count:
+        description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. '
+        type: boolean
       search:
         description: Refer to the boards documentation for the full list of restrictions for each field.
         properties:
@@ -1962,12 +2033,18 @@ definitions:
             items:
               type: string
             type: array
+          return_only:
+            description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. '
+            type: string
           ship_date:
             items:
               format: date
               type: string
             type: array
           sort_parameter:
+            type: string
+          tier:
+            description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. '
             type: string
           trailer_type:
             items:
@@ -2188,10 +2265,16 @@ definitions:
         "2020-05-06"
         ],
         "sort_parameter": "age",
+        "sort_direction": "asc",        
         "trailer_type": [
         "V",
         "R"
-        ]
+        ],
+        "min_weight": 1000,
+        "max_weight": 40000,
+        "min_length": 15,
+        "max_length": 300,
+        "google_recaptcha_score": 0.7
       }
     properties:
       alert_id:
@@ -2200,7 +2283,7 @@ definitions:
         x-example: undefined
         type: integer
       company_name:
-        description: Search only for loads posted by this company.
+        description: Search only for loads posted by this company. STAGE=Private
         type: string
       destination_city:
         description: 'If used, this field must be accompanied by a destination_state.'
@@ -2238,6 +2321,10 @@ definitions:
         maximum: 100
         minimum: 1
         type: integer
+      md5:
+        description: 'Return only this specific MD5 ID. STAGE=Private'
+        example: 850FBE52A5345119FD9C79FDE4E27308
+        type: string        
       origin_city:
         description: 'If used, this field must be accompanied by an origin_state.'
         example: Kansas City
@@ -2261,13 +2348,32 @@ definitions:
           minLength: 2
           type: string
         type: array
+      min_weight:
+        description: 'Return items that weight at least this much.'
+        example: 1000
+        type: integer        
+      max_weight:
+        description: 'Return items that weight less than this.'
+        example: 40000
+        type: integer           
+      min_length:
+        description: 'Return items at least this long.'
+        example: 15
+        type: integer        
+      max_length:
+        description: 'Return items no longer than this.'
+        example: 300
+        type: integer          
       page_number:
         description: The page you want to return. Will return an empty board on an invalid page.
         minimum: 1
         type: integer
       return_count:
-        description: 'If included this will return a total count instead of a list. '
+        description: 'If included this will return a total count instead of a list.'
         type: boolean
+      return_web_url:
+        description: 'If included this will return a "search_url" property that has a URL that can be used to perform this same search on the DirectFreight Website.'
+        type: boolean        
       return_only:
         description: STAGE=PRIVATE  This field is an additional filter that limits the boards response for attributes that are not defined by the load record. Currently the following attributes are valid for this field.
           
@@ -2284,13 +2390,15 @@ definitions:
           - unsent
           - newtag
         type: string
+      google_recaptcha_score:
+        description: Google ReCAPTCHA score, for logging purposes. This field is optional. Should be a decimal number between 0 and 1.   STAGE=Private
+        type: number
       tier:
-        description: This field is an optional filter that limits board response to "free" or "premium" loads. If this field is not specified it defaults to "all" loads.
+        description: "This field is an optional filter that limits board response to 'free' or 'premium' loads. If this field is not specified it defaults to 'all' loads.
         
           free loads - are loads that are more than 2 hours old. contact information and comments are visible even if this request comes from an unsubscribed account.
           
-          premium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.
-          
+          premium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.   STAGE=Private"
         enum:
           - all
           - free
@@ -2305,7 +2413,7 @@ definitions:
         type: array
       sort_parameter:
         default: age
-        description: The system automatically chooses the most common order based on the parameter chosen.  Sort order can be specified by adding -asc or -desc to the end.
+        description: The system automatically chooses the most common order based on the parameter chosen.  Sort order can be specified by using the "sort_direction" parameter.
         enum:
           - origin_city
           - origin_state
@@ -2329,6 +2437,14 @@ definitions:
           - new
         example: age
         type: string
+      sort_direction:
+        default: "asc"
+        description: The system automatically chooses the most common order based on the parameter chosen. Use this option if you want a specific sort direction.     
+        enum:
+          - asc
+          - desc
+        example: asc
+        type: string        
       trailer_type:
         description: 'A string array of valid trailer types to limit the search. '
         example:
@@ -2525,14 +2641,17 @@ definitions:
               "driver_cost": 2011.68,
               "fuel_cost": 7275.58,
               "fuel_used": "429.85",
+              "fuel_per_gallon": "2.55",
               "ins_permits": 363.22,
+              "other_trip_costs_total": 555.22,              
               "maint_cost": 474.98,
               "origin_city": "San Diego",
               "origin_state": "CA",
               "pay_rate": "6000",
               "rate_per_mile_est": 2.15,
               "toll_cost": 1.0,
-              "total_profit": -6892.52,
+              "gross_profit": -6892.52,
+              "net_profit": -4482.25,              
               "total_trip_cost": 12892.52,
               "trip_miles": 2794,
               "truck_ownership": 2766.06
@@ -2641,7 +2760,7 @@ definitions:
           rate_per_mile_est:
             type: integer
             description: Calculated using the same method as a boards load request.
-          tolls:
+          toll_cost:
             type: number
             description: Estimated cost of tolls.            
           fuel_used:
@@ -2649,22 +2768,31 @@ definitions:
             description: Estimated fuel needed for trip.
           fuel_cost:
             type: integer
-            description: Estimated cost of fuel.
+            description: Estimated cost of fuel.  fuel_used x avg_fuel_price_trip
           maint_cost:
             type: integer
             description: Estimated maintenance costs.
           driver_cost:
             type: integer
             description: Estimated driver costs.            
-          truck_ownership:
+          truck_ownership_per_mile:
             type: integer
             description: Estimated truck ownership costs.                
-          ins_permit:
+          ins_permits:
             type: integer
-            description: Estimated INS permit cost.               
+            description: Estimated INS permit cost.
+          other_trip_costs_total:
+            type: integer
+            description: Tolls + Maintenance + Truck Ownership + INS/Permits.              
           total_trip_cost:
             type: integer
-            description: Total trip cost.         
+            description: Total trip cost.     
+          gross_profit:
+            type: number
+            description: Pay Rate - total_trip_cost
+          net_profit:
+            type: number
+            description: Pay Rate - total_trip_cost - driver_cost
       truck_info:
         type: "object"
         properties:
@@ -2681,7 +2809,7 @@ definitions:
           truck_ownership_per_mile:
             type: integer
             description: Retrieved from user profile.
-          ins_permit_per_mile:
+          ins_permits_per_mile:
             type: integer
             description: Retrieved from user profile.
           fuel_capacity:
@@ -2703,7 +2831,7 @@ definitions:
             type: integer
           avg_fuel_price_trip:
             type: integer
-            description: Total sum of route costs.
+            description: Simple avgerage of all state average fuel prices for trip.  Does not account for miles traveled in each state.
     x-restlet:
       section: BOARDS
   boards_freight_rate_response:
@@ -2722,7 +2850,8 @@ definitions:
         "page_number": "{}",
         "total_items": "{}",
         "total_pages": 0,
-        "total_new": 0        
+        "total_new": 0,
+        "search_url": "https://www.directfreight.com/..."
       }
     properties:
       list:
@@ -2742,6 +2871,9 @@ definitions:
       total_unviewed_plus_viewed:
         description: 'STAGE=PRIVATE  This is the total number of loads that would be returned by this boards request if the boards request ignored the return_only "unviewed" attribute. The return_only field is an advanced field that allows for additional filter options.  Please contact Direct Freight for more information on gaining access to this field'
         type: integer  
+      search_url:
+        description: 'URL that can be used to perform this same search on the DirectFreight Website. Will only be returned if return_web_url is requested.'
+        type: string        
     required:
       - list
     type: object
@@ -3717,16 +3849,22 @@ definitions:
         type: string
       miles_per_gal:
         type: number
+        description: 'STAGE=Private'
       maint_per_mile:
-        type: number      
+        type: number
+        description: 'STAGE=Private'
       driver_per_mile:
         type: number      
+        description: 'STAGE=Private'
       truck_ownership_per_mile:
         type: number      
+        description: 'STAGE=Private'
       ins_permits_per_mile:
         type: number      
+        description: 'STAGE=Private'
       fuel_capacity:
         type: number 
+        description: 'STAGE=Private'
     type: object
     x-restlet:
       section: PROFILES      

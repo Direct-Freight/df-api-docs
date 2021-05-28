@@ -4,6 +4,11 @@ example:
   destination_state:
     - IL
   full_load: true
+  google_recaptcha_score: 0.7
+  max_length: 300
+  max_weight: 40000
+  min_length: 15
+  min_weight: 1000
   origin_city: Kansas City
   origin_radius: 300
   origin_state:
@@ -11,6 +16,7 @@ example:
   page_number: 1
   ship_date:
     - '2020-05-06'
+  sort_direction: asc
   sort_parameter: age
   trailer_type:
     - V
@@ -25,7 +31,7 @@ properties:
     type: integer
     x-example: undefined
   company_name:
-    description: Search only for loads posted by this company.
+    description: Search only for loads posted by this company. STAGE=Private
     type: string
   destination_city:
     description: 'If used, this field must be accompanied by a destination_state.'
@@ -67,6 +73,11 @@ properties:
       full loads only.  False will return partial loads only.
     example: true
     type: boolean
+  google_recaptcha_score:
+    description: >-
+      Google ReCAPTCHA score, for logging purposes. This field is optional.
+      Should be a decimal number between 0 and 1.   STAGE=Private
+    type: number
   item_count:
     description: >-
       This argument adjusts how many items per page will be returned.  Omitting
@@ -74,6 +85,26 @@ properties:
     example: 25
     maximum: 100
     minimum: 1
+    type: integer
+  max_length:
+    description: Return items no longer than this.
+    example: 300
+    type: integer
+  max_weight:
+    description: Return items that weight less than this.
+    example: 40000
+    type: integer
+  md5:
+    description: Return only this specific MD5 ID. STAGE=Private
+    example: 850FBE52A5345119FD9C79FDE4E27308
+    type: string
+  min_length:
+    description: Return items at least this long.
+    example: 15
+    type: integer
+  min_weight:
+    description: Return items that weight at least this much.
+    example: 1000
     type: integer
   origin_city:
     description: 'If used, this field must be accompanied by an origin_state.'
@@ -112,7 +143,7 @@ properties:
     minimum: 1
     type: integer
   return_count:
-    description: 'If included this will return a total count instead of a list. '
+    description: If included this will return a total count instead of a list.
     type: boolean
   return_only:
     description: >-
@@ -138,6 +169,11 @@ properties:
       - unsent
       - newtag
     type: string
+  return_web_url:
+    description: >-
+      If included this will return a "search_url" property that has a URL that
+      can be used to perform this same search on the DirectFreight Website.
+    type: boolean
   ship_date:
     description: Limits results to specified ship date(s).
     items:
@@ -145,12 +181,22 @@ properties:
       format: date
       type: string
     type: array
+  sort_direction:
+    default: asc
+    description: >-
+      The system automatically chooses the most common order based on the
+      parameter chosen. Use this option if you want a specific sort direction.
+    enum:
+      - asc
+      - desc
+    example: asc
+    type: string
   sort_parameter:
     default: age
     description: >-
       The system automatically chooses the most common order based on the
-      parameter chosen.  Sort order can be specified by adding -asc or -desc to
-      the end.
+      parameter chosen.  Sort order can be specified by using the
+      "sort_direction" parameter.
     enum:
       - origin_city
       - origin_state
@@ -176,8 +222,8 @@ properties:
     type: string
   tier:
     description: >-
-      This field is an optional filter that limits board response to "free" or
-      "premium" loads. If this field is not specified it defaults to "all"
+      This field is an optional filter that limits board response to 'free' or
+      'premium' loads. If this field is not specified it defaults to 'all'
       loads.
 
       free loads - are loads that are more than 2 hours old. contact information
@@ -185,7 +231,7 @@ properties:
       account.
 
       premium loads - loads that are less than 2 hours old. contact information
-      and comments are only visible for premium accounts.
+      and comments are only visible for premium accounts.   STAGE=Private
     enum:
       - all
       - free

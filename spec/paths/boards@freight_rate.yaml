@@ -1,28 +1,59 @@
 get:
   consumes: []
-  description: Calculate trip profit.
+  description: Calculate Freight Rates
   parameters:
-    - description: Metro Area Origin ID
+    - description: Origin City
       in: query
-      name: metro_origin_id
+      name: origin_city
       required: true
       type: string
-    - description: Metro Area Destination ID
+    - description: Origin State
       in: query
-      name: metro_destination_id
+      name: origin_state
       required: true
       type: string
-    - description: Date
+    - description: Destination City
       in: query
-      name: date
+      name: destination_city
+      required: true
+      type: string
+    - description: Destination State
+      in: query
+      name: destination_state
       required: true
       type: string
     - description: >-
-        Frequency, can be daily, weekly or monthly. Default to "daily" if not
-        specified.
+        Start Date. Optional value, must be used in conjunction with end_date.
+        If not specified defaults to yesterday.
       in: query
-      name: frequency
+      name: start_date
       required: false
+      type: string
+    - description: >-
+        End Date. Optional value, must be used in conjunction with start_date.
+        If not specified defaults to yesterday.
+      in: query
+      name: end_date
+      required: false
+      type: string
+    - description: 'Only include days with at least this many loads, defaults to 10.'
+      in: query
+      name: min_loads
+      required: false
+      type: number
+    - description: >-
+        Trailer Type, defaults to "all" if not specied. This option can be
+        specified multiple times.
+      enum:
+        - all
+        - van_only
+        - van_all
+        - reefer_only
+        - reefer_all
+        - flat_only
+        - flat_all
+      in: query
+      name: trailer_type
       type: string
     - in: header
       name: end-user-token
@@ -30,10 +61,10 @@ get:
       type: string
   responses:
     '201':
-      description: Details about the profitability of this trip.
+      description: Details about average rates for this trip.
       schema:
         $ref: '#/definitions/boards_freight_rate_response'
-  summary: STAGE=Private Get profit data.
+  summary: STAGE=Private Get Freight Rates.
   tags:
     - boards
 x-restlet:
