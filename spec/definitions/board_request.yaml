@@ -144,9 +144,8 @@ properties:
     type: integer
   partner:
     description: >-
-      If included this will be appended to the "search_url" parameters if
-      "return_web_url" was also specified as true. Depending on the partner it
-      will cause the website to behave in different ways.
+      Used to customize API response for integration partners. This field should
+      only be used in coordination with developers at Direct Freight Services
     type: string
   return_count:
     description: If included this will return a total count instead of a list.
