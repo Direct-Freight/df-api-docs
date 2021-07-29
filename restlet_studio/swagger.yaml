@@ -2375,7 +2375,7 @@ definitions:
         description: 'If included this will return a "search_url" property that has a URL that can be used to perform this same search on the DirectFreight Website.'
         type: boolean       
       partner:
-        description: 'If included this will be appended to the "search_url" parameters if "return_web_url" was also specified as true. Depending on the partner it will cause the website to behave in different ways.'
+        description: 'Used to customize API response for integration partners. This field should only be used in coordination with developers at Direct Freight Services'
         type: string            
       return_only:
         description: STAGE=PRIVATE  This field is an additional filter that limits the boards response for attributes that are not defined by the load record. Currently the following attributes are valid for this field.
