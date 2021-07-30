@@ -75,8 +75,8 @@ properties:
     type: boolean
   google_recaptcha_score:
     description: >-
-      Google ReCAPTCHA score, for logging purposes. This field is optional.
-      Should be a decimal number between 0 and 1.   STAGE=Private
+      STAGE=PRIVATE Google ReCAPTCHA score, for logging purposes. This field is
+      optional. Should be a decimal number between 0 and 1.
     type: number
   item_count:
     description: >-
