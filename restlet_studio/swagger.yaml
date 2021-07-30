@@ -2394,7 +2394,7 @@ definitions:
           - newtag
         type: string
       google_recaptcha_score:
-        description: Google ReCAPTCHA score, for logging purposes. This field is optional. Should be a decimal number between 0 and 1.   STAGE=Private
+        description: STAGE=PRIVATE Google ReCAPTCHA score, for logging purposes. This field is optional. Should be a decimal number between 0 and 1.
         type: number
       tier:
         description: "This field is an optional filter that limits board response to 'free' or 'premium' loads. If this field is not specified it defaults to 'all' loads.
