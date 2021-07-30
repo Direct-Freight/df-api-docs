@@ -7,6 +7,7 @@ else
     echo "invalid branch '$1'"
     exit
 fi
+git pull
 git commit -a -m "saving modified files"
 git checkout $TRAVIS_BRANCH
 git remote -v
