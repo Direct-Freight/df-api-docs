@@ -888,48 +888,6 @@
         "section": "BOARDS"
       }
     },
-    "/end_user_authentication/users": {
-      "post": {
-        "consumes": [],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/user"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "successful operation",
-            "schema": {
-              "properties": {
-                "end-user-token": {
-                  "description": "Auto logs in the new user and gives them a token.",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "end-user-token"
-              ],
-              "type": "object"
-            }
-          },
-          "422": {
-            "$ref": "#/responses/error_422"
-          }
-        },
-        "summary": "Create a new user.",
-        "tags": [
-          "end_user_authentications"
-        ]
-      },
-      "x-restlet": {
-        "section": "END_USER_AUTHENTICATIONS"
-      }
-    },
     "/end_user_authentications": {
       "delete": {
         "description": "This logs a user out. the end-user-token will no longer be valid.",
@@ -1223,6 +1181,48 @@
           }
         },
         "summary": "STAGE=Private Social Login/Create Account",
+        "tags": [
+          "end_user_authentications"
+        ]
+      },
+      "x-restlet": {
+        "section": "END_USER_AUTHENTICATIONS"
+      }
+    },
+    "/end_user_authentications/users": {
+      "post": {
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "properties": {
+                "end-user-token": {
+                  "description": "Auto logs in the new user and gives them a token.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "end-user-token"
+              ],
+              "type": "object"
+            }
+          },
+          "422": {
+            "$ref": "#/responses/error_422"
+          }
+        },
+        "summary": "Create a new user.",
         "tags": [
           "end_user_authentications"
         ]
@@ -3315,7 +3315,7 @@
           "type": "boolean"
         },
         "google_recaptcha_score": {
-          "description": "STAGE=PRIVATE Google ReCAPTCHA score, for logging purposes. This field is optional. Should be a decimal number between 0 and 1.",
+          "description": "Google ReCAPTCHA score, for logging purposes. This field is optional. Should be a decimal number between 0 and 1.   STAGE=Private",
           "type": "number"
         },
         "item_count": {
@@ -3382,10 +3382,6 @@
           "description": "The page you want to return. Will return an empty board on an invalid page.",
           "minimum": 1,
           "type": "integer"
-        },
-        "partner": {
-          "description": "Used to customize API response for integration partners. This field should only be used in coordination with developers at Direct Freight Services",
-          "type": "string"
         },
         "return_count": {
           "description": "If included this will return a total count instead of a list.",
