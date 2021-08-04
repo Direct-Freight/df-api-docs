@@ -4,9 +4,6 @@ consumes:
 definitions:
   alert:
     properties:
-      alert_id:
-        description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation.'
-        type: integer
       days_of_week:
         description: Limit the days that alerts are sent to the days listed.
         items:
@@ -30,12 +27,6 @@ definitions:
         example: '2020-01-01 14:30:24'
         format: date time
         type: string
-      item_count:
-        description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation.'
-        example: 25
-        maximum: 100
-        minimum: 1
-        type: integer
       list_type:
         description: 'This specify the type of list that is returned, including disabling the list from being sent at all. Valid values are ''complete-list'',''only-new'', ''only-new-free'' and ''not-active''.'
         enum:
@@ -47,13 +38,6 @@ definitions:
       minute_frequency:
         description: 'How many minutes to wait before sending another alert. Valid values are ''15'',''30'',''60'',''120'',''240'',''480'', and ''1440''.'
         type: integer
-      page_number:
-        description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation.'
-        minimum: 1
-        type: integer
-      return_count:
-        description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. '
-        type: boolean
       search:
         description: Refer to the boards documentation for the full list of restrictions for each field.
         properties:
@@ -75,18 +59,12 @@ definitions:
             items:
               type: string
             type: array
-          return_only:
-            description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. '
-            type: string
           ship_date:
             items:
               format: date
               type: string
             type: array
           sort_parameter:
-            type: string
-          tier:
-            description: 'Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. '
             type: string
           trailer_type:
             items:
@@ -314,11 +292,6 @@ definitions:
       destination_state:
         - IL
       full_load: true
-      google_recaptcha_score: 0.7
-      max_length: 300
-      max_weight: 40000
-      min_length: 15
-      min_weight: 1000
       origin_city: Kansas City
       origin_radius: 300
       origin_state:
@@ -326,7 +299,6 @@ definitions:
       page_number: 1
       ship_date:
         - '2020-05-06'
-      sort_direction: asc
       sort_parameter: age
       trailer_type:
         - V
@@ -337,6 +309,9 @@ definitions:
         example: 1155
         type: integer
         x-example: undefined
+      company_name:
+        description: Search only for loads posted by this company.
+        type: string
       destination_city:
         description: 'If used, this field must be accompanied by a destination_state.'
         example: chicago
@@ -373,22 +348,6 @@ definitions:
         maximum: 100
         minimum: 1
         type: integer
-      max_length:
-        description: Return items no longer than this.
-        example: 300
-        type: integer
-      max_weight:
-        description: Return items that weight less than this.
-        example: 40000
-        type: integer
-      min_length:
-        description: Return items at least this long.
-        example: 15
-        type: integer
-      min_weight:
-        description: Return items that weight at least this much.
-        example: 1000
-        type: integer
       origin_city:
         description: 'If used, this field must be accompanied by an origin_state.'
         example: Kansas City
@@ -416,14 +375,8 @@ definitions:
         description: The page you want to return. Will return an empty board on an invalid page.
         minimum: 1
         type: integer
-      partner:
-        description: Used to customize API response for integration partners. This field should only be used in coordination with developers at Direct Freight Services
-        type: string
       return_count:
-        description: If included this will return a total count instead of a list.
-        type: boolean
-      return_web_url:
-        description: If included this will return a "search_url" property that has a URL that can be used to perform this same search on the DirectFreight Website.
+        description: 'If included this will return a total count instead of a list. '
         type: boolean
       ship_date:
         description: Limits results to specified ship date(s).
@@ -432,17 +385,9 @@ definitions:
           format: date
           type: string
         type: array
-      sort_direction:
-        default: asc
-        description: The system automatically chooses the most common order based on the parameter chosen. Use this option if you want a specific sort direction.
-        enum:
-          - asc
-          - desc
-        example: asc
-        type: string
       sort_parameter:
         default: age
-        description: The system automatically chooses the most common order based on the parameter chosen.  Sort order can be specified by using the "sort_direction" parameter.
+        description: The system automatically chooses the most common order based on the parameter chosen.  Sort order can be specified by adding -asc or -desc to the end.
         enum:
           - origin_city
           - origin_state
@@ -465,6 +410,16 @@ definitions:
           - green_light
           - new
         example: age
+        type: string
+      tier:
+        description: |-
+          This field is an optional filter that limits board response to "free" or "premium" loads. If this field is not specified it defaults to "all" loads.
+          free loads - are loads that are more than 2 hours old. contact information and comments are visible even if this request comes from an unsubscribed account.
+          premium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.
+        enum:
+          - all
+          - free
+          - premium
         type: string
       trailer_type:
         description: 'A string array of valid trailer types to limit the search. '
@@ -514,8 +469,7 @@ definitions:
         "page_number": "{}",
         "total_items": "{}",
         "total_pages": 0,
-        "total_new": 0,
-        "search_url": "https://www.directfreight.com/..."
+        "total_new": 0        
       }
     properties:
       list:
@@ -526,9 +480,6 @@ definitions:
       page_number:
         description: The page you are on.
         type: integer
-      search_url:
-        description: URL that can be used to perform this same search on the DirectFreight Website. Will only be returned if return_web_url is requested.
-        type: string
       total_items:
         description: A count of all the entry objects for the specified search.
         type: integer
@@ -701,18 +652,15 @@ definitions:
         destination_state: NY
         driver_cost: 2011.68
         fuel_cost: 7275.58
-        fuel_per_gallon: '2.55'
         fuel_used: '429.85'
-        gross_profit: -6892.52
         ins_permits: 363.22
         maint_cost: 474.98
-        net_profit: -4482.25
         origin_city: San Diego
         origin_state: CA
-        other_trip_costs_total: 555.22
         pay_rate: '6000'
         rate_per_mile_est: 2.15
         toll_cost: 1
+        total_profit: -6892.52
         total_trip_cost: 12892.52
         trip_miles: 2794
         truck_ownership: 2766.06
@@ -779,39 +727,30 @@ definitions:
             description: Estimated driver costs.
             type: integer
           fuel_cost:
-            description: Estimated cost of fuel.  fuel_used x avg_fuel_price_trip
+            description: Estimated cost of fuel.
             type: integer
           fuel_used:
             description: Estimated fuel needed for trip.
             type: integer
-          gross_profit:
-            description: Pay Rate - total_trip_cost
-            type: number
-          ins_permits:
+          ins_permit:
             description: Estimated INS permit cost.
             type: integer
           maint_cost:
             description: Estimated maintenance costs.
             type: integer
-          net_profit:
-            description: Pay Rate - total_trip_cost - driver_cost
-            type: number
           origin_city:
             description: 'Origin City, returned as a convinience.'
             type: string
           origin_state:
             description: 'Two letter origin state abbreviation, returned as a convinience.'
             type: string
-          other_trip_costs_total:
-            description: Tolls + Maintenance + Truck Ownership + INS/Permits.
-            type: integer
           pay_rate:
             description: Returned as a convenience or "N/A" if value was not submitted.
             type: number
           rate_per_mile_est:
             description: Calculated using the same method as a boards load request.
             type: integer
-          toll_cost:
+          tolls:
             description: Estimated cost of tolls.
             type: number
           total_trip_cost:
@@ -820,7 +759,7 @@ definitions:
           trip_miles:
             description: 'Calculated distance, same value as when load was posted.'
             type: integer
-          truck_ownership_per_mile:
+          truck_ownership:
             description: Estimated truck ownership costs.
             type: integer
         type: object
@@ -829,7 +768,7 @@ definitions:
           avg_dest_rate:
             type: integer
           avg_fuel_price_trip:
-            description: Simple avgerage of all state average fuel prices for trip.  Does not account for miles traveled in each state.
+            description: Total sum of route costs.
             type: integer
           avg_lane_rate_30:
             type: integer
@@ -849,7 +788,7 @@ definitions:
           fuel_capacity:
             description: Retrieved from user profile.
             type: integer
-          ins_permits_per_mile:
+          ins_permit_per_mile:
             description: Retrieved from user profile.
             type: integer
           maint_per_mile:
@@ -1741,10 +1680,20 @@ definitions:
         type: integer
       dot_number:
         type: string
+      driver_per_mile:
+        type: number
       fax_number:
         type: integer
+      fuel_capacity:
+        type: number
+      ins_permits_per_mile:
+        type: number
+      maint_per_mile:
+        type: number
       mc_number:
         type: string
+      miles_per_gal:
+        type: number
       mobile_carrier:
         enum:
           - Other/Unknown
@@ -1773,6 +1722,8 @@ definitions:
         type: integer
       state:
         type: string
+      truck_ownership_per_mile:
+        type: number
       web_page:
         type: string
       zip:
@@ -2261,7 +2212,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/alerts/loads',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -2637,7 +2588,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/boards/freight_rate',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -3013,7 +2964,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/boards/hidden_companies',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -3389,7 +3340,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/boards/hidden_entries',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -3765,7 +3716,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/boards/notes',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -4141,7 +4092,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/boards/profit',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -4449,13 +4400,12 @@ paths:
 
             struct curl_slist *headers = NULL;
             headers = curl_slist_append(headers, "api-token: REPLACE_KEY_VALUE");
-            headers = curl_slist_append(headers, "x-dont-update-user-last-date: NO DEFAULT");
             headers = curl_slist_append(headers, "end-user-token: 01234567890abc");
             headers = curl_slist_append(headers, "Content-Type: application/json");
             headers = curl_slist_append(headers, "Accept: application/json");
             curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
-            curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}");
+            curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}");
 
             CURLcode ret = curl_easy_perform(hnd);
         - lang: Csharp_restsharp
@@ -4463,27 +4413,25 @@ paths:
             var client = new RestClient("https://api.directfreight.com/v1/boards/loads");
             var request = new RestRequest(Method.POST);
             request.AddHeader("api-token", "REPLACE_KEY_VALUE");
-            request.AddHeader("x-dont-update-user-last-date", "NO DEFAULT");
             request.AddHeader("end-user-token", "01234567890abc");
             request.AddHeader("Content-Type", "application/json");
             request.AddHeader("Accept", "application/json");
-            request.AddParameter("undefined", "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}", ParameterType.RequestBody);
+            request.AddParameter("undefined", "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}", ParameterType.RequestBody);
             IRestResponse response = client.Execute(request);
         - lang: Go_native
-          source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.directfreight.com/v1/boards/loads\"\n\n\tpayload := strings.NewReader(\"{\\\"alert_id\\\":1155,\\\"company_name\\\":\\\"<ADD EXAMPLE VALUE>\\\",\\\"destination_city\\\":\\\"chicago\\\",\\\"destination_radius\\\":100,\\\"destination_state\\\":[\\\"IL\\\",\\\"HI\\\",\\\"NY\\\",\\\"KS\\\",\\\"TX\\\",\\\"MO\\\",\\\"AL\\\"],\\\"full_load\\\":true,\\\"google_recaptcha_score\\\":0,\\\"item_count\\\":25,\\\"max_length\\\":300,\\\"max_weight\\\":40000,\\\"md5\\\":\\\"850FBE52A5345119FD9C79FDE4E27308\\\",\\\"min_length\\\":15,\\\"min_weight\\\":1000,\\\"origin_city\\\":\\\"Kansas City\\\",\\\"origin_radius\\\":150,\\\"origin_state\\\":[\\\"MO\\\",\\\"IL\\\",\\\"TX\\\",\\\"CA\\\"],\\\"page_number\\\":0,\\\"partner\\\":\\\"<ADD EXAMPLE VALUE>\\\",\\\"return_count\\\":false,\\\"return_only\\\":\\\"unviewed\\\",\\\"return_web_url\\\":false,\\\"sort_direction\\\":\\\"asc\\\",\\\"sort_parameter\\\":\\\"age\\\",\\\"tier\\\":\\\"all\\\",\\\"trailer_type\\\":[\\\"F\\\",\\\"F+T\\\",\\\"F+S\\\",\\\"V\\\"]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Accept\", \"application/json\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\treq.Header.Add(\"end-user-token\", \"01234567890abc\")\n\treq.Header.Add(\"x-dont-update-user-last-date\", \"NO DEFAULT\")\n\treq.Header.Add(\"api-token\", \"REPLACE_KEY_VALUE\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+          source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.directfreight.com/v1/boards/loads\"\n\n\tpayload := strings.NewReader(\"{\\\"alert_id\\\":1155,\\\"company_name\\\":\\\"<ADD EXAMPLE VALUE>\\\",\\\"destination_city\\\":\\\"chicago\\\",\\\"destination_radius\\\":100,\\\"destination_state\\\":[\\\"IL\\\",\\\"HI\\\",\\\"NY\\\",\\\"KS\\\",\\\"TX\\\",\\\"MO\\\",\\\"AL\\\"],\\\"full_load\\\":true,\\\"item_count\\\":25,\\\"origin_city\\\":\\\"Kansas City\\\",\\\"origin_radius\\\":150,\\\"origin_state\\\":[\\\"MO\\\",\\\"IL\\\",\\\"TX\\\",\\\"CA\\\"],\\\"page_number\\\":0,\\\"return_count\\\":false,\\\"return_only\\\":\\\"unviewed\\\",\\\"sort_parameter\\\":\\\"age\\\",\\\"tier\\\":\\\"all\\\",\\\"trailer_type\\\":[\\\"F\\\",\\\"F+T\\\",\\\"F+S\\\",\\\"V\\\"]}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Accept\", \"application/json\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\treq.Header.Add(\"end-user-token\", \"01234567890abc\")\n\treq.Header.Add(\"api-token\", \"REPLACE_KEY_VALUE\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
         - lang: Java_okhttp
           source: |-
             OkHttpClient client = new OkHttpClient();
 
             MediaType mediaType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(mediaType, "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}");
+            RequestBody body = RequestBody.create(mediaType, "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}");
             Request request = new Request.Builder()
               .url("https://api.directfreight.com/v1/boards/loads")
               .post(body)
               .addHeader("Accept", "application/json")
               .addHeader("Content-Type", "application/json")
               .addHeader("end-user-token", "01234567890abc")
-              .addHeader("x-dont-update-user-last-date", "NO DEFAULT")
               .addHeader("api-token", "REPLACE_KEY_VALUE")
               .build();
 
@@ -4494,9 +4442,8 @@ paths:
               .header("Accept", "application/json")
               .header("Content-Type", "application/json")
               .header("end-user-token", "01234567890abc")
-              .header("x-dont-update-user-last-date", "NO DEFAULT")
               .header("api-token", "REPLACE_KEY_VALUE")
-              .body("{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}")
+              .body("{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}")
               .asString();
         - lang: Javascript_jquery
           source: |-
@@ -4509,11 +4456,10 @@ paths:
                 "Accept": "application/json",
                 "Content-Type": "application/json",
                 "end-user-token": "01234567890abc",
-                "x-dont-update-user-last-date": "NO DEFAULT",
                 "api-token": "REPLACE_KEY_VALUE"
               },
               "processData": false,
-              "data": "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}"
+              "data": "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}"
             }
 
             $.ajax(settings).done(function (response) {
@@ -4536,13 +4482,7 @@ paths:
                 "AL"
               ],
               "full_load": true,
-              "google_recaptcha_score": 0,
               "item_count": 25,
-              "max_length": 300,
-              "max_weight": 40000,
-              "md5": "850FBE52A5345119FD9C79FDE4E27308",
-              "min_length": 15,
-              "min_weight": 1000,
               "origin_city": "Kansas City",
               "origin_radius": 150,
               "origin_state": [
@@ -4552,11 +4492,8 @@ paths:
                 "CA"
               ],
               "page_number": 0,
-              "partner": "<ADD EXAMPLE VALUE>",
               "return_count": false,
               "return_only": "unviewed",
-              "return_web_url": false,
-              "sort_direction": "asc",
               "sort_parameter": "age",
               "tier": "all",
               "trailer_type": [
@@ -4580,7 +4517,6 @@ paths:
             xhr.setRequestHeader("Accept", "application/json");
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.setRequestHeader("end-user-token", "01234567890abc");
-            xhr.setRequestHeader("x-dont-update-user-last-date", "NO DEFAULT");
             xhr.setRequestHeader("api-token", "REPLACE_KEY_VALUE");
 
             xhr.send(data);
@@ -4597,7 +4533,6 @@ paths:
                 "Accept": "application/json",
                 "Content-Type": "application/json",
                 "end-user-token": "01234567890abc",
-                "x-dont-update-user-last-date": "NO DEFAULT",
                 "api-token": "REPLACE_KEY_VALUE"
               }
             };
@@ -4621,22 +4556,13 @@ paths:
               destination_radius: 100,
               destination_state: [ 'IL', 'HI', 'NY', 'KS', 'TX', 'MO', 'AL' ],
               full_load: true,
-              google_recaptcha_score: 0,
               item_count: 25,
-              max_length: 300,
-              max_weight: 40000,
-              md5: '850FBE52A5345119FD9C79FDE4E27308',
-              min_length: 15,
-              min_weight: 1000,
               origin_city: 'Kansas City',
               origin_radius: 150,
               origin_state: [ 'MO', 'IL', 'TX', 'CA' ],
               page_number: 0,
-              partner: '<ADD EXAMPLE VALUE>',
               return_count: false,
               return_only: 'unviewed',
-              return_web_url: false,
-              sort_direction: 'asc',
               sort_parameter: 'age',
               tier: 'all',
               trailer_type: [ 'F', 'F+T', 'F+S', 'V' ] }));
@@ -4647,35 +4573,25 @@ paths:
 
             var options = { method: 'POST',
               url: 'https://api.directfreight.com/v1/boards/loads',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
-                 'x-dont-update-user-last-date': 'NO DEFAULT',
                  'end-user-token': '01234567890abc',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' },
-              body: 
+              body:
                { alert_id: 1155,
                  company_name: '<ADD EXAMPLE VALUE>',
                  destination_city: 'chicago',
                  destination_radius: 100,
                  destination_state: [ 'IL', 'HI', 'NY', 'KS', 'TX', 'MO', 'AL' ],
                  full_load: true,
-                 google_recaptcha_score: 0,
                  item_count: 25,
-                 max_length: 300,
-                 max_weight: 40000,
-                 md5: '850FBE52A5345119FD9C79FDE4E27308',
-                 min_length: 15,
-                 min_weight: 1000,
                  origin_city: 'Kansas City',
                  origin_radius: 150,
                  origin_state: [ 'MO', 'IL', 'TX', 'CA' ],
                  page_number: 0,
-                 partner: '<ADD EXAMPLE VALUE>',
                  return_count: false,
                  return_only: 'unviewed',
-                 return_web_url: false,
-                 sort_direction: 'asc',
                  sort_parameter: 'age',
                  tier: 'all',
                  trailer_type: [ 'F', 'F+T', 'F+S', 'V' ] },
@@ -4694,7 +4610,6 @@ paths:
 
             req.headers({
               "api-token": "REPLACE_KEY_VALUE",
-              "x-dont-update-user-last-date": "NO DEFAULT",
               "end-user-token": "01234567890abc",
               "Content-Type": "application/json",
               "Accept": "application/json"
@@ -4716,13 +4631,7 @@ paths:
                 "AL"
               ],
               "full_load": true,
-              "google_recaptcha_score": 0,
               "item_count": 25,
-              "max_length": 300,
-              "max_weight": 40000,
-              "md5": "850FBE52A5345119FD9C79FDE4E27308",
-              "min_length": 15,
-              "min_weight": 1000,
               "origin_city": "Kansas City",
               "origin_radius": 150,
               "origin_state": [
@@ -4732,11 +4641,8 @@ paths:
                 "CA"
               ],
               "page_number": 0,
-              "partner": "<ADD EXAMPLE VALUE>",
               "return_count": false,
               "return_only": "unviewed",
-              "return_web_url": false,
-              "sort_direction": "asc",
               "sort_parameter": "age",
               "tier": "all",
               "trailer_type": [
@@ -4759,7 +4665,6 @@ paths:
             NSDictionary *headers = @{ @"Accept": @"application/json",
                                        @"Content-Type": @"application/json",
                                        @"end-user-token": @"01234567890abc",
-                                       @"x-dont-update-user-last-date": @"NO DEFAULT",
                                        @"api-token": @"REPLACE_KEY_VALUE" };
             NSDictionary *parameters = @{ @"alert_id": @1155,
                                           @"company_name": @"<ADD EXAMPLE VALUE>",
@@ -4767,22 +4672,13 @@ paths:
                                           @"destination_radius": @100,
                                           @"destination_state": @[ @"IL", @"HI", @"NY", @"KS", @"TX", @"MO", @"AL" ],
                                           @"full_load": @YES,
-                                          @"google_recaptcha_score": @0,
                                           @"item_count": @25,
-                                          @"max_length": @300,
-                                          @"max_weight": @40000,
-                                          @"md5": @"850FBE52A5345119FD9C79FDE4E27308",
-                                          @"min_length": @15,
-                                          @"min_weight": @1000,
                                           @"origin_city": @"Kansas City",
                                           @"origin_radius": @150,
                                           @"origin_state": @[ @"MO", @"IL", @"TX", @"CA" ],
                                           @"page_number": @0,
-                                          @"partner": @"<ADD EXAMPLE VALUE>",
                                           @"return_count": @NO,
                                           @"return_only": @"unviewed",
-                                          @"return_web_url": @NO,
-                                          @"sort_direction": @"asc",
                                           @"sort_parameter": @"age",
                                           @"tier": @"all",
                                           @"trailer_type": @[ @"F", @"F+T", @"F+S", @"V" ] };
@@ -4818,10 +4714,9 @@ paths:
               ("Accept", "application/json");
               ("Content-Type", "application/json");
               ("end-user-token", "01234567890abc");
-              ("x-dont-update-user-last-date", "NO DEFAULT");
               ("api-token", "REPLACE_KEY_VALUE");
             ] in
-            let body = Cohttp_lwt_body.of_string "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}" in
+            let body = Cohttp_lwt_body.of_string "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}" in
 
             Client.call ~headers ~body `POST uri
             >>= fun (res, body_stream) ->
@@ -4838,9 +4733,8 @@ paths:
             $request->header( "Accept" => "application/json" );
             $request->header( "Content-Type" => "application/json" );
             $request->header( "end-user-token" => "01234567890abc" );
-            $request->header( "x-dont-update-user-last-date" => "NO DEFAULT" );
             $request->header( "api-token" => "REPLACE_KEY_VALUE" );
-            $request->content('{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"google_recaptcha_score":0,"item_count":25,"max_length":300,"max_weight":40000,"md5":"850FBE52A5345119FD9C79FDE4E27308","min_length":15,"min_weight":1000,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"partner":"<ADD EXAMPLE VALUE>","return_count":false,"return_only":"unviewed","return_web_url":false,"sort_direction":"asc","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}');
+            $request->content('{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"item_count":25,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"return_count":false,"return_only":"unviewed","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}');
             my $browser = LWP::UserAgent::JSON->new();
             my $response = $browser->request($request);
             print Dumper($response->json_content);
@@ -4858,13 +4752,12 @@ paths:
               CURLOPT_TIMEOUT => 30,
               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
               CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS => "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}",
+              CURLOPT_POSTFIELDS => "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}",
               CURLOPT_HTTPHEADER => array(
                 "Accept: application/json",
                 "Content-Type: application/json",
                 "api-token: REPLACE_KEY_VALUE",
-                "end-user-token: 01234567890abc",
-                "x-dont-update-user-last-date: NO DEFAULT"
+                "end-user-token: 01234567890abc"
               ),
             ));
 
@@ -4888,13 +4781,12 @@ paths:
 
             $request->setHeaders(array(
               'api-token' => 'REPLACE_KEY_VALUE',
-              'x-dont-update-user-last-date' => 'NO DEFAULT',
               'end-user-token' => '01234567890abc',
               'Content-Type' => 'application/json',
               'Accept' => 'application/json'
             ));
 
-            $request->setBody('{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"google_recaptcha_score":0,"item_count":25,"max_length":300,"max_weight":40000,"md5":"850FBE52A5345119FD9C79FDE4E27308","min_length":15,"min_weight":1000,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"partner":"<ADD EXAMPLE VALUE>","return_count":false,"return_only":"unviewed","return_web_url":false,"sort_direction":"asc","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}');
+            $request->setBody('{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"item_count":25,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"return_count":false,"return_only":"unviewed","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}');
 
             try {
               $response = $request->send();
@@ -4911,7 +4803,7 @@ paths:
             $request = new http\Client\Request;
 
             $body = new http\Message\Body;
-            $body->append('{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"google_recaptcha_score":0,"item_count":25,"max_length":300,"max_weight":40000,"md5":"850FBE52A5345119FD9C79FDE4E27308","min_length":15,"min_weight":1000,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"partner":"<ADD EXAMPLE VALUE>","return_count":false,"return_only":"unviewed","return_web_url":false,"sort_direction":"asc","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}');
+            $body->append('{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"item_count":25,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"return_count":false,"return_only":"unviewed","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}');
 
             $request->setRequestUrl('https://api.directfreight.com/v1/boards/loads');
             $request->setRequestMethod('POST');
@@ -4919,7 +4811,6 @@ paths:
 
             $request->setHeaders(array(
               'api-token' => 'REPLACE_KEY_VALUE',
-              'x-dont-update-user-last-date' => 'NO DEFAULT',
               'end-user-token' => '01234567890abc',
               'Content-Type' => 'application/json',
               'Accept' => 'application/json'
@@ -4935,13 +4826,12 @@ paths:
 
             conn = http.client.HTTPSConnection("api.directfreight.com")
 
-            payload = "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}"
+            payload = "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}"
 
             headers = {
                 'Accept': "application/json",
                 'Content-Type': "application/json",
                 'end-user-token': "01234567890abc",
-                'x-dont-update-user-last-date': "NO DEFAULT",
                 'api-token': "REPLACE_KEY_VALUE"
                 }
 
@@ -4957,12 +4847,11 @@ paths:
 
             url = "https://api.directfreight.com/v1/boards/loads"
 
-            payload = "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}"
+            payload = "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}"
             headers = {
                 'Accept': "application/json",
                 'Content-Type': "application/json",
                 'end-user-token': "01234567890abc",
-                'x-dont-update-user-last-date': "NO DEFAULT",
                 'api-token': "REPLACE_KEY_VALUE"
                 }
 
@@ -4984,9 +4873,8 @@ paths:
             request["Accept"] = 'application/json'
             request["Content-Type"] = 'application/json'
             request["end-user-token"] = '01234567890abc'
-            request["x-dont-update-user-last-date"] = 'NO DEFAULT'
             request["api-token"] = 'REPLACE_KEY_VALUE'
-            request.body = "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"google_recaptcha_score\":0,\"item_count\":25,\"max_length\":300,\"max_weight\":40000,\"md5\":\"850FBE52A5345119FD9C79FDE4E27308\",\"min_length\":15,\"min_weight\":1000,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"partner\":\"<ADD EXAMPLE VALUE>\",\"return_count\":false,\"return_only\":\"unviewed\",\"return_web_url\":false,\"sort_direction\":\"asc\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}"
+            request.body = "{\"alert_id\":1155,\"company_name\":\"<ADD EXAMPLE VALUE>\",\"destination_city\":\"chicago\",\"destination_radius\":100,\"destination_state\":[\"IL\",\"HI\",\"NY\",\"KS\",\"TX\",\"MO\",\"AL\"],\"full_load\":true,\"item_count\":25,\"origin_city\":\"Kansas City\",\"origin_radius\":150,\"origin_state\":[\"MO\",\"IL\",\"TX\",\"CA\"],\"page_number\":0,\"return_count\":false,\"return_only\":\"unviewed\",\"sort_parameter\":\"age\",\"tier\":\"all\",\"trailer_type\":[\"F\",\"F+T\",\"F+S\",\"V\"]}"
 
             response = http.request(request)
             puts response.read_body
@@ -4998,17 +4886,15 @@ paths:
               --header 'Content-Type: application/json' \
               --header 'api-token: REPLACE_KEY_VALUE' \
               --header 'end-user-token: 01234567890abc' \
-              --header 'x-dont-update-user-last-date: NO DEFAULT' \
-              --data '{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"google_recaptcha_score":0,"item_count":25,"max_length":300,"max_weight":40000,"md5":"850FBE52A5345119FD9C79FDE4E27308","min_length":15,"min_weight":1000,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"partner":"<ADD EXAMPLE VALUE>","return_count":false,"return_only":"unviewed","return_web_url":false,"sort_direction":"asc","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}'
+              --data '{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"item_count":25,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"return_count":false,"return_only":"unviewed","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}'
         - lang: Shell_httpie
           source: |-
-            echo '{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"google_recaptcha_score":0,"item_count":25,"max_length":300,"max_weight":40000,"md5":"850FBE52A5345119FD9C79FDE4E27308","min_length":15,"min_weight":1000,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"partner":"<ADD EXAMPLE VALUE>","return_count":false,"return_only":"unviewed","return_web_url":false,"sort_direction":"asc","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}' |  \
+            echo '{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"item_count":25,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"return_count":false,"return_only":"unviewed","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}' |  \
               http POST https://api.directfreight.com/v1/boards/loads \
               Accept:application/json \
               Content-Type:application/json \
               api-token:REPLACE_KEY_VALUE \
-              end-user-token:01234567890abc \
-              x-dont-update-user-last-date:'NO DEFAULT'
+              end-user-token:01234567890abc
         - lang: Shell_wget
           source: |-
             wget --verbose \
@@ -5016,9 +4902,8 @@ paths:
               --header 'Accept: application/json' \
               --header 'Content-Type: application/json' \
               --header 'end-user-token: 01234567890abc' \
-              --header 'x-dont-update-user-last-date: NO DEFAULT' \
               --header 'api-token: REPLACE_KEY_VALUE' \
-              --body-data '{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"google_recaptcha_score":0,"item_count":25,"max_length":300,"max_weight":40000,"md5":"850FBE52A5345119FD9C79FDE4E27308","min_length":15,"min_weight":1000,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"partner":"<ADD EXAMPLE VALUE>","return_count":false,"return_only":"unviewed","return_web_url":false,"sort_direction":"asc","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}' \
+              --body-data '{"alert_id":1155,"company_name":"<ADD EXAMPLE VALUE>","destination_city":"chicago","destination_radius":100,"destination_state":["IL","HI","NY","KS","TX","MO","AL"],"full_load":true,"item_count":25,"origin_city":"Kansas City","origin_radius":150,"origin_state":["MO","IL","TX","CA"],"page_number":0,"return_count":false,"return_only":"unviewed","sort_parameter":"age","tier":"all","trailer_type":["F","F+T","F+S","V"]}' \
               --output-document \
               - https://api.directfreight.com/v1/boards/loads
         - lang: Swift_nsurlsession
@@ -5029,7 +4914,6 @@ paths:
               "Accept": "application/json",
               "Content-Type": "application/json",
               "end-user-token": "01234567890abc",
-              "x-dont-update-user-last-date": "NO DEFAULT",
               "api-token": "REPLACE_KEY_VALUE"
             ]
             let parameters = [
@@ -5039,22 +4923,13 @@ paths:
               "destination_radius": 100,
               "destination_state": ["IL", "HI", "NY", "KS", "TX", "MO", "AL"],
               "full_load": true,
-              "google_recaptcha_score": 0,
               "item_count": 25,
-              "max_length": 300,
-              "max_weight": 40000,
-              "md5": "850FBE52A5345119FD9C79FDE4E27308",
-              "min_length": 15,
-              "min_weight": 1000,
               "origin_city": "Kansas City",
               "origin_radius": 150,
               "origin_state": ["MO", "IL", "TX", "CA"],
               "page_number": 0,
-              "partner": "<ADD EXAMPLE VALUE>",
               "return_count": false,
               "return_only": "unviewed",
-              "return_web_url": false,
-              "sort_direction": "asc",
               "sort_parameter": "age",
               "tier": "all",
               "trailer_type": ["F", "F+T", "F+S", "V"]
@@ -5193,7 +5068,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/boards/loads',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -5584,7 +5459,7 @@ paths:
 
             var options = { method: 'GET',
               url: 'https://api.directfreight.com/v1/boards/loads/state_totals',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -5961,7 +5836,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/boards/loads/state_totals',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -6223,829 +6098,6 @@ paths:
             })
 
             dataTask.resume()
-  /end_user_authentication/users:
-    post:
-      consumes: []
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/user'
-      responses:
-        '201':
-          description: successful operation
-          schema:
-            properties:
-              end-user-token:
-                description: Auto logs in the new user and gives them a token.
-                type: string
-            required:
-              - end-user-token
-            type: object
-        '422':
-          $ref: '#/responses/error_422'
-      summary: Create a new user.
-      tags:
-        - end_user_authentications
-      x-code-samples:
-        - lang: C_libcurl
-          source: |-
-            CURL *hnd = curl_easy_init();
-
-            curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
-            curl_easy_setopt(hnd, CURLOPT_URL, "https://api.directfreight.com/v1/end_user_authentication/users");
-
-            struct curl_slist *headers = NULL;
-            headers = curl_slist_append(headers, "api-token: REPLACE_KEY_VALUE");
-            headers = curl_slist_append(headers, "Content-Type: application/json");
-            headers = curl_slist_append(headers, "Accept: application/json");
-            curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-            curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}");
-
-            CURLcode ret = curl_easy_perform(hnd);
-        - lang: Csharp_restsharp
-          source: |-
-            var client = new RestClient("https://api.directfreight.com/v1/end_user_authentication/users");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("api-token", "REPLACE_KEY_VALUE");
-            request.AddHeader("Content-Type", "application/json");
-            request.AddHeader("Accept", "application/json");
-            request.AddParameter("undefined", "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}", ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);
-        - lang: Go_native
-          source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.directfreight.com/v1/end_user_authentication/users\"\n\n\tpayload := strings.NewReader(\"{\\\"email\\\":\\\"<ADD EXAMPLE VALUE>\\\",\\\"password\\\":\\\"<ADD EXAMPLE VALUE>\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Accept\", \"application/json\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\treq.Header.Add(\"api-token\", \"REPLACE_KEY_VALUE\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-        - lang: Java_okhttp
-          source: |-
-            OkHttpClient client = new OkHttpClient();
-
-            MediaType mediaType = MediaType.parse("application/json");
-            RequestBody body = RequestBody.create(mediaType, "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}");
-            Request request = new Request.Builder()
-              .url("https://api.directfreight.com/v1/end_user_authentication/users")
-              .post(body)
-              .addHeader("Accept", "application/json")
-              .addHeader("Content-Type", "application/json")
-              .addHeader("api-token", "REPLACE_KEY_VALUE")
-              .build();
-
-            Response response = client.newCall(request).execute();
-        - lang: Java_unirest
-          source: |-
-            HttpResponse<String> response = Unirest.post("https://api.directfreight.com/v1/end_user_authentication/users")
-              .header("Accept", "application/json")
-              .header("Content-Type", "application/json")
-              .header("api-token", "REPLACE_KEY_VALUE")
-              .body("{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}")
-              .asString();
-        - lang: Javascript_jquery
-          source: |-
-            var settings = {
-              "async": true,
-              "crossDomain": true,
-              "url": "https://api.directfreight.com/v1/end_user_authentication/users",
-              "method": "POST",
-              "headers": {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "api-token": "REPLACE_KEY_VALUE"
-              },
-              "processData": false,
-              "data": "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}"
-            }
-
-            $.ajax(settings).done(function (response) {
-              console.log(response);
-            });
-        - lang: Javascript_xhr
-          source: |-
-            var data = JSON.stringify({
-              "email": "<ADD EXAMPLE VALUE>",
-              "password": "<ADD EXAMPLE VALUE>"
-            });
-
-            var xhr = new XMLHttpRequest();
-            xhr.withCredentials = true;
-
-            xhr.addEventListener("readystatechange", function () {
-              if (this.readyState === this.DONE) {
-                console.log(this.responseText);
-              }
-            });
-
-            xhr.open("POST", "https://api.directfreight.com/v1/end_user_authentication/users");
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("api-token", "REPLACE_KEY_VALUE");
-
-            xhr.send(data);
-        - lang: Node_native
-          source: |-
-            var http = require("https");
-
-            var options = {
-              "method": "POST",
-              "hostname": "api.directfreight.com",
-              "port": null,
-              "path": "/v1/end_user_authentication/users",
-              "headers": {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "api-token": "REPLACE_KEY_VALUE"
-              }
-            };
-
-            var req = http.request(options, function (res) {
-              var chunks = [];
-
-              res.on("data", function (chunk) {
-                chunks.push(chunk);
-              });
-
-              res.on("end", function () {
-                var body = Buffer.concat(chunks);
-                console.log(body.toString());
-              });
-            });
-
-            req.write(JSON.stringify({ email: '<ADD EXAMPLE VALUE>',
-              password: '<ADD EXAMPLE VALUE>' }));
-            req.end();
-        - lang: Node_request
-          source: |
-            var request = require("request");
-
-            var options = { method: 'POST',
-              url: 'https://api.directfreight.com/v1/end_user_authentication/users',
-              headers: 
-               { 'api-token': 'REPLACE_KEY_VALUE',
-                 'Content-Type': 'application/json',
-                 Accept: 'application/json' },
-              body: 
-               { email: '<ADD EXAMPLE VALUE>',
-                 password: '<ADD EXAMPLE VALUE>' },
-              json: true };
-
-            request(options, function (error, response, body) {
-              if (error) throw new Error(error);
-
-              console.log(body);
-            });
-        - lang: Node_unirest
-          source: |
-            var unirest = require("unirest");
-
-            var req = unirest("POST", "https://api.directfreight.com/v1/end_user_authentication/users");
-
-            req.headers({
-              "api-token": "REPLACE_KEY_VALUE",
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-            });
-
-            req.type("json");
-            req.send({
-              "email": "<ADD EXAMPLE VALUE>",
-              "password": "<ADD EXAMPLE VALUE>"
-            });
-
-            req.end(function (res) {
-              if (res.error) throw new Error(res.error);
-
-              console.log(res.body);
-            });
-        - lang: Objc_nsurlsession
-          source: |-
-            #import <Foundation/Foundation.h>
-
-            NSDictionary *headers = @{ @"Accept": @"application/json",
-                                       @"Content-Type": @"application/json",
-                                       @"api-token": @"REPLACE_KEY_VALUE" };
-            NSDictionary *parameters = @{ @"email": @"<ADD EXAMPLE VALUE>",
-                                          @"password": @"<ADD EXAMPLE VALUE>" };
-
-            NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
-
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.directfreight.com/v1/end_user_authentication/users"]
-                                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                               timeoutInterval:10.0];
-            [request setHTTPMethod:@"POST"];
-            [request setAllHTTPHeaderFields:headers];
-            [request setHTTPBody:postData];
-
-            NSURLSession *session = [NSURLSession sharedSession];
-            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                            if (error) {
-                                                                NSLog(@"%@", error);
-                                                            } else {
-                                                                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                                                                NSLog(@"%@", httpResponse);
-                                                            }
-                                                        }];
-            [dataTask resume];
-        - lang: Ocaml_cohttp
-          source: |-
-            open Cohttp_lwt_unix
-            open Cohttp
-            open Lwt
-
-            let uri = Uri.of_string "https://api.directfreight.com/v1/end_user_authentication/users" in
-            let headers = Header.add_list (Header.init ()) [
-              ("Accept", "application/json");
-              ("Content-Type", "application/json");
-              ("api-token", "REPLACE_KEY_VALUE");
-            ] in
-            let body = Cohttp_lwt_body.of_string "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}" in
-
-            Client.call ~headers ~body `POST uri
-            >>= fun (res, body_stream) ->
-              (* Do stuff with the result *)
-        - lang: Perl_perl5
-          source: |-
-            #!/usr/bin/perl
-            use Modern::Perl;
-            use Data::Dumper;
-            use HTTP::Request::JSON;
-            use LWP::UserAgent::JSON;
-            my $request = HTTP::Request::JSON->new("POST",
-            "https://api.directfreight.com/v1/end_user_authentication/users");
-            $request->header( "Accept" => "application/json" );
-            $request->header( "Content-Type" => "application/json" );
-            $request->header( "api-token" => "REPLACE_KEY_VALUE" );
-            $request->content('{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}');
-            my $browser = LWP::UserAgent::JSON->new();
-            my $response = $browser->request($request);
-            print Dumper($response->json_content);
-        - lang: Php_curl
-          source: |-
-            <?php
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-              CURLOPT_URL => "https://api.directfreight.com/v1/end_user_authentication/users",
-              CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_ENCODING => "",
-              CURLOPT_MAXREDIRS => 10,
-              CURLOPT_TIMEOUT => 30,
-              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-              CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS => "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}",
-              CURLOPT_HTTPHEADER => array(
-                "Accept: application/json",
-                "Content-Type: application/json",
-                "api-token: REPLACE_KEY_VALUE"
-              ),
-            ));
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-              echo "cURL Error #:" . $err;
-            } else {
-              echo $response;
-            }
-        - lang: Php_http1
-          source: |-
-            <?php
-
-            $request = new HttpRequest();
-            $request->setUrl('https://api.directfreight.com/v1/end_user_authentication/users');
-            $request->setMethod(HTTP_METH_POST);
-
-            $request->setHeaders(array(
-              'api-token' => 'REPLACE_KEY_VALUE',
-              'Content-Type' => 'application/json',
-              'Accept' => 'application/json'
-            ));
-
-            $request->setBody('{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}');
-
-            try {
-              $response = $request->send();
-
-              echo $response->getBody();
-            } catch (HttpException $ex) {
-              echo $ex;
-            }
-        - lang: Php_http2
-          source: |-
-            <?php
-
-            $client = new http\Client;
-            $request = new http\Client\Request;
-
-            $body = new http\Message\Body;
-            $body->append('{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}');
-
-            $request->setRequestUrl('https://api.directfreight.com/v1/end_user_authentication/users');
-            $request->setRequestMethod('POST');
-            $request->setBody($body);
-
-            $request->setHeaders(array(
-              'api-token' => 'REPLACE_KEY_VALUE',
-              'Content-Type' => 'application/json',
-              'Accept' => 'application/json'
-            ));
-
-            $client->enqueue($request)->send();
-            $response = $client->getResponse();
-
-            echo $response->getBody();
-        - lang: Python_python3
-          source: |-
-            import http.client
-
-            conn = http.client.HTTPSConnection("api.directfreight.com")
-
-            payload = "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}"
-
-            headers = {
-                'Accept': "application/json",
-                'Content-Type': "application/json",
-                'api-token': "REPLACE_KEY_VALUE"
-                }
-
-            conn.request("POST", "/v1/end_user_authentication/users", payload, headers)
-
-            res = conn.getresponse()
-            data = res.read()
-
-            print(data.decode("utf-8"))
-        - lang: Python_requests
-          source: |-
-            import requests
-
-            url = "https://api.directfreight.com/v1/end_user_authentication/users"
-
-            payload = "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}"
-            headers = {
-                'Accept': "application/json",
-                'Content-Type': "application/json",
-                'api-token': "REPLACE_KEY_VALUE"
-                }
-
-            response = requests.request("POST", url, data=payload, headers=headers)
-
-            print(response.text)
-        - lang: Ruby_native
-          source: |-
-            require 'uri'
-            require 'net/http'
-
-            url = URI("https://api.directfreight.com/v1/end_user_authentication/users")
-
-            http = Net::HTTP.new(url.host, url.port)
-            http.use_ssl = true
-            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-            request = Net::HTTP::Post.new(url)
-            request["Accept"] = 'application/json'
-            request["Content-Type"] = 'application/json'
-            request["api-token"] = 'REPLACE_KEY_VALUE'
-            request.body = "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}"
-
-            response = http.request(request)
-            puts response.read_body
-        - lang: Shell_curl
-          source: |-
-            curl --request POST \
-              --url https://api.directfreight.com/v1/end_user_authentication/users \
-              --header 'Accept: application/json' \
-              --header 'Content-Type: application/json' \
-              --header 'api-token: REPLACE_KEY_VALUE' \
-              --data '{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}'
-        - lang: Shell_httpie
-          source: |-
-            echo '{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}' |  \
-              http POST https://api.directfreight.com/v1/end_user_authentication/users \
-              Accept:application/json \
-              Content-Type:application/json \
-              api-token:REPLACE_KEY_VALUE
-        - lang: Shell_wget
-          source: |-
-            wget --verbose \
-              --method POST \
-              --header 'Accept: application/json' \
-              --header 'Content-Type: application/json' \
-              --header 'api-token: REPLACE_KEY_VALUE' \
-              --body-data '{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}' \
-              --output-document \
-              - https://api.directfreight.com/v1/end_user_authentication/users
-        - lang: Swift_nsurlsession
-          source: |-
-            import Foundation
-
-            let headers = [
-              "Accept": "application/json",
-              "Content-Type": "application/json",
-              "api-token": "REPLACE_KEY_VALUE"
-            ]
-            let parameters = [
-              "email": "<ADD EXAMPLE VALUE>",
-              "password": "<ADD EXAMPLE VALUE>"
-            ]
-
-            let postData = NSJSONSerialization.dataWithJSONObject(parameters, options: nil, error: nil)
-
-            var request = NSMutableURLRequest(URL: NSURL(string: "https://api.directfreight.com/v1/end_user_authentication/users")!,
-                                                    cachePolicy: .UseProtocolCachePolicy,
-                                                timeoutInterval: 10.0)
-            request.HTTPMethod = "POST"
-            request.allHTTPHeaderFields = headers
-            request.HTTPBody = postData
-
-            let session = NSURLSession.sharedSession()
-            let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-              if (error != nil) {
-                println(error)
-              } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                println(httpResponse)
-              }
-            })
-
-            dataTask.resume()
-    x-restlet:
-      section: END_USER_AUTHENTICATIONS
-      x-code-samples:
-        - lang: C_libcurl
-          source: |-
-            CURL *hnd = curl_easy_init();
-
-            curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "X-RESTLET");
-            curl_easy_setopt(hnd, CURLOPT_URL, "https://api.directfreight.com/v1/end_user_authentication/users");
-
-            struct curl_slist *headers = NULL;
-            headers = curl_slist_append(headers, "api-token: REPLACE_KEY_VALUE");
-            headers = curl_slist_append(headers, "Content-Type: application/json");
-            headers = curl_slist_append(headers, "Accept: application/json");
-            curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-            CURLcode ret = curl_easy_perform(hnd);
-        - lang: Csharp_restsharp
-          source: Method not supported
-        - lang: Go_native
-          source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.directfreight.com/v1/end_user_authentication/users\"\n\n\treq, _ := http.NewRequest(\"X-RESTLET\", url, nil)\n\n\treq.Header.Add(\"Accept\", \"application/json\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\treq.Header.Add(\"api-token\", \"REPLACE_KEY_VALUE\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-        - lang: Java_okhttp
-          source: |-
-            OkHttpClient client = new OkHttpClient();
-
-            Request request = new Request.Builder()
-              .url("https://api.directfreight.com/v1/end_user_authentication/users")
-              .method("X-RESTLET", null)
-              .addHeader("Accept", "application/json")
-              .addHeader("Content-Type", "application/json")
-              .addHeader("api-token", "REPLACE_KEY_VALUE")
-              .build();
-
-            Response response = client.newCall(request).execute();
-        - lang: Java_unirest
-          source: |-
-            HttpResponse<String> response = Unirest.customMethod("X-RESTLET","https://api.directfreight.com/v1/end_user_authentication/users")
-              .header("Accept", "application/json")
-              .header("Content-Type", "application/json")
-              .header("api-token", "REPLACE_KEY_VALUE")
-              .asString();
-        - lang: Javascript_jquery
-          source: |-
-            var settings = {
-              "async": true,
-              "crossDomain": true,
-              "url": "https://api.directfreight.com/v1/end_user_authentication/users",
-              "method": "X-RESTLET",
-              "headers": {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "api-token": "REPLACE_KEY_VALUE"
-              }
-            }
-
-            $.ajax(settings).done(function (response) {
-              console.log(response);
-            });
-        - lang: Javascript_xhr
-          source: |-
-            var data = null;
-
-            var xhr = new XMLHttpRequest();
-            xhr.withCredentials = true;
-
-            xhr.addEventListener("readystatechange", function () {
-              if (this.readyState === this.DONE) {
-                console.log(this.responseText);
-              }
-            });
-
-            xhr.open("X-RESTLET", "https://api.directfreight.com/v1/end_user_authentication/users");
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("api-token", "REPLACE_KEY_VALUE");
-
-            xhr.send(data);
-        - lang: Node_native
-          source: |-
-            var http = require("https");
-
-            var options = {
-              "method": "X-RESTLET",
-              "hostname": "api.directfreight.com",
-              "port": null,
-              "path": "/v1/end_user_authentication/users",
-              "headers": {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "api-token": "REPLACE_KEY_VALUE"
-              }
-            };
-
-            var req = http.request(options, function (res) {
-              var chunks = [];
-
-              res.on("data", function (chunk) {
-                chunks.push(chunk);
-              });
-
-              res.on("end", function () {
-                var body = Buffer.concat(chunks);
-                console.log(body.toString());
-              });
-            });
-
-            req.end();
-        - lang: Node_request
-          source: |
-            var request = require("request");
-
-            var options = { method: 'X-RESTLET',
-              url: 'https://api.directfreight.com/v1/end_user_authentication/users',
-              headers: 
-               { 'api-token': 'REPLACE_KEY_VALUE',
-                 'Content-Type': 'application/json',
-                 Accept: 'application/json' } };
-
-            request(options, function (error, response, body) {
-              if (error) throw new Error(error);
-
-              console.log(body);
-            });
-        - lang: Node_unirest
-          source: |
-            var unirest = require("unirest");
-
-            var req = unirest("X-RESTLET", "https://api.directfreight.com/v1/end_user_authentication/users");
-
-            req.headers({
-              "api-token": "REPLACE_KEY_VALUE",
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-            });
-
-
-            req.end(function (res) {
-              if (res.error) throw new Error(res.error);
-
-              console.log(res.body);
-            });
-        - lang: Objc_nsurlsession
-          source: |-
-            #import <Foundation/Foundation.h>
-
-            NSDictionary *headers = @{ @"Accept": @"application/json",
-                                       @"Content-Type": @"application/json",
-                                       @"api-token": @"REPLACE_KEY_VALUE" };
-
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.directfreight.com/v1/end_user_authentication/users"]
-                                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                               timeoutInterval:10.0];
-            [request setHTTPMethod:@"X-RESTLET"];
-            [request setAllHTTPHeaderFields:headers];
-
-            NSURLSession *session = [NSURLSession sharedSession];
-            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                            if (error) {
-                                                                NSLog(@"%@", error);
-                                                            } else {
-                                                                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                                                                NSLog(@"%@", httpResponse);
-                                                            }
-                                                        }];
-            [dataTask resume];
-        - lang: Ocaml_cohttp
-          source: |-
-            open Cohttp_lwt_unix
-            open Cohttp
-            open Lwt
-
-            let uri = Uri.of_string "https://api.directfreight.com/v1/end_user_authentication/users" in
-            let headers = Header.add_list (Header.init ()) [
-              ("Accept", "application/json");
-              ("Content-Type", "application/json");
-              ("api-token", "REPLACE_KEY_VALUE");
-            ] in
-
-            Client.call ~headers (Code.method_of_string "X-RESTLET") uri
-            >>= fun (res, body_stream) ->
-              (* Do stuff with the result *)
-        - lang: Perl_perl5
-          source: |-
-            #!/usr/bin/perl
-            use Modern::Perl;
-            use Data::Dumper;
-            use HTTP::Request::JSON;
-            use LWP::UserAgent::JSON;
-            my $request = HTTP::Request::JSON->new("X-RESTLET",
-            "https://api.directfreight.com/v1/end_user_authentication/users");
-            $request->header( "Accept" => "application/json" );
-            $request->header( "Content-Type" => "application/json" );
-            $request->header( "api-token" => "REPLACE_KEY_VALUE" );
-            my $browser = LWP::UserAgent::JSON->new();
-            my $response = $browser->request($request);
-            print Dumper($response->json_content);
-        - lang: Php_curl
-          source: |-
-            <?php
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-              CURLOPT_URL => "https://api.directfreight.com/v1/end_user_authentication/users",
-              CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_ENCODING => "",
-              CURLOPT_MAXREDIRS => 10,
-              CURLOPT_TIMEOUT => 30,
-              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-              CURLOPT_CUSTOMREQUEST => "X-RESTLET",
-              CURLOPT_HTTPHEADER => array(
-                "Accept: application/json",
-                "Content-Type: application/json",
-                "api-token: REPLACE_KEY_VALUE"
-              ),
-            ));
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-              echo "cURL Error #:" . $err;
-            } else {
-              echo $response;
-            }
-        - lang: Php_http1
-          source: |-
-            <?php
-
-            HttpRequest::methodRegister('X-RESTLET');
-            $request = new HttpRequest();
-            $request->setUrl('https://api.directfreight.com/v1/end_user_authentication/users');
-            $request->setMethod(HttpRequest::HTTP_METH_X-RESTLET);
-
-            $request->setHeaders(array(
-              'api-token' => 'REPLACE_KEY_VALUE',
-              'Content-Type' => 'application/json',
-              'Accept' => 'application/json'
-            ));
-
-            try {
-              $response = $request->send();
-
-              echo $response->getBody();
-            } catch (HttpException $ex) {
-              echo $ex;
-            }
-        - lang: Php_http2
-          source: |-
-            <?php
-
-            $client = new http\Client;
-            $request = new http\Client\Request;
-
-            $request->setRequestUrl('https://api.directfreight.com/v1/end_user_authentication/users');
-            $request->setRequestMethod('X-RESTLET');
-            $request->setHeaders(array(
-              'api-token' => 'REPLACE_KEY_VALUE',
-              'Content-Type' => 'application/json',
-              'Accept' => 'application/json'
-            ));
-
-            $client->enqueue($request)->send();
-            $response = $client->getResponse();
-
-            echo $response->getBody();
-        - lang: Python_python3
-          source: |-
-            import http.client
-
-            conn = http.client.HTTPSConnection("api.directfreight.com")
-
-            headers = {
-                'Accept': "application/json",
-                'Content-Type': "application/json",
-                'api-token': "REPLACE_KEY_VALUE"
-                }
-
-            conn.request("X-RESTLET", "/v1/end_user_authentication/users", headers=headers)
-
-            res = conn.getresponse()
-            data = res.read()
-
-            print(data.decode("utf-8"))
-        - lang: Python_requests
-          source: |-
-            import requests
-
-            url = "https://api.directfreight.com/v1/end_user_authentication/users"
-
-            headers = {
-                'Accept': "application/json",
-                'Content-Type': "application/json",
-                'api-token': "REPLACE_KEY_VALUE"
-                }
-
-            response = requests.request("X-RESTLET", url, headers=headers)
-
-            print(response.text)
-        - lang: Ruby_native
-          source: |-
-            require 'uri'
-            require 'net/http'
-
-            class Net::HTTP::X-restlet < Net::HTTPRequest
-              METHOD = 'X-RESTLET'
-              REQUEST_HAS_BODY = 'false'
-              RESPONSE_HAS_BODY = true
-            end
-
-            url = URI("https://api.directfreight.com/v1/end_user_authentication/users")
-
-            http = Net::HTTP.new(url.host, url.port)
-            http.use_ssl = true
-            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-            request = Net::HTTP::X-restlet.new(url)
-            request["Accept"] = 'application/json'
-            request["Content-Type"] = 'application/json'
-            request["api-token"] = 'REPLACE_KEY_VALUE'
-
-            response = http.request(request)
-            puts response.read_body
-        - lang: Shell_curl
-          source: |-
-            curl --request X-RESTLET \
-              --url https://api.directfreight.com/v1/end_user_authentication/users \
-              --header 'Accept: application/json' \
-              --header 'Content-Type: application/json' \
-              --header 'api-token: REPLACE_KEY_VALUE'
-        - lang: Shell_httpie
-          source: |-
-            http X-RESTLET https://api.directfreight.com/v1/end_user_authentication/users \
-              Accept:application/json \
-              Content-Type:application/json \
-              api-token:REPLACE_KEY_VALUE
-        - lang: Shell_wget
-          source: |-
-            wget --verbose \
-              --method X-RESTLET \
-              --header 'Accept: application/json' \
-              --header 'Content-Type: application/json' \
-              --header 'api-token: REPLACE_KEY_VALUE' \
-              --output-document \
-              - https://api.directfreight.com/v1/end_user_authentication/users
-        - lang: Swift_nsurlsession
-          source: |-
-            import Foundation
-
-            let headers = [
-              "Accept": "application/json",
-              "Content-Type": "application/json",
-              "api-token": "REPLACE_KEY_VALUE"
-            ]
-
-            var request = NSMutableURLRequest(URL: NSURL(string: "https://api.directfreight.com/v1/end_user_authentication/users")!,
-                                                    cachePolicy: .UseProtocolCachePolicy,
-                                                timeoutInterval: 10.0)
-            request.HTTPMethod = "X-RESTLET"
-            request.allHTTPHeaderFields = headers
-
-            let session = NSURLSession.sharedSession()
-            let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-              if (error != nil) {
-                println(error)
-              } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                println(httpResponse)
-              }
-            })
-
-            dataTask.resume()
   /end_user_authentications:
     delete:
       description: This logs a user out. the end-user-token will no longer be valid.
@@ -7184,7 +6236,7 @@ paths:
 
             var options = { method: 'DELETE',
               url: 'https://api.directfreight.com/v1/end_user_authentications',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'end-user-token': 'NO DEFAULT',
                  'Content-Type': 'application/json',
@@ -7604,7 +6656,7 @@ paths:
 
             var options = { method: 'GET',
               url: 'https://api.directfreight.com/v1/end_user_authentications',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'end-user-token': 'NO DEFAULT',
                  'Content-Type': 'application/json',
@@ -8025,11 +7077,11 @@ paths:
 
             var options = { method: 'POST',
               url: 'https://api.directfreight.com/v1/end_user_authentications',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' },
-              body: 
+              body:
                { login: '<ADD EXAMPLE VALUE>',
                  realm: 'username',
                  secret: '<ADD EXAMPLE VALUE>' },
@@ -8435,7 +7487,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/end_user_authentications',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -8697,382 +7749,6 @@ paths:
             })
 
             dataTask.resume()
-  /end_user_authentications/auto_login_url:
-    x-restlet:
-      section: END_USER_AUTHENTICATIONS
-      x-code-samples:
-        - lang: C_libcurl
-          source: |-
-            CURL *hnd = curl_easy_init();
-
-            curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "X-RESTLET");
-            curl_easy_setopt(hnd, CURLOPT_URL, "https://api.directfreight.com/v1/end_user_authentications/auto_login_url");
-
-            struct curl_slist *headers = NULL;
-            headers = curl_slist_append(headers, "api-token: REPLACE_KEY_VALUE");
-            headers = curl_slist_append(headers, "Content-Type: application/json");
-            headers = curl_slist_append(headers, "Accept: application/json");
-            curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
-
-            CURLcode ret = curl_easy_perform(hnd);
-        - lang: Csharp_restsharp
-          source: Method not supported
-        - lang: Go_native
-          source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.directfreight.com/v1/end_user_authentications/auto_login_url\"\n\n\treq, _ := http.NewRequest(\"X-RESTLET\", url, nil)\n\n\treq.Header.Add(\"Accept\", \"application/json\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\treq.Header.Add(\"api-token\", \"REPLACE_KEY_VALUE\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
-        - lang: Java_okhttp
-          source: |-
-            OkHttpClient client = new OkHttpClient();
-
-            Request request = new Request.Builder()
-              .url("https://api.directfreight.com/v1/end_user_authentications/auto_login_url")
-              .method("X-RESTLET", null)
-              .addHeader("Accept", "application/json")
-              .addHeader("Content-Type", "application/json")
-              .addHeader("api-token", "REPLACE_KEY_VALUE")
-              .build();
-
-            Response response = client.newCall(request).execute();
-        - lang: Java_unirest
-          source: |-
-            HttpResponse<String> response = Unirest.customMethod("X-RESTLET","https://api.directfreight.com/v1/end_user_authentications/auto_login_url")
-              .header("Accept", "application/json")
-              .header("Content-Type", "application/json")
-              .header("api-token", "REPLACE_KEY_VALUE")
-              .asString();
-        - lang: Javascript_jquery
-          source: |-
-            var settings = {
-              "async": true,
-              "crossDomain": true,
-              "url": "https://api.directfreight.com/v1/end_user_authentications/auto_login_url",
-              "method": "X-RESTLET",
-              "headers": {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "api-token": "REPLACE_KEY_VALUE"
-              }
-            }
-
-            $.ajax(settings).done(function (response) {
-              console.log(response);
-            });
-        - lang: Javascript_xhr
-          source: |-
-            var data = null;
-
-            var xhr = new XMLHttpRequest();
-            xhr.withCredentials = true;
-
-            xhr.addEventListener("readystatechange", function () {
-              if (this.readyState === this.DONE) {
-                console.log(this.responseText);
-              }
-            });
-
-            xhr.open("X-RESTLET", "https://api.directfreight.com/v1/end_user_authentications/auto_login_url");
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("api-token", "REPLACE_KEY_VALUE");
-
-            xhr.send(data);
-        - lang: Node_native
-          source: |-
-            var http = require("https");
-
-            var options = {
-              "method": "X-RESTLET",
-              "hostname": "api.directfreight.com",
-              "port": null,
-              "path": "/v1/end_user_authentications/auto_login_url",
-              "headers": {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "api-token": "REPLACE_KEY_VALUE"
-              }
-            };
-
-            var req = http.request(options, function (res) {
-              var chunks = [];
-
-              res.on("data", function (chunk) {
-                chunks.push(chunk);
-              });
-
-              res.on("end", function () {
-                var body = Buffer.concat(chunks);
-                console.log(body.toString());
-              });
-            });
-
-            req.end();
-        - lang: Node_request
-          source: |
-            var request = require("request");
-
-            var options = { method: 'X-RESTLET',
-              url: 'https://api.directfreight.com/v1/end_user_authentications/auto_login_url',
-              headers: 
-               { 'api-token': 'REPLACE_KEY_VALUE',
-                 'Content-Type': 'application/json',
-                 Accept: 'application/json' } };
-
-            request(options, function (error, response, body) {
-              if (error) throw new Error(error);
-
-              console.log(body);
-            });
-        - lang: Node_unirest
-          source: |
-            var unirest = require("unirest");
-
-            var req = unirest("X-RESTLET", "https://api.directfreight.com/v1/end_user_authentications/auto_login_url");
-
-            req.headers({
-              "api-token": "REPLACE_KEY_VALUE",
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-            });
-
-
-            req.end(function (res) {
-              if (res.error) throw new Error(res.error);
-
-              console.log(res.body);
-            });
-        - lang: Objc_nsurlsession
-          source: |-
-            #import <Foundation/Foundation.h>
-
-            NSDictionary *headers = @{ @"Accept": @"application/json",
-                                       @"Content-Type": @"application/json",
-                                       @"api-token": @"REPLACE_KEY_VALUE" };
-
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.directfreight.com/v1/end_user_authentications/auto_login_url"]
-                                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                               timeoutInterval:10.0];
-            [request setHTTPMethod:@"X-RESTLET"];
-            [request setAllHTTPHeaderFields:headers];
-
-            NSURLSession *session = [NSURLSession sharedSession];
-            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
-                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                            if (error) {
-                                                                NSLog(@"%@", error);
-                                                            } else {
-                                                                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                                                                NSLog(@"%@", httpResponse);
-                                                            }
-                                                        }];
-            [dataTask resume];
-        - lang: Ocaml_cohttp
-          source: |-
-            open Cohttp_lwt_unix
-            open Cohttp
-            open Lwt
-
-            let uri = Uri.of_string "https://api.directfreight.com/v1/end_user_authentications/auto_login_url" in
-            let headers = Header.add_list (Header.init ()) [
-              ("Accept", "application/json");
-              ("Content-Type", "application/json");
-              ("api-token", "REPLACE_KEY_VALUE");
-            ] in
-
-            Client.call ~headers (Code.method_of_string "X-RESTLET") uri
-            >>= fun (res, body_stream) ->
-              (* Do stuff with the result *)
-        - lang: Perl_perl5
-          source: |-
-            #!/usr/bin/perl
-            use Modern::Perl;
-            use Data::Dumper;
-            use HTTP::Request::JSON;
-            use LWP::UserAgent::JSON;
-            my $request = HTTP::Request::JSON->new("X-RESTLET",
-            "https://api.directfreight.com/v1/end_user_authentications/auto_login_url");
-            $request->header( "Accept" => "application/json" );
-            $request->header( "Content-Type" => "application/json" );
-            $request->header( "api-token" => "REPLACE_KEY_VALUE" );
-            my $browser = LWP::UserAgent::JSON->new();
-            my $response = $browser->request($request);
-            print Dumper($response->json_content);
-        - lang: Php_curl
-          source: |-
-            <?php
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-              CURLOPT_URL => "https://api.directfreight.com/v1/end_user_authentications/auto_login_url",
-              CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_ENCODING => "",
-              CURLOPT_MAXREDIRS => 10,
-              CURLOPT_TIMEOUT => 30,
-              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-              CURLOPT_CUSTOMREQUEST => "X-RESTLET",
-              CURLOPT_HTTPHEADER => array(
-                "Accept: application/json",
-                "Content-Type: application/json",
-                "api-token: REPLACE_KEY_VALUE"
-              ),
-            ));
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-
-            curl_close($curl);
-
-            if ($err) {
-              echo "cURL Error #:" . $err;
-            } else {
-              echo $response;
-            }
-        - lang: Php_http1
-          source: |-
-            <?php
-
-            HttpRequest::methodRegister('X-RESTLET');
-            $request = new HttpRequest();
-            $request->setUrl('https://api.directfreight.com/v1/end_user_authentications/auto_login_url');
-            $request->setMethod(HttpRequest::HTTP_METH_X-RESTLET);
-
-            $request->setHeaders(array(
-              'api-token' => 'REPLACE_KEY_VALUE',
-              'Content-Type' => 'application/json',
-              'Accept' => 'application/json'
-            ));
-
-            try {
-              $response = $request->send();
-
-              echo $response->getBody();
-            } catch (HttpException $ex) {
-              echo $ex;
-            }
-        - lang: Php_http2
-          source: |-
-            <?php
-
-            $client = new http\Client;
-            $request = new http\Client\Request;
-
-            $request->setRequestUrl('https://api.directfreight.com/v1/end_user_authentications/auto_login_url');
-            $request->setRequestMethod('X-RESTLET');
-            $request->setHeaders(array(
-              'api-token' => 'REPLACE_KEY_VALUE',
-              'Content-Type' => 'application/json',
-              'Accept' => 'application/json'
-            ));
-
-            $client->enqueue($request)->send();
-            $response = $client->getResponse();
-
-            echo $response->getBody();
-        - lang: Python_python3
-          source: |-
-            import http.client
-
-            conn = http.client.HTTPSConnection("api.directfreight.com")
-
-            headers = {
-                'Accept': "application/json",
-                'Content-Type': "application/json",
-                'api-token': "REPLACE_KEY_VALUE"
-                }
-
-            conn.request("X-RESTLET", "/v1/end_user_authentications/auto_login_url", headers=headers)
-
-            res = conn.getresponse()
-            data = res.read()
-
-            print(data.decode("utf-8"))
-        - lang: Python_requests
-          source: |-
-            import requests
-
-            url = "https://api.directfreight.com/v1/end_user_authentications/auto_login_url"
-
-            headers = {
-                'Accept': "application/json",
-                'Content-Type': "application/json",
-                'api-token': "REPLACE_KEY_VALUE"
-                }
-
-            response = requests.request("X-RESTLET", url, headers=headers)
-
-            print(response.text)
-        - lang: Ruby_native
-          source: |-
-            require 'uri'
-            require 'net/http'
-
-            class Net::HTTP::X-restlet < Net::HTTPRequest
-              METHOD = 'X-RESTLET'
-              REQUEST_HAS_BODY = 'false'
-              RESPONSE_HAS_BODY = true
-            end
-
-            url = URI("https://api.directfreight.com/v1/end_user_authentications/auto_login_url")
-
-            http = Net::HTTP.new(url.host, url.port)
-            http.use_ssl = true
-            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-            request = Net::HTTP::X-restlet.new(url)
-            request["Accept"] = 'application/json'
-            request["Content-Type"] = 'application/json'
-            request["api-token"] = 'REPLACE_KEY_VALUE'
-
-            response = http.request(request)
-            puts response.read_body
-        - lang: Shell_curl
-          source: |-
-            curl --request X-RESTLET \
-              --url https://api.directfreight.com/v1/end_user_authentications/auto_login_url \
-              --header 'Accept: application/json' \
-              --header 'Content-Type: application/json' \
-              --header 'api-token: REPLACE_KEY_VALUE'
-        - lang: Shell_httpie
-          source: |-
-            http X-RESTLET https://api.directfreight.com/v1/end_user_authentications/auto_login_url \
-              Accept:application/json \
-              Content-Type:application/json \
-              api-token:REPLACE_KEY_VALUE
-        - lang: Shell_wget
-          source: |-
-            wget --verbose \
-              --method X-RESTLET \
-              --header 'Accept: application/json' \
-              --header 'Content-Type: application/json' \
-              --header 'api-token: REPLACE_KEY_VALUE' \
-              --output-document \
-              - https://api.directfreight.com/v1/end_user_authentications/auto_login_url
-        - lang: Swift_nsurlsession
-          source: |-
-            import Foundation
-
-            let headers = [
-              "Accept": "application/json",
-              "Content-Type": "application/json",
-              "api-token": "REPLACE_KEY_VALUE"
-            ]
-
-            var request = NSMutableURLRequest(URL: NSURL(string: "https://api.directfreight.com/v1/end_user_authentications/auto_login_url")!,
-                                                    cachePolicy: .UseProtocolCachePolicy,
-                                                timeoutInterval: 10.0)
-            request.HTTPMethod = "X-RESTLET"
-            request.allHTTPHeaderFields = headers
-
-            let session = NSURLSession.sharedSession()
-            let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-              if (error != nil) {
-                println(error)
-              } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                println(httpResponse)
-              }
-            })
-
-            dataTask.resume()
   /end_user_authentications/dates:
     get:
       description: Gets an authoritative date_time string.
@@ -9210,8 +7886,9 @@ paths:
             var request = require("request");
 
             var options = { method: 'GET',
-              url: 'https://api.directfreight.com/v1/end_user_authentications/dates',
-              headers: 
+              url:
+               'https://api.directfreight.com/v1/end_user_authentications/dates',
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -9578,8 +8255,9 @@ paths:
             var request = require("request");
 
             var options = { method: 'X-RESTLET',
-              url: 'https://api.directfreight.com/v1/end_user_authentications/dates',
-              headers: 
+              url:
+               'https://api.directfreight.com/v1/end_user_authentications/dates',
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -9954,8 +8632,9 @@ paths:
             var request = require("request");
 
             var options = { method: 'X-RESTLET',
-              url: 'https://api.directfreight.com/v1/end_user_authentications/email',
-              headers: 
+              url:
+               'https://api.directfreight.com/v1/end_user_authentications/email',
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -10330,8 +9009,9 @@ paths:
             var request = require("request");
 
             var options = { method: 'X-RESTLET',
-              url: 'https://api.directfreight.com/v1/end_user_authentications/passwords',
-              headers: 
+              url:
+               'https://api.directfreight.com/v1/end_user_authentications/passwords',
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -10706,8 +9386,9 @@ paths:
             var request = require("request");
 
             var options = { method: 'X-RESTLET',
-              url: 'https://api.directfreight.com/v1/end_user_authentications/social_login',
-              headers: 
+              url:
+               'https://api.directfreight.com/v1/end_user_authentications/social_login',
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -10969,6 +9650,831 @@ paths:
             })
 
             dataTask.resume()
+  /end_user_authentications/users:
+    post:
+      consumes: []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/user'
+      responses:
+        '201':
+          description: successful operation
+          schema:
+            properties:
+              end-user-token:
+                description: Auto logs in the new user and gives them a token.
+                type: string
+            required:
+              - end-user-token
+            type: object
+        '422':
+          $ref: '#/responses/error_422'
+      summary: Create a new user.
+      tags:
+        - end_user_authentications
+      x-code-samples:
+        - lang: C_libcurl
+          source: |-
+            CURL *hnd = curl_easy_init();
+
+            curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "POST");
+            curl_easy_setopt(hnd, CURLOPT_URL, "https://api.directfreight.com/v1/end_user_authentications/users");
+
+            struct curl_slist *headers = NULL;
+            headers = curl_slist_append(headers, "api-token: REPLACE_KEY_VALUE");
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+            headers = curl_slist_append(headers, "Accept: application/json");
+            curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+            curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}");
+
+            CURLcode ret = curl_easy_perform(hnd);
+        - lang: Csharp_restsharp
+          source: |-
+            var client = new RestClient("https://api.directfreight.com/v1/end_user_authentications/users");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("api-token", "REPLACE_KEY_VALUE");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("undefined", "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+        - lang: Go_native
+          source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.directfreight.com/v1/end_user_authentications/users\"\n\n\tpayload := strings.NewReader(\"{\\\"email\\\":\\\"<ADD EXAMPLE VALUE>\\\",\\\"password\\\":\\\"<ADD EXAMPLE VALUE>\\\"}\")\n\n\treq, _ := http.NewRequest(\"POST\", url, payload)\n\n\treq.Header.Add(\"Accept\", \"application/json\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\treq.Header.Add(\"api-token\", \"REPLACE_KEY_VALUE\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+        - lang: Java_okhttp
+          source: |-
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}");
+            Request request = new Request.Builder()
+              .url("https://api.directfreight.com/v1/end_user_authentications/users")
+              .post(body)
+              .addHeader("Accept", "application/json")
+              .addHeader("Content-Type", "application/json")
+              .addHeader("api-token", "REPLACE_KEY_VALUE")
+              .build();
+
+            Response response = client.newCall(request).execute();
+        - lang: Java_unirest
+          source: |-
+            HttpResponse<String> response = Unirest.post("https://api.directfreight.com/v1/end_user_authentications/users")
+              .header("Accept", "application/json")
+              .header("Content-Type", "application/json")
+              .header("api-token", "REPLACE_KEY_VALUE")
+              .body("{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}")
+              .asString();
+        - lang: Javascript_jquery
+          source: |-
+            var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "https://api.directfreight.com/v1/end_user_authentications/users",
+              "method": "POST",
+              "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "api-token": "REPLACE_KEY_VALUE"
+              },
+              "processData": false,
+              "data": "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}"
+            }
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+            });
+        - lang: Javascript_xhr
+          source: |-
+            var data = JSON.stringify({
+              "email": "<ADD EXAMPLE VALUE>",
+              "password": "<ADD EXAMPLE VALUE>"
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+              if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+              }
+            });
+
+            xhr.open("POST", "https://api.directfreight.com/v1/end_user_authentications/users");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("api-token", "REPLACE_KEY_VALUE");
+
+            xhr.send(data);
+        - lang: Node_native
+          source: |-
+            var http = require("https");
+
+            var options = {
+              "method": "POST",
+              "hostname": "api.directfreight.com",
+              "port": null,
+              "path": "/v1/end_user_authentications/users",
+              "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "api-token": "REPLACE_KEY_VALUE"
+              }
+            };
+
+            var req = http.request(options, function (res) {
+              var chunks = [];
+
+              res.on("data", function (chunk) {
+                chunks.push(chunk);
+              });
+
+              res.on("end", function () {
+                var body = Buffer.concat(chunks);
+                console.log(body.toString());
+              });
+            });
+
+            req.write(JSON.stringify({ email: '<ADD EXAMPLE VALUE>',
+              password: '<ADD EXAMPLE VALUE>' }));
+            req.end();
+        - lang: Node_request
+          source: |
+            var request = require("request");
+
+            var options = { method: 'POST',
+              url:
+               'https://api.directfreight.com/v1/end_user_authentications/users',
+              headers:
+               { 'api-token': 'REPLACE_KEY_VALUE',
+                 'Content-Type': 'application/json',
+                 Accept: 'application/json' },
+              body:
+               { email: '<ADD EXAMPLE VALUE>',
+                 password: '<ADD EXAMPLE VALUE>' },
+              json: true };
+
+            request(options, function (error, response, body) {
+              if (error) throw new Error(error);
+
+              console.log(body);
+            });
+        - lang: Node_unirest
+          source: |
+            var unirest = require("unirest");
+
+            var req = unirest("POST", "https://api.directfreight.com/v1/end_user_authentications/users");
+
+            req.headers({
+              "api-token": "REPLACE_KEY_VALUE",
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            });
+
+            req.type("json");
+            req.send({
+              "email": "<ADD EXAMPLE VALUE>",
+              "password": "<ADD EXAMPLE VALUE>"
+            });
+
+            req.end(function (res) {
+              if (res.error) throw new Error(res.error);
+
+              console.log(res.body);
+            });
+        - lang: Objc_nsurlsession
+          source: |-
+            #import <Foundation/Foundation.h>
+
+            NSDictionary *headers = @{ @"Accept": @"application/json",
+                                       @"Content-Type": @"application/json",
+                                       @"api-token": @"REPLACE_KEY_VALUE" };
+            NSDictionary *parameters = @{ @"email": @"<ADD EXAMPLE VALUE>",
+                                          @"password": @"<ADD EXAMPLE VALUE>" };
+
+            NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.directfreight.com/v1/end_user_authentications/users"]
+                                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                               timeoutInterval:10.0];
+            [request setHTTPMethod:@"POST"];
+            [request setAllHTTPHeaderFields:headers];
+            [request setHTTPBody:postData];
+
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                            if (error) {
+                                                                NSLog(@"%@", error);
+                                                            } else {
+                                                                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                                NSLog(@"%@", httpResponse);
+                                                            }
+                                                        }];
+            [dataTask resume];
+        - lang: Ocaml_cohttp
+          source: |-
+            open Cohttp_lwt_unix
+            open Cohttp
+            open Lwt
+
+            let uri = Uri.of_string "https://api.directfreight.com/v1/end_user_authentications/users" in
+            let headers = Header.add_list (Header.init ()) [
+              ("Accept", "application/json");
+              ("Content-Type", "application/json");
+              ("api-token", "REPLACE_KEY_VALUE");
+            ] in
+            let body = Cohttp_lwt_body.of_string "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}" in
+
+            Client.call ~headers ~body `POST uri
+            >>= fun (res, body_stream) ->
+              (* Do stuff with the result *)
+        - lang: Perl_perl5
+          source: |-
+            #!/usr/bin/perl
+            use Modern::Perl;
+            use Data::Dumper;
+            use HTTP::Request::JSON;
+            use LWP::UserAgent::JSON;
+            my $request = HTTP::Request::JSON->new("POST",
+            "https://api.directfreight.com/v1/end_user_authentications/users");
+            $request->header( "Accept" => "application/json" );
+            $request->header( "Content-Type" => "application/json" );
+            $request->header( "api-token" => "REPLACE_KEY_VALUE" );
+            $request->content('{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}');
+            my $browser = LWP::UserAgent::JSON->new();
+            my $response = $browser->request($request);
+            print Dumper($response->json_content);
+        - lang: Php_curl
+          source: |-
+            <?php
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => "https://api.directfreight.com/v1/end_user_authentications/users",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "POST",
+              CURLOPT_POSTFIELDS => "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}",
+              CURLOPT_HTTPHEADER => array(
+                "Accept: application/json",
+                "Content-Type: application/json",
+                "api-token: REPLACE_KEY_VALUE"
+              ),
+            ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+              echo "cURL Error #:" . $err;
+            } else {
+              echo $response;
+            }
+        - lang: Php_http1
+          source: |-
+            <?php
+
+            $request = new HttpRequest();
+            $request->setUrl('https://api.directfreight.com/v1/end_user_authentications/users');
+            $request->setMethod(HTTP_METH_POST);
+
+            $request->setHeaders(array(
+              'api-token' => 'REPLACE_KEY_VALUE',
+              'Content-Type' => 'application/json',
+              'Accept' => 'application/json'
+            ));
+
+            $request->setBody('{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}');
+
+            try {
+              $response = $request->send();
+
+              echo $response->getBody();
+            } catch (HttpException $ex) {
+              echo $ex;
+            }
+        - lang: Php_http2
+          source: |-
+            <?php
+
+            $client = new http\Client;
+            $request = new http\Client\Request;
+
+            $body = new http\Message\Body;
+            $body->append('{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}');
+
+            $request->setRequestUrl('https://api.directfreight.com/v1/end_user_authentications/users');
+            $request->setRequestMethod('POST');
+            $request->setBody($body);
+
+            $request->setHeaders(array(
+              'api-token' => 'REPLACE_KEY_VALUE',
+              'Content-Type' => 'application/json',
+              'Accept' => 'application/json'
+            ));
+
+            $client->enqueue($request)->send();
+            $response = $client->getResponse();
+
+            echo $response->getBody();
+        - lang: Python_python3
+          source: |-
+            import http.client
+
+            conn = http.client.HTTPSConnection("api.directfreight.com")
+
+            payload = "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}"
+
+            headers = {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'api-token': "REPLACE_KEY_VALUE"
+                }
+
+            conn.request("POST", "/v1/end_user_authentications/users", payload, headers)
+
+            res = conn.getresponse()
+            data = res.read()
+
+            print(data.decode("utf-8"))
+        - lang: Python_requests
+          source: |-
+            import requests
+
+            url = "https://api.directfreight.com/v1/end_user_authentications/users"
+
+            payload = "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}"
+            headers = {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'api-token': "REPLACE_KEY_VALUE"
+                }
+
+            response = requests.request("POST", url, data=payload, headers=headers)
+
+            print(response.text)
+        - lang: Ruby_native
+          source: |-
+            require 'uri'
+            require 'net/http'
+
+            url = URI("https://api.directfreight.com/v1/end_user_authentications/users")
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+            request = Net::HTTP::Post.new(url)
+            request["Accept"] = 'application/json'
+            request["Content-Type"] = 'application/json'
+            request["api-token"] = 'REPLACE_KEY_VALUE'
+            request.body = "{\"email\":\"<ADD EXAMPLE VALUE>\",\"password\":\"<ADD EXAMPLE VALUE>\"}"
+
+            response = http.request(request)
+            puts response.read_body
+        - lang: Shell_curl
+          source: |-
+            curl --request POST \
+              --url https://api.directfreight.com/v1/end_user_authentications/users \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header 'api-token: REPLACE_KEY_VALUE' \
+              --data '{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}'
+        - lang: Shell_httpie
+          source: |-
+            echo '{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}' |  \
+              http POST https://api.directfreight.com/v1/end_user_authentications/users \
+              Accept:application/json \
+              Content-Type:application/json \
+              api-token:REPLACE_KEY_VALUE
+        - lang: Shell_wget
+          source: |-
+            wget --verbose \
+              --method POST \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header 'api-token: REPLACE_KEY_VALUE' \
+              --body-data '{"email":"<ADD EXAMPLE VALUE>","password":"<ADD EXAMPLE VALUE>"}' \
+              --output-document \
+              - https://api.directfreight.com/v1/end_user_authentications/users
+        - lang: Swift_nsurlsession
+          source: |-
+            import Foundation
+
+            let headers = [
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "api-token": "REPLACE_KEY_VALUE"
+            ]
+            let parameters = [
+              "email": "<ADD EXAMPLE VALUE>",
+              "password": "<ADD EXAMPLE VALUE>"
+            ]
+
+            let postData = NSJSONSerialization.dataWithJSONObject(parameters, options: nil, error: nil)
+
+            var request = NSMutableURLRequest(URL: NSURL(string: "https://api.directfreight.com/v1/end_user_authentications/users")!,
+                                                    cachePolicy: .UseProtocolCachePolicy,
+                                                timeoutInterval: 10.0)
+            request.HTTPMethod = "POST"
+            request.allHTTPHeaderFields = headers
+            request.HTTPBody = postData
+
+            let session = NSURLSession.sharedSession()
+            let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+              if (error != nil) {
+                println(error)
+              } else {
+                let httpResponse = response as? NSHTTPURLResponse
+                println(httpResponse)
+              }
+            })
+
+            dataTask.resume()
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
+      x-code-samples:
+        - lang: C_libcurl
+          source: |-
+            CURL *hnd = curl_easy_init();
+
+            curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "X-RESTLET");
+            curl_easy_setopt(hnd, CURLOPT_URL, "https://api.directfreight.com/v1/end_user_authentications/users");
+
+            struct curl_slist *headers = NULL;
+            headers = curl_slist_append(headers, "api-token: REPLACE_KEY_VALUE");
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+            headers = curl_slist_append(headers, "Accept: application/json");
+            curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+            CURLcode ret = curl_easy_perform(hnd);
+        - lang: Csharp_restsharp
+          source: Method not supported
+        - lang: Go_native
+          source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.directfreight.com/v1/end_user_authentications/users\"\n\n\treq, _ := http.NewRequest(\"X-RESTLET\", url, nil)\n\n\treq.Header.Add(\"Accept\", \"application/json\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\treq.Header.Add(\"api-token\", \"REPLACE_KEY_VALUE\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+        - lang: Java_okhttp
+          source: |-
+            OkHttpClient client = new OkHttpClient();
+
+            Request request = new Request.Builder()
+              .url("https://api.directfreight.com/v1/end_user_authentications/users")
+              .method("X-RESTLET", null)
+              .addHeader("Accept", "application/json")
+              .addHeader("Content-Type", "application/json")
+              .addHeader("api-token", "REPLACE_KEY_VALUE")
+              .build();
+
+            Response response = client.newCall(request).execute();
+        - lang: Java_unirest
+          source: |-
+            HttpResponse<String> response = Unirest.customMethod("X-RESTLET","https://api.directfreight.com/v1/end_user_authentications/users")
+              .header("Accept", "application/json")
+              .header("Content-Type", "application/json")
+              .header("api-token", "REPLACE_KEY_VALUE")
+              .asString();
+        - lang: Javascript_jquery
+          source: |-
+            var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "https://api.directfreight.com/v1/end_user_authentications/users",
+              "method": "X-RESTLET",
+              "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "api-token": "REPLACE_KEY_VALUE"
+              }
+            }
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+            });
+        - lang: Javascript_xhr
+          source: |-
+            var data = null;
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+              if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+              }
+            });
+
+            xhr.open("X-RESTLET", "https://api.directfreight.com/v1/end_user_authentications/users");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("api-token", "REPLACE_KEY_VALUE");
+
+            xhr.send(data);
+        - lang: Node_native
+          source: |-
+            var http = require("https");
+
+            var options = {
+              "method": "X-RESTLET",
+              "hostname": "api.directfreight.com",
+              "port": null,
+              "path": "/v1/end_user_authentications/users",
+              "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "api-token": "REPLACE_KEY_VALUE"
+              }
+            };
+
+            var req = http.request(options, function (res) {
+              var chunks = [];
+
+              res.on("data", function (chunk) {
+                chunks.push(chunk);
+              });
+
+              res.on("end", function () {
+                var body = Buffer.concat(chunks);
+                console.log(body.toString());
+              });
+            });
+
+            req.end();
+        - lang: Node_request
+          source: |
+            var request = require("request");
+
+            var options = { method: 'X-RESTLET',
+              url:
+               'https://api.directfreight.com/v1/end_user_authentications/users',
+              headers:
+               { 'api-token': 'REPLACE_KEY_VALUE',
+                 'Content-Type': 'application/json',
+                 Accept: 'application/json' } };
+
+            request(options, function (error, response, body) {
+              if (error) throw new Error(error);
+
+              console.log(body);
+            });
+        - lang: Node_unirest
+          source: |
+            var unirest = require("unirest");
+
+            var req = unirest("X-RESTLET", "https://api.directfreight.com/v1/end_user_authentications/users");
+
+            req.headers({
+              "api-token": "REPLACE_KEY_VALUE",
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            });
+
+
+            req.end(function (res) {
+              if (res.error) throw new Error(res.error);
+
+              console.log(res.body);
+            });
+        - lang: Objc_nsurlsession
+          source: |-
+            #import <Foundation/Foundation.h>
+
+            NSDictionary *headers = @{ @"Accept": @"application/json",
+                                       @"Content-Type": @"application/json",
+                                       @"api-token": @"REPLACE_KEY_VALUE" };
+
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.directfreight.com/v1/end_user_authentications/users"]
+                                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                               timeoutInterval:10.0];
+            [request setHTTPMethod:@"X-RESTLET"];
+            [request setAllHTTPHeaderFields:headers];
+
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                            if (error) {
+                                                                NSLog(@"%@", error);
+                                                            } else {
+                                                                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                                NSLog(@"%@", httpResponse);
+                                                            }
+                                                        }];
+            [dataTask resume];
+        - lang: Ocaml_cohttp
+          source: |-
+            open Cohttp_lwt_unix
+            open Cohttp
+            open Lwt
+
+            let uri = Uri.of_string "https://api.directfreight.com/v1/end_user_authentications/users" in
+            let headers = Header.add_list (Header.init ()) [
+              ("Accept", "application/json");
+              ("Content-Type", "application/json");
+              ("api-token", "REPLACE_KEY_VALUE");
+            ] in
+
+            Client.call ~headers (Code.method_of_string "X-RESTLET") uri
+            >>= fun (res, body_stream) ->
+              (* Do stuff with the result *)
+        - lang: Perl_perl5
+          source: |-
+            #!/usr/bin/perl
+            use Modern::Perl;
+            use Data::Dumper;
+            use HTTP::Request::JSON;
+            use LWP::UserAgent::JSON;
+            my $request = HTTP::Request::JSON->new("X-RESTLET",
+            "https://api.directfreight.com/v1/end_user_authentications/users");
+            $request->header( "Accept" => "application/json" );
+            $request->header( "Content-Type" => "application/json" );
+            $request->header( "api-token" => "REPLACE_KEY_VALUE" );
+            my $browser = LWP::UserAgent::JSON->new();
+            my $response = $browser->request($request);
+            print Dumper($response->json_content);
+        - lang: Php_curl
+          source: |-
+            <?php
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => "https://api.directfreight.com/v1/end_user_authentications/users",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "X-RESTLET",
+              CURLOPT_HTTPHEADER => array(
+                "Accept: application/json",
+                "Content-Type: application/json",
+                "api-token: REPLACE_KEY_VALUE"
+              ),
+            ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+              echo "cURL Error #:" . $err;
+            } else {
+              echo $response;
+            }
+        - lang: Php_http1
+          source: |-
+            <?php
+
+            HttpRequest::methodRegister('X-RESTLET');
+            $request = new HttpRequest();
+            $request->setUrl('https://api.directfreight.com/v1/end_user_authentications/users');
+            $request->setMethod(HttpRequest::HTTP_METH_X-RESTLET);
+
+            $request->setHeaders(array(
+              'api-token' => 'REPLACE_KEY_VALUE',
+              'Content-Type' => 'application/json',
+              'Accept' => 'application/json'
+            ));
+
+            try {
+              $response = $request->send();
+
+              echo $response->getBody();
+            } catch (HttpException $ex) {
+              echo $ex;
+            }
+        - lang: Php_http2
+          source: |-
+            <?php
+
+            $client = new http\Client;
+            $request = new http\Client\Request;
+
+            $request->setRequestUrl('https://api.directfreight.com/v1/end_user_authentications/users');
+            $request->setRequestMethod('X-RESTLET');
+            $request->setHeaders(array(
+              'api-token' => 'REPLACE_KEY_VALUE',
+              'Content-Type' => 'application/json',
+              'Accept' => 'application/json'
+            ));
+
+            $client->enqueue($request)->send();
+            $response = $client->getResponse();
+
+            echo $response->getBody();
+        - lang: Python_python3
+          source: |-
+            import http.client
+
+            conn = http.client.HTTPSConnection("api.directfreight.com")
+
+            headers = {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'api-token': "REPLACE_KEY_VALUE"
+                }
+
+            conn.request("X-RESTLET", "/v1/end_user_authentications/users", headers=headers)
+
+            res = conn.getresponse()
+            data = res.read()
+
+            print(data.decode("utf-8"))
+        - lang: Python_requests
+          source: |-
+            import requests
+
+            url = "https://api.directfreight.com/v1/end_user_authentications/users"
+
+            headers = {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'api-token': "REPLACE_KEY_VALUE"
+                }
+
+            response = requests.request("X-RESTLET", url, headers=headers)
+
+            print(response.text)
+        - lang: Ruby_native
+          source: |-
+            require 'uri'
+            require 'net/http'
+
+            class Net::HTTP::X-restlet < Net::HTTPRequest
+              METHOD = 'X-RESTLET'
+              REQUEST_HAS_BODY = 'false'
+              RESPONSE_HAS_BODY = true
+            end
+
+            url = URI("https://api.directfreight.com/v1/end_user_authentications/users")
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+            request = Net::HTTP::X-restlet.new(url)
+            request["Accept"] = 'application/json'
+            request["Content-Type"] = 'application/json'
+            request["api-token"] = 'REPLACE_KEY_VALUE'
+
+            response = http.request(request)
+            puts response.read_body
+        - lang: Shell_curl
+          source: |-
+            curl --request X-RESTLET \
+              --url https://api.directfreight.com/v1/end_user_authentications/users \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header 'api-token: REPLACE_KEY_VALUE'
+        - lang: Shell_httpie
+          source: |-
+            http X-RESTLET https://api.directfreight.com/v1/end_user_authentications/users \
+              Accept:application/json \
+              Content-Type:application/json \
+              api-token:REPLACE_KEY_VALUE
+        - lang: Shell_wget
+          source: |-
+            wget --verbose \
+              --method X-RESTLET \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header 'api-token: REPLACE_KEY_VALUE' \
+              --output-document \
+              - https://api.directfreight.com/v1/end_user_authentications/users
+        - lang: Swift_nsurlsession
+          source: |-
+            import Foundation
+
+            let headers = [
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "api-token": "REPLACE_KEY_VALUE"
+            ]
+
+            var request = NSMutableURLRequest(URL: NSURL(string: "https://api.directfreight.com/v1/end_user_authentications/users")!,
+                                                    cachePolicy: .UseProtocolCachePolicy,
+                                                timeoutInterval: 10.0)
+            request.HTTPMethod = "X-RESTLET"
+            request.allHTTPHeaderFields = headers
+
+            let session = NSURLSession.sharedSession()
+            let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+              if (error != nil) {
+                println(error)
+              } else {
+                let httpResponse = response as? NSHTTPURLResponse
+                println(httpResponse)
+              }
+            })
+
+            dataTask.resume()
   /locations/autocomplete:
     get:
       description: 'A string of a partial city or state name, and returns a list of possible matches.'
@@ -11119,11 +10625,11 @@ paths:
 
             var options = { method: 'GET',
               url: 'https://api.directfreight.com/v1/locations/autocomplete',
-              qs: 
+              qs:
                { searchtext: 'SOME_STRING_VALUE',
                  return_only: 'SOME_STRING_VALUE',
                  limit: '100' },
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -11511,7 +11017,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/locations/autocomplete',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -11912,10 +11418,10 @@ paths:
 
             var options = { method: 'GET',
               url: 'https://api.directfreight.com/v1/locations/reverse_geocode',
-              qs: 
+              qs:
                { latitude: 'SOME_NUMBER_VALUE',
                  longitude: 'SOME_NUMBER_VALUE' },
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -12300,7 +11806,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/locations/reverse_geocode',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -12676,7 +12182,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/mobile_updates',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -13052,7 +12558,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/optins',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -13428,7 +12934,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/optins/load_alert_sound',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -13804,7 +13310,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/optins/web_push',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -14179,8 +13685,9 @@ paths:
             var request = require("request");
 
             var options = { method: 'X-RESTLET',
-              url: 'https://api.directfreight.com/v1/postings/custom_fields/data/%7Bposting_type%7D',
-              headers: 
+              url:
+               'https://api.directfreight.com/v1/postings/custom_fields/data/%7Bposting_type%7D',
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -14555,8 +14062,9 @@ paths:
             var request = require("request");
 
             var options = { method: 'X-RESTLET',
-              url: 'https://api.directfreight.com/v1/postings/custom_fields/names/',
-              headers: 
+              url:
+               'https://api.directfreight.com/v1/postings/custom_fields/names/',
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -14974,11 +14482,11 @@ paths:
 
             var options = { method: 'DELETE',
               url: 'https://api.directfreight.com/v1/postings/test_loads',
-              qs: 
+              qs:
                { posting_id: 'SOME_INTEGER_VALUE',
                  custom_id: 'SOME_STRING_VALUE',
                  delete_all: 'SOME_BOOLEAN_VALUE' },
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'end-user-token': 'NO DEFAULT',
                  'Content-Type': 'application/json',
@@ -15445,12 +14953,12 @@ paths:
 
             var options = { method: 'GET',
               url: 'https://api.directfreight.com/v1/postings/test_loads',
-              qs: 
+              qs:
                { posting_id: 'SOME_ARRAY_VALUE',
                  custom_id: 'SOME_ARRAY_VALUE',
                  sort_parameter: 'SOME_STRING_VALUE',
                  page_number: 'SOME_INTEGER_VALUE' },
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'end-user-token': 'NO DEFAULT',
                  'Content-Type': 'application/json',
@@ -15924,7 +15432,7 @@ paths:
 
             var options = { method: 'PATCH',
               url: 'https://api.directfreight.com/v1/postings/test_loads',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'end-user-token': 'NO DEFAULT',
                  'Content-Type': 'application/json',
@@ -16389,7 +15897,7 @@ paths:
 
             var options = { method: 'POST',
               url: 'https://api.directfreight.com/v1/postings/test_loads',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'end-user-token': 'NO DEFAULT',
                  'Content-Type': 'application/json',
@@ -16801,7 +16309,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/postings/test_loads',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -17198,7 +16706,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/postings/loads/copy',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -17599,7 +17107,7 @@ paths:
 
             var options = { method: 'GET',
               url: 'https://api.directfreight.com/v1/profiles',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'end-user-token': 'NO DEFAULT',
                  'Content-Type': 'application/json',
@@ -18055,12 +17563,12 @@ paths:
 
             var options = { method: 'PATCH',
               url: 'https://api.directfreight.com/v1/profiles',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'end-user-token': 'NO DEFAULT',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' },
-              body: 
+              body:
                { address: '<ADD EXAMPLE VALUE>',
                  city: '<ADD EXAMPLE VALUE>',
                  company: '<ADD EXAMPLE VALUE>',
@@ -18620,12 +18128,12 @@ paths:
 
             var options = { method: 'POST',
               url: 'https://api.directfreight.com/v1/profiles',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'end-user-token': 'NO DEFAULT',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' },
-              body: 
+              body:
                { address: '<ADD EXAMPLE VALUE>',
                  city: '<ADD EXAMPLE VALUE>',
                  company: '<ADD EXAMPLE VALUE>',
@@ -19121,7 +18629,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/profiles',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -19497,7 +19005,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/profiles/documents',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -19760,6 +19268,911 @@ paths:
 
             dataTask.resume()
   /profiles/truck_info:
+    get:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/truck_info_object'
+      summary: Request the logged in user's truck info.
+      tags:
+        - profiles
+      x-code-samples:
+        - lang: C_libcurl
+          source: |-
+            CURL *hnd = curl_easy_init();
+
+            curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "GET");
+            curl_easy_setopt(hnd, CURLOPT_URL, "https://api.directfreight.com/v1/profiles/truck_info");
+
+            struct curl_slist *headers = NULL;
+            headers = curl_slist_append(headers, "api-token: REPLACE_KEY_VALUE");
+            headers = curl_slist_append(headers, "end-user-token: NO DEFAULT");
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+            headers = curl_slist_append(headers, "Accept: application/json");
+            curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+            CURLcode ret = curl_easy_perform(hnd);
+        - lang: Csharp_restsharp
+          source: |-
+            var client = new RestClient("https://api.directfreight.com/v1/profiles/truck_info");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("api-token", "REPLACE_KEY_VALUE");
+            request.AddHeader("end-user-token", "NO DEFAULT");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json");
+            IRestResponse response = client.Execute(request);
+        - lang: Go_native
+          source: "package main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.directfreight.com/v1/profiles/truck_info\"\n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"Accept\", \"application/json\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\treq.Header.Add(\"end-user-token\", \"NO DEFAULT\")\n\treq.Header.Add(\"api-token\", \"REPLACE_KEY_VALUE\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+        - lang: Java_okhttp
+          source: |-
+            OkHttpClient client = new OkHttpClient();
+
+            Request request = new Request.Builder()
+              .url("https://api.directfreight.com/v1/profiles/truck_info")
+              .get()
+              .addHeader("Accept", "application/json")
+              .addHeader("Content-Type", "application/json")
+              .addHeader("end-user-token", "NO DEFAULT")
+              .addHeader("api-token", "REPLACE_KEY_VALUE")
+              .build();
+
+            Response response = client.newCall(request).execute();
+        - lang: Java_unirest
+          source: |-
+            HttpResponse<String> response = Unirest.get("https://api.directfreight.com/v1/profiles/truck_info")
+              .header("Accept", "application/json")
+              .header("Content-Type", "application/json")
+              .header("end-user-token", "NO DEFAULT")
+              .header("api-token", "REPLACE_KEY_VALUE")
+              .asString();
+        - lang: Javascript_jquery
+          source: |-
+            var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "https://api.directfreight.com/v1/profiles/truck_info",
+              "method": "GET",
+              "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "end-user-token": "NO DEFAULT",
+                "api-token": "REPLACE_KEY_VALUE"
+              }
+            }
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+            });
+        - lang: Javascript_xhr
+          source: |-
+            var data = null;
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+              if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+              }
+            });
+
+            xhr.open("GET", "https://api.directfreight.com/v1/profiles/truck_info");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("end-user-token", "NO DEFAULT");
+            xhr.setRequestHeader("api-token", "REPLACE_KEY_VALUE");
+
+            xhr.send(data);
+        - lang: Node_native
+          source: |-
+            var http = require("https");
+
+            var options = {
+              "method": "GET",
+              "hostname": "api.directfreight.com",
+              "port": null,
+              "path": "/v1/profiles/truck_info",
+              "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "end-user-token": "NO DEFAULT",
+                "api-token": "REPLACE_KEY_VALUE"
+              }
+            };
+
+            var req = http.request(options, function (res) {
+              var chunks = [];
+
+              res.on("data", function (chunk) {
+                chunks.push(chunk);
+              });
+
+              res.on("end", function () {
+                var body = Buffer.concat(chunks);
+                console.log(body.toString());
+              });
+            });
+
+            req.end();
+        - lang: Node_request
+          source: |
+            var request = require("request");
+
+            var options = { method: 'GET',
+              url: 'https://api.directfreight.com/v1/profiles/truck_info',
+              headers:
+               { 'api-token': 'REPLACE_KEY_VALUE',
+                 'end-user-token': 'NO DEFAULT',
+                 'Content-Type': 'application/json',
+                 Accept: 'application/json' } };
+
+            request(options, function (error, response, body) {
+              if (error) throw new Error(error);
+
+              console.log(body);
+            });
+        - lang: Node_unirest
+          source: |
+            var unirest = require("unirest");
+
+            var req = unirest("GET", "https://api.directfreight.com/v1/profiles/truck_info");
+
+            req.headers({
+              "api-token": "REPLACE_KEY_VALUE",
+              "end-user-token": "NO DEFAULT",
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            });
+
+
+            req.end(function (res) {
+              if (res.error) throw new Error(res.error);
+
+              console.log(res.body);
+            });
+        - lang: Objc_nsurlsession
+          source: |-
+            #import <Foundation/Foundation.h>
+
+            NSDictionary *headers = @{ @"Accept": @"application/json",
+                                       @"Content-Type": @"application/json",
+                                       @"end-user-token": @"NO DEFAULT",
+                                       @"api-token": @"REPLACE_KEY_VALUE" };
+
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.directfreight.com/v1/profiles/truck_info"]
+                                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                               timeoutInterval:10.0];
+            [request setHTTPMethod:@"GET"];
+            [request setAllHTTPHeaderFields:headers];
+
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                            if (error) {
+                                                                NSLog(@"%@", error);
+                                                            } else {
+                                                                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                                NSLog(@"%@", httpResponse);
+                                                            }
+                                                        }];
+            [dataTask resume];
+        - lang: Ocaml_cohttp
+          source: |-
+            open Cohttp_lwt_unix
+            open Cohttp
+            open Lwt
+
+            let uri = Uri.of_string "https://api.directfreight.com/v1/profiles/truck_info" in
+            let headers = Header.add_list (Header.init ()) [
+              ("Accept", "application/json");
+              ("Content-Type", "application/json");
+              ("end-user-token", "NO DEFAULT");
+              ("api-token", "REPLACE_KEY_VALUE");
+            ] in
+
+            Client.call ~headers `GET uri
+            >>= fun (res, body_stream) ->
+              (* Do stuff with the result *)
+        - lang: Perl_perl5
+          source: |-
+            #!/usr/bin/perl
+            use Modern::Perl;
+            use Data::Dumper;
+            use HTTP::Request::JSON;
+            use LWP::UserAgent::JSON;
+            my $request = HTTP::Request::JSON->new("GET",
+            "https://api.directfreight.com/v1/profiles/truck_info");
+            $request->header( "Accept" => "application/json" );
+            $request->header( "Content-Type" => "application/json" );
+            $request->header( "end-user-token" => "NO DEFAULT" );
+            $request->header( "api-token" => "REPLACE_KEY_VALUE" );
+            my $browser = LWP::UserAgent::JSON->new();
+            my $response = $browser->request($request);
+            print Dumper($response->json_content);
+        - lang: Php_curl
+          source: |-
+            <?php
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => "https://api.directfreight.com/v1/profiles/truck_info",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "GET",
+              CURLOPT_HTTPHEADER => array(
+                "Accept: application/json",
+                "Content-Type: application/json",
+                "api-token: REPLACE_KEY_VALUE",
+                "end-user-token: NO DEFAULT"
+              ),
+            ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+              echo "cURL Error #:" . $err;
+            } else {
+              echo $response;
+            }
+        - lang: Php_http1
+          source: |-
+            <?php
+
+            $request = new HttpRequest();
+            $request->setUrl('https://api.directfreight.com/v1/profiles/truck_info');
+            $request->setMethod(HTTP_METH_GET);
+
+            $request->setHeaders(array(
+              'api-token' => 'REPLACE_KEY_VALUE',
+              'end-user-token' => 'NO DEFAULT',
+              'Content-Type' => 'application/json',
+              'Accept' => 'application/json'
+            ));
+
+            try {
+              $response = $request->send();
+
+              echo $response->getBody();
+            } catch (HttpException $ex) {
+              echo $ex;
+            }
+        - lang: Php_http2
+          source: |-
+            <?php
+
+            $client = new http\Client;
+            $request = new http\Client\Request;
+
+            $request->setRequestUrl('https://api.directfreight.com/v1/profiles/truck_info');
+            $request->setRequestMethod('GET');
+            $request->setHeaders(array(
+              'api-token' => 'REPLACE_KEY_VALUE',
+              'end-user-token' => 'NO DEFAULT',
+              'Content-Type' => 'application/json',
+              'Accept' => 'application/json'
+            ));
+
+            $client->enqueue($request)->send();
+            $response = $client->getResponse();
+
+            echo $response->getBody();
+        - lang: Python_python3
+          source: |-
+            import http.client
+
+            conn = http.client.HTTPSConnection("api.directfreight.com")
+
+            headers = {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'end-user-token': "NO DEFAULT",
+                'api-token': "REPLACE_KEY_VALUE"
+                }
+
+            conn.request("GET", "/v1/profiles/truck_info", headers=headers)
+
+            res = conn.getresponse()
+            data = res.read()
+
+            print(data.decode("utf-8"))
+        - lang: Python_requests
+          source: |-
+            import requests
+
+            url = "https://api.directfreight.com/v1/profiles/truck_info"
+
+            headers = {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'end-user-token': "NO DEFAULT",
+                'api-token': "REPLACE_KEY_VALUE"
+                }
+
+            response = requests.request("GET", url, headers=headers)
+
+            print(response.text)
+        - lang: Ruby_native
+          source: |-
+            require 'uri'
+            require 'net/http'
+
+            url = URI("https://api.directfreight.com/v1/profiles/truck_info")
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+            request = Net::HTTP::Get.new(url)
+            request["Accept"] = 'application/json'
+            request["Content-Type"] = 'application/json'
+            request["end-user-token"] = 'NO DEFAULT'
+            request["api-token"] = 'REPLACE_KEY_VALUE'
+
+            response = http.request(request)
+            puts response.read_body
+        - lang: Shell_curl
+          source: |-
+            curl --request GET \
+              --url https://api.directfreight.com/v1/profiles/truck_info \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header 'api-token: REPLACE_KEY_VALUE' \
+              --header 'end-user-token: NO DEFAULT'
+        - lang: Shell_httpie
+          source: |-
+            http GET https://api.directfreight.com/v1/profiles/truck_info \
+              Accept:application/json \
+              Content-Type:application/json \
+              api-token:REPLACE_KEY_VALUE \
+              end-user-token:'NO DEFAULT'
+        - lang: Shell_wget
+          source: |-
+            wget --verbose \
+              --method GET \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header 'end-user-token: NO DEFAULT' \
+              --header 'api-token: REPLACE_KEY_VALUE' \
+              --output-document \
+              - https://api.directfreight.com/v1/profiles/truck_info
+        - lang: Swift_nsurlsession
+          source: |-
+            import Foundation
+
+            let headers = [
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "end-user-token": "NO DEFAULT",
+              "api-token": "REPLACE_KEY_VALUE"
+            ]
+
+            var request = NSMutableURLRequest(URL: NSURL(string: "https://api.directfreight.com/v1/profiles/truck_info")!,
+                                                    cachePolicy: .UseProtocolCachePolicy,
+                                                timeoutInterval: 10.0)
+            request.HTTPMethod = "GET"
+            request.allHTTPHeaderFields = headers
+
+            let session = NSURLSession.sharedSession()
+            let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+              if (error != nil) {
+                println(error)
+              } else {
+                let httpResponse = response as? NSHTTPURLResponse
+                println(httpResponse)
+              }
+            })
+
+            dataTask.resume()
+    patch:
+      consumes: []
+      description: Please send in at least one field to be updated.
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/truck_info_object'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/truck_info_object'
+      summary: Update truck information.
+      tags:
+        - profiles
+      x-code-samples:
+        - lang: C_libcurl
+          source: |-
+            CURL *hnd = curl_easy_init();
+
+            curl_easy_setopt(hnd, CURLOPT_CUSTOMREQUEST, "PATCH");
+            curl_easy_setopt(hnd, CURLOPT_URL, "https://api.directfreight.com/v1/profiles/truck_info");
+
+            struct curl_slist *headers = NULL;
+            headers = curl_slist_append(headers, "api-token: REPLACE_KEY_VALUE");
+            headers = curl_slist_append(headers, "end-user-token: NO DEFAULT");
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+            headers = curl_slist_append(headers, "Accept: application/json");
+            curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
+
+            curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}");
+
+            CURLcode ret = curl_easy_perform(hnd);
+        - lang: Csharp_restsharp
+          source: |-
+            var client = new RestClient("https://api.directfreight.com/v1/profiles/truck_info");
+            var request = new RestRequest(Method.PATCH);
+            request.AddHeader("api-token", "REPLACE_KEY_VALUE");
+            request.AddHeader("end-user-token", "NO DEFAULT");
+            request.AddHeader("Content-Type", "application/json");
+            request.AddHeader("Accept", "application/json");
+            request.AddParameter("undefined", "{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+        - lang: Go_native
+          source: "package main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://api.directfreight.com/v1/profiles/truck_info\"\n\n\tpayload := strings.NewReader(\"{\\\"deadhead_per_mile\\\":0,\\\"driver_per_mile\\\":0,\\\"fuel_capacity\\\":0,\\\"ins_permits_per_mile\\\":0,\\\"maint_per_mile\\\":0,\\\"miles_per_gal\\\":0,\\\"truck_ownership_per_mile\\\":0}\")\n\n\treq, _ := http.NewRequest(\"PATCH\", url, payload)\n\n\treq.Header.Add(\"Accept\", \"application/json\")\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\treq.Header.Add(\"end-user-token\", \"NO DEFAULT\")\n\treq.Header.Add(\"api-token\", \"REPLACE_KEY_VALUE\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}"
+        - lang: Java_okhttp
+          source: |-
+            OkHttpClient client = new OkHttpClient();
+
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}");
+            Request request = new Request.Builder()
+              .url("https://api.directfreight.com/v1/profiles/truck_info")
+              .patch(body)
+              .addHeader("Accept", "application/json")
+              .addHeader("Content-Type", "application/json")
+              .addHeader("end-user-token", "NO DEFAULT")
+              .addHeader("api-token", "REPLACE_KEY_VALUE")
+              .build();
+
+            Response response = client.newCall(request).execute();
+        - lang: Java_unirest
+          source: |-
+            HttpResponse<String> response = Unirest.patch("https://api.directfreight.com/v1/profiles/truck_info")
+              .header("Accept", "application/json")
+              .header("Content-Type", "application/json")
+              .header("end-user-token", "NO DEFAULT")
+              .header("api-token", "REPLACE_KEY_VALUE")
+              .body("{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}")
+              .asString();
+        - lang: Javascript_jquery
+          source: |-
+            var settings = {
+              "async": true,
+              "crossDomain": true,
+              "url": "https://api.directfreight.com/v1/profiles/truck_info",
+              "method": "PATCH",
+              "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "end-user-token": "NO DEFAULT",
+                "api-token": "REPLACE_KEY_VALUE"
+              },
+              "processData": false,
+              "data": "{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}"
+            }
+
+            $.ajax(settings).done(function (response) {
+              console.log(response);
+            });
+        - lang: Javascript_xhr
+          source: |-
+            var data = JSON.stringify({
+              "deadhead_per_mile": 0,
+              "driver_per_mile": 0,
+              "fuel_capacity": 0,
+              "ins_permits_per_mile": 0,
+              "maint_per_mile": 0,
+              "miles_per_gal": 0,
+              "truck_ownership_per_mile": 0
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+              if (this.readyState === this.DONE) {
+                console.log(this.responseText);
+              }
+            });
+
+            xhr.open("PATCH", "https://api.directfreight.com/v1/profiles/truck_info");
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("end-user-token", "NO DEFAULT");
+            xhr.setRequestHeader("api-token", "REPLACE_KEY_VALUE");
+
+            xhr.send(data);
+        - lang: Node_native
+          source: |-
+            var http = require("https");
+
+            var options = {
+              "method": "PATCH",
+              "hostname": "api.directfreight.com",
+              "port": null,
+              "path": "/v1/profiles/truck_info",
+              "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "end-user-token": "NO DEFAULT",
+                "api-token": "REPLACE_KEY_VALUE"
+              }
+            };
+
+            var req = http.request(options, function (res) {
+              var chunks = [];
+
+              res.on("data", function (chunk) {
+                chunks.push(chunk);
+              });
+
+              res.on("end", function () {
+                var body = Buffer.concat(chunks);
+                console.log(body.toString());
+              });
+            });
+
+            req.write(JSON.stringify({ deadhead_per_mile: 0,
+              driver_per_mile: 0,
+              fuel_capacity: 0,
+              ins_permits_per_mile: 0,
+              maint_per_mile: 0,
+              miles_per_gal: 0,
+              truck_ownership_per_mile: 0 }));
+            req.end();
+        - lang: Node_request
+          source: |
+            var request = require("request");
+
+            var options = { method: 'PATCH',
+              url: 'https://api.directfreight.com/v1/profiles/truck_info',
+              headers:
+               { 'api-token': 'REPLACE_KEY_VALUE',
+                 'end-user-token': 'NO DEFAULT',
+                 'Content-Type': 'application/json',
+                 Accept: 'application/json' },
+              body:
+               { deadhead_per_mile: 0,
+                 driver_per_mile: 0,
+                 fuel_capacity: 0,
+                 ins_permits_per_mile: 0,
+                 maint_per_mile: 0,
+                 miles_per_gal: 0,
+                 truck_ownership_per_mile: 0 },
+              json: true };
+
+            request(options, function (error, response, body) {
+              if (error) throw new Error(error);
+
+              console.log(body);
+            });
+        - lang: Node_unirest
+          source: |
+            var unirest = require("unirest");
+
+            var req = unirest("PATCH", "https://api.directfreight.com/v1/profiles/truck_info");
+
+            req.headers({
+              "api-token": "REPLACE_KEY_VALUE",
+              "end-user-token": "NO DEFAULT",
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            });
+
+            req.type("json");
+            req.send({
+              "deadhead_per_mile": 0,
+              "driver_per_mile": 0,
+              "fuel_capacity": 0,
+              "ins_permits_per_mile": 0,
+              "maint_per_mile": 0,
+              "miles_per_gal": 0,
+              "truck_ownership_per_mile": 0
+            });
+
+            req.end(function (res) {
+              if (res.error) throw new Error(res.error);
+
+              console.log(res.body);
+            });
+        - lang: Objc_nsurlsession
+          source: |-
+            #import <Foundation/Foundation.h>
+
+            NSDictionary *headers = @{ @"Accept": @"application/json",
+                                       @"Content-Type": @"application/json",
+                                       @"end-user-token": @"NO DEFAULT",
+                                       @"api-token": @"REPLACE_KEY_VALUE" };
+            NSDictionary *parameters = @{ @"deadhead_per_mile": @0,
+                                          @"driver_per_mile": @0,
+                                          @"fuel_capacity": @0,
+                                          @"ins_permits_per_mile": @0,
+                                          @"maint_per_mile": @0,
+                                          @"miles_per_gal": @0,
+                                          @"truck_ownership_per_mile": @0 };
+
+            NSData *postData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:nil];
+
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://api.directfreight.com/v1/profiles/truck_info"]
+                                                                   cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                               timeoutInterval:10.0];
+            [request setHTTPMethod:@"PATCH"];
+            [request setAllHTTPHeaderFields:headers];
+            [request setHTTPBody:postData];
+
+            NSURLSession *session = [NSURLSession sharedSession];
+            NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
+                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                            if (error) {
+                                                                NSLog(@"%@", error);
+                                                            } else {
+                                                                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                                                                NSLog(@"%@", httpResponse);
+                                                            }
+                                                        }];
+            [dataTask resume];
+        - lang: Ocaml_cohttp
+          source: |-
+            open Cohttp_lwt_unix
+            open Cohttp
+            open Lwt
+
+            let uri = Uri.of_string "https://api.directfreight.com/v1/profiles/truck_info" in
+            let headers = Header.add_list (Header.init ()) [
+              ("Accept", "application/json");
+              ("Content-Type", "application/json");
+              ("end-user-token", "NO DEFAULT");
+              ("api-token", "REPLACE_KEY_VALUE");
+            ] in
+            let body = Cohttp_lwt_body.of_string "{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}" in
+
+            Client.call ~headers ~body `PATCH uri
+            >>= fun (res, body_stream) ->
+              (* Do stuff with the result *)
+        - lang: Perl_perl5
+          source: |-
+            #!/usr/bin/perl
+            use Modern::Perl;
+            use Data::Dumper;
+            use HTTP::Request::JSON;
+            use LWP::UserAgent::JSON;
+            my $request = HTTP::Request::JSON->new("PATCH",
+            "https://api.directfreight.com/v1/profiles/truck_info");
+            $request->header( "Accept" => "application/json" );
+            $request->header( "Content-Type" => "application/json" );
+            $request->header( "end-user-token" => "NO DEFAULT" );
+            $request->header( "api-token" => "REPLACE_KEY_VALUE" );
+            $request->content('{"deadhead_per_mile":0,"driver_per_mile":0,"fuel_capacity":0,"ins_permits_per_mile":0,"maint_per_mile":0,"miles_per_gal":0,"truck_ownership_per_mile":0}');
+            my $browser = LWP::UserAgent::JSON->new();
+            my $response = $browser->request($request);
+            print Dumper($response->json_content);
+        - lang: Php_curl
+          source: |-
+            <?php
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => "https://api.directfreight.com/v1/profiles/truck_info",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "PATCH",
+              CURLOPT_POSTFIELDS => "{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}",
+              CURLOPT_HTTPHEADER => array(
+                "Accept: application/json",
+                "Content-Type: application/json",
+                "api-token: REPLACE_KEY_VALUE",
+                "end-user-token: NO DEFAULT"
+              ),
+            ));
+
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+              echo "cURL Error #:" . $err;
+            } else {
+              echo $response;
+            }
+        - lang: Php_http1
+          source: |-
+            <?php
+
+            HttpRequest::methodRegister('PATCH');
+            $request = new HttpRequest();
+            $request->setUrl('https://api.directfreight.com/v1/profiles/truck_info');
+            $request->setMethod(HttpRequest::HTTP_METH_PATCH);
+
+            $request->setHeaders(array(
+              'api-token' => 'REPLACE_KEY_VALUE',
+              'end-user-token' => 'NO DEFAULT',
+              'Content-Type' => 'application/json',
+              'Accept' => 'application/json'
+            ));
+
+            $request->setBody('{"deadhead_per_mile":0,"driver_per_mile":0,"fuel_capacity":0,"ins_permits_per_mile":0,"maint_per_mile":0,"miles_per_gal":0,"truck_ownership_per_mile":0}');
+
+            try {
+              $response = $request->send();
+
+              echo $response->getBody();
+            } catch (HttpException $ex) {
+              echo $ex;
+            }
+        - lang: Php_http2
+          source: |-
+            <?php
+
+            $client = new http\Client;
+            $request = new http\Client\Request;
+
+            $body = new http\Message\Body;
+            $body->append('{"deadhead_per_mile":0,"driver_per_mile":0,"fuel_capacity":0,"ins_permits_per_mile":0,"maint_per_mile":0,"miles_per_gal":0,"truck_ownership_per_mile":0}');
+
+            $request->setRequestUrl('https://api.directfreight.com/v1/profiles/truck_info');
+            $request->setRequestMethod('PATCH');
+            $request->setBody($body);
+
+            $request->setHeaders(array(
+              'api-token' => 'REPLACE_KEY_VALUE',
+              'end-user-token' => 'NO DEFAULT',
+              'Content-Type' => 'application/json',
+              'Accept' => 'application/json'
+            ));
+
+            $client->enqueue($request)->send();
+            $response = $client->getResponse();
+
+            echo $response->getBody();
+        - lang: Python_python3
+          source: |-
+            import http.client
+
+            conn = http.client.HTTPSConnection("api.directfreight.com")
+
+            payload = "{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}"
+
+            headers = {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'end-user-token': "NO DEFAULT",
+                'api-token': "REPLACE_KEY_VALUE"
+                }
+
+            conn.request("PATCH", "/v1/profiles/truck_info", payload, headers)
+
+            res = conn.getresponse()
+            data = res.read()
+
+            print(data.decode("utf-8"))
+        - lang: Python_requests
+          source: |-
+            import requests
+
+            url = "https://api.directfreight.com/v1/profiles/truck_info"
+
+            payload = "{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}"
+            headers = {
+                'Accept': "application/json",
+                'Content-Type': "application/json",
+                'end-user-token': "NO DEFAULT",
+                'api-token': "REPLACE_KEY_VALUE"
+                }
+
+            response = requests.request("PATCH", url, data=payload, headers=headers)
+
+            print(response.text)
+        - lang: Ruby_native
+          source: |-
+            require 'uri'
+            require 'net/http'
+
+            url = URI("https://api.directfreight.com/v1/profiles/truck_info")
+
+            http = Net::HTTP.new(url.host, url.port)
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+            request = Net::HTTP::Patch.new(url)
+            request["Accept"] = 'application/json'
+            request["Content-Type"] = 'application/json'
+            request["end-user-token"] = 'NO DEFAULT'
+            request["api-token"] = 'REPLACE_KEY_VALUE'
+            request.body = "{\"deadhead_per_mile\":0,\"driver_per_mile\":0,\"fuel_capacity\":0,\"ins_permits_per_mile\":0,\"maint_per_mile\":0,\"miles_per_gal\":0,\"truck_ownership_per_mile\":0}"
+
+            response = http.request(request)
+            puts response.read_body
+        - lang: Shell_curl
+          source: |-
+            curl --request PATCH \
+              --url https://api.directfreight.com/v1/profiles/truck_info \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header 'api-token: REPLACE_KEY_VALUE' \
+              --header 'end-user-token: NO DEFAULT' \
+              --data '{"deadhead_per_mile":0,"driver_per_mile":0,"fuel_capacity":0,"ins_permits_per_mile":0,"maint_per_mile":0,"miles_per_gal":0,"truck_ownership_per_mile":0}'
+        - lang: Shell_httpie
+          source: |-
+            echo '{"deadhead_per_mile":0,"driver_per_mile":0,"fuel_capacity":0,"ins_permits_per_mile":0,"maint_per_mile":0,"miles_per_gal":0,"truck_ownership_per_mile":0}' |  \
+              http PATCH https://api.directfreight.com/v1/profiles/truck_info \
+              Accept:application/json \
+              Content-Type:application/json \
+              api-token:REPLACE_KEY_VALUE \
+              end-user-token:'NO DEFAULT'
+        - lang: Shell_wget
+          source: |-
+            wget --verbose \
+              --method PATCH \
+              --header 'Accept: application/json' \
+              --header 'Content-Type: application/json' \
+              --header 'end-user-token: NO DEFAULT' \
+              --header 'api-token: REPLACE_KEY_VALUE' \
+              --body-data '{"deadhead_per_mile":0,"driver_per_mile":0,"fuel_capacity":0,"ins_permits_per_mile":0,"maint_per_mile":0,"miles_per_gal":0,"truck_ownership_per_mile":0}' \
+              --output-document \
+              - https://api.directfreight.com/v1/profiles/truck_info
+        - lang: Swift_nsurlsession
+          source: |-
+            import Foundation
+
+            let headers = [
+              "Accept": "application/json",
+              "Content-Type": "application/json",
+              "end-user-token": "NO DEFAULT",
+              "api-token": "REPLACE_KEY_VALUE"
+            ]
+            let parameters = [
+              "deadhead_per_mile": 0,
+              "driver_per_mile": 0,
+              "fuel_capacity": 0,
+              "ins_permits_per_mile": 0,
+              "maint_per_mile": 0,
+              "miles_per_gal": 0,
+              "truck_ownership_per_mile": 0
+            ]
+
+            let postData = NSJSONSerialization.dataWithJSONObject(parameters, options: nil, error: nil)
+
+            var request = NSMutableURLRequest(URL: NSURL(string: "https://api.directfreight.com/v1/profiles/truck_info")!,
+                                                    cachePolicy: .UseProtocolCachePolicy,
+                                                timeoutInterval: 10.0)
+            request.HTTPMethod = "PATCH"
+            request.allHTTPHeaderFields = headers
+            request.HTTPBody = postData
+
+            let session = NSURLSession.sharedSession()
+            let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+              if (error != nil) {
+                println(error)
+              } else {
+                let httpResponse = response as? NSHTTPURLResponse
+                println(httpResponse)
+              }
+            })
+
+            dataTask.resume()
     x-restlet:
       section: PROFILES
       x-code-samples:
@@ -19873,7 +20286,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/profiles/truck_info',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -20249,7 +20662,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/validations/email_exists',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
@@ -20625,7 +21038,7 @@ paths:
 
             var options = { method: 'X-RESTLET',
               url: 'https://api.directfreight.com/v1/validations/trailers',
-              headers: 
+              headers:
                { 'api-token': 'REPLACE_KEY_VALUE',
                  'Content-Type': 'application/json',
                  Accept: 'application/json' } };
