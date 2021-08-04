@@ -190,45 +190,9 @@ paths:
     x-restlet:
       section: ALERTS
   '/alerts/search/{board_type}':
-    get:
-      description: Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id. Returns 50 alerts by default.
-      parameters:
-        - description: only get a subset of alerts. As this is a get request this is specified as a query string parameter.
-          in: query
-          items:
-            type: integer
-          name: alert_id
-          required: false
-          type: array
-        - description: Page number to fetch, defaults to 1
-          in: query
-          name: page_number
-          required: false
-          type: integer          
-        - in: header
-          name: end-user-token
-          required: true
-          type: string
-      responses:
-        '200':
-          description: On success will return a list of alerts.
-          schema:
-            $ref: '#/definitions/alert_list'
-      summary: STAGE=UNKNOWN Retrieve alerts.
-      tags:
-        - alerts
-    parameters:
-      - description: 'Valid types are "loads", and "trucks".'
-        enum:
-          - loads
-          - trucks
-        in: path
-        name: board_type
-        required: true
-        type: string
     post:
       consumes: []
-      description: 'This method will update or create an alert. The POST action with the same search parameters but different alert parameters will update the existing alert. The one caveaut to this is send_type. You can have 2 alerts with the same search parameters but different send_types. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
+      description: 'This method will search a users alert. It accepts the exact same structure as the POST method for /alerts/. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
       parameters:
         - in: header
           name: end-user-token
@@ -239,11 +203,17 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/alert'
+        - in: path
+          name: board_type
+          required: true
+          type: string            
       responses:
-        '201':
-          description: Object created check the headers for a reference URL
+        '200':
+          description: Alert found, returns the alert_id that corresponds to the search.
           schema:
-            $ref: '#/definitions/create_status_alert'
+            $ref: '#/definitions/alert_search_response'          
+        '404':
+          description: Alert not found using specified parameters.
       summary: STAGE=UNKNOWN Create an alert.
       tags:
         - alerts
@@ -2967,6 +2937,12 @@ definitions:
     required:
       - name
     type: object
+  alert_search_response:
+    properties:
+      alert_id:
+        description: 'Alert ID.'
+        type: integer
+    type: object    
   create_custom_field_data:
     properties:
       field_name:
@@ -3227,21 +3203,6 @@ definitions:
     type: object
     x-restlet:
       section: not categorized yet
-  mobile_carrier_response:
-    example:
-      carrier_id: 0
-      carrier_name: '{}'
-    properties:
-      carrier_id:
-        description: The carrier ID.
-        format: int32
-        type: integer
-      carrier_name:
-        description: Their mobile carrier.
-        type: object
-    type: object
-    x-restlet:
-      section: not categorized yet
   note_create_status:
     properties:
       note_id:
@@ -3363,17 +3324,6 @@ definitions:
     type: object
     x-restlet:
       section: ALERTS
-  post_optin_code_response:
-    example:
-      optin_code: optin_code
-    properties:
-      optin_code:
-        description: A text string with the code sent.
-        type: string
-    type: object
-    x-restlet:
-      section: not categorized yet
-
   post_posting_type_action_body:
     properties:
       source_id:
