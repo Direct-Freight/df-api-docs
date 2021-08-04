@@ -1,9 +1,0 @@
-example:
-  optin_code: optin_code
-properties:
-  optin_code:
-    description: A text string with the code sent.
-    type: string
-type: object
-x-restlet:
-  section: not categorized yet
