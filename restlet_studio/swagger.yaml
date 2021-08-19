@@ -765,12 +765,12 @@ paths:
       parameters:
         - description: The user e-mail to send a password to if valid.
           in: query
-          name: email
+          name: email_address
           required: true
           type: string
       responses:
         '200':
-          description: This will return a success even if the e-mail is not in our records.
+          description: This will return a success only if the e-mail is in our records.
         '422':
           $ref: '#/responses/error_422'
       summary: STAGE=UNK Retrieve password
