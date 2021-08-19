@@ -776,6 +776,29 @@ paths:
       summary: STAGE=UNK Retrieve password
       tags:
         - end_user_authentications
+    post:
+      consumes: []
+      description: 'Creates a new password for a user with a recovery key'
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            recovery_key: 
+              description: The key we e-mailed to a user when they forgot their password. See the GET section.
+              type: string
+            new_password:
+              description: The new password they want it updated to.
+              type: string
+      responses:
+        '201':
+          description: Their password was successfuly updated.
+        '422':
+          $ref: '#/responses/error_422'
+      summary: STAGE=UNK Restore password.
+      tags:
+        - end_user_authentications
     patch:
       consumes: []
       description: Update a users password.
