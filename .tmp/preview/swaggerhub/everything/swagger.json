@@ -1176,14 +1176,14 @@
           {
             "description": "The user e-mail to send a password to if valid.",
             "in": "query",
-            "name": "email",
+            "name": "email_address",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "This will return a success even if the e-mail is not in our records."
+            "description": "This will return a success only if the e-mail is in our records."
           },
           "422": {
             "$ref": "#/responses/error_422"
@@ -1236,6 +1236,41 @@
           }
         },
         "summary": "STAGE=UNK Update password.",
+        "tags": [
+          "end_user_authentications"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "description": "Creates a new password for a user with a recovery key",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "new_password": {
+                  "description": "The new password they want it updated to.",
+                  "type": "string"
+                },
+                "recovery_key": {
+                  "description": "The key we e-mailed to a user when they forgot their password. See the GET section.",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Their password was successfuly updated."
+          },
+          "422": {
+            "$ref": "#/responses/error_422"
+          }
+        },
+        "summary": "STAGE=UNK Restore password.",
         "tags": [
           "end_user_authentications"
         ]
