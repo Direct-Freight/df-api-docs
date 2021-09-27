@@ -2,6 +2,9 @@ properties:
   email:
     description: 'This must be a valid e-mail. '
     type: string
+  partner:
+    description: Optional partner string to be associated with the new account.
+    type: string
   password:
     description: 'Currently this is a 6-10 digit alphanumeric password. '
     type: string
