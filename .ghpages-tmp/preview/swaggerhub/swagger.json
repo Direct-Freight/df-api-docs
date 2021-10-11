@@ -120,11 +120,6 @@
         "section": "ALERTS"
       }
     },
-    "/alerts/search/{board_type}": {
-      "x-restlet": {
-        "section": "ALERTS"
-      }
-    },
     "/boards/{board_type}": {
       "parameters": [
         {
@@ -1113,15 +1108,6 @@
       "x-restlet": {
         "section": "ALERTS"
       }
-    },
-    "alert_search_response": {
-      "properties": {
-        "alert_id": {
-          "description": "Alert ID.",
-          "type": "integer"
-        }
-      },
-      "type": "object"
     },
     "alert": {
       "properties": {
@@ -2320,6 +2306,27 @@
         "section": "not categorized yet"
       }
     },
+    "mobile_carrier_response": {
+      "example": {
+        "carrier_id": 0,
+        "carrier_name": "{}"
+      },
+      "properties": {
+        "carrier_id": {
+          "description": "The carrier ID.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "carrier_name": {
+          "description": "Their mobile carrier.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-restlet": {
+        "section": "not categorized yet"
+      }
+    },
     "note_create_status": {
       "properties": {
         "note_id": {
@@ -2474,6 +2481,21 @@
       "type": "object",
       "x-restlet": {
         "section": "ALERTS"
+      }
+    },
+    "post_optin_code_response": {
+      "example": {
+        "optin_code": "optin_code"
+      },
+      "properties": {
+        "optin_code": {
+          "description": "A text string with the code sent.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "x-restlet": {
+        "section": "not categorized yet"
       }
     },
     "post_posting_type_action_body": {
