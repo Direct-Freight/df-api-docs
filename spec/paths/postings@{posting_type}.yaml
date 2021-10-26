@@ -96,7 +96,7 @@ get:
   tags:
     - postings
 parameters:
-  - description: Database you are posting to
+  - description: board you are posting to
     enum:
       - test_loads
       - test_trucks
