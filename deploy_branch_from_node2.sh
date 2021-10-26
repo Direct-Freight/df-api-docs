@@ -21,3 +21,5 @@ if test "$1" = "master"; then
 else
     npm run deploy-branch
 fi
+
+./scripts/build.js

@@ -10,7 +10,7 @@ parameters:
       - live_loads_temp
       - test_loads_temp
       - live_trucks_temp
-      - test_loads_temp
+      - test_trucks_temp
     in: path
     name: posting_type
     required: true
@@ -40,7 +40,7 @@ post:
       description: Success
       schema:
         $ref: '#/definitions/postings-copy_or_move_response'
-  summary: STAGE=UNK Copy or Move a posting.
+  summary: STAGE=PRIVATE Copy or Move a posting.
   tags:
     - postings
 x-restlet:

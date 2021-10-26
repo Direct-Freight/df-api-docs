@@ -1243,7 +1243,7 @@ definitions:
         description: The posting id of the posting you are moving or copying. Optional for create.
         type: object
       source_posting:
-        description: The posting_type where you are moving or copying the posting from. Items can only be moved to like types. loads -> private_loads.
+        description: Where the items are coming from. Items can only be moved to like types. loads -> private_loads.
         type: string
     required:
       - source_posting
@@ -2591,7 +2591,7 @@ paths:
       section: POSTINGS
   '/postings/{posting_type}/{action}':
     parameters:
-      - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+      - description: Where the items are being posted to
         enum:
           - loads
           - trucks
@@ -2599,6 +2599,10 @@ paths:
           - private_trucks
           - test_loads
           - test_trucks
+          - live_loads_temp
+          - test_loads_temp
+          - live_trucks_temp
+          - test_loads_temp
         in: path
         name: posting_type
         required: true
