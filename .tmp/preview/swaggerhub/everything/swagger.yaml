@@ -1464,6 +1464,7 @@ paths:
         enum:
           - copy
           - move
+          - delete_all_after_move_all STAGE=PRIVATE
         in: path
         name: action
         required: true

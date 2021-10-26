@@ -2128,7 +2128,8 @@
           "description": "Specified in the url. Valid types are \"copy\", and \"move\"",
           "enum": [
             "copy",
-            "move"
+            "move",
+            "delete_all_after_move_all STAGE=PRIVATE"
           ],
           "in": "path",
           "name": "action",
