@@ -1244,6 +1244,17 @@ definitions:
         type: object
       source_posting:
         description: Where the items are coming from. Items can only be moved to like types. loads -> private_loads.
+        enum:
+          - loads
+          - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
+          - live_loads_temp
+          - test_loads_temp
+          - live_trucks_temp
+          - test_trucks_temp
         type: string
     required:
       - source_posting
@@ -2602,7 +2613,7 @@ paths:
           - live_loads_temp
           - test_loads_temp
           - live_trucks_temp
-          - test_loads_temp
+          - test_trucks_temp
         in: path
         name: posting_type
         required: true
