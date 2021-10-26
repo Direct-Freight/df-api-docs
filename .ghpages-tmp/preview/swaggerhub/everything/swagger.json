@@ -250,52 +250,6 @@
         "section": "ALERTS"
       }
     },
-    "/alerts/search/{board_type}": {
-      "post": {
-        "consumes": [],
-        "description": "This method will search a users alert. It accepts the exact same structure as the POST method for /alerts/. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "end-user-token",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/alert"
-            }
-          },
-          {
-            "in": "path",
-            "name": "board_type",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Alert found, returns the alert_id that corresponds to the search.",
-            "schema": {
-              "$ref": "#/definitions/alert_search_response"
-            }
-          },
-          "404": {
-            "description": "Alert not found using specified parameters."
-          }
-        },
-        "summary": "STAGE=UNKNOWN Create an alert.",
-        "tags": [
-          "alerts"
-        ]
-      },
-      "x-restlet": {
-        "section": "ALERTS"
-      }
-    },
     "/boards/{board_type}": {
       "parameters": [
         {
@@ -473,7 +427,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Details about average rates for this trip. Returns an object where each key is a trailer type with an array of the freight rate for each day that was found for that type.",
+            "description": "Details about average rates for this trip.",
             "schema": {
               "$ref": "#/definitions/boards_freight_rate_response"
             }
@@ -1176,14 +1130,14 @@
           {
             "description": "The user e-mail to send a password to if valid.",
             "in": "query",
-            "name": "email_address",
+            "name": "email",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "This will return a success only if the e-mail is in our records."
+            "description": "This will return a success even if the e-mail is not in our records."
           },
           "422": {
             "$ref": "#/responses/error_422"
@@ -1236,41 +1190,6 @@
           }
         },
         "summary": "STAGE=UNK Update password.",
-        "tags": [
-          "end_user_authentications"
-        ]
-      },
-      "post": {
-        "consumes": [],
-        "description": "Creates a new password for a user with a recovery key",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "properties": {
-                "new_password": {
-                  "description": "The new password they want it updated to.",
-                  "type": "string"
-                },
-                "recovery_key": {
-                  "description": "The key we e-mailed to a user when they forgot their password. See the GET section.",
-                  "type": "string"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Their password was successfuly updated."
-          },
-          "422": {
-            "$ref": "#/responses/error_422"
-          }
-        },
-        "summary": "STAGE=UNK Restore password.",
         "tags": [
           "end_user_authentications"
         ]
@@ -2106,18 +2025,14 @@
     "/postings/{posting_type}/{action}": {
       "parameters": [
         {
-          "description": "Where the items are being posted to",
+          "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
           "enum": [
             "loads",
             "trucks",
             "private_loads",
             "private_trucks",
             "test_loads",
-            "test_trucks",
-            "live_loads_temp",
-            "test_loads_temp",
-            "live_trucks_temp",
-            "test_trucks_temp"
+            "test_trucks"
           ],
           "in": "path",
           "name": "posting_type",
@@ -2128,8 +2043,7 @@
           "description": "Specified in the url. Valid types are \"copy\", and \"move\"",
           "enum": [
             "copy",
-            "move",
-            "delete_all_after_move_all STAGE=PRIVATE"
+            "move"
           ],
           "in": "path",
           "name": "action",
@@ -2163,7 +2077,7 @@
             }
           }
         },
-        "summary": "STAGE=PRIVATE Copy or Move a posting.",
+        "summary": "STAGE=UNK Copy or Move a posting.",
         "tags": [
           "postings"
         ]
@@ -3126,15 +3040,6 @@
         "section": "ALERTS"
       }
     },
-    "alert_search_response": {
-      "properties": {
-        "alert_id": {
-          "description": "Alert ID.",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
     "alert": {
       "properties": {
         "alert_id": {
@@ -3821,28 +3726,11 @@
     },
     "boards_freight_rate_response": {
       "properties": {
-        "TRAILER_TYPE": {
-          "properties": {
-            "dates": {
-              "items": {
-                "properties": {
-                  "date": {
-                    "format": "date",
-                    "type": "string"
-                  },
-                  "loads": {
-                    "type": "integer"
-                  },
-                  "rate": {
-                    "type": "number"
-                  }
-                },
-                "type": "object"
-              },
-              "type": "array"
-            }
-          },
-          "type": "object"
+        "average_pay_rate": {
+          "type": "number"
+        },
+        "loads": {
+          "type": "integer"
         }
       },
       "type": "object",
@@ -4384,6 +4272,27 @@
         "section": "not categorized yet"
       }
     },
+    "mobile_carrier_response": {
+      "example": {
+        "carrier_id": 0,
+        "carrier_name": "{}"
+      },
+      "properties": {
+        "carrier_id": {
+          "description": "The carrier ID.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "carrier_name": {
+          "description": "Their mobile carrier.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-restlet": {
+        "section": "not categorized yet"
+      }
+    },
     "note_create_status": {
       "properties": {
         "note_id": {
@@ -4540,6 +4449,21 @@
         "section": "ALERTS"
       }
     },
+    "post_optin_code_response": {
+      "example": {
+        "optin_code": "optin_code"
+      },
+      "properties": {
+        "optin_code": {
+          "description": "A text string with the code sent.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "x-restlet": {
+        "section": "not categorized yet"
+      }
+    },
     "post_posting_type_action_body": {
       "properties": {
         "new_load_custom_id": {
@@ -4551,24 +4475,14 @@
           "type": "object"
         },
         "source_posting": {
-          "description": "Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.",
-          "enum": [
-            "loads",
-            "trucks",
-            "private_loads",
-            "private_trucks",
-            "test_loads",
-            "test_trucks",
-            "live_loads_temp",
-            "test_loads_temp",
-            "live_trucks_temp",
-            "test_trucks_temp"
-          ],
+          "description": "The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads.",
           "type": "string"
         }
       },
       "required": [
-        "source_posting"
+        "source_id",
+        "source_posting",
+        "new_load_custom_id"
       ],
       "type": "object",
       "x-restlet": {
@@ -5625,10 +5539,6 @@
       "properties": {
         "email": {
           "description": "This must be a valid e-mail. ",
-          "type": "string"
-        },
-        "partner": {
-          "description": "Optional partner string to be associated with the new account.",
           "type": "string"
         },
         "password": {

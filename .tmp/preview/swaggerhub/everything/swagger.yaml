@@ -1361,7 +1361,7 @@ paths:
       tags:
         - postings
     parameters:
-      - description: Database you are posting to
+      - description: board you are posting to
         enum:
           - test_loads
           - test_trucks
@@ -1468,7 +1468,7 @@ paths:
         enum:
           - copy
           - move
-          - delete_all_after_move_all STAGE=PRIVATE
+          - replace_all STAGE=PRIVATE
         in: path
         name: action
         required: true
