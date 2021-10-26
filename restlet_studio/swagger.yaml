@@ -3364,15 +3364,13 @@ definitions:
         description: The posting id of the posting you are moving or copying. Optional for create.
         type: object
       source_posting:
-        description: The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads.
+        description: The posting_type where you are moving or copying the posting from. Items can only be moved to like types. loads -> private_loads.
         type: string
       new_load_custom_id:
         description: Optionally specify the custom_id that should be assigned to the new load. This is required for the copy command, for the move command it will be auto-generated if one is not specified.
         type: string        
     required:
-      - source_id
       - source_posting
-      - new_load_custom_id
     type: object
     x-restlet:
       section: not categorized yet
