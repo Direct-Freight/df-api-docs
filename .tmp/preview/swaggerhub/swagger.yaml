@@ -1243,7 +1243,7 @@ definitions:
         description: The posting id of the posting you are moving or copying. Optional for create.
         type: object
       source_posting:
-        description: Where the items are coming from. Items can only be moved to like types. loads -> private_loads.
+        description: Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.
         enum:
           - loads
           - trucks
