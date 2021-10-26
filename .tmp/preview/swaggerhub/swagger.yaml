@@ -692,10 +692,21 @@ definitions:
       section: BOARDS
   boards_freight_rate_response:
     properties:
-      average_pay_rate:
-        type: number
-      loads:
-        type: integer
+      TRAILER_TYPE:
+        properties:
+          dates:
+            items:
+              properties:
+                date:
+                  format: date
+                  type: string
+                loads:
+                  type: integer
+                rate:
+                  type: number
+              type: object
+            type: array
+        type: object
     type: object
     x-restlet:
       section: BOARDS
