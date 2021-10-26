@@ -120,6 +120,11 @@
         "section": "ALERTS"
       }
     },
+    "/alerts/search/{board_type}": {
+      "x-restlet": {
+        "section": "ALERTS"
+      }
+    },
     "/boards/{board_type}": {
       "parameters": [
         {
@@ -1109,6 +1114,15 @@
         "section": "ALERTS"
       }
     },
+    "alert_search_response": {
+      "properties": {
+        "alert_id": {
+          "description": "Alert ID.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "alert": {
       "properties": {
         "alert_id": {
@@ -1760,11 +1774,28 @@
     },
     "boards_freight_rate_response": {
       "properties": {
-        "average_pay_rate": {
-          "type": "number"
-        },
-        "loads": {
-          "type": "integer"
+        "TRAILER_TYPE": {
+          "properties": {
+            "dates": {
+              "items": {
+                "properties": {
+                  "date": {
+                    "format": "date",
+                    "type": "string"
+                  },
+                  "loads": {
+                    "type": "integer"
+                  },
+                  "rate": {
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
         }
       },
       "type": "object",
@@ -2306,27 +2337,6 @@
         "section": "not categorized yet"
       }
     },
-    "mobile_carrier_response": {
-      "example": {
-        "carrier_id": 0,
-        "carrier_name": "{}"
-      },
-      "properties": {
-        "carrier_id": {
-          "description": "The carrier ID.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "carrier_name": {
-          "description": "Their mobile carrier.",
-          "type": "object"
-        }
-      },
-      "type": "object",
-      "x-restlet": {
-        "section": "not categorized yet"
-      }
-    },
     "note_create_status": {
       "properties": {
         "note_id": {
@@ -2481,21 +2491,6 @@
       "type": "object",
       "x-restlet": {
         "section": "ALERTS"
-      }
-    },
-    "post_optin_code_response": {
-      "example": {
-        "optin_code": "optin_code"
-      },
-      "properties": {
-        "optin_code": {
-          "description": "A text string with the code sent.",
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-restlet": {
-        "section": "not categorized yet"
       }
     },
     "post_posting_type_action_body": {
@@ -3549,6 +3544,10 @@
       "properties": {
         "email": {
           "description": "This must be a valid e-mail. ",
+          "type": "string"
+        },
+        "partner": {
+          "description": "Optional partner string to be associated with the new account.",
           "type": "string"
         },
         "password": {

@@ -1243,12 +1243,10 @@ definitions:
         description: The posting id of the posting you are moving or copying. Optional for create.
         type: object
       source_posting:
-        description: The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads.
+        description: The posting_type where you are moving or copying the posting from. Items can only be moved to like types. loads -> private_loads.
         type: string
     required:
-      - source_id
       - source_posting
-      - new_load_custom_id
     type: object
     x-restlet:
       section: not categorized yet
