@@ -2129,7 +2129,7 @@
           "type": "string"
         },
         {
-          "description": "Specified in the url. Valid types are \"copy\", and \"move\"",
+          "description": "Specified in the url. replace_all will delete all original items in the destination after moving all loads in the source to the destination",
           "enum": [
             "copy",
             "move",
