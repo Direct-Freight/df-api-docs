@@ -1370,8 +1370,8 @@ paths:
           - private_trucks
           - loads
           - trucks
-          - live_loads_temp
-          - live_trucks_temp
+          - temp_loads
+          - temp_trucks
           - test_loads_temp
           - test_trucks_temp
         in: path
