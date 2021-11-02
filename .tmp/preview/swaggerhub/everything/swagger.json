@@ -1995,8 +1995,8 @@
             "private_trucks",
             "loads",
             "trucks",
-            "live_loads_temp",
-            "live_trucks_temp",
+            "temp_loads",
+            "temp_trucks",
             "test_loads_temp",
             "test_trucks_temp"
           ],
@@ -2061,7 +2061,7 @@
       },
       "post": {
         "consumes": [],
-        "description": "This endpoint method will post one or more entries. Valid posting_type are: loads, trucks, test_loads, test_trucks, private_loads, and private_trucks.\n\nOnly 100 entries can be created per request.",
+        "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", \"test_trucks\",\n  \"temp_loads\", \"temp_trucks\", \"test_loads_temp\", \"test_trucks_temp\"\nOnly 100 entries can be created per request.",
         "parameters": [
           {
             "in": "header",
