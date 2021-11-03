@@ -70,7 +70,7 @@ parameters:
     type: string
   posting_type:
     description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", "test_trucks",
-    "temp_loads", "temp_trucks", "test_loads_temp", "test_trucks_temp"'
+    "live_loads_temp", "live_trucks_temp", "test_loads_temp", "test_trucks_temp"'
     enum:
       - loads
       - trucks
