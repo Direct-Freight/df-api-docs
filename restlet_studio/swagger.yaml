@@ -1465,7 +1465,7 @@ paths:
         name: posting_type
         required: true
         type: string
-      - description: 'Specified in the url. replace_all will delete all original items in the destination after moving all loads in the source to the destination'
+      - description: 'Specified in the url.'
         enum:
           - copy
           - move
@@ -1496,6 +1496,46 @@ paths:
         - postings
     x-restlet:
       section: POSTINGS
+  '/postings/{posting_type}/replace_all':
+    parameters:
+      - description: 'Destination where items will be moved.'
+        enum:
+          - loads
+          - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
+          - live_loads_temp
+          - test_loads_temp
+          - live_trucks_temp
+          - test_trucks_temp
+        in: path
+        name: posting_type
+        required: true
+        type: string
+    post:
+      consumes: []
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/post_posting_replace_all_body'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/postings-replace_all_response'
+      summary: Will delete all original items in the destination after moving all loads in the source to the destination
+      tags:
+        - postings
+    x-restlet:
+      section: POSTINGS      
   '/postings/custom_fields/names/':
     delete:
       parameters:
@@ -3411,6 +3451,27 @@ definitions:
     type: object
     x-restlet:
       section: POSTINGS
+  post_posting_replace_all_body:
+    properties:
+      source_posting:
+        description: Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.
+        type: string
+        enum:
+          - loads
+          - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
+          - live_loads_temp
+          - test_loads_temp
+          - live_trucks_temp
+          - test_trucks_temp
+    required:
+      - source_posting
+    type: object
+    x-restlet:
+      section: not categorized yet
   postings_entry_object:
     example: {
       "comment": "hello world",
@@ -3829,6 +3890,16 @@ definitions:
     type: object
     x-restlet:
       section: POSTINGS
+  postings-replace_all_response:
+    properties:
+      message:
+        description: Operation Successful.
+        type: string
+        required:
+          - message
+    type: object
+    x-restlet:
+      section: POSTINGS      
   profile_object:
     example: {
       "address": "11 Wall Street",
