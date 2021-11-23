@@ -1234,6 +1234,27 @@ definitions:
     type: object
     x-restlet:
       section: ALERTS
+  post_posting_replace_all_body:
+    properties:
+      source_posting:
+        description: Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.
+        enum:
+          - loads
+          - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
+          - live_loads_temp
+          - test_loads_temp
+          - live_trucks_temp
+          - test_trucks_temp
+        type: string
+    required:
+      - source_posting
+    type: object
+    x-restlet:
+      section: not categorized yet
   post_posting_type_action_body:
     properties:
       new_load_custom_id:
@@ -1318,6 +1339,16 @@ definitions:
         type: array
     required:
       - list
+    type: object
+    x-restlet:
+      section: POSTINGS
+  postings-replace_all_response:
+    properties:
+      message:
+        description: Operation Successful.
+        required:
+          - message
+        type: string
     type: object
     x-restlet:
       section: POSTINGS
@@ -2604,6 +2635,46 @@ paths:
         - postings
     x-restlet:
       section: POSTINGS
+  '/postings/{posting_type}/replace_all':
+    parameters:
+      - description: Destination where items will be moved.
+        enum:
+          - loads
+          - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
+          - live_loads_temp
+          - test_loads_temp
+          - live_trucks_temp
+          - test_trucks_temp
+        in: path
+        name: posting_type
+        required: true
+        type: string
+    post:
+      consumes: []
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/post_posting_replace_all_body'
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/postings-replace_all_response'
+      summary: Will delete all original items in the destination after moving all loads in the source to the destination
+      tags:
+        - postings
+    x-restlet:
+      section: POSTINGS
   '/postings/{posting_type}/{action}':
     parameters:
       - description: Where the items are being posted to
@@ -2622,7 +2693,7 @@ paths:
         name: posting_type
         required: true
         type: string
-      - description: Specified in the url. replace_all will delete all original items in the destination after moving all loads in the source to the destination
+      - description: Specified in the url.
         in: path
         name: action
         required: true
