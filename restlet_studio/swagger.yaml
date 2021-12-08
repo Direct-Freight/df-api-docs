@@ -1468,7 +1468,6 @@ paths:
         enum:
           - copy
           - move
-          - replace_all STAGE=PRIVATE
         in: path
         name: action
         required: true
@@ -1530,7 +1529,7 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/postings-replace_all_response'
-      summary: Will delete all original items in the destination after moving all loads in the source to the destination
+      summary: STAGE=PRIVATE Delete all/Replace
       tags:
         - postings
     x-restlet:
