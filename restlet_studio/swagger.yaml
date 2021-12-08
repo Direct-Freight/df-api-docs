@@ -1362,7 +1362,7 @@ paths:
       tags:
         - postings
     parameters:
-      - description: board you are posting to
+      - description: Specifies board you are posting to.
         enum:
           - loads
           - trucks
@@ -1416,7 +1416,7 @@ paths:
     post:
       consumes: []
       description: |-
-        Only 100 entries can be created per request. TEST
+        Only 100 entries can be created per request.
         
       parameters:
         - in: header
@@ -1448,7 +1448,7 @@ paths:
       section: POSTINGS
   '/postings/{posting_type}/{action}':
     parameters:
-      - description: 'Where the items are being posted to'
+      - description: 'Where items are being moved or copied to.'
         enum:
           - loads
           - trucks
@@ -1497,7 +1497,7 @@ paths:
       section: POSTINGS
   '/postings/{posting_type}/replace_all':
     parameters:
-      - description: 'Destination where items will be moved.'
+      - description: 'Destination where items will be replaced.'
         enum:
           - loads
           - trucks
