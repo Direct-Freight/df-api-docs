@@ -19,7 +19,6 @@ parameters:
     enum:
       - copy
       - move
-      - replace_all STAGE=PRIVATE
     in: path
     name: action
     required: true
