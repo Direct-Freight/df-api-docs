@@ -1989,15 +1989,15 @@
         {
           "description": "board you are posting to",
           "enum": [
-            "test_loads",
-            "test_trucks",
-            "private_loads",
-            "private_trucks",
             "loads",
             "trucks",
-            "temp_loads",
-            "temp_trucks",
+            "private_loads",
+            "private_trucks",
+            "test_loads",
+            "test_trucks",
+            "live_loads_temp",
             "test_loads_temp",
+            "live_trucks_temp",
             "test_trucks_temp"
           ],
           "in": "path",
@@ -2061,7 +2061,7 @@
       },
       "post": {
         "consumes": [],
-        "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", \"test_trucks\",\n  \"temp_loads\", \"temp_trucks\", \"test_loads_temp\", \"test_trucks_temp\"\nOnly 100 entries can be created per request.",
+        "description": "Only 100 entries can be created per request. TEST",
         "parameters": [
           {
             "in": "header",

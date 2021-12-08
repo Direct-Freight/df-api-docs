@@ -120,11 +120,6 @@
         "section": "ALERTS"
       }
     },
-    "/alerts/search/{board_type}": {
-      "x-restlet": {
-        "section": "ALERTS"
-      }
-    },
     "/boards/{board_type}": {
       "parameters": [
         {
@@ -649,18 +644,14 @@
       },
       "parameters": [
         {
-          "description": "board you are posting to",
+          "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
           "enum": [
             "test_loads",
             "test_trucks",
             "private_loads",
             "private_trucks",
             "loads",
-            "trucks",
-            "temp_loads",
-            "temp_trucks",
-            "test_loads_temp",
-            "test_trucks_temp"
+            "trucks"
           ],
           "in": "path",
           "name": "posting_type",
@@ -723,7 +714,7 @@
       },
       "post": {
         "consumes": [],
-        "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", \"test_trucks\",\n  \"temp_loads\", \"temp_trucks\", \"test_loads_temp\", \"test_trucks_temp\"\nOnly 100 entries can be created per request.",
+        "description": "This endpoint method will post one or more entries. Valid posting_type are: loads, trucks, test_loads, test_trucks, private_loads, and private_trucks.\n\nOnly 100 entries can be created per request.",
         "parameters": [
           {
             "in": "header",
@@ -772,18 +763,14 @@
     "/postings/{posting_type}/{action}": {
       "parameters": [
         {
-          "description": "Where the items are being posted to",
+          "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
           "enum": [
             "loads",
             "trucks",
             "private_loads",
             "private_trucks",
             "test_loads",
-            "test_trucks",
-            "live_loads_temp",
-            "test_loads_temp",
-            "live_trucks_temp",
-            "test_trucks_temp"
+            "test_trucks"
           ],
           "in": "path",
           "name": "posting_type",
@@ -791,70 +778,17 @@
           "type": "string"
         },
         {
-          "description": "Specified in the url.",
+          "description": "Specified in the url. Valid types are \"copy\", and \"move\"",
+          "enum": [
+            "copy",
+            "move"
+          ],
           "in": "path",
           "name": "action",
           "required": true,
           "type": "string"
         }
       ],
-      "x-restlet": {
-        "section": "POSTINGS"
-      }
-    },
-    "/postings/{posting_type}/replace_all": {
-      "parameters": [
-        {
-          "description": "Destination where items will be moved.",
-          "enum": [
-            "loads",
-            "trucks",
-            "private_loads",
-            "private_trucks",
-            "test_loads",
-            "test_trucks",
-            "live_loads_temp",
-            "test_loads_temp",
-            "live_trucks_temp",
-            "test_trucks_temp"
-          ],
-          "in": "path",
-          "name": "posting_type",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "consumes": [],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "end-user-token",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/post_posting_replace_all_body"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/postings-replace_all_response"
-            }
-          }
-        },
-        "summary": "Will delete all original items in the destination after moving all loads in the source to the destination",
-        "tags": [
-          "postings"
-        ]
-      },
       "x-restlet": {
         "section": "POSTINGS"
       }
@@ -1174,15 +1108,6 @@
       "x-restlet": {
         "section": "ALERTS"
       }
-    },
-    "alert_search_response": {
-      "properties": {
-        "alert_id": {
-          "description": "Alert ID.",
-          "type": "integer"
-        }
-      },
-      "type": "object"
     },
     "alert": {
       "properties": {
@@ -1835,28 +1760,11 @@
     },
     "boards_freight_rate_response": {
       "properties": {
-        "TRAILER_TYPE": {
-          "properties": {
-            "dates": {
-              "items": {
-                "properties": {
-                  "date": {
-                    "format": "date",
-                    "type": "string"
-                  },
-                  "loads": {
-                    "type": "integer"
-                  },
-                  "rate": {
-                    "type": "number"
-                  }
-                },
-                "type": "object"
-              },
-              "type": "array"
-            }
-          },
-          "type": "object"
+        "average_pay_rate": {
+          "type": "number"
+        },
+        "loads": {
+          "type": "integer"
         }
       },
       "type": "object",
@@ -2398,6 +2306,27 @@
         "section": "not categorized yet"
       }
     },
+    "mobile_carrier_response": {
+      "example": {
+        "carrier_id": 0,
+        "carrier_name": "{}"
+      },
+      "properties": {
+        "carrier_id": {
+          "description": "The carrier ID.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "carrier_name": {
+          "description": "Their mobile carrier.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "x-restlet": {
+        "section": "not categorized yet"
+      }
+    },
     "note_create_status": {
       "properties": {
         "note_id": {
@@ -2554,28 +2483,16 @@
         "section": "ALERTS"
       }
     },
-    "post_posting_replace_all_body": {
+    "post_optin_code_response": {
+      "example": {
+        "optin_code": "optin_code"
+      },
       "properties": {
-        "source_posting": {
-          "description": "Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.",
-          "enum": [
-            "loads",
-            "trucks",
-            "private_loads",
-            "private_trucks",
-            "test_loads",
-            "test_trucks",
-            "live_loads_temp",
-            "test_loads_temp",
-            "live_trucks_temp",
-            "test_trucks_temp"
-          ],
+        "optin_code": {
+          "description": "A text string with the code sent.",
           "type": "string"
         }
       },
-      "required": [
-        "source_posting"
-      ],
       "type": "object",
       "x-restlet": {
         "section": "not categorized yet"
@@ -2592,24 +2509,14 @@
           "type": "object"
         },
         "source_posting": {
-          "description": "Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.",
-          "enum": [
-            "loads",
-            "trucks",
-            "private_loads",
-            "private_trucks",
-            "test_loads",
-            "test_trucks",
-            "live_loads_temp",
-            "test_loads_temp",
-            "live_trucks_temp",
-            "test_trucks_temp"
-          ],
+          "description": "The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads.",
           "type": "string"
         }
       },
       "required": [
-        "source_posting"
+        "source_id",
+        "source_posting",
+        "new_load_custom_id"
       ],
       "type": "object",
       "x-restlet": {
@@ -3152,21 +3059,6 @@
         "section": "POSTINGS"
       }
     },
-    "postings-replace_all_response": {
-      "properties": {
-        "message": {
-          "description": "Operation Successful.",
-          "required": [
-            "message"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-restlet": {
-        "section": "POSTINGS"
-      }
-    },
     "profile_object_patch": {
       "example": {
         "address": "11 Wall Street",
@@ -3657,10 +3549,6 @@
       "properties": {
         "email": {
           "description": "This must be a valid e-mail. ",
-          "type": "string"
-        },
-        "partner": {
-          "description": "Optional partner string to be associated with the new account.",
           "type": "string"
         },
         "password": {
