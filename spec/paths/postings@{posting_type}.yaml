@@ -96,7 +96,7 @@ get:
   tags:
     - postings
 parameters:
-  - description: board you are posting to
+  - description: Specifies board you are posting to.
     enum:
       - loads
       - trucks
@@ -149,7 +149,7 @@ patch:
     - postings
 post:
   consumes: []
-  description: Only 100 entries can be created per request. TEST
+  description: Only 100 entries can be created per request.
   parameters:
     - in: header
       name: end-user-token

@@ -1,5 +1,5 @@
 parameters:
-  - description: Where the items are being posted to
+  - description: Where items are being moved or copied to.
     enum:
       - loads
       - trucks

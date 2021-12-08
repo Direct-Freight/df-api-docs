@@ -1,5 +1,5 @@
 parameters:
-  - description: Destination where items will be moved.
+  - description: Destination where items will be replaced.
     enum:
       - loads
       - trucks
