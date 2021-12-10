@@ -792,6 +792,10 @@
         },
         {
           "description": "Specified in the url.",
+          "enum": [
+            "copy",
+            "move"
+          ],
           "in": "path",
           "name": "action",
           "required": true,
@@ -824,37 +828,6 @@
           "type": "string"
         }
       ],
-      "post": {
-        "consumes": [],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "end-user-token",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/post_posting_replace_all_body"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/postings-replace_all_response"
-            }
-          }
-        },
-        "summary": "Will delete all original items in the destination after moving all loads in the source to the destination",
-        "tags": [
-          "postings"
-        ]
-      },
       "x-restlet": {
         "section": "POSTINGS"
       }

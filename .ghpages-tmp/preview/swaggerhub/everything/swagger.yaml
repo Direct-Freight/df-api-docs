@@ -189,36 +189,6 @@ paths:
         - alerts
     x-restlet:
       section: ALERTS
-  '/alerts/search/{board_type}':
-    post:
-      consumes: []
-      description: 'This method will search a users alert. It accepts the exact same structure as the POST method for /alerts/. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
-      parameters:
-        - in: header
-          name: end-user-token
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/alert'
-        - in: path
-          name: board_type
-          required: true
-          type: string
-      responses:
-        '200':
-          description: 'Alert found, returns the alert_id that corresponds to the search.'
-          schema:
-            $ref: '#/definitions/alert_search_response'
-        '404':
-          description: Alert not found using specified parameters.
-      summary: STAGE=UNKNOWN Create an alert.
-      tags:
-        - alerts
-    x-restlet:
-      section: ALERTS
   '/boards/{board_type}':
     parameters:
       - description: Defines the type of board requested.
@@ -345,7 +315,7 @@ paths:
           type: string
       responses:
         '201':
-          description: Details about average rates for this trip. Returns an object where each key is a trailer type with an array of the freight rate for each day that was found for that type.
+          description: Details about average rates for this trip.
           schema:
             $ref: '#/definitions/boards_freight_rate_response'
       summary: STAGE=Private Get Freight Rates.
@@ -811,12 +781,12 @@ paths:
       parameters:
         - description: The user e-mail to send a password to if valid.
           in: query
-          name: email_address
+          name: email
           required: true
           type: string
       responses:
         '200':
-          description: This will return a success only if the e-mail is in our records.
+          description: This will return a success even if the e-mail is not in our records.
         '422':
           $ref: '#/responses/error_422'
       summary: STAGE=UNK Retrieve password
@@ -851,29 +821,6 @@ paths:
         '422':
           $ref: '#/responses/error_422'
       summary: STAGE=UNK Update password.
-      tags:
-        - end_user_authentications
-    post:
-      consumes: []
-      description: Creates a new password for a user with a recovery key
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              new_password:
-                description: The new password they want it updated to.
-                type: string
-              recovery_key:
-                description: The key we e-mailed to a user when they forgot their password. See the GET section.
-                type: string
-      responses:
-        '201':
-          description: Their password was successfuly updated.
-        '422':
-          $ref: '#/responses/error_422'
-      summary: STAGE=UNK Restore password.
       tags:
         - end_user_authentications
     x-restlet:
@@ -1361,18 +1308,14 @@ paths:
       tags:
         - postings
     parameters:
-      - description: board you are posting to
+      - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
         enum:
-          - loads
-          - trucks
-          - private_loads
-          - private_trucks
           - test_loads
           - test_trucks
-          - live_loads_temp
-          - test_loads_temp
-          - live_trucks_temp
-          - test_trucks_temp
+          - private_loads
+          - private_trucks
+          - loads
+          - trucks
         in: path
         name: posting_type
         required: true
@@ -1414,7 +1357,10 @@ paths:
         - postings
     post:
       consumes: []
-      description: Only 100 entries can be created per request. TEST
+      description: |-
+        This endpoint method will post one or more entries. Valid posting_type are: loads, trucks, test_loads, test_trucks, private_loads, and private_trucks.
+
+        Only 100 entries can be created per request.
       parameters:
         - in: header
           name: end-user-token
@@ -1445,7 +1391,7 @@ paths:
       section: POSTINGS
   '/postings/{posting_type}/{action}':
     parameters:
-      - description: Where the items are being posted to
+      - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
         enum:
           - loads
           - trucks
@@ -1453,19 +1399,14 @@ paths:
           - private_trucks
           - test_loads
           - test_trucks
-          - live_loads_temp
-          - test_loads_temp
-          - live_trucks_temp
-          - test_trucks_temp
         in: path
         name: posting_type
         required: true
         type: string
-      - description: Specified in the url.
+      - description: 'Specified in the url. Valid types are "copy", and "move"'
         enum:
           - copy
           - move
-          - replace_all STAGE=PRIVATE
         in: path
         name: action
         required: true
@@ -1487,47 +1428,7 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/postings-copy_or_move_response'
-      summary: STAGE=PRIVATE Copy or Move a posting.
-      tags:
-        - postings
-    x-restlet:
-      section: POSTINGS
-  '/postings/{posting_type}/replace_all':
-    parameters:
-      - description: Destination where items will be moved.
-        enum:
-          - loads
-          - trucks
-          - private_loads
-          - private_trucks
-          - test_loads
-          - test_trucks
-          - live_loads_temp
-          - test_loads_temp
-          - live_trucks_temp
-          - test_trucks_temp
-        in: path
-        name: posting_type
-        required: true
-        type: string
-    post:
-      consumes: []
-      parameters:
-        - in: header
-          name: end-user-token
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/post_posting_replace_all_body'
-      responses:
-        '202':
-          description: Success
-          schema:
-            $ref: '#/definitions/postings-replace_all_response'
-      summary: Will delete all original items in the destination after moving all loads in the source to the destination
+      summary: STAGE=UNK Copy or Move a posting.
       tags:
         - postings
     x-restlet:
@@ -2192,12 +2093,6 @@ definitions:
     type: object
     x-restlet:
       section: ALERTS
-  alert_search_response:
-    properties:
-      alert_id:
-        description: Alert ID.
-        type: integer
-    type: object
   alert:
     properties:
       alert_id:
@@ -2769,21 +2664,10 @@ definitions:
       section: BOARDS
   boards_freight_rate_response:
     properties:
-      TRAILER_TYPE:
-        properties:
-          dates:
-            items:
-              properties:
-                date:
-                  format: date
-                  type: string
-                loads:
-                  type: integer
-                rate:
-                  type: number
-              type: object
-            type: array
-        type: object
+      average_pay_rate:
+        type: number
+      loads:
+        type: integer
     type: object
     x-restlet:
       section: BOARDS
@@ -3190,6 +3074,21 @@ definitions:
     type: object
     x-restlet:
       section: not categorized yet
+  mobile_carrier_response:
+    example:
+      carrier_id: 0
+      carrier_name: '{}'
+    properties:
+      carrier_id:
+        description: The carrier ID.
+        format: int32
+        type: integer
+      carrier_name:
+        description: Their mobile carrier.
+        type: object
+    type: object
+    x-restlet:
+      section: not categorized yet
   note_create_status:
     properties:
       note_id:
@@ -3311,24 +3210,13 @@ definitions:
     type: object
     x-restlet:
       section: ALERTS
-  post_posting_replace_all_body:
+  post_optin_code_response:
+    example:
+      optin_code: optin_code
     properties:
-      source_posting:
-        description: Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.
-        enum:
-          - loads
-          - trucks
-          - private_loads
-          - private_trucks
-          - test_loads
-          - test_trucks
-          - live_loads_temp
-          - test_loads_temp
-          - live_trucks_temp
-          - test_trucks_temp
+      optin_code:
+        description: A text string with the code sent.
         type: string
-    required:
-      - source_posting
     type: object
     x-restlet:
       section: not categorized yet
@@ -3341,21 +3229,12 @@ definitions:
         description: The posting id of the posting you are moving or copying. Optional for create.
         type: object
       source_posting:
-        description: Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.
-        enum:
-          - loads
-          - trucks
-          - private_loads
-          - private_trucks
-          - test_loads
-          - test_trucks
-          - live_loads_temp
-          - test_loads_temp
-          - live_trucks_temp
-          - test_trucks_temp
+        description: The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads.
         type: string
     required:
+      - source_id
       - source_posting
+      - new_load_custom_id
     type: object
     x-restlet:
       section: not categorized yet
@@ -3793,16 +3672,6 @@ definitions:
     type: object
     x-restlet:
       section: POSTINGS
-  postings-replace_all_response:
-    properties:
-      message:
-        description: Operation Successful.
-        required:
-          - message
-        type: string
-    type: object
-    x-restlet:
-      section: POSTINGS
   profile_object_patch:
     example:
       address: 11 Wall Street
@@ -4199,9 +4068,6 @@ definitions:
     properties:
       email:
         description: 'This must be a valid e-mail. '
-        type: string
-      partner:
-        description: Optional partner string to be associated with the new account.
         type: string
       password:
         description: 'Currently this is a 6-10 digit alphanumeric password. '

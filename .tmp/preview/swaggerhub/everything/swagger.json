@@ -1987,7 +1987,7 @@
       },
       "parameters": [
         {
-          "description": "board you are posting to",
+          "description": "Specifies board you are posting to.",
           "enum": [
             "loads",
             "trucks",
@@ -2061,7 +2061,7 @@
       },
       "post": {
         "consumes": [],
-        "description": "Only 100 entries can be created per request. TEST",
+        "description": "Only 100 entries can be created per request.",
         "parameters": [
           {
             "in": "header",
@@ -2110,7 +2110,7 @@
     "/postings/{posting_type}/{action}": {
       "parameters": [
         {
-          "description": "Where the items are being posted to",
+          "description": "Where items are being moved or copied to.",
           "enum": [
             "loads",
             "trucks",
@@ -2132,8 +2132,7 @@
           "description": "Specified in the url.",
           "enum": [
             "copy",
-            "move",
-            "replace_all STAGE=PRIVATE"
+            "move"
           ],
           "in": "path",
           "name": "action",
@@ -2179,7 +2178,7 @@
     "/postings/{posting_type}/replace_all": {
       "parameters": [
         {
-          "description": "Destination where items will be moved.",
+          "description": "Destination where items will be replaced.",
           "enum": [
             "loads",
             "trucks",
@@ -2224,7 +2223,7 @@
             }
           }
         },
-        "summary": "Will delete all original items in the destination after moving all loads in the source to the destination",
+        "summary": "STAGE=PRIVATE Delete all/Replace",
         "tags": [
           "postings"
         ]
