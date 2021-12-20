@@ -3406,10 +3406,6 @@ definitions:
           - private_trucks
           - test_loads
           - test_trucks
-          - live_loads_temp
-          - test_loads_temp
-          - live_trucks_temp
-          - test_trucks_temp
       new_load_custom_id:
         description: Optionally specify the custom_id that should be assigned to the new load. This is required for the copy command, for the move command it will be auto-generated if one is not specified.
         type: string        
