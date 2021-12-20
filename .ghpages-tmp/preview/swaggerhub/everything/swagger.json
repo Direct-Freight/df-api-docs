@@ -2117,11 +2117,7 @@
             "private_loads",
             "private_trucks",
             "test_loads",
-            "test_trucks",
-            "live_loads_temp",
-            "test_loads_temp",
-            "live_trucks_temp",
-            "test_trucks_temp"
+            "test_trucks"
           ],
           "in": "path",
           "name": "posting_type",
@@ -2182,14 +2178,8 @@
           "enum": [
             "loads",
             "trucks",
-            "private_loads",
-            "private_trucks",
             "test_loads",
-            "test_trucks",
-            "live_loads_temp",
-            "test_loads_temp",
-            "live_trucks_temp",
-            "test_trucks_temp"
+            "test_trucks"
           ],
           "in": "path",
           "name": "posting_type",
@@ -2205,14 +2195,6 @@
             "name": "end-user-token",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/post_posting_replace_all_body"
-            }
           }
         ],
         "responses": {
@@ -4598,33 +4580,6 @@
       "type": "object",
       "x-restlet": {
         "section": "ALERTS"
-      }
-    },
-    "post_posting_replace_all_body": {
-      "properties": {
-        "source_posting": {
-          "description": "Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.",
-          "enum": [
-            "loads",
-            "trucks",
-            "private_loads",
-            "private_trucks",
-            "test_loads",
-            "test_trucks",
-            "live_loads_temp",
-            "test_loads_temp",
-            "live_trucks_temp",
-            "test_trucks_temp"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "source_posting"
-      ],
-      "type": "object",
-      "x-restlet": {
-        "section": "not categorized yet"
       }
     },
     "post_posting_type_action_body": {
