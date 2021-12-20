@@ -3,14 +3,8 @@ parameters:
     enum:
       - loads
       - trucks
-      - private_loads
-      - private_trucks
       - test_loads
       - test_trucks
-      - live_loads_temp
-      - test_loads_temp
-      - live_trucks_temp
-      - test_trucks_temp
     in: path
     name: posting_type
     required: true
@@ -22,11 +16,6 @@ post:
       name: end-user-token
       required: true
       type: string
-    - in: body
-      name: body
-      required: true
-      schema:
-        $ref: '#/definitions/post_posting_replace_all_body'
   responses:
     '202':
       description: Success
