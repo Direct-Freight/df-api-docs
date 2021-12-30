@@ -7,14 +7,8 @@ get:
       required: false
       type: string
       x-example: '?entry_id=22ef23'
-    - description: To retrieve by custom_id
-      in: query
-      name: custom_id
-      required: false
-      type: string
-      x-example: '?custom_id=my1234'
     - in: query
-      name: booking_information
+      name: request_booking_info
       required: false
       type: boolean
     - in: header
