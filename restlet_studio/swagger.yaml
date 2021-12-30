@@ -3017,9 +3017,11 @@ definitions:
       booking_information:
         type: object
         properties:
+          booking_link:
+            type: string
           ref_id:
             type: string
-          url:
+          partner:
             type: string
   create_notes:
     properties:
