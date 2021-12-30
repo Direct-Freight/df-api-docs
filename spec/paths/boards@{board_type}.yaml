@@ -14,7 +14,7 @@ get:
       type: string
       x-example: '?custom_id=my1234'
     - in: query
-      name: book_now
+      name: booking_information
       required: false
       type: boolean
     - in: header

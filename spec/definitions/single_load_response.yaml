@@ -3,6 +3,8 @@ properties:
     properties:
       ref_id:
         type: string
+      url:
+        type: string
     type: object
   item:
     $ref: '#/definitions/board_response_item'
