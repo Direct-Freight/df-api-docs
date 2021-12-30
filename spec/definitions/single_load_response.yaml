@@ -3,7 +3,7 @@ properties:
     properties:
       booking_link:
         type: string
-      offer_authorization_key:
+      offer_preauthorization_key:
         type: string
       offer_rate:
         type: number
