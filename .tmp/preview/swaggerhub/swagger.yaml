@@ -1911,6 +1911,11 @@ definitions:
       section: LOCATIONS
   single_load_response:
     properties:
+      booking_information:
+        properties:
+          ref_id:
+            type: string
+        type: object
       item:
         $ref: '#/definitions/board_response_item'
   social-login-end-user-token:
@@ -2188,20 +2193,20 @@ paths:
       parameters:
         - description: the entry_id associated with the data you want to get.
           in: query
-          items:
-            type: integer
           name: entry_id
           required: false
-          type: array
+          type: integer
           x-example: '?entry_id=22'
         - description: To retrieve by custom_id
           in: query
-          items:
-            type: string
           name: custom_id
           required: false
-          type: array
+          type: string
           x-example: '?custom_id=my1234'
+        - in: query
+          name: book_now
+          required: false
+          type: boolean
         - in: header
           name: end-user-token
           required: true
