@@ -269,9 +269,9 @@ paths:
         - name: entry_id
           description: the entry_id associated with the data you want to get.
           in: query
-          type: integer
+          type: string
           required: false
-          x-example: '?entry_id=22'
+          x-example: '?entry_id=22ef23'
         - name: custom_id 
           description: To retrieve by custom_id
           in: query
