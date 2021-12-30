@@ -269,19 +269,19 @@ paths:
         - name: entry_id
           description: the entry_id associated with the data you want to get.
           in: query
-          items:
-            type: integer
+          type: integer
           required: false
-          type: array
           x-example: '?entry_id=22'
         - name: custom_id 
           description: To retrieve by custom_id
           in: query
           required: false
-          type: array
-          items:
-            type: string
+          type: string
           x-example: '?custom_id=my1234'
+        - name: book_now
+          required: false
+          type: boolean
+          in: query
         - in: header
           name: end-user-token
           required: true
@@ -3014,6 +3014,11 @@ definitions:
     properties:
       item:
         $ref: '#/definitions/board_response_item'
+      booking_information:
+        type: object
+        properties:
+          ref_id:
+            type: string
   create_notes:
     properties:
       body:
