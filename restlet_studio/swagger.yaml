@@ -3017,7 +3017,7 @@ definitions:
             type: number
           offer_preauthorization_key:
             type: string
-          raw_partner_data:
+          debug_raw_partner_data:
             type: object
   create_notes:
     properties:
