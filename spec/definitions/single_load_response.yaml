@@ -1,12 +1,12 @@
 properties:
-  booking_information:
+  booking_info:
     properties:
       booking_link:
         type: string
-      partner:
+      offer_authorization_key:
         type: string
-      ref_id:
-        type: string
+      offer_rate:
+        type: number
     type: object
   item:
     $ref: '#/definitions/board_response_item'

@@ -103,6 +103,75 @@
   },
   "paths": {
     "/alerts/{board_type}": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "Specify to just delete some alerts.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "alert_id",
+            "required": true,
+            "type": "array"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "STAGE=UNKNOWN Delete an alert.",
+        "tags": [
+          "alerts"
+        ]
+      },
+      "get": {
+        "description": "Get a list of alerts. You can optionally limit the list by specifcying alerts by their alert_id. Returns 50 alerts by default.",
+        "parameters": [
+          {
+            "description": "only get a subset of alerts. As this is a get request this is specified as a query string parameter.",
+            "in": "query",
+            "items": {
+              "type": "integer"
+            },
+            "name": "alert_id",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "description": "Page number to fetch, defaults to 1",
+            "in": "query",
+            "name": "page_number",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "On success will return a list of alerts.",
+            "schema": {
+              "$ref": "#/definitions/alert_list"
+            }
+          }
+        },
+        "summary": "STAGE=UNKNOWN Retrieve alerts.",
+        "tags": [
+          "alerts"
+        ]
+      },
       "parameters": [
         {
           "description": "Valid types are \"loads\", and \"trucks\".",
@@ -116,11 +185,113 @@
           "type": "string"
         }
       ],
+      "patch": {
+        "consumes": [],
+        "description": "Search objects are set at creation. You cannot modify them after the alert has been created.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/patch_alert_properties"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Returned on response."
+          }
+        },
+        "summary": "STAGE=UNK Update an alert.",
+        "tags": [
+          "alerts"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "description": "This method will update or create an alert. The POST action with the same search parameters but different alert parameters will update the existing alert. The one caveaut to this is send_type. You can have 2 alerts with the same search parameters but different send_types. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/alert"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Object created check the headers for a reference URL",
+            "schema": {
+              "$ref": "#/definitions/create_status_alert"
+            }
+          }
+        },
+        "summary": "STAGE=UNKNOWN Create an alert.",
+        "tags": [
+          "alerts"
+        ]
+      },
       "x-restlet": {
         "section": "ALERTS"
       }
     },
     "/alerts/search/{board_type}": {
+      "post": {
+        "consumes": [],
+        "description": "This method will search a users alert. It accepts the exact same structure as the POST method for /alerts/. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/alert"
+            }
+          },
+          {
+            "in": "path",
+            "name": "board_type",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Alert found, returns the alert_id that corresponds to the search.",
+            "schema": {
+              "$ref": "#/definitions/alert_search_response"
+            }
+          },
+          "404": {
+            "description": "Alert not found using specified parameters."
+          }
+        },
+        "summary": "STAGE=UNKNOWN Create an alert.",
+        "tags": [
+          "alerts"
+        ]
+      },
       "x-restlet": {
         "section": "ALERTS"
       }
@@ -190,6 +361,15 @@
             "x-example": "01234567890abc"
           },
           {
+            "default": 0,
+            "description": "If this optional header is sent and set to a positive value, the API will not update the users last_date, this option is used internally when sending email alerts. STAGE=Private",
+            "in": "header",
+            "name": "x-dont-update-user-last-date",
+            "required": false,
+            "type": "number",
+            "x-example": 1
+          },
+          {
             "in": "body",
             "name": "body",
             "required": true,
@@ -253,26 +433,540 @@
       }
     },
     "/boards/freight_rate": {
+      "get": {
+        "consumes": [],
+        "description": "Calculate Freight Rates",
+        "parameters": [
+          {
+            "description": "Origin City",
+            "in": "query",
+            "name": "origin_city",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Origin State",
+            "in": "query",
+            "name": "origin_state",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Destination City",
+            "in": "query",
+            "name": "destination_city",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Destination State",
+            "in": "query",
+            "name": "destination_state",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Start Date. Optional value, must be used in conjunction with end_date. If not specified defaults to yesterday.",
+            "in": "query",
+            "name": "start_date",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "End Date. Optional value, must be used in conjunction with start_date. If not specified defaults to yesterday.",
+            "in": "query",
+            "name": "end_date",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Only include days with at least this many loads, defaults to 10.",
+            "in": "query",
+            "name": "min_loads",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Trailer Type, defaults to \"all\" if not specied. This option can be specified multiple times.",
+            "enum": [
+              "all",
+              "van_only",
+              "van_all",
+              "reefer_only",
+              "reefer_all",
+              "flat_only",
+              "flat_all"
+            ],
+            "in": "query",
+            "name": "trailer_type",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Details about average rates for this trip. Returns an object where each key is a trailer type with an array of the freight rate for each day that was found for that type.",
+            "schema": {
+              "$ref": "#/definitions/boards_freight_rate_response"
+            }
+          }
+        },
+        "summary": "STAGE=Private Get Freight Rates.",
+        "tags": [
+          "boards"
+        ]
+      },
       "x-restlet": {
         "section": "BOARDS"
       }
     },
     "/boards/hidden_companies": {
+      "delete": {
+        "description": "Mark a company as not hidden.",
+        "parameters": [
+          {
+            "description": "The company that need to be marked as not hidden.",
+            "in": "query",
+            "name": "company_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          }
+        },
+        "summary": "STAGE=UNK Unhide companies",
+        "tags": [
+          "boards"
+        ]
+      },
+      "get": {
+        "description": "Get a list of companies that should be hidden.",
+        "parameters": [
+          {
+            "description": "A list of company names to check if any should be visually hidden.  If this field is blank all hidden companies will be returned.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "company_name",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/get_hidden_companies_response"
+            }
+          }
+        },
+        "summary": "STAGE=UNK List hidden companies.",
+        "tags": [
+          "boards"
+        ]
+      },
+      "patch": {
+        "consumes": [],
+        "description": "Toggle one  company between hidden and unhidden.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/toggle_hidden_companies"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "STAGE=UNK Change hidden status",
+        "tags": [
+          "boards"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "description": "Mark a set of companies as hidden.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mark_hidden_companies"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/object_created"
+          }
+        },
+        "summary": "STAGE=UNK Hide companies.",
+        "tags": [
+          "boards"
+        ]
+      },
       "x-restlet": {
         "section": "BOARDS"
       }
     },
     "/boards/hidden_entries": {
+      "delete": {
+        "description": " Mark an entry as unhidden.",
+        "parameters": [
+          {
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "entry_id",
+            "required": true,
+            "type": "array"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "summary": "STAGE=private Unhide 1 or more postings",
+        "tags": [
+          "boards"
+        ]
+      },
+      "get": {
+        "description": "Get a list of entries that should be hidden.",
+        "parameters": [
+          {
+            "description": "A list of id's to check if any should be visually hidden.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "entry_id",
+            "required": true,
+            "type": "array"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/get_hidden_entries"
+            }
+          }
+        },
+        "summary": "STAGE=UNK List hidden entries.",
+        "tags": [
+          "boards"
+        ]
+      },
+      "patch": {
+        "consumes": [],
+        "description": "Toggle one or more entries between hidden and unhidden.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/toggle_hidden_entries"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "STAGE=UNK Change hidden status",
+        "tags": [
+          "boards"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "description": "Mark an entry as hidden.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/hidden_entry_object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/object_created"
+          }
+        },
+        "summary": "STAGE=private Hide 1 or more postings",
+        "tags": [
+          "boards"
+        ]
+      },
       "x-restlet": {
         "section": "BOARDS"
       }
     },
     "/boards/notes": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "The entry to associate the note with. ",
+            "in": "query",
+            "name": "note_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "STAGE=UNK Delete a note.",
+        "tags": [
+          "boards"
+        ]
+      },
+      "get": {
+        "description": "Get notes that this user has written.",
+        "parameters": [
+          {
+            "description": "Optionally just check if certain loads have notes associated with them. ",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "entry_id",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/get_boards_notes_response"
+            }
+          }
+        },
+        "summary": "STAGE=UNK List user notes.",
+        "tags": [
+          "boards"
+        ]
+      },
+      "patch": {
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/update_notes"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/update_notes_status"
+            }
+          }
+        },
+        "summary": "STAGE=UNK Update a note.",
+        "tags": [
+          "boards"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "description": "Create a new note.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/create_notes"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Object created check the headers for a reference URL.",
+            "schema": {
+              "$ref": "#/definitions/note_create_status"
+            }
+          }
+        },
+        "summary": "STAGE=UNK Create a note.",
+        "tags": [
+          "boards"
+        ]
+      },
       "x-restlet": {
         "section": "BOARDS"
       }
     },
     "/boards/profit": {
+      "get": {
+        "consumes": [],
+        "description": "Calculate trip profit.",
+        "parameters": [
+          {
+            "description": "Origin City name",
+            "in": "query",
+            "name": "origin_city",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Origin State, two letter abbreviation",
+            "in": "query",
+            "name": "origin_state",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Destination City name",
+            "in": "query",
+            "name": "destination_city",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Destination State, two letter abbreviation",
+            "in": "query",
+            "name": "destination_state",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "This field will accept either the per mile rate, or gross rate.",
+            "in": "query",
+            "name": "pay_rate",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Total deadhead distance in miles, if this value is provided the response will include the deadhead_cost.",
+            "in": "query",
+            "name": "deadhead_distance",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details about the profitability of this trip.",
+            "schema": {
+              "$ref": "#/definitions/boards_profit_response"
+            }
+          }
+        },
+        "summary": "STAGE=Private Get profit data.",
+        "tags": [
+          "boards"
+        ]
+      },
       "x-restlet": {
         "section": "BOARDS"
       }
@@ -412,6 +1106,26 @@
       }
     },
     "/end_user_authentications/auto_login_url": {
+      "get": {
+        "description": "Get a auto login url STAGE=Private",
+        "parameters": [
+          {
+            "description": "DirectFreight website URI to redirect to after login. Example, {{url}}/v1/end_user_authentications/auto_login_url?redirect_url=/loads/results",
+            "in": "query",
+            "name": "redirect_url",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Will return a DirectFreight URI that can be used to auto login and redirect.  The URI is valid for 5 minutes."
+          }
+        },
+        "tags": [
+          "end_user_authentications"
+        ]
+      },
       "x-restlet": {
         "section": "END_USER_AUTHENTICATIONS"
       }
@@ -447,16 +1161,190 @@
       }
     },
     "/end_user_authentications/email": {
+      "patch": {
+        "consumes": [],
+        "description": "Update a users email address.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "email": {
+                  "description": "The user's new email address.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "A successful operation."
+          },
+          "422": {
+            "$ref": "#/responses/error_422"
+          }
+        },
+        "summary": "STAGE=UNK Update email.",
+        "tags": [
+          "end_user_authentications"
+        ]
+      },
       "x-restlet": {
         "section": "END_USER_AUTHENTICATIONS"
       }
     },
     "/end_user_authentications/passwords": {
+      "get": {
+        "description": "Request a forgotten password.",
+        "parameters": [
+          {
+            "description": "The user e-mail to send a password to if valid.",
+            "in": "query",
+            "name": "email_address",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This will return a success only if the e-mail is in our records."
+          },
+          "422": {
+            "$ref": "#/responses/error_422"
+          }
+        },
+        "summary": "STAGE=UNK Retrieve password",
+        "tags": [
+          "end_user_authentications"
+        ]
+      },
+      "patch": {
+        "consumes": [],
+        "description": "Update a users password.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "new_password": {
+                  "description": "The user's new password.",
+                  "type": "string"
+                },
+                "old_password": {
+                  "description": "Thee user's old password.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "new_password",
+                "old_password"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "A successful operation."
+          },
+          "422": {
+            "$ref": "#/responses/error_422"
+          }
+        },
+        "summary": "STAGE=UNK Update password.",
+        "tags": [
+          "end_user_authentications"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "description": "Creates a new password for a user with a recovery key",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "new_password": {
+                  "description": "The new password they want it updated to.",
+                  "type": "string"
+                },
+                "recovery_key": {
+                  "description": "The key we e-mailed to a user when they forgot their password. See the GET section.",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Their password was successfuly updated."
+          },
+          "422": {
+            "$ref": "#/responses/error_422"
+          }
+        },
+        "summary": "STAGE=UNK Restore password.",
+        "tags": [
+          "end_user_authentications"
+        ]
+      },
       "x-restlet": {
         "section": "END_USER_AUTHENTICATIONS"
       }
     },
     "/end_user_authentications/social_login": {
+      "post": {
+        "description": "Logs in or creates a new account for the user based on their email. \"new_account\" is what indicates if a new account was created, or if an existing account was used to login.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/social_login_credentials"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/social-login-end-user-token"
+            }
+          },
+          "422": {
+            "$ref": "#/responses/error_422"
+          }
+        },
+        "summary": "STAGE=Private Social Login/Create Account",
+        "tags": [
+          "end_user_authentications"
+        ]
+      },
       "x-restlet": {
         "section": "END_USER_AUTHENTICATIONS"
       }
@@ -548,21 +1436,471 @@
       }
     },
     "/mobile_updates": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email_address",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "properties": {
+                "bullet_points": {
+                  "items": {
+                    "default": "[]",
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "information_url": {
+                  "default": "null",
+                  "type": "string"
+                },
+                "message": {
+                  "default": "null",
+                  "type": "string"
+                },
+                "title": {
+                  "default": "null",
+                  "type": "string"
+                },
+                "update_url": {
+                  "default": "null",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "bullet_points",
+                "information_url",
+                "message",
+                "title",
+                "update_url"
+              ],
+              "type": "object"
+            }
+          }
+        },
+        "summary": "STAGE=Private Get any available update information.",
+        "tags": [
+          "mobile update"
+        ]
+      },
       "x-restlet": {
         "section": "Mobile Update"
       }
     },
     "/optins": {
+      "delete": {
+        "description": "By only sending in their EUA token you would be requesting to opt them out of everything.",
+        "parameters": [
+          {
+            "enum": [
+              "email",
+              "text",
+              "push"
+            ],
+            "in": "query",
+            "name": "notification_medium",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "default": "all",
+            "description": "This would allow granular optouts. Currently ignored.",
+            "enum": [
+              "all",
+              "alerts"
+            ],
+            "in": "query",
+            "name": "notification_channel",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Status 204"
+          }
+        },
+        "summary": "STAGE=UNK Opt someone out of one or more mediums and channels.",
+        "tags": [
+          "optins"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "To limit your list to just one medium.",
+            "enum": [
+              "email",
+              "text",
+              "push"
+            ],
+            "in": "query",
+            "name": "notification_medium",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "properties": {
+                "list": {
+                  "items": {
+                    "properties": {
+                      "notification_channel": {
+                        "default": "all",
+                        "type": "string"
+                      },
+                      "notification_medium": {
+                        "enum": [
+                          "email",
+                          "text",
+                          "push"
+                        ],
+                        "type": "string"
+                      },
+                      "status": {
+                        "enum": [
+                          "optin",
+                          "optout",
+                          "no response",
+                          "no record"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "notification_channel",
+                      "notification_medium",
+                      "status"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "required": [
+                "list"
+              ],
+              "type": "object"
+            }
+          }
+        },
+        "summary": "STAGE=UNK Get the optin status of a user.",
+        "tags": [
+          "optins"
+        ]
+      },
+      "patch": {
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "notification_medium": {
+                  "enum": [
+                    "email",
+                    "text"
+                  ],
+                  "type": "string"
+                },
+                "verification_code": {
+                  "description": "This code is generated on a POST, and will arrive via the same medium it was designated for.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "notification_medium",
+                "verification_code"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Status 204"
+          }
+        },
+        "summary": "STAGE=UNK Confirm an optin.",
+        "tags": [
+          "optins"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "description": "Currently only Push notifications are implemented. With them a post creates and approves the optin. Later on when text/email is ported post will create the optin with the status of 'no response' meaning they haven't replied with the propper code, or clicked an authorization link.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "notification_channel": {
+                  "default": "all",
+                  "description": "Currently defaults to all, and is ignored. When we start using it it will be for opting people out or in one list like alerts, or messages, but not others.",
+                  "type": "string"
+                },
+                "notification_medium": {
+                  "description": "We currently only accept push",
+                  "enum": [
+                    "email",
+                    "text",
+                    "push"
+                  ],
+                  "type": "string"
+                },
+                "tokens": {
+                  "description": "This is how you can add multiple push notifications at once, or for systems that have multiple tokens required.",
+                  "example": "\"tokens\": { \"ios\": \"12345678\", \"android\": \"5432344\" } ",
+                  "properties": {
+                    "$SERVICE_OR_KEY_NAME": {
+                      "description": "Fill in the key in the value, and the service in the name. Look at our examples for clarification.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "$SERVICE_OR_KEY_NAME"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "notification_medium"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Status 201"
+          }
+        },
+        "summary": "STAGE=UNK Submit a request to be opted in.",
+        "tags": [
+          "optins"
+        ]
+      },
       "x-restlet": {
         "section": "Optins"
       }
     },
     "/optins/load_alert_sound": {
+      "get": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "STAGE=UNK Check if a user has enabled audio notifications on the web for new load alerts.",
+        "tags": [
+          "optins"
+        ]
+      },
+      "patch": {
+        "consumes": [],
+        "description": "Toggle audio notifications.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "enabled": {
+                  "description": "true/false",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "enabled"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Status 204"
+          }
+        },
+        "summary": "STAGE=UNK Toggles audio notifications for web new load load alerts.",
+        "tags": [
+          "optins"
+        ]
+      },
       "x-restlet": {
         "section": "Optins"
       }
     },
     "/optins/web_push": {
+      "delete": {
+        "description": "Opt Out of web push notifications.",
+        "parameters": [
+          {
+            "description": "the onesignal player_id as returned by them when a user subscribes.",
+            "in": "query",
+            "name": "player_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Status 204"
+          }
+        },
+        "summary": "STAGE=UNK Opt someone out of web push notifications.",
+        "tags": [
+          "optins"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "The OneSignal player_id as returned by them when a user subscribes. If this parameter is not provided the API will return true if the User has any player_id subscribed.",
+            "in": "query",
+            "name": "player_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "properties": {
+                "subscribed": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "STAGE=UNK Check if a users player_id is subscribed to web push notifications.",
+        "tags": [
+          "optins"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "description": "Register a OneSignal player_id in DirectFreight for web push notifications.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "player_id": {
+                  "default": "all",
+                  "description": "The OneSignal player_id as returned by them when a user subscribes.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "player_id"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "properties": {
+                "subscribed": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "summary": "STAGE=UNK Register a OneSignal player_id in the DirectFreight database.",
+        "tags": [
+          "optins"
+        ]
+      },
       "x-restlet": {
         "section": "Optins"
       }
@@ -835,6 +2173,37 @@
           "type": "string"
         }
       ],
+      "post": {
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/post_posting_type_action_body"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/postings-copy_or_move_response"
+            }
+          }
+        },
+        "summary": "STAGE=PRIVATE Copy or Move a posting.",
+        "tags": [
+          "postings"
+        ]
+      },
       "x-restlet": {
         "section": "POSTINGS"
       }
@@ -855,21 +2224,349 @@
           "type": "string"
         }
       ],
+      "post": {
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/postings-replace_all_response"
+            }
+          }
+        },
+        "summary": "STAGE=PRIVATE Delete all/Replace",
+        "tags": [
+          "postings"
+        ]
+      },
       "x-restlet": {
         "section": "POSTINGS"
       }
     },
     "/postings/custom_fields/data/{posting_type}": {
+      "delete": {
+        "parameters": [
+          {
+            "description": "the field_name associated with the data you want deleted.",
+            "in": "query",
+            "name": "field_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "the posting_id associated with the data you want deleted.",
+            "in": "query",
+            "name": "posting_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+            "enum": [
+              "test_loads",
+              "test_trucks",
+              "private_loads",
+              "private_trucks",
+              "loads",
+              "trucks"
+            ],
+            "in": "path",
+            "name": "posting_type",
+            "required": true,
+            "type": "string",
+            "x-example": "test_loads"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "summary": "STAGE=UNK Delete data from a custom field.",
+        "tags": [
+          "postings/custom_fields"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "the posting_ids associated with the data you want to get.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "posting_id",
+            "required": false,
+            "type": "array",
+            "x-example": "?posting_id=22&posting_id=23&posting_id=24"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+            "enum": [
+              "test_loads",
+              "test_trucks",
+              "private_loads",
+              "private_trucks",
+              "loads",
+              "trucks"
+            ],
+            "in": "path",
+            "name": "posting_type",
+            "required": true,
+            "type": "string",
+            "x-example": "test_loads"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/get_custom_fields_data_response"
+            }
+          }
+        },
+        "summary": "STAGE=UNK Get data for a custom field.",
+        "tags": [
+          "postings/custom_fields"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/create_custom_field_data"
+            }
+          },
+          {
+            "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+            "enum": [
+              "test_loads",
+              "test_trucks",
+              "private_loads",
+              "private_trucks",
+              "loads",
+              "trucks"
+            ],
+            "in": "path",
+            "name": "posting_type",
+            "required": true,
+            "type": "string",
+            "x-example": "test_loads"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "STAGE=UNK Update custom field data.",
+        "tags": [
+          "postings/custom_fields"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/create_custom_field_data"
+            }
+          },
+          {
+            "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+            "enum": [
+              "test_loads",
+              "test_trucks",
+              "private_loads",
+              "private_trucks",
+              "loads",
+              "trucks"
+            ],
+            "in": "path",
+            "name": "posting_type",
+            "required": true,
+            "type": "string",
+            "x-example": "test_loads"
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/object_created"
+          }
+        },
+        "summary": "STAGE=UNK add new data.",
+        "tags": [
+          "postings/custom_fields"
+        ]
+      },
       "x-restlet": {
         "section": "POSTINGS/CUSTOM_FIELDS"
       }
     },
     "/postings/custom_fields/names/": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "column/field that you want deleted",
+            "in": "query",
+            "name": "field_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "summary": "STAGE=UNK Delete a custom column/field",
+        "tags": [
+          "postings/custom_fields"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/get_custom_fields_name_response"
+            }
+          }
+        },
+        "summary": "STAGE=UNK Get a list of all defined custom fields/columns.",
+        "tags": [
+          "postings/custom_fields"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/rename_custom_field"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "successful operation"
+          }
+        },
+        "summary": "STAGE=UNK Rename a custom field/column.",
+        "tags": [
+          "postings/custom_fields"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/create_custom_field"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/object_created"
+          }
+        },
+        "summary": "STAGE=UNK Create new custom field/column.",
+        "tags": [
+          "postings/custom_fields"
+        ]
+      },
       "x-restlet": {
         "section": "POSTINGS/CUSTOM_FIELDS"
       }
     },
     "/profiles": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success operation"
+          }
+        },
+        "summary": "STAGE=UNK Delete the profile.",
+        "tags": [
+          "profiles"
+        ]
+      },
       "get": {
         "parameters": [
           {
@@ -964,21 +2661,354 @@
       }
     },
     "/profiles/documents": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success operation"
+          }
+        },
+        "summary": "STAGE=UNK Delete the document.",
+        "tags": [
+          "profiles"
+        ]
+      },
+      "get": {
+        "description": "Retrieve documents",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        },
+        "summary": "STAGE=UNK Retrieve documents",
+        "tags": [
+          "profiles"
+        ]
+      },
+      "patch": {
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/rename_document"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "success"
+          }
+        },
+        "summary": "STAGE=UNK Rename a document.",
+        "tags": [
+          "profiles"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/upload_document"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/responses/object_created"
+          }
+        },
+        "summary": "STAGE=UNK Upload a new document.",
+        "tags": [
+          "profiles"
+        ]
+      },
       "x-restlet": {
         "section": "PROFILES"
       }
     },
     "/profiles/truck_info": {
+      "get": {
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/truck_info_object"
+            }
+          }
+        },
+        "summary": "Request the logged in user's truck info. STAGE=Private",
+        "tags": [
+          "profiles"
+        ]
+      },
+      "patch": {
+        "consumes": [],
+        "description": "Please send in at least one field to be updated.",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/truck_info_object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/truck_info_object"
+            }
+          }
+        },
+        "summary": "Update truck information. STAGE=Private",
+        "tags": [
+          "profiles"
+        ]
+      },
       "x-restlet": {
         "section": "PROFILES"
       }
     },
     "/validations/email_exists": {
+      "get": {
+        "description": "Enter an e-mail to see if it is available. Can be used as ?email=xxx or as a JSON request.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/get_email_exists_response"
+            }
+          }
+        },
+        "summary": "STAGE=UNK Check if an e-mail exists.",
+        "tags": [
+          "validations"
+        ]
+      },
       "x-restlet": {
         "section": "VALIDATIONS"
       }
     },
     "/validations/trailers": {
+      "delete": {
+        "description": "This will remove a customer_type from the list. This is only useable via a special api-token",
+        "parameters": [
+          {
+            "description": "This will remove this type from the list.",
+            "in": "query",
+            "name": "customer_type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "If you wish to remove a customer_type associated with a username you would add this parameter.",
+            "in": "query",
+            "name": "username",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Status 204"
+          }
+        },
+        "summary": "STAGE=UNIMPLEMENTED-NO-NEED Remove a lookup.",
+        "tags": [
+          "validations"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "description": "The custom type that the poster is trying to submit.",
+            "in": "query",
+            "name": "customer_type",
+            "required": true,
+            "type": "string",
+            "x-example": "DX"
+          },
+          {
+            "description": "We assume only posters will be using this endpoint. We will use their end-user-token to match for a customer specific match first, and fall back to a general one if it doesn't exist.",
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "properties": {
+                "trailer_type": {
+                  "$ref": "#/definitions/trailer_type"
+                }
+              },
+              "required": [
+                "trailer_type"
+              ],
+              "type": "object"
+            }
+          }
+        },
+        "summary": "STAGE=PRIVATE-LIVE Find an official type to match to the customer submitted one.",
+        "tags": [
+          "validations"
+        ]
+      },
+      "patch": {
+        "consumes": [],
+        "description": "Will update the match of the trailer_type to the customer type. This is only useable via a special api-token",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "customer_type": {
+                  "description": "This is the key. It is not modified.",
+                  "type": "string"
+                },
+                "notes": {
+                  "description": "You can clear or replace the notes.",
+                  "type": "string"
+                },
+                "trailer_type": {
+                  "$ref": "#/definitions/trailer_type"
+                },
+                "username": {
+                  "description": "This is an optional key, and is also not modifiable. If customer_type is associated with a username you must also include the username.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "customer_type",
+                "trailer_type"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Status 202"
+          }
+        },
+        "summary": "STAGE=UNIMPLEMENTED-NO-NEED Update which DF trailer_types match the customer_type",
+        "tags": [
+          "validations"
+        ]
+      },
+      "post": {
+        "consumes": [],
+        "description": "This is only useable via a special api-token",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "properties": {
+                "customer_type": {
+                  "description": "This is the new type we are adding to our lookup table.",
+                  "type": "string"
+                },
+                "notes": {
+                  "description": "Provides context. For internal use.",
+                  "type": "string"
+                },
+                "trailer_type": {
+                  "$ref": "#/definitions/trailer_type"
+                },
+                "username": {
+                  "description": "This is to specify to create this definition for only this specific user. You might do this if this customer_type already exists and uses a different list of trailer types than this customer requires.\n\nThis style uses the old system. It is open in that anyone with the special api-token can update any user. Optionally, if we chose to lock it down to end-user-token we loose that ability, could drop this field and let them just send in an EUA token.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "customer_type",
+                "trailer_type"
+              ],
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Status 201"
+          }
+        },
+        "summary": "STAGE=UNIMPLEMENTED-NO-NEED Add a custom trailer type match.",
+        "tags": [
+          "validations"
+        ]
+      },
       "x-restlet": {
         "section": "VALIDATIONS"
       }
@@ -1418,6 +3448,10 @@
           "type": "integer",
           "x-example": "undefined"
         },
+        "company_name": {
+          "description": "Search only for loads posted by this company. STAGE=Private",
+          "type": "string"
+        },
         "destination_city": {
           "description": "If used, this field must be accompanied by a destination_state.",
           "example": "chicago",
@@ -1454,6 +3488,10 @@
           "example": true,
           "type": "boolean"
         },
+        "google_recaptcha_score": {
+          "description": "STAGE=PRIVATE Google ReCAPTCHA score, for logging purposes. This field is optional. Should be a decimal number between 0 and 1.",
+          "type": "number"
+        },
         "item_count": {
           "description": "This argument adjusts how many items per page will be returned.  Omitting this field will return the default of 50 items per page",
           "example": 25,
@@ -1470,6 +3508,11 @@
           "description": "Return items that weight less than this.",
           "example": 40000,
           "type": "integer"
+        },
+        "md5": {
+          "description": "Return only this specific MD5 ID. STAGE=Private",
+          "example": "850FBE52A5345119FD9C79FDE4E27308",
+          "type": "string"
         },
         "min_length": {
           "description": "Return items at least this long.",
@@ -1522,6 +3565,15 @@
           "description": "If included this will return a total count instead of a list.",
           "type": "boolean"
         },
+        "return_only": {
+          "description": "STAGE=PRIVATE  This field is an additional filter that limits the boards response for attributes that are not defined by the load record. Currently the following attributes are valid for this field.\n\nunviewed-loads that have not been viewed by the user (Loads will continue to be returned by boards as unviewed until a GET is requested from the alerts endpoint.  Requesting the alerts resets the timestamp for determining when a load is new to the time of the last search).\n\nunsent-Loads that have not been sent to or viewed by a user.\n\nnewtag- Loads that are given a new tag.  The new tag is only given to loads that are new since the previous search if the 2 searches are both done in the same day.",
+          "enum": [
+            "unviewed",
+            "unsent",
+            "newtag"
+          ],
+          "type": "string"
+        },
         "return_web_url": {
           "description": "If included this will return a \"search_url\" property that has a URL that can be used to perform this same search on the DirectFreight Website.",
           "type": "boolean"
@@ -1571,6 +3623,15 @@
             "new"
           ],
           "example": "age",
+          "type": "string"
+        },
+        "tier": {
+          "description": "This field is an optional filter that limits board response to 'free' or 'premium' loads. If this field is not specified it defaults to 'all' loads.\nfree loads - are loads that are more than 2 hours old. contact information and comments are visible even if this request comes from an unsubscribed account.\npremium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.   STAGE=Private",
+          "enum": [
+            "all",
+            "free",
+            "premium"
+          ],
           "type": "string"
         },
         "trailer_type": {
@@ -1822,6 +3883,10 @@
         },
         "total_pages": {
           "description": "A count of the # of pages based on the search parameters.",
+          "type": "integer"
+        },
+        "total_unviewed_plus_viewed": {
+          "description": "STAGE=PRIVATE  This is the total number of loads that would be returned by this boards request if the boards request ignored the return_only \"unviewed\" attribute. The return_only field is an advanced field that allows for additional filter options.  Please contact Direct Freight for more information on gaining access to this field",
           "type": "integer"
         }
       },
@@ -3293,11 +5358,31 @@
         "dot_number": {
           "type": "string"
         },
+        "driver_per_mile": {
+          "description": "STAGE=Private",
+          "type": "number"
+        },
         "fax_number": {
           "type": "integer"
         },
+        "fuel_capacity": {
+          "description": "STAGE=Private",
+          "type": "number"
+        },
+        "ins_permits_per_mile": {
+          "description": "STAGE=Private",
+          "type": "number"
+        },
+        "maint_per_mile": {
+          "description": "STAGE=Private",
+          "type": "number"
+        },
         "mc_number": {
           "type": "string"
+        },
+        "miles_per_gal": {
+          "description": "STAGE=Private",
+          "type": "number"
         },
         "mobile_carrier": {
           "enum": [
@@ -3330,6 +5415,10 @@
         },
         "state": {
           "type": "string"
+        },
+        "truck_ownership_per_mile": {
+          "description": "STAGE=Private",
+          "type": "number"
         },
         "web_page": {
           "type": "string"
@@ -3407,16 +5496,16 @@
     },
     "single_load_response": {
       "properties": {
-        "booking_information": {
+        "booking_info": {
           "properties": {
             "booking_link": {
               "type": "string"
             },
-            "partner": {
+            "offer_authorization_key": {
               "type": "string"
             },
-            "ref_id": {
-              "type": "string"
+            "offer_rate": {
+              "type": "number"
             }
           },
           "type": "object"
