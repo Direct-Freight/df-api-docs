@@ -305,20 +305,12 @@
             "in": "query",
             "name": "entry_id",
             "required": false,
-            "type": "integer",
-            "x-example": "?entry_id=22"
-          },
-          {
-            "description": "To retrieve by custom_id",
-            "in": "query",
-            "name": "custom_id",
-            "required": false,
             "type": "string",
-            "x-example": "?custom_id=my1234"
+            "x-example": "?entry_id=22ef23"
           },
           {
             "in": "query",
-            "name": "booking_information",
+            "name": "request_booking_info",
             "required": false,
             "type": "boolean"
           },
@@ -5506,10 +5498,13 @@
       "properties": {
         "booking_information": {
           "properties": {
-            "ref_id": {
+            "booking_link": {
               "type": "string"
             },
-            "url": {
+            "partner": {
+              "type": "string"
+            },
+            "ref_id": {
               "type": "string"
             }
           },
