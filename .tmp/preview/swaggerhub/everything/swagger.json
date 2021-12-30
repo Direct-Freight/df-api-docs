@@ -298,10 +298,10 @@
     },
     "/boards/{board_type}": {
       "get": {
-        "description": "Retrieves a list of the users posted loads or trucks. By default it retrieves all of their entries. If you specifiy multiple ids, only 100 entries can be retrieved per request.",
+        "description": "Retrieves single load",
         "parameters": [
           {
-            "description": "the posting_ids associated with the data you want to get.",
+            "description": "the posting_id associated with the data you want to get.",
             "in": "query",
             "items": {
               "type": "integer"
@@ -309,7 +309,7 @@
             "name": "posting_id",
             "required": false,
             "type": "array",
-            "x-example": "?posting_id=22&posting_id=23&posting_id=24"
+            "x-example": "?posting_id=22"
           },
           {
             "description": "To retrieve only a subset of entries.",
@@ -320,34 +320,7 @@
             "name": "custom_id",
             "required": false,
             "type": "array",
-            "x-example": "?custom_id=cats&custom_id=dogs&custom_id=parrots"
-          },
-          {
-            "description": "Sort results by a certain field.",
-            "enum": [
-              "origin_city",
-              "origin_state",
-              "destination_city",
-              "destination_state",
-              "trailer_type",
-              "load_size",
-              "ship_date",
-              "receive_date",
-              "comment"
-            ],
-            "in": "query",
-            "name": "sort_parameter",
-            "required": false,
-            "type": "string",
-            "x-example": "?sort_parameter=origin_city"
-          },
-          {
-            "description": "The page you want to return. Will return an empty board on an invalid page.",
-            "in": "query",
-            "name": "page_number",
-            "required": false,
-            "type": "integer",
-            "x-example": "?page_number=2"
+            "x-example": "?custom_id=cats"
           },
           {
             "in": "header",
@@ -424,7 +397,10 @@
             "$ref": "#/responses/error_422"
           }
         },
-        "summary": "Retrieve a board"
+        "summary": "Retrieve a board",
+        "tags": [
+          "boards"
+        ]
       },
       "x-restlet": {
         "section": "BOARDS"
