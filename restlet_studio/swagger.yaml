@@ -278,7 +278,7 @@ paths:
           required: false
           type: string
           x-example: '?custom_id=my1234'
-        - name: book_now
+        - name: booking_information
           required: false
           type: boolean
           in: query
@@ -3018,6 +3018,8 @@ definitions:
         type: object
         properties:
           ref_id:
+            type: string
+          url:
             type: string
   create_notes:
     properties:
