@@ -1,9 +1,11 @@
 properties:
   booking_information:
     properties:
-      ref_id:
+      booking_link:
         type: string
-      url:
+      partner:
+        type: string
+      ref_id:
         type: string
     type: object
   item:
