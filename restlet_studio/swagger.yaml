@@ -3008,14 +3008,14 @@ definitions:
     properties:
       item:
         $ref: '#/definitions/board_response_item'
-      booking_information:
+      booking_info:
         type: object
         properties:
           booking_link:
             type: string
-          ref_id:
-            type: string
-          partner:
+          offer_rate:
+            type: number
+          offer_authorization_key:
             type: string
   create_notes:
     properties:
