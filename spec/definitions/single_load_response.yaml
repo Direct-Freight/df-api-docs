@@ -7,6 +7,8 @@ properties:
         type: string
       offer_rate:
         type: number
+      raw_partner_data:
+        type: object
     type: object
   item:
     $ref: '#/definitions/board_response_item'
