@@ -1909,6 +1909,10 @@ definitions:
     type: object
     x-restlet:
       section: LOCATIONS
+  single_load_response:
+    properties:
+      item:
+        $ref: '#/definitions/board_response_item'
   social-login-end-user-token:
     properties:
       email:
@@ -2182,22 +2186,22 @@ paths:
     get:
       description: Retrieves single load
       parameters:
-        - description: the posting_id associated with the data you want to get.
+        - description: the entry_id associated with the data you want to get.
           in: query
           items:
             type: integer
-          name: posting_id
+          name: entry_id
           required: false
           type: array
-          x-example: '?posting_id=22'
-        - description: To retrieve only a subset of entries.
+          x-example: '?entry_id=22'
+        - description: To retrieve by custom_id
           in: query
           items:
             type: string
           name: custom_id
           required: false
           type: array
-          x-example: '?custom_id=cats'
+          x-example: '?custom_id=my1234'
         - in: header
           name: end-user-token
           required: true
@@ -2206,8 +2210,8 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/posting_post_response'
-      summary: Retrieve multiple postings
+            $ref: '#/definitions/single_load_response'
+      summary: Retrieve single load
       tags:
         - boards
     parameters:
