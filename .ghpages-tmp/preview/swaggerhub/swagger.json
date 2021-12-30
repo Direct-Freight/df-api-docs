@@ -120,7 +120,57 @@
         "section": "ALERTS"
       }
     },
+    "/alerts/search/{board_type}": {
+      "x-restlet": {
+        "section": "ALERTS"
+      }
+    },
     "/boards/{board_type}": {
+      "get": {
+        "description": "Retrieves single load",
+        "parameters": [
+          {
+            "description": "the entry_id associated with the data you want to get.",
+            "in": "query",
+            "name": "entry_id",
+            "required": false,
+            "type": "integer",
+            "x-example": "?entry_id=22"
+          },
+          {
+            "description": "To retrieve by custom_id",
+            "in": "query",
+            "name": "custom_id",
+            "required": false,
+            "type": "string",
+            "x-example": "?custom_id=my1234"
+          },
+          {
+            "in": "query",
+            "name": "book_now",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "header",
+            "name": "end-user-token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/single_load_response"
+            }
+          }
+        },
+        "summary": "Retrieve single load",
+        "tags": [
+          "boards"
+        ]
+      },
       "parameters": [
         {
           "description": "Defines the type of board requested.",
@@ -644,14 +694,18 @@
       },
       "parameters": [
         {
-          "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+          "description": "Specifies board you are posting to.",
           "enum": [
-            "test_loads",
-            "test_trucks",
+            "loads",
+            "trucks",
             "private_loads",
             "private_trucks",
-            "loads",
-            "trucks"
+            "test_loads",
+            "test_trucks",
+            "live_loads_temp",
+            "test_loads_temp",
+            "live_trucks_temp",
+            "test_trucks_temp"
           ],
           "in": "path",
           "name": "posting_type",
@@ -714,7 +768,7 @@
       },
       "post": {
         "consumes": [],
-        "description": "This endpoint method will post one or more entries. Valid posting_type are: loads, trucks, test_loads, test_trucks, private_loads, and private_trucks.\n\nOnly 100 entries can be created per request.",
+        "description": "Only 100 entries can be created per request.",
         "parameters": [
           {
             "in": "header",
@@ -763,7 +817,7 @@
     "/postings/{posting_type}/{action}": {
       "parameters": [
         {
-          "description": "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\"",
+          "description": "Where items are being moved or copied to.",
           "enum": [
             "loads",
             "trucks",
@@ -778,13 +832,33 @@
           "type": "string"
         },
         {
-          "description": "Specified in the url. Valid types are \"copy\", and \"move\"",
+          "description": "Specified in the url.",
           "enum": [
             "copy",
             "move"
           ],
           "in": "path",
           "name": "action",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-restlet": {
+        "section": "POSTINGS"
+      }
+    },
+    "/postings/{posting_type}/replace_all": {
+      "parameters": [
+        {
+          "description": "Destination where items will be replaced.",
+          "enum": [
+            "loads",
+            "trucks",
+            "test_loads",
+            "test_trucks"
+          ],
+          "in": "path",
+          "name": "posting_type",
           "required": true,
           "type": "string"
         }
@@ -1108,6 +1182,15 @@
       "x-restlet": {
         "section": "ALERTS"
       }
+    },
+    "alert_search_response": {
+      "properties": {
+        "alert_id": {
+          "description": "Alert ID.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
     },
     "alert": {
       "properties": {
@@ -1760,11 +1843,28 @@
     },
     "boards_freight_rate_response": {
       "properties": {
-        "average_pay_rate": {
-          "type": "number"
-        },
-        "loads": {
-          "type": "integer"
+        "TRAILER_TYPE": {
+          "properties": {
+            "dates": {
+              "items": {
+                "properties": {
+                  "date": {
+                    "format": "date",
+                    "type": "string"
+                  },
+                  "loads": {
+                    "type": "integer"
+                  },
+                  "rate": {
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
         }
       },
       "type": "object",
@@ -2306,27 +2406,6 @@
         "section": "not categorized yet"
       }
     },
-    "mobile_carrier_response": {
-      "example": {
-        "carrier_id": 0,
-        "carrier_name": "{}"
-      },
-      "properties": {
-        "carrier_id": {
-          "description": "The carrier ID.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "carrier_name": {
-          "description": "Their mobile carrier.",
-          "type": "object"
-        }
-      },
-      "type": "object",
-      "x-restlet": {
-        "section": "not categorized yet"
-      }
-    },
     "note_create_status": {
       "properties": {
         "note_id": {
@@ -2483,21 +2562,6 @@
         "section": "ALERTS"
       }
     },
-    "post_optin_code_response": {
-      "example": {
-        "optin_code": "optin_code"
-      },
-      "properties": {
-        "optin_code": {
-          "description": "A text string with the code sent.",
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "x-restlet": {
-        "section": "not categorized yet"
-      }
-    },
     "post_posting_type_action_body": {
       "properties": {
         "new_load_custom_id": {
@@ -2509,14 +2573,20 @@
           "type": "object"
         },
         "source_posting": {
-          "description": "The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads.",
+          "description": "Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.",
+          "enum": [
+            "loads",
+            "trucks",
+            "private_loads",
+            "private_trucks",
+            "test_loads",
+            "test_trucks"
+          ],
           "type": "string"
         }
       },
       "required": [
-        "source_id",
-        "source_posting",
-        "new_load_custom_id"
+        "source_posting"
       ],
       "type": "object",
       "x-restlet": {
@@ -3059,6 +3129,21 @@
         "section": "POSTINGS"
       }
     },
+    "postings-replace_all_response": {
+      "properties": {
+        "message": {
+          "description": "Operation Successful.",
+          "required": [
+            "message"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "x-restlet": {
+        "section": "POSTINGS"
+      }
+    },
     "profile_object_patch": {
       "example": {
         "address": "11 Wall Street",
@@ -3328,6 +3413,21 @@
         "section": "LOCATIONS"
       }
     },
+    "single_load_response": {
+      "properties": {
+        "booking_information": {
+          "properties": {
+            "ref_id": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "item": {
+          "$ref": "#/definitions/board_response_item"
+        }
+      }
+    },
     "social_login_credentials": {
       "properties": {
         "create_missing_account": {
@@ -3549,6 +3649,10 @@
       "properties": {
         "email": {
           "description": "This must be a valid e-mail. ",
+          "type": "string"
+        },
+        "partner": {
+          "description": "Optional partner string to be associated with the new account.",
           "type": "string"
         },
         "password": {

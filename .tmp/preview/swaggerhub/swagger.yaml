@@ -1915,6 +1915,8 @@ definitions:
         properties:
           ref_id:
             type: string
+          url:
+            type: string
         type: object
       item:
         $ref: '#/definitions/board_response_item'
@@ -2204,7 +2206,7 @@ paths:
           type: string
           x-example: '?custom_id=my1234'
         - in: query
-          name: book_now
+          name: booking_information
           required: false
           type: boolean
         - in: header

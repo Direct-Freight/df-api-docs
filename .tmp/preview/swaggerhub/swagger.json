@@ -147,7 +147,7 @@
           },
           {
             "in": "query",
-            "name": "book_now",
+            "name": "booking_information",
             "required": false,
             "type": "boolean"
           },
@@ -3418,6 +3418,9 @@
         "booking_information": {
           "properties": {
             "ref_id": {
+              "type": "string"
+            },
+            "url": {
               "type": "string"
             }
           },
