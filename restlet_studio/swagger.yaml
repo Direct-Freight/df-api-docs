@@ -3015,7 +3015,7 @@ definitions:
             type: string
           offer_rate:
             type: number
-          offer_authorization_key:
+          offer_preauthorization_key:
             type: string
   create_notes:
     properties:
