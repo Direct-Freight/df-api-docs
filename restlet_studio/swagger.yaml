@@ -272,13 +272,7 @@ paths:
           type: string
           required: false
           x-example: '?entry_id=22ef23'
-        - name: custom_id 
-          description: To retrieve by custom_id
-          in: query
-          required: false
-          type: string
-          x-example: '?custom_id=my1234'
-        - name: booking_information
+        - name: request_booking_info
           required: false
           type: boolean
           in: query
