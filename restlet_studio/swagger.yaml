@@ -276,9 +276,9 @@ paths:
           required: false
           type: string
           enum:
+            - request_quote
             - request_booking
             - finalize_booking
-            - request_quote
           in: query
         - name: booking_authorization_key
           in: query
