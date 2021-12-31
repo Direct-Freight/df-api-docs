@@ -139,9 +139,9 @@
           },
           {
             "enum": [
+              "request_quote",
               "request_booking",
-              "finalize_booking",
-              "request_quote"
+              "finalize_booking"
             ],
             "in": "query",
             "name": "request_booking_info",
