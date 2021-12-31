@@ -279,6 +279,7 @@ paths:
             - request_quote
             - request_booking
             - finalize_booking
+            - none
           in: query
           description: optional.  
         - name: booking_authorization_key
