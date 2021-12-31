@@ -12,6 +12,7 @@ get:
         - request_quote
         - request_booking
         - finalize_booking
+        - none
       in: query
       name: request_booking_info
       required: false
