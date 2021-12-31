@@ -5,7 +5,7 @@ properties:
         type: string
       debug_raw_partner_data:
         type: object
-      offer_preauthorization_key:
+      offer_authorization_key:
         type: string
       offer_rate:
         type: number
