@@ -234,7 +234,7 @@ paths:
             - finalize_booking
             - request_quote
           in: query
-          name: request_booking
+          name: request_booking_info
           required: false
           type: string
         - in: query
