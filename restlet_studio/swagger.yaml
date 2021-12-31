@@ -272,7 +272,7 @@ paths:
           type: string
           required: false
           x-example: '?entry_id=22ef23'
-        - name: request_booking
+        - name: request_booking_info
           required: false
           type: string
           enum:
