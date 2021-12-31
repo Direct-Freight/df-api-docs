@@ -280,6 +280,7 @@ paths:
             - request_booking
             - finalize_booking
           in: query
+          description: optional.  
         - name: booking_authorization_key
           description:  Only required to finalize a booking.
           in: query
