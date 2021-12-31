@@ -281,6 +281,7 @@ paths:
             - finalize_booking
           in: query
         - name: booking_authorization_key
+          description:  Only required to finalize a booking.
           in: query
           type: string
           required: false
