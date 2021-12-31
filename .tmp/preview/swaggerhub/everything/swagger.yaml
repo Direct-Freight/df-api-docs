@@ -229,10 +229,18 @@ paths:
           required: false
           type: string
           x-example: '?entry_id=22ef23'
-        - in: query
-          name: request_booking_info
+        - enum:
+            - booking_preauth
+            - finalize_booking
+            - request_quote
+          in: query
+          name: request_booking
           required: false
-          type: boolean
+          type: string
+        - in: query
+          name: booking_authorization_key
+          required: false
+          type: string
         - in: header
           name: end-user-token
           required: true
@@ -4021,7 +4029,7 @@ definitions:
             type: string
           debug_raw_partner_data:
             type: object
-          offer_preauthorization_key:
+          offer_authorization_key:
             type: string
           offer_rate:
             type: number

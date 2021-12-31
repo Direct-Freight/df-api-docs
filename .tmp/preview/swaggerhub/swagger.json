@@ -138,10 +138,21 @@
             "x-example": "?entry_id=22ef23"
           },
           {
+            "enum": [
+              "booking_preauth",
+              "finalize_booking",
+              "request_quote"
+            ],
             "in": "query",
-            "name": "request_booking_info",
+            "name": "request_booking",
             "required": false,
-            "type": "boolean"
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "booking_authorization_key",
+            "required": false,
+            "type": "string"
           },
           {
             "in": "header",
@@ -3415,7 +3426,7 @@
             "debug_raw_partner_data": {
               "type": "object"
             },
-            "offer_preauthorization_key": {
+            "offer_authorization_key": {
               "type": "string"
             },
             "offer_rate": {
