@@ -149,6 +149,7 @@
             "type": "string"
           },
           {
+            "description": "Only required to finalize a booking.",
             "in": "query",
             "name": "booking_authorization_key",
             "required": false,
