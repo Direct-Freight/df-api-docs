@@ -1979,8 +1979,16 @@ paths:
             properties:
               trailer_type:
                 $ref: '#/definitions/trailer_type'
+              - comment:
+                description:  the public comment that should be attached to the load being entered.
+                type: sting
+              - other_trailer_type:
+                description:  what should be put in the other_trailer_types field when posting the load.
+                type: string
             required:
               - trailer_type
+              - comment
+              - other_trailer_type
             type: object
       summary: STAGE=PRIVATE-LIVE Find an official type to match to the customer submitted one.
       tags:
