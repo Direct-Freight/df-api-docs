@@ -2203,10 +2203,12 @@ paths:
           required: false
           type: string
           x-example: '?entry_id=22ef23'
-        - enum:
+        - description: optional.
+          enum:
             - request_quote
             - request_booking
             - finalize_booking
+            - none
           in: query
           name: request_booking_info
           required: false
