@@ -38,8 +38,6 @@ get:
             $ref: '#/definitions/trailer_type'
         required:
           - trailer_type
-          - comment
-          - other_trailer_type
         type: object
   summary: >-
     STAGE=PRIVATE-LIVE Find an official type to match to the customer submitted
