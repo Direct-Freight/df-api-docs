@@ -1979,10 +1979,10 @@ paths:
             properties:
               trailer_type:
                 $ref: '#/definitions/trailer_type'
-              - comment:
+              comment:
                 description:  the public comment that should be attached to the load being entered.
-                type: sting
-              - other_trailer_type:
+                type: string
+              other_trailer_type:
                 description:  what should be put in the other_trailer_types field when posting the load.
                 type: string
             required:
