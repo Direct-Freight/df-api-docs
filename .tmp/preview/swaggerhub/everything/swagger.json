@@ -311,13 +311,13 @@
           {
             "description": "optional.",
             "enum": [
-              "request_quote",
-              "request_booking",
+              "submit_quote",
+              "request_booking_rate",
               "finalize_booking",
               "none"
             ],
             "in": "query",
-            "name": "request_booking_info",
+            "name": "booking_action",
             "required": false,
             "type": "string"
           },
