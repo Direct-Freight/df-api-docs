@@ -1974,6 +1974,12 @@ paths:
           description: Status 200
           schema:
             properties:
+              comment:
+                description: the public comment that should be attached to the load being entered.
+                type: string
+              other_trailer_type:
+                description: what should be put in the other_trailer_types field when posting the load.
+                type: string
               trailer_type:
                 $ref: '#/definitions/trailer_type'
             required:

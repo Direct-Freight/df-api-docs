@@ -14,7 +14,7 @@ get:
         - finalize_booking
         - none
       in: query
-      name: request_booking_info
+      name: booking_action
       required: false
       type: string
     - description: Only required to finalize a booking.
