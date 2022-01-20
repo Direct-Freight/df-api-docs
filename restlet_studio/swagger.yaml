@@ -276,8 +276,8 @@ paths:
           required: false
           type: string
           enum:
-            - request_quote
-            - request_booking
+            - submit_quote
+            - request_booking_rate
             - finalize_booking
             - none
           in: query
