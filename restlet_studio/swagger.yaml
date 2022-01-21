@@ -282,8 +282,8 @@ paths:
             - none
           in: query
           description: optional.  
-        - name: booking_authorization_key
-          description:  Only required to finalize a booking.
+        - name: booking_reference_code
+          description:  Required to finalize a booking.
           in: query
           type: string
           required: false
@@ -2951,11 +2951,11 @@ definitions:
       booking_info:
         type: object
         properties:
-          booking_link:
-            type: string
           offer_rate:
             type: number
-          offer_authorization_key:
+          offer_rate_per_mile_est:
+            type: number
+          booking_reference_code:
             type: string
           debug_raw_partner_data:
             type: object
