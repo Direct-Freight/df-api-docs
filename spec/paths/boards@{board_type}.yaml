@@ -17,9 +17,9 @@ get:
       name: booking_action
       required: false
       type: string
-    - description: Only required to finalize a booking.
+    - description: Required to finalize a booking.
       in: query
-      name: booking_authorization_key
+      name: booking_reference_code
       required: false
       type: string
     - in: header

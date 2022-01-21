@@ -311,8 +311,8 @@
           {
             "description": "optional.",
             "enum": [
-              "submit_bid",
-              "request_booking_rate",
+              "submit_quote",
+              "request_booking",
               "finalize_booking",
               "none"
             ],
