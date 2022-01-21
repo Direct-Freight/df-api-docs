@@ -19,7 +19,7 @@ get:
       type: string
     - description: Required to finalize a booking.
       in: query
-      name: booking_reference_code
+      name: offer_reference_code
       required: false
       type: string
     - in: header
