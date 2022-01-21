@@ -282,7 +282,7 @@ paths:
             - none
           in: query
           description: optional.  
-        - name: booking_reference_code
+        - name: offer_reference_code
           description:  Required to finalize a booking.
           in: query
           type: string
@@ -2955,7 +2955,7 @@ definitions:
             type: number
           offer_rate_per_mile_est:
             type: number
-          booking_reference_code:
+          offer_reference_code:
             type: string
           debug_raw_partner_data:
             type: object
