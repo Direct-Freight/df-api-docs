@@ -19,6 +19,10 @@ info:
     The end-user-token is needed in order to use certain features, and get certain sensitive information.
 
     Both Tokens are stateless, and delivered via the HTTP headers.
+    The api token is a permanent token assigned to each partner.
+    The user token is a temporary session token assigned to each direct freight user.
+    The user token can be valid for up to 24 hours depending on activity.
+    
   title: Direct Freight API
   version: '1.0'
   x-logo:
