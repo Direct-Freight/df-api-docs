@@ -39,3 +39,6 @@ node_modules
 
 #temporary build directory
 #.tmp  #this breaks the build I think
+.ghpages-tmp
+.tmp
+
