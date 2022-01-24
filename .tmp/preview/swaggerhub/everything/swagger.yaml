@@ -239,9 +239,9 @@ paths:
           name: booking_action
           required: false
           type: string
-        - description: Only required to finalize a booking.
+        - description: Required to finalize a booking.
           in: query
-          name: booking_authorization_key
+          name: offer_reference_code
           required: false
           type: string
         - in: header
@@ -3957,14 +3957,14 @@ definitions:
     properties:
       booking_info:
         properties:
-          booking_link:
-            type: string
           debug_raw_partner_data:
             type: object
-          offer_authorization_key:
-            type: string
           offer_rate:
             type: number
+          offer_rate_per_mile_est:
+            type: number
+          offer_reference_code:
+            type: string
         type: object
       item:
         $ref: '#/definitions/board_response_item'
