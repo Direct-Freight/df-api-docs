@@ -1,7 +1,5 @@
 parameters:
-  - description: >-
-      Valid types are "loads", "trucks", "private_loads", "private_trucks",
-      "test_loads", and "test_trucks"
+  - description: Where items are being moved or copied to.
     enum:
       - loads
       - trucks
@@ -13,7 +11,7 @@ parameters:
     name: posting_type
     required: true
     type: string
-  - description: 'Specified in the url. Valid types are "copy", and "move"'
+  - description: Specified in the url.
     enum:
       - copy
       - move
@@ -38,7 +36,7 @@ post:
       description: Success
       schema:
         $ref: '#/definitions/postings-copy_or_move_response'
-  summary: STAGE=UNK Copy or Move a posting.
+  summary: STAGE=PRIVATE Copy or Move a posting.
   tags:
     - postings
 x-restlet:

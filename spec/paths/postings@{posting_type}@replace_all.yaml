@@ -1,0 +1,28 @@
+parameters:
+  - description: Destination where items will be replaced.
+    enum:
+      - loads
+      - trucks
+      - test_loads
+      - test_trucks
+    in: path
+    name: posting_type
+    required: true
+    type: string
+post:
+  consumes: []
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '202':
+      description: Success
+      schema:
+        $ref: '#/definitions/postings-replace_all_response'
+  summary: STAGE=PRIVATE Delete all/Replace
+  tags:
+    - postings
+x-restlet:
+  section: POSTINGS

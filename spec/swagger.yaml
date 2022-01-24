@@ -60,7 +60,8 @@ parameters:
   posting_type:
     description: >-
       Valid types are "loads", "trucks", "private_loads", "private_trucks",
-      "test_loads", and "test_trucks"
+      "test_loads", "test_trucks", "live_loads_temp", "live_trucks_temp",
+      "test_loads_temp", "test_trucks_temp"
     enum:
       - loads
       - trucks

@@ -19,6 +19,10 @@ info:
     The end-user-token is needed in order to use certain features, and get certain sensitive information.
 
     Both Tokens are stateless, and delivered via the HTTP headers.
+    The api token is a permanent token assigned to each partner.
+    The user token is a temporary session token assigned to each direct freight user.
+    The user token can be valid for up to 24 hours depending on activity.
+    
   title: Direct Freight API
   version: '1.0'
   x-logo:
@@ -69,7 +73,8 @@ parameters:
     required: true
     type: string
   posting_type:
-    description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+    description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", "test_trucks",
+    "live_loads_temp", "live_trucks_temp", "test_loads_temp", "test_trucks_temp"'
     enum:
       - loads
       - trucks
@@ -189,6 +194,36 @@ paths:
         - alerts
     x-restlet:
       section: ALERTS
+  '/alerts/search/{board_type}':
+    post:
+      consumes: []
+      description: 'This method will search a users alert. It accepts the exact same structure as the POST method for /alerts/. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/alert'
+        - in: path
+          name: board_type
+          required: true
+          type: string            
+      responses:
+        '200':
+          description: Alert found, returns the alert_id that corresponds to the search.
+          schema:
+            $ref: '#/definitions/alert_search_response'          
+        '404':
+          description: Alert not found using specified parameters.
+      summary: STAGE=UNKNOWN Create an alert.
+      tags:
+        - alerts
+    x-restlet:
+      section: ALERTS      
   '/boards/{board_type}':
     parameters:
       - description: Defines the type of board requested.
@@ -230,6 +265,42 @@ paths:
         '422':
           $ref: '#/responses/error_422'
       summary: Retrieve a board
+      tags:
+        - boards
+    get:
+      description: 'Retrieves single load'
+      parameters:
+        - name: entry_id
+          description: the entry_id associated with the data you want to get.
+          in: query
+          type: string
+          required: false
+          x-example: '?entry_id=22ef23'
+        - name: booking_action
+          required: false
+          type: string
+          enum:
+            - submit_quote
+            - request_booking
+            - finalize_booking
+            - none
+          in: query
+          description: optional.  
+        - name: offer_reference_code
+          description:  Required to finalize a booking.
+          in: query
+          type: string
+          required: false
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/single_load_response'
+      summary: Retrieve single load STAGE=UNK
       tags:
         - boards
     x-restlet:
@@ -610,14 +681,14 @@ paths:
           type: string   
       responses:
         '201':
-          description: Details about average rates for this trip.
+          description: Details about average rates for this trip. Returns an object where each key is a trailer type with an array of the freight rate for each day that was found for that type.
           schema:
             $ref: '#/definitions/boards_freight_rate_response'
       summary: STAGE=Private Get Freight Rates.
       tags:
         - boards
     x-restlet:
-      section: BOARDS                  
+      section: BOARDS    
   /end_user_authentication/users:
     post:
       consumes: []
@@ -735,15 +806,38 @@ paths:
       parameters:
         - description: The user e-mail to send a password to if valid.
           in: query
-          name: email
+          name: email_address
           required: true
           type: string
       responses:
         '200':
-          description: This will return a success even if the e-mail is not in our records.
+          description: This will return a success only if the e-mail is in our records.
         '422':
           $ref: '#/responses/error_422'
       summary: STAGE=UNK Retrieve password
+      tags:
+        - end_user_authentications
+    post:
+      consumes: []
+      description: 'Creates a new password for a user with a recovery key'
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            recovery_key: 
+              description: The key we e-mailed to a user when they forgot their password. See the GET section.
+              type: string
+            new_password:
+              description: The new password they want it updated to.
+              type: string
+      responses:
+        '201':
+          description: Their password was successfuly updated.
+        '422':
+          $ref: '#/responses/error_422'
+      summary: STAGE=UNK Restore password.
       tags:
         - end_user_authentications
     patch:
@@ -1308,14 +1402,18 @@ paths:
       tags:
         - postings
     parameters:
-      - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+      - description: Specifies board you are posting to.
         enum:
-          - test_loads
-          - test_trucks
-          - private_loads
-          - private_trucks
           - loads
           - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
+          - live_loads_temp
+          - test_loads_temp
+          - live_trucks_temp
+          - test_trucks_temp 
         in: path
         name: posting_type
         required: true
@@ -1358,9 +1456,8 @@ paths:
     post:
       consumes: []
       description: |-
-        This endpoint method will post one or more entries. Valid posting_type are: loads, trucks, test_loads, test_trucks, private_loads, and private_trucks.
-
         Only 100 entries can be created per request.
+        
       parameters:
         - in: header
           name: end-user-token
@@ -1391,7 +1488,7 @@ paths:
       section: POSTINGS
   '/postings/{posting_type}/{action}':
     parameters:
-      - description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", and "test_trucks"'
+      - description: 'Where items are being moved or copied to.'
         enum:
           - loads
           - trucks
@@ -1403,7 +1500,7 @@ paths:
         name: posting_type
         required: true
         type: string
-      - description: 'Specified in the url. Valid types are "copy", and "move"'
+      - description: 'Specified in the url.'
         enum:
           - copy
           - move
@@ -1428,11 +1525,40 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/postings-copy_or_move_response'
-      summary: STAGE=UNK Copy or Move a posting.
+      summary: STAGE=PRIVATE Copy or Move a posting.
       tags:
         - postings
     x-restlet:
       section: POSTINGS
+  '/postings/{posting_type}/replace_all':
+    parameters:
+      - description: 'Destination where items will be replaced.'
+        enum:
+          - loads
+          - trucks
+          - test_loads
+          - test_trucks
+        in: path
+        name: posting_type
+        required: true
+        type: string
+    post:
+      consumes: []
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '202':
+          description: Success
+          schema:
+            $ref: '#/definitions/postings-replace_all_response'
+      summary: STAGE=PRIVATE Delete all/Replace
+      tags:
+        - postings
+    x-restlet:
+      section: POSTINGS      
   '/postings/custom_fields/names/':
     delete:
       parameters:
@@ -1832,25 +1958,6 @@ paths:
     x-restlet:
       section: VALIDATIONS
   /validations/trailers:
-    delete:
-      description: This will remove a customer_type from the list. This is only useable via a special api-token
-      parameters:
-        - description: This will remove this type from the list.
-          in: query
-          name: customer_type
-          required: true
-          type: string
-        - description: If you wish to remove a customer_type associated with a username you would add this parameter.
-          in: query
-          name: username
-          required: false
-          type: string
-      responses:
-        '204':
-          description: Status 204
-      summary: STAGE=UNIMPLEMENTED-NO-NEED Remove a lookup.
-      tags:
-        - validations
     get:
       parameters:
         - description: The custom type that the poster is trying to submit.
@@ -1858,7 +1965,12 @@ paths:
           name: customer_type
           required: true
           type: string
-          x-example: DX
+          x-example: FLAT53
+        - in: query
+          name: partner
+          type: string
+          x-example: parade
+          required: false
         - description: 'We assume only posters will be using this endpoint. We will use their end-user-token to match for a customer specific match first, and fall back to a general one if it doesn''t exist.'
           in: header
           name: end-user-token
@@ -1871,73 +1983,16 @@ paths:
             properties:
               trailer_type:
                 $ref: '#/definitions/trailer_type'
+              comment:
+                description:  the public comment that should be attached to the load being entered.
+                type: string
+              other_trailer_type:
+                description:  what should be put in the other_trailer_types field when posting the load.
+                type: string
             required:
               - trailer_type
             type: object
       summary: STAGE=PRIVATE-LIVE Find an official type to match to the customer submitted one.
-      tags:
-        - validations
-    patch:
-      consumes: []
-      description: Will update the match of the trailer_type to the customer type. This is only useable via a special api-token
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              customer_type:
-                description: This is the key. It is not modified.
-                type: string
-              notes:
-                description: You can clear or replace the notes.
-                type: string
-              trailer_type:
-                $ref: '#/definitions/trailer_type'
-              username:
-                description: 'This is an optional key, and is also not modifiable. If customer_type is associated with a username you must also include the username.'
-                type: string
-            required:
-              - customer_type
-              - trailer_type
-            type: object
-      responses:
-        '202':
-          description: Status 202
-      summary: STAGE=UNIMPLEMENTED-NO-NEED Update which DF trailer_types match the customer_type
-      tags:
-        - validations
-    post:
-      consumes: []
-      description: This is only useable via a special api-token
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            properties:
-              customer_type:
-                description: This is the new type we are adding to our lookup table.
-                type: string
-              notes:
-                description: Provides context. For internal use.
-                type: string
-              trailer_type:
-                $ref: '#/definitions/trailer_type'
-              username:
-                description: |-
-                  This is to specify to create this definition for only this specific user. You might do this if this customer_type already exists and uses a different list of trailer types than this customer requires.
-
-                  This style uses the old system. It is open in that anyone with the special api-token can update any user. Optionally, if we chose to lock it down to end-user-token we loose that ability, could drop this field and let them just send in an EUA token.
-                type: string
-            required:
-              - customer_type
-              - trailer_type
-            type: object
-      responses:
-        '201':
-          description: Status 201
-      summary: STAGE=UNIMPLEMENTED-NO-NEED Add a custom trailer type match.
       tags:
         - validations
     x-restlet:
@@ -2839,10 +2894,21 @@ definitions:
       section: BOARDS
   boards_freight_rate_response:
     properties:
-      loads:
-        type: integer
-      average_pay_rate:
-        type: number
+      TRAILER_TYPE:
+        type: object
+        properties:
+          dates:
+            type: array
+            items:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                loads:
+                  type: integer
+                rate:
+                  type: number
     type: object
     x-restlet:
       section: BOARDS
@@ -2882,6 +2948,21 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
+  single_load_response:
+    properties:
+      item:
+        $ref: '#/definitions/board_response_item'
+      booking_info:
+        type: object
+        properties:
+          offer_rate:
+            type: number
+          offer_rate_per_mile_est:
+            type: number
+          offer_reference_code:
+            type: string
+          debug_raw_partner_data:
+            type: object
   create_notes:
     properties:
       body:
@@ -2907,6 +2988,12 @@ definitions:
     required:
       - name
     type: object
+  alert_search_response:
+    properties:
+      alert_id:
+        description: 'Alert ID.'
+        type: integer
+    type: object    
   create_custom_field_data:
     properties:
       field_name:
@@ -3167,21 +3254,6 @@ definitions:
     type: object
     x-restlet:
       section: not categorized yet
-  mobile_carrier_response:
-    example:
-      carrier_id: 0
-      carrier_name: '{}'
-    properties:
-      carrier_id:
-        description: The carrier ID.
-        format: int32
-        type: integer
-      carrier_name:
-        description: Their mobile carrier.
-        type: object
-    type: object
-    x-restlet:
-      section: not categorized yet
   note_create_status:
     properties:
       note_id:
@@ -3303,32 +3375,26 @@ definitions:
     type: object
     x-restlet:
       section: ALERTS
-  post_optin_code_response:
-    example:
-      optin_code: optin_code
-    properties:
-      optin_code:
-        description: A text string with the code sent.
-        type: string
-    type: object
-    x-restlet:
-      section: not categorized yet
-
   post_posting_type_action_body:
     properties:
       source_id:
         description: The posting id of the posting you are moving or copying. Optional for create.
         type: object
       source_posting:
-        description: The posting_type where you are moving or copying the posting from. Optional for create. Items can only be moved to like types. loads -> private_private loads.
+        description: Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.
         type: string
+        enum:
+          - loads
+          - trucks
+          - private_loads
+          - private_trucks
+          - test_loads
+          - test_trucks
       new_load_custom_id:
         description: Optionally specify the custom_id that should be assigned to the new load. This is required for the copy command, for the move command it will be auto-generated if one is not specified.
         type: string        
     required:
-      - source_id
       - source_posting
-      - new_load_custom_id
     type: object
     x-restlet:
       section: not categorized yet
@@ -3766,6 +3832,16 @@ definitions:
     type: object
     x-restlet:
       section: POSTINGS
+  postings-replace_all_response:
+    properties:
+      message:
+        description: Operation Successful.
+        type: string
+        required:
+          - message
+    type: object
+    x-restlet:
+      section: POSTINGS      
   profile_object:
     example: {
       "address": "11 Wall Street",
@@ -4121,6 +4197,9 @@ definitions:
       password:
         description: 'Currently this is a 6-10 digit alphanumeric password. '
         type: string
+      partner:
+        description: 'Optional partner string to be associated with the new account.'
+        type: string        
     required:
       - email
       - password

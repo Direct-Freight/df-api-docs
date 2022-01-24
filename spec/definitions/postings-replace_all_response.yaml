@@ -1,0 +1,9 @@
+properties:
+  message:
+    description: Operation Successful.
+    required:
+      - message
+    type: string
+type: object
+x-restlet:
+  section: POSTINGS

@@ -61,7 +61,10 @@ get:
       type: string
   responses:
     '201':
-      description: Details about average rates for this trip.
+      description: >-
+        Details about average rates for this trip. Returns an object where each
+        key is a trailer type with an array of the freight rate for each day
+        that was found for that type.
       schema:
         $ref: '#/definitions/boards_freight_rate_response'
   summary: STAGE=Private Get Freight Rates.

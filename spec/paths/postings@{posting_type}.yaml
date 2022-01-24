@@ -96,16 +96,18 @@ get:
   tags:
     - postings
 parameters:
-  - description: >-
-      Valid types are "loads", "trucks", "private_loads", "private_trucks",
-      "test_loads", and "test_trucks"
+  - description: Specifies board you are posting to.
     enum:
-      - test_loads
-      - test_trucks
-      - private_loads
-      - private_trucks
       - loads
       - trucks
+      - private_loads
+      - private_trucks
+      - test_loads
+      - test_trucks
+      - live_loads_temp
+      - test_loads_temp
+      - live_trucks_temp
+      - test_trucks_temp
     in: path
     name: posting_type
     required: true
@@ -147,12 +149,7 @@ patch:
     - postings
 post:
   consumes: []
-  description: >-
-    This endpoint method will post one or more entries. Valid posting_type are:
-    loads, trucks, test_loads, test_trucks, private_loads, and private_trucks.
-
-
-    Only 100 entries can be created per request.
+  description: Only 100 entries can be created per request.
   parameters:
     - in: header
       name: end-user-token
