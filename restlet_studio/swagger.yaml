@@ -296,7 +296,7 @@ paths:
           description: successful operation
           schema:
             $ref: '#/definitions/single_load_response'
-      summary: Retrieve single load
+      summary: Retrieve single load STAGE=UNK
       tags:
         - boards
     x-restlet:
