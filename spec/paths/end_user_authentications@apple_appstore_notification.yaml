@@ -1,0 +1,10 @@
+post:
+  description: Save the apple notification to mysql  STAGE=private
+  responses:
+    '200':
+      description: successful operation
+  summary: Save the apple notification to mysql  STAGE=private
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS
