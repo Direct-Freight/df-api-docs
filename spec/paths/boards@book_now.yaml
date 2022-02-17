@@ -1,0 +1,21 @@
+post:
+  consumes: []
+  description: Book a load with a partner.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/book_partner_load'
+  responses:
+    '201':
+      $ref: '#/responses/object_created'
+  summary: STAGE=UNK Book a load.
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS

@@ -1,0 +1,15 @@
+properties:
+  entry_id:
+    description: 'MD5 Identifier of load. '
+    type: string
+  offer_reference_code:
+    description: >-
+      Offer reference code as returned by
+      /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking. 
+    type: string
+required:
+  - entry_id
+  - offer_reference_code
+type: object
+x-restlet:
+  section: BOARDS
