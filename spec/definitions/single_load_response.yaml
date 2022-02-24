@@ -12,3 +12,12 @@ properties:
     type: object
   item:
     $ref: '#/definitions/board_response_item'
+  message:
+    description: Status message.
+    type: string
+  status:
+    description: OK or Error.
+    type: string
+  success:
+    description: true/false if request was successful.
+    type: boolean
