@@ -287,10 +287,25 @@ paths:
           in: query
           description: optional.  
         - name: offer_reference_code
-          description:  Required to finalize a booking.
+          description:  Required if booking_action=finalize_booking, returned when /boards/loads is used with booking_action=request_booking.
           in: query
           type: string
           required: false
+        - name: load_reference_id
+          description:  Required if booking_action=submit_quote, returned when /boards/loads is used with booking_action=request_booking.
+          in: query
+          type: string
+          required: false    
+        - name: company_external_key
+          description:  Required if booking_action=submit_quote, returned when /boards/loads is used with booking_action=request_booking.
+          in: query
+          type: string
+          required: false             
+        - name: quote_amount
+          description:  Required if booking_action=submit_quote, the amount offered to transport this load.
+          in: query
+          type: number
+          required: false                
         - in: header
           name: end-user-token
           required: true
@@ -574,54 +589,54 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
-  /boards/book_now:
-    post:
-      consumes: []
-      description: Book a load with a partner.
-      parameters:
-        - in: header
-          name: end-user-token
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/book_partner_load'
-      responses:
-        '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/create_status'
-      summary: STAGE=UNK Book a load.
-      tags:
-        - boards
-    x-restlet:
-      section: BOARDS      
-  /boards/post_quote:
-    post:
-      consumes: []
-      description: Post a quote for a load.
-      parameters:
-        - in: header
-          name: end-user-token
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/quote_partner_load'
-      responses:
-        '201':
-          description: Object created check the headers for a reference URL.
-          schema:
-            $ref: '#/definitions/create_status'
-      summary: STAGE=UNK Post quote for a load.
-      tags:
-        - boards
-    x-restlet:
-      section: BOARDS            
+  # /boards/book_now:
+  #   post:
+  #     consumes: []
+  #     description: Book a load with a partner.
+  #     parameters:
+  #       - in: header
+  #         name: end-user-token
+  #         required: true
+  #         type: string
+  #       - in: body
+  #         name: body
+  #         required: true
+  #         schema:
+  #           $ref: '#/definitions/book_partner_load'
+  #     responses:
+  #       '201':
+  #         description: Object created check the headers for a reference URL.
+  #         schema:
+  #           $ref: '#/definitions/create_status'
+  #     summary: STAGE=UNK Book a load.
+  #     tags:
+  #       - boards
+  #   x-restlet:
+  #     section: BOARDS      
+  # /boards/post_quote:
+  #   post:
+  #     consumes: []
+  #     description: Post a quote for a load.
+  #     parameters:
+  #       - in: header
+  #         name: end-user-token
+  #         required: true
+  #         type: string
+  #       - in: body
+  #         name: body
+  #         required: true
+  #         schema:
+  #           $ref: '#/definitions/quote_partner_load'
+  #     responses:
+  #       '201':
+  #         description: Object created check the headers for a reference URL.
+  #         schema:
+  #           $ref: '#/definitions/create_status'
+  #     summary: STAGE=UNK Post quote for a load.
+  #     tags:
+  #       - boards
+  #   x-restlet:
+  #     section: BOARDS            
   /boards/profit:      
     get:
       consumes: []
