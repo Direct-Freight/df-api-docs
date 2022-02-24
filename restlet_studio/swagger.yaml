@@ -3037,6 +3037,15 @@ definitions:
             type: string
           debug_raw_partner_data:
             type: object
+      message:
+        description: 'Status message.'
+        type: string        
+      status:
+        description: 'OK or Error.'
+        type: string    
+      success:
+        description: 'true/false if request was successful.'
+        type: boolean
   create_notes:
     properties:
       body:
