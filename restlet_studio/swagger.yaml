@@ -1611,7 +1611,7 @@ paths:
       section: POSTINGS
   '/postings/{posting_type}/replace_all':
     parameters:
-      - description: 'Destination where items will be replaced.'
+      - description: 'Destination where items will be replaced. Depending on the posting_type that is selected, the source posting will be the same but with _temp appended. For example, if posting_type=loads, then source_type is loads_temp.'
         enum:
           - loads
           - trucks
@@ -1628,6 +1628,11 @@ paths:
           name: end-user-token
           required: true
           type: string
+        - in: query
+          name: return_details
+          description: If this option is specified and its value is positive, this endpoint will additionaly return the total count of items inserted and deleted, it will also return an erray of the md5sums that were moved.
+          required: false
+          type: boolean          
       responses:
         '202':
           description: Success
