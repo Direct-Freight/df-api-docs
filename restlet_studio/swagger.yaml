@@ -3966,8 +3966,17 @@ definitions:
       message:
         description: Operation Successful.
         type: string
-        required:
-          - message
+      insert_count:
+        description: Total number of items inserted into destination.
+        type: number
+      delete_count:
+        description: Total number of items deleted from source.
+        type: number
+      replaced_entries:
+        description: List of entry ids that were replaced.
+        items:
+          type: string
+        type: array     
     type: object
     x-restlet:
       section: POSTINGS      
