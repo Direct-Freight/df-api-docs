@@ -4020,6 +4020,8 @@ definitions:
       "mobile_number":4445556666,
       "state": "NY",
       "web_page": "www.directfreight.com",
+      "carrier_onboard_url": "www.carrier.com/onboard",
+      "carrier_terms_url": "www.carrier.com/terms",
       "zip": "12345",
       "miles_per_gal": 6.50,
       "maint_per_mile": 0.17,
@@ -4085,6 +4087,10 @@ definitions:
         type: string
       web_page:
         type: string
+      carrier_onboard_url:
+        type: string
+      carrier_terms_url:
+        type: string
       zip:
         type: string
       miles_per_gal:
@@ -4125,6 +4131,8 @@ definitions:
       "mobile_number":4445556666,
       "state": "NY",
       "web_page": "www.directfreight.com",
+      "carrier_onboard_url": "www.carrier.com/onboard",
+      "carrier_terms_url": "www.carrier.com/terms",
       "zip": "12345"
    }
     properties:
@@ -4182,6 +4190,10 @@ definitions:
       state:
         type: string
       web_page:
+        type: string
+      carrier_onboard_url:
+        type: string
+      carrier_terms_url:
         type: string
       zip:
         type: string
