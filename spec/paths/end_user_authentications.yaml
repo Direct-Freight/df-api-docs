@@ -1,5 +1,5 @@
 delete:
-  description: This logs a user out. the end-user-token will no longer be valid.
+  description: This deletes the logged in users account permanently.
   parameters:
     - in: header
       name: end-user-token
@@ -7,7 +7,7 @@ delete:
       type: string
   responses:
     '204':
-      description: Will not return content on a successful logout.
+      description: Will not return content on a successful delete.
   summary: Logout
   tags:
     - end_user_authentications

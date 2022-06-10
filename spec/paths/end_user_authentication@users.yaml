@@ -1,3 +1,15 @@
+delete:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '204':
+      description: Will not return content on a successful logout.
+  summary: Create a new user.
+  tags:
+    - end_user_authentications
 post:
   consumes: []
   parameters:
