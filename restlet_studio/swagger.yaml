@@ -3207,15 +3207,6 @@ definitions:
         description: The email address that was used to login.
         example: example@directfreight.com
         type: string   
-      social_login:
-        type: object        
-        example: |-
-          {
-              "lastname" : "Doe",
-              "name" : "John",
-              "service": "google",
-              "status":1
-          }        
       new_account:
         description: Indicates if a new account was created or an existing one was used to login.
         example: false
@@ -3402,6 +3393,7 @@ definitions:
       create_missing_account:
         description: 'If true the endpoint will create the users account in case it doesnt already exist.'
         type: boolean
+        default: false
     required:
       - token
       - service
