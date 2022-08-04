@@ -757,7 +757,7 @@ paths:
         - boards
     x-restlet:
       section: BOARDS    
-  /end_user_authentication/users:
+  /end_user_authentications/users:
     post:
       consumes: []
       parameters:
