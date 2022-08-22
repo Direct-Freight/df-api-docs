@@ -2,13 +2,15 @@ example: |-
   {
     "code": 1,
     "error": "Generic Validation",
-    "description": "The e-mail address must be valid."
+    "description": [ "The e-mail address must be valid." ]
   }
 properties:
   code:
     type: integer
   description:
-    type: string
+    items:
+      type: string
+    type: array
   error:
     type: string
 required:
