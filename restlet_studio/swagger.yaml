@@ -2575,7 +2575,7 @@ definitions:
         
           free loads - are loads that are more than 2 hours old. contact information and comments are visible even if this request comes from an unsubscribed account.
           
-          premium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.   STAGE=Private"
+          premium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.   "
         enum:
           - all
           - free
