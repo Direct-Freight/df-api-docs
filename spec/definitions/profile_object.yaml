@@ -1,5 +1,7 @@
 example:
   address: 11 Wall Street
+  carrier_onboard_url: www.carrier.com/onboard
+  carrier_terms_url: www.carrier.com/terms
   city: New York
   company: NY Stock Exchange
   contact_extension: 111
@@ -24,6 +26,10 @@ example:
   zip: '12345'
 properties:
   address:
+    type: string
+  carrier_onboard_url:
+    type: string
+  carrier_terms_url:
     type: string
   city:
     type: string

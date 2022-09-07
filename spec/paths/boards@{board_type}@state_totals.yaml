@@ -1,6 +1,13 @@
 get:
   description: A convenience method to get totals by state.
-  parameters: []
+  parameters:
+    - description: >-
+        Filter totals to only include these trailer_type's. This parameter can
+        be specified multiple times.
+      in: query
+      name: trailer_type
+      required: false
+      type: string
   responses:
     '200':
       description: successful operation

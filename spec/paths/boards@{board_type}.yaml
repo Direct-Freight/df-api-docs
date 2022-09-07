@@ -17,11 +17,34 @@ get:
       name: booking_action
       required: false
       type: string
-    - description: Required to finalize a booking.
+    - description: >-
+        Required if booking_action=finalize_booking, returned when /boards/loads
+        is used with booking_action=request_booking.
       in: query
       name: offer_reference_code
       required: false
       type: string
+    - description: >-
+        Required if booking_action=submit_quote, returned when /boards/loads is
+        used with booking_action=request_booking.
+      in: query
+      name: load_reference_id
+      required: false
+      type: string
+    - description: >-
+        Required if booking_action=submit_quote, returned when /boards/loads is
+        used with booking_action=request_booking.
+      in: query
+      name: company_external_key
+      required: false
+      type: string
+    - description: >-
+        Required if booking_action=submit_quote, the amount offered to transport
+        this load.
+      in: query
+      name: quote_amount
+      required: false
+      type: number
     - in: header
       name: end-user-token
       required: true

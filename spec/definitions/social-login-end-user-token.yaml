@@ -13,15 +13,6 @@ properties:
       login.
     example: false
     type: boolean
-  social_login:
-    example: |-
-      {
-          "lastname" : "Doe",
-          "name" : "John",
-          "service": "google",
-          "status":1
-      }        
-    type: object
 type: object
 x-restlet:
   section: END_USER_AUTHENTICATIONS

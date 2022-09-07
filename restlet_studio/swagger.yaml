@@ -287,10 +287,25 @@ paths:
           in: query
           description: optional.  
         - name: offer_reference_code
-          description:  Required to finalize a booking.
+          description:  Required if booking_action=finalize_booking, returned when /boards/loads is used with booking_action=request_booking.
           in: query
           type: string
           required: false
+        - name: load_reference_id
+          description:  Required if booking_action=submit_quote, returned when /boards/loads is used with booking_action=request_booking.
+          in: query
+          type: string
+          required: false    
+        - name: company_external_key
+          description:  Required if booking_action=submit_quote, returned when /boards/loads is used with booking_action=request_booking.
+          in: query
+          type: string
+          required: false             
+        - name: quote_amount
+          description:  Required if booking_action=submit_quote, the amount offered to transport this load.
+          in: query
+          type: number
+          required: false                
         - in: header
           name: end-user-token
           required: true
@@ -308,7 +323,12 @@ paths:
   '/boards/{board_type}/state_totals':
     get:
       description: A convenience method to get totals by state.
-      parameters: []
+      parameters: 
+        - description: Filter totals to only include these trailer_type's. This parameter can be specified multiple times.
+          in: query
+          name: trailer_type
+          required: false
+          type: string      
       responses:
         '200':
           description: successful operation
@@ -574,6 +594,54 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
+  # /boards/book_now:
+  #   post:
+  #     consumes: []
+  #     description: Book a load with a partner.
+  #     parameters:
+  #       - in: header
+  #         name: end-user-token
+  #         required: true
+  #         type: string
+  #       - in: body
+  #         name: body
+  #         required: true
+  #         schema:
+  #           $ref: '#/definitions/book_partner_load'
+  #     responses:
+  #       '201':
+  #         description: Object created check the headers for a reference URL.
+  #         schema:
+  #           $ref: '#/definitions/create_status'
+  #     summary: STAGE=UNK Book a load.
+  #     tags:
+  #       - boards
+  #   x-restlet:
+  #     section: BOARDS      
+  # /boards/post_quote:
+  #   post:
+  #     consumes: []
+  #     description: Post a quote for a load.
+  #     parameters:
+  #       - in: header
+  #         name: end-user-token
+  #         required: true
+  #         type: string
+  #       - in: body
+  #         name: body
+  #         required: true
+  #         schema:
+  #           $ref: '#/definitions/quote_partner_load'
+  #     responses:
+  #       '201':
+  #         description: Object created check the headers for a reference URL.
+  #         schema:
+  #           $ref: '#/definitions/create_status'
+  #     summary: STAGE=UNK Post quote for a load.
+  #     tags:
+  #       - boards
+  #   x-restlet:
+  #     section: BOARDS            
   /boards/profit:      
     get:
       consumes: []
@@ -689,7 +757,7 @@ paths:
         - boards
     x-restlet:
       section: BOARDS    
-  /end_user_authentication/users:
+  /end_user_authentications/users:
     post:
       consumes: []
       parameters:
@@ -714,11 +782,7 @@ paths:
       summary: Create a new user.
       tags:
         - end_user_authentications
-    x-restlet:
-      section: END_USER_AUTHENTICATIONS
-  /end_user_authentications:
     delete:
-      description: This logs a user out. the end-user-token will no longer be valid.
       parameters:
         - in: header
           name: end-user-token
@@ -727,6 +791,22 @@ paths:
       responses:
         '204':
           description: Will not return content on a successful logout.
+      summary: Deletes Logged in User
+      tags:
+        - end_user_authentications
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS      
+  /end_user_authentications:
+    delete:
+      description: This deletes the logged in users account permanently.
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Will not return content on a successful delete.
       summary: Logout
       tags:
         - end_user_authentications
@@ -796,6 +876,40 @@ paths:
                 type: string
             type: object
       summary: Retrieve date
+      tags:
+        - end_user_authentications
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
+  /end_user_authentications/uuids:
+    get:
+      description: Gets user specific UUID.
+      parameters: []
+      responses:
+        '200':
+          description: successful operation
+          examples:
+            application/json: |-
+              {
+                "uuid": "B542E92E-7359-4096-9382-0D5AD324808D"
+              }
+          schema:
+            properties:
+              uuid:
+                description: The logged in users UUID.
+                type: string
+            type: object
+      summary: Retrieve UUID
+      tags:
+        - end_user_authentications
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS      
+  /end_user_authentications/apple_appstore_notification:
+    post:
+      description: Save the apple notification to mysql  STAGE=private
+      responses:
+        '200':
+          description: successful operation
+      summary: Save the apple notification to mysql  STAGE=private
       tags:
         - end_user_authentications
     x-restlet:
@@ -1532,7 +1646,7 @@ paths:
       section: POSTINGS
   '/postings/{posting_type}/replace_all':
     parameters:
-      - description: 'Destination where items will be replaced.'
+      - description: 'Destination where items will be replaced. Depending on the posting_type that is selected, the source posting will be the same but with _temp appended. For example, if posting_type=loads, then source_type is loads_temp.'
         enum:
           - loads
           - trucks
@@ -1549,6 +1663,11 @@ paths:
           name: end-user-token
           required: true
           type: string
+        - in: query
+          name: return_details
+          description: If this option is specified and its value is positive, this endpoint will additionaly return the total count of items inserted and deleted, it will also return an erray of the md5sums that were moved.
+          required: false
+          type: boolean          
       responses:
         '202':
           description: Success
@@ -2456,7 +2575,7 @@ definitions:
         
           free loads - are loads that are more than 2 hours old. contact information and comments are visible even if this request comes from an unsubscribed account.
           
-          premium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.   STAGE=Private"
+          premium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.   "
         enum:
           - all
           - free
@@ -2963,6 +3082,15 @@ definitions:
             type: string
           debug_raw_partner_data:
             type: object
+      message:
+        description: 'Status message.'
+        type: string        
+      status:
+        description: 'OK or Error.'
+        type: string    
+      success:
+        description: 'true/false if request was successful.'
+        type: boolean
   create_notes:
     properties:
       body:
@@ -2980,6 +3108,42 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
+  book_partner_load:
+    properties:
+      entry_id:
+        description: 'MD5 Identifier of load. '
+        type: string
+      offer_reference_code:
+        description: 'Offer reference code as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking. '
+        type: string
+    required:
+      - entry_id
+      - offer_reference_code
+    type: object
+    x-restlet:
+      section: BOARDS      
+  quote_partner_load:
+    properties:
+      entry_id:
+        description: 'MD5 Identifier of load.'
+        type: string
+      load_reference_id:
+        description: 'Load reference ID as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking.'
+        type: string
+      company_external_key:
+        description: 'Company External Key as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking.'
+        type: string
+      quote_amount:
+        description: 'Amount offered for transporting this load.'
+        type: number        
+    required:
+      - entry_id
+      - load_reference_id
+      - company_external_key
+      - quote_amount      
+    type: object
+    x-restlet:
+      section: BOARDS         
   create_custom_field:
     properties:
       name:
@@ -3043,15 +3207,6 @@ definitions:
         description: The email address that was used to login.
         example: example@directfreight.com
         type: string   
-      social_login:
-        type: object        
-        example: |-
-          {
-              "lastname" : "Doe",
-              "name" : "John",
-              "service": "google",
-              "status":1
-          }        
       new_account:
         description: Indicates if a new account was created or an existing one was used to login.
         example: false
@@ -3064,13 +3219,15 @@ definitions:
       {
         "code": 1,
         "error": "Generic Validation",
-        "description": "The e-mail address must be valid."
+        "description": [ "The e-mail address must be valid." ]
       }
     properties:
       code:
         type: integer
       description:
-        type: string
+        type: array
+        items:
+          type: string        
       error:
         type: string
     required:
@@ -3238,6 +3395,7 @@ definitions:
       create_missing_account:
         description: 'If true the endpoint will create the users account in case it doesnt already exist.'
         type: boolean
+        default: false
     required:
       - token
       - service
@@ -3837,8 +3995,17 @@ definitions:
       message:
         description: Operation Successful.
         type: string
-        required:
-          - message
+      insert_count:
+        description: Total number of items inserted into destination.
+        type: number
+      delete_count:
+        description: Total number of items deleted from source.
+        type: number
+      replaced_entries:
+        description: List of entry ids that were replaced.
+        items:
+          type: string
+        type: array     
     type: object
     x-restlet:
       section: POSTINGS      
@@ -3859,6 +4026,8 @@ definitions:
       "mobile_number":4445556666,
       "state": "NY",
       "web_page": "www.directfreight.com",
+      "carrier_onboard_url": "www.carrier.com/onboard",
+      "carrier_terms_url": "www.carrier.com/terms",
       "zip": "12345",
       "miles_per_gal": 6.50,
       "maint_per_mile": 0.17,
@@ -3924,6 +4093,10 @@ definitions:
         type: string
       web_page:
         type: string
+      carrier_onboard_url:
+        type: string
+      carrier_terms_url:
+        type: string
       zip:
         type: string
       miles_per_gal:
@@ -3964,6 +4137,8 @@ definitions:
       "mobile_number":4445556666,
       "state": "NY",
       "web_page": "www.directfreight.com",
+      "carrier_onboard_url": "www.carrier.com/onboard",
+      "carrier_terms_url": "www.carrier.com/terms",
       "zip": "12345"
    }
     properties:
@@ -4021,6 +4196,10 @@ definitions:
       state:
         type: string
       web_page:
+        type: string
+      carrier_onboard_url:
+        type: string
+      carrier_terms_url:
         type: string
       zip:
         type: string
