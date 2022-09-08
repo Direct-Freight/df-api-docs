@@ -7,7 +7,7 @@ delete:
   responses:
     '204':
       description: Will not return content on a successful logout.
-  summary: Create a new user.
+  summary: Deletes Logged in User
   tags:
     - end_user_authentications
 post:

@@ -236,7 +236,7 @@ properties:
       account.
 
       premium loads - loads that are less than 2 hours old. contact information
-      and comments are only visible for premium accounts.   STAGE=Private
+      and comments are only visible for premium accounts.   
     enum:
       - all
       - free
