@@ -6,8 +6,10 @@ example:
   full_load: true
   google_recaptcha_score: 0.7
   max_length: 300
+  max_pay_rate: 200
   max_weight: 40000
   min_length: 15
+  min_pay_rate: 50
   min_weight: 1000
   origin_city: Kansas City
   origin_radius: 300
@@ -90,6 +92,10 @@ properties:
     description: Return items no longer than this.
     example: 300
     type: integer
+  max_pay_rate:
+    description: Return items that pay at most this amount.
+    example: 300
+    type: integer
   max_weight:
     description: Return items that weight less than this.
     example: 40000
@@ -100,6 +106,10 @@ properties:
     type: string
   min_length:
     description: Return items at least this long.
+    example: 15
+    type: integer
+  min_pay_rate:
+    description: Return items that pay at least this amount.
     example: 15
     type: integer
   min_weight:
