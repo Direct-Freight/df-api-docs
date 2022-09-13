@@ -2542,7 +2542,7 @@ definitions:
         type: integer      
       min_pay_rate:
         description: 'Return items that pay at least this amount.'
-        example: 15
+        example: 50
         type: integer        
       max_pay_rate:
         description: 'Return items that pay at most this amount.'
