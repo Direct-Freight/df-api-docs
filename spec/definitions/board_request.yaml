@@ -110,7 +110,7 @@ properties:
     type: integer
   min_pay_rate:
     description: Return items that pay at least this amount.
-    example: 15
+    example: 50
     type: integer
   min_weight:
     description: Return items that weight at least this much.
