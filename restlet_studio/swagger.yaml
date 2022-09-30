@@ -736,12 +736,9 @@ paths:
           in: query
           enum:
             - all
-            - van_only
-            - van_all
-            - reefer_only
-            - reefer_all
-            - flat_only
-            - flat_all
+            - van 
+            - reefer
+            - flat
           type: string          
         - in: header
           name: end-user-token
