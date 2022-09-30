@@ -736,12 +736,9 @@ paths:
           in: query
           enum:
             - all
-            - van_only
-            - van_all
-            - reefer_only
-            - reefer_all
-            - flat_only
-            - flat_all
+            - van 
+            - reefer
+            - flat
           type: string          
         - in: header
           name: end-user-token
@@ -2448,6 +2445,8 @@ definitions:
         "max_weight": 40000,
         "min_length": 15,
         "max_length": 300,
+        "min_pay_rate": 50,
+        "max_pay_rate": 200,
         "google_recaptcha_score": 0.7
       }
     properties:
@@ -2537,7 +2536,15 @@ definitions:
       max_length:
         description: 'Return items no longer than this.'
         example: 300
-        type: integer          
+        type: integer      
+      min_pay_rate:
+        description: 'Return items that pay at least this amount.'
+        example: 50
+        type: integer        
+      max_pay_rate:
+        description: 'Return items that pay at most this amount.'
+        example: 300
+        type: integer              
       page_number:
         description: The page you want to return. Will return an empty board on an invalid page.
         minimum: 1
