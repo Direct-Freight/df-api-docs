@@ -46,12 +46,9 @@ get:
         specified multiple times.
       enum:
         - all
-        - van_only
-        - van_all
-        - reefer_only
-        - reefer_all
-        - flat_only
-        - flat_all
+        - van
+        - reefer
+        - flat
       in: query
       name: trailer_type
       type: string
