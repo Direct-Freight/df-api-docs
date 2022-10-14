@@ -3099,6 +3099,10 @@ definitions:
             type: string
           debug_raw_partner_data:
             type: object
+          booking_message:
+            type: string
+          quote_message:
+            type: string            
       message:
         description: 'Status message.'
         type: string        
