@@ -2629,6 +2629,7 @@ definitions:
           - tia_user
           - green_light
           - new
+          - book_now
         example: age
         type: string
       sort_direction:
