@@ -28,7 +28,7 @@ get:
         Required if booking_action=submit_quote, returned when /boards/loads is
         used with booking_action=request_booking.
       in: query
-      name: load_reference_id
+      name: reference_id
       required: false
       type: string
     - description: >-

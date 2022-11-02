@@ -5,9 +5,11 @@ example:
     - IL
   full_load: true
   google_recaptcha_score: 0.7
+  max_age: 2000
   max_length: 300
   max_pay_rate: 200
   max_weight: 40000
+  min_age: 50
   min_length: 15
   min_pay_rate: 50
   min_weight: 1000
@@ -88,6 +90,10 @@ properties:
     maximum: 100
     minimum: 1
     type: integer
+  max_age:
+    description: Return items that are at most this many minutes old.
+    example: 300
+    type: integer
   max_length:
     description: Return items no longer than this.
     example: 300
@@ -104,6 +110,10 @@ properties:
     description: Return only this specific MD5 ID. STAGE=Private
     example: 850FBE52A5345119FD9C79FDE4E27308
     type: string
+  min_age:
+    description: Return items that are at least this many minutes old.
+    example: 50
+    type: integer
   min_length:
     description: Return items at least this long.
     example: 15
@@ -233,6 +243,7 @@ properties:
       - tia_user
       - green_light
       - new
+      - book_now
     example: age
     type: string
   tier:
