@@ -291,7 +291,7 @@ paths:
           in: query
           type: string
           required: false
-        - name: load_reference_id
+        - name: reference_id
           description:  Required if booking_action=submit_quote, returned when /boards/loads is used with booking_action=request_booking.
           in: query
           type: string
@@ -2447,6 +2447,8 @@ definitions:
         "max_length": 300,
         "min_pay_rate": 50,
         "max_pay_rate": 200,
+        "min_age": 50,
+        "max_age": 2000,
         "google_recaptcha_score": 0.7
       }
     properties:
@@ -2545,6 +2547,14 @@ definitions:
         description: 'Return items that pay at most this amount.'
         example: 300
         type: integer              
+      min_age:
+        description: 'Return items that are at least this many minutes old.'
+        example: 50
+        type: integer        
+      max_age:
+        description: 'Return items that are at most this many minutes old.'
+        example: 300
+        type: integer             
       page_number:
         description: The page you want to return. Will return an empty board on an invalid page.
         minimum: 1
@@ -2619,6 +2629,7 @@ definitions:
           - tia_user
           - green_light
           - new
+          - book_now
         example: age
         type: string
       sort_direction:
@@ -3089,6 +3100,10 @@ definitions:
             type: string
           debug_raw_partner_data:
             type: object
+          booking_message:
+            type: string
+          quote_message:
+            type: string            
       message:
         description: 'Status message.'
         type: string        
@@ -3134,7 +3149,7 @@ definitions:
       entry_id:
         description: 'MD5 Identifier of load.'
         type: string
-      load_reference_id:
+      reference_id:
         description: 'Load reference ID as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking.'
         type: string
       company_external_key:
@@ -3145,7 +3160,7 @@ definitions:
         type: number        
     required:
       - entry_id
-      - load_reference_id
+      - reference_id
       - company_external_key
       - quote_amount      
     type: object
