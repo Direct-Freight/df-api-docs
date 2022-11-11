@@ -3356,7 +3356,7 @@ definitions:
     properties:
       list:
         description: A hash of state totals.
-        example: '{     "MS": 1449,     "NS": 24,     "VT": 145,     "MD": 520,     "ID": 2091,     "SK": 126,     "WA": 2207,     "SC": 1619,     "VA": 1781,     "PQ": 10,     "ON": 270,     "KS": 969,     "NE": 1386,     "OR": 2984,     "WI": 2714,     "GA": 3184,     "IN": 3363,     "KY": 1731,     "NV": 534,     "NC": 1824,     "BC": 124,     "DC": 7,     .... }'
+        example: '{ "AZ": { "inbound": 10, "outbound": 5, "outbound_percentage": 50 }'
         type: object
     type: object
     x-restlet:
