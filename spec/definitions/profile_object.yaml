@@ -10,13 +10,13 @@ example:
   deadhead_per_mile: 1.29
   dispatch_extension: 123
   dispatch_number: 4445556666
-  dot_number: '345345345'
+  dot_number: '12345678'
   driver_per_mile: 0.72
   fax_number: 1112223333
   fuel_capacity: 200
   ins_permits_per_mile: 0.13
   maint_per_mile: 0.17
-  mc_number: '354345345'
+  mc_number: '12345678'
   miles_per_gal: 6.5
   mobile_carrier: Sprint
   mobile_number: 4445556666
@@ -49,7 +49,8 @@ properties:
   dispatch_number:
     type: integer
   dot_number:
-    type: string
+    description: Maximum 8 numbers.
+    type: number
   driver_per_mile:
     description: STAGE=Private
     type: number
@@ -65,7 +66,8 @@ properties:
     description: STAGE=Private
     type: number
   mc_number:
-    type: string
+    description: Maximum 8 numbers.
+    type: number
   miles_per_gal:
     description: STAGE=Private
     type: number
