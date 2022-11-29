@@ -6,6 +6,10 @@ properties:
       values less than 1 minute.
     example: 15
     type: integer
+  carrier_onboard_url:
+    description: URL for onboarding specified by carrier.
+    example: www.google.com
+    type: string
   comment:
     description: >-
       This field is only returned for an end_user_token that has the subscribed
