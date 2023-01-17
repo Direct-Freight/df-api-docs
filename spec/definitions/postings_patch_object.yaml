@@ -1,11 +1,16 @@
 example:
+  allowed_actions: send_quote
+  booking_partner: ...
   comment: hello world
   custom_id: abc123
   destination_city: cincinnati
   destination_state: OH
+  dispatch_email: dispatch@directfreight.com
+  dispatch_mobile_number: 7777777777
   full_load: true
   height: 11
   length: 11
+  load_detail_url: 'https://www.directfreight.com'
   origin_city: pittsburg
   origin_state: PA
   other_trailer_types: hot shot
@@ -19,6 +24,26 @@ example:
   weight: 1100
   width: 11
 properties:
+  allowed_actions:
+    description: 'What actions are available for this load, defaults to "call".'
+    items:
+      enum:
+        - send_quote
+        - book_now
+        - request_info
+        - call
+        - email
+        - text
+        - desktop_push
+        - mobile_push
+        - no_call
+        - no_email
+        - no_text
+      type: string
+    type: string
+  booking_partner:
+    description: Booking partner.
+    type: string
   category:
     description: 'This option only applies to "private_loads", "private_trucks"'
     items:
@@ -47,6 +72,12 @@ properties:
   destination_state:
     description: Delivery location city of load/truck.
     type: string
+  dispatch_email:
+    description: Dispatch e-Mail.
+    type: string
+  dispatch_mobile_number:
+    description: Dispatch mobile number.
+    type: string
   full_load:
     description: This should only be used with loads.
     type: boolean
@@ -56,6 +87,9 @@ properties:
   length:
     description: This number represents feet.
     type: number
+  load_detail_url:
+    description: An optional URL with additional information about this load.
+    type: string
   origin_city:
     description: Origin city location of load or truck
     type: string

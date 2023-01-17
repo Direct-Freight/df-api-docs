@@ -3,7 +3,9 @@ get:
   parameters:
     - description: >-
         Filter totals to only include these trailer_type's. This parameter can
-        be specified multiple times.
+        be specified multiple times and the totals are combined. i.e.
+        trailer_type=V&trailer_type=R returns the combined total of all loads
+        that are either V or
       in: query
       name: trailer_type
       required: false
