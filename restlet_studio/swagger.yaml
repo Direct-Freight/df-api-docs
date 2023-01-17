@@ -23,7 +23,7 @@ info:
     The user token is a temporary session token assigned to each direct freight user.
     The user token can be valid for up to 24 hours depending on activity.
     
-  title: Direct Freight API
+  title: Direct Freight Load Board API
   version: '1.0'
   x-logo:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
@@ -1053,7 +1053,7 @@ paths:
       section: END_USER_AUTHENTICATIONS
   /locations/autocomplete:
     get:
-      description: 'A string of a partial city or state name, and returns a list of possible matches.'
+      description: 'Searches a string of a partial city or state name, and returns a list of possible matches.'
       parameters:
         - description: 'City or State or Postal code to search for.   It matches city name and state name and state abbreviation.  So for instance "MO" would return Missouri, Montana, and Montreal, QC  while  ME would return Maine, Mexico, and Memphis, TN'
           in: query
@@ -3619,12 +3619,17 @@ definitions:
       "other_trailer_types": "Lowboy",
       "pay_rate": 0.22,
       "phone_extension": 666,
-      "phone_number": 6666666666,
+      "phone_number": 7777777777,
       "receive_date": "2020-05-06",
       "ship_date": "2020-05-06",
       "trailer_type": ["R"],
       "weight": 2200,
-      "width": 22
+      "width": 22,            
+      "load_detail_url": "https://www.directfreight.com",
+      "booking_partner": "...",
+      "allowed_actions":  "send_quote",
+      "dispatch_email": "dispatch@directfreight.com",
+      "dispatch_mobile_number": 7777777777,
       }
     properties:
       comment:
@@ -3724,6 +3729,35 @@ definitions:
             - delivered
           type: string
         type: string
+      load_detail_url:
+        description: An optional URL with additional information about this load.
+        type: string
+      booking_partner:
+        description: Booking partner.
+        type: string  
+      allowed_actions:
+        description: What actions are available for this load, defaults to "call".
+        items:
+          enum:
+            - send_quote
+            - book_now
+            - request_info
+            - call
+            - email
+            - text
+            - desktop_push
+            - mobile_push
+            - no_call
+            - no_email
+            - no_text 
+          type: string
+        type: string        
+      dispatch_email:
+        description: Dispatch e-Mail.
+        type: string        
+      dispatch_mobile_number:
+        description: Dispatch mobile number.
+        type: string        
     required:
       - custom_id
       - origin_city
@@ -3752,7 +3786,12 @@ definitions:
         "receive_date":"2020-05-07",
         "trailer_type": ["V+V"],
         "weight": 1100,
-        "width":11
+        "width":11,
+        "load_detail_url": "https://www.directfreight.com",
+        "booking_partner": "...",
+        "allowed_actions":  "send_quote",
+        "dispatch_email": "dispatch@directfreight.com",
+        "dispatch_mobile_number": 7777777777      
         }
     properties:
       comment:
@@ -3856,7 +3895,36 @@ definitions:
             - pending
             - delivered
           type: string
+        type: string 
+      load_detail_url:
+        description: An optional URL with additional information about this load.
+        type: string     
+      booking_partner:
+        description: Booking partner.
+        type: string  
+      allowed_actions:
+        description: What actions are available for this load, defaults to "call".
+        items:
+          enum:
+            - send_quote
+            - book_now
+            - request_info
+            - call
+            - email
+            - text
+            - desktop_push
+            - mobile_push
+            - no_call
+            - no_email
+            - no_text 
+          type: string
         type: string        
+      dispatch_email:
+        description: Dispatch e-Mail.
+        type: string        
+      dispatch_mobile_number:
+        description: Dispatch mobile number.
+        type: string             
     type: object
     x-restlet:
       section: POSTINGS
