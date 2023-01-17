@@ -1,7 +1,7 @@
 get:
   description: >-
-    A string of a partial city or state name, and returns a list of possible
-    matches.
+    Searches a string of a partial city or state name, and returns a list of
+    possible matches.
   parameters:
     - description: >-
         City or State or Postal code to search for.   It matches city name and

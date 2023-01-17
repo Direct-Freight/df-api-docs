@@ -9,9 +9,9 @@ example:
   contact_number: 8885559999
   dispatch_extension: 123
   dispatch_number: 4445556666
-  dot_number: '345345345'
+  dot_number: '12345678'
   fax_number: 1112223333
-  mc_number: '354345345'
+  mc_number: '12345678'
   mobile_carrier: Sprint
   mobile_number: 4445556666
   state: NY
@@ -42,7 +42,8 @@ properties:
   dispatch_number:
     type: integer
   dot_number:
-    type: string
+    description: Maximum 8 numbers.
+    type: number
   fax_number:
     type: integer
   mc_number:

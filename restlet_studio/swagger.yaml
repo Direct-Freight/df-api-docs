@@ -5,7 +5,7 @@ host: api.directfreight.com
 info:
   contact: {}
   description: |-
-    In order to use the Direct Freight API please first contact us to get an API Token. 
+    In order to use the Direct Freight Load Board API please first contact us to get an API Token. 
     This token needs to be sent as a HTTP header argument in every request to our API.
 
     api-token="SECRET KEY"
@@ -23,7 +23,7 @@ info:
     The user token is a temporary session token assigned to each direct freight user.
     The user token can be valid for up to 24 hours depending on activity.
     
-  title: Direct Freight API
+  title: Direct Freight Load Board API
   version: '1.0'
   x-logo:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
@@ -324,7 +324,7 @@ paths:
     get:
       description: A convenience method to get totals by state.
       parameters: 
-        - description: Filter totals to only include these trailer_type's. This parameter can be specified multiple times.
+        - description: Filter totals to only include these trailer_type's. This parameter can be specified multiple times and the totals are combined. i.e. trailer_type=V&trailer_type=R returns the combined total of all loads that are either V or 
           in: query
           name: trailer_type
           required: false
@@ -1053,7 +1053,7 @@ paths:
       section: END_USER_AUTHENTICATIONS
   /locations/autocomplete:
     get:
-      description: 'A string of a partial city or state name, and returns a list of possible matches.'
+      description: 'Searches a string of a partial city or state name, and returns a list of possible matches.'
       parameters:
         - description: 'City or State or Postal code to search for.   It matches city name and state name and state abbreviation.  So for instance "MO" would return Missouri, Montana, and Montreal, QC  while  ME would return Maine, Mexico, and Memphis, TN'
           in: query
@@ -2692,6 +2692,10 @@ definitions:
         description: This field is only returned for an end_user_token that has the subscribed access level.
         example: Test Load
         type: string
+      carrier_onboard_url:
+        description: URL for onboarding specified by carrier.
+        example: www.google.com
+        type: string        
       company_name:
         description: This field is only returned for an end_user_token that has the subscribed access level.
         example: ABC Company
@@ -3351,12 +3355,19 @@ definitions:
   get_state_list_response:
     example: |-
       {
-        "list": "{     \"MS\": 1449,     \"NS\": 24,     \"VT\": 145,     \"MD\": 520,     \"ID\": 2091,     \"SK\": 126,     \"WA\": 2207,     \"SC\": 1619,     \"VA\": 1781,     \"PQ\": 10,     \"ON\": 270,     \"KS\": 969,     \"NE\": 1386,     \"OR\": 2984,     \"WI\": 2714,     \"GA\": 3184,     \"IN\": 3363,     \"KY\": 1731,     \"NV\": 534,     \"NC\": 1824,     \"BC\": 124,     \"DC\": 7,     .... }"
+        "list": { 
+          "AZ": { 
+            "inbound": 10, 
+            "outbound": 5, 
+            "outbound_percentage": 50 
+            
+          } 
+        }
       }
     properties:
       list:
         description: A hash of state totals.
-        example: '{     "MS": 1449,     "NS": 24,     "VT": 145,     "MD": 520,     "ID": 2091,     "SK": 126,     "WA": 2207,     "SC": 1619,     "VA": 1781,     "PQ": 10,     "ON": 270,     "KS": 969,     "NE": 1386,     "OR": 2984,     "WI": 2714,     "GA": 3184,     "IN": 3363,     "KY": 1731,     "NV": 534,     "NC": 1824,     "BC": 124,     "DC": 7,     .... }'
+        example: '{ "AZ": { "inbound": 10, "outbound": 5, "outbound_percentage": 50 }'
         type: object
     type: object
     x-restlet:
@@ -3608,12 +3619,17 @@ definitions:
       "other_trailer_types": "Lowboy",
       "pay_rate": 0.22,
       "phone_extension": 666,
-      "phone_number": 6666666666,
+      "phone_number": 7777777777,
       "receive_date": "2020-05-06",
       "ship_date": "2020-05-06",
       "trailer_type": ["R"],
       "weight": 2200,
-      "width": 22
+      "width": 22,            
+      "load_detail_url": "https://www.directfreight.com",
+      "booking_partner": "...",
+      "allowed_actions":  "send_quote",
+      "dispatch_email": "dispatch@directfreight.com",
+      "dispatch_mobile_number": 7777777777,
       }
     properties:
       comment:
@@ -3713,6 +3729,35 @@ definitions:
             - delivered
           type: string
         type: string
+      load_detail_url:
+        description: An optional URL with additional information about this load.
+        type: string
+      booking_partner:
+        description: Booking partner.
+        type: string  
+      allowed_actions:
+        description: What actions are available for this load, defaults to "call".
+        items:
+          enum:
+            - send_quote
+            - book_now
+            - request_info
+            - call
+            - email
+            - text
+            - desktop_push
+            - mobile_push
+            - no_call
+            - no_email
+            - no_text 
+          type: string
+        type: string        
+      dispatch_email:
+        description: Dispatch e-Mail.
+        type: string        
+      dispatch_mobile_number:
+        description: Dispatch mobile number.
+        type: string        
     required:
       - custom_id
       - origin_city
@@ -3741,7 +3786,12 @@ definitions:
         "receive_date":"2020-05-07",
         "trailer_type": ["V+V"],
         "weight": 1100,
-        "width":11
+        "width":11,
+        "load_detail_url": "https://www.directfreight.com",
+        "booking_partner": "...",
+        "allowed_actions":  "send_quote",
+        "dispatch_email": "dispatch@directfreight.com",
+        "dispatch_mobile_number": 7777777777      
         }
     properties:
       comment:
@@ -3845,7 +3895,36 @@ definitions:
             - pending
             - delivered
           type: string
+        type: string 
+      load_detail_url:
+        description: An optional URL with additional information about this load.
+        type: string     
+      booking_partner:
+        description: Booking partner.
+        type: string  
+      allowed_actions:
+        description: What actions are available for this load, defaults to "call".
+        items:
+          enum:
+            - send_quote
+            - book_now
+            - request_info
+            - call
+            - email
+            - text
+            - desktop_push
+            - mobile_push
+            - no_call
+            - no_email
+            - no_text 
+          type: string
         type: string        
+      dispatch_email:
+        description: Dispatch e-Mail.
+        type: string        
+      dispatch_mobile_number:
+        description: Dispatch mobile number.
+        type: string             
     type: object
     x-restlet:
       section: POSTINGS
@@ -4041,9 +4120,9 @@ definitions:
       "contact_number": 8885559999,
       "dispatch_extension": 123,
       "dispatch_number": 4445556666,
-      "dot_number": "345345345",
+      "dot_number": "12345678",
       "fax_number": 1112223333,
-      "mc_number": "354345345",
+      "mc_number": "12345678",
       "mobile_carrier": "Sprint",
       "mobile_number":4445556666,
       "state": "NY",
@@ -4080,11 +4159,13 @@ definitions:
       dispatch_number:
         type: integer
       dot_number:
-        type: string
+        type: number
+        description: "Maximum 8 numbers."
       fax_number:
         type: integer
       mc_number:
-        type: string
+        type: number
+        description: "Maximum 8 numbers."
       mobile_carrier:
         enum:
           - Other/Unknown
@@ -4152,9 +4233,9 @@ definitions:
       "contact_number": 8885559999,
       "dispatch_extension": 123,
       "dispatch_number": 4445556666,
-      "dot_number": "345345345",
+      "dot_number": "12345678",
       "fax_number": 1112223333,
-      "mc_number": "354345345",
+      "mc_number": "12345678",
       "mobile_carrier": "Sprint",
       "mobile_number":4445556666,
       "state": "NY",
@@ -4184,7 +4265,8 @@ definitions:
       dispatch_number:
         type: integer
       dot_number:
-        type: string
+        type: number
+        description: "Maximum 8 numbers."
       fax_number:
         type: integer
       mc_number:
