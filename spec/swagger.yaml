@@ -40,7 +40,7 @@ info:
     user.
 
     The user token can be valid for up to 24 hours depending on activity.
-  title: Direct Freight API
+  title: Direct Freight Load Board API
   version: '1.0'
   x-logo:
     url: 'https://www.directfreight.com/home/images/logo-direct-freight.png'
