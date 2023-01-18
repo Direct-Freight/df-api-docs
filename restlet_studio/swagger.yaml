@@ -3787,7 +3787,7 @@ definitions:
             - no_email
             - no_text 
           type: string
-        type: string        
+        type: array        
       dispatch_email:
         description: Dispatch e-Mail.
         type: string        
