@@ -41,7 +41,7 @@ properties:
         - no_email
         - no_text
       type: string
-    type: string
+    type: array
   booking_partner:
     description: Booking partner.
     type: string
