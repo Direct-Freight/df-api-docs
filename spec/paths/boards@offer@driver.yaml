@@ -17,7 +17,7 @@ get:
       description: Details about
       schema:
         $ref: '#/definitions/boards_offer_driver_response'
-  summary: STAGE=Private Get Freight Rates.
+  summary: STAGE=Private Get Offer.
   tags:
     - boards
 x-restlet:
