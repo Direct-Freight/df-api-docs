@@ -3663,7 +3663,7 @@ definitions:
       "width": 22,            
       "load_detail_url": "https://www.directfreight.com",
       "booking_partner": "...",
-      "allowed_actions":  "send_quote",
+      "allowed_actions":  [ "send_quote" ],
       "dispatch_email": "dispatch@directfreight.com",
       "dispatch_mobile_number": 7777777777,
       }
