@@ -3825,7 +3825,7 @@ definitions:
         "width":11,
         "load_detail_url": "https://www.directfreight.com",
         "booking_partner": "...",
-        "allowed_actions":  "send_quote",
+        "allowed_actions":  [ "send_quote" ],
         "dispatch_email": "dispatch@directfreight.com",
         "dispatch_mobile_number": 7777777777      
         }
@@ -3954,7 +3954,7 @@ definitions:
             - no_email
             - no_text 
           type: string
-        type: string        
+        type: array        
       dispatch_email:
         description: Dispatch e-Mail.
         type: string        
