@@ -754,6 +754,31 @@ paths:
         - boards
     x-restlet:
       section: BOARDS    
+  /boards/offer/driver:      
+    get:
+      consumes: []
+      description: Fetch Offer Driver
+      parameters:
+        - name: offer_id
+          description: Numeric Offer ID
+          in: query
+          required: true
+          type: string
+        - name: entry_id
+          description: 32 Character Entry ID
+          in: query
+          required: true
+          type: string          
+      responses:
+        '201':
+          description: Details about average rates for this trip. Returns an object where each key is a trailer type with an array of the freight rate for each day that was found for that type.
+          schema:
+            $ref: '#/definitions/boards_offer_driver_response'
+      summary: STAGE=Private Get Freight Rates.
+      tags:
+        - boards
+    x-restlet:
+      section: BOARDS          
   /end_user_authentications/users:
     post:
       consumes: []
@@ -3053,6 +3078,17 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
+  boards_offer_driver_response:
+    properties:
+      driver_contact_info:
+        type: object
+      load_info_when_quoted:
+        type: object        
+      quote_amount:
+        type: integer              
+    type: object
+    x-restlet:
+      section: BOARDS      
   board_response:
     example: |-
       {
