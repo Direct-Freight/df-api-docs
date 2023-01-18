@@ -1,0 +1,10 @@
+properties:
+  driver_contact_info:
+    type: object
+  load_info_when_quoted:
+    type: object
+  quote_amount:
+    type: integer
+type: object
+x-restlet:
+  section: BOARDS

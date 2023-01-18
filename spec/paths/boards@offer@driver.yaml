@@ -1,0 +1,27 @@
+get:
+  consumes: []
+  description: Fetch Offer Driver
+  parameters:
+    - description: Numeric Offer ID
+      in: query
+      name: offer_id
+      required: true
+      type: string
+    - description: 32 Character Entry ID
+      in: query
+      name: entry_id
+      required: true
+      type: string
+  responses:
+    '201':
+      description: >-
+        Details about average rates for this trip. Returns an object where each
+        key is a trailer type with an array of the freight rate for each day
+        that was found for that type.
+      schema:
+        $ref: '#/definitions/boards_offer_driver_response'
+  summary: STAGE=Private Get Freight Rates.
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS
