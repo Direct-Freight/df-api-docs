@@ -107,7 +107,7 @@ properties:
     example: 40000
     type: integer
   md5:
-    description: Return only this specific MD5 ID. STAGE=Private
+    description: Return only this specific MD5 ID. STAGE=Private  DEPRECATED DO NOT USE
     example: 850FBE52A5345119FD9C79FDE4E27308
     type: string
   min_age:
