@@ -1,5 +1,6 @@
 example:
-  allowed_actions: send_quote
+  allowed_actions:
+    - send_quote
   booking_partner: ...
   comment: hello world
   custom_id: abc123
@@ -40,7 +41,7 @@ properties:
         - no_email
         - no_text
       type: string
-    type: string
+    type: array
   booking_partner:
     description: Booking partner.
     type: string

@@ -1,0 +1,24 @@
+get:
+  consumes: []
+  description: Fetch Offer Driver
+  parameters:
+    - description: Numeric Offer ID
+      in: query
+      name: offer_id
+      required: true
+      type: string
+    - description: 32 Character Entry ID
+      in: query
+      name: entry_id
+      required: true
+      type: string
+  responses:
+    '201':
+      description: Details about
+      schema:
+        $ref: '#/definitions/boards_offer_driver_response'
+  summary: STAGE=Private Get Offer.
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS
