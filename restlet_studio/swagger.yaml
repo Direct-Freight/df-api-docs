@@ -754,6 +754,31 @@ paths:
         - boards
     x-restlet:
       section: BOARDS    
+  /boards/offer/driver:      
+    get:
+      consumes: []
+      description: Fetch Offer Driver
+      parameters:
+        - name: offer_id
+          description: Numeric Offer ID
+          in: query
+          required: true
+          type: string
+        - name: entry_id
+          description: 32 Character Entry ID
+          in: query
+          required: true
+          type: string          
+      responses:
+        '201':
+          description: Details about 
+          schema:
+            $ref: '#/definitions/boards_offer_driver_response'
+      summary: STAGE=Private Get Offer.
+      tags:
+        - boards
+    x-restlet:
+      section: BOARDS          
   /end_user_authentications/users:
     post:
       consumes: []
@@ -2497,7 +2522,7 @@ definitions:
         minimum: 1
         type: integer
       md5:
-        description: 'Return only this specific MD5 ID. STAGE=Private'
+        description: 'Return only this specific MD5 ID. STAGE=Private  DEPRECATED DO NOT USE'
         example: 850FBE52A5345119FD9C79FDE4E27308
         type: string        
       origin_city:
@@ -3053,6 +3078,17 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
+  boards_offer_driver_response:
+    properties:
+      driver_contact_info:
+        type: object
+      load_info_when_quoted:
+        type: object        
+      quote_amount:
+        type: integer              
+    type: object
+    x-restlet:
+      section: BOARDS      
   board_response:
     example: |-
       {
@@ -3627,7 +3663,7 @@ definitions:
       "width": 22,            
       "load_detail_url": "https://www.directfreight.com",
       "booking_partner": "...",
-      "allowed_actions":  "send_quote",
+      "allowed_actions":  [ "send_quote" ],
       "dispatch_email": "dispatch@directfreight.com",
       "dispatch_mobile_number": 7777777777,
       }
@@ -3751,7 +3787,7 @@ definitions:
             - no_email
             - no_text 
           type: string
-        type: string        
+        type: array        
       dispatch_email:
         description: Dispatch e-Mail.
         type: string        
@@ -3789,7 +3825,7 @@ definitions:
         "width":11,
         "load_detail_url": "https://www.directfreight.com",
         "booking_partner": "...",
-        "allowed_actions":  "send_quote",
+        "allowed_actions":  [ "send_quote" ],
         "dispatch_email": "dispatch@directfreight.com",
         "dispatch_mobile_number": 7777777777      
         }
@@ -3918,7 +3954,7 @@ definitions:
             - no_email
             - no_text 
           type: string
-        type: string        
+        type: array        
       dispatch_email:
         description: Dispatch e-Mail.
         type: string        
