@@ -1,5 +1,5 @@
 get:
-  description: Get a auto login url
+  description: Get an auto login url
   parameters:
     - description: >-
         DirectFreight website URI to redirect to after login. Example,
