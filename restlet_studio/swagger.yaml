@@ -3661,9 +3661,9 @@ definitions:
       "trailer_type": ["R"],
       "weight": 2200,
       "width": 22,            
-      "load_detail_url": "https://www.directfreight.com",
+      "details_url": "https://www.example.com/?loadnumber=1234",
       "booking_partner": "...",
-      "allowed_actions":  [ "send_quote" ],
+      "allowed_actions":  [ "call" ],
       "dispatch_email": "dispatch@directfreight.com",
       "dispatch_mobile_number": 7777777777,
       }
@@ -3765,7 +3765,7 @@ definitions:
             - delivered
           type: string
         type: string
-      load_detail_url:
+      details_url:
         description: An optional URL with additional information about this load.
         type: string
       booking_partner:
@@ -3785,7 +3785,9 @@ definitions:
             - mobile_push
             - no_call
             - no_email
-            - no_text 
+            - no_text
+            - url_direct_book
+            - url_details
           type: string
         type: array        
       dispatch_email:
@@ -3823,9 +3825,9 @@ definitions:
         "trailer_type": ["V+V"],
         "weight": 1100,
         "width":11,
-        "load_detail_url": "https://www.directfreight.com",
+        "details_url": "https://www.example.com/?loadnumber=1234",
         "booking_partner": "...",
-        "allowed_actions":  [ "send_quote" ],
+        "allowed_actions":  [ "call" ],
         "dispatch_email": "dispatch@directfreight.com",
         "dispatch_mobile_number": 7777777777      
         }
@@ -3932,7 +3934,7 @@ definitions:
             - delivered
           type: string
         type: string 
-      load_detail_url:
+      details_url:
         description: An optional URL with additional information about this load.
         type: string     
       booking_partner:
@@ -3953,6 +3955,8 @@ definitions:
             - no_call
             - no_email
             - no_text 
+            - url_direct_book
+            - url_details
           type: string
         type: array        
       dispatch_email:
