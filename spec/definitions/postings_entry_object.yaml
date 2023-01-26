@@ -1,17 +1,17 @@
 example:
   allowed_actions:
-    - send_quote
+    - call
   booking_partner: ...
   comment: hello world
   custom_id: abc123
   destination_city: San Francisco
   destination_state: CA
+  details_url: 'https://www.example.com/?loadnumber=1234'
   dispatch_email: dispatch@directfreight.com
   dispatch_mobile_number: 7777777777
   full_load: true
   height: 22
   length: 22
-  load_detail_url: 'https://www.directfreight.com'
   origin_city: seattle
   origin_state: WA
   other_trailer_types: Lowboy
@@ -40,6 +40,8 @@ properties:
         - no_call
         - no_email
         - no_text
+        - url_direct_book
+        - url_details
       type: string
     type: array
   booking_partner:
@@ -73,6 +75,9 @@ properties:
       Delivery location state of load/truck. For truck type entries this field
       is optional.
     type: string
+  details_url:
+    description: An optional URL with additional information about this load.
+    type: string
   dispatch_email:
     description: Dispatch e-Mail.
     type: string
@@ -90,9 +95,6 @@ properties:
   length:
     description: This number represents feet.
     type: number
-  load_detail_url:
-    description: An optional URL with additional information about this load.
-    type: string
   origin_city:
     description: Origin city location of load or truck.  Required for all entry types.
     type: string
