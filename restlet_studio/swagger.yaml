@@ -267,15 +267,25 @@ paths:
       summary: Retrieve a board
       tags:
         - boards
+  '/boards/{board_type}/{entry_id}':        
     get:
       description: 'Retrieves single load'
       parameters:
+        - description: Defines the type of board requested.
+          enum:
+            - loads
+            - trucks
+          in: path
+          name: board_type
+          required: true
+          type: string
+          x-example: loads      
         - name: entry_id
           description: the entry_id associated with the data you want to get.
-          in: query
+          in: path
           type: string
-          required: false
-          x-example: '?entry_id=22ef23'
+          required: true
+          x-example: '22ef23'
         - name: booking_action
           required: false
           type: string
@@ -287,7 +297,7 @@ paths:
           in: query
           description: optional.  
         - name: offer_reference_code
-          description:  Required if booking_action=finalize_booking, returned when /boards/loads is used with booking_action=request_booking.
+          description:  Required if booking_action=finalize_booking, returned when /boards/loads is used with booking_action=request_booking. Defaults to 'none' if not specified.
           in: query
           type: string
           required: false
