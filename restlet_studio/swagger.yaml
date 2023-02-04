@@ -267,7 +267,6 @@ paths:
       summary: Retrieve a board
       tags:
         - boards
-  '/boards/{board_type}/{entry_id}':        
     get:
       description: 'Retrieves single load'
       parameters:
@@ -282,10 +281,10 @@ paths:
           x-example: loads      
         - name: entry_id
           description: the entry_id associated with the data you want to get.
-          in: path
           type: string
           required: true
-          x-example: '22ef23'
+          x-example: '0123456789012345678901234567890123'
+          in: query
         - name: booking_action
           required: false
           type: string
