@@ -1,12 +1,21 @@
 get:
-  description: Retrieves single load
+  description: Retrieves a single load
   parameters:
+    - description: Defines the type of board requested.
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
+      x-example: loads
     - description: the entry_id associated with the data you want to get.
       in: query
       name: entry_id
-      required: false
+      required: true
       type: string
-      x-example: '?entry_id=22ef23'
+      x-example: 0123456789012345678901234567890123
     - description: optional.
       enum:
         - submit_quote
@@ -19,7 +28,8 @@ get:
       type: string
     - description: >-
         Required if booking_action=finalize_booking, returned when /boards/loads
-        is used with booking_action=request_booking.
+        is used with booking_action=request_booking. Defaults to 'none' if not
+        specified.
       in: query
       name: offer_reference_code
       required: false
@@ -54,7 +64,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/single_load_response'
-  summary: Retrieve single load STAGE=UNK
+  summary: Retrieve single load
   tags:
     - boards
 parameters:
