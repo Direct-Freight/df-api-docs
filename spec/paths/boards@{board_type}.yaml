@@ -1,5 +1,5 @@
 get:
-  description: Retrieves single load
+  description: Retrieves a single load
   parameters:
     - description: Defines the type of board requested.
       enum:
@@ -64,7 +64,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/single_load_response'
-  summary: Retrieve single load STAGE=UNK
+  summary: Retrieve single load
   tags:
     - boards
 parameters:
