@@ -18,39 +18,39 @@ get:
       x-example: 0123456789012345678901234567890123
     - description: optional.
       enum:
-        - submit_quote
-        - request_booking
-        - finalize_booking
+        - get_broker_offer
+        - submit_driver_offer
+        - accept_broker_offer
         - none
       in: query
       name: booking_action
       required: false
       type: string
     - description: >-
-        Required if booking_action=finalize_booking, returned when /boards/loads
-        is used with booking_action=request_booking. Defaults to 'none' if not
-        specified.
+        Required if booking_action=accept_broker_offer, returned when
+        /boards/loads is used with booking_action=get_broker_offer. Defaults to
+        'none' if not specified.
       in: query
       name: offer_reference_code
       required: false
       type: string
     - description: >-
-        Required if booking_action=submit_quote, returned when /boards/loads is
-        used with booking_action=request_booking.
+        Required if booking_action=submit_driver_offer, returned when
+        /boards/loads is used with booking_action=get_broker_offer.
       in: query
       name: reference_id
       required: false
       type: string
     - description: >-
-        Required if booking_action=submit_quote, returned when /boards/loads is
-        used with booking_action=request_booking.
+        Required if booking_action=submit_driver_offer, returned when
+        /boards/loads is used with booking_action=get_broker_offer.
       in: query
       name: company_external_key
       required: false
       type: string
     - description: >-
-        Required if booking_action=submit_quote, the amount offered to transport
-        this load.
+        Required if booking_action=submit_driver_offer, the amount offered to
+        transport this load.
       in: query
       name: quote_amount
       required: false
