@@ -289,29 +289,29 @@ paths:
           required: false
           type: string
           enum:
-            - submit_quote
-            - request_booking
-            - finalize_booking
+            - get_broker_offer
+            - submit_driver_offer
+            - accept_broker_offer
             - none
           in: query
           description: optional.  
         - name: offer_reference_code
-          description:  Required if booking_action=finalize_booking, returned when /boards/loads is used with booking_action=request_booking. Defaults to 'none' if not specified.
+          description:  Required if booking_action=accept_broker_offer, returned when /boards/loads is used with booking_action=get_broker_offer. Defaults to 'none' if not specified.
           in: query
           type: string
           required: false
         - name: reference_id
-          description:  Required if booking_action=submit_quote, returned when /boards/loads is used with booking_action=request_booking.
+          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
           in: query
           type: string
           required: false    
         - name: company_external_key
-          description:  Required if booking_action=submit_quote, returned when /boards/loads is used with booking_action=request_booking.
+          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
           in: query
           type: string
           required: false             
         - name: quote_amount
-          description:  Required if booking_action=submit_quote, the amount offered to transport this load.
+          description:  Required if booking_action=submit_driver_offer, the amount offered to transport this load.
           in: query
           type: number
           required: false                
