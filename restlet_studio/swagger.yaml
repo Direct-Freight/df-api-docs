@@ -2769,8 +2769,8 @@ definitions:
         example: true
         type: boolean
       height:
-        description: Height in inches.  Will be null if empty.
-        type: integer
+        description: Height in feet.  Will be null if empty.
+        type: number
       length:
         description: Length in feet.  Will be null if empty.
         type: number
@@ -2839,8 +2839,8 @@ definitions:
         description: Weight in pounds.  Will be null if empty.
         type: integer
       width:
-        description: Width in inches.  Will be null if empty.
-        type: integer
+        description: Width in feet.  Will be null if empty.
+        type: number
     required:
       - age
       - credit_score
@@ -3692,10 +3692,10 @@ definitions:
         description: The load will be assumed to be full if this argument isn't included and marked to true.
         type: boolean
       height:
-        description: This number represents inches.
-        type: integer
+        description: height in feet.
+        type: number
       length:
-        description: This number represents feet.
+        description: length in feet.
         type: number
       origin_city:
         description: Origin city location of load or truck.  Required for all entry types.
@@ -3759,11 +3759,11 @@ definitions:
           type: string
         type: array
       weight:
-        description: This number represents pounds.
+        description: weight in pounds.
         type: integer
       width:
-        description: This number represents inches.
-        type: integer
+        description: width in feet.
+        type: number
       category:
         description: This option only applies to "private_loads", "private_trucks"
         items:
@@ -3858,10 +3858,10 @@ definitions:
         description: This should only be used with loads.
         type: boolean
       height:
-        description: This number represents inches.
-        type: integer
+        description: height in feet.
+        type: number
       length:
-        description: This number represents feet.
+        description: length in feet.
         type: number
       origin_city:
         description: Origin city location of load or truck
@@ -3928,11 +3928,11 @@ definitions:
           type: string
         type: array
       weight:
-        description: This number represents pounds.
+        description: weight in pounds.
         type: integer
       width:
-        description: This number represents inches.
-        type: integer
+        description: width in feet.
+        type: number
       category:
         description: This option only applies to "private_loads", "private_trucks"
         items:
@@ -3999,10 +3999,10 @@ definitions:
         description: For trucks this will always be false.
         type: boolean
       height:
-        description: This number represents inches.
-        type: integer
+        description: height in feet.
+        type: number
       length:
-        description: This number represents feet.
+        description: length in feet.
         type: number
       origin_city:
         description: Origin city location of load or truck
@@ -4067,11 +4067,11 @@ definitions:
           type: string
         type: array
       weight:
-        description: This number represents pounds.
+        description: weight in pounds.
         type: integer
       width:
-        description: This number represents inches.
-        type: integer
+        description: width in feet.
+        type: number
     required:
       - comment
       - contact_name
