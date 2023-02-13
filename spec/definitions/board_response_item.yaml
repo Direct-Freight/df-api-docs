@@ -68,8 +68,8 @@ properties:
     example: true
     type: boolean
   height:
-    description: Height in inches.  Will be null if empty.
-    type: integer
+    description: Height in feet.  Will be null if empty.
+    type: number
   length:
     description: Length in feet.  Will be null if empty.
     type: number
@@ -152,8 +152,8 @@ properties:
     description: Weight in pounds.  Will be null if empty.
     type: integer
   width:
-    description: Width in inches.  Will be null if empty.
-    type: integer
+    description: Width in feet.  Will be null if empty.
+    type: number
 required:
   - age
   - credit_score
