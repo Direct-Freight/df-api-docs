@@ -90,10 +90,10 @@ properties:
       marked to true.
     type: boolean
   height:
-    description: This number represents inches.
-    type: integer
+    description: height in feet.
+    type: number
   length:
-    description: This number represents feet.
+    description: length in feet.
     type: number
   origin_city:
     description: Origin city location of load or truck.  Required for all entry types.
@@ -165,11 +165,11 @@ properties:
       type: string
     type: array
   weight:
-    description: This number represents pounds.
+    description: weight in pounds.
     type: integer
   width:
-    description: This number represents inches.
-    type: integer
+    description: width in feet.
+    type: number
 required:
   - custom_id
   - origin_city
