@@ -1,6 +1,6 @@
 get:
   consumes: []
-  description: Fetch Offer Driver
+  description: Get the offer submitted by the driver for this load.
   parameters:
     - description: Numeric Offer ID
       in: query
