@@ -1,13 +1,13 @@
 get:
   consumes: []
-  description: Get the offer submitted by the driver for this load.
+  description: Get the offer submitted by the driver for this load.  STAGE=Private
   parameters:
     - description: Numeric Offer ID
       in: query
       name: offer_id
       required: true
       type: string
-    - description: 32 Character Entry ID
+    - description: 32 character entry id
       in: query
       name: entry_id
       required: true
