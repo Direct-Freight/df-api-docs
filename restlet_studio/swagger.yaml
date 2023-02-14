@@ -766,7 +766,7 @@ paths:
   /boards/offer/driver:      
     get:
       consumes: []
-      description: Get the offer submitted by the driver for this load.
+      description: Get the offer submitted by the driver for this load.  STAGE=Private
       parameters:
         - name: offer_id
           description: Numeric Offer ID
@@ -774,7 +774,7 @@ paths:
           required: true
           type: string
         - name: entry_id
-          description: 32 Character Entry ID
+          description: 32 character entry id
           in: query
           required: true
           type: string          
@@ -790,24 +790,13 @@ paths:
       section: BOARDS
   /boards/offer/broker:
     get:
-      description: 'Get the offer from the broker for this load'
+      description: 'Get the offer from the broker for this load.  STAGE=Private'
       parameters:
         - name: entry_id
-          description: the entry_id associated with the data you want to get.
+          description: 32 character entry id
           type: string
           required: true
-          x-example: '0123456789012345678901234567890123'
           in: query
-        - name: booking_action
-          required: false
-          type: string
-          enum:
-            - get_broker_offer
-            - submit_driver_offer
-            - accept_broker_offer
-            - none
-          in: query
-          description: optional.  
         - name: offer_reference_code
           description:  Required if booking_action=accept_broker_offer, returned when /boards/loads is used with booking_action=get_broker_offer. Defaults to 'none' if not specified.
           in: query
