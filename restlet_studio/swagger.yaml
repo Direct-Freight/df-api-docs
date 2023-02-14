@@ -285,45 +285,15 @@ paths:
           required: true
           x-example: '0123456789012345678901234567890123'
           in: query
-        - name: booking_action
-          required: false
-          type: string
-          enum:
-            - get_broker_offer
-            - submit_driver_offer
-            - accept_broker_offer
-            - none
-          in: query
-          description: optional.  
-        - name: offer_reference_code
-          description:  Required if booking_action=accept_broker_offer, returned when /boards/loads is used with booking_action=get_broker_offer. Defaults to 'none' if not specified.
-          in: query
-          type: string
-          required: false
-        - name: reference_id
-          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
-          in: query
-          type: string
-          required: false    
-        - name: company_external_key
-          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
-          in: query
-          type: string
-          required: false             
-        - name: quote_amount
-          description:  Required if booking_action=submit_driver_offer, the amount offered to transport this load.
-          in: query
-          type: number
-          required: false                
         - in: header
           name: end-user-token
-          required: true
+          required: false
           type: string
       responses:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/single_load_response'
+            $ref: '#/definitions/board_response_item'
       summary: Retrieve single load
       tags:
         - boards
@@ -763,7 +733,7 @@ paths:
         - boards
     x-restlet:
       section: BOARDS    
-  /boards/offer/driver:      
+  /boards/loads/offer/driver:      
     get:
       consumes: []
       description: Get the offer submitted by the driver for this load.  STAGE=Private
@@ -788,7 +758,7 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
-  /boards/offer/broker:
+  /boards/loads/offer/broker:
     get:
       description: 'Get the offer from the broker for this load.  STAGE=Private'
       parameters:
@@ -2759,7 +2729,6 @@ definitions:
     x-restlet:
       section: BOARDS
   board_response_item:
-    example: test
     properties:
       age:
         description: Time in minutes since load/truck was first posted. NULL is returned for values less than 1 minute.
