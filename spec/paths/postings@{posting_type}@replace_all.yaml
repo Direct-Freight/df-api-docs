@@ -1,8 +1,8 @@
 parameters:
   - description: >-
       delete and replace all entries in {posting_type} with the entries in
-      {posting_type}_temp.  For example, if posting_type=loads, then source_type
-      is loads_temp.
+      {posting_type}_temp.  For example, if posting_type=loads, then source
+      posting_type is loads_temp.
     enum:
       - loads
       - trucks
