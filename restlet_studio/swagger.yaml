@@ -730,8 +730,8 @@ paths:
       section: BOARDS
   /boards/offer/driver:      
     post:
-      summary: 'Post Driver Offer'
-      description: 'Post the offer from the driver for this load.  STAGE=Private'
+      summary: 'Submit Driver Offer'
+      description: 'Submit the offer from the driver for this load.  STAGE=Private'
       parameters:
         - name: entry_id
           description: 32 character entry id
