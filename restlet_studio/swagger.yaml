@@ -735,7 +735,7 @@ paths:
         - boards
     x-restlet:
       section: BOARDS    
-  /boards/loads/offer/driver:      
+  /boards/offer/driver:      
     get:
       consumes: []
       description: Get the offer submitted by the driver for this load.  STAGE=Private
@@ -758,10 +758,7 @@ paths:
       summary: STAGE=Private Get Offer.
       tags:
         - boards
-    x-restlet:
-      section: BOARDS
-  /boards/loads/offer/broker:
-    get:
+    post:
       description: 'Get the offer from the broker for this load.  STAGE=Private'
       parameters:
         - name: entry_id
@@ -803,6 +800,89 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
+  /boards/offer/broker:
+    get:
+      description: 'Get the offer from the broker for this load.  STAGE=Private'
+      parameters:
+        - name: entry_id
+          description: 32 character entry id
+          type: string
+          required: true
+          in: query
+        - name: offer_reference_code
+          description:  Required if booking_action=accept_broker_offer, returned when /boards/loads is used with booking_action=get_broker_offer. Defaults to 'none' if not specified.
+          in: query
+          type: string
+          required: false
+        - name: reference_id
+          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
+          in: query
+          type: string
+          required: false    
+        - name: company_external_key
+          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
+          in: query
+          type: string
+          required: false             
+        - name: quote_amount
+          description:  Required if booking_action=submit_driver_offer, the amount offered to transport this load.
+          in: query
+          type: number
+          required: false                
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/single_load_response'
+      summary: Retrieve single load
+      tags:
+        - boards
+    post:
+      description: 'Get the offer from the broker for this load.  STAGE=Private'
+      parameters:
+        - name: entry_id
+          description: 32 character entry id
+          type: string
+          required: true
+          in: query
+        - name: offer_reference_code
+          description:  Required if booking_action=accept_broker_offer, returned when /boards/loads is used with booking_action=get_broker_offer. Defaults to 'none' if not specified.
+          in: query
+          type: string
+          required: false
+        - name: reference_id
+          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
+          in: query
+          type: string
+          required: false    
+        - name: company_external_key
+          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
+          in: query
+          type: string
+          required: false             
+        - name: quote_amount
+          description:  Required if booking_action=submit_driver_offer, the amount offered to transport this load.
+          in: query
+          type: number
+          required: false                
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/single_load_response'
+      summary: Retrieve single load
+      tags:
+        - boards
+    x-restlet:
+      section: BOARDS      
   /end_user_authentications/users:
     post:
       consumes: []
