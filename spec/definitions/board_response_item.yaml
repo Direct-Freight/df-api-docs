@@ -7,7 +7,7 @@ properties:
     type: integer
   carrier_onboard_url:
     description: URL for onboarding specified by carrier.
-    example: www.google.com
+    example: 'https://www.truckersearch.com/'
     type: string
   comment:
     description: >-
