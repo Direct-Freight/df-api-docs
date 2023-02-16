@@ -15,7 +15,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/single_load_response'
-  summary: Retrieve single load
+  summary: Get Broker Offer
   tags:
     - boards
 x-restlet:

@@ -1,5 +1,4 @@
 get:
-  consumes: []
   description: Get the offer submitted by the driver for this load.  STAGE=Private
   parameters:
     - description: Numeric Offer ID
@@ -14,14 +13,14 @@ get:
       type: string
   responses:
     '201':
-      description: Details about
+      description: Details about Driver Offer
       schema:
         $ref: '#/definitions/boards_offer_driver_response'
-  summary: STAGE=Private Get Offer.
+  summary: Get Driver Offer
   tags:
     - boards
 post:
-  description: Get the offer from the broker for this load.  STAGE=Private
+  description: Post the offer from the driver for this load.  STAGE=Private
   parameters:
     - description: 32 character entry id
       in: query
@@ -66,7 +65,7 @@ post:
       description: successful operation
       schema:
         $ref: '#/definitions/single_load_response'
-  summary: Retrieve single load
+  summary: Post Driver Offer
   tags:
     - boards
 x-restlet:
