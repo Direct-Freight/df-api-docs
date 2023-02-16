@@ -37,15 +37,8 @@ post:
         unless action=accept_broker_offer
       in: query
       name: quote_amount
-      required: false
+      required: true
       type: number
-    - enum:
-        - accept_broker_offer
-        - submit_driver_offer
-      in: query
-      name: action
-      required: false
-      type: string
     - in: header
       name: end-user-token
       required: true
