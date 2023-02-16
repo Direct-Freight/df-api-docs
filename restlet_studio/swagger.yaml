@@ -747,7 +747,13 @@ paths:
           description:  The amount offered by the driver to transport this load.  Required unless action=accept_broker_offer
           in: query
           type: number
-          required: false                
+          required: false
+        - name: action
+          type: string
+          enum:
+            - accept_broker_offer
+          required: false
+          in: query
         - name: end-user-token
           in: header
           required: true
@@ -3165,28 +3171,6 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS      
-  quote_partner_load:
-    properties:
-      entry_id:
-        description: 'MD5 Identifier of load.'
-        type: string
-      reference_id:
-        description: 'Load reference ID as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking.'
-        type: string
-      company_external_key:
-        description: 'Company External Key as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking.'
-        type: string
-      quote_amount:
-        description: 'Amount offered for transporting this load.'
-        type: number        
-    required:
-      - entry_id
-      - reference_id
-      - company_external_key
-      - quote_amount      
-    type: object
-    x-restlet:
-      section: BOARDS         
   create_custom_field:
     properties:
       name:
