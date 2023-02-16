@@ -153,7 +153,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes: []
       description: Search objects are set at creation. You cannot modify them after the alert has been created.
       parameters:
         - in: header
@@ -172,7 +171,6 @@ paths:
       tags:
         - alerts
     post:
-      consumes: []
       description: 'This method will update or create an alert. The POST action with the same search parameters but different alert parameters will update the existing alert. The one caveaut to this is send_type. You can have 2 alerts with the same search parameters but different send_types. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
       parameters:
         - in: header
@@ -196,7 +194,6 @@ paths:
       section: ALERTS
   '/alerts/search/{board_type}':
     post:
-      consumes: []
       description: 'This method will search a users alert. It accepts the exact same structure as the POST method for /alerts/. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
       parameters:
         - in: header
@@ -236,7 +233,6 @@ paths:
         type: string
         x-example: loads
     post:
-      consumes: []
       description: This is the primary search method for loads and trucks. Please specifify at least an origin or destination.  The origin or destination may be state only.
       parameters:
         - default: 01234567890abc
@@ -371,7 +367,6 @@ paths:
       tags:
         - boards
     patch:
-      consumes: []
       description: Toggle one  company between hidden and unhidden.
       parameters:
         - in: header
@@ -390,7 +385,6 @@ paths:
       tags:
         - boards
     post:
-      consumes: []
       description: Mark a set of companies as hidden.
       parameters:
         - in: header
@@ -453,7 +447,6 @@ paths:
       tags:
         - boards
     patch:
-      consumes: []
       description: Toggle one or more entries between hidden and unhidden.
       parameters:
         - in: header
@@ -472,7 +465,6 @@ paths:
       tags:
         - boards
     post:
-      consumes: []
       description: Mark an entry as hidden.
       parameters:
         - in: header
@@ -533,7 +525,6 @@ paths:
       tags:
         - boards
     patch:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -553,7 +544,6 @@ paths:
       tags:
         - boards
     post:
-      consumes: []
       description: Create a new note.
       parameters:
         - in: header
@@ -575,54 +565,6 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
-  # /boards/book_now:
-  #   post:
-  #     consumes: []
-  #     description: Book a load with a partner.
-  #     parameters:
-  #       - in: header
-  #         name: end-user-token
-  #         required: true
-  #         type: string
-  #       - in: body
-  #         name: body
-  #         required: true
-  #         schema:
-  #           $ref: '#/definitions/book_partner_load'
-  #     responses:
-  #       '201':
-  #         description: Object created check the headers for a reference URL.
-  #         schema:
-  #           $ref: '#/definitions/create_status'
-  #     summary: STAGE=UNK Book a load.
-  #     tags:
-  #       - boards
-  #   x-restlet:
-  #     section: BOARDS      
-  # /boards/post_quote:
-  #   post:
-  #     consumes: []
-  #     description: Post a quote for a load.
-  #     parameters:
-  #       - in: header
-  #         name: end-user-token
-  #         required: true
-  #         type: string
-  #       - in: body
-  #         name: body
-  #         required: true
-  #         schema:
-  #           $ref: '#/definitions/quote_partner_load'
-  #     responses:
-  #       '201':
-  #         description: Object created check the headers for a reference URL.
-  #         schema:
-  #           $ref: '#/definitions/create_status'
-  #     summary: STAGE=UNK Post quote for a load.
-  #     tags:
-  #       - boards
-  #   x-restlet:
-  #     section: BOARDS            
   /boards/profit:      
     get:
       consumes: []
@@ -674,8 +616,8 @@ paths:
       section: BOARDS           
   /boards/freight_rate:      
     get:
-      consumes: []
-      description: Calculate Freight Rates
+      summary: 'Get Freight Rates.'
+      description: 'Calculate Freight Rates.  STAGE=Private'
       parameters:
         - name: origin_city
           description: Origin City
@@ -730,7 +672,6 @@ paths:
           description: Details about average rates for this trip. Returns an object where each key is a trailer type with an array of the freight rate for each day that was found for that type.
           schema:
             $ref: '#/definitions/boards_freight_rate_response'
-      summary: STAGE=Private Get Freight Rates.
       tags:
         - boards
     x-restlet:
@@ -824,7 +765,6 @@ paths:
       section: BOARDS
   /end_user_authentications/users:
     post:
-      consumes: []
       parameters:
         - in: body
           name: body
@@ -902,7 +842,6 @@ paths:
       tags:
         - end_user_authentications
     post:
-      consumes: []
       description: 'This function sends login credentials, and retrieves a stateless token.'
       parameters:
         - in: body
@@ -997,7 +936,6 @@ paths:
       tags:
         - end_user_authentications
     post:
-      consumes: []
       description: 'Creates a new password for a user with a recovery key'
       parameters:
       - in: body
@@ -1020,7 +958,6 @@ paths:
       tags:
         - end_user_authentications
     patch:
-      consumes: []
       description: Update a users password.
       parameters:
         - in: header
@@ -1070,7 +1007,6 @@ paths:
       section: END_USER_AUTHENTICATIONS      
   /end_user_authentications/email:
     patch:
-      consumes: []
       description: Update a users email address.
       parameters:
         - in: header
@@ -1302,7 +1238,6 @@ paths:
       tags:
         - optins
     patch:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -1332,7 +1267,6 @@ paths:
       tags:
         - optins
     post:
-      consumes: []
       description: 'Currently only Push notifications are implemented. With them a post creates and approves the optin. Later on when text/email is ported post will create the optin with the status of ''no response'' meaning they haven''t replied with the propper code, or clicked an authorization link.'
       parameters:
         - in: header
@@ -1418,7 +1352,6 @@ paths:
       tags:
         - optins
     post:
-      consumes: []
       description: 'Register a OneSignal player_id in DirectFreight for web push notifications.'
       parameters:
         - in: header
@@ -1469,7 +1402,6 @@ paths:
       tags:
         - optins
     patch:
-      consumes: []
       description: 'Toggle audio notifications.'
       parameters:
         - in: header
@@ -1599,7 +1531,6 @@ paths:
         type: string
         x-example: test_loads
     patch:
-      consumes: []
       description: Update one or more entries. Only 100 entries can be updated per request.
       parameters:
         - in: header
@@ -1633,10 +1564,7 @@ paths:
       tags:
         - postings
     post:
-      consumes: []
-      description: |-
-        Only 100 entries can be created per request.
-        
+      description: "Only 100 entries can be created per request."
       parameters:
         - in: header
           name: end-user-token
@@ -1688,7 +1616,6 @@ paths:
         required: true
         type: string
     post:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -1722,7 +1649,6 @@ paths:
         required: true
         type: string
     post:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
