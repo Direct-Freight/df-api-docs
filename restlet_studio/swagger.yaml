@@ -752,6 +752,7 @@ paths:
           type: string
           enum:
             - accept_broker_offer
+            - post_driver_offer
           required: false
           in: query
         - name: end-user-token
