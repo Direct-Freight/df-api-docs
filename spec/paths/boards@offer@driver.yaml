@@ -27,31 +27,14 @@ post:
       name: entry_id
       required: true
       type: string
-    - description: >-
-        Required if booking_action=accept_broker_offer, returned when
-        /boards/loads is used with booking_action=get_broker_offer. Defaults to
-        'none' if not specified.
+    - description: The reference code returned with the broker offer.
       in: query
-      name: offer_reference_code
-      required: false
+      name: df_reference_code
+      required: true
       type: string
     - description: >-
-        Required if booking_action=submit_driver_offer, returned when
-        /boards/loads is used with booking_action=get_broker_offer.
-      in: query
-      name: reference_id
-      required: false
-      type: string
-    - description: >-
-        Required if booking_action=submit_driver_offer, returned when
-        /boards/loads is used with booking_action=get_broker_offer.
-      in: query
-      name: company_external_key
-      required: false
-      type: string
-    - description: >-
-        Required if booking_action=submit_driver_offer, the amount offered to
-        transport this load.
+        The amount offered by the driver to transport this load.  Required
+        unless action=accept_broker_offer
       in: query
       name: quote_amount
       required: false
