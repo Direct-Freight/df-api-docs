@@ -19,7 +19,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/get_state_list_response'
-  summary: Totals by state
+  summary: Top 5 city totals by state'
   tags:
     - boards
 parameters:
