@@ -1,5 +1,5 @@
 get:
-  description: A convenience method to get totals by state.
+  description: A convenience method to get totals by state.  Stage=Private
   parameters:
     - description: >-
         Filter totals to only include these trailer_type's. This parameter can
