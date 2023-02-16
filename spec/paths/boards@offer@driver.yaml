@@ -1,9 +1,9 @@
 get:
   description: Get the offer submitted by the driver for this load.  STAGE=Private
   parameters:
-    - description: Numeric Offer ID
+    - description: The reference code to look up the driver's offer
       in: query
-      name: offer_id
+      name: df_reference_code
       required: true
       type: string
     - description: 32 character entry id
