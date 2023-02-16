@@ -567,7 +567,6 @@ paths:
       section: BOARDS
   /boards/profit:      
     get:
-      consumes: []
       description: Calculate trip profit.
       parameters:
         - name: origin_city
@@ -1886,7 +1885,6 @@ paths:
       tags:
         - profiles
     patch:
-      consumes: []
       description: Please send in at least one field to be updated.
       parameters:
         - in: header
@@ -1907,7 +1905,6 @@ paths:
       tags:
         - profiles
     post:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -1959,7 +1956,6 @@ paths:
       tags:
         - profiles
     patch:
-      consumes: []
       description: Please send in at least one field to be updated.
       parameters:
         - in: header
@@ -2008,7 +2004,6 @@ paths:
       tags:
         - profiles
     patch:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -2026,7 +2021,6 @@ paths:
       tags:
         - profiles
     post:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
