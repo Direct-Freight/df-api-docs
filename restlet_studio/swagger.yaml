@@ -325,6 +325,38 @@ paths:
         type: string
     x-restlet:
       section: BOARDS
+  '/boards/{board_type}/state_totals/{state_code}':
+    get:
+      description: A convenience method to get totals by state.
+      parameters: 
+        - description: Filter totals to only include these trailer_type's. This parameter can be specified multiple times and the totals are combined. i.e. trailer_type=V&trailer_type=R returns the combined total of all loads that are either V or 
+          in: query
+          name: trailer_type
+          required: false
+          type: string
+        - name: state_code
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/get_state_list_response'
+      summary: Totals by state
+      tags:
+        - boards
+    parameters:
+      - description: 'Valid types are "loads", and "trucks".'
+        enum:
+          - loads
+          - trucks
+        in: path
+        name: board_type
+        required: true
+        type: string
+    x-restlet:
+      section: BOARDS      
   /boards/hidden_companies:
     delete:
       description: Mark a company as not hidden.
@@ -708,28 +740,18 @@ paths:
           type: string
           required: true
           in: query
-        - name: offer_reference_code
-          description:  Required if booking_action=accept_broker_offer, returned when /boards/loads is used with booking_action=get_broker_offer. Defaults to 'none' if not specified.
+        - name: df_reference_code
+          description:  The reference code returned with the broker offer.
           in: query
           type: string
-          required: false
-        - name: reference_id
-          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
-          in: query
-          type: string
-          required: false    
-        - name: company_external_key
-          description:  Required if booking_action=submit_driver_offer, returned when /boards/loads is used with booking_action=get_broker_offer.
-          in: query
-          type: string
-          required: false             
+          required: true
         - name: quote_amount
-          description:  Required if booking_action=submit_driver_offer, the amount offered to transport this load.
+          description:  The amount offered by the driver to transport this load.  Required unless action=accept_broker_offer
           in: query
           type: number
           required: false                
-        - in: header
-          name: end-user-token
+        - name: end-user-token
+          in: header
           required: true
           type: string
       responses:
