@@ -22,27 +22,26 @@ get:
 post:
   description: Submit the offer from the driver for this load.  STAGE=Private
   parameters:
-    - description: 32 character entry id
-      in: query
-      name: entry_id
-      required: true
-      type: string
-    - description: The reference code returned with the broker offer.
-      in: query
-      name: df_reference_code
-      required: true
-      type: string
-    - description: >-
-        The amount offered by the driver to transport this load.  Required
-        unless action=accept_broker_offer
-      in: query
-      name: quote_amount
-      required: true
-      type: number
     - in: header
       name: end-user-token
       required: true
       type: string
+    - in: body
+      name: body
+      schema:
+        properties:
+          df_reference_code:
+            description: The reference code returned with the broker offer.
+            type: string
+          entry_id:
+            description: 32 character entry id
+            type: string
+          quote_amount:
+            description: The amount offered by the driver to transport this load.
+            type: number
+        required:
+          - entry_id df_reference_code quote_amount
+        type: object
   responses:
     '200':
       description: successful operation
