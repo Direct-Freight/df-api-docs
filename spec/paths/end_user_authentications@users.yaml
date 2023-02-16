@@ -11,7 +11,6 @@ delete:
   tags:
     - end_user_authentications
 post:
-  consumes: []
   parameters:
     - in: body
       name: body

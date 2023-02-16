@@ -41,7 +41,6 @@ parameters:
     type: string
     x-example: loads
 post:
-  consumes: []
   description: >-
     This is the primary search method for loads and trucks. Please specifify at
     least an origin or destination.  The origin or destination may be state

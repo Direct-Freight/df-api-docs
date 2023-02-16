@@ -40,7 +40,6 @@ get:
   tags:
     - boards
 patch:
-  consumes: []
   description: Toggle one or more entries between hidden and unhidden.
   parameters:
     - in: header
@@ -59,7 +58,6 @@ patch:
   tags:
     - boards
 post:
-  consumes: []
   description: Mark an entry as hidden.
   parameters:
     - in: header

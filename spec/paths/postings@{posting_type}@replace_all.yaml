@@ -14,7 +14,6 @@ parameters:
     required: true
     type: string
 post:
-  consumes: []
   parameters:
     - in: header
       name: end-user-token
