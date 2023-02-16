@@ -39,6 +39,12 @@ post:
       name: quote_amount
       required: false
       type: number
+    - enum:
+        - accept_broker_offer
+      in: query
+      name: action
+      required: false
+      type: string
     - in: header
       name: end-user-token
       required: true
