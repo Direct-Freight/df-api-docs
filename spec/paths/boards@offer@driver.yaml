@@ -20,7 +20,7 @@ get:
   tags:
     - boards
 post:
-  description: Post the offer from the driver for this load.  STAGE=Private
+  description: Submit the offer from the driver for this load.  STAGE=Private
   parameters:
     - description: 32 character entry id
       in: query
@@ -55,7 +55,7 @@ post:
       description: successful operation
       schema:
         $ref: '#/definitions/single_load_response'
-  summary: Post Driver Offer
+  summary: Submit Driver Offer
   tags:
     - boards
 x-restlet:
