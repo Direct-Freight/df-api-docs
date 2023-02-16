@@ -2742,7 +2742,7 @@ definitions:
         type: string
       carrier_onboard_url:
         description: URL for onboarding specified by carrier.
-        example: www.google.com
+        example: https://www.truckersearch.com/
         type: string        
       company_name:
         description: This field is only returned for an end_user_token that has the subscribed access level.
