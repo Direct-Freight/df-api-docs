@@ -41,6 +41,7 @@ post:
       type: number
     - enum:
         - accept_broker_offer
+        - post_driver_offer
       in: query
       name: action
       required: false
