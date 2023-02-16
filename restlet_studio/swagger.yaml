@@ -797,8 +797,8 @@ paths:
       summary: 'Get Driver Offer'
       description: 'Get the offer submitted by the driver for this load.  STAGE=Private'
       parameters:
-        - name: offer_id
-          description: Numeric Offer ID
+        - name: df_reference_code
+          description: "The reference code to look up the driver's offer"
           in: query
           required: true
           type: string
