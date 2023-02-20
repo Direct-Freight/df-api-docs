@@ -83,6 +83,10 @@ parameters:
 produces:
   - application/json
 responses:
+  error_403:
+    description: The user wasn't authorized to do the operation.
+    schema:
+      $ref: '#/definitions/error_message'
   error_422:
     description: Unprocessable Entity. More information provided in the return object.
     schema:
