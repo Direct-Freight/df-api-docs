@@ -832,6 +832,9 @@ paths:
               end-user-token:
                 description: Auto logs in the new user and gives them a token.
                 type: string
+              user_id:
+                type: integer
+                description: STAGE=private This is used in the spider code for Parade users.
             required:
               - end-user-token
             type: object
