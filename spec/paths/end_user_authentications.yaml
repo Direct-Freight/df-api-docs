@@ -50,8 +50,6 @@ post:
       description: successful operation
       schema:
         $ref: '#/definitions/end-user-token'
-    '403':
-      $ref: '#/responses/error_403'
     '422':
       $ref: '#/responses/error_422'
   summary: Login
