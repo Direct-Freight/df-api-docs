@@ -285,6 +285,7 @@ paths:
           type: string
           in: query
           description: 'The page that is requesting the information.  This is used to determine when to retrieve real time information from the shipper or broker.  Example:  requesting_page="book-now" will return real time information for certain partners.  Stage=Private'
+          required: false
         - in: header
           name: end-user-token
           required: false
