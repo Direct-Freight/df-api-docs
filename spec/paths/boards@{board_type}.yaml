@@ -16,6 +16,14 @@ get:
       required: true
       type: string
       x-example: 0123456789012345678901234567890123
+    - description: >-
+        The page that is requesting the information.  This is used to determine
+        when to retrieve real time information from the shipper or broker. 
+        Example:  requesting_page="book-now" will return real time information
+        for certain partners.  Stage=Private
+      in: query
+      name: requesting_page
+      type: string
     - in: header
       name: end-user-token
       required: false
