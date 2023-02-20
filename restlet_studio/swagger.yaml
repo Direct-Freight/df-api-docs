@@ -91,6 +91,10 @@ responses:
     description: Unprocessable Entity. More information provided in the return object.
     schema:
       $ref: '#/definitions/error_object'
+  error_403:
+    description: The user wasn't authorized to do the operation.
+    schema:
+      $ref: '#/definitions/error_message'
   object_created:
     description: Object created check the headers for a reference URL.
     schema:
@@ -832,9 +836,6 @@ paths:
               end-user-token:
                 description: Auto logs in the new user and gives them a token.
                 type: string
-              user_id:
-                type: integer
-                description: STAGE=private This is used in the spider code for Parade users.
             required:
               - end-user-token
             type: object
@@ -912,6 +913,8 @@ paths:
             $ref: '#/definitions/end-user-token'
         '422':
           $ref: '#/responses/error_422'
+        '403':
+          $ref: '#/responses/error_403'
       summary: Login
       tags:
         - end_user_authentications
@@ -3252,6 +3255,9 @@ definitions:
         description: On success an end-user-token is returned.
         example: XX423ASOEUHT4AESUTH
         type: string
+      user_id:
+        type: integer 
+        description: STAGE=private This is used in the spider code for Parade users.
     type: object
     x-restlet:
       section: END_USER_AUTHENTICATIONS
@@ -3292,6 +3298,15 @@ definitions:
       - code
       - description
       - error
+    type: object
+    x-restlet:
+      section: common_definitions
+  error_message:
+    properties:
+      message:
+        type: string
+    required:
+      - message
     type: object
     x-restlet:
       section: common_definitions
