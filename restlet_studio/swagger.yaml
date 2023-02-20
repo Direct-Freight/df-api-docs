@@ -1690,21 +1690,21 @@ paths:
     x-restlet:
       section: POSTINGS
   '/postings/{posting_type}/replace_all':
-    parameters:
-      - description: 'delete and replace all entries in {posting_type} with the entries in {posting_type}_temp.  For example, if posting_type=loads, then source posting_type is loads_temp.'
-        enum:
-          - loads
-          - trucks
-          - test_loads
-          - test_trucks
-        in: path
-        name: posting_type
-        required: true
-        type: string
     post:
+      summary: 'replace_all'
+      description: 'delete and replace all entries in posting_type with the entries in {posting_type}_temp.  For example, if posting_type=loads, then source posting_type is loads_temp.'
       parameters:
-        - in: header
-          name: end-user-token
+        - name: posting_type
+          enum:
+            - loads
+            - trucks
+            - test_loads
+            - test_trucks
+          in: path
+          required: true
+          type: string
+        - name: end-user-token
+          in: header
           required: true
           type: string
         - in: query
