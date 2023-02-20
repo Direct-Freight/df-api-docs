@@ -23,6 +23,7 @@ get:
         for certain partners.  Stage=Private
       in: query
       name: requesting_page
+      required: false
       type: string
     - in: header
       name: end-user-token
