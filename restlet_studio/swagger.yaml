@@ -91,10 +91,6 @@ responses:
     description: Unprocessable Entity. More information provided in the return object.
     schema:
       $ref: '#/definitions/error_object'
-  error_403:
-    description: The user wasn't authorized to do the operation.
-    schema:
-      $ref: '#/definitions/error_message'
   object_created:
     description: Object created check the headers for a reference URL.
     schema:
