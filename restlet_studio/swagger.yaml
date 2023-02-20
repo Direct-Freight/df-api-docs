@@ -913,8 +913,6 @@ paths:
             $ref: '#/definitions/end-user-token'
         '422':
           $ref: '#/responses/error_422'
-        '403':
-          $ref: '#/responses/error_403'
       summary: Login
       tags:
         - end_user_authentications
