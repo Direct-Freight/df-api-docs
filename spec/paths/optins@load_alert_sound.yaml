@@ -18,7 +18,6 @@ get:
   tags:
     - optins
 patch:
-  consumes: []
   description: Toggle audio notifications.
   parameters:
     - in: header

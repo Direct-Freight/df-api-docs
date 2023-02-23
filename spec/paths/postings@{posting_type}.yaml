@@ -114,7 +114,6 @@ parameters:
     type: string
     x-example: test_loads
 patch:
-  consumes: []
   description: Update one or more entries. Only 100 entries can be updated per request.
   parameters:
     - in: header
@@ -148,7 +147,6 @@ patch:
   tags:
     - postings
 post:
-  consumes: []
   description: Only 100 entries can be created per request.
   parameters:
     - in: header

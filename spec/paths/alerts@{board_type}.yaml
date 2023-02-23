@@ -58,7 +58,6 @@ parameters:
     required: true
     type: string
 patch:
-  consumes: []
   description: >-
     Search objects are set at creation. You cannot modify them after the alert
     has been created.
@@ -79,7 +78,6 @@ patch:
   tags:
     - alerts
 post:
-  consumes: []
   description: >-
     This method will update or create an alert. The POST action with the same
     search parameters but different alert parameters will update the existing

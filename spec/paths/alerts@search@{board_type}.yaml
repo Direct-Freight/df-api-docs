@@ -1,5 +1,4 @@
 post:
-  consumes: []
   description: >-
     This method will search a users alert. It accepts the exact same structure
     as the POST method for /alerts/. Any parameter that is defined here and is

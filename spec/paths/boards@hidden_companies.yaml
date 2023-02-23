@@ -41,7 +41,6 @@ get:
   tags:
     - boards
 patch:
-  consumes: []
   description: Toggle one  company between hidden and unhidden.
   parameters:
     - in: header
@@ -60,7 +59,6 @@ patch:
   tags:
     - boards
 post:
-  consumes: []
   description: Mark a set of companies as hidden.
   parameters:
     - in: header

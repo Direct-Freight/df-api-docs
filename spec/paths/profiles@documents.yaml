@@ -24,7 +24,6 @@ get:
   tags:
     - profiles
 patch:
-  consumes: []
   parameters:
     - in: header
       name: end-user-token
@@ -42,7 +41,6 @@ patch:
   tags:
     - profiles
 post:
-  consumes: []
   parameters:
     - in: header
       name: end-user-token
