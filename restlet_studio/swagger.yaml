@@ -3117,12 +3117,30 @@ definitions:
       booking_info:
         type: object
         properties:
-          offer_reference_code:
+          book_header_label:
             type: string
-          booking_message:
+          show_book_rate:
+            type: boolean
+          book_message:
+            type: string
+          book_button_label:
+            type: string
+          book_button_action:
+            type: string
+          show_or_label:
+            type: boolean
+          quote_header_label:
             type: string
           quote_message:
-            type: string            
+            type: string
+          show_quote_input:
+            type: boolean
+          quote_button_label:
+            type: string
+          quote_button_action:
+            type: string
+          offer_reference_code:
+            type: string
       message:
         description: 'Status message.'
         type: string        
@@ -3242,15 +3260,6 @@ definitions:
       - code
       - description
       - error
-    type: object
-    x-restlet:
-      section: common_definitions
-  error_message:
-    properties:
-      message:
-        type: string
-    required:
-      - message
     type: object
     x-restlet:
       section: common_definitions
