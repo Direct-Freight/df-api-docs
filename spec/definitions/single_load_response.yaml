@@ -3,12 +3,6 @@ properties:
     properties:
       booking_message:
         type: string
-      debug_raw_partner_data:
-        type: object
-      offer_rate:
-        type: number
-      offer_rate_per_mile_est:
-        type: number
       offer_reference_code:
         type: string
       quote_message:
