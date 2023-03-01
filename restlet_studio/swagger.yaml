@@ -2846,8 +2846,6 @@ definitions:
       - weight
       - width
     type: object
-    x-restlet:
-      section: BOARDS
   boards_profit_response:
     example:
       {
