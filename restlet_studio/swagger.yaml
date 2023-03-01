@@ -294,9 +294,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            properties:
-              item:
-                $ref: '#/definitions/board_response_item'
+            $ref: '#/definitions/single_load_response'
       summary: Retrieve single load
       tags:
         - boards
@@ -2710,10 +2708,6 @@ definitions:
         description: This field is only returned for an end_user_token that has the subscribed access level.
         example: Test Load
         type: string
-      carrier_onboard_url:
-        description: URL for onboarding specified by carrier.
-        example: https://www.directfreight.com/
-        type: string        
       company_name:
         description: This field is only returned for an end_user_token that has the subscribed access level.
         example: ABC Company
@@ -3161,20 +3155,6 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
-  book_partner_load:
-    properties:
-      entry_id:
-        description: 'MD5 Identifier of load. '
-        type: string
-      offer_reference_code:
-        description: 'Offer reference code as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking. '
-        type: string
-    required:
-      - entry_id
-      - offer_reference_code
-    type: object
-    x-restlet:
-      section: BOARDS      
   create_custom_field:
     properties:
       name:
