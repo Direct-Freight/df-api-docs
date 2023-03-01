@@ -1,8 +1,0 @@
-properties:
-  message:
-    type: string
-required:
-  - message
-type: object
-x-restlet:
-  section: common_definitions
