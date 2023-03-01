@@ -174,5 +174,3 @@ required:
   - weight
   - width
 type: object
-x-restlet:
-  section: BOARDS
