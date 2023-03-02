@@ -2820,6 +2820,7 @@ definitions:
         type: number
       commodity:
         description: the type of cargo.  Currently only returned by the single load endpoint.
+        type: string
       stops:
         description: a summary of the stops.  Currently only returned by the single load endpoint.
         type: array
