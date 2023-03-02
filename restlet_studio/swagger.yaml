@@ -4133,6 +4133,7 @@ definitions:
       "dispatch_number": 4445556666,
       "dot_number": "12345678",
       "fax_number": 1112223333,
+      "email": "test@directfreight.com",
       "mc_number": "12345678",
       "mobile_carrier": "Sprint",
       "mobile_number":4445556666,
@@ -4155,15 +4156,18 @@ definitions:
       city:
         type: string
       company:
-        description: 'Company name. '
+        description: 'Company name.'
         type: string
       contact_extension:
         type: integer
       contact_name:
-        description: 'Contact name. '
+        description: 'Contact name.'
         type: string
       contact_number:
         type: integer
+      email:
+        description: 'EMail.'
+        type: string        
       dispatch_extension:
         description: Limited to 3 integers
         type: integer
