@@ -13,7 +13,7 @@
     "http-server": "^0.11.1",
     "httpsnippet": "^1.16.5",
     "js-yaml": "^3.14.1",
-    "json-pointer": "^0.6.1",
+    "json-pointer": "^0.6.2",
     "jsonpath": "^1.1.1",
     "lodash": "^4.17.21",
     "mkdirp": "^1.0.4",
