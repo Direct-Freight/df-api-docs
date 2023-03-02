@@ -2846,6 +2846,7 @@ definitions:
             example: "https://www.truckersearch.com/"
           show_or_label:
             type: boolean
+            example: true
           quote_header_label:
             type: string
             example: "Quote this Load"
@@ -2861,7 +2862,7 @@ definitions:
           quote_button_action:
             type: string
             example: "https://www.truckersearch.com"
-          offer_reference_code:
+          df_reference_code:
             type: string
             example: "tJJB-cQQDh19nkmyOn5xzjfdGSQao3bskaRDzc5r2IaX3_EBROT34pQ~"
     required:
