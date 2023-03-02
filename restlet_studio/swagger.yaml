@@ -1945,13 +1945,10 @@ paths:
           schema:
             $ref: '#/definitions/profile_object'
       responses:
-        '201':
-          description: Object created
-          headers:
-            Location:
-              description: This will have a fully qualified API url you can call to get details of your profile.
-              type: string
-              x-example: 'https://api.directfreight.com/v1/profiles/'
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/profile_object_patch'
       summary: Create a new profile.
       tags:
         - profiles
@@ -4164,9 +4161,6 @@ definitions:
         type: string
       contact_number:
         type: integer
-      email:
-        description: 'EMail.'
-        type: string        
       dispatch_extension:
         description: Limited to 3 integers
         type: integer
@@ -4248,6 +4242,7 @@ definitions:
       "dispatch_extension": 123,
       "dispatch_number": 4445556666,
       "dot_number": "12345678",
+      "email": "test@directfreight.com",
       "fax_number": 1112223333,
       "mc_number": "12345678",
       "mobile_carrier": "Sprint",
@@ -4281,6 +4276,8 @@ definitions:
       dot_number:
         type: number
         description: "Maximum 8 numbers."
+      email:
+        type: string        
       fax_number:
         type: integer
       mc_number:
