@@ -294,7 +294,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/single_load_response'
+            $ref: '#/definitions/board_response_item'
       summary: Retrieve single load
       tags:
         - boards
@@ -2752,7 +2752,6 @@ definitions:
       length:
         description: Length in feet.  Will be null if empty.
         type: number
-      
       origin_city:
         description: Origin city of item.
         example: Chicago
@@ -2819,34 +2818,52 @@ definitions:
       width:
         description: Width in feet.  Will be null if empty.
         type: number
+      commodity:
+        description: the type of cargo.  Currently only returned by the single load endpoint.
+      stops:
+        description: a summary of the stops.  Currently only returned by the single load endpoint.
+        type: array
+        items:
+          $ref: '#/definitions/stop_item'
       booking_info:
         type: object
-        description: Information about booking this load.  Currently only returned by the single load endpoint.
+        description: Information about booking this load online.  Currently only returned by the single load endpoint.
         properties:
           book_header_label:
             type: string
+            example: "Book Now"
           show_book_rate:
             type: boolean
+            example: true
           book_message:
             type: string
+            example: "You must call 888-894-4198 before booking online"
           book_button_label:
             type: string
+            example: "Book Now"
           book_button_action:
             type: string
+            example: "https://www.truckersearch.com/"
           show_or_label:
             type: boolean
           quote_header_label:
             type: string
+            example: "Quote this Load"
           quote_message:
             type: string
+            example: "Please enter the dollar amount you are willing to book this load at"
           show_quote_input:
             type: boolean
+            example: true
           quote_button_label:
             type: string
+            example: "Send Quote"
           quote_button_action:
             type: string
+            example: "https://www.truckersearch.com"
           offer_reference_code:
             type: string
+            example: "tJJB-cQQDh19nkmyOn5xzjfdGSQao3bskaRDzc5r2IaX3_EBROT34pQ~"
     required:
       - age
       - credit_score
@@ -3138,10 +3155,6 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
-  single_load_response:
-    properties:
-      item:
-        $ref: '#/definitions/board_response_item'
   create_notes:
     properties:
       body:
@@ -4306,6 +4319,18 @@ definitions:
     type: object
     x-restlet:
       section: PROFILES
+  stop_item:
+    properties:
+      label:
+        description: 'Label for this field.'
+        type: string
+        example: 'Pickup #1'
+      summary:
+        description: 'Summary of this field.'
+        type: string
+        example: "411 Locust
+Chillicothe, MO 64601
+on 03-02-2023"
   truck_info_object:
     example: {
       "miles_per_gal": 6.50,
