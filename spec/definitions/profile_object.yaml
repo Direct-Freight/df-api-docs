@@ -12,7 +12,6 @@ example:
   dispatch_number: 4445556666
   dot_number: '12345678'
   driver_per_mile: 0.72
-  email: test@directfreight.com
   fax_number: 1112223333
   fuel_capacity: 200
   ins_permits_per_mile: 0.13
