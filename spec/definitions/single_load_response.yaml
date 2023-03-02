@@ -1,3 +1,0 @@
-properties:
-  item:
-    $ref: '#/definitions/board_response_item'
