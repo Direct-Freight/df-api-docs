@@ -55,6 +55,7 @@ properties:
     type: string
   commodity:
     description: the type of cargo.  Currently only returned by the single load endpoint.
+    type: string
   company_name:
     description: >-
       This field is only returned for an end_user_token that has the subscribed
