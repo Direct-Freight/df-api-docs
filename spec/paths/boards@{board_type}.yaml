@@ -1,60 +1,42 @@
 get:
-  description: Retrieves single load
+  description: Retrieves a single load
   parameters:
+    - description: Defines the type of board requested.
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
+      x-example: loads
     - description: the entry_id associated with the data you want to get.
       in: query
       name: entry_id
-      required: false
+      required: true
       type: string
-      x-example: '?entry_id=22ef23'
-    - description: optional.
-      enum:
-        - submit_quote
-        - request_booking
-        - finalize_booking
-        - none
-      in: query
-      name: booking_action
-      required: false
-      type: string
+      x-example: 0123456789012345678901234567890123
     - description: >-
-        Required if booking_action=finalize_booking, returned when /boards/loads
-        is used with booking_action=request_booking.
+        The page that is requesting the information.  This is used to determine
+        when to retrieve real time information from the shipper or broker. 
+        Example:  requesting_page="book-now" will return real time information
+        for certain partners.  Stage=Private
       in: query
-      name: offer_reference_code
+      name: requesting_page
       required: false
       type: string
-    - description: >-
-        Required if booking_action=submit_quote, returned when /boards/loads is
-        used with booking_action=request_booking.
-      in: query
-      name: reference_id
-      required: false
-      type: string
-    - description: >-
-        Required if booking_action=submit_quote, returned when /boards/loads is
-        used with booking_action=request_booking.
-      in: query
-      name: company_external_key
-      required: false
-      type: string
-    - description: >-
-        Required if booking_action=submit_quote, the amount offered to transport
-        this load.
-      in: query
-      name: quote_amount
-      required: false
-      type: number
     - in: header
       name: end-user-token
-      required: true
+      required: false
       type: string
   responses:
     '200':
       description: successful operation
       schema:
-        $ref: '#/definitions/single_load_response'
-  summary: Retrieve single load STAGE=UNK
+        properties:
+          item:
+            $ref: '#/definitions/board_response_item'
+  summary: Retrieve single load
   tags:
     - boards
 parameters:
@@ -68,7 +50,6 @@ parameters:
     type: string
     x-example: loads
 post:
-  consumes: []
   description: >-
     This is the primary search method for loads and trucks. Please specifify at
     least an origin or destination.  The origin or destination may be state

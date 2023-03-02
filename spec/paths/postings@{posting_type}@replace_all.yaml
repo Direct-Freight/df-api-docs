@@ -1,21 +1,18 @@
-parameters:
-  - description: >-
-      Destination where items will be replaced. Depending on the posting_type
-      that is selected, the source posting will be the same but with _temp
-      appended. For example, if posting_type=loads, then source_type is
-      loads_temp.
-    enum:
-      - loads
-      - trucks
-      - test_loads
-      - test_trucks
-    in: path
-    name: posting_type
-    required: true
-    type: string
 post:
-  consumes: []
+  description: >-
+    delete and replace all entries in posting_type with the entries in
+    {posting_type}_temp.  For example, if posting_type=loads, then source
+    posting_type is loads_temp.
   parameters:
+    - enum:
+        - loads
+        - trucks
+        - test_loads
+        - test_trucks
+      in: path
+      name: posting_type
+      required: true
+      type: string
     - in: header
       name: end-user-token
       required: true
@@ -33,7 +30,7 @@ post:
       description: Success
       schema:
         $ref: '#/definitions/postings-replace_all_response'
-  summary: STAGE=PRIVATE Delete all/Replace
+  summary: replace_all
   tags:
     - postings
 x-restlet:

@@ -1,5 +1,4 @@
 patch:
-  consumes: []
   description: Update a users email address.
   parameters:
     - in: header

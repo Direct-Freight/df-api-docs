@@ -153,7 +153,6 @@ paths:
         required: true
         type: string
     patch:
-      consumes: []
       description: Search objects are set at creation. You cannot modify them after the alert has been created.
       parameters:
         - in: header
@@ -172,7 +171,6 @@ paths:
       tags:
         - alerts
     post:
-      consumes: []
       description: 'This method will update or create an alert. The POST action with the same search parameters but different alert parameters will update the existing alert. The one caveaut to this is send_type. You can have 2 alerts with the same search parameters but different send_types. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
       parameters:
         - in: header
@@ -196,7 +194,6 @@ paths:
       section: ALERTS
   '/alerts/search/{board_type}':
     post:
-      consumes: []
       description: 'This method will search a users alert. It accepts the exact same structure as the POST method for /alerts/. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules.'
       parameters:
         - in: header
@@ -236,7 +233,6 @@ paths:
         type: string
         x-example: loads
     post:
-      consumes: []
       description: This is the primary search method for loads and trucks. Please specifify at least an origin or destination.  The origin or destination may be state only.
       parameters:
         - default: 01234567890abc
@@ -268,54 +264,40 @@ paths:
       tags:
         - boards
     get:
-      description: 'Retrieves single load'
+      description: 'Retrieves a single load'
       parameters:
+        - description: Defines the type of board requested.
+          enum:
+            - loads
+            - trucks
+          in: path
+          name: board_type
+          required: true
+          type: string
+          x-example: loads      
         - name: entry_id
           description: the entry_id associated with the data you want to get.
-          in: query
           type: string
+          required: true
+          x-example: '0123456789012345678901234567890123'
+          in: query
+        - name: requesting_page
+          type: string
+          in: query
+          description: 'The page that is requesting the information.  This is used to determine when to retrieve real time information from the shipper or broker.  Example:  requesting_page="book-now" will return real time information for certain partners.  Stage=Private'
           required: false
-          x-example: '?entry_id=22ef23'
-        - name: booking_action
-          required: false
-          type: string
-          enum:
-            - submit_quote
-            - request_booking
-            - finalize_booking
-            - none
-          in: query
-          description: optional.  
-        - name: offer_reference_code
-          description:  Required if booking_action=finalize_booking, returned when /boards/loads is used with booking_action=request_booking.
-          in: query
-          type: string
-          required: false
-        - name: reference_id
-          description:  Required if booking_action=submit_quote, returned when /boards/loads is used with booking_action=request_booking.
-          in: query
-          type: string
-          required: false    
-        - name: company_external_key
-          description:  Required if booking_action=submit_quote, returned when /boards/loads is used with booking_action=request_booking.
-          in: query
-          type: string
-          required: false             
-        - name: quote_amount
-          description:  Required if booking_action=submit_quote, the amount offered to transport this load.
-          in: query
-          type: number
-          required: false                
         - in: header
           name: end-user-token
-          required: true
+          required: false
           type: string
       responses:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/single_load_response'
-      summary: Retrieve single load STAGE=UNK
+            properties:
+              item:
+                $ref: '#/definitions/board_response_item'
+      summary: Retrieve single load
       tags:
         - boards
     x-restlet:
@@ -348,6 +330,36 @@ paths:
         type: string
     x-restlet:
       section: BOARDS
+  '/boards/{board_type}/state_totals/{state_code}':
+    get:
+      description: A convenience method to get totals by state.  Stage=Private
+      parameters: 
+        - description: Filter totals to only include these trailer_type's. This parameter can be specified multiple times and the totals are combined. i.e. trailer_type=V&trailer_type=R returns the combined total of all loads that are either V or 
+          in: query
+          name: trailer_type
+          required: false
+          type: string
+        - name: state_code
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+      summary: 'Top 5 city totals by state'
+      tags:
+        - boards
+    parameters:
+      - description: 'Valid types are "loads", and "trucks".'
+        enum:
+          - loads
+          - trucks
+        in: path
+        name: board_type
+        required: true
+        type: string
+    x-restlet:
+      section: BOARDS      
   /boards/hidden_companies:
     delete:
       description: Mark a company as not hidden.
@@ -390,7 +402,6 @@ paths:
       tags:
         - boards
     patch:
-      consumes: []
       description: Toggle one  company between hidden and unhidden.
       parameters:
         - in: header
@@ -409,7 +420,6 @@ paths:
       tags:
         - boards
     post:
-      consumes: []
       description: Mark a set of companies as hidden.
       parameters:
         - in: header
@@ -472,7 +482,6 @@ paths:
       tags:
         - boards
     patch:
-      consumes: []
       description: Toggle one or more entries between hidden and unhidden.
       parameters:
         - in: header
@@ -491,7 +500,6 @@ paths:
       tags:
         - boards
     post:
-      consumes: []
       description: Mark an entry as hidden.
       parameters:
         - in: header
@@ -552,7 +560,6 @@ paths:
       tags:
         - boards
     patch:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -572,7 +579,6 @@ paths:
       tags:
         - boards
     post:
-      consumes: []
       description: Create a new note.
       parameters:
         - in: header
@@ -594,57 +600,8 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
-  # /boards/book_now:
-  #   post:
-  #     consumes: []
-  #     description: Book a load with a partner.
-  #     parameters:
-  #       - in: header
-  #         name: end-user-token
-  #         required: true
-  #         type: string
-  #       - in: body
-  #         name: body
-  #         required: true
-  #         schema:
-  #           $ref: '#/definitions/book_partner_load'
-  #     responses:
-  #       '201':
-  #         description: Object created check the headers for a reference URL.
-  #         schema:
-  #           $ref: '#/definitions/create_status'
-  #     summary: STAGE=UNK Book a load.
-  #     tags:
-  #       - boards
-  #   x-restlet:
-  #     section: BOARDS      
-  # /boards/post_quote:
-  #   post:
-  #     consumes: []
-  #     description: Post a quote for a load.
-  #     parameters:
-  #       - in: header
-  #         name: end-user-token
-  #         required: true
-  #         type: string
-  #       - in: body
-  #         name: body
-  #         required: true
-  #         schema:
-  #           $ref: '#/definitions/quote_partner_load'
-  #     responses:
-  #       '201':
-  #         description: Object created check the headers for a reference URL.
-  #         schema:
-  #           $ref: '#/definitions/create_status'
-  #     summary: STAGE=UNK Post quote for a load.
-  #     tags:
-  #       - boards
-  #   x-restlet:
-  #     section: BOARDS            
   /boards/profit:      
     get:
-      consumes: []
       description: Calculate trip profit.
       parameters:
         - name: origin_city
@@ -693,8 +650,8 @@ paths:
       section: BOARDS           
   /boards/freight_rate:      
     get:
-      consumes: []
-      description: Calculate Freight Rates
+      summary: 'Get Freight Rates.'
+      description: 'Calculate Freight Rates.  STAGE=Private'
       parameters:
         - name: origin_city
           description: Origin City
@@ -749,39 +706,96 @@ paths:
           description: Details about average rates for this trip. Returns an object where each key is a trailer type with an array of the freight rate for each day that was found for that type.
           schema:
             $ref: '#/definitions/boards_freight_rate_response'
-      summary: STAGE=Private Get Freight Rates.
       tags:
         - boards
     x-restlet:
-      section: BOARDS    
-  /boards/offer/driver:      
-    get:
-      consumes: []
-      description: Fetch Offer Driver
+      section: BOARDS
+  /boards/offer/driver/accept_broker_offer:      
+    post:
+      summary: 'Accept Broker Offer'
+      description: 'Submit the offer from the driver for this load.  STAGE=Private'
       parameters:
-        - name: offer_id
-          description: Numeric Offer ID
+        - name: end-user-token
+          in: header
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            type: object
+            required:
+              - entry_id
+                df_reference_code
+            properties:
+              entry_id:
+                description: '32 character entry id'
+                type: string
+              df_reference_code:
+                description:  The reference code returned with the broker offer.
+                type: string
+      responses:
+        '200':
+          description: successful operation
+      tags:
+        - boards
+  /boards/offer/driver:      
+    post:
+      summary: 'Submit Driver Offer'
+      description: 'Submit the offer from the driver for this load.  STAGE=Private'
+      parameters:
+        - name: end-user-token
+          in: header
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            type: object
+            required:
+              - entry_id
+                df_reference_code
+                quote_amount
+            properties:
+              entry_id:
+                description: '32 character entry id'
+                type: string
+              df_reference_code:
+                description:  The reference code returned with the broker offer.
+                type: string
+              quote_amount:
+                description:  The amount offered by the driver to transport this load.
+                type: number
+
+      responses:
+        '200':
+          description: successful operation
+      tags:
+        - boards
+    get:
+      summary: 'Get Driver Offer'
+      description: 'Get the offer submitted by the driver for this load.  STAGE=Private'
+      parameters:
+        - name: df_reference_code
+          description: "The reference code to look up the driver's offer"
           in: query
           required: true
           type: string
         - name: entry_id
-          description: 32 Character Entry ID
+          description: 32 character entry id
           in: query
           required: true
           type: string          
       responses:
         '201':
-          description: Details about 
+          description: Details about Driver Offer
           schema:
             $ref: '#/definitions/boards_offer_driver_response'
-      summary: STAGE=Private Get Offer.
       tags:
         - boards
     x-restlet:
-      section: BOARDS          
+      section: BOARDS
   /end_user_authentications/users:
     post:
-      consumes: []
       parameters:
         - in: body
           name: body
@@ -859,7 +873,6 @@ paths:
       tags:
         - end_user_authentications
     post:
-      consumes: []
       description: 'This function sends login credentials, and retrieves a stateless token.'
       parameters:
         - in: body
@@ -954,7 +967,6 @@ paths:
       tags:
         - end_user_authentications
     post:
-      consumes: []
       description: 'Creates a new password for a user with a recovery key'
       parameters:
       - in: body
@@ -977,7 +989,6 @@ paths:
       tags:
         - end_user_authentications
     patch:
-      consumes: []
       description: Update a users password.
       parameters:
         - in: header
@@ -1011,9 +1022,9 @@ paths:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications/auto_login_url:
     get:
-      description: Get a auto login url STAGE=Private
+      description: Get an auto login url
       parameters:
-        - description: DirectFreight website URI to redirect to after login. Example, {{url}}/v1/end_user_authentications/auto_login_url?redirect_url=/loads/results  
+        - description: DirectFreight website URI to redirect to after login. Example, {{url}}/v1/end_user_authentications/auto_login_url?redirect_url=/boards/find/loads  
           in: query
           name: redirect_url
           required: false
@@ -1027,7 +1038,6 @@ paths:
       section: END_USER_AUTHENTICATIONS      
   /end_user_authentications/email:
     patch:
-      consumes: []
       description: Update a users email address.
       parameters:
         - in: header
@@ -1259,7 +1269,6 @@ paths:
       tags:
         - optins
     patch:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -1289,7 +1298,6 @@ paths:
       tags:
         - optins
     post:
-      consumes: []
       description: 'Currently only Push notifications are implemented. With them a post creates and approves the optin. Later on when text/email is ported post will create the optin with the status of ''no response'' meaning they haven''t replied with the propper code, or clicked an authorization link.'
       parameters:
         - in: header
@@ -1375,7 +1383,6 @@ paths:
       tags:
         - optins
     post:
-      consumes: []
       description: 'Register a OneSignal player_id in DirectFreight for web push notifications.'
       parameters:
         - in: header
@@ -1426,7 +1433,6 @@ paths:
       tags:
         - optins
     patch:
-      consumes: []
       description: 'Toggle audio notifications.'
       parameters:
         - in: header
@@ -1556,7 +1562,6 @@ paths:
         type: string
         x-example: test_loads
     patch:
-      consumes: []
       description: Update one or more entries. Only 100 entries can be updated per request.
       parameters:
         - in: header
@@ -1590,10 +1595,7 @@ paths:
       tags:
         - postings
     post:
-      consumes: []
-      description: |-
-        Only 100 entries can be created per request.
-        
+      description: "Only 100 entries can be created per request."
       parameters:
         - in: header
           name: end-user-token
@@ -1645,7 +1647,6 @@ paths:
         required: true
         type: string
     post:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -1667,22 +1668,21 @@ paths:
     x-restlet:
       section: POSTINGS
   '/postings/{posting_type}/replace_all':
-    parameters:
-      - description: 'Destination where items will be replaced. Depending on the posting_type that is selected, the source posting will be the same but with _temp appended. For example, if posting_type=loads, then source_type is loads_temp.'
-        enum:
-          - loads
-          - trucks
-          - test_loads
-          - test_trucks
-        in: path
-        name: posting_type
-        required: true
-        type: string
     post:
-      consumes: []
+      summary: 'replace_all'
+      description: 'delete and replace all entries in posting_type with the entries in {posting_type}_temp.  For example, if posting_type=loads, then source posting_type is loads_temp.'
       parameters:
-        - in: header
-          name: end-user-token
+        - name: posting_type
+          enum:
+            - loads
+            - trucks
+            - test_loads
+            - test_trucks
+          in: path
+          required: true
+          type: string
+        - name: end-user-token
+          in: header
           required: true
           type: string
         - in: query
@@ -1695,7 +1695,6 @@ paths:
           description: Success
           schema:
             $ref: '#/definitions/postings-replace_all_response'
-      summary: STAGE=PRIVATE Delete all/Replace
       tags:
         - postings
     x-restlet:
@@ -1917,7 +1916,6 @@ paths:
       tags:
         - profiles
     patch:
-      consumes: []
       description: Please send in at least one field to be updated.
       parameters:
         - in: header
@@ -1938,7 +1936,6 @@ paths:
       tags:
         - profiles
     post:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -1990,7 +1987,6 @@ paths:
       tags:
         - profiles
     patch:
-      consumes: []
       description: Please send in at least one field to be updated.
       parameters:
         - in: header
@@ -2039,7 +2035,6 @@ paths:
       tags:
         - profiles
     patch:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -2057,7 +2052,6 @@ paths:
       tags:
         - profiles
     post:
-      consumes: []
       parameters:
         - in: header
           name: end-user-token
@@ -2707,7 +2701,6 @@ definitions:
     x-restlet:
       section: BOARDS
   board_response_item:
-    example: test
     properties:
       age:
         description: Time in minutes since load/truck was first posted. NULL is returned for values less than 1 minute.
@@ -2719,7 +2712,7 @@ definitions:
         type: string
       carrier_onboard_url:
         description: URL for onboarding specified by carrier.
-        example: www.google.com
+        example: https://www.directfreight.com/
         type: string        
       company_name:
         description: This field is only returned for an end_user_token that has the subscribed access level.
@@ -2760,8 +2753,8 @@ definitions:
         example: true
         type: boolean
       height:
-        description: Height in inches.  Will be null if empty.
-        type: integer
+        description: Height in feet.  Will be null if empty.
+        type: number
       length:
         description: Length in feet.  Will be null if empty.
         type: number
@@ -2830,8 +2823,8 @@ definitions:
         description: Weight in pounds.  Will be null if empty.
         type: integer
       width:
-        description: Width in inches.  Will be null if empty.
-        type: integer
+        description: Width in feet.  Will be null if empty.
+        type: number
     required:
       - age
       - credit_score
@@ -3184,28 +3177,6 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS      
-  quote_partner_load:
-    properties:
-      entry_id:
-        description: 'MD5 Identifier of load.'
-        type: string
-      reference_id:
-        description: 'Load reference ID as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking.'
-        type: string
-      company_external_key:
-        description: 'Company External Key as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking.'
-        type: string
-      quote_amount:
-        description: 'Amount offered for transporting this load.'
-        type: number        
-    required:
-      - entry_id
-      - reference_id
-      - company_external_key
-      - quote_amount      
-    type: object
-    x-restlet:
-      section: BOARDS         
   create_custom_field:
     properties:
       name:
@@ -3256,6 +3227,9 @@ definitions:
         description: On success an end-user-token is returned.
         example: XX423ASOEUHT4AESUTH
         type: string
+      user_id:
+        type: integer 
+        description: STAGE=private This is used in the spider code for Parade users.
     type: object
     x-restlet:
       section: END_USER_AUTHENTICATIONS
@@ -3296,6 +3270,15 @@ definitions:
       - code
       - description
       - error
+    type: object
+    x-restlet:
+      section: common_definitions
+  error_message:
+    properties:
+      message:
+        type: string
+    required:
+      - message
     type: object
     x-restlet:
       section: common_definitions
@@ -3661,9 +3644,9 @@ definitions:
       "trailer_type": ["R"],
       "weight": 2200,
       "width": 22,            
-      "load_detail_url": "https://www.directfreight.com",
+      "details_url": "https://www.example.com/?loadnumber=1234",
       "booking_partner": "...",
-      "allowed_actions":  [ "send_quote" ],
+      "allowed_actions":  [ "call" ],
       "dispatch_email": "dispatch@directfreight.com",
       "dispatch_mobile_number": 7777777777,
       }
@@ -3683,10 +3666,10 @@ definitions:
         description: The load will be assumed to be full if this argument isn't included and marked to true.
         type: boolean
       height:
-        description: This number represents inches.
-        type: integer
+        description: height in feet.
+        type: number
       length:
-        description: This number represents feet.
+        description: length in feet.
         type: number
       origin_city:
         description: Origin city location of load or truck.  Required for all entry types.
@@ -3750,11 +3733,11 @@ definitions:
           type: string
         type: array
       weight:
-        description: This number represents pounds.
+        description: weight in pounds.
         type: integer
       width:
-        description: This number represents inches.
-        type: integer
+        description: width in feet.
+        type: number
       category:
         description: This option only applies to "private_loads", "private_trucks"
         items:
@@ -3765,7 +3748,7 @@ definitions:
             - delivered
           type: string
         type: string
-      load_detail_url:
+      details_url:
         description: An optional URL with additional information about this load.
         type: string
       booking_partner:
@@ -3785,7 +3768,9 @@ definitions:
             - mobile_push
             - no_call
             - no_email
-            - no_text 
+            - no_text
+            - url_direct_book
+            - url_details
           type: string
         type: array        
       dispatch_email:
@@ -3823,9 +3808,9 @@ definitions:
         "trailer_type": ["V+V"],
         "weight": 1100,
         "width":11,
-        "load_detail_url": "https://www.directfreight.com",
+        "details_url": "https://www.example.com/?loadnumber=1234",
         "booking_partner": "...",
-        "allowed_actions":  [ "send_quote" ],
+        "allowed_actions":  [ "call" ],
         "dispatch_email": "dispatch@directfreight.com",
         "dispatch_mobile_number": 7777777777      
         }
@@ -3847,10 +3832,10 @@ definitions:
         description: This should only be used with loads.
         type: boolean
       height:
-        description: This number represents inches.
-        type: integer
+        description: height in feet.
+        type: number
       length:
-        description: This number represents feet.
+        description: length in feet.
         type: number
       origin_city:
         description: Origin city location of load or truck
@@ -3917,11 +3902,11 @@ definitions:
           type: string
         type: array
       weight:
-        description: This number represents pounds.
+        description: weight in pounds.
         type: integer
       width:
-        description: This number represents inches.
-        type: integer
+        description: width in feet.
+        type: number
       category:
         description: This option only applies to "private_loads", "private_trucks"
         items:
@@ -3932,7 +3917,7 @@ definitions:
             - delivered
           type: string
         type: string 
-      load_detail_url:
+      details_url:
         description: An optional URL with additional information about this load.
         type: string     
       booking_partner:
@@ -3953,6 +3938,8 @@ definitions:
             - no_call
             - no_email
             - no_text 
+            - url_direct_book
+            - url_details
           type: string
         type: array        
       dispatch_email:
@@ -3986,10 +3973,10 @@ definitions:
         description: For trucks this will always be false.
         type: boolean
       height:
-        description: This number represents inches.
-        type: integer
+        description: height in feet.
+        type: number
       length:
-        description: This number represents feet.
+        description: length in feet.
         type: number
       origin_city:
         description: Origin city location of load or truck
@@ -4054,11 +4041,11 @@ definitions:
           type: string
         type: array
       weight:
-        description: This number represents pounds.
+        description: weight in pounds.
         type: integer
       width:
-        description: This number represents inches.
-        type: integer
+        description: width in feet.
+        type: number
     required:
       - comment
       - contact_name

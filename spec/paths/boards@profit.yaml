@@ -1,5 +1,4 @@
 get:
-  consumes: []
   description: Calculate trip profit.
   parameters:
     - description: Origin City name

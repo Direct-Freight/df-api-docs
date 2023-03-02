@@ -1,16 +1,17 @@
 example:
-  allowed_actions: send_quote
+  allowed_actions:
+    - call
   booking_partner: ...
   comment: hello world
   custom_id: abc123
   destination_city: cincinnati
   destination_state: OH
+  details_url: 'https://www.example.com/?loadnumber=1234'
   dispatch_email: dispatch@directfreight.com
   dispatch_mobile_number: 7777777777
   full_load: true
   height: 11
   length: 11
-  load_detail_url: 'https://www.directfreight.com'
   origin_city: pittsburg
   origin_state: PA
   other_trailer_types: hot shot
@@ -39,8 +40,10 @@ properties:
         - no_call
         - no_email
         - no_text
+        - url_direct_book
+        - url_details
       type: string
-    type: string
+    type: array
   booking_partner:
     description: Booking partner.
     type: string
@@ -72,6 +75,9 @@ properties:
   destination_state:
     description: Delivery location city of load/truck.
     type: string
+  details_url:
+    description: An optional URL with additional information about this load.
+    type: string
   dispatch_email:
     description: Dispatch e-Mail.
     type: string
@@ -82,14 +88,11 @@ properties:
     description: This should only be used with loads.
     type: boolean
   height:
-    description: This number represents inches.
-    type: integer
-  length:
-    description: This number represents feet.
+    description: height in feet.
     type: number
-  load_detail_url:
-    description: An optional URL with additional information about this load.
-    type: string
+  length:
+    description: length in feet.
+    type: number
   origin_city:
     description: Origin city location of load or truck
     type: string
@@ -161,11 +164,11 @@ properties:
       type: string
     type: array
   weight:
-    description: This number represents pounds.
+    description: weight in pounds.
     type: integer
   width:
-    description: This number represents inches.
-    type: integer
+    description: width in feet.
+    type: number
 type: object
 x-restlet:
   section: POSTINGS

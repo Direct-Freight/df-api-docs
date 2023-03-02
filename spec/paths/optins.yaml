@@ -82,7 +82,6 @@ get:
   tags:
     - optins
 patch:
-  consumes: []
   parameters:
     - in: header
       name: end-user-token
@@ -114,7 +113,6 @@ patch:
   tags:
     - optins
 post:
-  consumes: []
   description: >-
     Currently only Push notifications are implemented. With them a post creates
     and approves the optin. Later on when text/email is ported post will create
