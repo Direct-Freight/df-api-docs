@@ -1,39 +1,3 @@
 properties:
-  booking_info:
-    properties:
-      book_button_action:
-        type: string
-      book_button_label:
-        type: string
-      book_header_label:
-        type: string
-      book_message:
-        type: string
-      offer_reference_code:
-        type: string
-      quote_button_action:
-        type: string
-      quote_button_label:
-        type: string
-      quote_header_label:
-        type: string
-      quote_message:
-        type: string
-      show_book_rate:
-        type: boolean
-      show_or_label:
-        type: boolean
-      show_quote_input:
-        type: boolean
-    type: object
   item:
     $ref: '#/definitions/board_response_item'
-  message:
-    description: Status message.
-    type: string
-  status:
-    description: OK or Error.
-    type: string
-  success:
-    description: true/false if request was successful.
-    type: boolean

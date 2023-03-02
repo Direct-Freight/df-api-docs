@@ -5,6 +5,36 @@ properties:
       values less than 1 minute.
     example: 15
     type: integer
+  booking_info:
+    description: >-
+      Information about booking this load.  Currently only returned by the
+      single load endpoint.
+    properties:
+      book_button_action:
+        type: string
+      book_button_label:
+        type: string
+      book_header_label:
+        type: string
+      book_message:
+        type: string
+      offer_reference_code:
+        type: string
+      quote_button_action:
+        type: string
+      quote_button_label:
+        type: string
+      quote_header_label:
+        type: string
+      quote_message:
+        type: string
+      show_book_rate:
+        type: boolean
+      show_or_label:
+        type: boolean
+      show_quote_input:
+        type: boolean
+    type: object
   comment:
     description: >-
       This field is only returned for an end_user_token that has the subscribed
