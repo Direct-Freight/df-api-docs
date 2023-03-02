@@ -294,9 +294,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            properties:
-              item:
-                $ref: '#/definitions/board_response_item'
+            $ref: '#/definitions/board_response_item'
       summary: Retrieve single load
       tags:
         - boards
@@ -1947,13 +1945,10 @@ paths:
           schema:
             $ref: '#/definitions/profile_object'
       responses:
-        '201':
-          description: Object created
-          headers:
-            Location:
-              description: This will have a fully qualified API url you can call to get details of your profile.
-              type: string
-              x-example: 'https://api.directfreight.com/v1/profiles/'
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/profile_object_patch'
       summary: Create a new profile.
       tags:
         - profiles
@@ -2710,10 +2705,6 @@ definitions:
         description: This field is only returned for an end_user_token that has the subscribed access level.
         example: Test Load
         type: string
-      carrier_onboard_url:
-        description: URL for onboarding specified by carrier.
-        example: https://www.directfreight.com/
-        type: string        
       company_name:
         description: This field is only returned for an end_user_token that has the subscribed access level.
         example: ABC Company
@@ -2758,7 +2749,6 @@ definitions:
       length:
         description: Length in feet.  Will be null if empty.
         type: number
-      
       origin_city:
         description: Origin city of item.
         example: Chicago
@@ -2825,6 +2815,54 @@ definitions:
       width:
         description: Width in feet.  Will be null if empty.
         type: number
+      commodity:
+        description: the type of cargo.  Currently only returned by the single load endpoint.
+        type: string
+      stops:
+        description: a summary of the stops.  Currently only returned by the single load endpoint.
+        type: array
+        items:
+          $ref: '#/definitions/stop_item'
+      booking_info:
+        type: object
+        description: Information about booking this load online.  Currently only returned by the single load endpoint.
+        properties:
+          book_header_label:
+            type: string
+            example: "Book Now"
+          show_book_rate:
+            type: boolean
+            example: true
+          book_message:
+            type: string
+            example: "You must call 888-894-4198 before booking online"
+          book_button_label:
+            type: string
+            example: "Book Now"
+          book_button_action:
+            type: string
+            example: "https://www.truckersearch.com/"
+          show_or_label:
+            type: boolean
+            example: true
+          quote_header_label:
+            type: string
+            example: "Quote this Load"
+          quote_message:
+            type: string
+            example: "Please enter the dollar amount you are willing to book this load at"
+          show_quote_input:
+            type: boolean
+            example: true
+          quote_button_label:
+            type: string
+            example: "Send Quote"
+          quote_button_action:
+            type: string
+            example: "https://www.truckersearch.com"
+          df_reference_code:
+            type: string
+            example: "tJJB-cQQDh19nkmyOn5xzjfdGSQao3bskaRDzc5r2IaX3_EBROT34pQ~"
     required:
       - age
       - credit_score
@@ -2846,8 +2884,6 @@ definitions:
       - weight
       - width
     type: object
-    x-restlet:
-      section: BOARDS
   boards_profit_response:
     example:
       {
@@ -3118,34 +3154,6 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
-  single_load_response:
-    properties:
-      item:
-        $ref: '#/definitions/board_response_item'
-      booking_info:
-        type: object
-        properties:
-          offer_rate:
-            type: number
-          offer_rate_per_mile_est:
-            type: number
-          offer_reference_code:
-            type: string
-          debug_raw_partner_data:
-            type: object
-          booking_message:
-            type: string
-          quote_message:
-            type: string            
-      message:
-        description: 'Status message.'
-        type: string        
-      status:
-        description: 'OK or Error.'
-        type: string    
-      success:
-        description: 'true/false if request was successful.'
-        type: boolean
   create_notes:
     properties:
       body:
@@ -3163,20 +3171,6 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
-  book_partner_load:
-    properties:
-      entry_id:
-        description: 'MD5 Identifier of load. '
-        type: string
-      offer_reference_code:
-        description: 'Offer reference code as returned by /boads/loads?entry_id=[ENTRY-ID]&booking_action=request_booking. '
-        type: string
-    required:
-      - entry_id
-      - offer_reference_code
-    type: object
-    x-restlet:
-      section: BOARDS      
   create_custom_field:
     properties:
       name:
@@ -3270,15 +3264,6 @@ definitions:
       - code
       - description
       - error
-    type: object
-    x-restlet:
-      section: common_definitions
-  error_message:
-    properties:
-      message:
-        type: string
-    required:
-      - message
     type: object
     x-restlet:
       section: common_definitions
@@ -4167,12 +4152,12 @@ definitions:
       city:
         type: string
       company:
-        description: 'Company name. '
+        description: 'Company name.'
         type: string
       contact_extension:
         type: integer
       contact_name:
-        description: 'Contact name. '
+        description: 'Contact name.'
         type: string
       contact_number:
         type: integer
@@ -4257,6 +4242,7 @@ definitions:
       "dispatch_extension": 123,
       "dispatch_number": 4445556666,
       "dot_number": "12345678",
+      "email": "test@directfreight.com",
       "fax_number": 1112223333,
       "mc_number": "12345678",
       "mobile_carrier": "Sprint",
@@ -4290,6 +4276,8 @@ definitions:
       dot_number:
         type: number
         description: "Maximum 8 numbers."
+      email:
+        type: string        
       fax_number:
         type: integer
       mc_number:
@@ -4333,6 +4321,18 @@ definitions:
     type: object
     x-restlet:
       section: PROFILES
+  stop_item:
+    properties:
+      label:
+        description: 'Label for this field.'
+        type: string
+        example: 'Pickup #1'
+      summary:
+        description: 'Summary of this field.'
+        type: string
+        example: "411 Locust
+Chillicothe, MO 64601
+on 03-02-2023"
   truck_info_object:
     example: {
       "miles_per_gal": 6.50,
