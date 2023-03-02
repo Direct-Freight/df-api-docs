@@ -2819,6 +2819,34 @@ definitions:
       width:
         description: Width in feet.  Will be null if empty.
         type: number
+      booking_info:
+        type: object
+        description: Information about booking this load.  Currently only returned by the single load endpoint.
+        properties:
+          book_header_label:
+            type: string
+          show_book_rate:
+            type: boolean
+          book_message:
+            type: string
+          book_button_label:
+            type: string
+          book_button_action:
+            type: string
+          show_or_label:
+            type: boolean
+          quote_header_label:
+            type: string
+          quote_message:
+            type: string
+          show_quote_input:
+            type: boolean
+          quote_button_label:
+            type: string
+          quote_button_action:
+            type: string
+          offer_reference_code:
+            type: string
     required:
       - age
       - credit_score
@@ -3114,42 +3142,6 @@ definitions:
     properties:
       item:
         $ref: '#/definitions/board_response_item'
-      booking_info:
-        type: object
-        properties:
-          book_header_label:
-            type: string
-          show_book_rate:
-            type: boolean
-          book_message:
-            type: string
-          book_button_label:
-            type: string
-          book_button_action:
-            type: string
-          show_or_label:
-            type: boolean
-          quote_header_label:
-            type: string
-          quote_message:
-            type: string
-          show_quote_input:
-            type: boolean
-          quote_button_label:
-            type: string
-          quote_button_action:
-            type: string
-          offer_reference_code:
-            type: string
-      message:
-        description: 'Status message.'
-        type: string        
-      status:
-        description: 'OK or Error.'
-        type: string    
-      success:
-        description: 'true/false if request was successful.'
-        type: boolean
   create_notes:
     properties:
       body:
