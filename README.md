@@ -1,4 +1,4 @@
-# Direct Freight OpenAPI Specification
+# Direct Freight Load Board OpenAPI Specification
 [![Build Status](https://travis-ci.com/Direct-Freight/df-api-docs.svg?branch=master)](https://travis-ci.com/Direct-Freight/df-api-docs)
 
 

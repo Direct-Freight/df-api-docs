@@ -1,6 +1,5 @@
 get:
-  consumes: []
-  description: Calculate Freight Rates
+  description: Calculate Freight Rates.  STAGE=Private
   parameters:
     - description: Origin City
       in: query
@@ -46,12 +45,9 @@ get:
         specified multiple times.
       enum:
         - all
-        - van_only
-        - van_all
-        - reefer_only
-        - reefer_all
-        - flat_only
-        - flat_all
+        - van
+        - reefer
+        - flat
       in: query
       name: trailer_type
       type: string
@@ -67,7 +63,7 @@ get:
         that was found for that type.
       schema:
         $ref: '#/definitions/boards_freight_rate_response'
-  summary: STAGE=Private Get Freight Rates.
+  summary: Get Freight Rates.
   tags:
     - boards
 x-restlet:

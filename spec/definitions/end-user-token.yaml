@@ -3,6 +3,9 @@ properties:
     description: On success an end-user-token is returned.
     example: XX423ASOEUHT4AESUTH
     type: string
+  user_id:
+    description: STAGE=private This is used in the spider code for Parade users.
+    type: integer
 type: object
 x-restlet:
   section: END_USER_AUTHENTICATIONS

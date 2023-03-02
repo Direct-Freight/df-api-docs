@@ -38,7 +38,6 @@ get:
   tags:
     - end_user_authentications
 post:
-  consumes: []
   description: 'This function sends login credentials, and retrieves a stateless token.'
   parameters:
     - in: body

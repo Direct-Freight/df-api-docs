@@ -44,7 +44,6 @@ get:
   tags:
     - optins
 post:
-  consumes: []
   description: Register a OneSignal player_id in DirectFreight for web push notifications.
   parameters:
     - in: header

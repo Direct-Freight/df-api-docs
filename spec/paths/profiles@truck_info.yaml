@@ -13,7 +13,6 @@ get:
   tags:
     - profiles
 patch:
-  consumes: []
   description: Please send in at least one field to be updated.
   parameters:
     - in: header

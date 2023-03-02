@@ -1,5 +1,5 @@
 get:
-  description: A convenience method to get totals by state.
+  description: A convenience method to get totals by state.  Stage=Private
   parameters:
     - description: >-
         Filter totals to only include these trailer_type's. This parameter can
@@ -10,12 +10,14 @@ get:
       name: trailer_type
       required: false
       type: string
+    - in: path
+      name: state_code
+      required: true
+      type: string
   responses:
     '200':
       description: successful operation
-      schema:
-        $ref: '#/definitions/get_state_list_response'
-  summary: Totals by state
+  summary: Top 5 city totals by state
   tags:
     - boards
 parameters:

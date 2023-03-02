@@ -38,7 +38,6 @@ get:
   tags:
     - boards
 patch:
-  consumes: []
   parameters:
     - in: header
       name: end-user-token
@@ -58,7 +57,6 @@ patch:
   tags:
     - boards
 post:
-  consumes: []
   description: Create a new note.
   parameters:
     - in: header

@@ -1,4 +1,3 @@
-example: test
 properties:
   age:
     description: >-
@@ -6,11 +5,56 @@ properties:
       values less than 1 minute.
     example: 15
     type: integer
+  booking_info:
+    description: >-
+      Information about booking this load online.  Currently only returned by
+      the single load endpoint.
+    properties:
+      book_button_action:
+        example: 'https://www.truckersearch.com/'
+        type: string
+      book_button_label:
+        example: Book Now
+        type: string
+      book_header_label:
+        example: Book Now
+        type: string
+      book_message:
+        example: You must call 888-894-4198 before booking online
+        type: string
+      df_reference_code:
+        example: tJJB-cQQDh19nkmyOn5xzjfdGSQao3bskaRDzc5r2IaX3_EBROT34pQ~
+        type: string
+      quote_button_action:
+        example: 'https://www.truckersearch.com'
+        type: string
+      quote_button_label:
+        example: Send Quote
+        type: string
+      quote_header_label:
+        example: Quote this Load
+        type: string
+      quote_message:
+        example: Please enter the dollar amount you are willing to book this load at
+        type: string
+      show_book_rate:
+        example: true
+        type: boolean
+      show_or_label:
+        example: true
+        type: boolean
+      show_quote_input:
+        example: true
+        type: boolean
+    type: object
   comment:
     description: >-
       This field is only returned for an end_user_token that has the subscribed
       access level.
     example: Test Load
+    type: string
+  commodity:
+    description: the type of cargo.  Currently only returned by the single load endpoint.
     type: string
   company_name:
     description: >-
@@ -64,8 +108,8 @@ properties:
     example: true
     type: boolean
   height:
-    description: Height in inches.  Will be null if empty.
-    type: integer
+    description: Height in feet.  Will be null if empty.
+    type: number
   length:
     description: Length in feet.  Will be null if empty.
     type: number
@@ -108,6 +152,13 @@ properties:
     example: '2018-09-20'
     format: date
     type: string
+  stops:
+    description: >-
+      a summary of the stops.  Currently only returned by the single load
+      endpoint.
+    items:
+      $ref: '#/definitions/stop_item'
+    type: array
   tags:
     description: >-
       Indicates special characteristics of a load record.  This field may be
@@ -148,8 +199,8 @@ properties:
     description: Weight in pounds.  Will be null if empty.
     type: integer
   width:
-    description: Width in inches.  Will be null if empty.
-    type: integer
+    description: Width in feet.  Will be null if empty.
+    type: number
 required:
   - age
   - credit_score
@@ -171,5 +222,3 @@ required:
   - weight
   - width
 type: object
-x-restlet:
-  section: BOARDS
