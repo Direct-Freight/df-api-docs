@@ -33,9 +33,7 @@ get:
     '200':
       description: successful operation
       schema:
-        properties:
-          item:
-            $ref: '#/definitions/board_response_item'
+        $ref: '#/definitions/board_response_item'
   summary: Retrieve single load
   tags:
     - boards
