@@ -54,9 +54,6 @@ properties:
   driver_per_mile:
     description: STAGE=Private
     type: number
-  email:
-    description: EMail.
-    type: string
   fax_number:
     type: integer
   fuel_capacity:
