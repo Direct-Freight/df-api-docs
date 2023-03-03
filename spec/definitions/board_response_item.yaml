@@ -79,8 +79,8 @@ properties:
   dead_head:
     description: >-
       Distance between request body origin_city, and response item origin_city.
-      This field will be null if no origin_city is specified in the request body
-      or if distance cannot be calculated.
+      This field will be undefined if no origin_city is specified in the request
+      body or if distance cannot be calculated.
     example: 87
     type: integer
   destination_city:
@@ -181,6 +181,10 @@ properties:
     items:
       type: string
     type: array
+  trailer_type_details:
+    description: >-
+      A description of the trailer type.  This might also be a custom trailer
+      type or a customer specified trailer type.
   trip_miles:
     description: >-
       Distance between origin and destination.  This field will be null if
