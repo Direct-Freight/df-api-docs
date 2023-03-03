@@ -34,12 +34,12 @@ properties:
   city:
     type: string
   company:
-    description: 'Company name. '
+    description: Company name.
     type: string
   contact_extension:
     type: integer
   contact_name:
-    description: 'Contact name. '
+    description: Contact name.
     type: string
   contact_number:
     type: integer

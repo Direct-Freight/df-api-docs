@@ -10,6 +10,7 @@ example:
   dispatch_extension: 123
   dispatch_number: 4445556666
   dot_number: '12345678'
+  email: test@directfreight.com
   fax_number: 1112223333
   mc_number: '12345678'
   mobile_carrier: Sprint
@@ -44,6 +45,8 @@ properties:
   dot_number:
     description: Maximum 8 numbers.
     type: number
+  email:
+    type: string
   fax_number:
     type: integer
   mc_number:
