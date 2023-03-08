@@ -1,35 +1,5 @@
 properties:
-  FLAT:
-    properties:
-      dates:
-        items:
-          properties:
-            date:
-              format: date
-              type: string
-            loads:
-              type: integer
-            rate:
-              type: number
-          type: object
-        type: array
-    type: object
-  REEFER:
-    properties:
-      dates:
-        items:
-          properties:
-            date:
-              format: date
-              type: string
-            loads:
-              type: integer
-            rate:
-              type: number
-          type: object
-        type: array
-    type: object
-  VAN:
+  TRAILER_TYPE:
     properties:
       dates:
         items:
