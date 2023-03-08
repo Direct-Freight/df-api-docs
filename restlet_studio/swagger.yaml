@@ -3092,7 +3092,37 @@ definitions:
   boards_freight_rate_response:
     type: object
     properties:
-      TRAILER_TYPE:
+      VAN:
+        type: object
+        properties:
+          dates:
+            type: array
+            items:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                loads:
+                  type: integer
+                rate:
+                  type: number
+      FLAT:
+        type: object
+        properties:
+          dates:
+            type: array
+            items:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                loads:
+                  type: integer
+                rate:
+                  type: number
+      REEFER:
         type: object
         properties:
           dates:
