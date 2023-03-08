@@ -649,7 +649,7 @@ paths:
   /boards/freight_rate:      
     get:
       summary: 'Get Freight Rates.'
-      description: 'Calculate Freight Rates.  STAGE=Private'
+      description: 'Calculate Freight Rates.'
       parameters:
         - name: origin_city
           description: Origin City
@@ -672,12 +672,12 @@ paths:
           required: true
           type: string             
         - name: start_date
-          description: Start Date. Optional value, must be used in conjunction with end_date. If not specified defaults to yesterday.
+          description: Start Date. Optional value, must be used in conjunction with end_date. If not specified defaults to today.
           in: query
           required: false
           type: string
         - name: end_date
-          description: End Date. Optional value, must be used in conjunction with start_date. If not specified defaults to yesterday.
+          description: End Date. Optional value, must be used in conjunction with start_date. If not specified defaults to today.
           in: query
           required: false
           type: string        
