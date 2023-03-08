@@ -3090,6 +3090,7 @@ definitions:
     x-restlet:
       section: BOARDS
   boards_freight_rate_response:
+    type: object
     properties:
       TRAILER_TYPE:
         type: object
@@ -3106,7 +3107,6 @@ definitions:
                   type: integer
                 rate:
                   type: number
-    type: object
     x-restlet:
       section: BOARDS
   boards_offer_driver_response:
