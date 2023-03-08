@@ -3090,9 +3090,8 @@ definitions:
     x-restlet:
       section: BOARDS
   boards_freight_rate_response:
-    type: object
     properties:
-      VAN:
+      TRAILER_TYPE:
         type: object
         properties:
           dates:
@@ -3107,36 +3106,7 @@ definitions:
                   type: integer
                 rate:
                   type: number
-      FLAT:
-        type: object
-        properties:
-          dates:
-            type: array
-            items:
-              type: object
-              properties:
-                date:
-                  type: string
-                  format: date
-                loads:
-                  type: integer
-                rate:
-                  type: number
-      REEFER:
-        type: object
-        properties:
-          dates:
-            type: array
-            items:
-              type: object
-              properties:
-                date:
-                  type: string
-                  format: date
-                loads:
-                  type: integer
-                rate:
-                  type: number
+    type: object
     x-restlet:
       section: BOARDS
   boards_offer_driver_response:
