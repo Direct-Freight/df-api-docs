@@ -2844,10 +2844,10 @@ definitions:
           book_button_action:
             items: 
               enum:
+                - accept_broker_offer
                 - call
                 - external_browser
                 - internal_browser
-                - accept_broker_offer
                 - update_user_profile
                 - login
                 - upgrade
@@ -2874,10 +2874,10 @@ definitions:
           quote_button_action:
             items: 
               enum:
+                - submit_driver_offer
                 - call
                 - external_browser
                 - internal_browser
-                - submit_driver_offer
                 - update_user_profile
                 - login
                 - upgrade
