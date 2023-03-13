@@ -2853,7 +2853,9 @@ definitions:
                 - upgrade
               type: string
           book_button_data:
-            description: data associated with the action.  For example a url or a phone number.
+            description: "data associated with the action.  
+                          For example a url or a phone number.  
+                          Only returned if book_button_action is call, external_browser, or internal_browser"
             type: string
             example: "https://www.truckersearch.com"
           show_or_label:
@@ -2883,7 +2885,10 @@ definitions:
                 - upgrade
               type: string
           quote_button_data:
-            description: data associated with the action.  For example a url or a phone number.
+            description: "data associated with the action.  
+                          For example a url or a phone number.  
+                          Only returned if quote_button_action is call, external_browser, or internal_browser"
+          
             type: string
             example: "https://www.truckersearch.com"
           df_reference_code:
