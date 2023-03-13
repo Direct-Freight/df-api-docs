@@ -2842,8 +2842,20 @@ definitions:
             type: string
             example: "Book Now"
           book_button_action:
+            items: 
+              enum:
+                - call
+                - external_browser
+                - internal_browser
+                - accept_broker_offer
+                - update_user_profile
+                - login
+                - upgrade
+              type: string
+          book_button_data:
+            description: data associated with the action.  For example a url or a phone number.
             type: string
-            example: "https://www.truckersearch.com/"
+            example: "https://www.truckersearch.com"
           show_or_label:
             type: boolean
             example: true
@@ -2860,6 +2872,18 @@ definitions:
             type: string
             example: "Send Quote"
           quote_button_action:
+            items: 
+              enum:
+                - call
+                - external_browser
+                - internal_browser
+                - submit_driver_offer
+                - update_user_profile
+                - login
+                - upgrade
+              type: string
+          quote_button_data:
+            description: data associated with the action.  For example a url or a phone number.
             type: string
             example: "https://www.truckersearch.com"
           df_reference_code:
