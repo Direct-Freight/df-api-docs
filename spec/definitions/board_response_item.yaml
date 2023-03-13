@@ -11,7 +11,19 @@ properties:
       the single load endpoint.
     properties:
       book_button_action:
-        example: 'https://www.truckersearch.com/'
+        items:
+          enum:
+            - call
+            - external_browser
+            - internal_browser
+            - accept_broker_offer
+            - update_user_profile
+            - login
+            - upgrade
+          type: string
+      book_button_data:
+        description: data associated with the action.  For example a url or a phone number.
+        example: 'https://www.truckersearch.com'
         type: string
       book_button_label:
         example: Book Now
@@ -26,6 +38,18 @@ properties:
         example: tJJB-cQQDh19nkmyOn5xzjfdGSQao3bskaRDzc5r2IaX3_EBROT34pQ~
         type: string
       quote_button_action:
+        items:
+          enum:
+            - call
+            - external_browser
+            - internal_browser
+            - submit_driver_offer
+            - update_user_profile
+            - login
+            - upgrade
+          type: string
+      quote_button_data:
+        description: data associated with the action.  For example a url or a phone number.
         example: 'https://www.truckersearch.com'
         type: string
       quote_button_label:
