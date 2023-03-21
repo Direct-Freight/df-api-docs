@@ -3168,6 +3168,17 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS      
+  boards_offer_driver_list_response:
+    properties:
+      driver_contact_info:
+        type: object
+      load_info_when_quoted:
+        type: object        
+      quote_amount:
+        type: integer              
+    type: object
+    x-restlet:
+      section: BOARDS            
   board_response:
     example: |-
       {
