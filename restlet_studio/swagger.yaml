@@ -3170,11 +3170,11 @@ definitions:
       section: BOARDS      
   boards_offer_driver_list_response:
     properties:
-      driver_contact_info:
-        type: object
-      load_info_when_quoted:
-        type: object        
-      quote_amount:
+      list:
+        type: array
+        items:
+          type: object
+      item_count:
         type: integer              
     type: object
     x-restlet:
