@@ -806,7 +806,7 @@ paths:
         '201':
           description: List of offers
           schema:
-            $ref: '#/definitions/boards_offer_driver_response'
+            $ref: '#/definitions/boards_offer_driver_list_response'
       tags:
         - boards
     x-restlet:
