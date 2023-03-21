@@ -792,6 +792,25 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
+  /boards/offer/driver/list:            
+    get:
+      summary: 'Get accepted and submitter driver offers'
+      description: 'Get a list of accepted and submitted offers driver has for this load.  STAGE=Private'
+      parameters:
+        - name: entry_id
+          description: 32 character entry id
+          in: query
+          required: true
+          type: string          
+      responses:
+        '201':
+          description: List of offers
+          schema:
+            $ref: '#/definitions/boards_offer_driver_response'
+      tags:
+        - boards
+    x-restlet:
+      section: BOARDS      
   /end_user_authentications/users:
     post:
       parameters:
