@@ -732,8 +732,10 @@ paths:
                 description:  The reference code returned with the broker offer.
                 type: string
       responses:
-        '200':
+        '201':
           description: successful operation
+          schema:
+            $ref: '#/definitions/boards_accept_offer_response'
       tags:
         - boards
   /boards/offer/driver:      
@@ -3157,6 +3159,13 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
+  boards_accept_offer_response:
+    properties:
+      success:
+        type: boolean
+    type: object
+    x-restlet:
+      section: BOARDS    
   boards_offer_driver_response:
     properties:
       driver_contact_info:
