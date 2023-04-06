@@ -769,6 +769,8 @@ paths:
       responses:
         '200':
           description: successful operation
+          schema:
+            $ref: '#/definitions/boards_submit_offer_response'          
       tags:
         - boards
     get:
@@ -3170,6 +3172,17 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS    
+  boards_submit_offer_response:
+    properties:
+      success:
+        type: boolean
+      message:
+        type: string
+      header:
+        type: string
+    type: object
+    x-restlet:
+      section: BOARDS          
   boards_offer_driver_response:
     properties:
       driver_contact_info:
