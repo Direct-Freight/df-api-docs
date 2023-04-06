@@ -3163,6 +3163,10 @@ definitions:
     properties:
       success:
         type: boolean
+      message:
+        type: string
+      header:
+        type: string
     type: object
     x-restlet:
       section: BOARDS    
