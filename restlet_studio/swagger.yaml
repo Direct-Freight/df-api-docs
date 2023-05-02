@@ -767,7 +767,7 @@ paths:
                 type: number
 
       responses:
-        '200':
+        '201':
           description: successful operation
           schema:
             $ref: '#/definitions/boards_submit_offer_response'          
