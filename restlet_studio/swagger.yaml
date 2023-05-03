@@ -3163,12 +3163,14 @@ definitions:
       section: BOARDS
   boards_accept_offer_response:
     properties:
-      success:
+      header: 
+        type: string
+      message: 
+        type: string
+      status: 
+        type: string
+      success: 
         type: boolean
-      message:
-        type: string
-      header:
-        type: string
     type: object
     x-restlet:
       section: BOARDS    
