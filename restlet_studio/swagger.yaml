@@ -2026,6 +2026,23 @@ paths:
         - profiles
     x-restlet:
       section: PROFILES  
+  /profiles/fmcsa:
+    get:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/fmcsa_profile_object'
+      summary: Returns the FMCSA information of this profiles' DOT number.
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES        
   /profiles/documents:
     delete:
       parameters:
@@ -4707,6 +4724,112 @@ on 03-02-2023"
     type: object
     x-restlet:
       section: PROFILES
+  fmcsa_profile_object:
+    properties:
+      add_date: 
+        type: string
+      authorized_for_hire: 
+        type: integer
+        format: int32
+      carrier_operation: 
+        type: string
+      dba_name: 
+        type: string
+      dot_number: 
+        type: string
+      driver_total: 
+        type: string
+      email_address: 
+        type: string
+      exempt_for_hire: 
+        type: integer
+        format: int32
+      fax: 
+        type: string
+      federal_government: 
+        type: integer
+        format: int32
+      hm_flag: 
+        type: integer
+        format: int32
+      indian_tribe: 
+        type: integer
+        format: int32
+      insert_date: 
+        type: string
+        format: date
+      legal_name: 
+        type: string
+      local_government: 
+        type: integer
+        format: int32
+      mailing_city: 
+        type: string
+      mailing_country: 
+        type: string
+      mailing_state: 
+        type: string
+      mailing_street: 
+        type: string
+      mailing_zip: 
+        type: string
+      mcs150_date: 
+        type: string
+      mcs150_mileage: 
+        type: string
+      mcs150_mileage_year: 
+        type: string
+      migrant: 
+        type: integer
+        format: int32
+      nbr_power_unit: 
+        type: string
+      oic_state: 
+        type: string
+      op_other: 
+        type: string
+      pc_flag: 
+        type: integer
+        format: int32
+      phy_city: 
+        type: string
+      phy_country: 
+        type: string
+      phy_state: 
+        type: string
+      phy_street: 
+        type: string
+      phy_zip: 
+        type: string
+      private_only: 
+        type: integer
+        format: int32
+      private_passenger_business: 
+        type: integer
+        format: int32
+      private_passenger_nonbusiness: 
+        type: integer
+        format: int32
+      private_property: 
+        type: integer
+        format: int32
+      recent_mileage: 
+        type: string
+      recent_mileage_year: 
+        type: string
+      state_government: 
+        type: integer
+        format: int32
+      telephone: 
+        type: string
+      us_mail: 
+        type: integer
+        format: int32
+      vmt_source_id: 
+        type: string
+    type: object
+    x-restlet:
+      section: PROFILES      
   user:
     properties:
       email:
