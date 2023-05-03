@@ -3185,12 +3185,133 @@ definitions:
       section: BOARDS          
   boards_offer_driver_response:
     properties:
-      driver_contact_info:
+      driver_contact_info: 
+        type: string
+      load_info_when_quoted: 
         type: object
-      load_info_when_quoted:
-        type: object        
-      quote_amount:
-        type: integer              
+        properties: 
+          age: 
+            type: integer
+            format: int32
+          allowed_actions: 
+            type: string
+          booking_info: 
+            type: object
+            properties: 
+              book_button_action: 
+                type: string
+              book_button_label: 
+                type: string
+              book_header_label: 
+                type: string
+              book_message: 
+                type: string
+              df_reference_code: 
+                type: string
+              quote_button_action: 
+                type: string
+              quote_button_label: 
+                type: string
+              quote_header_label: 
+                type: string
+              quote_message: 
+                type: string
+              show_book_rate: 
+                type: integer
+                format: int32
+              show_or_label: 
+                type: integer
+                format: int32
+              show_quote_input: 
+                type: integer
+                format: int32
+          booking_partner: 
+            type: string
+          broker_user_id: 
+            type: integer
+            format: int32
+          comment: 
+            type: string
+            format: nullable
+          company_name: 
+            type: string
+          credit_report_key: 
+            type: string
+          credit_score: 
+            type: string
+            format: nullable
+          custom_id: 
+            type: string
+          destination_city: 
+            type: string
+          destination_state: 
+            type: string
+          details_url: 
+            type: string
+            format: nullable
+          entry_id: 
+            type: string
+          full_load: 
+            type: boolean
+          green_light: 
+            type: boolean
+          height: 
+            type: string
+            format: nullable
+          length: 
+            type: string
+            format: nullable
+          origin_city: 
+            type: string
+          origin_state: 
+            type: string
+          other_trailer_types: 
+            type: string
+            format: nullable
+          pay_rate: 
+            type: integer
+            format: int32
+          phone_extension: 
+            type: integer
+            format: int32
+          phone_number: 
+            type: integer
+            format: int64
+          rate_per_mile_est: 
+            type: number
+          receive_date: 
+            type: string
+            format: nullable
+          ship_date: 
+            type: string
+            format: date
+          tags: 
+            type: array
+            items: 
+              type: string
+          trade_orgs: 
+            type: object
+            properties: 
+              tia_approved: 
+                type: string
+          trailer_type: 
+            type: array
+            items: 
+              type: string
+          trip_miles: 
+            type: integer
+            format: int32
+          user_hid: 
+            type: boolean
+          weight: 
+            type: string
+            format: nullable
+          width: 
+            type: string
+            format: nullable
+      quote_amount: 
+        type: integer
+        format: int32
     type: object
     x-restlet:
       section: BOARDS      
