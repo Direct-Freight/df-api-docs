@@ -732,8 +732,10 @@ paths:
                 description:  The reference code returned with the broker offer.
                 type: string
       responses:
-        '200':
+        '201':
           description: successful operation
+          schema:
+            $ref: '#/definitions/boards_accept_offer_response'
       tags:
         - boards
   /boards/offer/driver:      
@@ -765,8 +767,10 @@ paths:
                 type: number
 
       responses:
-        '200':
+        '201':
           description: successful operation
+          schema:
+            $ref: '#/definitions/boards_submit_offer_response'          
       tags:
         - boards
     get:
@@ -792,6 +796,25 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
+  /boards/offer/driver/list:            
+    get:
+      summary: 'Get accepted and submitter driver offers'
+      description: 'Get a list of accepted and submitted offers driver has for this load.  STAGE=Private'
+      parameters:
+        - name: entry_id
+          description: 32 character entry id
+          in: query
+          required: true
+          type: string          
+      responses:
+        '201':
+          description: List of offers
+          schema:
+            $ref: '#/definitions/boards_offer_driver_list_response'
+      tags:
+        - boards
+    x-restlet:
+      section: BOARDS      
   /end_user_authentications/users:
     post:
       parameters:
@@ -2003,6 +2026,23 @@ paths:
         - profiles
     x-restlet:
       section: PROFILES  
+  /profiles/fmcsa:
+    get:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/fmcsa_profile_object'
+      summary: Returns the FMCSA information of this profiles' DOT number.
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES        
   /profiles/documents:
     delete:
       parameters:
@@ -3138,17 +3178,175 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
+  boards_accept_offer_response:
+    properties:
+      header: 
+        type: string
+      message: 
+        type: string
+      status: 
+        type: string
+      success: 
+        type: boolean
+    type: object
+    x-restlet:
+      section: BOARDS    
+  boards_submit_offer_response:
+    properties:
+      header: 
+        type: string
+      message: 
+        type: string
+      status: 
+        type: string
+      success: 
+        type: boolean
+    type: object
+    x-restlet:
+      section: BOARDS          
   boards_offer_driver_response:
     properties:
-      driver_contact_info:
+      driver_contact_info: 
+        type: string
+      load_info_when_quoted: 
         type: object
-      load_info_when_quoted:
-        type: object        
-      quote_amount:
-        type: integer              
+        properties: 
+          age: 
+            type: integer
+            format: int32
+          allowed_actions: 
+            type: string
+          booking_info: 
+            type: object
+            properties: 
+              book_button_action: 
+                type: string
+              book_button_label: 
+                type: string
+              book_header_label: 
+                type: string
+              book_message: 
+                type: string
+              df_reference_code: 
+                type: string
+              quote_button_action: 
+                type: string
+              quote_button_label: 
+                type: string
+              quote_header_label: 
+                type: string
+              quote_message: 
+                type: string
+              show_book_rate: 
+                type: integer
+                format: int32
+              show_or_label: 
+                type: integer
+                format: int32
+              show_quote_input: 
+                type: integer
+                format: int32
+          booking_partner: 
+            type: string
+          broker_user_id: 
+            type: integer
+            format: int32
+          comment: 
+            type: string
+            format: nullable
+          company_name: 
+            type: string
+          credit_report_key: 
+            type: string
+          credit_score: 
+            type: string
+            format: nullable
+          custom_id: 
+            type: string
+          destination_city: 
+            type: string
+          destination_state: 
+            type: string
+          details_url: 
+            type: string
+            format: nullable
+          entry_id: 
+            type: string
+          full_load: 
+            type: boolean
+          green_light: 
+            type: boolean
+          height: 
+            type: string
+            format: nullable
+          length: 
+            type: string
+            format: nullable
+          origin_city: 
+            type: string
+          origin_state: 
+            type: string
+          other_trailer_types: 
+            type: string
+            format: nullable
+          pay_rate: 
+            type: integer
+            format: int32
+          phone_extension: 
+            type: integer
+            format: int32
+          phone_number: 
+            type: integer
+            format: int64
+          rate_per_mile_est: 
+            type: number
+          receive_date: 
+            type: string
+            format: nullable
+          ship_date: 
+            type: string
+            format: date
+          tags: 
+            type: array
+            items: 
+              type: string
+          trade_orgs: 
+            type: object
+            properties: 
+              tia_approved: 
+                type: string
+          trailer_type: 
+            type: array
+            items: 
+              type: string
+          trip_miles: 
+            type: integer
+            format: int32
+          user_hid: 
+            type: boolean
+          weight: 
+            type: string
+            format: nullable
+          width: 
+            type: string
+            format: nullable
+      quote_amount: 
+        type: integer
+        format: int32
     type: object
     x-restlet:
       section: BOARDS      
+  boards_offer_driver_list_response:
+    properties:
+      list:
+        type: array
+        items:
+          type: object
+      item_count:
+        type: integer              
+    type: object
+    x-restlet:
+      section: BOARDS            
   board_response:
     example: |-
       {
@@ -4526,6 +4724,112 @@ on 03-02-2023"
     type: object
     x-restlet:
       section: PROFILES
+  fmcsa_profile_object:
+    properties:
+      add_date: 
+        type: string
+      authorized_for_hire: 
+        type: integer
+        format: int32
+      carrier_operation: 
+        type: string
+      dba_name: 
+        type: string
+      dot_number: 
+        type: string
+      driver_total: 
+        type: string
+      email_address: 
+        type: string
+      exempt_for_hire: 
+        type: integer
+        format: int32
+      fax: 
+        type: string
+      federal_government: 
+        type: integer
+        format: int32
+      hm_flag: 
+        type: integer
+        format: int32
+      indian_tribe: 
+        type: integer
+        format: int32
+      insert_date: 
+        type: string
+        format: date
+      legal_name: 
+        type: string
+      local_government: 
+        type: integer
+        format: int32
+      mailing_city: 
+        type: string
+      mailing_country: 
+        type: string
+      mailing_state: 
+        type: string
+      mailing_street: 
+        type: string
+      mailing_zip: 
+        type: string
+      mcs150_date: 
+        type: string
+      mcs150_mileage: 
+        type: string
+      mcs150_mileage_year: 
+        type: string
+      migrant: 
+        type: integer
+        format: int32
+      nbr_power_unit: 
+        type: string
+      oic_state: 
+        type: string
+      op_other: 
+        type: string
+      pc_flag: 
+        type: integer
+        format: int32
+      phy_city: 
+        type: string
+      phy_country: 
+        type: string
+      phy_state: 
+        type: string
+      phy_street: 
+        type: string
+      phy_zip: 
+        type: string
+      private_only: 
+        type: integer
+        format: int32
+      private_passenger_business: 
+        type: integer
+        format: int32
+      private_passenger_nonbusiness: 
+        type: integer
+        format: int32
+      private_property: 
+        type: integer
+        format: int32
+      recent_mileage: 
+        type: string
+      recent_mileage_year: 
+        type: string
+      state_government: 
+        type: integer
+        format: int32
+      telephone: 
+        type: string
+      us_mail: 
+        type: integer
+        format: int32
+      vmt_source_id: 
+        type: string
+    type: object
+    x-restlet:
+      section: PROFILES      
   user:
     properties:
       email:
