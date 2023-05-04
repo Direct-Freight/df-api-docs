@@ -19,8 +19,10 @@ post:
           - entry_id df_reference_code
         type: object
   responses:
-    '200':
+    '201':
       description: successful operation
+      schema:
+        $ref: '#/definitions/boards_accept_offer_response'
   summary: Accept Broker Offer
   tags:
     - boards
