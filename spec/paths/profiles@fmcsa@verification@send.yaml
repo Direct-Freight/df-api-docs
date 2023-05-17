@@ -1,0 +1,26 @@
+get:
+  description: >-
+    Sends a verification challenge to the email or phone number associated with
+    this FMCSA Dot number.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - description: 'Must be one of: email, call or text.'
+      in: query
+      name: method
+      required: true
+      type: string
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        properties:
+          message:
+            type: string
+  summary: Sends FMCSA verification challenge
+  tags:
+    - profiles
+x-restlet:
+  section: PROFILES

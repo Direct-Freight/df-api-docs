@@ -1,0 +1,24 @@
+get:
+  description: Checks a verification code challenge.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - description: 6 Digit verification code.
+      in: query
+      name: code
+      required: true
+      type: number
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        properties:
+          message:
+            type: string
+  summary: Sends FMCSA verification challenge
+  tags:
+    - profiles
+x-restlet:
+  section: PROFILES
