@@ -2043,6 +2043,56 @@ paths:
         - profiles
     x-restlet:
       section: PROFILES        
+  /profiles/fmcsa/verification/send:
+    get:
+      description: Sends a verification challenge to the email or phone number associated with this FMCSA Dot number.
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: query
+          name: method
+          required: true
+          type: string
+          description: "Must be one of: email, call or text."
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              message: 
+                type: string
+      summary: Sends FMCSA verification challenge
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES       
+  /profiles/fmcsa/verification/check:
+    get:
+      description: Checks a verification code challenge.
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: query
+          name: code
+          required: true
+          type: number
+          description: "6 Digit verification code."
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              message: 
+                type: string
+      summary: Sends FMCSA verification challenge
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES         
   /profiles/documents:
     delete:
       parameters:
