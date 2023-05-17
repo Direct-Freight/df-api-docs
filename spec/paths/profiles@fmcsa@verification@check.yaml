@@ -17,7 +17,7 @@ get:
         properties:
           message:
             type: string
-  summary: Sends FMCSA verification challenge
+  summary: Checks FMCSA verification challenge
   tags:
     - profiles
 x-restlet:
