@@ -3890,6 +3890,7 @@ definitions:
       section: POSTINGS
   postings_entry_object:
     example: {
+      "allowed_actions":  [ "call" ],      
       "comment": "hello world",
       "custom_id": "abc123",
       "destination_city": "San Francisco",
@@ -3910,7 +3911,6 @@ definitions:
       "width": 22,            
       "details_url": "https://www.example.com/?loadnumber=1234",
       "booking_partner": "...",
-      "allowed_actions":  [ "call" ],
       "dispatch_email": "dispatch@directfreight.com",
       "dispatch_mobile_number": 7777777777,
       }
