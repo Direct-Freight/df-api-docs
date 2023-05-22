@@ -4217,6 +4217,25 @@ definitions:
       section: POSTINGS
   postings_post_response_item:
     properties:
+      allowed_actions:
+        description: What actions are available for this load, defaults to "call".
+        items:
+          enum:
+            - send_quote
+            - book_now
+            - request_info
+            - call
+            - email
+            - text
+            - desktop_push
+            - mobile_push
+            - no_call
+            - no_email
+            - no_text
+            - url_direct_book
+            - url_details
+          type: string
+        type: array         
       comment:
         type: string
       contact_name:
