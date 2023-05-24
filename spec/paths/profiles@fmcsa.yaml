@@ -9,7 +9,7 @@ get:
       description: successful operation
       schema:
         $ref: '#/definitions/fmcsa_profile_object'
-  summary: STAGE=private Returns the FMCSA information of this profiles' DOT number.
+  summary: STAGE=PRIVATE Returns the FMCSA information of this profiles' DOT number.
   tags:
     - profiles
 x-restlet:

@@ -19,7 +19,7 @@ get:
         properties:
           message:
             type: string
-  summary: Sends FMCSA verification challenge
+  summary: STAGE=PRIVATE Sends FMCSA verification challenge
   tags:
     - profiles
 x-restlet:
