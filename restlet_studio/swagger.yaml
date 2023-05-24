@@ -2043,6 +2043,30 @@ paths:
         - profiles
     x-restlet:
       section: PROFILES        
+  /profiles/fmcsa/verification:
+    get:
+      description: Checks if the logged in user is FMCSA verified.
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              last_verification_date: 
+                type: string
+              status: 
+                type: boolean
+              verified_via: 
+                type: string
+      summary: STAGE=PRIVATE Sends FMCSA verification challenge
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES         
   /profiles/fmcsa/verification/send:
     get:
       description: Sends a verification challenge to the email or phone number associated with this FMCSA Dot number.
