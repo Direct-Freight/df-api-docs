@@ -2062,7 +2062,7 @@ paths:
                 type: boolean
               verified_via: 
                 type: string
-      summary: STAGE=PRIVATE Sends FMCSA verification challenge
+      summary: STAGE=PRIVATE Checks if the logged in user is FMCSA verified.
       tags:
         - profiles
     x-restlet:
