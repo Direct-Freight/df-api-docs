@@ -2045,7 +2045,7 @@ paths:
       section: PROFILES        
   /profiles/fmcsa/verification:
     get:
-      description: Checks if the logged in user is FMCSA verified.
+      description: STAGE=PRIVATE Checks if the logged in user is FMCSA verified.
       parameters:
         - in: header
           name: end-user-token
@@ -2069,7 +2069,7 @@ paths:
       section: PROFILES         
   /profiles/fmcsa/verification/send:
     get:
-      description: Sends a verification challenge to the email or phone number associated with this FMCSA Dot number.
+      description: STAGE=PRIVATE Sends a verification challenge to the email or phone number associated with this FMCSA Dot number.
       parameters:
         - in: header
           name: end-user-token
@@ -2094,7 +2094,7 @@ paths:
       section: PROFILES       
   /profiles/fmcsa/verification/check:
     get:
-      description: Checks a verification code challenge.
+      description: STAGE=PRIVATE Checks a verification code challenge.
       parameters:
         - in: header
           name: end-user-token
@@ -2112,7 +2112,7 @@ paths:
             properties:
               message: 
                 type: string
-      summary: Checks FMCSA verification challenge
+      summary: STAGE=PRIVATE Checks FMCSA verification challenge
       tags:
         - profiles
     x-restlet:
