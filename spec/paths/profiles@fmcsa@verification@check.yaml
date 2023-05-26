@@ -1,5 +1,5 @@
 get:
-  description: Checks a verification code challenge.
+  description: STAGE=PRIVATE Checks a verification code challenge.
   parameters:
     - in: header
       name: end-user-token
@@ -17,7 +17,7 @@ get:
         properties:
           message:
             type: string
-  summary: Checks FMCSA verification challenge
+  summary: STAGE=PRIVATE Checks FMCSA verification challenge
   tags:
     - profiles
 x-restlet:

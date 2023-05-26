@@ -1,7 +1,7 @@
 get:
   description: >-
-    Sends a verification challenge to the email or phone number associated with
-    this FMCSA Dot number.
+    STAGE=PRIVATE Sends a verification challenge to the email or phone number
+    associated with this FMCSA Dot number.
   parameters:
     - in: header
       name: end-user-token

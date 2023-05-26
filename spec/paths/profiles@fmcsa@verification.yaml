@@ -1,5 +1,5 @@
 get:
-  description: Checks if the logged in user is FMCSA verified.
+  description: STAGE=PRIVATE Checks if the logged in user is FMCSA verified.
   parameters:
     - in: header
       name: end-user-token
