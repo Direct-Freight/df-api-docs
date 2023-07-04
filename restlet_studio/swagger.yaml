@@ -2094,6 +2094,7 @@ paths:
       section: PROFILES       
   /profiles/fmcsa/verification/check:
     get:
+      
       description: STAGE=PRIVATE Checks a verification code challenge.
       parameters:
         - in: header
@@ -2811,6 +2812,9 @@ definitions:
       section: BOARDS
   board_response_item:
     properties:
+      avg_market_rate:
+        description: Average rate for this type of load during the last 28 days.
+        type: number    
       age:
         description: Time in minutes since load/truck was first posted. NULL is returned for values less than 1 minute.
         example: 15
