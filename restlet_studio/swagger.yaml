@@ -2759,6 +2759,7 @@ definitions:
           - green_light
           - new
           - book_now
+          - avg_market_rate
         example: age
         type: string
       sort_direction:
