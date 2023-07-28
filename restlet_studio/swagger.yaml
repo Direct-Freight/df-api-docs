@@ -1530,6 +1530,12 @@ paths:
           items:
             type: string
           x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
+        - name: whoentered 
+          description: Internal usage parameter. Retrieves all postings that match the specified whoenetered.
+          in: query
+          required: false
+          type: string
+          x-example: '?whoentered=ZZZ'          
         - description: Sort results by a certain field.
           in: query
           name: sort_parameter
