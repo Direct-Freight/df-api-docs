@@ -3955,6 +3955,9 @@ definitions:
       custom_id:
         description: An identifier that can be provided for your own records.  (i.e.-Company load number) This field can be used to retrieve loads via GET.  This value must be unique. Custom Id's can have a maximum of 25 characters.
         type: string
+      custom_md5sum:
+        description: A custom checksum to identify the original string processed by the directfreight spiders.
+        type: string        
       destination_city:
         description: Delivery location city of load/truck. For truck type entries this field is optional or can be used to specify a region.
         type: string
@@ -4121,6 +4124,9 @@ definitions:
           An identifier that can be provided for your own records. (i.e.-Company load number) This field can be used to retrieve loads via GET. This value must be unique.
           You cannot update a custom_id once it is set. Please delete and reenter the load to change the custom_id.  Either posting_id or custom_id is required.
         type: string
+      custom_md5sum:
+        description: A custom checksum to identify the original string processed by the directfreight spiders.
+        type: string        
       destination_city:
         description: Delivery location city of load/truck.
         type: string
