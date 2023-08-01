@@ -65,6 +65,11 @@ properties:
       load number) This field can be used to retrieve loads via GET.  This value
       must be unique. Custom Id's can have a maximum of 25 characters.
     type: string
+  custom_md5sum:
+    description: >-
+      A custom checksum to identify the original string processed by the
+      directfreight spiders.
+    type: string
   destination_city:
     description: >-
       Delivery location city of load/truck. For truck type entries this field is

@@ -69,6 +69,11 @@ properties:
       the load to change the custom_id.  Either posting_id or custom_id is
       required.
     type: string
+  custom_md5sum:
+    description: >-
+      A custom checksum to identify the original string processed by the
+      directfreight spiders.
+    type: string
   destination_city:
     description: Delivery location city of load/truck.
     type: string
