@@ -22,6 +22,7 @@ properties:
     type: string
 required:
   - source_posting
+  - source_id
 type: object
 x-restlet:
   section: not categorized yet
