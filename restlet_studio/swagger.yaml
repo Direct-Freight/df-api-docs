@@ -1001,6 +1001,7 @@ paths:
             new_password:
               description: The new password they want it updated to.
               type: string
+          type: object
       responses:
         '201':
           description: Their password was successfuly updated.
