@@ -82,7 +82,6 @@ parameters:
       - private_trucks
       - test_loads
       - test_trucks
-      - olp_network
     in: path
     name: posting_type
     required: true
@@ -1662,6 +1661,7 @@ paths:
           - private_trucks
           - test_loads
           - test_trucks
+          - olp_network
         in: path
         name: posting_type
         required: true
