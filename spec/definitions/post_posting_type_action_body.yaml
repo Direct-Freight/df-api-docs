@@ -6,9 +6,7 @@ properties:
       auto-generated if one is not specified.
     type: string
   source_id:
-    description: >-
-      The posting id of the posting you are moving or copying. Optional for
-      create.
+    description: The posting id of the posting you are moving or copying.
     type: object
   source_posting:
     description: >-
