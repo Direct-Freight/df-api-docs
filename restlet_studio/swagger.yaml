@@ -3889,7 +3889,7 @@ definitions:
     properties:
       source_id:
         description: The posting id of the posting you are moving or copying.
-        type: object
+        type: string
       source_posting:
         description: Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.
         type: string
