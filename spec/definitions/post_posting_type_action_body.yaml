@@ -6,10 +6,8 @@ properties:
       auto-generated if one is not specified.
     type: string
   source_id:
-    description: >-
-      The posting id of the posting you are moving or copying. Optional for
-      create.
-    type: object
+    description: The posting id of the posting you are moving or copying.
+    type: integer
   source_posting:
     description: >-
       Where the items are coming from. Loads can not be moved or copied to
@@ -24,6 +22,7 @@ properties:
     type: string
 required:
   - source_posting
+  - source_id
 type: object
 x-restlet:
   section: not categorized yet
