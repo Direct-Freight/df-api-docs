@@ -938,7 +938,7 @@ paths:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications/uuids:
     get:
-      description: Gets user specific UUID.
+      description: Get or create a user specific UUID.
       parameters: []
       responses:
         '200':
