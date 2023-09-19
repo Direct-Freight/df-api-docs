@@ -7,7 +7,7 @@ properties:
     type: string
   source_id:
     description: The posting id of the posting you are moving or copying.
-    type: string
+    type: integer
   source_posting:
     description: >-
       Where the items are coming from. Loads can not be moved or copied to
