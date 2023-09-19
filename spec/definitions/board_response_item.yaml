@@ -5,6 +5,9 @@ properties:
       values less than 1 minute.
     example: 15
     type: integer
+  avg_market_rate:
+    description: Average rate for this type of load during the last 28 days.
+    type: number
   booking_info:
     description: >-
       Information about booking this load online.  Currently only returned by

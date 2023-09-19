@@ -59,6 +59,14 @@ get:
       required: false
       type: array
       x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
+    - description: >-
+        Internal usage parameter. Retrieves all postings that match the
+        specified whoenetered.
+      in: query
+      name: whoentered
+      required: false
+      type: string
+      x-example: '?whoentered=ZZZ'
     - description: Sort results by a certain field.
       enum:
         - origin_city

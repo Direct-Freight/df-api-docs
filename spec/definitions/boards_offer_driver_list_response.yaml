@@ -1,0 +1,10 @@
+properties:
+  item_count:
+    type: integer
+  list:
+    items:
+      type: object
+    type: array
+type: object
+x-restlet:
+  section: BOARDS

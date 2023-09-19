@@ -732,8 +732,10 @@ paths:
                 description:  The reference code returned with the broker offer.
                 type: string
       responses:
-        '200':
+        '201':
           description: successful operation
+          schema:
+            $ref: '#/definitions/boards_accept_offer_response'
       tags:
         - boards
   /boards/offer/driver:      
@@ -765,8 +767,10 @@ paths:
                 type: number
 
       responses:
-        '200':
+        '201':
           description: successful operation
+          schema:
+            $ref: '#/definitions/boards_submit_offer_response'          
       tags:
         - boards
     get:
@@ -792,6 +796,25 @@ paths:
         - boards
     x-restlet:
       section: BOARDS
+  /boards/offer/driver/list:            
+    get:
+      summary: 'Get accepted and submitter driver offers'
+      description: 'Get a list of accepted and submitted offers driver has for this load.  STAGE=Private'
+      parameters:
+        - name: entry_id
+          description: 32 character entry id
+          in: query
+          required: true
+          type: string          
+      responses:
+        '201':
+          description: List of offers
+          schema:
+            $ref: '#/definitions/boards_offer_driver_list_response'
+      tags:
+        - boards
+    x-restlet:
+      section: BOARDS      
   /end_user_authentications/users:
     post:
       parameters:
@@ -915,7 +938,7 @@ paths:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications/uuids:
     get:
-      description: Gets user specific UUID.
+      description: Get or create a user specific UUID.
       parameters: []
       responses:
         '200':
@@ -957,7 +980,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        '204':
           description: This will return a success only if the e-mail is in our records.
         '422':
           $ref: '#/responses/error_422'
@@ -1507,6 +1530,12 @@ paths:
           items:
             type: string
           x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
+        - name: whoentered 
+          description: Internal usage parameter. Retrieves all postings that match the specified whoenetered.
+          in: query
+          required: false
+          type: string
+          x-example: '?whoentered=ZZZ'          
         - description: Sort results by a certain field.
           in: query
           name: sort_parameter
@@ -2003,6 +2032,98 @@ paths:
         - profiles
     x-restlet:
       section: PROFILES  
+  /profiles/fmcsa:
+    get:
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/fmcsa_profile_object'
+      summary: STAGE=PRIVATE Returns the FMCSA information of this profiles' DOT number.
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES        
+  /profiles/fmcsa/verification:
+    get:
+      description: STAGE=PRIVATE Checks if the logged in user is FMCSA verified.
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              last_verification_date: 
+                type: string
+              status: 
+                type: boolean
+              verified_via: 
+                type: string
+      summary: STAGE=PRIVATE Checks if the logged in user is FMCSA verified.
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES         
+  /profiles/fmcsa/verification/send:
+    get:
+      description: STAGE=PRIVATE Sends a verification challenge to the email or phone number associated with this FMCSA Dot number.
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: query
+          name: method
+          required: true
+          type: string
+          description: "Must be one of: email, call or text."
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              message: 
+                type: string
+      summary: STAGE=PRIVATE Sends FMCSA verification challenge
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES       
+  /profiles/fmcsa/verification/check:
+    get:
+      
+      description: STAGE=PRIVATE Checks a verification code challenge.
+      parameters:
+        - in: header
+          name: end-user-token
+          required: true
+          type: string
+        - in: query
+          name: code
+          required: true
+          type: number
+          description: "6 Digit verification code."
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            properties:
+              message: 
+                type: string
+      summary: STAGE=PRIVATE Checks FMCSA verification challenge
+      tags:
+        - profiles
+    x-restlet:
+      section: PROFILES         
   /profiles/documents:
     delete:
       parameters:
@@ -2644,6 +2765,7 @@ definitions:
           - green_light
           - new
           - book_now
+          - avg_market_rate
         example: age
         type: string
       sort_direction:
@@ -2697,6 +2819,9 @@ definitions:
       section: BOARDS
   board_response_item:
     properties:
+      avg_market_rate:
+        description: Average rate for this type of load during the last 28 days.
+        type: number        
       age:
         description: Time in minutes since load/truck was first posted. NULL is returned for values less than 1 minute.
         example: 15
@@ -3138,17 +3263,175 @@ definitions:
     type: object
     x-restlet:
       section: BOARDS
+  boards_accept_offer_response:
+    properties:
+      header: 
+        type: string
+      message: 
+        type: string
+      status: 
+        type: string
+      success: 
+        type: boolean
+    type: object
+    x-restlet:
+      section: BOARDS    
+  boards_submit_offer_response:
+    properties:
+      header: 
+        type: string
+      message: 
+        type: string
+      status: 
+        type: string
+      success: 
+        type: boolean
+    type: object
+    x-restlet:
+      section: BOARDS          
   boards_offer_driver_response:
     properties:
-      driver_contact_info:
+      driver_contact_info: 
+        type: string
+      load_info_when_quoted: 
         type: object
-      load_info_when_quoted:
-        type: object        
-      quote_amount:
-        type: integer              
+        properties: 
+          age: 
+            type: integer
+            format: int32
+          allowed_actions: 
+            type: string
+          booking_info: 
+            type: object
+            properties: 
+              book_button_action: 
+                type: string
+              book_button_label: 
+                type: string
+              book_header_label: 
+                type: string
+              book_message: 
+                type: string
+              df_reference_code: 
+                type: string
+              quote_button_action: 
+                type: string
+              quote_button_label: 
+                type: string
+              quote_header_label: 
+                type: string
+              quote_message: 
+                type: string
+              show_book_rate: 
+                type: integer
+                format: int32
+              show_or_label: 
+                type: integer
+                format: int32
+              show_quote_input: 
+                type: integer
+                format: int32
+          booking_partner: 
+            type: string
+          broker_user_id: 
+            type: integer
+            format: int32
+          comment: 
+            type: string
+            format: nullable
+          company_name: 
+            type: string
+          credit_report_key: 
+            type: string
+          credit_score: 
+            type: string
+            format: nullable
+          custom_id: 
+            type: string
+          destination_city: 
+            type: string
+          destination_state: 
+            type: string
+          details_url: 
+            type: string
+            format: nullable
+          entry_id: 
+            type: string
+          full_load: 
+            type: boolean
+          green_light: 
+            type: boolean
+          height: 
+            type: string
+            format: nullable
+          length: 
+            type: string
+            format: nullable
+          origin_city: 
+            type: string
+          origin_state: 
+            type: string
+          other_trailer_types: 
+            type: string
+            format: nullable
+          pay_rate: 
+            type: integer
+            format: int32
+          phone_extension: 
+            type: integer
+            format: int32
+          phone_number: 
+            type: integer
+            format: int64
+          rate_per_mile_est: 
+            type: number
+          receive_date: 
+            type: string
+            format: nullable
+          ship_date: 
+            type: string
+            format: date
+          tags: 
+            type: array
+            items: 
+              type: string
+          trade_orgs: 
+            type: object
+            properties: 
+              tia_approved: 
+                type: string
+          trailer_type: 
+            type: array
+            items: 
+              type: string
+          trip_miles: 
+            type: integer
+            format: int32
+          user_hid: 
+            type: boolean
+          weight: 
+            type: string
+            format: nullable
+          width: 
+            type: string
+            format: nullable
+      quote_amount: 
+        type: integer
+        format: int32
     type: object
     x-restlet:
       section: BOARDS      
+  boards_offer_driver_list_response:
+    properties:
+      list:
+        type: array
+        items:
+          type: object
+      item_count:
+        type: integer              
+    type: object
+    x-restlet:
+      section: BOARDS            
   board_response:
     example: |-
       {
@@ -3642,6 +3925,7 @@ definitions:
       section: POSTINGS
   postings_entry_object:
     example: {
+      "allowed_actions":  [ "call" ],      
       "comment": "hello world",
       "custom_id": "abc123",
       "destination_city": "San Francisco",
@@ -3662,7 +3946,6 @@ definitions:
       "width": 22,            
       "details_url": "https://www.example.com/?loadnumber=1234",
       "booking_partner": "...",
-      "allowed_actions":  [ "call" ],
       "dispatch_email": "dispatch@directfreight.com",
       "dispatch_mobile_number": 7777777777,
       }
@@ -3672,6 +3955,9 @@ definitions:
       custom_id:
         description: An identifier that can be provided for your own records.  (i.e.-Company load number) This field can be used to retrieve loads via GET.  This value must be unique. Custom Id's can have a maximum of 25 characters.
         type: string
+      custom_md5sum:
+        description: A custom checksum to identify the original string processed by the directfreight spiders.
+        type: string        
       destination_city:
         description: Delivery location city of load/truck. For truck type entries this field is optional or can be used to specify a region.
         type: string
@@ -3838,6 +4124,9 @@ definitions:
           An identifier that can be provided for your own records. (i.e.-Company load number) This field can be used to retrieve loads via GET. This value must be unique.
           You cannot update a custom_id once it is set. Please delete and reenter the load to change the custom_id.  Either posting_id or custom_id is required.
         type: string
+      custom_md5sum:
+        description: A custom checksum to identify the original string processed by the directfreight spiders.
+        type: string        
       destination_city:
         description: Delivery location city of load/truck.
         type: string
@@ -3969,6 +4258,25 @@ definitions:
       section: POSTINGS
   postings_post_response_item:
     properties:
+      allowed_actions:
+        description: What actions are available for this load, defaults to "call".
+        items:
+          enum:
+            - send_quote
+            - book_now
+            - request_info
+            - call
+            - email
+            - text
+            - desktop_push
+            - mobile_push
+            - no_call
+            - no_email
+            - no_text
+            - url_direct_book
+            - url_details
+          type: string
+        type: array         
       comment:
         type: string
       contact_name:
@@ -4526,6 +4834,112 @@ on 03-02-2023"
     type: object
     x-restlet:
       section: PROFILES
+  fmcsa_profile_object:
+    properties:
+      add_date: 
+        type: string
+      authorized_for_hire: 
+        type: integer
+        format: int32
+      carrier_operation: 
+        type: string
+      dba_name: 
+        type: string
+      dot_number: 
+        type: string
+      driver_total: 
+        type: string
+      email_address: 
+        type: string
+      exempt_for_hire: 
+        type: integer
+        format: int32
+      fax: 
+        type: string
+      federal_government: 
+        type: integer
+        format: int32
+      hm_flag: 
+        type: integer
+        format: int32
+      indian_tribe: 
+        type: integer
+        format: int32
+      insert_date: 
+        type: string
+        format: date
+      legal_name: 
+        type: string
+      local_government: 
+        type: integer
+        format: int32
+      mailing_city: 
+        type: string
+      mailing_country: 
+        type: string
+      mailing_state: 
+        type: string
+      mailing_street: 
+        type: string
+      mailing_zip: 
+        type: string
+      mcs150_date: 
+        type: string
+      mcs150_mileage: 
+        type: string
+      mcs150_mileage_year: 
+        type: string
+      migrant: 
+        type: integer
+        format: int32
+      nbr_power_unit: 
+        type: string
+      oic_state: 
+        type: string
+      op_other: 
+        type: string
+      pc_flag: 
+        type: integer
+        format: int32
+      phy_city: 
+        type: string
+      phy_country: 
+        type: string
+      phy_state: 
+        type: string
+      phy_street: 
+        type: string
+      phy_zip: 
+        type: string
+      private_only: 
+        type: integer
+        format: int32
+      private_passenger_business: 
+        type: integer
+        format: int32
+      private_passenger_nonbusiness: 
+        type: integer
+        format: int32
+      private_property: 
+        type: integer
+        format: int32
+      recent_mileage: 
+        type: string
+      recent_mileage_year: 
+        type: string
+      state_government: 
+        type: integer
+        format: int32
+      telephone: 
+        type: string
+      us_mail: 
+        type: integer
+        format: int32
+      vmt_source_id: 
+        type: string
+    type: object
+    x-restlet:
+      section: PROFILES      
   user:
     properties:
       email:

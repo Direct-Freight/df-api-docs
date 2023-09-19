@@ -43,8 +43,10 @@ post:
           - entry_id df_reference_code quote_amount
         type: object
   responses:
-    '200':
+    '201':
       description: successful operation
+      schema:
+        $ref: '#/definitions/boards_submit_offer_response'
   summary: Submit Driver Offer
   tags:
     - boards
