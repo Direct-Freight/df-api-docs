@@ -1,5 +1,5 @@
 get:
-  description: Gets user specific UUID.
+  description: Get or create a user specific UUID.
   parameters: []
   responses:
     '200':

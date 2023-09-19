@@ -1001,6 +1001,7 @@ paths:
             new_password:
               description: The new password they want it updated to.
               type: string
+          type: object
       responses:
         '201':
           description: Their password was successfuly updated.
@@ -1661,6 +1662,7 @@ paths:
           - private_trucks
           - test_loads
           - test_trucks
+          - olp_network
         in: path
         name: posting_type
         required: true
@@ -3887,8 +3889,8 @@ definitions:
   post_posting_type_action_body:
     properties:
       source_id:
-        description: The posting id of the posting you are moving or copying. Optional for create.
-        type: object
+        description: The posting id of the posting you are moving or copying.
+        type: integer
       source_posting:
         description: Where the items are coming from. Loads can not be moved or copied to trucks and trucks can not be moved or copied to loads.
         type: string
@@ -3904,6 +3906,7 @@ definitions:
         type: string        
     required:
       - source_posting
+      - source_id
     type: object
     x-restlet:
       section: not categorized yet
