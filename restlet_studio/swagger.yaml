@@ -74,7 +74,7 @@ parameters:
     type: string
   posting_type:
     description: 'Valid types are "loads", "trucks", "private_loads", "private_trucks", "test_loads", "test_trucks",
-    "live_loads_temp", "live_trucks_temp", "test_loads_temp", "test_trucks_temp"'
+    "live_loads_temp", "live_trucks_temp", "test_loads_temp", "test_trucks_temp", "olp_network"'
     enum:
       - loads
       - trucks
@@ -82,6 +82,7 @@ parameters:
       - private_trucks
       - test_loads
       - test_trucks
+      - olp_network
     in: path
     name: posting_type
     required: true
@@ -1532,14 +1533,14 @@ paths:
             type: string
           x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
         - name: whoentered 
-          description: Internal usage parameter. Retrieves all postings that match the specified whoenetered.
+          description: STAGE=private Internal usage parameter. Retrieves all postings that match the specified whoentered.
           in: query
           required: false
           type: string
-          x-example: '?whoentered=ZZZ'          
-        - description: Sort results by a certain field.
+          x-example: '?whoentered=ZZZ'    
+        - name: sort_parameter
+          description: Sort results by a certain field.
           in: query
-          name: sort_parameter
           required: false
           type : string
           enum:
@@ -4367,6 +4368,9 @@ definitions:
             - OTHER
           type: string
         type: array
+      username:
+        type: string
+        description: STAGE=private only returned if a whoentered is specified.
       weight:
         description: weight in pounds.
         type: integer
