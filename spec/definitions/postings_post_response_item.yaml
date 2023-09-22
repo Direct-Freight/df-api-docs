@@ -107,6 +107,9 @@ properties:
         - OTHER
       type: string
     type: array
+  username:
+    description: STAGE=private only returned if a whoentered is specified.
+    type: string
   weight:
     description: weight in pounds.
     type: integer
