@@ -3540,7 +3540,13 @@ definitions:
         type: string
       user_id:
         type: integer 
-        description: STAGE=private This is used in the spider code for Parade users.
+        description: STAGE=private This is used for realm users
+      book_now:
+        type: boolean
+        description: STAGE=private This is used for realm users
+      submit_quote:
+        type: boolean 
+        description: STAGE=private This is used for realm users
     type: object
     x-restlet:
       section: END_USER_AUTHENTICATIONS
