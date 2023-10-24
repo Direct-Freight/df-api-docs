@@ -1,10 +1,16 @@
 properties:
+  book_now:
+    description: STAGE=private This is used for realm users
+    type: boolean
   end-user-token:
     description: On success an end-user-token is returned.
     example: XX423ASOEUHT4AESUTH
     type: string
+  submit_quote:
+    description: STAGE=private This is used for realm users
+    type: boolean
   user_id:
-    description: STAGE=private This is used in the spider code for Parade users.
+    description: STAGE=private This is used for realm users
     type: integer
 type: object
 x-restlet:
