@@ -879,7 +879,7 @@ paths:
         '200':
           description: successful operation
           examples:
-            application/json: '{status: "Subscribed"}'
+            application/json: '{status: "Subscribed", nami_label: "default"}'
           schema:
             properties:
               status:
@@ -890,6 +890,10 @@ paths:
                   - overdue
                   - not_logged_in
                 type: string
+              nami_label:
+                description: used internally for in app purchase paywall campaigns 
+                type: string
+                
             type: object
       summary: Get authentication level.
       tags:
