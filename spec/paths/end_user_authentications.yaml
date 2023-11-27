@@ -22,9 +22,12 @@ get:
     '200':
       description: successful operation
       examples:
-        application/json: '{status: "Subscribed"}'
+        application/json: '{status: "Subscribed", nami_label: "default"}'
       schema:
         properties:
+          nami_label:
+            description: used internally for in app purchase paywall campaigns
+            type: string
           status:
             description: Will return the logged in user's status.
             enum:
