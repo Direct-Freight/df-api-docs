@@ -8,6 +8,7 @@ else
     exit
 fi
 git pull
+lynx --source "https://app.swaggerhub.com/apiproxy/registry/jgabriels/Direct_Freight_API/1.0/swagger.yaml?resolved=true&flatten=false&pretty=false" >restlet_studio/swagger.yaml
 git commit -a -m "saving modified files"
 git checkout $TRAVIS_BRANCH
 git remote -v

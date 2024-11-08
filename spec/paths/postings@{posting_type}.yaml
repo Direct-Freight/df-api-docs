@@ -60,8 +60,8 @@ get:
       type: array
       x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
     - description: >-
-        Internal usage parameter. Retrieves all postings that match the
-        specified whoenetered.
+        STAGE=private Internal usage parameter. Retrieves all postings that
+        match the specified whoentered.
       in: query
       name: whoentered
       required: false
