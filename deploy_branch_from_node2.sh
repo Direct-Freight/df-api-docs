@@ -7,10 +7,13 @@ else
     echo "invalid branch '$1'"
     exit
 fi
+source ../set_gh_token.df  #set the GH_TOKEN
+
 git checkout $TRAVIS_BRANCH
 git pull
 lynx --source "https://app.swaggerhub.com/apiproxy/registry/jgabriels/Direct_Freight_API/1.0/swagger.yaml?resolved=true&flatten=false&pretty=false" >restlet_studio/swagger.yaml
 git commit -a -m "saving modified files"
+git push
 git remote -v
 git remote set-url origin https://github.com/Direct-Freight/df-api-docs.git
 git remote -v
