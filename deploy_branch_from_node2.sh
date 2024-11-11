@@ -9,6 +9,7 @@ else
 fi
 source ../set_gh_token.df  #set the GH_TOKEN
 
+/var/www/dfwdbi/api/df-api-docs/scripts/restlet2repo.sh df-api-docs directfreight master 'jon@directfreight.com' restlet2repo
 git checkout $TRAVIS_BRANCH
 git pull
 lynx --source "https://app.swaggerhub.com/apiproxy/registry/jgabriels/Direct_Freight_API/1.0/swagger.yaml?resolved=true&flatten=false&pretty=false" >restlet_studio/swagger.yaml
