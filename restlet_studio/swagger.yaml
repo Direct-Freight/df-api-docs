@@ -2899,13 +2899,13 @@ definitions:
       credit_report_key:
         type: string
         description: |-
-          This field is only returned for an end_user_token that has the subscribed access level.
+          This field is only returned for an end_user_token that has access to credit reports.
 
           To access the credit report associated with the company for this item, use the key returned with the following url. https://www.directfreight.com/home/credit_report?refid=$credit_report_key
       credit_score:
-        type: integer
-        example: 99
-        description: The credit score for the company associated with this item.
+        type: string
+        example: "99"
+        description: The credit score for the company associated with this item.  Returns "XX" or "Upgrade" or "Signup"
       dead_head:
         type: integer
         example: 87
@@ -2972,7 +2972,7 @@ definitions:
       tags:
         type: array
         example: new
-        description: Indicates special characteristics of a load record.  This field may be returned as a blank array.  Currently (new) is the only value that will be returned.
+        description: "Indicates special characteristics of a load record.  This field may be returned as a blank array.  Tags=  new, book_now_or_quote, unviewed"
         items:
           type: string
       trade_orgs:
