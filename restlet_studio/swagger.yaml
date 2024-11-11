@@ -2883,7 +2883,7 @@ definitions:
     properties:
       avg_market_rate:
         type: string
-        description: Average rate for this type of load during the last 28 days.  Returns either $X.XX or "Upgrade" or "Sign Up"
+        description: Average rate for this type of load during the last 28 days.  Returns either "$X.XX" or "Upgrade" or "Sign Up"
       age:
         type: integer
         example: 15
