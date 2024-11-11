@@ -3,6 +3,7 @@ properties:
     type: integer
   list:
     items:
+      properties: {}
       type: object
     type: array
 type: object

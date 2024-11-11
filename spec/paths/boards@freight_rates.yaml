@@ -16,30 +16,30 @@ get:
       name: destination_city
       required: true
       type: string
-    - description: Destination State
+    - description: >-
+        Destination State. If destination_city and destination_state are set to
+        "ANYWHERE", then this endpoint will return an average of freight rates
+        from the origin to all destinations.
       in: query
       name: destination_state
       required: true
       type: string
     - description: >-
-        Start Date. Optional value, must be used in conjunction with end_date.
-        If not specified defaults to today.
+        Must be used in conjunction with end_date. If not specified the most
+        current day's data is used.
+      format: date
       in: query
       name: start_date
       required: false
       type: string
     - description: >-
-        End Date. Optional value, must be used in conjunction with start_date.
-        If not specified defaults to today.
+        Must be used in conjunction with start_date. If not specified the most
+        current day's data is used
+      format: date
       in: query
       name: end_date
       required: false
       type: string
-    - description: 'Only include days with at least this many loads, defaults to 10.'
-      in: query
-      name: min_loads
-      required: false
-      type: number
     - description: >-
         Trailer Type, defaults to "all" if not specied. This option can be
         specified multiple times.
@@ -50,6 +50,7 @@ get:
         - flat
       in: query
       name: trailer_type
+      required: false
       type: string
     - in: header
       name: end-user-token

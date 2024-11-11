@@ -37,22 +37,21 @@ get:
   summary: Retrieve single load
   tags:
     - boards
-parameters:
-  - description: Defines the type of board requested.
-    enum:
-      - loads
-      - trucks
-    in: path
-    name: board_type
-    required: true
-    type: string
-    x-example: loads
 post:
   description: >-
     This is the primary search method for loads and trucks. Please specifify at
     least an origin or destination.  The origin or destination may be state
     only.
   parameters:
+    - description: Defines the type of board requested.
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
+      x-example: loads
     - default: 01234567890abc
       in: header
       name: end-user-token

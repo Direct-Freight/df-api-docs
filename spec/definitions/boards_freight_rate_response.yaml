@@ -1,19 +1,48 @@
+description: >-
+  There is some debug trailer types. They are formatted as
+  TRAILER_TYPE_$subsection. They will most likely be removed at the same time as
+  the below mentioned debug variables.
 properties:
   TRAILER_TYPE:
+    description: >-
+      Currently there is some debug keys that alos exist. Don't rely on these.
+      They will most likely be removed in before Winter 2024.
     properties:
-      dates:
-        items:
-          properties:
-            date:
-              format: date
-              type: string
-            loads:
-              type: integer
-            rate:
-              type: number
-          type: object
-        type: array
+      payrate:
+        description: 'This will return a list of dates, single key of newest_payrate'
+        properties:
+          CURRENT_DATE:
+            format: date
+            type: string
+        type: object
+      payrates_25th:
+        description: 'This will return a list of dates, single key of newest_payrate'
+        properties:
+          CURRENT_DATE:
+            format: date
+            type: string
+        type: object
+      payrates_75th:
+        description: 'This will return a list of dates, single key of newest_payrate'
+        properties:
+          CURRENT_DATE:
+            format: date
+            type: string
+        type: object
+      payrates_max:
+        description: 'This will return a list of dates, single key of newest_payrate'
+        properties:
+          CURRENT_DATE:
+            format: date
+            type: string
+        type: object
+      payrates_min:
+        description: 'This will return a list of dates, single key of newest_payrate'
+        properties:
+          CURRENT_DATE:
+            format: date
+            type: string
+        type: object
     type: object
-type: object
 x-restlet:
   section: BOARDS

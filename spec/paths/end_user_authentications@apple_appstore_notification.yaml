@@ -1,5 +1,8 @@
 post:
-  description: Save the apple notification to mysql  STAGE=private
+  description: >-
+    DEPRECATED Please use the webooks endpoint. Save the apple notification to
+    mysql  STAGE=private
+  parameters: []
   responses:
     '200':
       description: successful operation

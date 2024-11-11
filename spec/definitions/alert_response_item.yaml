@@ -32,22 +32,22 @@ properties:
     description: >-
       The last day the alert will be valid. Valid time frames are from today
       until one year into the future.
-    example: '2019-12-30'
+    example: 2019-12-30T00:00:00.000Z
     format: date
     type: string
   last_modified:
     description: The last time this alert was modified.
-    example: '2019-11-20 10:05:35'
+    example: 2019-11-20T10:05:35.000Z
     format: datetime
     type: string
   last_search:
     description: The last time this alert was used in a boards request.
-    example: '2019-11-20 10:05:35'
+    example: 2019-11-20T10:05:35.000Z
     format: datetime
     type: string
   last_sent:
     description: The last time this alert was sent.
-    example: '2019-11-20 10:05:35'
+    example: 2019-11-20T10:05:35.000Z
     format: datetime
     type: string
   list_type:
@@ -68,7 +68,7 @@ properties:
     type: integer
   previous_search:
     description: The second to last time this alert was used in a boards request.
-    example: '2019-11-20 10:05:35'
+    example: 2019-11-20T10:05:35.000Z
     format: datetime
     type: string
   search:

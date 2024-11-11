@@ -37,7 +37,8 @@ delete:
     - postings/custom_fields
 get:
   parameters:
-    - description: the posting_ids associated with the data you want to get.
+    - collectionFormat: multi
+      description: the posting_ids associated with the data you want to get.
       in: query
       items:
         type: string

@@ -31,7 +31,7 @@ properties:
       today until one year into the future.  This field will accept date only or
       a date and time.  If the date only is submitted the time will default to
       23:59:59
-    example: '2020-01-01 14:30:24'
+    example: 2020-01-01T14:30:24.000Z
     format: date time
     type: string
   item_count:

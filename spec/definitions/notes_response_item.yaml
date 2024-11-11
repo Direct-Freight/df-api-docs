@@ -6,12 +6,12 @@ properties:
     type: string
   date_added:
     description: The date the note was created.
-    example: '2019-08-23'
+    example: 2019-08-23T00:00:00.000Z
     format: date
     type: string
   date_modified:
     description: Date of the last update to this note
-    example: '2019-08-24'
+    example: 2019-08-24T00:00:00.000Z
     format: date
     type: string
   deleted:

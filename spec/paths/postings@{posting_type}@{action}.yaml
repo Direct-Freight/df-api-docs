@@ -1,27 +1,26 @@
-parameters:
-  - description: Where items are being moved or copied to.
-    enum:
-      - loads
-      - trucks
-      - private_loads
-      - private_trucks
-      - test_loads
-      - test_trucks
-      - olp_network
-    in: path
-    name: posting_type
-    required: true
-    type: string
-  - description: Specified in the url.
-    enum:
-      - copy
-      - move
-    in: path
-    name: action
-    required: true
-    type: string
 post:
   parameters:
+    - description: Where items are being moved or copied to.
+      enum:
+        - loads
+        - trucks
+        - private_loads
+        - private_trucks
+        - test_loads
+        - test_trucks
+        - olp_network
+      in: path
+      name: posting_type
+      required: true
+      type: string
+    - description: Specified in the url.
+      enum:
+        - copy
+        - move
+      in: path
+      name: action
+      required: true
+      type: string
     - in: header
       name: end-user-token
       required: true

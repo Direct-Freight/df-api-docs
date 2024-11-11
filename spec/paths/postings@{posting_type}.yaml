@@ -3,6 +3,23 @@ delete:
     Will delete one or more entries. Unless the delete_all parameter is set,
     only 100 entries can be removed per request.
   parameters:
+    - description: Specifies board you are posting to.
+      enum:
+        - loads
+        - trucks
+        - private_loads
+        - private_trucks
+        - test_loads
+        - test_trucks
+        - live_loads_temp
+        - test_loads_temp
+        - live_trucks_temp
+        - test_trucks_temp
+      in: path
+      name: posting_type
+      required: true
+      type: string
+      x-example: test_loads
     - description: >-
         This parameter will be ignored if delete_all is specified, otherwise
         posting_id or custom_id must be specified. The 100 maximum is split
@@ -43,7 +60,25 @@ get:
     retrieves all of their entries. If you specifiy multiple ids, only 100
     entries can be retrieved per request.
   parameters:
-    - description: the posting_ids associated with the data you want to get.
+    - description: Specifies board you are posting to.
+      enum:
+        - loads
+        - trucks
+        - private_loads
+        - private_trucks
+        - test_loads
+        - test_trucks
+        - live_loads_temp
+        - test_loads_temp
+        - live_trucks_temp
+        - test_trucks_temp
+      in: path
+      name: posting_type
+      required: true
+      type: string
+      x-example: test_loads
+    - collectionFormat: multi
+      description: the posting_ids associated with the data you want to get.
       in: query
       items:
         type: integer
@@ -51,7 +86,8 @@ get:
       required: false
       type: array
       x-example: '?posting_id=22&posting_id=23&posting_id=24'
-    - description: To retrieve only a subset of entries.
+    - collectionFormat: multi
+      description: To retrieve only a subset of entries.
       in: query
       items:
         type: string
@@ -103,27 +139,26 @@ get:
   summary: Retrieve multiple postings
   tags:
     - postings
-parameters:
-  - description: Specifies board you are posting to.
-    enum:
-      - loads
-      - trucks
-      - private_loads
-      - private_trucks
-      - test_loads
-      - test_trucks
-      - live_loads_temp
-      - test_loads_temp
-      - live_trucks_temp
-      - test_trucks_temp
-    in: path
-    name: posting_type
-    required: true
-    type: string
-    x-example: test_loads
 patch:
   description: Update one or more entries. Only 100 entries can be updated per request.
   parameters:
+    - description: Specifies board you are posting to.
+      enum:
+        - loads
+        - trucks
+        - private_loads
+        - private_trucks
+        - test_loads
+        - test_trucks
+        - live_loads_temp
+        - test_loads_temp
+        - live_trucks_temp
+        - test_trucks_temp
+      in: path
+      name: posting_type
+      required: true
+      type: string
+      x-example: test_loads
     - in: header
       name: end-user-token
       required: true
@@ -157,6 +192,23 @@ patch:
 post:
   description: Only 100 entries can be created per request.
   parameters:
+    - description: Specifies board you are posting to.
+      enum:
+        - loads
+        - trucks
+        - private_loads
+        - private_trucks
+        - test_loads
+        - test_trucks
+        - live_loads_temp
+        - test_loads_temp
+        - live_trucks_temp
+        - test_trucks_temp
+      in: path
+      name: posting_type
+      required: true
+      type: string
+      x-example: test_loads
     - in: header
       name: end-user-token
       required: true

@@ -6,29 +6,21 @@ properties:
     example: 15
     type: integer
   avg_market_rate:
-    description: Average rate for this type of load during the last 28 days.
-    type: number
+    description: >-
+      Average rate for this type of load during the last 28 days.  Returns
+      either "$X.XX" or "Upgrade" or "Sign Up"
+    type: string
   booking_info:
     description: >-
       Information about booking this load online.  Currently only returned by
       the single load endpoint.
     properties:
-      book_button_action:
-        items:
-          enum:
-            - accept_broker_offer
-            - call
-            - external_browser
-            - internal_browser
-            - update_user_profile
-            - login
-            - upgrade
-          type: string
+      book_button_action: {}
       book_button_data:
         description: >-
-          data associated with the action.   For example a url or a phone
-          number.   Only returned if book_button_action is call,
-          external_browser, or internal_browser
+          data associated with the action. For example a url or a phone number.
+          Only returned if book_button_action is call, external_browser, or
+          internal_browser
         example: 'https://www.truckersearch.com'
         type: string
       book_button_label:
@@ -43,22 +35,12 @@ properties:
       df_reference_code:
         example: tJJB-cQQDh19nkmyOn5xzjfdGSQao3bskaRDzc5r2IaX3_EBROT34pQ~
         type: string
-      quote_button_action:
-        items:
-          enum:
-            - submit_driver_offer
-            - call
-            - external_browser
-            - internal_browser
-            - update_user_profile
-            - login
-            - upgrade
-          type: string
+      quote_button_action: {}
       quote_button_data:
         description: >-
-          data associated with the action.   For example a url or a phone
-          number.   Only returned if quote_button_action is call,
-          external_browser, or internal_browser
+          data associated with the action. For example a url or a phone number.
+          Only returned if quote_button_action is call, external_browser, or
+          internal_browser
         example: 'https://www.truckersearch.com'
         type: string
       quote_button_label:
@@ -169,20 +151,20 @@ properties:
       This field is only returned for an end_user_token that has the subscribed
       access level.
     example: 555-555-5555
-    type: integer
+    type: string
   rate_per_mile_est:
     description: Rate per mile estimate
     example: 1.5
     type: number
   receive_date:
-    example: '2018-09-24'
+    example: 2018-09-24T00:00:00.000Z
     format: date
     type: string
   ship_date:
     description: >-
       The date the load is scheduled to be picked up.  For trucks this is the
       date the truck is available.
-    example: '2018-09-20'
+    example: 2018-09-20T00:00:00.000Z
     format: date
     type: string
   stops:

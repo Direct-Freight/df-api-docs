@@ -19,7 +19,7 @@ example:
     - MO
   page_number: 1
   ship_date:
-    - '2020-05-06'
+    - 2020-05-06T00:00:00.000Z
   sort_direction: asc
   sort_parameter: age
   trailer_type:

@@ -16,6 +16,7 @@ properties:
         - no_text
         - url_direct_book
         - url_details
+        - no_call_unverified
       type: string
     type: array
   comment:

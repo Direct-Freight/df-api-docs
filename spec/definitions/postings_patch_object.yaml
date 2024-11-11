@@ -18,8 +18,8 @@ example:
   pay_rate: 11
   phone_extension: 777
   phone_number: 777777777
-  receive_date: '2020-05-07'
-  ship_date: '2020-05-06'
+  receive_date: 2020-05-07T00:00:00.000Z
+  ship_date: 2020-05-06T00:00:00.000Z
   trailer_type:
     - V+V
   weight: 1100
@@ -42,6 +42,7 @@ properties:
         - no_text
         - url_direct_book
         - url_details
+        - no_call_unverified
       type: string
     type: array
   booking_partner:
@@ -49,13 +50,6 @@ properties:
     type: string
   category:
     description: 'This option only applies to "private_loads", "private_trucks"'
-    items:
-      enum:
-        - in_route
-        - template
-        - pending
-        - delivered
-      type: string
     type: string
   comment:
     type: string
@@ -118,8 +112,9 @@ properties:
   phone_number:
     description: >-
       If not provided we will use the contact info associated with the users
-      profile.
-    type: integer
+      profile. Can be a string such as "Online Only", "View Details" depending
+      on the load and the account type.
+    type: string
   posting_id:
     description: |-
       A unique id for each entry.  This value is returned via GET. 

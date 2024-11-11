@@ -7,6 +7,7 @@ post:
       type: string
     - in: body
       name: body
+      required: false
       schema:
         properties:
           df_reference_code:
@@ -15,8 +16,6 @@ post:
           entry_id:
             description: 32 character entry id
             type: string
-        required:
-          - entry_id df_reference_code
         type: object
   responses:
     '201':

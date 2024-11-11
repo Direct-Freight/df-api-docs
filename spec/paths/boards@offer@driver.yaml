@@ -28,6 +28,7 @@ post:
       type: string
     - in: body
       name: body
+      required: false
       schema:
         properties:
           df_reference_code:
@@ -39,8 +40,6 @@ post:
           quote_amount:
             description: The amount offered by the driver to transport this load.
             type: number
-        required:
-          - entry_id df_reference_code quote_amount
         type: object
   responses:
     '201':

@@ -9,9 +9,9 @@ properties:
       status:
         type: integer
     required:
-      - status
-      - posting_id
       - message
+      - posting_id
+      - status
     type: object
 type: object
 x-restlet:

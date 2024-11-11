@@ -18,7 +18,8 @@ delete:
 get:
   description: Get notes that this user has written.
   parameters:
-    - description: 'Optionally just check if certain loads have notes associated with them. '
+    - collectionFormat: multi
+      description: 'Optionally just check if certain loads have notes associated with them. '
       in: query
       items:
         type: string

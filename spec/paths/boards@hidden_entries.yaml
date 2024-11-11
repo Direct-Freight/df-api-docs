@@ -1,7 +1,8 @@
 delete:
   description: ' Mark an entry as unhidden.'
   parameters:
-    - in: query
+    - collectionFormat: multi
+      in: query
       items:
         type: string
       name: entry_id
@@ -20,7 +21,8 @@ delete:
 get:
   description: Get a list of entries that should be hidden.
   parameters:
-    - description: A list of id's to check if any should be visually hidden.
+    - collectionFormat: multi
+      description: A list of id's to check if any should be visually hidden.
       in: query
       items:
         type: string

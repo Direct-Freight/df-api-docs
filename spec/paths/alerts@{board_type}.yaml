@@ -1,6 +1,15 @@
 delete:
   parameters:
-    - description: Specify to just delete some alerts.
+    - description: 'Valid types are "loads", and "trucks".'
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
+    - collectionFormat: multi
+      description: Specify to just delete some alerts.
       in: query
       items:
         type: string
@@ -22,7 +31,16 @@ get:
     Get a list of alerts. You can optionally limit the list by specifcying
     alerts by their alert_id. Returns 50 alerts by default.
   parameters:
-    - description: >-
+    - description: 'Valid types are "loads", and "trucks".'
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
+    - collectionFormat: multi
+      description: >-
         only get a subset of alerts. As this is a get request this is specified
         as a query string parameter.
       in: query
@@ -48,20 +66,19 @@ get:
   summary: STAGE=UNKNOWN Retrieve alerts.
   tags:
     - alerts
-parameters:
-  - description: 'Valid types are "loads", and "trucks".'
-    enum:
-      - loads
-      - trucks
-    in: path
-    name: board_type
-    required: true
-    type: string
 patch:
   description: >-
     Search objects are set at creation. You cannot modify them after the alert
     has been created.
   parameters:
+    - description: 'Valid types are "loads", and "trucks".'
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
     - in: header
       name: end-user-token
       required: true
@@ -86,6 +103,14 @@ post:
     defined here and is also defined on the boards POST action, follows the same
     rules.
   parameters:
+    - description: 'Valid types are "loads", and "trucks".'
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
     - in: header
       name: end-user-token
       required: true

@@ -19,7 +19,8 @@ delete:
 get:
   description: Get a list of companies that should be hidden.
   parameters:
-    - description: >-
+    - collectionFormat: multi
+      description: >-
         A list of company names to check if any should be visually hidden.  If
         this field is blank all hidden companies will be returned.
       in: query

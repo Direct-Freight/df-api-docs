@@ -167,7 +167,6 @@ properties:
         description: Retrieved from user profile.
         type: integer
       miles_per_gal:
-        default: 33
         description: Retrieved from user profile.
         type: integer
       truck_ownership_per_mile:
