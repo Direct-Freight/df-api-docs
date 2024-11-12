@@ -34,6 +34,10 @@ get:
       name: limit
       required: false
       type: number
+    - in: query
+      name: requesting_page
+      required: false
+      type: string
   responses:
     '200':
       description: successful operation
