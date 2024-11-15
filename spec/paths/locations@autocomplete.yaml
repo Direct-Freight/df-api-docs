@@ -23,6 +23,14 @@ get:
       name: return_only
       required: false
       type: string
+    - description: Specify the page that is calling this endpoint.
+      enum:
+        - mileage_calculator
+        - freight_rates
+      in: query
+      name: requesting_page
+      required: false
+      type: string
     - default: 100
       description: >-
         The number of records to return.   Limit 1 has a special property where
@@ -34,10 +42,6 @@ get:
       name: limit
       required: false
       type: number
-    - in: query
-      name: requesting_page
-      required: false
-      type: string
   responses:
     '200':
       description: successful operation

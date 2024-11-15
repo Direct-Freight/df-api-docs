@@ -25,11 +25,19 @@ get:
         application/json: '{status: "Subscribed", nami_label: "default"}'
       schema:
         properties:
+          abilities:
+            items:
+              type: string
+            type: array
           nami_label:
             description: used internally for in app purchase paywall campaigns
             type: string
+          roles:
+            items:
+              type: string
+            type: array
           status:
-            description: Will return the logged in user's status.
+            description: Will return the logged in user's status.  (deprecated)
             enum:
               - subscribed
               - posting
