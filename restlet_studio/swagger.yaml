@@ -821,7 +821,7 @@ paths:
             properties:
               status:
                 type: string
-                description: Will return the logged in user's status.
+                description: Will return the logged in user's status.  (deprecated)
                 enum:
                 - subscribed
                 - posting
@@ -830,6 +830,14 @@ paths:
               nami_label:
                 type: string
                 description: used internally for in app purchase paywall campaigns
+              roles:
+                type: array
+                items:
+                  type: string
+              abilities:
+                type: array
+                items:
+                  type: string
     post:
       tags:
       - end_user_authentications
@@ -1091,6 +1099,14 @@ paths:
         enum:
         - cities
         - regions
+      - name: requesting_page
+        in: query
+        description: Specify the page that is calling this endpoint.
+        required: false
+        type: string
+        enum:
+        - mileage_calculator
+        - freight_rates
       - name: limit
         in: query
         description: The number of records to return.   Limit 1 has a special property where it will only return a high confidence match so it may return zero results if no match found.
@@ -1099,10 +1115,6 @@ paths:
         default: 100.0
         maximum: 100
         minimum: 1
-      - name: requesting_page
-        in: query
-        required: false
-        type: string
       responses:
         "200":
           description: successful operation
