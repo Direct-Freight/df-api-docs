@@ -814,11 +814,11 @@ paths:
     post:
       tags:
       - end_user_authentications
-      summary: Create a new user.
+      summary: Link Sub Account.
       parameters:
       - name: user_id
         in: query
-        description: The user_id to invite into the sub_account.
+        description: The user_id to link with the sub_account.
         required: true
         type: integer
         x-example: ?user_id=1&user_id=2
@@ -838,17 +838,17 @@ paths:
     delete:
       tags:
       - end_user_authentications
-      summary: Deletes requested user_ids from sub account.
+      summary: Unlink requested user_ids from sub account.
       parameters:
       - name: user_id
         in: query
-        description: The user_id to delete from the sub_account.
+        description: The user_id to unlink from the sub_account.
         required: true
         type: integer
         x-example: ?user_id=1&user_id=2
       responses:
         "204":
-          description: Will not return content on a successful logout.
+          description: Will not return content on a successful deletion.
     x-restlet:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications:
@@ -2680,24 +2680,46 @@ definitions:
         items:
           type: object
           properties:
-            additional_user_id:
+            id:
               type: integer
               description: The ID of the additional user.
             status:
               type: string
               description: The status of the sub-account.
+            contact_name:
+              type: string
+            dispatch_number:
+              type: string
+            mc_number:
+              type: string
+            dot_number:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+      subscriptions_purchased:
+        type: integer
+        description: Number of licenses purchased.
+      active_sub_accounts:
+        type: integer
+        description: Number of licenses used.
     example: |-
       {
-          "sub_accounts": [
-              {
-                  "additional_user_id": 1234,
-                  "status": "invited"
-              },
-              {
-                  "additional_user_id": 2456,
-                  "status": "invited"
-              }
-          ]
+        "sub_accounts": [
+          {
+            "id": 1234,
+            "status": "invited",
+            "contact_name": "...",
+            "dispatch_number": "(123) 123-4567",
+            "mc_number": "12312312",
+            "dot_number": "45645645",
+            "username": "...",
+            "email": "user@domain.com"
+          }
+        ],
+        "subscriptions_purchased": 5,
+        "active_sub_accounts": 3
       }
     x-restlet:
       section: LOCATIONS
