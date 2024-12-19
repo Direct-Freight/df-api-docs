@@ -800,6 +800,57 @@ paths:
           description: Will not return content on a successful logout.
     x-restlet:
       section: END_USER_AUTHENTICATIONS
+  /end_user_authentications/sub_accounts:
+    get:
+      tags:
+      - end_user_authentications
+      description: Get sub account users
+      parameters: []
+      responses:
+        "200":
+          description: Sub account users
+          schema:
+            $ref: '#/definitions/sub_account_response'
+    post:
+      tags:
+      - end_user_authentications
+      summary: Create a new user.
+      parameters:
+      - name: user_id
+        in: query
+        description: The user_id to invite into the sub_account.
+        required: true
+        type: integer
+        x-example: ?user_id=1&user_id=2
+      responses:
+        "201":
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Sub account users created.
+        "422":
+          description: Unprocessable Entity. More information provided in the return object.
+          schema:
+            $ref: '#/definitions/error_object'
+    delete:
+      tags:
+      - end_user_authentications
+      summary: Deletes requested user_ids from sub account.
+      parameters:
+      - name: user_id
+        in: query
+        description: The user_id to delete from the sub_account.
+        required: true
+        type: integer
+        x-example: ?user_id=1&user_id=2
+      responses:
+        "204":
+          description: Will not return content on a successful logout.
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
   /end_user_authentications:
     get:
       tags:
@@ -2618,6 +2669,35 @@ definitions:
         "city": "city",
         "state_abbreviation": "{}",
         "state_name": "{}"
+      }
+    x-restlet:
+      section: LOCATIONS
+  sub_account_response:
+    type: object
+    properties:
+      sub_accounts:
+        type: array
+        items:
+          type: object
+          properties:
+            additional_user_id:
+              type: integer
+              description: The ID of the additional user.
+            status:
+              type: string
+              description: The status of the sub-account.
+    example: |-
+      {
+          "sub_accounts": [
+              {
+                  "additional_user_id": 1234,
+                  "status": "invited"
+              },
+              {
+                  "additional_user_id": 2456,
+                  "status": "invited"
+              }
+          ]
       }
     x-restlet:
       section: LOCATIONS
