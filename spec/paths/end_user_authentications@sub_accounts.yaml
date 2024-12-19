@@ -1,0 +1,48 @@
+delete:
+  parameters:
+    - description: The user_id to delete from the sub_account.
+      in: query
+      name: user_id
+      required: true
+      type: integer
+      x-example: '?user_id=1&user_id=2'
+  responses:
+    '204':
+      description: Will not return content on a successful logout.
+  summary: Deletes requested user_ids from sub account.
+  tags:
+    - end_user_authentications
+get:
+  description: Get sub account users
+  parameters: []
+  responses:
+    '200':
+      description: Sub account users
+      schema:
+        $ref: '#/definitions/sub_account_response'
+  tags:
+    - end_user_authentications
+post:
+  parameters:
+    - description: The user_id to invite into the sub_account.
+      in: query
+      name: user_id
+      required: true
+      type: integer
+      x-example: '?user_id=1&user_id=2'
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        properties:
+          message:
+            description: Sub account users created.
+            type: string
+        type: object
+    '422':
+      $ref: '#/responses/error_422'
+  summary: Create a new user.
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

@@ -1,0 +1,28 @@
+example: |-
+  {
+      "sub_accounts": [
+          {
+              "additional_user_id": 1234,
+              "status": "invited"
+          },
+          {
+              "additional_user_id": 2456,
+              "status": "invited"
+          }
+      ]
+  }
+properties:
+  sub_accounts:
+    items:
+      properties:
+        additional_user_id:
+          description: The ID of the additional user.
+          type: integer
+        status:
+          description: The status of the sub-account.
+          type: string
+      type: object
+    type: array
+type: object
+x-restlet:
+  section: LOCATIONS
