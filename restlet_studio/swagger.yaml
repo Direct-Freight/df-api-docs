@@ -818,10 +818,16 @@ paths:
       parameters:
       - name: user_id
         in: query
-        description: The user_id to link with the sub_account.
-        required: true
+        description: The user_id to link with the sub_account. You can use either user ID or Email to link.
+        required: false
         type: integer
         x-example: ?user_id=1&user_id=2
+      - name: email
+        in: query
+        description: The email address to link with the sub_account. You can use either user ID or Email to link.
+        required: false
+        type: integer
+        x-example: ?email=user1@domain.com&email=user2@domain.com
       responses:
         "201":
           description: successful operation
@@ -830,7 +836,7 @@ paths:
             properties:
               message:
                 type: string
-                description: Sub account users created.
+                description: Sub account users linked to primary account.
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
@@ -846,6 +852,135 @@ paths:
         required: true
         type: integer
         x-example: ?user_id=1&user_id=2
+      - name: email
+        in: query
+        description: The email to unlink from the sub_account.
+        required: true
+        type: integer
+        x-example: ?email=foo@bar.com&email=bar@foo.com
+      responses:
+        "204":
+          description: Will not return content on a successful deletion.
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
+  /end_user_authentications/departments:
+    get:
+      tags:
+      - end_user_authentications
+      description: Get departments
+      parameters: []
+      responses:
+        "200":
+          description: Get departments
+          schema:
+            $ref: '#/definitions/departments_response'
+    post:
+      tags:
+      - end_user_authentications
+      summary: Create department.
+      parameters:
+      - name: name
+        in: query
+        description: The name of the department to create.
+        required: true
+        type: string
+        x-example: ?name=West-Coast&name=East-Coast
+      responses:
+        "201":
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Department created.
+        "422":
+          description: Unprocessable Entity. More information provided in the return object.
+          schema:
+            $ref: '#/definitions/error_object'
+    delete:
+      tags:
+      - end_user_authentications
+      summary: Delete requested department ids.
+      parameters:
+      - name: department_id
+        in: query
+        description: The department_id to delete.
+        required: true
+        type: integer
+        x-example: ?department_id=1&department_id=2
+      responses:
+        "204":
+          description: Will not return content on a successful deletion.
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
+  /end_user_authentications/departments/{department_id}:
+    get:
+      tags:
+      - end_user_authentications
+      description: Get departments users
+      parameters:
+      - name: department_id
+        in: path
+        description: Department ID
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: Get departments users
+          schema:
+            $ref: '#/definitions/department_users_response'
+    post:
+      tags:
+      - end_user_authentications
+      summary: Create department user.
+      parameters:
+      - name: user_id
+        in: query
+        description: The User ID to link to the department.
+        required: true
+        type: string
+        x-example: ?user_id=1&user_id=2
+      - name: department_id
+        in: path
+        description: Department ID
+        required: true
+        type: integer
+      responses:
+        "201":
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Department user created.
+        "422":
+          description: Unprocessable Entity. More information provided in the return object.
+          schema:
+            $ref: '#/definitions/error_object'
+    delete:
+      tags:
+      - end_user_authentications
+      summary: Delete requested User ID from department.
+      parameters:
+      - name: user_id
+        in: query
+        description: The User ID to delete.
+        required: true
+        type: integer
+        x-example: ?user_id=1&user_id=2
+      - name: email
+        in: query
+        description: The email to unlink from the department.
+        required: true
+        type: integer
+        x-example: ?email=foo@bar.com&email=bar@foo.com
+      - name: department_id
+        in: path
+        description: Department ID
+        required: true
+        type: integer
       responses:
         "204":
           description: Will not return content on a successful deletion.
@@ -1543,6 +1678,15 @@ paths:
           type: integer
         collectionFormat: multi
         x-example: ?posting_id=22&posting_id=23&posting_id=24
+      - name: department_id
+        in: query
+        description: Only get loads from these department IDs.
+        required: false
+        type: array
+        items:
+          type: integer
+        collectionFormat: multi
+        x-example: ?department_id=22&department_id=23&department_id=24
       - name: custom_id
         in: query
         description: To retrieve only a subset of entries.
@@ -2698,6 +2842,10 @@ definitions:
               type: string
             email:
               type: string
+            department_id:
+              type: integer
+            department_name:
+              type: string
       subscriptions_purchased:
         type: integer
         description: Number of licenses purchased.
@@ -2715,14 +2863,84 @@ definitions:
             "mc_number": "12312312",
             "dot_number": "45645645",
             "username": "...",
-            "email": "user@domain.com"
+            "email": "user@domain.com",
+            "department_id": 5,
+            "department_name": "West Coast"
           }
         ],
         "subscriptions_purchased": 5,
         "active_sub_accounts": 3
       }
     x-restlet:
-      section: LOCATIONS
+      section: END_USER_AUTHENTICATIONS
+  departments_response:
+    type: object
+    properties:
+      departments:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the department.
+            name:
+              type: string
+              description: The name of the department.
+    example: |-
+      {
+          "departments": [
+              {
+                  "id": 8,
+                  "name": "West Coast"
+              }
+          ]
+      }
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
+  department_users_response:
+    type: object
+    properties:
+      sub_accounts:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the department user.
+            access_level:
+              type: string
+              description: The access_level of the user.
+            contact_name:
+              type: string
+            dispatch_number:
+              type: string
+            mc_number:
+              type: string
+            dot_number:
+              type: string
+            username:
+              type: string
+            email:
+              type: string
+    example: |-
+      {
+        "department_users": [
+          {
+            "id": 1234,
+            "access_level": "read-only",
+            "contact_name": "...",
+            "dispatch_number": "(123) 123-4567",
+            "mc_number": "12312312",
+            "dot_number": "45645645",
+            "username": "...",
+            "email": "user@domain.com"
+          }
+        ]
+      }
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
   board_request:
     type: object
     properties:
