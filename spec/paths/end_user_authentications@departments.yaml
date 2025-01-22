@@ -1,0 +1,48 @@
+delete:
+  parameters:
+    - description: The department_id to delete.
+      in: query
+      name: department_id
+      required: true
+      type: integer
+      x-example: '?department_id=1&department_id=2'
+  responses:
+    '204':
+      description: Will not return content on a successful deletion.
+  summary: Delete requested department ids.
+  tags:
+    - end_user_authentications
+get:
+  description: Get departments
+  parameters: []
+  responses:
+    '200':
+      description: Get departments
+      schema:
+        $ref: '#/definitions/departments_response'
+  tags:
+    - end_user_authentications
+post:
+  parameters:
+    - description: The name of the department to create.
+      in: query
+      name: name
+      required: true
+      type: string
+      x-example: '?name=West-Coast&name=East-Coast'
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        properties:
+          message:
+            description: Department created.
+            type: string
+        type: object
+    '422':
+      $ref: '#/responses/error_422'
+  summary: Create department.
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

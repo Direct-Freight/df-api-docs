@@ -1,34 +1,26 @@
 example: |-
   {
-    "sub_accounts": [
+    "department_users": [
       {
         "id": 1234,
-        "status": "invited",
+        "access_level": "read-only",
         "contact_name": "...",
         "dispatch_number": "(123) 123-4567",
         "mc_number": "12312312",
         "dot_number": "45645645",
         "username": "...",
-        "email": "user@domain.com",
-        "department_id": 5,
-        "department_name": "West Coast"
+        "email": "user@domain.com"
       }
-    ],
-    "subscriptions_purchased": 5,
-    "active_sub_accounts": 3
+    ]
   }
 properties:
-  active_sub_accounts:
-    description: Number of licenses used.
-    type: integer
   sub_accounts:
     items:
       properties:
-        contact_name:
+        access_level:
+          description: The access_level of the user.
           type: string
-        department_id:
-          type: integer
-        department_name:
+        contact_name:
           type: string
         dispatch_number:
           type: string
@@ -37,20 +29,14 @@ properties:
         email:
           type: string
         id:
-          description: The ID of the additional user.
+          description: The ID of the department user.
           type: integer
         mc_number:
-          type: string
-        status:
-          description: The status of the sub-account.
           type: string
         username:
           type: string
       type: object
     type: array
-  subscriptions_purchased:
-    description: Number of licenses purchased.
-    type: integer
 type: object
 x-restlet:
   section: END_USER_AUTHENTICATIONS

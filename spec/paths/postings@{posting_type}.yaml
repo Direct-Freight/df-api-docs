@@ -87,6 +87,15 @@ get:
       type: array
       x-example: '?posting_id=22&posting_id=23&posting_id=24'
     - collectionFormat: multi
+      description: Only get loads from these department IDs.
+      in: query
+      items:
+        type: integer
+      name: department_id
+      required: false
+      type: array
+      x-example: '?department_id=22&department_id=23&department_id=24'
+    - collectionFormat: multi
       description: To retrieve only a subset of entries.
       in: query
       items:
