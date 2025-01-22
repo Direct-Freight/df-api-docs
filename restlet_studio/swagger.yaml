@@ -938,9 +938,15 @@ paths:
       - name: user_id
         in: query
         description: The User ID to link to the department.
-        required: true
+        required: false
         type: string
         x-example: ?user_id=1&user_id=2
+      - name: email
+        in: query
+        description: The email to add to the department.
+        required: false
+        type: integer
+        x-example: ?email=foo@bar.com&email=bar@foo.com
       - name: department_id
         in: path
         description: Department ID
