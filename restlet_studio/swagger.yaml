@@ -1677,13 +1677,22 @@ paths:
         - test_trucks_temp
       - name: posting_id
         in: query
-        description: the posting_ids associated with the data you want to get.
+        description: To retrieve only a subset of entries owned by the user specify one or more posting_id(s) or custom_id(s).
         required: false
         type: array
         items:
           type: integer
         collectionFormat: multi
         x-example: ?posting_id=22&posting_id=23&posting_id=24
+      - name: custom_id
+        in: query
+        description: To retrieve only a subset of entries owned by the user specify one or more posting_id(s) or custom_id(s).
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+        x-example: ?custom_id=cats&custom_id=dogs&custom_id=parrots
       - name: department_id
         in: query
         description: Only get loads from these department IDs.
@@ -1693,18 +1702,9 @@ paths:
           type: integer
         collectionFormat: multi
         x-example: ?department_id=22&department_id=23&department_id=24
-      - name: custom_id
-        in: query
-        description: To retrieve only a subset of entries.
-        required: false
-        type: array
-        items:
-          type: string
-        collectionFormat: multi
-        x-example: ?custom_id=cats&custom_id=dogs&custom_id=parrots
       - name: whoentered
         in: query
-        description: STAGE=private Internal usage parameter. Retrieves all postings that match the specified whoentered.
+        description: STAGE=PRIVATE Internal use only.  Retrieves all postings that match the specified whoentered.
         required: false
         type: string
         x-example: ?whoentered=ZZZ
@@ -3306,6 +3306,10 @@ definitions:
         type: string
         format: date
         example: 2018-09-24
+      results_book_button_label:
+        type: string
+      results_book_button_color:
+        type: string
       ship_date:
         type: string
         format: date
