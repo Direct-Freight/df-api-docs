@@ -3085,7 +3085,7 @@ definitions:
         description: "STAGE=PRIVATE Google ReCAPTCHA score, for logging purposes. This field is optional. Should be a decimal number between 0 and 1."
       tier:
         type: string
-        description: "This field is an optional filter that limits board response to 'free' or 'premium' loads. If this field is not specified it defaults to 'all' loads.\nfree loads - are loads that are more than 2 hours old. contact information and comments are visible even if this request comes from an unsubscribed account.\npremium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.   "
+        description: "STAGE=PRIVATE  DEPRECATED  This field is an optional filter that limits board response to 'free' or 'premium' loads. If this field is not specified it defaults to 'all' loads.\nfree loads - are loads that are more than 2 hours old. contact information and comments are visible even if this request comes from an unsubscribed account.\npremium loads - loads that are less than 2 hours old. contact information and comments are only visible for premium accounts.   "
         enum:
         - all
         - free
