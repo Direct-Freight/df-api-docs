@@ -162,6 +162,10 @@ properties:
     example: 2018-09-24T00:00:00.000Z
     format: date
     type: string
+  results_book_button_color:
+    type: string
+  results_book_button_label:
+    type: string
   ship_date:
     description: >-
       The date the load is scheduled to be picked up.  For trucks this is the

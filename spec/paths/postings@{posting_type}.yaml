@@ -78,7 +78,9 @@ get:
       type: string
       x-example: test_loads
     - collectionFormat: multi
-      description: the posting_ids associated with the data you want to get.
+      description: >-
+        To retrieve only a subset of entries owned by the user specify one or
+        more posting_id(s) or custom_id(s).
       in: query
       items:
         type: integer
@@ -86,6 +88,17 @@ get:
       required: false
       type: array
       x-example: '?posting_id=22&posting_id=23&posting_id=24'
+    - collectionFormat: multi
+      description: >-
+        To retrieve only a subset of entries owned by the user specify one or
+        more posting_id(s) or custom_id(s).
+      in: query
+      items:
+        type: string
+      name: custom_id
+      required: false
+      type: array
+      x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
     - collectionFormat: multi
       description: Only get loads from these department IDs.
       in: query
@@ -95,18 +108,9 @@ get:
       required: false
       type: array
       x-example: '?department_id=22&department_id=23&department_id=24'
-    - collectionFormat: multi
-      description: To retrieve only a subset of entries.
-      in: query
-      items:
-        type: string
-      name: custom_id
-      required: false
-      type: array
-      x-example: '?custom_id=cats&custom_id=dogs&custom_id=parrots'
     - description: >-
-        STAGE=private Internal usage parameter. Retrieves all postings that
-        match the specified whoentered.
+        STAGE=PRIVATE Internal use only.  Retrieves all postings that match the
+        specified whoentered.
       in: query
       name: whoentered
       required: false
