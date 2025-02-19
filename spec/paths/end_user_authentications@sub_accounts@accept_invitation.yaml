@@ -1,0 +1,12 @@
+get:
+  description: Get sub account users
+  parameters: []
+  responses:
+    '200':
+      description: Sub account users
+      schema:
+        $ref: '#/definitions/sub_account_response'
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

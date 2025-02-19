@@ -31,16 +31,16 @@ get:
 post:
   parameters:
     - description: >-
-        The user_id to link with the sub_account. You can use either user ID or
-        Email to link.
+        The user_id to invite into the sub_account. You can use either user ID
+        or Email to link.
       in: query
       name: user_id
       required: false
       type: integer
       x-example: '?user_id=1&user_id=2'
     - description: >-
-        The email address to link with the sub_account. You can use either user
-        ID or Email to link.
+        The email address to invite into the sub_account. You can use either
+        user ID or Email to link.
       in: query
       name: email
       required: false
@@ -52,12 +52,12 @@ post:
       schema:
         properties:
           message:
-            description: Sub account users linked to primary account.
+            description: Sub account users invited into primary account.
             type: string
         type: object
     '422':
       $ref: '#/responses/error_422'
-  summary: Link Sub Account.
+  summary: Invite Sub Account User.
   tags:
     - end_user_authentications
 x-restlet:
