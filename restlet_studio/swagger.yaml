@@ -867,13 +867,17 @@ paths:
     get:
       tags:
       - end_user_authentications
-      description: Get sub account users
+      description: Accept sub-account invitation
       parameters: []
       responses:
-        "200":
-          description: Sub account users
+        "201":
+          description: successful operation
           schema:
-            $ref: '#/definitions/sub_account_response'
+            type: object
+            properties:
+              message:
+                type: string
+                description: Sub-account invitation accepted successfully.
     x-restlet:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications/departments:
@@ -1708,13 +1712,13 @@ paths:
         x-example: ?custom_id=cats&custom_id=dogs&custom_id=parrots
       - name: department_id
         in: query
-        description: Only get loads from these department IDs.
+        description: "Only get loads from these department IDs. department_id can also be \"all\", to get loads of all departments under your main account. If no deparment_id is specified, the default is to return just the logged in users' postings."
         required: false
         type: array
         items:
           type: integer
         collectionFormat: multi
-        x-example: ?department_id=22&department_id=23&department_id=24
+        x-example: ?department_id=22&department_id=23&department_id=24 or department_id=all
       - name: whoentered
         in: query
         description: STAGE=PRIVATE Internal use only.  Retrieves all postings that match the specified whoentered.
