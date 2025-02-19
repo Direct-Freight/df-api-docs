@@ -1,11 +1,15 @@
 get:
-  description: Get sub account users
+  description: Accept sub-account invitation
   parameters: []
   responses:
-    '200':
-      description: Sub account users
+    '201':
+      description: successful operation
       schema:
-        $ref: '#/definitions/sub_account_response'
+        properties:
+          message:
+            description: Sub-account invitation accepted successfully.
+            type: string
+        type: object
   tags:
     - end_user_authentications
 x-restlet:
