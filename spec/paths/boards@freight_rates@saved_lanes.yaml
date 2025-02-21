@@ -1,0 +1,68 @@
+delete:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: query
+      name: lane_id
+      required: true
+      type: integer
+  responses:
+    '204':
+      description: Will not have a return body.
+  summary: Remove a Saved lane
+  tags:
+    - boards
+get:
+  description: Get all saved lanes for logged in user.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Will return an object containing a list of saved lanes.
+      schema:
+        $ref: '#/definitions/boards_saved_lanes_response'
+  tags:
+    - boards
+post:
+  description: Save a lane.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: false
+      schema:
+        properties:
+          destinaition_city:
+            description: A valid city or INBOUND
+            type: string
+          destination_state:
+            description: A valid State abbrevitaino or blank when using INBOUND.
+            type: string
+          origin_city:
+            description: A valid city or OUTBOUND
+            type: string
+          origin_state:
+            description: A valid State abbrevitaino or blank when using OUTBOUND.
+            type: string
+        required:
+          - destination_state
+          - origin_city
+          - origin_state
+        type: object
+  responses:
+    '200':
+      description: Will return an object containing a list of saved lanes.
+      schema:
+        $ref: '#/definitions/boards_saved_lanes_response'
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS
