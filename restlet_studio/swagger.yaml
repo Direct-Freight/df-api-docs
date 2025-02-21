@@ -659,6 +659,75 @@ paths:
             $ref: '#/definitions/boards_freight_rate_response'
     x-restlet:
       section: BOARDS
+  /boards/freight_rates/saved_lanes:
+    get:
+      tags:
+      - boards
+      description: Get all saved lanes for logged in user.
+      parameters:
+      - name: end-user-token
+        in: header
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Will return an object containing a list of saved lanes.
+          schema:
+            $ref: '#/definitions/boards_saved_lanes_response'
+    post:
+      tags:
+      - boards
+      description: Save a lane.
+      parameters:
+      - name: end-user-token
+        in: header
+        required: true
+        type: string
+      - in: body
+        name: body
+        required: false
+        schema:
+          type: object
+          required:
+          - destination_state
+          - origin_city
+          - origin_state
+          properties:
+            origin_city:
+              type: string
+              description: A valid city or OUTBOUND
+            origin_state:
+              type: string
+              description: A valid State abbrevitaino or blank when using OUTBOUND.
+            destinaition_city:
+              type: string
+              description: A valid city or INBOUND
+            destination_state:
+              type: string
+              description: A valid State abbrevitaino or blank when using INBOUND.
+      responses:
+        "200":
+          description: Will return an object containing a list of saved lanes.
+          schema:
+            $ref: '#/definitions/boards_saved_lanes_response'
+    delete:
+      tags:
+      - boards
+      summary: Remove a Saved lane
+      parameters:
+      - name: end-user-token
+        in: header
+        required: true
+        type: string
+      - name: lane_id
+        in: query
+        required: true
+        type: integer
+      responses:
+        "204":
+          description: Will not have a return body.
+    x-restlet:
+      section: BOARDS
   /boards/offer/driver/accept_broker_offer:
     post:
       tags:
@@ -3633,6 +3702,62 @@ definitions:
                 type: string
                 format: date
     description: There is some debug trailer types. They are formatted as TRAILER_TYPE_$subsection. They will most likely be removed at the same time as the below mentioned debug variables.
+    x-restlet:
+      section: BOARDS
+  boards_saved_lanes_response:
+    properties:
+      list:
+        type: object
+        properties:
+          payrate:
+            type: object
+            description: "This will return a list of dates, single key of newest_payrate"
+            properties:
+              lane_id:
+                type: integer
+              origin_city:
+                type: string
+              origin_state:
+                type: string
+              destination_city:
+                type: string
+              destination_state:
+                type: string
+              origin_metro_id:
+                type: integer
+              destination_metro_id:
+                type: integer
+              distance:
+                type: integer
+              van_per_mile:
+                type: number
+              van_gross:
+                type: number
+              flat_per_mile:
+                type: number
+              flat_gross:
+                type: number
+              reefer_per_mile:
+                type: number
+              reefer_gross:
+                type: number
+    description: Each saved lane entry is a key/value object in the list.
+    example:
+      list:
+      - lane_id: 123
+        origin_city: Dallas
+        origin_state: TX
+        origin_metro_id: 123
+        destination_city: Atlanta
+        destination_state: GA
+        destination_metro_id: 987
+        distance: 456
+        flat_per_mile: 1.11
+        flat_gross: 111
+        van_per_mile: 2.22
+        van_gross: 222
+        reefer_per_mile: 3.33
+        reefer_gross: 333
     x-restlet:
       section: BOARDS
   boards_accept_offer_response:
