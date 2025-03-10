@@ -41,16 +41,16 @@ post:
       schema:
         properties:
           destinaition_city:
-            description: A valid city or INBOUND
+            description: A valid city or outbound
             type: string
           destination_state:
-            description: A valid State abbrevitaino or blank when using INBOUND.
+            description: A valid State abbrevitaino or blank when using outbound.
             type: string
           origin_city:
-            description: A valid city or OUTBOUND
+            description: A valid city or inbound
             type: string
           origin_state:
-            description: A valid State abbrevitaino or blank when using OUTBOUND.
+            description: A valid State abbrevitaino or blank when using inbound.
             type: string
         required:
           - destination_state

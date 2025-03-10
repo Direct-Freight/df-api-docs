@@ -2,14 +2,12 @@ description: Each saved lane entry is a key/value object in the list.
 example:
   list:
     - destination_city: Atlanta
-      destination_metro_id: 987
       destination_state: GA
       distance: 456
       flat_gross: 111
       flat_per_mile: 1.11
       lane_id: 123
       origin_city: Dallas
-      origin_metro_id: 123
       origin_state: TX
       reefer_gross: 333
       reefer_per_mile: 3.33
@@ -18,38 +16,30 @@ example:
 properties:
   list:
     properties:
-      payrate:
-        description: 'This will return a list of dates, single key of newest_payrate'
-        properties:
-          destination_city:
-            type: string
-          destination_metro_id:
-            type: integer
-          destination_state:
-            type: string
-          distance:
-            type: integer
-          flat_gross:
-            type: number
-          flat_per_mile:
-            type: number
-          lane_id:
-            type: integer
-          origin_city:
-            type: string
-          origin_metro_id:
-            type: integer
-          origin_state:
-            type: string
-          reefer_gross:
-            type: number
-          reefer_per_mile:
-            type: number
-          van_gross:
-            type: number
-          van_per_mile:
-            type: number
-        type: object
+      destination_city:
+        type: string
+      destination_state:
+        type: string
+      distance:
+        type: integer
+      flat_gross:
+        type: number
+      flat_per_mile:
+        type: number
+      lane_id:
+        type: integer
+      origin_city:
+        type: string
+      origin_state:
+        type: string
+      reefer_gross:
+        type: number
+      reefer_per_mile:
+        type: number
+      van_gross:
+        type: number
+      van_per_mile:
+        type: number
     type: object
 x-restlet:
   section: BOARDS
