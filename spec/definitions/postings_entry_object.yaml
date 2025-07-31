@@ -122,7 +122,7 @@ properties:
       profile.
     type: integer
   real_age:
-    description: When this item was created.
+    description: When this item was created.  STAGE=PRIVATE
     format: date
     type: string
   receive_date:

@@ -122,7 +122,7 @@ properties:
       Either posting_id or custom_id is required.
     type: integer
   real_age:
-    description: The date the entry was created.
+    description: The date the entry was created.  STAGE=PRIVATE
     format: date
     type: string
   receive_date:
