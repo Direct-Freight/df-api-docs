@@ -4636,7 +4636,7 @@ definitions:
       real_age:
         type: string
         format: date
-        description: When this item was created.
+        description: When this item was created.  STAGE=PRIVATE
     x-restlet:
       section: POSTINGS
     example:
@@ -4800,7 +4800,7 @@ definitions:
       real_age:
         type: string
         format: date
-        description: The date the entry was created.
+        description: The date the entry was created.  STAGE=PRIVATE
     x-restlet:
       section: POSTINGS
     example:
