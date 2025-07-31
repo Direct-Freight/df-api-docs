@@ -34,6 +34,7 @@ info:
 
     Both Tokens are stateless, and delivered via the HTTP headers.
 
+
     The api token is a permanent token assigned to each partner.
 
     The user token is a temporary session token assigned to each direct freight

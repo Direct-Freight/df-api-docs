@@ -18,6 +18,7 @@ example:
   pay_rate: 0.22
   phone_extension: 666
   phone_number: 7777777777
+  real_age: 2025-07-07T00:00:00.000Z
   receive_date: 2020-05-06T00:00:00.000Z
   ship_date: 2020-05-06T00:00:00.000Z
   trailer_type:
@@ -120,6 +121,10 @@ properties:
       If not provided we will use the contact info associated with the users
       profile.
     type: integer
+  real_age:
+    description: When this item was created.
+    format: date
+    type: string
   receive_date:
     description: The date the load/truck should deliver.
     format: date

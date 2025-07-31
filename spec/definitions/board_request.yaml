@@ -245,6 +245,7 @@ properties:
       - new
       - book_now
       - avg_market_rate
+      - posting_type
     example: age
     type: string
   tier:

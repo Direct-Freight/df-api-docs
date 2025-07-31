@@ -43,6 +43,14 @@ properties:
             format: date
             type: string
         type: object
+      total_rates:
+        description: >-
+          This will return a list of dates, single key of total rates found for
+          this day
+        properties:
+          CURRENT_DATE:
+            type: number
+        type: object
     type: object
 x-restlet:
   section: BOARDS

@@ -39,7 +39,7 @@ get:
         - push
       in: query
       name: notification_medium
-      required: false
+      required: true
       type: string
     - in: header
       name: end-user-token
