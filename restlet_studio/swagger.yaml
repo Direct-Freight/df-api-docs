@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "In order to use the Direct Freight Load Board API please first contact us to get an API Token. \nThis token needs to be sent as a HTTP header argument in every request to our API.\n\napi-token=\"SECRET KEY\"\n\nPlease keep your api-token a secret. If the token is compromised please contact us to get a new one.\n\nThis api token authenticates your application and gives it access to the API.\n\nThe API token should not be confused with the end-user-token. \nThe end-user-token is given to you via the end_user_authentications endpoint when the user logs in. \nThe end-user-token is needed in order to use certain features, and get certain sensitive information.\n\nBoth Tokens are stateless, and delivered via the HTTP headers.\nThe api token is a permanent token assigned to each partner.\nThe user token is a temporary session token assigned to each direct freight user.\nThe user token can be valid for up to 24 hours depending on activity."
+  description: "In order to use the Direct Freight Load Board API please first contact us to get an API Token. \nThis token needs to be sent as a HTTP header argument in every request to our API.\n\napi-token=\"SECRET KEY\"\n\nPlease keep your api-token a secret. If the token is compromised please contact us to get a new one.\n\nThis api token authenticates your application and gives it access to the API.\n\nThe API token should not be confused with the end-user-token. \nThe end-user-token is given to you via the end_user_authentications endpoint when the user logs in. \nThe end-user-token is needed in order to use certain features, and get certain sensitive information.\n\nBoth Tokens are stateless, and delivered via the HTTP headers.\n\nThe api token is a permanent token assigned to each partner.\nThe user token is a temporary session token assigned to each direct freight user.\nThe user token can be valid for up to 24 hours depending on activity."
   version: "1.0"
   title: Direct Freight Load Board API
   contact: {}
@@ -53,7 +53,7 @@ paths:
         "200":
           description: On success will return a list of alerts.
           schema:
-            $ref: '#/definitions/alert_list'
+            $ref: "#/definitions/alert_list"
     post:
       tags:
       - alerts
@@ -76,12 +76,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/alert'
+          $ref: "#/definitions/alert"
       responses:
         "201":
           description: Object created check the headers for a reference URL
           schema:
-            $ref: '#/definitions/create_status_alert'
+            $ref: "#/definitions/create_status_alert"
     delete:
       tags:
       - alerts
@@ -132,7 +132,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/patch_alert_properties'
+          $ref: "#/definitions/patch_alert_properties"
       responses:
         "204":
           description: Returned on response.
@@ -153,7 +153,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/alert'
+          $ref: "#/definitions/alert"
       - name: board_type
         in: path
         required: true
@@ -162,7 +162,7 @@ paths:
         "200":
           description: "Alert found, returns the alert_id that corresponds to the search."
           schema:
-            $ref: '#/definitions/alert_search_response'
+            $ref: "#/definitions/alert_search_response"
         "404":
           description: Alert not found using specified parameters.
     x-restlet:
@@ -202,7 +202,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/board_response_item'
+            $ref: "#/definitions/board_response_item"
     post:
       tags:
       - boards
@@ -235,16 +235,16 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/board_request'
+          $ref: "#/definitions/board_request"
       responses:
         "200":
           description: Returns a list matching your search.
           schema:
-            $ref: '#/definitions/board_response'
+            $ref: "#/definitions/board_response"
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     x-restlet:
       section: BOARDS
   /boards/{board_type}/state_totals:
@@ -271,7 +271,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/get_state_list_response'
+            $ref: "#/definitions/get_state_list_response"
     x-restlet:
       section: BOARDS
   /boards/{board_type}/state_totals/{state_code}:
@@ -326,7 +326,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/get_hidden_companies_response'
+            $ref: "#/definitions/get_hidden_companies_response"
     post:
       tags:
       - boards
@@ -341,12 +341,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/mark_hidden_companies'
+          $ref: "#/definitions/mark_hidden_companies"
       responses:
         "201":
           description: Object created check the headers for a reference URL.
           schema:
-            $ref: '#/definitions/create_status'
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - boards
@@ -379,7 +379,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/toggle_hidden_companies'
+          $ref: "#/definitions/toggle_hidden_companies"
       responses:
         "204":
           description: successful operation
@@ -408,7 +408,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/get_hidden_entries'
+            $ref: "#/definitions/get_hidden_entries"
     post:
       tags:
       - boards
@@ -423,12 +423,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/hidden_entry_object'
+          $ref: "#/definitions/hidden_entry_object"
       responses:
         "201":
           description: Object created check the headers for a reference URL.
           schema:
-            $ref: '#/definitions/create_status'
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - boards
@@ -463,7 +463,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/toggle_hidden_entries'
+          $ref: "#/definitions/toggle_hidden_entries"
       responses:
         "204":
           description: successful operation
@@ -492,7 +492,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/get_boards_notes_response'
+            $ref: "#/definitions/get_boards_notes_response"
     post:
       tags:
       - boards
@@ -507,12 +507,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/create_notes'
+          $ref: "#/definitions/create_notes"
       responses:
         "201":
           description: Object created check the headers for a reference URL.
           schema:
-            $ref: '#/definitions/note_create_status'
+            $ref: "#/definitions/note_create_status"
     delete:
       tags:
       - boards
@@ -543,12 +543,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/update_notes'
+          $ref: "#/definitions/update_notes"
       responses:
         "201":
           description: successful operation
           schema:
-            $ref: '#/definitions/update_notes_status'
+            $ref: "#/definitions/update_notes_status"
     x-restlet:
       section: BOARDS
   /boards/profit:
@@ -596,7 +596,7 @@ paths:
         "200":
           description: Details about the profitability of this trip.
           schema:
-            $ref: '#/definitions/boards_profit_response'
+            $ref: "#/definitions/boards_profit_response"
     x-restlet:
       section: BOARDS
   /boards/freight_rates:
@@ -656,7 +656,7 @@ paths:
         "201":
           description: Details about average rates for this trip. Returns an object where each key is a trailer type with an array of the freight rate for each day that was found for that type.
           schema:
-            $ref: '#/definitions/boards_freight_rate_response'
+            $ref: "#/definitions/boards_freight_rate_response"
     x-restlet:
       section: BOARDS
   /boards/freight_rates/saved_lanes:
@@ -673,7 +673,7 @@ paths:
         "200":
           description: Will return an object containing a list of saved lanes.
           schema:
-            $ref: '#/definitions/boards_saved_lanes_response'
+            $ref: "#/definitions/boards_saved_lanes_response"
     post:
       tags:
       - boards
@@ -709,7 +709,7 @@ paths:
         "200":
           description: Will return an object containing a list of saved lanes.
           schema:
-            $ref: '#/definitions/boards_saved_lanes_response'
+            $ref: "#/definitions/boards_saved_lanes_response"
     delete:
       tags:
       - boards
@@ -755,7 +755,7 @@ paths:
         "201":
           description: successful operation
           schema:
-            $ref: '#/definitions/boards_accept_offer_response'
+            $ref: "#/definitions/boards_accept_offer_response"
   /boards/offer/driver:
     get:
       tags:
@@ -777,7 +777,7 @@ paths:
         "201":
           description: Details about Driver Offer
           schema:
-            $ref: '#/definitions/boards_offer_driver_response'
+            $ref: "#/definitions/boards_offer_driver_response"
     post:
       tags:
       - boards
@@ -807,7 +807,7 @@ paths:
         "201":
           description: successful operation
           schema:
-            $ref: '#/definitions/boards_submit_offer_response'
+            $ref: "#/definitions/boards_submit_offer_response"
     x-restlet:
       section: BOARDS
   /boards/offer/driver/list:
@@ -826,7 +826,7 @@ paths:
         "201":
           description: List of offers
           schema:
-            $ref: '#/definitions/boards_offer_driver_list_response'
+            $ref: "#/definitions/boards_offer_driver_list_response"
     x-restlet:
       section: BOARDS
   /end_user_authentications/users:
@@ -839,7 +839,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/user'
+          $ref: "#/definitions/user"
       responses:
         "201":
           description: successful operation
@@ -854,7 +854,7 @@ paths:
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     delete:
       tags:
       - end_user_authentications
@@ -879,7 +879,7 @@ paths:
         "200":
           description: Sub account users
           schema:
-            $ref: '#/definitions/sub_account_response'
+            $ref: "#/definitions/sub_account_response"
     post:
       tags:
       - end_user_authentications
@@ -909,7 +909,7 @@ paths:
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     delete:
       tags:
       - end_user_authentications
@@ -949,6 +949,52 @@ paths:
                 description: Sub-account invitation accepted successfully.
     x-restlet:
       section: END_USER_AUTHENTICATIONS
+  /end_user_authentications/sub_accounts/decline_invitation:
+    get:
+      tags:
+      - end_user_authentications
+      description: Decline sub-account invitation
+      parameters: []
+      responses:
+        "201":
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Sub-account invitation declined successfully.
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
+  /end_user_authentications/sub_accounts/pending_invitation:
+    get:
+      tags:
+      - end_user_authentications
+      description: Check if current user has pending sub account invitations
+      parameters: []
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The status of the invitation.
+              primary_user_id:
+                type: number
+                description: ID of the primary user who invited.
+              primary_user_email:
+                type: string
+                description: Email of the primary user who invited.
+              primary_user_name:
+                type: string
+                description: Name of the primary user who invited.
+              primary_user_company:
+                type: string
+                description: Company of the primary user who invited.
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
   /end_user_authentications/departments:
     get:
       tags:
@@ -959,7 +1005,7 @@ paths:
         "200":
           description: Get departments
           schema:
-            $ref: '#/definitions/departments_response'
+            $ref: "#/definitions/departments_response"
     post:
       tags:
       - end_user_authentications
@@ -983,7 +1029,7 @@ paths:
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     delete:
       tags:
       - end_user_authentications
@@ -1015,7 +1061,7 @@ paths:
         "200":
           description: Get departments users
           schema:
-            $ref: '#/definitions/department_users_response'
+            $ref: "#/definitions/department_users_response"
     post:
       tags:
       - end_user_authentications
@@ -1050,7 +1096,7 @@ paths:
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     delete:
       tags:
       - end_user_authentications
@@ -1126,16 +1172,16 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/login_credentials'
+          $ref: "#/definitions/login_credentials"
       responses:
         "201":
           description: successful operation
           schema:
-            $ref: '#/definitions/end-user-token'
+            $ref: "#/definitions/end-user-token"
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     delete:
       tags:
       - end_user_authentications
@@ -1227,7 +1273,7 @@ paths:
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     post:
       tags:
       - end_user_authentications
@@ -1252,7 +1298,7 @@ paths:
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     patch:
       tags:
       - end_user_authentications
@@ -1284,7 +1330,7 @@ paths:
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     x-restlet:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications/auto_login_url:
@@ -1331,7 +1377,7 @@ paths:
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     x-restlet:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications/social_login:
@@ -1345,16 +1391,16 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/social_login_credentials'
+          $ref: "#/definitions/social_login_credentials"
       responses:
         "201":
           description: successful operation
           schema:
-            $ref: '#/definitions/social-login-end-user-token'
+            $ref: "#/definitions/social-login-end-user-token"
         "422":
           description: Unprocessable Entity. More information provided in the return object.
           schema:
-            $ref: '#/definitions/error_object'
+            $ref: "#/definitions/error_object"
     x-restlet:
       section: END_USER_AUTHENTICATIONS
   /locations/autocomplete:
@@ -1397,7 +1443,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/autocomplete_response'
+            $ref: "#/definitions/autocomplete_response"
     x-restlet:
       section: LOCATIONS
   /locations/reverse_geocode:
@@ -1421,7 +1467,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/reverse_geocode_response'
+            $ref: "#/definitions/reverse_geocode_response"
     x-restlet:
       section: LOCATIONS
   /mobile_updates:
@@ -1474,7 +1520,7 @@ paths:
       - name: notification_medium
         in: query
         description: To limit your list to just one medium.
-        required: false
+        required: true
         type: string
         enum:
         - email
@@ -1824,7 +1870,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/posting_post_response'
+            $ref: "#/definitions/posting_post_response"
     post:
       tags:
       - postings
@@ -1863,13 +1909,13 @@ paths:
             list:
               type: array
               items:
-                $ref: '#/definitions/postings_entry_object'
+                $ref: "#/definitions/postings_entry_object"
               maxItems: 100
       responses:
         "202":
           description: Loads accepted. Check the response for an ordered list of response.
           schema:
-            $ref: '#/definitions/postings-post_or_patch_response'
+            $ref: "#/definitions/postings-post_or_patch_response"
     delete:
       tags:
       - postings
@@ -1956,7 +2002,7 @@ paths:
             list:
               type: array
               items:
-                $ref: '#/definitions/postings_patch_object'
+                $ref: "#/definitions/postings_patch_object"
               maxItems: 100
       responses:
         "202":
@@ -1967,7 +2013,7 @@ paths:
             - list
             properties:
               list:
-                $ref: '#/definitions/postings-post_or_patch_response'
+                $ref: "#/definitions/postings-post_or_patch_response"
     x-restlet:
       section: POSTINGS
   /postings/{posting_type}/{action}:
@@ -2005,12 +2051,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/post_posting_type_action_body'
+          $ref: "#/definitions/post_posting_type_action_body"
       responses:
         "201":
           description: Success
           schema:
-            $ref: '#/definitions/postings-copy_or_move_response'
+            $ref: "#/definitions/postings-copy_or_move_response"
     x-restlet:
       section: POSTINGS
   /postings/{posting_type}/replace_all:
@@ -2042,7 +2088,7 @@ paths:
         "202":
           description: Success
           schema:
-            $ref: '#/definitions/postings-replace_all_response'
+            $ref: "#/definitions/postings-replace_all_response"
     x-restlet:
       section: POSTINGS
   /postings/custom_fields/names/:
@@ -2059,7 +2105,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/get_custom_fields_name_response'
+            $ref: "#/definitions/get_custom_fields_name_response"
     post:
       tags:
       - postings/custom_fields
@@ -2073,12 +2119,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/create_custom_field'
+          $ref: "#/definitions/create_custom_field"
       responses:
         "201":
           description: Object created check the headers for a reference URL.
           schema:
-            $ref: '#/definitions/create_status'
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - postings/custom_fields
@@ -2109,7 +2155,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/rename_custom_field'
+          $ref: "#/definitions/rename_custom_field"
       responses:
         "204":
           description: successful operation
@@ -2151,7 +2197,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/get_custom_fields_data_response'
+            $ref: "#/definitions/get_custom_fields_data_response"
     post:
       tags:
       - postings/custom_fields
@@ -2165,7 +2211,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/create_custom_field_data'
+          $ref: "#/definitions/create_custom_field_data"
       - name: posting_type
         in: path
         description: "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\""
@@ -2183,7 +2229,7 @@ paths:
         "201":
           description: Object created check the headers for a reference URL.
           schema:
-            $ref: '#/definitions/create_status'
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - postings/custom_fields
@@ -2232,7 +2278,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/create_custom_field_data'
+          $ref: "#/definitions/create_custom_field_data"
       - name: posting_type
         in: path
         description: "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", and \"test_trucks\""
@@ -2265,7 +2311,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/profile_object'
+            $ref: "#/definitions/profile_object"
     post:
       tags:
       - profiles
@@ -2279,12 +2325,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/profile_object'
+          $ref: "#/definitions/profile_object"
       responses:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/profile_object_patch'
+            $ref: "#/definitions/profile_object_patch"
     delete:
       tags:
       - profiles
@@ -2311,12 +2357,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/profile_object_patch'
+          $ref: "#/definitions/profile_object_patch"
       responses:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/profile_object_patch'
+            $ref: "#/definitions/profile_object_patch"
     x-restlet:
       section: PROFILES
   /profiles/truck_info:
@@ -2333,7 +2379,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/truck_info_object'
+            $ref: "#/definitions/truck_info_object"
     patch:
       tags:
       - profiles
@@ -2348,12 +2394,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/truck_info_object'
+          $ref: "#/definitions/truck_info_object"
       responses:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/truck_info_object'
+            $ref: "#/definitions/truck_info_object"
     x-restlet:
       section: PROFILES
   /profiles/fmcsa:
@@ -2370,7 +2416,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/fmcsa_profile_object'
+            $ref: "#/definitions/fmcsa_profile_object"
     x-restlet:
       section: PROFILES
   /profiles/fmcsa/verification:
@@ -2474,12 +2520,12 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/upload_document'
+          $ref: "#/definitions/upload_document"
       responses:
         "201":
           description: Object created check the headers for a reference URL.
           schema:
-            $ref: '#/definitions/create_status'
+            $ref: "#/definitions/create_status"
     delete:
       tags:
       - profiles
@@ -2505,7 +2551,7 @@ paths:
         name: body
         required: true
         schema:
-          $ref: '#/definitions/rename_document'
+          $ref: "#/definitions/rename_document"
       responses:
         "204":
           description: success
@@ -2530,7 +2576,7 @@ paths:
         "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/get_email_exists_response'
+            $ref: "#/definitions/get_email_exists_response"
     x-restlet:
       section: VALIDATIONS
   /validations/trailers:
@@ -2564,7 +2610,7 @@ paths:
             - trailer_type
             properties:
               trailer_type:
-                $ref: '#/definitions/trailer_type'
+                $ref: "#/definitions/trailer_type"
               comment:
                 type: string
                 description: the public comment that should be attached to the load being entered.
@@ -2609,7 +2655,9 @@ definitions:
       alerts:
         type: array
         items:
-          $ref: '#/definitions/alert_response_item'
+          $ref: "#/definitions/alert_response_item"
+    x-restlet:
+      section: ALERTS
     description: "A hash containing a list of objects. Each entry should have 1 alert object, and 1 search object, and 2 integer counts. One for the number of new loads, and one for the number of total loads that match the search critera."
     example: |-
       {
@@ -2618,8 +2666,6 @@ definitions:
           "{}"
         ]
       }
-    x-restlet:
-      section: ALERTS
   alert:
     type: object
     required:
@@ -2900,14 +2946,14 @@ definitions:
         type: string
       region_name:
         type: string
+    x-restlet:
+      section: LOCATIONS
     example: |-
       {
         "city": "city",
         "state_abbreviation": "{}",
         "state_name": "{}"
       }
-    x-restlet:
-      section: LOCATIONS
   sub_account_response:
     type: object
     properties:
@@ -2944,6 +2990,8 @@ definitions:
       active_sub_accounts:
         type: integer
         description: Number of licenses used.
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
     example: |-
       {
         "sub_accounts": [
@@ -2963,8 +3011,6 @@ definitions:
         "subscriptions_purchased": 5,
         "active_sub_accounts": 3
       }
-    x-restlet:
-      section: END_USER_AUTHENTICATIONS
   departments_response:
     type: object
     properties:
@@ -2979,6 +3025,8 @@ definitions:
             name:
               type: string
               description: The name of the department.
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
     example: |-
       {
           "departments": [
@@ -2988,8 +3036,6 @@ definitions:
               }
           ]
       }
-    x-restlet:
-      section: END_USER_AUTHENTICATIONS
   department_users_response:
     type: object
     properties:
@@ -3016,6 +3062,8 @@ definitions:
               type: string
             email:
               type: string
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
     example: |-
       {
         "department_users": [
@@ -3031,8 +3079,6 @@ definitions:
           }
         ]
       }
-    x-restlet:
-      section: END_USER_AUTHENTICATIONS
   board_request:
     type: object
     properties:
@@ -3211,6 +3257,7 @@ definitions:
         - new
         - book_now
         - avg_market_rate
+        - posting_type
       sort_direction:
         type: string
         example: asc
@@ -3257,6 +3304,8 @@ definitions:
           - PNEU
           - CONT
           - OTHER
+    x-restlet:
+      section: BOARDS
     example:
       destination_city: chicago
       destination_radius: 300
@@ -3284,8 +3333,6 @@ definitions:
       min_age: 50
       max_age: 2000
       google_recaptcha_score: 0.7
-    x-restlet:
-      section: BOARDS
   board_response_item:
     type: object
     required:
@@ -3443,7 +3490,7 @@ definitions:
         type: array
         description: a summary of the stops.  Currently only returned by the single load endpoint.
         items:
-          $ref: '#/definitions/stop_item'
+          $ref: "#/definitions/stop_item"
       booking_info:
         type: object
         description: Information about booking this load online.  Currently only returned by the single load endpoint.
@@ -3589,6 +3636,8 @@ definitions:
           avg_fuel_price_trip:
             type: integer
             description: Simple avgerage of all state average fuel prices for trip.  Does not account for miles traveled in each state.
+    x-restlet:
+      section: BOARDS
     example:
       executive_summary: "Based on all of the information we have about your truck and this load we believe this load would have a net profit of $-736.27 after you paid the driver(yourself) and all of the expenses. Fuel costs vary across your route you might consider buying fuel in MO, where fuel costs are $0.458 lower than the average fuel price along this route. "
       load_info:
@@ -3658,14 +3707,18 @@ definitions:
         ins_permits_per_mile: 0.13
         fuel_capacity: 200.0
         deadhead_per_mile: 1.29
-    x-restlet:
-      section: BOARDS
   boards_freight_rate_response:
     properties:
       TRAILER_TYPE:
         type: object
         description: Currently there is some debug keys that alos exist. Don't rely on these. They will most likely be removed in before Winter 2024.
         properties:
+          total_rates:
+            type: object
+            description: "This will return a list of dates, single key of total rates found for this day"
+            properties:
+              CURRENT_DATE:
+                type: number
           payrate:
             type: object
             description: "This will return a list of dates, single key of newest_payrate"
@@ -3701,9 +3754,9 @@ definitions:
               CURRENT_DATE:
                 type: string
                 format: date
-    description: There is some debug trailer types. They are formatted as TRAILER_TYPE_$subsection. They will most likely be removed at the same time as the below mentioned debug variables.
     x-restlet:
       section: BOARDS
+    description: There is some debug trailer types. They are formatted as TRAILER_TYPE_$subsection. They will most likely be removed at the same time as the below mentioned debug variables.
   boards_saved_lanes_response:
     properties:
       list:
@@ -3733,6 +3786,8 @@ definitions:
             type: number
           reefer_gross:
             type: number
+    x-restlet:
+      section: BOARDS
     description: Each saved lane entry is a key/value object in the list.
     example:
       list:
@@ -3748,8 +3803,6 @@ definitions:
         van_gross: 222
         reefer_per_mile: 3.33
         reefer_gross: 333
-    x-restlet:
-      section: BOARDS
   boards_accept_offer_response:
     type: object
     properties:
@@ -3929,7 +3982,7 @@ definitions:
         type: array
         description: A list of entries for this board.
         items:
-          $ref: '#/definitions/board_response_item'
+          $ref: "#/definitions/board_response_item"
       page_number:
         type: integer
         description: The page you are on.
@@ -3945,6 +3998,8 @@ definitions:
       search_url:
         type: string
         description: URL that can be used to perform this same search on the DirectFreight Website. Will only be returned if return_web_url is requested.
+    x-restlet:
+      section: BOARDS
     example: |-
       {
         "list": "{}",
@@ -3954,8 +4009,6 @@ definitions:
         "total_new": 0,
         "search_url": "https://www.directfreight.com/..."
       }
-    x-restlet:
-      section: BOARDS
   create_notes:
     type: object
     required:
@@ -4074,14 +4127,14 @@ definitions:
           type: string
       error:
         type: string
+    x-restlet:
+      section: common_definitions
     example: |-
       {
         "code": 1,
         "error": "Generic Validation",
         "description": [ "The e-mail address must be valid." ]
       }
-    x-restlet:
-      section: common_definitions
   get_boards_notes_response:
     type: object
     required:
@@ -4091,7 +4144,7 @@ definitions:
         type: array
         description: A list of requested notes
         items:
-          $ref: '#/definitions/notes_response_item'
+          $ref: "#/definitions/notes_response_item"
     x-restlet:
       section: BOARDS
   get_custom_fields_name_response:
@@ -4102,6 +4155,8 @@ definitions:
         description: "A list of each custom field, type and it's corresponding position."
         items:
           type: string
+    x-restlet:
+      section: not categorized yet
     example: |-
       {
         "list": [
@@ -4109,8 +4164,6 @@ definitions:
           "field2"
         ]
       }
-    x-restlet:
-      section: not categorized yet
   get_custom_fields_data_response:
     type: object
     properties:
@@ -4119,6 +4172,8 @@ definitions:
         description: "A list of each custom field, type and it's corresponding position."
         items:
           type: string
+    x-restlet:
+      section: not categorized yet
     example: |-
       {
         "load_id": [
@@ -4126,20 +4181,18 @@ definitions:
           "field2" : "data2"
         ]
       }
-    x-restlet:
-      section: not categorized yet
   get_email_exists_response:
     type: object
     properties:
       exists:
         type: boolean
         description: Returns a true value if it is associated with an account.
+    x-restlet:
+      section: not categorized yet
     example: |-
       {
         "exists": true
       }
-    x-restlet:
-      section: not categorized yet
   get_hidden_companies_response:
     type: object
     properties:
@@ -4148,6 +4201,8 @@ definitions:
         description: A subset of companies that need to be marked as hidden.
         items:
           type: string
+    x-restlet:
+      section: not categorized yet
     example: |-
       {
         "company_name": [
@@ -4155,8 +4210,6 @@ definitions:
           "company_name"
         ]
       }
-    x-restlet:
-      section: not categorized yet
   get_hidden_entries:
     type: object
     properties:
@@ -4165,12 +4218,12 @@ definitions:
         description: A subset of entries that need to be marked as hidden.
         items:
           type: string
+    x-restlet:
+      section: not categorized yet
     example:
       entry_id:
       - entry_id
       - entry_id
-    x-restlet:
-      section: not categorized yet
   get_state_list_response:
     properties:
       list:
@@ -4210,9 +4263,9 @@ definitions:
                 outbound_color:
                   type: string
                   description: This is an optional color code you can use to shade the map.
-    example: "{\n  \"list\": { \n    \"AZ\": { \n      \"inbound\": 10, \n      \"outbound\": 5, \n      \"outbound_percentage\": 50,\n      \"outbound_color\": \"#43434334\",\n      \"freight_rates\": {\n        \"inbound\": {\n          \"ALL\": \"5.95\"\n        },\n        \"outbound\": {\n          \"ALL\": \"5.95\"\n        }\n      }\n    } \n  }\n}"
     x-restlet:
       section: BOARDS
+    example: "{\n  \"list\": { \n    \"AZ\": { \n      \"inbound\": 10, \n      \"outbound\": 5, \n      \"outbound_percentage\": 50,\n      \"outbound_color\": \"#43434334\",\n      \"freight_rates\": {\n        \"inbound\": {\n          \"ALL\": \"5.95\"\n        },\n        \"outbound\": {\n          \"ALL\": \"5.95\"\n        }\n      }\n    } \n  }\n}"
   hidden_entry_object:
     type: object
     required:
@@ -4342,9 +4395,9 @@ definitions:
         type: string
         example: MO
         description: Title of note.
-    example: test
     x-restlet:
       section: BOARDS
+    example: test
   patch_alert_properties:
     type: object
     required:
@@ -4437,15 +4490,15 @@ definitions:
         type: array
         description: A list of posting objects you can iterate over.
         items:
-          $ref: '#/definitions/postings_post_response_item'
+          $ref: "#/definitions/postings_post_response_item"
+    x-restlet:
+      section: POSTINGS
     example: |-
       {
         "list": [
           .....
         ]
       }
-    x-restlet:
-      section: POSTINGS
   postings_entry_object:
     type: object
     required:
@@ -4580,6 +4633,12 @@ definitions:
       dispatch_mobile_number:
         type: string
         description: Dispatch mobile number.
+      real_age:
+        type: string
+        format: date
+        description: When this item was created.
+    x-restlet:
+      section: POSTINGS
     example:
       allowed_actions:
       - call
@@ -4606,8 +4665,7 @@ definitions:
       booking_partner: '...'
       dispatch_email: dispatch@directfreight.com
       dispatch_mobile_number: 7777777777
-    x-restlet:
-      section: POSTINGS
+      real_age: 2025-07-07
   postings_patch_object:
     type: object
     properties:
@@ -4739,6 +4797,12 @@ definitions:
       dispatch_mobile_number:
         type: string
         description: Dispatch mobile number.
+      real_age:
+        type: string
+        format: date
+        description: The date the entry was created.
+    x-restlet:
+      section: POSTINGS
     example:
       custom_id: abc123
       comment: hello world
@@ -4765,8 +4829,7 @@ definitions:
       - call
       dispatch_email: dispatch@directfreight.com
       dispatch_mobile_number: 7777777777
-    x-restlet:
-      section: POSTINGS
+      real_age: 2025-07-01
   postings_post_response_item:
     type: object
     required:
@@ -4931,9 +4994,9 @@ definitions:
               - Error
           required:
           - status
-    example: Success
     x-restlet:
       section: POSTINGS
+    example: Success
   postings-copy_or_move_response:
     type: object
     properties:
@@ -5056,6 +5119,8 @@ definitions:
       fuel_capacity:
         type: number
         description: STAGE=Private
+    x-restlet:
+      section: PROFILES
     example:
       address: 11 Wall Street
       city: New York
@@ -5082,8 +5147,6 @@ definitions:
       ins_permits_per_mile: 0.13
       fuel_capacity: 200.0
       deadhead_per_mile: 1.29
-    x-restlet:
-      section: PROFILES
   profile_object_patch:
     type: object
     properties:
@@ -5151,6 +5214,8 @@ definitions:
         type: string
       zip:
         type: string
+    x-restlet:
+      section: PROFILES
     example:
       address: 11 Wall Street
       city: New York
@@ -5171,8 +5236,6 @@ definitions:
       carrier_onboard_url: www.carrier.com/onboard
       carrier_terms_url: www.carrier.com/terms
       zip: "12345"
-    x-restlet:
-      section: PROFILES
   stop_item:
     properties:
       label:
@@ -5200,6 +5263,8 @@ definitions:
         type: number
       deadhead_per_mile:
         type: number
+    x-restlet:
+      section: PROFILES
     example:
       miles_per_gal: 6.5
       maint_per_mile: 0.17
@@ -5208,8 +5273,6 @@ definitions:
       ins_permits_per_mile: 0.13
       fuel_capacity: 200.0
       deadhead_per_mile: 1.29
-    x-restlet:
-      section: PROFILES
   rename_custom_field:
     type: object
     required:
@@ -5276,6 +5339,8 @@ definitions:
     x-restlet:
       section: BOARDS
   trailer_type:
+    x-restlet:
+      section: common_definitions
     type: array
     description: These are the officially supported trailer types.
     items:
@@ -5308,8 +5373,6 @@ definitions:
       - PNEU
       - CONT
       - OTHER
-    x-restlet:
-      section: common_definitions
   update_notes_status:
     type: object
     properties:
@@ -5506,11 +5569,11 @@ responses:
   error_422:
     description: Unprocessable Entity. More information provided in the return object.
     schema:
-      $ref: '#/definitions/error_object'
+      $ref: "#/definitions/error_object"
   object_created:
     description: Object created check the headers for a reference URL.
     schema:
-      $ref: '#/definitions/create_status'
+      $ref: "#/definitions/create_status"
 x-restlet:
   sections:
     ALERTS: {}
