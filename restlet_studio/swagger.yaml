@@ -1783,6 +1783,50 @@ paths:
           description: Status 204
     x-restlet:
       section: Optins
+  /optins/search_data:
+    get:
+      tags:
+      - optins
+      summary: STAGE=UNK Check if a user has enabled search data opt in.
+      parameters:
+      - name: end-user-token
+        in: header
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Status 200
+          schema:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+    patch:
+      tags:
+      - optins
+      summary: STAGE=UNK Toggle search data opt in.
+      description: Toggle search data opt in.
+      parameters:
+      - name: end-user-token
+        in: header
+        required: true
+        type: string
+      - in: body
+        name: body
+        required: true
+        schema:
+          type: object
+          required:
+          - enabled
+          properties:
+            enabled:
+              type: boolean
+              description: true/false
+      responses:
+        "204":
+          description: Status 204
+    x-restlet:
+      section: Optins
   /postings/{posting_type}:
     get:
       tags:
@@ -1803,10 +1847,6 @@ paths:
         - private_trucks
         - test_loads
         - test_trucks
-        - live_loads_temp
-        - test_loads_temp
-        - live_trucks_temp
-        - test_trucks_temp
       - name: posting_id
         in: query
         description: To retrieve only a subset of entries owned by the user specify one or more posting_id(s) or custom_id(s).
@@ -1890,10 +1930,6 @@ paths:
         - private_trucks
         - test_loads
         - test_trucks
-        - live_loads_temp
-        - test_loads_temp
-        - live_trucks_temp
-        - test_trucks_temp
       - name: end-user-token
         in: header
         required: true
@@ -1935,10 +1971,6 @@ paths:
         - private_trucks
         - test_loads
         - test_trucks
-        - live_loads_temp
-        - test_loads_temp
-        - live_trucks_temp
-        - test_trucks_temp
       - name: posting_id
         in: query
         description: "This parameter will be ignored if delete_all is specified, otherwise posting_id or custom_id must be specified. The 100 maximum is split between posting_id & custom_id."
@@ -1983,10 +2015,6 @@ paths:
         - private_trucks
         - test_loads
         - test_trucks
-        - live_loads_temp
-        - test_loads_temp
-        - live_trucks_temp
-        - test_trucks_temp
       - name: end-user-token
         in: header
         required: true
