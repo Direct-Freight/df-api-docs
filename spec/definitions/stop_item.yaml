@@ -1,9 +1,0 @@
-properties:
-  label:
-    description: Label for this field.
-    example: 'Pickup #1'
-    type: string
-  summary:
-    description: Summary of this field.
-    example: '411 Locust Chillicothe, MO 64601 on 03-02-2023'
-    type: string

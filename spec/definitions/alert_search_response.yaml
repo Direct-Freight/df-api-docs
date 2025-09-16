@@ -1,5 +1,0 @@
-properties:
-  alert_id:
-    description: Alert ID.
-    type: integer
-type: object

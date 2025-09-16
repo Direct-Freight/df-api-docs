@@ -1,8 +1,0 @@
-error_422:
-  description: Unprocessable Entity. More information provided in the return object.
-  schema:
-    $ref: '#/definitions/error_object'
-object_created:
-  description: Object created check the headers for a reference URL.
-  schema:
-    $ref: '#/definitions/create_status'

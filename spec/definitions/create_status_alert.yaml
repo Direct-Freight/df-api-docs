@@ -1,6 +1,0 @@
-properties:
-  alert_id:
-    type: integer
-type: object
-x-restlet:
-  section: common_definitions

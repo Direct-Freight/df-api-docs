@@ -1,7 +1,0 @@
-properties:
-  name:
-    description: Custom field name.
-    type: string
-required:
-  - name
-type: object
