@@ -1,0 +1,43 @@
+get:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Status 200
+      schema:
+        properties:
+          enabled:
+            type: boolean
+        type: object
+  summary: STAGE=UNK Check if a user has enabled search data opt in.
+  tags:
+    - optins
+patch:
+  description: Toggle search data opt in.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        properties:
+          enabled:
+            description: true/false
+            type: boolean
+        required:
+          - enabled
+        type: object
+  responses:
+    '204':
+      description: Status 204
+  summary: STAGE=UNK Toggle search data opt in.
+  tags:
+    - optins
+x-restlet:
+  section: Optins
