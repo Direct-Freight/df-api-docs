@@ -1,0 +1,42 @@
+example: |-
+  {
+    "department_users": [
+      {
+        "id": 1234,
+        "access_level": "read-only",
+        "contact_name": "...",
+        "dispatch_number": "(123) 123-4567",
+        "mc_number": "12312312",
+        "dot_number": "45645645",
+        "username": "...",
+        "email": "user@domain.com"
+      }
+    ]
+  }
+properties:
+  sub_accounts:
+    items:
+      properties:
+        access_level:
+          description: The access_level of the user.
+          type: string
+        contact_name:
+          type: string
+        dispatch_number:
+          type: string
+        dot_number:
+          type: string
+        email:
+          type: string
+        id:
+          description: The ID of the department user.
+          type: integer
+        mc_number:
+          type: string
+        username:
+          type: string
+      type: object
+    type: array
+type: object
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

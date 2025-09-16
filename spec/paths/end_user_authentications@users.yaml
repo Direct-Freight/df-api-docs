@@ -1,0 +1,37 @@
+delete:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '204':
+      description: Will not return content on a successful logout.
+  summary: Deletes Logged in User
+  tags:
+    - end_user_authentications
+post:
+  parameters:
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/user'
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        properties:
+          end-user-token:
+            description: Auto logs in the new user and gives them a token.
+            type: string
+        required:
+          - end-user-token
+        type: object
+    '422':
+      $ref: '#/responses/error_422'
+  summary: Create a new user.
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

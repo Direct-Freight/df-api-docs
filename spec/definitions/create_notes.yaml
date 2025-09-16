@@ -1,0 +1,16 @@
+properties:
+  body:
+    type: string
+  entry_id:
+    description: 'The entry to associate the note with. '
+    type: string
+  title:
+    description: 'Subject of the note. '
+    type: string
+required:
+  - body
+  - entry_id
+  - title
+type: object
+x-restlet:
+  section: BOARDS

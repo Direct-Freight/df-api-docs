@@ -1,0 +1,32 @@
+get:
+  description: A convenience method to get totals by state.  Stage=Private
+  parameters:
+    - description: 'Valid types are "loads", and "trucks".'
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
+    - description: >-
+        Filter totals to only include these trailer_type's. This parameter can
+        be specified multiple times and the totals are combined. i.e.
+        trailer_type=V&trailer_type=R returns the combined total of all loads
+        that are either V or
+      in: query
+      name: trailer_type
+      required: false
+      type: string
+    - in: path
+      name: state_code
+      required: true
+      type: string
+  responses:
+    '200':
+      description: A list of freight rates
+  summary: Top 5 city totals by state
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS

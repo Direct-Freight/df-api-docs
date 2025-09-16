@@ -1,0 +1,143 @@
+properties:
+  allowed_actions:
+    description: 'What actions are available for this load, defaults to "call".'
+    items:
+      enum:
+        - send_quote
+        - book_now
+        - request_info
+        - call
+        - email
+        - text
+        - desktop_push
+        - mobile_push
+        - no_call
+        - no_email
+        - no_text
+        - url_direct_book
+        - url_details
+        - no_call_unverified
+      type: string
+    type: array
+  comment:
+    type: string
+  contact_name:
+    description: This is generated from the logged in users profile information.
+    type: string
+  custom_id:
+    description: A unique identifier a user can provide for their own records.
+    type: integer
+  destination_city:
+    description: Delivery location city of load/truck.
+    type: string
+  destination_state:
+    description: Delivery location state of load/truck.
+    items:
+      type: string
+    type: array
+  full_load:
+    description: For trucks this will always be false.
+    type: boolean
+  height:
+    description: height in feet.
+    type: number
+  length:
+    description: length in feet.
+    type: number
+  origin_city:
+    description: Origin city location of load or truck
+    type: string
+  origin_state:
+    description: Origin state location of load or truck.
+    type: string
+  other_trailer_types:
+    description: To include custom trailer types.
+    type: string
+  pay_rate:
+    description: 'We expect one of 2 formats. either the per mile, or total sum.'
+    type: number
+  phone_extension:
+    description: If not supplied and not in the user's profile this will be null.
+    type: integer
+  phone_number:
+    description: >-
+      If not supplied, this is generated from the logged in users profile
+      information.
+    type: integer
+  posting_id:
+    description: This is the unique ID of this post.
+    type: integer
+  receive_date:
+    description: The date the load/truck should deliver.
+    format: date
+    type: string
+  ship_date:
+    description: The date you wish the load to be shipped.
+    format: date
+    type: string
+  trailer_type:
+    description: This can have 1 or more standard trailer types.
+    items:
+      enum:
+        - V
+        - VINT
+        - SD
+        - MX
+        - HS
+        - AC
+        - LB
+        - F+T
+        - F
+        - FINT
+        - DD
+        - V+V
+        - V+A
+        - CRG
+        - HB
+        - LA
+        - PO
+        - R
+        - RINT
+        - RGN
+        - CV
+        - DT
+        - TNK
+        - F+S
+        - PNEU
+        - CONT
+        - OTHER
+      type: string
+    type: array
+  username:
+    description: STAGE=private only returned if a whoentered is specified.
+    type: string
+  weight:
+    description: weight in pounds.
+    type: integer
+  width:
+    description: width in feet.
+    type: number
+required:
+  - comment
+  - contact_name
+  - custom_id
+  - destination_city
+  - destination_state
+  - full_load
+  - height
+  - length
+  - origin_city
+  - origin_state
+  - other_trailer_types
+  - pay_rate
+  - phone_extension
+  - phone_number
+  - posting_id
+  - receive_date
+  - ship_date
+  - trailer_type
+  - weight
+  - width
+type: object
+x-restlet:
+  section: POSTINGS

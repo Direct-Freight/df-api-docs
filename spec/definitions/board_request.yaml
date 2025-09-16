@@ -1,0 +1,308 @@
+example:
+  destination_city: chicago
+  destination_radius: 300
+  destination_state:
+    - IL
+  full_load: true
+  google_recaptcha_score: 0.7
+  max_age: 2000
+  max_length: 300
+  max_pay_rate: 200
+  max_weight: 40000
+  min_age: 50
+  min_length: 15
+  min_pay_rate: 50
+  min_weight: 1000
+  origin_city: Kansas City
+  origin_radius: 300
+  origin_state:
+    - MO
+  page_number: 1
+  ship_date:
+    - 2020-05-06T00:00:00.000Z
+  sort_direction: asc
+  sort_parameter: age
+  trailer_type:
+    - V
+    - R
+properties:
+  alert_id:
+    description: >-
+      By specifying an alert_id we will record the loads or trucks seen by this
+      user, and associate it with their alert.   See /alerts documentation for
+      more information on setting up alerts.
+    example: 1155
+    type: integer
+    x-example: undefined
+  company_name:
+    description: Search only for loads posted by this company. STAGE=Private
+    type: string
+  destination_city:
+    description: 'If used, this field must be accompanied by a destination_state.'
+    example: chicago
+    minLength: 2
+    type: string
+  destination_radius:
+    description: >-
+      If both the destination city and state are specified, this field will
+      limit the search to results to within # miles of the specified destination
+      city.   If this field is omitted during a search that includes a
+      destination city a default value of 30 miles will be used.
+    example: 100
+    maximum: 300
+    minimum: 1
+    type: integer
+  destination_state:
+    description: >-
+      If the destination_city field is is used, this field should contain the
+      state for that city.  For searches without a specified destination_city
+      this field may contain an array list of state abbreviations.
+    example:
+      - IL
+      - HI
+      - NY
+      - KS
+      - TX
+      - MO
+      - AL
+    items:
+      maxLength: 2
+      minLength: 2
+      type: string
+    type: array
+  full_load:
+    description: >-
+      This is only valid when requesting a loads board. Omitting this field will
+      return both full and partial loads. A true value will limit results to
+      full loads only.  False will return partial loads only.
+    example: true
+    type: boolean
+  google_recaptcha_score:
+    description: >-
+      STAGE=PRIVATE Google ReCAPTCHA score, for logging purposes. This field is
+      optional. Should be a decimal number between 0 and 1.
+    type: number
+  item_count:
+    description: >-
+      This argument adjusts how many items per page will be returned.  Omitting
+      this field will return the default of 50 items per page
+    example: 25
+    maximum: 100
+    minimum: 1
+    type: integer
+  max_age:
+    description: Return items that are at most this many minutes old.
+    example: 300
+    type: integer
+  max_length:
+    description: Return items no longer than this.
+    example: 300
+    type: integer
+  max_pay_rate:
+    description: Return items that pay at most this amount.
+    example: 300
+    type: integer
+  max_weight:
+    description: Return items that weight less than this.
+    example: 40000
+    type: integer
+  md5:
+    description: Return only this specific MD5 ID. STAGE=Private  DEPRECATED DO NOT USE
+    example: 850FBE52A5345119FD9C79FDE4E27308
+    type: string
+  min_age:
+    description: Return items that are at least this many minutes old.
+    example: 50
+    type: integer
+  min_length:
+    description: Return items at least this long.
+    example: 15
+    type: integer
+  min_pay_rate:
+    description: Return items that pay at least this amount.
+    example: 50
+    type: integer
+  min_weight:
+    description: Return items that weight at least this much.
+    example: 1000
+    type: integer
+  origin_city:
+    description: 'If used, this field must be accompanied by an origin_state.'
+    example: Kansas City
+    minLength: 2
+    type: string
+  origin_radius:
+    description: >-
+      If both the origin city and state are specified, this field will limit the
+      search to results to within # miles of the specified origin city. If this
+      field is omitted during a search that includes an origin city a default
+      value of 25 miles will be used.
+    example: 150
+    maximum: 300
+    minimum: 1
+    type: integer
+  origin_state:
+    description: >-
+      If the origin_city field is is used, this field should contain the state
+      for that city. For searches without a specified origin_city this field may
+      contain an array list of state abbreviations.
+    example:
+      - MO
+      - IL
+      - TX
+      - CA
+    items:
+      maxLength: 2
+      minLength: 2
+      type: string
+    type: array
+  page_number:
+    description: >-
+      The page you want to return. Will return an empty board on an invalid
+      page.
+    minimum: 1
+    type: integer
+  partner:
+    description: >-
+      Used to customize API response for integration partners. This field should
+      only be used in coordination with developers at Direct Freight Services
+    type: string
+  return_count:
+    description: If included this will return a total count instead of a list.
+    type: boolean
+  return_only:
+    description: >-
+      STAGE=PRIVATE  This field is an additional filter that limits the boards
+      response for attributes that are not defined by the load record. Currently
+      the following attributes are valid for this field.
+
+
+      unviewed-loads that have not been viewed by the user (Loads will continue
+      to be returned by boards as unviewed until a GET is requested from the
+      alerts endpoint.  Requesting the alerts resets the timestamp for
+      determining when a load is new to the time of the last search).
+
+
+      unsent-Loads that have not been sent to or viewed by a user.
+
+
+      newtag- Loads that are given a new tag.  The new tag is only given to
+      loads that are new since the previous search if the 2 searches are both
+      done in the same day.
+    enum:
+      - unviewed
+      - unsent
+      - newtag
+    type: string
+  return_web_url:
+    description: >-
+      If included this will return a "search_url" property that has a URL that
+      can be used to perform this same search on the DirectFreight Website.
+    type: boolean
+  ship_date:
+    description: Limits results to specified ship date(s).
+    items:
+      description: Please use the YYYY-MM-DD format.
+      format: date
+      type: string
+    type: array
+  sort_direction:
+    default: asc
+    description: >-
+      The system automatically chooses the most common order based on the
+      parameter chosen. Use this option if you want a specific sort direction.
+    enum:
+      - asc
+      - desc
+    example: asc
+    type: string
+  sort_parameter:
+    default: age
+    description: >-
+      The system automatically chooses the most common order based on the
+      parameter chosen.  Sort order can be specified by using the
+      "sort_direction" parameter.
+    enum:
+      - origin_city
+      - origin_state
+      - destination_city
+      - destination_state
+      - trailer_type
+      - load_size
+      - pay_rate
+      - rate_per_mile_est
+      - credit_score
+      - age
+      - trip_miles
+      - dead_head
+      - length
+      - weight
+      - company_name
+      - ship_date
+      - receive_date
+      - tia_user
+      - green_light
+      - new
+      - book_now
+      - avg_market_rate
+      - posting_type
+    example: age
+    type: string
+  tier:
+    description: >-
+      STAGE=PRIVATE  DEPRECATED  This field is an optional filter that limits
+      board response to 'free' or 'premium' loads. If this field is not
+      specified it defaults to 'all' loads.
+
+      free loads - are loads that are more than 2 hours old. contact information
+      and comments are visible even if this request comes from an unsubscribed
+      account.
+
+      premium loads - loads that are less than 2 hours old. contact information
+      and comments are only visible for premium accounts.   
+    enum:
+      - all
+      - free
+      - premium
+    type: string
+  trailer_type:
+    description: 'A string array of valid trailer types to limit the search. '
+    example:
+      - F
+      - F+T
+      - F+S
+      - V
+    items:
+      enum:
+        - V
+        - VINT
+        - SD
+        - MX
+        - HS
+        - AC
+        - LB
+        - F+T
+        - F
+        - FINT
+        - DD
+        - V+V
+        - V+A
+        - CRG
+        - HB
+        - LA
+        - PO
+        - R
+        - RINT
+        - RGN
+        - CV
+        - DT
+        - TNK
+        - F+S
+        - PNEU
+        - CONT
+        - OTHER
+      type: string
+    type: array
+type: object
+x-restlet:
+  section: BOARDS

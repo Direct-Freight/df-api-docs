@@ -1,0 +1,61 @@
+delete:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '204':
+      description: success operation
+  summary: STAGE=UNK Delete the document.
+  tags:
+    - profiles
+get:
+  description: Retrieve documents
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: success
+  summary: STAGE=UNK Retrieve documents
+  tags:
+    - profiles
+patch:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/rename_document'
+  responses:
+    '204':
+      description: success
+  summary: STAGE=UNK Rename a document.
+  tags:
+    - profiles
+post:
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/upload_document'
+  responses:
+    '201':
+      $ref: '#/responses/object_created'
+  summary: STAGE=UNK Upload a new document.
+  tags:
+    - profiles
+x-restlet:
+  section: PROFILES

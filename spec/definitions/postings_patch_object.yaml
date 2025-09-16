@@ -1,0 +1,179 @@
+example:
+  allowed_actions:
+    - call
+  booking_partner: ...
+  comment: hello world
+  custom_id: abc123
+  destination_city: cincinnati
+  destination_state: OH
+  details_url: 'https://www.example.com/?loadnumber=1234'
+  dispatch_email: dispatch@directfreight.com
+  dispatch_mobile_number: 7777777777
+  full_load: true
+  height: 11
+  length: 11
+  origin_city: pittsburg
+  origin_state: PA
+  other_trailer_types: hot shot
+  pay_rate: 11
+  phone_extension: 777
+  phone_number: 777777777
+  real_age: 2025-07-01T00:00:00.000Z
+  receive_date: 2020-05-07T00:00:00.000Z
+  ship_date: 2020-05-06T00:00:00.000Z
+  trailer_type:
+    - V+V
+  weight: 1100
+  width: 11
+properties:
+  allowed_actions:
+    description: 'What actions are available for this load, defaults to "call".'
+    items:
+      enum:
+        - send_quote
+        - book_now
+        - request_info
+        - call
+        - email
+        - text
+        - desktop_push
+        - mobile_push
+        - no_call
+        - no_email
+        - no_text
+        - url_direct_book
+        - url_details
+        - no_call_unverified
+      type: string
+    type: array
+  booking_partner:
+    description: Booking partner.
+    type: string
+  category:
+    description: 'This option only applies to "private_loads", "private_trucks"'
+    type: string
+  comment:
+    type: string
+  custom_id:
+    description: >-
+      An identifier that can be provided for your own records. (i.e.-Company
+      load number) This field can be used to retrieve loads via GET. This value
+      must be unique.
+
+      You cannot update a custom_id once it is set. Please delete and reenter
+      the load to change the custom_id.  Either posting_id or custom_id is
+      required.
+    type: string
+  custom_md5sum:
+    description: >-
+      A custom checksum to identify the original string processed by the
+      directfreight spiders.
+    type: string
+  destination_city:
+    description: Delivery location city of load/truck.
+    type: string
+  destination_state:
+    description: Delivery location city of load/truck.
+    type: string
+  details_url:
+    description: An optional URL with additional information about this load.
+    type: string
+  dispatch_email:
+    description: Dispatch e-Mail.
+    type: string
+  dispatch_mobile_number:
+    description: Dispatch mobile number.
+    type: string
+  full_load:
+    description: This should only be used with loads.
+    type: boolean
+  height:
+    description: height in feet.
+    type: number
+  length:
+    description: length in feet.
+    type: number
+  origin_city:
+    description: Origin city location of load or truck
+    type: string
+  origin_state:
+    description: Origin state location of load or truck
+    type: string
+  other_trailer_types:
+    description: Can be used to specify custom trailer types.
+    type: string
+  pay_rate:
+    description: 'This field will accept either the per mile rate, or gross rate.'
+    type: number
+  phone_extension:
+    description: >-
+      If not provided we will use the contact info associated with the users
+      profile.
+    type: integer
+  phone_number:
+    description: >-
+      If not provided we will use the contact info associated with the users
+      profile. Can be a string such as "Online Only", "View Details" depending
+      on the load and the account type.
+    type: string
+  posting_id:
+    description: |-
+      A unique id for each entry.  This value is returned via GET. 
+      Either posting_id or custom_id is required.
+    type: integer
+  real_age:
+    description: The date the entry was created.  STAGE=PRIVATE
+    format: date
+    type: string
+  receive_date:
+    description: The date the load/truck should deliver.
+    format: date
+    type: string
+  ship_date:
+    description: >-
+      When posting loads this is the date the load should be picked up.  When
+      posting trucks this is the date the truck is available to be loaded.
+    format: date
+    type: string
+  trailer_type:
+    description: This can have 1 or more standard trailer types.
+    items:
+      enum:
+        - V
+        - VINT
+        - SD
+        - MX
+        - HS
+        - AC
+        - LB
+        - F+T
+        - F
+        - FINT
+        - DD
+        - V+V
+        - V+A
+        - CRG
+        - HB
+        - LA
+        - PO
+        - R
+        - RINT
+        - RGN
+        - CV
+        - DT
+        - TNK
+        - F+S
+        - PNEU
+        - CONT
+        - OTHER
+      type: string
+    type: array
+  weight:
+    description: weight in pounds.
+    type: integer
+  width:
+    description: width in feet.
+    type: number
+type: object
+x-restlet:
+  section: POSTINGS

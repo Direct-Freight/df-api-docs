@@ -1,0 +1,23 @@
+get:
+  description: STAGE=PRIVATE Checks if the logged in user is FMCSA verified.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        properties:
+          last_verification_date:
+            type: string
+          status:
+            type: boolean
+          verified_via:
+            type: string
+  summary: STAGE=PRIVATE Checks if the logged in user is FMCSA verified.
+  tags:
+    - profiles
+x-restlet:
+  section: PROFILES

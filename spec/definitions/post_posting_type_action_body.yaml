@@ -1,0 +1,28 @@
+properties:
+  new_load_custom_id:
+    description: >-
+      Optionally specify the custom_id that should be assigned to the new load.
+      This is required for the copy command, for the move command it will be
+      auto-generated if one is not specified.
+    type: string
+  source_id:
+    description: The posting id of the posting you are moving or copying.
+    type: integer
+  source_posting:
+    description: >-
+      Where the items are coming from. Loads can not be moved or copied to
+      trucks and trucks can not be moved or copied to loads.
+    enum:
+      - loads
+      - trucks
+      - private_loads
+      - private_trucks
+      - test_loads
+      - test_trucks
+    type: string
+required:
+  - source_id
+  - source_posting
+type: object
+x-restlet:
+  section: not categorized yet

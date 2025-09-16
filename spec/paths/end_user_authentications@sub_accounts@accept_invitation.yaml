@@ -1,0 +1,16 @@
+get:
+  description: Accept sub-account invitation
+  parameters: []
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        properties:
+          message:
+            description: Sub-account invitation accepted successfully.
+            type: string
+        type: object
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

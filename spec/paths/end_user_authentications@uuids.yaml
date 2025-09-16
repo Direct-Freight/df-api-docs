@@ -1,0 +1,22 @@
+get:
+  description: Get or create a user specific UUID.
+  parameters: []
+  responses:
+    '200':
+      description: successful operation
+      examples:
+        application/json: |-
+          {
+            "uuid": "B542E92E-7359-4096-9382-0D5AD324808D"
+          }
+      schema:
+        properties:
+          uuid:
+            description: The logged in users UUID.
+            type: string
+        type: object
+  summary: Retrieve UUID
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

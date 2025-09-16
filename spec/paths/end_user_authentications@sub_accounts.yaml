@@ -1,0 +1,64 @@
+delete:
+  parameters:
+    - description: The user_id to unlink from the sub_account.
+      in: query
+      name: user_id
+      required: true
+      type: integer
+      x-example: '?user_id=1&user_id=2'
+    - description: The email to unlink from the sub_account.
+      in: query
+      name: email
+      required: true
+      type: integer
+      x-example: '?email=foo@bar.com&email=bar@foo.com'
+  responses:
+    '204':
+      description: Will not return content on a successful deletion.
+  summary: Unlink requested user_ids from sub account.
+  tags:
+    - end_user_authentications
+get:
+  description: Get sub account users
+  parameters: []
+  responses:
+    '200':
+      description: Sub account users
+      schema:
+        $ref: '#/definitions/sub_account_response'
+  tags:
+    - end_user_authentications
+post:
+  parameters:
+    - description: >-
+        The user_id to invite into the sub_account. You can use either user ID
+        or Email to link.
+      in: query
+      name: user_id
+      required: false
+      type: integer
+      x-example: '?user_id=1&user_id=2'
+    - description: >-
+        The email address to invite into the sub_account. You can use either
+        user ID or Email to link.
+      in: query
+      name: email
+      required: false
+      type: integer
+      x-example: '?email=user1@domain.com&email=user2@domain.com'
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        properties:
+          message:
+            description: Sub account users invited into primary account.
+            type: string
+        type: object
+    '422':
+      $ref: '#/responses/error_422'
+  summary: Invite Sub Account User.
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

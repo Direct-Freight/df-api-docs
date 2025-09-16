@@ -1,0 +1,111 @@
+example:
+  address: 11 Wall Street
+  carrier_onboard_url: www.carrier.com/onboard
+  carrier_terms_url: www.carrier.com/terms
+  city: New York
+  company: NY Stock Exchange
+  contact_extension: 111
+  contact_name: J.P. Morgan
+  contact_number: 8885559999
+  deadhead_per_mile: 1.29
+  dispatch_extension: 123
+  dispatch_number: 4445556666
+  dot_number: '12345678'
+  driver_per_mile: 0.72
+  fax_number: 1112223333
+  fuel_capacity: 200
+  ins_permits_per_mile: 0.13
+  maint_per_mile: 0.17
+  mc_number: '12345678'
+  miles_per_gal: 6.5
+  mobile_carrier: Sprint
+  mobile_number: 4445556666
+  state: NY
+  truck_ownership_per_mile: 0.27
+  web_page: www.directfreight.com
+  zip: '12345'
+properties:
+  address:
+    type: string
+  carrier_onboard_url:
+    type: string
+  carrier_terms_url:
+    type: string
+  city:
+    type: string
+  company:
+    description: Company name.
+    type: string
+  contact_extension:
+    type: integer
+  contact_name:
+    description: Contact name.
+    type: string
+  contact_number:
+    type: integer
+  dispatch_extension:
+    description: Limited to 3 integers
+    type: integer
+  dispatch_number:
+    type: integer
+  dot_number:
+    description: Maximum 8 numbers.
+    type: number
+  driver_per_mile:
+    description: STAGE=Private
+    type: number
+  fax_number:
+    type: integer
+  fuel_capacity:
+    description: STAGE=Private
+    type: number
+  ins_permits_per_mile:
+    description: STAGE=Private
+    type: number
+  maint_per_mile:
+    description: STAGE=Private
+    type: number
+  mc_number:
+    description: Maximum 8 numbers.
+    type: number
+  miles_per_gal:
+    description: STAGE=Private
+    type: number
+  mobile_carrier:
+    enum:
+      - Other/Unknown
+      - AT&T
+      - Verizon
+      - Sprint
+      - T-Mobile
+      - US Cellular
+      - Nextel
+      - Virgin Mobile
+      - Boost Mobile
+      - Straight Talk
+      - Tracfone
+      - NET10
+      - Metro PCS
+      - Cricket
+      - Rogers
+      - Fido
+      - Bell Mobility
+      - Telus
+      - Clearnet
+      - Solo Mobile
+      - Koodo Mobile
+    type: string
+  mobile_number:
+    type: integer
+  state:
+    type: string
+  truck_ownership_per_mile:
+    description: STAGE=Private
+    type: number
+  web_page:
+    type: string
+  zip:
+    type: string
+type: object
+x-restlet:
+  section: PROFILES

@@ -1,0 +1,49 @@
+example: test
+properties:
+  body:
+    description: Body of the note
+    example: This is a test note.
+    type: string
+  date_added:
+    description: The date the note was created.
+    example: 2019-08-23T00:00:00.000Z
+    format: date
+    type: string
+  date_modified:
+    description: Date of the last update to this note
+    example: 2019-08-24T00:00:00.000Z
+    format: date
+    type: string
+  deleted:
+    description: >-
+      Not sure what this field is?  Is this the date the note was deleted or the
+      status of the load?
+    type: string
+  entry_id:
+    description: Entry id of the load associated with this note.
+    example: 93b30df654ccd860eb34775214877921
+    type: string
+  id:
+    description: The id of the note.
+    example: 55551
+    type: integer
+  important:
+    description: Identifies notes marked as important.
+    example: true
+    type: boolean
+  title:
+    description: Title of note.
+    example: MO
+    type: string
+required:
+  - body
+  - date_added
+  - date_modified
+  - deleted
+  - entry_id
+  - id
+  - important
+  - title
+type: object
+x-restlet:
+  section: BOARDS

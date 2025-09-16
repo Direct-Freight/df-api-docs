@@ -1,0 +1,37 @@
+post:
+  description: >-
+    delete and replace all entries in posting_type with the entries in
+    {posting_type}_temp.  For example, if posting_type=loads, then source
+    posting_type is loads_temp.
+  parameters:
+    - enum:
+        - loads
+        - trucks
+        - test_loads
+        - test_trucks
+      in: path
+      name: posting_type
+      required: true
+      type: string
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - description: >-
+        If this option is specified and its value is positive, this endpoint
+        will additionaly return the total count of items inserted and deleted,
+        it will also return an erray of the md5sums that were moved.
+      in: query
+      name: return_details
+      required: false
+      type: boolean
+  responses:
+    '202':
+      description: Success
+      schema:
+        $ref: '#/definitions/postings-replace_all_response'
+  summary: replace_all
+  tags:
+    - postings
+x-restlet:
+  section: POSTINGS

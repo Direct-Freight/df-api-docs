@@ -1,0 +1,56 @@
+example: |-
+  {
+    "sub_accounts": [
+      {
+        "id": 1234,
+        "status": "invited",
+        "contact_name": "...",
+        "dispatch_number": "(123) 123-4567",
+        "mc_number": "12312312",
+        "dot_number": "45645645",
+        "username": "...",
+        "email": "user@domain.com",
+        "department_id": 5,
+        "department_name": "West Coast"
+      }
+    ],
+    "subscriptions_purchased": 5,
+    "active_sub_accounts": 3
+  }
+properties:
+  active_sub_accounts:
+    description: Number of licenses used.
+    type: integer
+  sub_accounts:
+    items:
+      properties:
+        contact_name:
+          type: string
+        department_id:
+          type: integer
+        department_name:
+          type: string
+        dispatch_number:
+          type: string
+        dot_number:
+          type: string
+        email:
+          type: string
+        id:
+          description: The ID of the additional user.
+          type: integer
+        mc_number:
+          type: string
+        status:
+          description: The status of the sub-account.
+          type: string
+        username:
+          type: string
+      type: object
+    type: array
+  subscriptions_purchased:
+    description: Number of licenses purchased.
+    type: integer
+type: object
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

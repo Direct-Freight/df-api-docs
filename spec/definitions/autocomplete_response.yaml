@@ -1,0 +1,32 @@
+example: |-
+  {
+    "city": "city",
+    "state_abbreviation": "{}",
+    "state_name": "{}"
+  }
+properties:
+  city:
+    description: The name of the city.  Only returned if record_type is city or postal
+    type: string
+  postal_code:
+    description: The postal code of the city.  Only returned if match type is postal.
+    type: string
+  record_type:
+    enum:
+      - country
+      - state
+      - province
+      - city
+      - postal
+    type: string
+  region_code:
+    type: string
+  region_name:
+    type: string
+required:
+  - record_type
+  - region_code
+  - region_name
+type: object
+x-restlet:
+  section: LOCATIONS

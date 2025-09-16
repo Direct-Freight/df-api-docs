@@ -1,0 +1,87 @@
+get:
+  description: Retrieves a single load
+  parameters:
+    - description: Defines the type of board requested.
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
+      x-example: loads
+    - description: the entry_id associated with the data you want to get.
+      in: query
+      name: entry_id
+      required: true
+      type: string
+      x-example: 0123456789012345678901234567890123
+    - description: >-
+        The page that is requesting the information.  This is used to determine
+        when to retrieve real time information from the shipper or broker. 
+        Example:  requesting_page="book-now" will return real time information
+        for certain partners.  Stage=Private
+      in: query
+      name: requesting_page
+      required: false
+      type: string
+    - in: header
+      name: end-user-token
+      required: false
+      type: string
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/board_response_item'
+  summary: Retrieve single load
+  tags:
+    - boards
+post:
+  description: >-
+    This is the primary search method for loads and trucks. Please specifify at
+    least an origin or destination.  The origin or destination may be state
+    only.
+  parameters:
+    - description: Defines the type of board requested.
+      enum:
+        - loads
+        - trucks
+      in: path
+      name: board_type
+      required: true
+      type: string
+      x-example: loads
+    - default: 01234567890abc
+      in: header
+      name: end-user-token
+      required: false
+      type: string
+      x-example: 01234567890abc
+    - default: 0
+      description: >-
+        If this optional header is sent and set to a positive value, the API
+        will not update the users last_date, this option is used internally when
+        sending email alerts. STAGE=Private
+      in: header
+      name: x-dont-update-user-last-date
+      required: false
+      type: number
+      x-example: 1
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/board_request'
+  responses:
+    '200':
+      description: Returns a list matching your search.
+      schema:
+        $ref: '#/definitions/board_response'
+    '422':
+      $ref: '#/responses/error_422'
+  summary: Retrieve a board
+  tags:
+    - boards
+x-restlet:
+  section: BOARDS

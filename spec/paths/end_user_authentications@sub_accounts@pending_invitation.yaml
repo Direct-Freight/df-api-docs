@@ -1,0 +1,28 @@
+get:
+  description: Check if current user has pending sub account invitations
+  parameters: []
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        properties:
+          primary_user_company:
+            description: Company of the primary user who invited.
+            type: string
+          primary_user_email:
+            description: Email of the primary user who invited.
+            type: string
+          primary_user_id:
+            description: ID of the primary user who invited.
+            type: number
+          primary_user_name:
+            description: Name of the primary user who invited.
+            type: string
+          status:
+            description: The status of the invitation.
+            type: string
+        type: object
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS

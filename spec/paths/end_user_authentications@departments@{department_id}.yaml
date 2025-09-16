@@ -1,0 +1,75 @@
+delete:
+  parameters:
+    - description: The User ID to delete.
+      in: query
+      name: user_id
+      required: true
+      type: integer
+      x-example: '?user_id=1&user_id=2'
+    - description: The email to unlink from the department.
+      in: query
+      name: email
+      required: true
+      type: integer
+      x-example: '?email=foo@bar.com&email=bar@foo.com'
+    - description: Department ID
+      in: path
+      name: department_id
+      required: true
+      type: integer
+  responses:
+    '204':
+      description: Will not return content on a successful deletion.
+  summary: Delete requested User ID from department.
+  tags:
+    - end_user_authentications
+get:
+  description: Get departments users
+  parameters:
+    - description: Department ID
+      in: path
+      name: department_id
+      required: true
+      type: integer
+  responses:
+    '200':
+      description: Get departments users
+      schema:
+        $ref: '#/definitions/department_users_response'
+  tags:
+    - end_user_authentications
+post:
+  parameters:
+    - description: The User ID to link to the department.
+      in: query
+      name: user_id
+      required: false
+      type: string
+      x-example: '?user_id=1&user_id=2'
+    - description: The email to add to the department.
+      in: query
+      name: email
+      required: false
+      type: integer
+      x-example: '?email=foo@bar.com&email=bar@foo.com'
+    - description: Department ID
+      in: path
+      name: department_id
+      required: true
+      type: integer
+  responses:
+    '201':
+      description: successful operation
+      schema:
+        properties:
+          message:
+            description: Department user created.
+            type: string
+        type: object
+    '422':
+      $ref: '#/responses/error_422'
+  summary: Create department user.
+  tags:
+    - end_user_authentications
+x-restlet:
+  section: END_USER_AUTHENTICATIONS
