@@ -5,6 +5,11 @@ properties:
       values less than 1 minute.
     example: 15
     type: integer
+  average_outbound_rate_at_destination:
+    description: >-
+      Average rate for this type of load at destination during the last 28
+      days.  Returns either "$X.XX" or "Upgrade" or "Sign Up"
+    type: string
   avg_market_rate:
     description: >-
       Average rate for this type of load during the last 28 days.  Returns
