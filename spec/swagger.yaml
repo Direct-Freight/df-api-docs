@@ -41,6 +41,10 @@ info:
     user.
 
     The user token can be valid for up to 24 hours depending on activity.
+
+
+    This API is subject to the terms and conditions found here: 
+    https://www.directfreight.com/policies/directfreight_api_terms.html
   title: Direct Freight Load Board API
   version: '1.0'
   x-logo:
