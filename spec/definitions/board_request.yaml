@@ -246,6 +246,8 @@ properties:
       - book_now
       - avg_market_rate
       - posting_type
+      - average_outbound_rate_at_destination
+      - loads_at_destination
     example: age
     type: string
   tier:

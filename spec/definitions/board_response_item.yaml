@@ -135,6 +135,11 @@ properties:
   length:
     description: Length in feet.  Will be null if empty.
     type: number
+  loads_at_destination:
+    description: >-
+      Number of loads at destination.  Returns either "XXX" or "Upgrade" or
+      "Sign Up"
+    type: string
   origin_city:
     description: Origin city of item.
     example: Chicago

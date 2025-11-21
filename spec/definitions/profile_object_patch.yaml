@@ -7,7 +7,7 @@ example:
   contact_extension: 111
   contact_name: J.P. Morgan
   contact_number: 8885559999
-  dispatch_extension: 123
+  dispatch_extension: 1234
   dispatch_number: 4445556666
   dot_number: '12345678'
   email: test@directfreight.com
@@ -38,7 +38,7 @@ properties:
   contact_number:
     type: integer
   dispatch_extension:
-    description: Limited to 3 integers
+    description: Limited to 4 integers
     type: integer
   dispatch_number:
     type: integer
