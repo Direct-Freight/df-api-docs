@@ -3286,6 +3286,8 @@ definitions:
         - book_now
         - avg_market_rate
         - posting_type
+        - average_outbound_rate_at_destination
+        - loads_at_destination
       sort_direction:
         type: string
         example: asc
@@ -3442,6 +3444,9 @@ definitions:
       length:
         type: number
         description: Length in feet.  Will be null if empty.
+      loads_at_destination:
+        type: string
+        description: Number of loads at destination.  Returns either "XXX" or "Upgrade" or "Sign Up"
       origin_city:
         type: string
         example: Chicago
@@ -5085,7 +5090,7 @@ definitions:
         type: integer
       dispatch_extension:
         type: integer
-        description: Limited to 3 integers
+        description: Limited to 4 integers
       dispatch_number:
         type: integer
       dot_number:
@@ -5152,32 +5157,7 @@ definitions:
         description: STAGE=Private
     x-restlet:
       section: PROFILES
-    example:
-      address: 11 Wall Street
-      city: New York
-      company: NY Stock Exchange
-      contact_extension: 111
-      contact_name: J.P. Morgan
-      contact_number: 8885559999
-      dispatch_extension: 123
-      dispatch_number: 4445556666
-      dot_number: "12345678"
-      fax_number: 1112223333
-      mc_number: "12345678"
-      mobile_carrier: Sprint
-      mobile_number: 4445556666
-      state: NY
-      web_page: www.directfreight.com
-      carrier_onboard_url: www.carrier.com/onboard
-      carrier_terms_url: www.carrier.com/terms
-      zip: "12345"
-      miles_per_gal: 6.5
-      maint_per_mile: 0.17
-      driver_per_mile: 0.72
-      truck_ownership_per_mile: 0.27
-      ins_permits_per_mile: 0.13
-      fuel_capacity: 200.0
-      deadhead_per_mile: 1.29
+    example: "{ \"address\": \"11 Wall Street\", \"city\": \"New York\", \"company\": \"NY Stock Exchange\", \"contact_extension\": 111, \"contact_name\": \"J.P. Morgan\", \"contact_number\": 8885559999, \"dispatch_extension\": 1234, \"dispatch_number\": 4445556666, \"dot_number\": \"12345678\", \"fax_number\": 1112223333, \"mc_number\": \"12345678\", \"mobile_carrier\": \"Sprint\", \"mobile_number\":4445556666, \"state\": \"NY\", \"web_page\": \"www.directfreight.com\", \"carrier_onboard_url\": \"www.carrier.com/onboard\", \"carrier_terms_url\": \"www.carrier.com/terms\", \"zip\": \"12345\", \"miles_per_gal\": 6.50, \"maint_per_mile\": 0.17, \"driver_per_mile\": 0.72, \"truck_ownership_per_mile\": 0.27, \"ins_permits_per_mile\": 0.13, \"fuel_capacity\": 200.00, \"deadhead_per_mile\": 1.29 }"
   profile_object_patch:
     type: object
     properties:
@@ -5197,7 +5177,7 @@ definitions:
         type: integer
       dispatch_extension:
         type: integer
-        description: Limited to 3 integers
+        description: Limited to 4 integers
       dispatch_number:
         type: integer
       dot_number:
@@ -5254,7 +5234,7 @@ definitions:
       contact_extension: 111
       contact_name: J.P. Morgan
       contact_number: 8885559999
-      dispatch_extension: 123
+      dispatch_extension: 1234
       dispatch_number: 4445556666
       dot_number: "12345678"
       email: test@directfreight.com
@@ -5585,7 +5565,7 @@ parameters:
   posting_type:
     name: posting_type
     in: path
-    description: "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", \"test_trucks\", \"live_loads_temp\", \"live_trucks_temp\", \"test_loads_temp\", \"test_trucks_temp\", \"olp_network\""
+    description: "Valid types are \"loads\", \"trucks\", \"private_loads\", \"private_trucks\", \"test_loads\", \"test_trucks\",\"live_loads_temp\", \"live_trucks_temp\", \"test_loads_temp\", \"test_trucks_temp\", \"olp_network\""
     required: true
     type: string
     enum:
