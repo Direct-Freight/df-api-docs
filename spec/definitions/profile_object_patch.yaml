@@ -1,23 +1,12 @@
-example:
-  address: 11 Wall Street
-  carrier_onboard_url: www.carrier.com/onboard
-  carrier_terms_url: www.carrier.com/terms
-  city: New York
-  company: NY Stock Exchange
-  contact_extension: 111
-  contact_name: J.P. Morgan
-  contact_number: 8885559999
-  dispatch_extension: 1234
-  dispatch_number: 4445556666
-  dot_number: '12345678'
-  email: test@directfreight.com
-  fax_number: 1112223333
-  mc_number: '12345678'
-  mobile_carrier: Sprint
-  mobile_number: 4445556666
-  state: NY
-  web_page: www.directfreight.com
-  zip: '12345'
+example: >-
+  { "address": "11 Wall Street", "city": "New York", "company": "NY Stock
+  Exchange", "contact_extension": 111, "contact_name": "J.P. Morgan",
+  "contact_number": 8885559999, "dispatch_extension": 1234, "dispatch_number":
+  4445556666, "dot_number": "12345678", "email": "test@directfreight.com",
+  "fax_number": 1112223333, "mc_number": "12345678", "mobile_carrier": "Sprint",
+  "mobile_number":4445556666, "state": "NY", "web_page":
+  "www.directfreight.com", "carrier_onboard_url": "www.carrier.com/onboard",
+  "carrier_terms_url": "www.carrier.com/terms", "zip": "12345" }
 properties:
   address:
     type: string

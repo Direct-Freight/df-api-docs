@@ -5,5 +5,8 @@ properties:
     type: string
   summary:
     description: Summary of this field.
-    example: '411 Locust Chillicothe, MO 64601 on 03-02-2023'
+    example: |
+      411 Locust
+      Chillicothe, MO 64601
+      on 03-02-2023
     type: string
