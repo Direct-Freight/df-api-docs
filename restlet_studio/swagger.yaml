@@ -1525,6 +1525,7 @@ paths:
         enum:
         - email
         - text
+        - voice
         - push
       - name: end-user-token
         in: header
@@ -1567,7 +1568,7 @@ paths:
       tags:
       - optins
       summary: STAGE=UNK Submit a request to be opted in.
-      description: "Currently only Push notifications are implemented. With them a post creates and approves the optin. Later on when text/email is ported post will create the optin with the status of 'no response' meaning they haven't replied with the propper code, or clicked an authorization link."
+      description: "Text, voice, push and manual are implemented. With push a post creates and approves the optin. With the others, a code is sent to the refecenced contact, and can be verified via the PATCH operation. Email has not yet been enabled."
       parameters:
       - name: end-user-token
         in: header
@@ -1583,7 +1584,7 @@ paths:
           properties:
             notification_channel:
               type: string
-              description: "Currently defaults to all, and is ignored. When we start using it it will be for opting people out or in one list like alerts, or messages, but not others."
+              description: Everything but email has been implemented. Push is 1 step verification. Everyone but push and manual uses PATCH to verify the code.
               default: all
             notification_medium:
               type: string
@@ -1591,11 +1592,12 @@ paths:
               enum:
               - email
               - text
+              - voice
+              - manual
               - push
             tokens:
               type: object
-              example: "\"tokens\": { \"ios\": \"12345678\", \"android\": \"5432344\" } "
-              description: "This is how you can add multiple push notifications at once, or for systems that have multiple tokens required."
+              description: "This is how you can add multiple push notifications at once, or for systems that have multiple tokens required. For other notification mediums use \"contact_number\": \"1234567890\" instead of ios or android."
               properties:
                 $SERVICE_OR_KEY_NAME:
                   type: string
@@ -1618,6 +1620,7 @@ paths:
         enum:
         - email
         - text
+        - voice
         - push
       - name: notification_channel
         in: query
@@ -1639,6 +1642,7 @@ paths:
       tags:
       - optins
       summary: STAGE=UNK Confirm an optin.
+      description: "Used to verify an optin code, or update which channels the user is subscribed to. Email is not yet enabled."
       parameters:
       - name: end-user-token
         in: header
@@ -1651,14 +1655,21 @@ paths:
           type: object
           required:
           - notification_medium
-          - verification_code
           properties:
             notification_medium:
               type: string
               enum:
               - email
               - text
-            verification_code:
+              - voice
+            notification_channel:
+              type: string
+              description: Specify which channels to subscribe to update. You can also send in an empty string to opt out of everything.
+              enum:
+              - all
+              - alerts
+              - search_data
+            code:
               type: string
               description: "This code is generated on a POST, and will arrive via the same medium it was designated for."
       responses:
@@ -3261,7 +3272,6 @@ definitions:
         type: string
         example: age
         description: The system automatically chooses the most common order based on the parameter chosen.  Sort order can be specified by using the "sort_direction" parameter.
-        default: age
         enum:
         - origin_city
         - origin_state
@@ -3288,14 +3298,15 @@ definitions:
         - posting_type
         - average_outbound_rate_at_destination
         - loads_at_destination
+        default: age
       sort_direction:
         type: string
         example: asc
         description: The system automatically chooses the most common order based on the parameter chosen. Use this option if you want a specific sort direction.
-        default: asc
         enum:
         - asc
         - desc
+        default: asc
       trailer_type:
         type: array
         example:
@@ -5227,26 +5238,7 @@ definitions:
         type: string
     x-restlet:
       section: PROFILES
-    example:
-      address: 11 Wall Street
-      city: New York
-      company: NY Stock Exchange
-      contact_extension: 111
-      contact_name: J.P. Morgan
-      contact_number: 8885559999
-      dispatch_extension: 1234
-      dispatch_number: 4445556666
-      dot_number: "12345678"
-      email: test@directfreight.com
-      fax_number: 1112223333
-      mc_number: "12345678"
-      mobile_carrier: Sprint
-      mobile_number: 4445556666
-      state: NY
-      web_page: www.directfreight.com
-      carrier_onboard_url: www.carrier.com/onboard
-      carrier_terms_url: www.carrier.com/terms
-      zip: "12345"
+    example: "{ \"address\": \"11 Wall Street\", \"city\": \"New York\", \"company\": \"NY Stock Exchange\", \"contact_extension\": 111, \"contact_name\": \"J.P. Morgan\", \"contact_number\": 8885559999, \"dispatch_extension\": 1234, \"dispatch_number\": 4445556666, \"dot_number\": \"12345678\", \"email\": \"test@directfreight.com\", \"fax_number\": 1112223333, \"mc_number\": \"12345678\", \"mobile_carrier\": \"Sprint\", \"mobile_number\":4445556666, \"state\": \"NY\", \"web_page\": \"www.directfreight.com\", \"carrier_onboard_url\": \"www.carrier.com/onboard\", \"carrier_terms_url\": \"www.carrier.com/terms\", \"zip\": \"12345\" }"
   stop_item:
     properties:
       label:
@@ -5255,7 +5247,10 @@ definitions:
         description: Label for this field.
       summary:
         type: string
-        example: "411 Locust Chillicothe, MO 64601 on 03-02-2023"
+        example: |
+          411 Locust
+          Chillicothe, MO 64601
+          on 03-02-2023
         description: Summary of this field.
   truck_info_object:
     type: object
@@ -5276,14 +5271,7 @@ definitions:
         type: number
     x-restlet:
       section: PROFILES
-    example:
-      miles_per_gal: 6.5
-      maint_per_mile: 0.17
-      driver_per_mile: 0.72
-      truck_ownership_per_mile: 0.27
-      ins_permits_per_mile: 0.13
-      fuel_capacity: 200.0
-      deadhead_per_mile: 1.29
+    example: "{\n\"miles_per_gal\": 6.50,\n\"maint_per_mile\": 0.17,\n\"driver_per_mile\": 0.72,\n\"truck_ownership_per_mile\": 0.27,\n\"ins_permits_per_mile\": 0.13,\n\"fuel_capacity\": 200.00,\n\"deadhead_per_mile\": 1.29      \n}\n"
   rename_custom_field:
     type: object
     required:
