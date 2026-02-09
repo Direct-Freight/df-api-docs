@@ -24,7 +24,7 @@ post:
         $ref: '#/definitions/alert_search_response'
     '404':
       description: Alert not found using specified parameters.
-  summary: STAGE=UNKNOWN Create an alert.
+  summary: STAGE=UNKNOWN Search users alerts.
   tags:
     - alerts
 x-restlet:
