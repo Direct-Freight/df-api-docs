@@ -142,7 +142,7 @@ paths:
     post:
       tags:
       - alerts
-      summary: STAGE=UNKNOWN Create an alert.
+      summary: STAGE=UNKNOWN Search users alerts.
       description: "This method will search a users alert. It accepts the exact same structure as the POST method for /alerts/. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules."
       parameters:
       - name: end-user-token
