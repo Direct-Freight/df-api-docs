@@ -2596,6 +2596,38 @@ paths:
           description: success
     x-restlet:
       section: PROFILES
+  /profiles/twilio/xml/{UUID}:
+    get:
+      tags:
+      - profiles
+      summary: STAGE=PRIVATE This URL doesn't require an API key. It takes a UUID in the url. This will generate an XML document with a 6 digit verification code in it. The Twilio API uses this to call the related user and say out the code.
+      parameters:
+      - name: UUID
+        in: path
+        description: "For testing, you can initiate a voice verification. Then check the FMCSA database tables to get the UUID."
+        required: true
+        type: string
+        maxLength: 36
+        minLength: 36
+      responses:
+        "200":
+          description: This will return an XML document.
+    post:
+      tags:
+      - profiles
+      summary: STAGE=PRIVATE Same as GET. According to the code comments sometimes the Twilio service sends POST requests and sometimes it's GET requests. There was no extra info on why.
+      parameters:
+      - name: UUID
+        in: path
+        required: true
+        type: string
+        maxLength: 36
+        minLength: 36
+      responses:
+        "200":
+          description: Same as the GET.
+    x-restlet:
+      section: PROFILES
   /validations/email_exists:
     get:
       tags:
@@ -3200,6 +3232,14 @@ definitions:
         type: integer
         example: 40000
         description: Return items that weight less than this.
+      min_tripmiles:
+        type: integer
+        example: 100
+        description: Return items with at least this many tripmiles.
+      max_tripmiles:
+        type: integer
+        example: 500
+        description: Return items with at most this many tripmiles.
       min_length:
         type: integer
         example: 15
