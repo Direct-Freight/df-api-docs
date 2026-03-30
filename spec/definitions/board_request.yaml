@@ -102,6 +102,10 @@ properties:
     description: Return items that pay at most this amount.
     example: 300
     type: integer
+  max_tripmiles:
+    description: Return items with at most this many tripmiles.
+    example: 500
+    type: integer
   max_weight:
     description: Return items that weight less than this.
     example: 40000
@@ -121,6 +125,10 @@ properties:
   min_pay_rate:
     description: Return items that pay at least this amount.
     example: 50
+    type: integer
+  min_tripmiles:
+    description: Return items with at least this many tripmiles.
+    example: 100
     type: integer
   min_weight:
     description: Return items that weight at least this much.

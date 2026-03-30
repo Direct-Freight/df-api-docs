@@ -1,0 +1,39 @@
+get:
+  parameters:
+    - description: >-
+        For testing, you can initiate a voice verification. Then check the FMCSA
+        database tables to get the UUID.
+      in: path
+      maxLength: 36
+      minLength: 36
+      name: UUID
+      required: true
+      type: string
+  responses:
+    '200':
+      description: This will return an XML document.
+  summary: >-
+    STAGE=PRIVATE This URL doesn't require an API key. It takes a UUID in the
+    url. This will generate an XML document with a 6 digit verification code in
+    it. The Twilio API uses this to call the related user and say out the code.
+  tags:
+    - profiles
+post:
+  parameters:
+    - in: path
+      maxLength: 36
+      minLength: 36
+      name: UUID
+      required: true
+      type: string
+  responses:
+    '200':
+      description: Same as the GET.
+  summary: >-
+    STAGE=PRIVATE Same as GET. According to the code comments sometimes the
+    Twilio service sends POST requests and sometimes it's GET requests. There
+    was no extra info on why.
+  tags:
+    - profiles
+x-restlet:
+  section: PROFILES
