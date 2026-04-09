@@ -2727,8 +2727,6 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/alert_response_item"
-    x-restlet:
-      section: ALERTS
     description: "A hash containing a list of objects. Each entry should have 1 alert object, and 1 search object, and 2 integer counts. One for the number of new loads, and one for the number of total loads that match the search critera."
     example: |-
       {
@@ -2737,6 +2735,8 @@ definitions:
           "{}"
         ]
       }
+    x-restlet:
+      section: ALERTS
   alert:
     type: object
     required:
@@ -3017,14 +3017,14 @@ definitions:
         type: string
       region_name:
         type: string
-    x-restlet:
-      section: LOCATIONS
     example: |-
       {
         "city": "city",
         "state_abbreviation": "{}",
         "state_name": "{}"
       }
+    x-restlet:
+      section: LOCATIONS
   sub_account_response:
     type: object
     properties:
@@ -3061,8 +3061,6 @@ definitions:
       active_sub_accounts:
         type: integer
         description: Number of licenses used.
-    x-restlet:
-      section: END_USER_AUTHENTICATIONS
     example: |-
       {
         "sub_accounts": [
@@ -3082,6 +3080,8 @@ definitions:
         "subscriptions_purchased": 5,
         "active_sub_accounts": 3
       }
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
   departments_response:
     type: object
     properties:
@@ -3096,8 +3096,6 @@ definitions:
             name:
               type: string
               description: The name of the department.
-    x-restlet:
-      section: END_USER_AUTHENTICATIONS
     example: |-
       {
           "departments": [
@@ -3107,6 +3105,8 @@ definitions:
               }
           ]
       }
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
   department_users_response:
     type: object
     properties:
@@ -3133,8 +3133,6 @@ definitions:
               type: string
             email:
               type: string
-    x-restlet:
-      section: END_USER_AUTHENTICATIONS
     example: |-
       {
         "department_users": [
@@ -3150,6 +3148,8 @@ definitions:
           }
         ]
       }
+    x-restlet:
+      section: END_USER_AUTHENTICATIONS
   board_request:
     type: object
     properties:
@@ -3385,8 +3385,6 @@ definitions:
           - PNEU
           - CONT
           - OTHER
-    x-restlet:
-      section: BOARDS
     example:
       destination_city: chicago
       destination_radius: 300
@@ -3414,6 +3412,8 @@ definitions:
       min_age: 50
       max_age: 2000
       google_recaptcha_score: 0.7
+    x-restlet:
+      section: BOARDS
   board_response_item:
     type: object
     required:
@@ -3723,8 +3723,6 @@ definitions:
           avg_fuel_price_trip:
             type: integer
             description: Simple avgerage of all state average fuel prices for trip.  Does not account for miles traveled in each state.
-    x-restlet:
-      section: BOARDS
     example:
       executive_summary: "Based on all of the information we have about your truck and this load we believe this load would have a net profit of $-736.27 after you paid the driver(yourself) and all of the expenses. Fuel costs vary across your route you might consider buying fuel in MO, where fuel costs are $0.458 lower than the average fuel price along this route. "
       load_info:
@@ -3794,6 +3792,8 @@ definitions:
         ins_permits_per_mile: 0.13
         fuel_capacity: 200.0
         deadhead_per_mile: 1.29
+    x-restlet:
+      section: BOARDS
   boards_freight_rate_response:
     properties:
       TRAILER_TYPE:
@@ -3841,9 +3841,9 @@ definitions:
               CURRENT_DATE:
                 type: string
                 format: date
+    description: There is some debug trailer types. They are formatted as TRAILER_TYPE_$subsection. They will most likely be removed at the same time as the below mentioned debug variables.
     x-restlet:
       section: BOARDS
-    description: There is some debug trailer types. They are formatted as TRAILER_TYPE_$subsection. They will most likely be removed at the same time as the below mentioned debug variables.
   boards_saved_lanes_response:
     properties:
       list:
@@ -3873,8 +3873,6 @@ definitions:
             type: number
           reefer_gross:
             type: number
-    x-restlet:
-      section: BOARDS
     description: Each saved lane entry is a key/value object in the list.
     example:
       list:
@@ -3890,6 +3888,8 @@ definitions:
         van_gross: 222
         reefer_per_mile: 3.33
         reefer_gross: 333
+    x-restlet:
+      section: BOARDS
   boards_accept_offer_response:
     type: object
     properties:
@@ -4085,8 +4085,6 @@ definitions:
       search_url:
         type: string
         description: URL that can be used to perform this same search on the DirectFreight Website. Will only be returned if return_web_url is requested.
-    x-restlet:
-      section: BOARDS
     example: |-
       {
         "list": "{}",
@@ -4096,6 +4094,8 @@ definitions:
         "total_new": 0,
         "search_url": "https://www.directfreight.com/..."
       }
+    x-restlet:
+      section: BOARDS
   create_notes:
     type: object
     required:
@@ -4214,14 +4214,14 @@ definitions:
           type: string
       error:
         type: string
-    x-restlet:
-      section: common_definitions
     example: |-
       {
         "code": 1,
         "error": "Generic Validation",
         "description": [ "The e-mail address must be valid." ]
       }
+    x-restlet:
+      section: common_definitions
   get_boards_notes_response:
     type: object
     required:
@@ -4242,8 +4242,6 @@ definitions:
         description: "A list of each custom field, type and it's corresponding position."
         items:
           type: string
-    x-restlet:
-      section: not categorized yet
     example: |-
       {
         "list": [
@@ -4251,6 +4249,8 @@ definitions:
           "field2"
         ]
       }
+    x-restlet:
+      section: not categorized yet
   get_custom_fields_data_response:
     type: object
     properties:
@@ -4259,8 +4259,6 @@ definitions:
         description: "A list of each custom field, type and it's corresponding position."
         items:
           type: string
-    x-restlet:
-      section: not categorized yet
     example: |-
       {
         "load_id": [
@@ -4268,18 +4266,20 @@ definitions:
           "field2" : "data2"
         ]
       }
+    x-restlet:
+      section: not categorized yet
   get_email_exists_response:
     type: object
     properties:
       exists:
         type: boolean
         description: Returns a true value if it is associated with an account.
-    x-restlet:
-      section: not categorized yet
     example: |-
       {
         "exists": true
       }
+    x-restlet:
+      section: not categorized yet
   get_hidden_companies_response:
     type: object
     properties:
@@ -4288,8 +4288,6 @@ definitions:
         description: A subset of companies that need to be marked as hidden.
         items:
           type: string
-    x-restlet:
-      section: not categorized yet
     example: |-
       {
         "company_name": [
@@ -4297,6 +4295,8 @@ definitions:
           "company_name"
         ]
       }
+    x-restlet:
+      section: not categorized yet
   get_hidden_entries:
     type: object
     properties:
@@ -4305,12 +4305,12 @@ definitions:
         description: A subset of entries that need to be marked as hidden.
         items:
           type: string
-    x-restlet:
-      section: not categorized yet
     example:
       entry_id:
       - entry_id
       - entry_id
+    x-restlet:
+      section: not categorized yet
   get_state_list_response:
     properties:
       list:
@@ -4350,9 +4350,9 @@ definitions:
                 outbound_color:
                   type: string
                   description: This is an optional color code you can use to shade the map.
+    example: "{\n  \"list\": { \n    \"AZ\": { \n      \"inbound\": 10, \n      \"outbound\": 5, \n      \"outbound_percentage\": 50,\n      \"outbound_color\": \"#43434334\",\n      \"freight_rates\": {\n        \"inbound\": {\n          \"ALL\": \"5.95\"\n        },\n        \"outbound\": {\n          \"ALL\": \"5.95\"\n        }\n      }\n    } \n  }\n}"
     x-restlet:
       section: BOARDS
-    example: "{\n  \"list\": { \n    \"AZ\": { \n      \"inbound\": 10, \n      \"outbound\": 5, \n      \"outbound_percentage\": 50,\n      \"outbound_color\": \"#43434334\",\n      \"freight_rates\": {\n        \"inbound\": {\n          \"ALL\": \"5.95\"\n        },\n        \"outbound\": {\n          \"ALL\": \"5.95\"\n        }\n      }\n    } \n  }\n}"
   hidden_entry_object:
     type: object
     required:
@@ -4482,9 +4482,9 @@ definitions:
         type: string
         example: MO
         description: Title of note.
+    example: test
     x-restlet:
       section: BOARDS
-    example: test
   patch_alert_properties:
     type: object
     required:
@@ -4578,14 +4578,14 @@ definitions:
         description: A list of posting objects you can iterate over.
         items:
           $ref: "#/definitions/postings_post_response_item"
-    x-restlet:
-      section: POSTINGS
     example: |-
       {
         "list": [
           .....
         ]
       }
+    x-restlet:
+      section: POSTINGS
   postings_entry_object:
     type: object
     required:
@@ -4724,8 +4724,6 @@ definitions:
         type: string
         format: date
         description: When this item was created.  STAGE=PRIVATE
-    x-restlet:
-      section: POSTINGS
     example:
       allowed_actions:
       - call
@@ -4753,6 +4751,8 @@ definitions:
       dispatch_email: dispatch@directfreight.com
       dispatch_mobile_number: 7777777777
       real_age: 2025-07-07
+    x-restlet:
+      section: POSTINGS
   postings_patch_object:
     type: object
     properties:
@@ -4888,8 +4888,6 @@ definitions:
         type: string
         format: date
         description: The date the entry was created.  STAGE=PRIVATE
-    x-restlet:
-      section: POSTINGS
     example:
       custom_id: abc123
       comment: hello world
@@ -4917,6 +4915,8 @@ definitions:
       dispatch_email: dispatch@directfreight.com
       dispatch_mobile_number: 7777777777
       real_age: 2025-07-01
+    x-restlet:
+      section: POSTINGS
   postings_post_response_item:
     type: object
     required:
@@ -5081,9 +5081,9 @@ definitions:
               - Error
           required:
           - status
+    example: Success
     x-restlet:
       section: POSTINGS
-    example: Success
   postings-copy_or_move_response:
     type: object
     properties:
@@ -5206,9 +5206,9 @@ definitions:
       fuel_capacity:
         type: number
         description: STAGE=Private
+    example: "{ \"address\": \"11 Wall Street\", \"city\": \"New York\", \"company\": \"NY Stock Exchange\", \"contact_extension\": 111, \"contact_name\": \"J.P. Morgan\", \"contact_number\": 8885559999, \"dispatch_extension\": 1234, \"dispatch_number\": 4445556666, \"dot_number\": \"12345678\", \"fax_number\": 1112223333, \"mc_number\": \"12345678\", \"mobile_carrier\": \"Sprint\", \"mobile_number\":4445556666, \"state\": \"NY\", \"web_page\": \"www.directfreight.com\", \"carrier_onboard_url\": \"www.carrier.com/onboard\", \"carrier_terms_url\": \"www.carrier.com/terms\", \"zip\": \"12345\", \"miles_per_gal\": 6.50, \"maint_per_mile\": 0.17, \"driver_per_mile\": 0.72, \"truck_ownership_per_mile\": 0.27, \"ins_permits_per_mile\": 0.13, \"fuel_capacity\": 200.00, \"deadhead_per_mile\": 1.29 }"
     x-restlet:
       section: PROFILES
-    example: "{ \"address\": \"11 Wall Street\", \"city\": \"New York\", \"company\": \"NY Stock Exchange\", \"contact_extension\": 111, \"contact_name\": \"J.P. Morgan\", \"contact_number\": 8885559999, \"dispatch_extension\": 1234, \"dispatch_number\": 4445556666, \"dot_number\": \"12345678\", \"fax_number\": 1112223333, \"mc_number\": \"12345678\", \"mobile_carrier\": \"Sprint\", \"mobile_number\":4445556666, \"state\": \"NY\", \"web_page\": \"www.directfreight.com\", \"carrier_onboard_url\": \"www.carrier.com/onboard\", \"carrier_terms_url\": \"www.carrier.com/terms\", \"zip\": \"12345\", \"miles_per_gal\": 6.50, \"maint_per_mile\": 0.17, \"driver_per_mile\": 0.72, \"truck_ownership_per_mile\": 0.27, \"ins_permits_per_mile\": 0.13, \"fuel_capacity\": 200.00, \"deadhead_per_mile\": 1.29 }"
   profile_object_patch:
     type: object
     properties:
@@ -5276,9 +5276,9 @@ definitions:
         type: string
       zip:
         type: string
+    example: "{ \"address\": \"11 Wall Street\", \"city\": \"New York\", \"company\": \"NY Stock Exchange\", \"contact_extension\": 111, \"contact_name\": \"J.P. Morgan\", \"contact_number\": 8885559999, \"dispatch_extension\": 1234, \"dispatch_number\": 4445556666, \"dot_number\": \"12345678\", \"email\": \"test@directfreight.com\", \"fax_number\": 1112223333, \"mc_number\": \"12345678\", \"mobile_carrier\": \"Sprint\", \"mobile_number\":4445556666, \"state\": \"NY\", \"web_page\": \"www.directfreight.com\", \"carrier_onboard_url\": \"www.carrier.com/onboard\", \"carrier_terms_url\": \"www.carrier.com/terms\", \"zip\": \"12345\" }"
     x-restlet:
       section: PROFILES
-    example: "{ \"address\": \"11 Wall Street\", \"city\": \"New York\", \"company\": \"NY Stock Exchange\", \"contact_extension\": 111, \"contact_name\": \"J.P. Morgan\", \"contact_number\": 8885559999, \"dispatch_extension\": 1234, \"dispatch_number\": 4445556666, \"dot_number\": \"12345678\", \"email\": \"test@directfreight.com\", \"fax_number\": 1112223333, \"mc_number\": \"12345678\", \"mobile_carrier\": \"Sprint\", \"mobile_number\":4445556666, \"state\": \"NY\", \"web_page\": \"www.directfreight.com\", \"carrier_onboard_url\": \"www.carrier.com/onboard\", \"carrier_terms_url\": \"www.carrier.com/terms\", \"zip\": \"12345\" }"
   stop_item:
     properties:
       label:
@@ -5309,9 +5309,9 @@ definitions:
         type: number
       deadhead_per_mile:
         type: number
+    example: "{\n\"miles_per_gal\": 6.50,\n\"maint_per_mile\": 0.17,\n\"driver_per_mile\": 0.72,\n\"truck_ownership_per_mile\": 0.27,\n\"ins_permits_per_mile\": 0.13,\n\"fuel_capacity\": 200.00,\n\"deadhead_per_mile\": 1.29      \n}\n"
     x-restlet:
       section: PROFILES
-    example: "{\n\"miles_per_gal\": 6.50,\n\"maint_per_mile\": 0.17,\n\"driver_per_mile\": 0.72,\n\"truck_ownership_per_mile\": 0.27,\n\"ins_permits_per_mile\": 0.13,\n\"fuel_capacity\": 200.00,\n\"deadhead_per_mile\": 1.29      \n}\n"
   rename_custom_field:
     type: object
     required:
@@ -5378,8 +5378,6 @@ definitions:
     x-restlet:
       section: BOARDS
   trailer_type:
-    x-restlet:
-      section: common_definitions
     type: array
     description: These are the officially supported trailer types.
     items:
@@ -5412,6 +5410,8 @@ definitions:
       - PNEU
       - CONT
       - OTHER
+    x-restlet:
+      section: common_definitions
   update_notes_status:
     type: object
     properties:
