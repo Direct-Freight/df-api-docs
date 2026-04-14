@@ -96,12 +96,13 @@ patch:
     - alerts
 post:
   description: >-
-    This method will update or create an alert. The POST action with the same
-    search parameters but different alert parameters will update the existing
-    alert. The one caveaut to this is send_type. You can have 2 alerts with the
-    same search parameters but different send_types. Any parameter that is
-    defined here and is also defined on the boards POST action, follows the same
-    rules.
+    This method will update or create an alert. <br /><br /> If the search
+    parameters match as an active alert, it will update the active alert
+    instead. <br /><br /> If the search origin matches an inactive alert, we
+    will update the inactive alert. <br /><br /> The one caveaut to this is
+    send_type. You can have 2 alerts with the same search parameters but
+    different send_types. Any parameter that is defined here and is also defined
+    on the boards POST action matches the same type and restrictions.
   parameters:
     - description: 'Valid types are "loads", and "trucks".'
       enum:

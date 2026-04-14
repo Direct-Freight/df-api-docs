@@ -82,6 +82,15 @@ properties:
       STAGE=PRIVATE Google ReCAPTCHA score, for logging purposes. This field is
       optional. Should be a decimal number between 0 and 1.
     type: number
+  hide_blank_lengths:
+    description: Dont include loads/trucks with undefined lengths.
+    type: boolean
+  hide_blank_payrates:
+    description: Dont include loads/trucks with undefined payrates.
+    type: boolean
+  hide_blank_weights:
+    description: Dont include loads/trucks with undefined weights.
+    type: boolean
   item_count:
     description: >-
       This argument adjusts how many items per page will be returned.  Omitting
