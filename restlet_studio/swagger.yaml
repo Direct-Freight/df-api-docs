@@ -58,7 +58,7 @@ paths:
       tags:
       - alerts
       summary: STAGE=UNKNOWN Create an alert.
-      description: "This method will update or create an alert. The POST action with the same search parameters but different alert parameters will update the existing alert. The one caveaut to this is send_type. You can have 2 alerts with the same search parameters but different send_types. Any parameter that is defined here and is also defined on the boards POST action, follows the same rules."
+      description: "This method will update or create an alert. <br /><br /> If the search parameters match as an active alert, it will update the active alert instead. <br /><br /> If the search origin matches an inactive alert, we will update the inactive alert. <br /><br /> The one caveaut to this is send_type. You can have 2 alerts with the same search parameters but different send_types. Any parameter that is defined here and is also defined on the boards POST action matches the same type and restrictions."
       parameters:
       - name: board_type
         in: path
@@ -2797,9 +2797,6 @@ definitions:
         type: integer
         description: "Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation."
         minimum: 1
-      return_count:
-        type: boolean
-        description: "Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. "
       search:
         type: object
         description: Refer to the boards documentation for the full list of restrictions for each field.
@@ -2822,6 +2819,9 @@ definitions:
             type: array
             items:
               type: string
+          return_count:
+            type: boolean
+            description: "Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. "
           return_only:
             type: string
             description: "Allowed as a convenience to create consistency with a boards request, but is ignored during alert creation. "
@@ -3385,6 +3385,15 @@ definitions:
           - PNEU
           - CONT
           - OTHER
+      hide_blank_lengths:
+        type: boolean
+        description: Dont include loads/trucks with undefined lengths.
+      hide_blank_weights:
+        type: boolean
+        description: Dont include loads/trucks with undefined weights.
+      hide_blank_payrates:
+        type: boolean
+        description: Dont include loads/trucks with undefined payrates.
     example:
       destination_city: chicago
       destination_radius: 300
