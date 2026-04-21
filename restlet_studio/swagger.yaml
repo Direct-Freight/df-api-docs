@@ -3248,6 +3248,16 @@ definitions:
         type: integer
         example: 300
         description: Return items no longer than this.
+      min_width:
+        type: number
+        example: 8.5
+        description: Return items at least this wide. Accepts up to 1 decimal place.
+        multipleOf: 0.1
+      max_width:
+        type: number
+        example: 12.5
+        description: Return items no wider than this. Accepts up to 1 decimal place.
+        multipleOf: 0.1
       min_pay_rate:
         type: integer
         example: 50
@@ -3312,6 +3322,7 @@ definitions:
         type: string
         example: age
         description: The system automatically chooses the most common order based on the parameter chosen.  Sort order can be specified by using the "sort_direction" parameter.
+        default: age
         enum:
         - origin_city
         - origin_state
@@ -3338,15 +3349,14 @@ definitions:
         - posting_type
         - average_outbound_rate_at_destination
         - loads_at_destination
-        default: age
       sort_direction:
         type: string
         example: asc
         description: The system automatically chooses the most common order based on the parameter chosen. Use this option if you want a specific sort direction.
+        default: asc
         enum:
         - asc
         - desc
-        default: asc
       trailer_type:
         type: array
         example:
@@ -4526,7 +4536,7 @@ definitions:
         description: The last day the alert will be valid. Valid time frames are from today until one year into the future. Cannot be changed if alert is inactive.
       list_type:
         type: string
-        description: "This specify the type of list that is returned, including disabling the list from being sent at all."
+        description: "This specify the type of list that is returned, including disabling the list from being sent at all. If an alert is already inactive, you must also specify an expires_after value to change the list_type."
         enum:
         - complete-list
         - only-new
