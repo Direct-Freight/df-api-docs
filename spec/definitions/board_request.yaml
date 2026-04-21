@@ -119,6 +119,11 @@ properties:
     description: Return items that weight less than this.
     example: 40000
     type: integer
+  max_width:
+    description: Return items no wider than this. Accepts up to 1 decimal place.
+    example: 12.5
+    multipleOf: 0.1
+    type: number
   md5:
     description: Return only this specific MD5 ID. STAGE=Private  DEPRECATED DO NOT USE
     example: 850FBE52A5345119FD9C79FDE4E27308
@@ -143,6 +148,11 @@ properties:
     description: Return items that weight at least this much.
     example: 1000
     type: integer
+  min_width:
+    description: Return items at least this wide. Accepts up to 1 decimal place.
+    example: 8.5
+    multipleOf: 0.1
+    type: number
   origin_city:
     description: 'If used, this field must be accompanied by an origin_state.'
     example: Kansas City

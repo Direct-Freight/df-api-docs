@@ -29,7 +29,8 @@ properties:
   list_type:
     description: >-
       This specify the type of list that is returned, including disabling the
-      list from being sent at all.
+      list from being sent at all. If an alert is already inactive, you must
+      also specify an expires_after value to change the list_type.
     enum:
       - complete-list
       - only-new
