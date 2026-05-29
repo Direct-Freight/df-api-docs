@@ -31,7 +31,8 @@ properties:
   expires_after:
     description: >-
       The last day the alert will be valid. Valid time frames are from today
-      until one year into the future.
+      until one year into the future. If the date is in the past(expired) the
+      alert will be marked as inactive.
     example: 2019-12-30T00:00:00.000Z
     format: date
     type: string
