@@ -2775,7 +2775,7 @@ definitions:
         type: string
         format: date time
         example: 2020-01-01 14:30:24
-        description: The last day and time the alert will be valid. Valid time frames are from today until one year into the future.  This field will accept date only or a date and time.  If the date only is submitted the time will default to 23:59:59
+        description: The last day and time the alert will be valid. This field will accept date only or a date and time.  If the date only is submitted the time will default to 23:59:59. If this date is in the past(expired) the alert will be marked as inactive.
       item_count:
         type: integer
         example: 25
@@ -2900,7 +2900,7 @@ definitions:
         type: string
         format: date
         example: 2019-12-30
-        description: The last day the alert will be valid. Valid time frames are from today until one year into the future.
+        description: The last day the alert will be valid. Valid time frames are from today until one year into the future. If the date is in the past(expired) the alert will be marked as inactive.
       last_modified:
         type: string
         format: datetime
@@ -3322,7 +3322,6 @@ definitions:
         type: string
         example: age
         description: The system automatically chooses the most common order based on the parameter chosen.  Sort order can be specified by using the "sort_direction" parameter.
-        default: age
         enum:
         - origin_city
         - origin_state
@@ -3349,14 +3348,15 @@ definitions:
         - posting_type
         - average_outbound_rate_at_destination
         - loads_at_destination
+        default: age
       sort_direction:
         type: string
         example: asc
         description: The system automatically chooses the most common order based on the parameter chosen. Use this option if you want a specific sort direction.
-        default: asc
         enum:
         - asc
         - desc
+        default: asc
       trailer_type:
         type: array
         example:
