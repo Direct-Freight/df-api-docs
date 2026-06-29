@@ -275,6 +275,7 @@ properties:
       - posting_type
       - average_outbound_rate_at_destination
       - loads_at_destination
+      - fmcsa_verified
     example: age
     type: string
   tier:

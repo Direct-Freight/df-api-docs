@@ -16,12 +16,30 @@ get:
       name: end-user-token
       required: true
       type: string
+    - description: >-
+        Look up the profile for this user_id instead of the logged in user.
+        Takes precedence over email.
+      in: query
+      name: user_id
+      required: false
+      type: integer
+    - description: >-
+        Look up the profile for the user with this email instead of the logged
+        in user. Ignored if user_id is also provided.
+      in: query
+      name: email
+      required: false
+      type: string
   responses:
     '200':
       description: successful operation
       schema:
         $ref: '#/definitions/profile_object'
-  summary: Request the logged in user's profile.
+    '404':
+      description: No matching user or profile was found for the provided user_id or email.
+  summary: >-
+    Request a user's profile. Defaults to the logged in user, or pass user_id or
+    email to look up any profile.
   tags:
     - profiles
 patch:

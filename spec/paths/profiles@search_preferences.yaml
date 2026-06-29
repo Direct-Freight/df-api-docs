@@ -1,0 +1,67 @@
+get:
+  description: >-
+    Returns the logged in user's saved search preferences (min/max ranges for
+    weight, length, trip miles and pay rate). If the profile predates this
+    feature and has no search_preferences row yet, one is created on the fly
+    with all preferences null and enabled = 0, then returned.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/search_preferences_object'
+  summary: Request the logged in user's search preferences.
+  tags:
+    - profiles
+patch:
+  description: >-
+    Create or update the logged in user's search preferences. Send in any subset
+    of fields; omitted fields are left unchanged. Send an explicit null to clear
+    a min/max value. The user must already have a profile.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/search_preferences_object'
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/search_preferences_object'
+  summary: Update search preferences.
+  tags:
+    - profiles
+post:
+  description: >-
+    Create or update the logged in user's search preferences. Send in any subset
+    of fields; omitted fields are left unchanged. Send an explicit null to clear
+    a min/max value. The user must already have a profile.
+  parameters:
+    - in: header
+      name: end-user-token
+      required: true
+      type: string
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '#/definitions/search_preferences_object'
+  responses:
+    '200':
+      description: successful operation
+      schema:
+        $ref: '#/definitions/search_preferences_object'
+  summary: Create or update search preferences.
+  tags:
+    - profiles
+x-restlet:
+  section: PROFILES

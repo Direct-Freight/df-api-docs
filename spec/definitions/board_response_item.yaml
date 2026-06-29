@@ -117,6 +117,21 @@ properties:
     description: unique identifier for this item.
     example: '55555555'
     type: string
+  fmcsa_dot_number:
+    description: >-
+      Trucks board only. The carrier's verified DOT number, normalized to digits
+      only with leading zeros stripped. Only returned when fmcsa_verified is
+      true, and is the value used to build the FMCSA SAFER carrier snapshot
+      link.
+    example: '123123'
+    type: string
+  fmcsa_verified:
+    description: >-
+      Trucks board only. true when the carrier that posted this truck has a
+      verified FMCSA DOT ownership record matching their current DOT number,
+      false otherwise. Not returned on the loads board.
+    example: true
+    type: boolean
   full_load:
     description: >-
       Specifies whether load is full or partial.  Will always return true for

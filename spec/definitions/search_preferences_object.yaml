@@ -1,0 +1,37 @@
+properties:
+  enabled:
+    description: 'Whether the search preferences are active (0 = off, 1 = on).'
+    type: integer
+  max_length:
+    description: Maximum length (ft). Null means no maximum.
+    type: integer
+    x-nullable: true
+  max_payrate:
+    description: Maximum pay rate. Null means no maximum.
+    type: integer
+    x-nullable: true
+  max_tripmiles:
+    description: Maximum trip miles. Null means no maximum.
+    type: integer
+    x-nullable: true
+  max_weight:
+    description: Maximum weight (lbs). Null means no maximum.
+    type: integer
+    x-nullable: true
+  min_length:
+    description: Minimum length (ft). Null means no minimum.
+    type: integer
+    x-nullable: true
+  min_payrate:
+    description: Minimum pay rate. Null means no minimum.
+    type: integer
+    x-nullable: true
+  min_tripmiles:
+    description: Minimum trip miles. Null means no minimum.
+    type: integer
+    x-nullable: true
+  min_weight:
+    description: Minimum weight (lbs). Null means no minimum.
+    type: integer
+    x-nullable: true
+type: object
