@@ -1,0 +1,31 @@
+get:
+  parameters:
+    - description: The DOT number to check for an active internal poster.
+      in: query
+      name: dotnumber
+      required: true
+      type: string
+      x-example: '2358199'
+  responses:
+    '200':
+      description: Status 200
+      schema:
+        properties:
+          is_active_internal_poster:
+            description: >-
+              1 if the DOT number belongs to an internal poster who has posted
+              within the last 30 days (excluding 123loadboard-sourced accounts),
+              0 otherwise.
+            type: integer
+        required:
+          - is_active_internal_poster
+        type: object
+    '400':
+      description: Missing dotnumber parameter.
+  summary: >-
+    STAGE=PRIVATE-LIVE Check whether a DOT number belongs to an active internal
+    poster.
+  tags:
+    - validations
+x-restlet:
+  section: VALIDATIONS
