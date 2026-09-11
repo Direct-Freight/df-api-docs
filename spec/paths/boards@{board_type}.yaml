@@ -17,14 +17,17 @@ get:
       type: string
       x-example: 0123456789012345678901234567890123
     - description: >-
-        The page that is requesting the information.  This is used to determine
-        when to retrieve real time information from the shipper or broker. 
-        Example:  requesting_page="book-now" will return real time information
-        for certain partners.  Stage=Private
+        Optional. Lets us know which page or screen is requesting the load. It
+        doesn't change the response, we just echo it back as
+        `DEBUG_requesting_page` to help with troubleshooting. Any short text
+        works, but the DirectFreight site uses its load page tab names: `main`,
+        `details`, `book-now`, `profit-calc`, `freight-rate-info`,
+        `credit-report`, `mileage`, `dh-mileage`. Stage=Private
       in: query
       name: requesting_page
       required: false
       type: string
+      x-example: book-now
     - in: header
       name: end-user-token
       required: false
