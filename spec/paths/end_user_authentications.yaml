@@ -1,5 +1,12 @@
 delete:
-  description: This deletes the logged in users account permanently.
+  description: >
+    Logs out the session for the given `end-user-token`. The account is not
+    affected.
+
+    The token stops working; call `POST /end_user_authentications` to log in
+    again.
+
+    To permanently delete the account, use `DELETE /users`.
   parameters:
     - in: header
       name: end-user-token
@@ -7,7 +14,7 @@ delete:
       type: string
   responses:
     '204':
-      description: Will not return content on a successful delete.
+      description: Logged out. No content is returned.
   summary: Logout
   tags:
     - end_user_authentications
