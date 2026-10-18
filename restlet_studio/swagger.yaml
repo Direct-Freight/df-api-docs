@@ -1187,7 +1187,10 @@ paths:
       tags:
       - end_user_authentications
       summary: Logout
-      description: This deletes the logged in users account permanently.
+      description: |
+        Logs out the session for the given `end-user-token`. The account is not affected.
+        The token stops working; call `POST /end_user_authentications` to log in again.
+        To permanently delete the account, use `DELETE /users`.
       parameters:
       - name: end-user-token
         in: header
@@ -1195,7 +1198,7 @@ paths:
         type: string
       responses:
         "204":
-          description: Will not return content on a successful delete.
+          description: Logged out. No content is returned.
     x-restlet:
       section: END_USER_AUTHENTICATIONS
   /end_user_authentications/dates:
