@@ -19,10 +19,30 @@ delete:
   tags:
     - end_user_authentications
 get:
-  description: Get current authentication level for the user.
+  description: >-
+    Get current authentication level for the user. API tokens granted the
+    view_all_end_user_authentications access can instead look up any Direct
+    Freight user by passing user_id or email, without an end-user-token. If both
+    are sent, user_id is used. Tokens without that access ignore these
+    parameters.
   parameters:
     - in: header
       name: end-user-token
+      required: false
+      type: string
+    - description: >-
+        Direct Freight user id to look up. Requires an api-token with
+        view_all_end_user_authentications access. Takes precedence over email
+        and over the end-user-token.
+      in: query
+      name: user_id
+      required: false
+      type: integer
+    - description: >-
+        Email of the Direct Freight user to look up. Requires an api-token with
+        view_all_end_user_authentications access. Ignored if
+      in: query
+      name: email
       required: false
       type: string
   responses:
@@ -36,6 +56,14 @@ get:
             items:
               type: string
             type: array
+          id:
+            description: Direct Freight user id.
+            type: integer
+          message_123:
+            description: >-
+              Only present when the user has a 123Loadboard plan that affects
+              their Direct Freight membership.
+            type: string
           nami_label:
             description: used internally for in app purchase paywall campaigns
             type: string
@@ -51,7 +79,15 @@ get:
               - overdue
               - not_logged_in
             type: string
+          username:
+            type: string
         type: object
+    '404':
+      description: >-
+        No user found for the provided user_id or email (only when using the
+        lookup parameters).
+      examples:
+        application/json: '{error: "No user found for the provided id."}'
   summary: Get authentication level.
   tags:
     - end_user_authentications
