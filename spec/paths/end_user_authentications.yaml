@@ -40,7 +40,7 @@ get:
       type: integer
     - description: >-
         Email of the Direct Freight user to look up. Requires an api-token with
-        view_all_end_user_authentications access. Ignored if
+        view_all_end_user_authentications access. Ignored if user_id is present.
       in: query
       name: email
       required: false
